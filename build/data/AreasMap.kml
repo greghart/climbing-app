@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document><Folder><name>AreasMap</name>
+<Schema name="AreasMap" id="AreasMap">
+	<SimpleField name="Name" type="string"></SimpleField>
+	<SimpleField name="Description" type="string"></SimpleField>
+	<SimpleField name="SHAPE_Leng" type="float"></SimpleField>
+	<SimpleField name="SHAPE_Area" type="float"></SimpleField>
+</Schema>
+  <Placemark>
+	<name>Jupiter Boulders</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">Jupiter Boulders</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.0149229029688</SimpleData>
+		<SimpleData name="SHAPE_Area">1.3891114594e-005</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.60104644399991,33.879013808000082 -116.59724053799994,33.879005588000041 -116.59724053799994,33.875355864000085 -116.60104644399991,33.875355864000085 -116.60103822399994,33.875364084000068 -116.60104644399991,33.879013808000082</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>The Undiscovered Country</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">The Undiscovered Country</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.0167715525679</SimpleData>
+		<SimpleData name="SHAPE_Area">1.5506548404e-005</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.6505150459999,33.808050475000073 -116.64691819699995,33.811742606000053 -116.64452711399991,33.81138648700005 -116.64647408699994,33.806810763000044 -116.6505150459999,33.808050475000073</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Kung Fu Canyon</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">Kung Fu Canyon</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.00963508699389</SimpleData>
+		<SimpleData name="SHAPE_Area">5.578750112e-006</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.64729800399994,33.811362145000089 -116.64728198599995,33.811369180000042 -116.64729338799991,33.811357476000069 -116.64729800399994,33.811362145000089</coordinates></LinearRing></outerBoundaryIs><innerBoundaryIs><LinearRing><coordinates>-116.64729800399994,33.811362145000089 -116.64876290099993,33.809849035000077 -116.65040023599992,33.812337801000069 -116.64867302699992,33.813417339000075 -116.64729800399994,33.811362145000089</coordinates></LinearRing></innerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Trailside Boulders</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">Trailside Boulders</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.0080191511775</SimpleData>
+		<SimpleData name="SHAPE_Area">3.769548378e-006</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.64771056199994,33.811990480000077 -116.64736137699992,33.813071086000036 -116.64531732799992,33.813192215000072 -116.64491608899993,33.812124767000057 -116.64524103099991,33.811492815000065 -116.64691819699995,33.811742606000053 -116.64729800399994,33.811362145000089 -116.64771056199994,33.811990480000077</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Conquest Ridge</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">Conquest Ridge</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.00692384747773</SimpleData>
+		<SimpleData name="SHAPE_Area">2.808514595e-006</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.65040023599992,33.812337801000069 -116.65122861899995,33.813800677000074 -116.64912025599995,33.814343741000073 -116.64867302699992,33.813417339000075 -116.65040023599992,33.812337801000069</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Shangri-La Valley</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">Shangri-La Valley</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.0128694406866</SimpleData>
+		<SimpleData name="SHAPE_Area">7.203277197e-006</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.64998054699993,33.814122151000049 -116.64998276799992,33.814822914000047 -116.6463353199999,33.815721795000059 -116.6463136509999,33.813133174000086 -116.64736137699992,33.813071086000036 -116.64771056199994,33.811990480000077 -116.64867302699992,33.813417339000075 -116.64912025599995,33.814343741000073 -116.64998054699993,33.814122151000049</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Flash Gordon</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">Flash Gordon</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.00829584716096</SimpleData>
+		<SimpleData name="SHAPE_Area">4.164118976e-006</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.64531732799992,33.813192215000072 -116.6463136509999,33.813133174000086 -116.6463353199999,33.815721795000059 -116.64417338399996,33.814861670000084 -116.64455695299991,33.81329252200004 -116.64531732799992,33.813192215000072</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Pleiades</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">Pleiades</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.00605308303076</SimpleData>
+		<SimpleData name="SHAPE_Area">1.722400133e-006</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.64491608899993,33.812124767000057 -116.64531732799992,33.813192215000072 -116.64455695299991,33.81329252200004 -116.64438292299991,33.81400446400005 -116.64346436199992,33.812281294000059 -116.64491608899993,33.812124767000057</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Long Valley and Ranger Station Boulders</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">Long Valley and Ranger Station Boulders</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.0130588415535</SimpleData>
+		<SimpleData name="SHAPE_Area">8.333190833e-006</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.64417338399996,33.814861670000084 -116.64181385099994,33.814340945000083 -116.64169761799991,33.80995895600006 -116.64274371599993,33.810017072000051 -116.64346436199992,33.812281294000059 -116.64438292299991,33.81400446400005 -116.64417338399996,33.814861670000084</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>The Icebergs</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">The Icebergs</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.00984719122255</SimpleData>
+		<SimpleData name="SHAPE_Area">5.11815289e-006</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.65040318599989,33.814013289000059 -116.65122861899995,33.813800677000074 -116.65399529399991,33.813147545000049 -116.65437343599991,33.814130712000065 -116.65213483899993,33.815658403000043 -116.65040318599989,33.814013289000059</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Area 51</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">Area 51</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.00841060637841</SimpleData>
+		<SimpleData name="SHAPE_Area">3.666699617e-006</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.64906477899991,33.815049144000056 -116.64998276799992,33.814822914000047 -116.64998054699993,33.814122151000049 -116.65040318599989,33.814013289000059 -116.65213483899993,33.815658403000043 -116.65069790199995,33.816575018000037 -116.64906477899991,33.815049144000056</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>The Dance Floor</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">The Dance Floor</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.00496919767014</SimpleData>
+		<SimpleData name="SHAPE_Area">1.346909361e-006</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.64765429399989,33.81539674600009 -116.64906477899991,33.815049144000056 -116.6497438479999,33.815654979000044 -116.64877694299993,33.816302756000084 -116.64765429399989,33.81539674600009</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>The Beach</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">The Beach</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.00969130357475</SimpleData>
+		<SimpleData name="SHAPE_Area">5.133136245e-006</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.64897054399991,33.816173053000057 -116.64930593899994,33.816532068000072 -116.64652856799989,33.818607889000077 -116.64614415699992,33.817906338000057 -116.64682656199996,33.815600733000053 -116.64765429399989,33.81539674600009 -116.64877694299993,33.816302756000084 -116.6489704789999,33.816173097000046 -116.64897054399991,33.816173053000057</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Boardwalk Area</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">Boardwalk Area</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.00959634556906</SimpleData>
+		<SimpleData name="SHAPE_Area">4.510782112e-006</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.64934252199993,33.815923847000079 -116.6507859219999,33.817560368000045 -116.64843140299992,33.819021131000056 -116.64751694899991,33.817869168000072 -116.64930593899994,33.816532068000072 -116.6489704789999,33.816173097000046 -116.64932700099989,33.815934245000051 -116.64934252199993,33.815923847000079</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>The Edge of Nowhere</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AreasMap">
+		<SimpleData name="Name">The Edge of Nowhere</SimpleData>
+		<SimpleData name="SHAPE_Leng">0.00710216000362</SimpleData>
+		<SimpleData name="SHAPE_Area">3.100533171e-006</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-116.65055829599994,33.81770158900008 -116.65149708299992,33.818980768000074 -116.64989216599992,33.819989847000045 -116.6488512,33.818760686000076 -116.65054345399994,33.817710797000075 -116.65055829599994,33.81770158900008</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+</Folder></Document></kml>
