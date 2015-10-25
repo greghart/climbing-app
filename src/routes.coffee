@@ -4,7 +4,13 @@ module.exports =
     method: 'get'
     page: 'home'
     title: 'Home'
-    handler: require './components/Crag'
+    handler: require './components/explorer/Crag'
+  tracer:
+    path: '/tracer'
+    method: 'get'
+    page: 'tracer'
+    title: 'Tracer'
+    handler: require './components/tracer/Tracer'
   about:
     path: '/about'
     method: 'get'

@@ -30,7 +30,7 @@ LayerGroup = React.createClass
     <span style={display: 'none'}>
       {
         if @state.group?
-          <LayerContainer layer={@state.group}>
+          <LayerContainer layerContainer={@state.group}>
             {@props.children}
           </LayerContainer>
         else

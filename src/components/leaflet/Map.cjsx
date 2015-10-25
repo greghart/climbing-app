@@ -1,6 +1,7 @@
 React = require 'react'
 {PropTypes} = React
 LayerContainer = require './LayerContainer'
+listenForEvents = require './listenForEvents'
 
 # Encapsulates Leaflet.Map
 Map = React.createClass
@@ -23,11 +24,12 @@ Map = React.createClass
 
   resetMap: ->
     @state.map?.remove()
-    @setState
-      map: L.map(
-        @refs.mapContainer.getDOMNode(),
-        @props.leafletOptions
-      )
+    map = L.map(
+      @refs.mapContainer.getDOMNode(),
+      @props.leafletOptions
+    )
+    listenForEvents map, @props
+    @setState map: map
 
   componentWillUnmount: ->
     @state.map?.remove()
@@ -36,11 +38,10 @@ Map = React.createClass
     @state.map
 
   render: ->
-    console.log 'Map.render'
     <div ref='mapContainer' {...@props.containerOptions}>
       {
         if @state.map?
-          <LayerContainer layer={@state.map}>
+          <LayerContainer layerContainer={@state.map}>
             {@props.children}
           </LayerContainer>
         else

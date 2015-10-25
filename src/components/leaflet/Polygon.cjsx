@@ -1,6 +1,7 @@
 React = require 'react'
 {PropTypes} = React
 LayerContainer = require './LayerContainer'
+listenForEvents = require './listenForEvents'
 
 # Encapsulates Leaflet.Polygon
 Polygon = React.createClass
@@ -17,11 +18,9 @@ Polygon = React.createClass
     return if @state.polygon?
     polygon = new L.Polygon(
       @props.coordinates,
-      @props.style
+      @props.options
     )
-    polygon.on 'click', @props.onClick
-    polygon.on 'mouseover', @props.onMouseOver
-    polygon.on 'mouseout', @props.onMouseOut
+    listenForEvents(polygon, @props)
     @props.layerContainer.addLayer(polygon)
     @setState polygon: polygon
 
