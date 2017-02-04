@@ -36,12 +36,21 @@ Tracer = React.createClass
     # We then go to an "Edit Pending Boulders" mode, which is just a boulder
     # form with a "Save + Next"
 
+  handleControlKeys: (e) ->
+    e.persist()
+    console.log {
+      e
+    }, 'handleControlKeys'
+    if e.key is 'z'
+      @undo()
+
+  undo: ->
+    if @state.points.length > 0
+      @setState points: @state.points[0...-1]
+
   getPoints: ->
     # Polyline of all existing points, plus one to cursor
     # We keep them separate for efficiency (base doesn't have to re-render )
-    console.log {
-      state: @state
-    }, 'getPoints'
     <LayerContainer {...@props}>
       <Polyline
         coordinates={@state.points}
@@ -69,7 +78,9 @@ Tracer = React.createClass
     </LayerContainer>
 
   render: ->
-    <div>
+    <div
+      onKeyPress={@handleControlKeys}
+    >
       <h2>Tracer</h2>
       <div className='row'>
         <div
@@ -109,6 +120,18 @@ Tracer = React.createClass
           >
             Submit
           </button>
+          <hr/>
+          <div className='row'>
+            <div className='col-md-12'>
+              {# Controls }
+              <button
+                className='btn'
+                onClick={@undo}
+              >
+               <-
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
