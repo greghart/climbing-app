@@ -1,5 +1,3 @@
-require('babel/register');
-require('coffee-script/register');
-require('coffee-react/register');
+require('babel-core/register');
 
 module.exports = require('./src/server');
