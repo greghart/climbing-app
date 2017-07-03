@@ -1,0 +1,4 @@
+server:
+  port: 3000
+  cookies:
+    secret: 'temposecret8213408SFS@##$'
