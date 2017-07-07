@@ -2,3 +2,9 @@ server:
   port: 3000
   cookies:
     secret: 'temposecret8213408SFS@##$'
+  sessions:
+    secret: develsessionsecret
+    prefix: 'apollo|sid|{NODE_ENV}'
+  redis:
+    host: localhost
+    port: 6379

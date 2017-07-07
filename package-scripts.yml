@@ -1,11 +1,11 @@
 scripts:
   default: nps dev
-  build:
-    description: Build output.
-    script: webpack && webpack --config webpack.config.production.js
-  dev:
+  server:
+    description: Run server
+    script: cross-env PORT=3001 ts-node ./dev-server.ts
+  devServer:
     description: Monitor your code and run dev server
-    script: cross-env PORT=3001 nodemon start.js -e js,jsx,cjsx
+    script: cross-env PORT=3001 webpack-dashboard -- ts-node ./dev-server.ts
   lint:
     description: Lint the code, duh
     script: eslint ./*.js ./**/*.js

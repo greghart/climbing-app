@@ -3,7 +3,7 @@ import * as express from 'express';
 import * as _debug from 'debug';
 const debug = _debug('climbing-app:server');
 
-import getExpressApplication from './getExpressApplication';
+import getExpressApplication from './server/getExpressApplication';
 // import getAPIRouter from './api/getRouter';
 // import rollbar from './util/getRollbar';
 // import { serverOptions as rollbarServerOptions } from './util/getRollbar';

@@ -17,9 +17,9 @@ import * as config from 'config';
 import * as _debug from 'debug';
 const debug = _debug('apollo-demand-app:getApp');
 
-import isLocal from './util/isLocal';
-// import { appSessionOptions } from './util/sessions/getSessionOptions';
-// import conf from './conf';
+import isLocal from '../util/isLocal';
+import { appSessionOptions } from './sessions/getSessionOptions';
+import getServerRenderMiddleware from './getServerRenderMiddleware';
 // import { APIRouter } from './api/getRouter';
 // import getAuthRouter from './util/authentication/getRouter';
 
@@ -36,7 +36,7 @@ interface Application extends express.Express {
   expose: (data: any, key: string) => any;
 }
 
-function getExpressApplication(APIRouter, _app?: Application) {
+function getExpressApplication(_app?: Application) {
   const app = _app ? _app : (express() as Application);
 
   state.extend(app);
@@ -47,7 +47,7 @@ function getExpressApplication(APIRouter, _app?: Application) {
   // Server favicon
   app.use(
     favicon(
-      path.join(__dirname, '../../static/ico/favicon.ico')
+      path.join(__dirname, '../../../static/ico/favicon.ico')
     )
   );
   // Security headers can make things annoying during local dev
@@ -63,18 +63,6 @@ function getExpressApplication(APIRouter, _app?: Application) {
   app.use('/build', serveStatic(
     path.join(__dirname, '../build')
   ));
-  app.use('/build/css/proxima_nova', serveStatic(
-    path.join(__dirname, '../build/fonts/proxima_nova')
-  ));
-  app.use('/build/css/myriad_pro', serveStatic(
-    path.join(__dirname, '../build/fonts/myriad_pro')
-  ));
-  app.use('/build/js', serveStatic(
-    path.join(__dirname, '../node_modules/react/dist/')
-  ));
-  app.use('/build/js', serveStatic(
-    path.join(__dirname, '../node_modules/react-dom/dist/')
-  ));
 
   // Setup cookies and sessions
   app.use(
@@ -82,11 +70,11 @@ function getExpressApplication(APIRouter, _app?: Application) {
       config.get<string>('server.cookies.secret')
     )
   );
-  // app.use(
-  //   session(
-  //     appSessionOptions
-  //   )
-  // );
+  app.use(
+    session(
+      appSessionOptions
+    )
+  );
   app.use(flash());
 
   // // Allow unauthorized access to API docs, and expose to all requests
@@ -100,7 +88,7 @@ function getExpressApplication(APIRouter, _app?: Application) {
   // TODO Re-implement or module validate middleware, authorize middleware
   // app.use(apiRouter);
 
-  // app.use(getServerRenderMiddleware(apiRouter.apiDocs));
+  app.use(getServerRenderMiddleware());
 
   // Temporary add for local testing
   app.use((req, res, next) => {

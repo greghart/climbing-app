@@ -107,6 +107,8 @@ Example
 /api        // Application API
 /redux      // Universal Redux
 /schemas    // Universal validation layer
+/authentication // Authentication layer
+/authorization  // Authorization layer
 /util       // Universally shared logic
 /conf.ts    // Applicaton configuration
 /client.ts  // Entry point for client application
