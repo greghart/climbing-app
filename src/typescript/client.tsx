@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 const Redbox = require('redbox-react');
 
+require('bootstrap/dist/css/bootstrap.min.css');
 require('leaflet/dist/leaflet.css');
 require('application.scss');
 

@@ -26,7 +26,6 @@ const HtmlComponent: SFC<HtmlComponentProps> = (props) => {
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en" />
         <script src="https://use.fontawesome.com/470e7e519a.js" />
         <script src="/js/vendor.bundle.js" />
-        <link rel="stylesheet" href="/css/styles.css" />
       </head>
       <body className="body--sidebar">
         <div

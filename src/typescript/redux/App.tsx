@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SFC, PropTypes } from 'react';
 
 const App: SFC<any> = (props) => (
-  <div className="page-container">
+  <div className="container">
     {React.cloneElement({...props}.children, {...props})}
   </div>
 );

@@ -23,7 +23,9 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'  // fetch API
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+      $: 'jquery',
+      jQuery: 'jquery'
     }),
     // Shared code
     new webpack.optimize.CommonsChunkPlugin({

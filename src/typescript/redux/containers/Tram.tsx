@@ -3,7 +3,7 @@ import { SFC } from 'react';
 import { Map } from 'react-leaflet';
 import { connect } from 'react-redux';
 
-import CragMap from '../components/explorer/CragMap';
+import CragComponent from '../components/explorer/Crag';
 import { State } from '../reducer';
 import { Area, Crag } from '../components/explorer/types';
 import { selectArea } from '../ducks/explorer';
@@ -29,5 +29,8 @@ type StateProps = {
 type DispatchProps = {
   onAreaClick: (area: Area) => any;
 }
-export default connect<StateProps, DispatchProps, any>(mapStateToProps, mapDispatchToProps)(CragMap);
+export default connect<StateProps, DispatchProps, any>(
+  mapStateToProps,
+  mapDispatchToProps
+)(CragComponent);
 
