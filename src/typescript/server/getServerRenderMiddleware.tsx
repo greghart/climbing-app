@@ -16,10 +16,10 @@ import * as _debug from 'debug';
 const debug = _debug('apollo-demand:util:getServerRenderMiddleware');
 
 import HtmlComponent from './HtmlComponent';
-import getRoutes from '../redux/getRoutes';
+// import getRoutes from '../redux/getRoutes';
 const getStore = require('../redux/store/getStore');
 
-const routes = getRoutes();
+// const routes = getRoutes();
 interface ResponseWithExpose extends express.Response {
   expose?(value: any, key: string): any;
 }
@@ -28,18 +28,18 @@ function renderApp(req: express.Request, res: ResponseWithExpose, store: Store<a
   // Context is used by router to seed redirect data by side effects
   const context: { url?: string } = {};
 
-  const content = ReactDOMServer.renderToString(
-    <StaticRouter
-      location={req.url}
-      context={context}
-    >
-      <Provider
-        store={store}
-      >
-        {renderRoutes(routes)}
-      </Provider>
-    </StaticRouter>
-  );
+  // const content = ReactDOMServer.renderToString(
+  //   <StaticRouter
+  //     location={req.url}
+  //     context={context}
+  //   >
+  //     <Provider
+  //       store={store}
+  //     >
+  //       {renderRoutes(routes)}
+  //     </Provider>
+  //   </StaticRouter>
+  // );
 
   // Expose necessary data to client
   if (!!res.expose) {
@@ -54,7 +54,7 @@ function renderApp(req: express.Request, res: ResponseWithExpose, store: Store<a
   // Replace with HtmlComponent
   const html = ReactDOMServer.renderToStaticMarkup(
     <HtmlComponent
-      content={content}
+      content=""
       state={res.locals.state.toString()}
     />
   );

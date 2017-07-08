@@ -12,6 +12,7 @@ const config = require('./config/webpack.config.development.js');
 import getExpressApplication from './src/typescript/server/getExpressApplication';
 
 const app = express();
+console.log({ config }, 'webpack config');
 const compiler = webpack(config);
 
 // Apply CLI dashboard for your webpack dev server

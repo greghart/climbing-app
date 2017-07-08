@@ -3,6 +3,7 @@
 .idea
 node_modules
 dump.rdb
+.vscode/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

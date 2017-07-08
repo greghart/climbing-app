@@ -13,12 +13,13 @@ module.exports = {
   resolve: {
     modules: [
       path.join(__dirname, '../src/typescript'),
+      path.join(__dirname, '../src/scss'),
       'node_modules'
     ],
     alias: {
       // models: path.join(__dirname, '../src/client/assets/javascripts/models')
     },
-    extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.json', '.scss', '.js']
+    extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.json', '.scss', '.css', '.js']
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -44,7 +45,7 @@ module.exports = {
       // Inline base64 URLs for <=8k images, direct URLs for the rest
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
-        loader: 'url',
+        loader: 'url-loader',
         query: {
           limit: 8192,
           name: 'images/[name].[ext]?[hash]'
@@ -53,7 +54,7 @@ module.exports = {
       // Fonts
       {
         test: /\.(woff|woff2|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url',
+        loader: 'url-loader',
         query: {
           limit: 8192,
           name: 'fonts/[name].[ext]?[hash]'

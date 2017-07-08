@@ -4,6 +4,9 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 const Redbox = require('redbox-react');
 
+require('leaflet/dist/leaflet.css');
+require('application.scss');
+
 const getStore = require('./redux/store/getStore');
 import Root from './redux/Root';
 

@@ -27,10 +27,12 @@ const Root: SFC<Props> = ({ store }) => {
 
     ComponentEl = (
       <Provider store={store}>
-        <div>
-          <BrowserRouter>
-            {renderRoutes(getRoutes())}
-          </BrowserRouter>
+        <div style={{ height: '100%', width: '100%' }}>
+          <div style={{ width: '70%', height: 'auto' }}>
+            <BrowserRouter>
+              {renderRoutes(getRoutes())}
+            </BrowserRouter>
+          </div>
           {!window.devToolsExtension ? <DevTools /> : null}
         </div>
       </Provider>

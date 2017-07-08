@@ -27,19 +27,13 @@ module.exports = merge(config, {
     new webpack.DefinePlugin(GLOBALS)
   ],
   module: {
-    loaders: [
+    rules: [
       // Sass
       {
         test: /\.scss$/,
-        include: [
-          path.resolve(__dirname, '../src/client/assets/javascripts'),
-          path.resolve(__dirname, '../src/client/assets/styles'),
-          path.resolve(__dirname, '../src/client/scripts')
-        ],
         loaders: [
           'style-loader',
           'css-loader',
-          'postcss-loader',
           { loader: 'sass-loader', query: { outputStyle: 'expanded' } }
         ]
       },
@@ -64,7 +58,10 @@ module.exports = merge(config, {
       // CSS
       {
         test: /\.css$/,
-        loader: 'style!css!postcss'
+        loaders: [
+          'style-loader',
+          'css-loader'
+        ]
       }
     ]
   }

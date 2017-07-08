@@ -11,19 +11,6 @@ AreaMap = React.createClass
   propTypes:
     selected: PropTypes.bool
 
-  normalStyle:
-    weight: 1.0
-    opacity: 1
-    color: 'white'
-    dashArray: 3
-    fillOpacity: 0.2
-    fillColor: '#088da5'
-  overStyle:
-    weight: 5
-    color: '#666'
-    dashArray: ''
-    fillOpacity: 0.2
-
   onClick: ->
     @props.onClick?(@props.area)
 
