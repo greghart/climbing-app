@@ -1,29 +1,33 @@
 import * as React from 'react';
+import { SFC } from 'react';
 import { Map } from 'react-leaflet';
+import { connect } from 'react-redux';
 
-import BestTileLayer from '../components/BestTileLayer';
-import AreasMap from '../components/explorer/AreasMap';
-const areas = require('../../../../static/data/TramData.json');
+import CragMap from '../components/explorer/CragMap';
+import { State } from '../reducer';
+import { Area, Crag } from '../components/explorer/types';
+import { selectArea } from '../ducks/explorer';
+const tramData = require('../../../../static/data/TramData.json');
 
-const Tram = () => {
-  console.log({ areas });
-  return (
-    <div>
-      <h1>Hello World 2</h1>
-      <Map
-        className='map'
-        center={[33.810942, -116.645494]}
-        zoom={18}
-        minZoom={15}
-        maxZoom={22}
-      >
-        <BestTileLayer />
-        <AreasMap
-          areas={areas}
-        />
-      </Map>
-    </div>
-  );
+const mapStateToProps = (state: State) => {
+  return {
+    selectedAreaId: state.explorer.selectedAreaId,
+    crag: tramData
+  };
+}
+
+const mapDispatchToProps = {
+  onAreaClick: (area: Area) => {
+    return selectArea(area.name);
+  }
+}
+
+type StateProps = {
+  selectedAreaId: string;
+  crag: Crag;
 };
+type DispatchProps = {
+  onAreaClick: (area: Area) => any;
+}
+export default connect<StateProps, DispatchProps, any>(mapStateToProps, mapDispatchToProps)(CragMap);
 
-export default Tram;

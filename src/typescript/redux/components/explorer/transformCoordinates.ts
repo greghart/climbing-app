@@ -13,11 +13,11 @@ function transformCoordinates (coordinates?: LatLngTuple | LatLngTuple[]): LatLn
   }
   if (isArray(coordinates)) {
     return coordinates.map((c) => {
-      return ([c[1], c[0]] as LatLngTuple);
+      return ([parseFloat(c[1].toString()), parseFloat(c[0].toString())] as LatLngTuple);
     });
   }
   return [
-    [coordinates[1], coordinates[0]]
+    [parseFloat(coordinates[1].toString()), parseFloat(coordinates[0].toString())]
   ];
 }
 

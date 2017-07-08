@@ -3,18 +3,27 @@ import { SFC, PropTypes } from 'react';
 
 import { Area } from './types';
 import AreaPolygon from './AreaPolygon';
+import AreaBoulders from './AreaBoulders';
 
 interface Props {
   area: Area;
-  onClick?: (id: number) => any;
+  selected: boolean;
+  onClick?: () => any;
 }
 
 const AreaMap: SFC<any> = (props) => {
   console.log({ props }, 'AreaMap');
   return (
-    <AreaPolygon
-      area={props.area}
-    />
+    <span>
+      <AreaPolygon
+        area={props.area}
+        onclick={props.onClick}
+      />
+      {props.selected ?
+        <AreaBoulders area={props.area} /> :
+        <span />
+      }
+    </span>
   );
 };
 

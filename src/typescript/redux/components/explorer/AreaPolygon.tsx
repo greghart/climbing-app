@@ -5,7 +5,7 @@ import { Polygon, PolygonProps } from 'react-leaflet';
 import { Area } from './types';
 import transformCoordinates from './transformCoordinates';
 
-interface Props {
+type Props = Partial<PolygonProps> & {
   area: Area;
 }
 
@@ -32,6 +32,7 @@ const AreaPolygon: SFC<Props> = (props) => {
   let polygonRef: Polygon;
   return (
     <Polygon
+      {...props}
       positions={transformCoordinates(props.area.coordinates)}
       {...normalStyle}
       ref={(polygon) => { polygonRef = polygon; }}
@@ -45,4 +46,5 @@ const AreaPolygon: SFC<Props> = (props) => {
   );
 };
 
+export { Props };
 export default AreaPolygon;

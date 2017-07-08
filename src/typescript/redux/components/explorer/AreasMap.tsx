@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { SFC, PropTypes } from 'react';
+import partial = require('lodash/partial');
 
 import AreaMap from './AreaMap';
 import { Area } from './types';
 
 interface Props {
   areas: Area[];
-  selectedAreaId?: number;
-  onAreaClick?: (areaId: number) => any;
+  selectedAreaId?: string;
+  onAreaClick?: (area: Area) => any;
 }
 
 const AreasMap: SFC<Props> = (props) => {
@@ -19,8 +20,8 @@ const AreasMap: SFC<Props> = (props) => {
           <AreaMap
             key={area.id}
             area={area}
-            selected={props.selectedAreaId === area.id}
-            onClick={props.onAreaClick}
+            selected={props.selectedAreaId === area.name}
+            onClick={partial(props.onAreaClick, area)}
           />
         );
       })}

@@ -3,7 +3,7 @@ import { persistState } from 'redux-devtools';
 import * as promiseMiddleware from 'redux-promise';
 import { createLogger } from 'redux-logger';
 
-import rootReducer from '../reducers';
+import rootReducer from '../reducer';
 import DevTools from '../DevTools';
 
 /**
@@ -41,8 +41,8 @@ export default function getStore(initialState: any) {
 
   // Enable hot module replacement for reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      const nextReducer = require('../reducers').default;
+    module.hot.accept('../reducer', () => {
+      const nextReducer = require('../reducer').default;
       store.replaceReducer(nextReducer);
     });
   }
