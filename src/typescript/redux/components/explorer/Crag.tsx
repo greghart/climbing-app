@@ -19,12 +19,12 @@ const Crag: SFC<Props> = (props) => {
     <div>
       <h2>Crag {props.crag.name}</h2>
       <div className='row'>
-        <div className='col-md-10'>
+        <div className='col-md-8'>
           <CragMap
             {...props}
           />
         </div>
-        <div className='col-md-2'>
+        <div className='col-md-4'>
           Areas
           <AreasList
             {...props}

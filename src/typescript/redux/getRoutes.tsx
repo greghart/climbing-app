@@ -1,8 +1,15 @@
 import * as React from 'react';
-import { RouteConfig } from 'react-router-config';
+import { SFC } from 'react';
+import { RouteConfig, RouteConfigComponentProps } from 'react-router-config';
 
 // Import all containers here
-import Tram from './containers/Tram';
+import CragContainer from './containers/CragContainer';
+
+const CragRoute: SFC<RouteConfigComponentProps<{ name: string }>> = (props) => {
+  return (
+    <CragContainer name={props.match.params.name} />
+  );
+};
 
 /**
  * App encapsulates the full routes markup that our app consists of
@@ -10,8 +17,8 @@ import Tram from './containers/Tram';
 export default function getRoutes(): RouteConfig[] {
   return [
     {
-      path: '/',
-      component: Tram
+      path: '/:name',
+      component: CragRoute
     }
   ];
 }
