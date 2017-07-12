@@ -7,6 +7,7 @@ import * as classNames from 'classnames';
 import { Crag, Area } from './types';
 import CragMap from './CragMap';
 import AreasList from './AreasList';
+import MapDetailLayout from '../layouts/MapDetailLayout';
 
 interface Props {
   crag: Crag;
@@ -16,23 +17,21 @@ interface Props {
 
 const Crag: SFC<Props> = (props) => {
   return (
-    <div>
-      <h2>Crag {props.crag.name}</h2>
-      <div className='row'>
-        <div className='col-md-8'>
-          <CragMap
-            {...props}
-          />
-        </div>
-        <div className='col-md-4'>
+    <MapDetailLayout
+      title={`Crag ${props.crag.name}`}
+      Map={
+        <CragMap {...props} />
+      }
+      Detail={
+        <div>
           Areas
           <AreasList
             {...props}
             areas={props.crag.areas}
           />
         </div>
-      </div>
-    </div>
+      }
+    />
   )
 };
 
