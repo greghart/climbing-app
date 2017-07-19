@@ -5,7 +5,10 @@
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "es5",
-    "jsx": "react"
+    "lib": ["dom", "es5", "scripthost", "es6"],
+    "jsx": "react",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": [
     "./src/typescript/**/*"

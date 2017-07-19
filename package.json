@@ -64,6 +64,7 @@
     "leaflet": "^1.1.0",
     "lodash": "^4.17.4",
     "normalizr": "^3.2.3",
+    "pg": "^6.4.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -79,9 +80,11 @@
     "redux-actions": "^2.2.1",
     "redux-logger": "^3.0.6",
     "redux-promise": "^0.5.3",
+    "reflect-metadata": "^0.1.10",
     "serve-favicon": "^2.4.3",
     "serve-static": "^1.12.3",
-    "swagger-client": "^3.0.16"
+    "swagger-client": "^3.0.16",
+    "typeorm": "0.0.11"
   },
   "devDependencies": {
     "@types/react-hot-loader": "^3.0.3",

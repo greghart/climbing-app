@@ -4,13 +4,14 @@ import { Map } from 'react-leaflet';
 import { connect } from 'react-redux';
 import * as classNames from 'classnames';
 
-import { Crag, Area } from './types';
 import CragMap from './CragMap';
 import AreasList from './AreasList';
 import MapDetailLayout from '../layouts/MapDetailLayout';
+import Area from '../../../models/Area';
+import CragModel from '../../../models/Crag';
 
 interface Props {
-  crag: Crag;
+  crag: CragModel;
   selectedAreaId: string;
   onAreaClick: (area: Area) => any;
 }

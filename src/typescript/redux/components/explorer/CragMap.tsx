@@ -6,11 +6,12 @@ import find = require('lodash/find');
 
 import BestTileLayer from '../BestTileLayer';
 import AreasMap from './AreasMap';
-import { Area, Crag } from './types';
 import transformCoordinates from './transformCoordinates';
+import Crag from '../../../models/Crag';
+import Area from '../../../models/Area';
 
 interface Props {
-  crag: Crag
+  crag: Crag;
   selectedAreaId: string;
   onAreaClick: (area: Area) => any;
 }
@@ -28,11 +29,11 @@ const CragMap: SFC<Props> = (props) => {
         map = _map;
       }}
       center={props.crag.center}
-      zoom={props.crag.zoom}
+      zoom={props.crag.defaultZoom}
       minZoom={props.crag.minZoom}
       maxZoom={props.crag.maxZoom}
       bounds={selectedArea &&
-        transformCoordinates(selectedArea.coordinates)
+        selectedArea.coordinates.map((c) => c.tuple)
       }
     >
       <BestTileLayer />

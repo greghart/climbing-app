@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { SFC, PropTypes } from 'react';
 
-import { Area } from './types';
 import AreaPolygon from './AreaPolygon';
 import AreaBoulders from './AreaBoulders';
+import Area from '../../../models/Area';
 
 interface Props {
   area: Area;

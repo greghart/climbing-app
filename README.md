@@ -35,9 +35,15 @@ it! Ideal consumption is Github flavored markdown.
     - [Options](#options)
     - [Solution](#solution-1)
   - [Configuration](#configuration)
-  - [Server/API](#serverapi)
+  - [Server](#server)
     - [Express.js](#expressjs)
     - [Hapi.js](#hapijs)
+    - [Swagger / OpenAPI](#swagger--openapi)
+    - [Solution](#solution-2)
+  - [Database layer](#database-layer)
+  - [Model Layer](#model-layer)
+    - [Sequelize](#sequelize)
+    - [TypeORM](#typeorm)
   - [Authentication](#authentication)
     - [Use Cases](#use-cases)
       - [Session authentication](#session-authentication)
@@ -239,7 +245,7 @@ but run them only through NPS scripts.
 
 TODO Decide on solid universal configuration paradigm
 
-## Server/API
+## Server
 
 AKA: Backend, server, API
 
@@ -255,6 +261,66 @@ you put on top of it
 ### Hapi.js
 
 Opinionated and monolithic. Overall _unnecessary_ and _restrictive_
+
+### Swagger / OpenAPI
+
+Swagger is less a specific technology, and more a framework for standardizing
+RESTful APIs. Documenting your API with the spec and tools Swagger provides
+gives you (nearly free): API exploration, contractual versioning, validation,
+authorization, automatic client, etc.
+
+The downside is the technology is relatively new, and quickly evolving -- it was
+switched naming from Swagger -> OpenAPI, had a major version update, and has another
+on the way. That means splintered community help and documentation.
+
+### Solution
+
+Use Express, nearly every tech has a plugin.
+
+*Don't* use middleware for everything though. Minimize request flags and properties
+that only work if earlier middleware happened to have run in a certain way.
+
+Instead, use Swagger, or spec out your own API logic and ensure things are as
+modular as possible
+
+## Database layer
+
+My expertise and preference is relational data, in MySQL or PostgreSQL.
+
+Some experience with document based data stores like Mongo, but outside the scope
+for now.
+
+## Model Layer
+
+The model layer exists to separate your application and the underlying database. This
+can be as thin as encapsulating within SQL functions, to as broad as utilizing an ORM.
+Because we're not particularly masochistic, we will use an ORM to handle the primary
+use cases, describe the schema of our app, and handle logistics like migrations.
+
+### Sequelize
+
+Sequelize is the most popular Node.js ORM, and comes with all the advantages that
+brings (active community, long term support, etc.). It follows the ActiveRecord pattern
+(https://www.martinfowler.com/eaaCatalog/activeRecord.html).
+
+While active, stable, and mostly functional, it was was also built by primarily
+hobbyists who make very significant mistakes and design errors. When sequelize gets
+leaky (which happens a lot), it's not apparent at all how to tap into the lower layers.
+Additionally, it's built on an "old-school" object based query dialog, which
+makes building complex queries just a little bit harder.
+
+### TypeORM
+
+TypeORM is a TypeScript-centric ORM. Following the Data Mapper pattern
+(https://martinfowler.com/eaaCatalog/dataMapper.html), it allows you to
+declare POJCs (Plain Ol Javascript Classes), and uses decorators and type
+reflection to create a layer for adapting these classes to SQL and back.
+
+The design was buit specifically as a foil to the Sequelize way, ensuring
+falling back to lower level SQL is done easily and predictably. The query
+builder is first class, and working with basic objects for most of your
+application logic is a joy, as is having a class that can even be re-used
+on the client.
 
 ## Authentication
 

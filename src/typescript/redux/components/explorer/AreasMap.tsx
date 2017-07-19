@@ -3,7 +3,7 @@ import { SFC, PropTypes } from 'react';
 import partial = require('lodash/partial');
 
 import AreaMap from './AreaMap';
-import { Area } from './types';
+import Area from '../../../models/Area';
 
 interface Props {
   areas: Area[];

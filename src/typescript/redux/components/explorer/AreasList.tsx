@@ -3,10 +3,9 @@ import { SFC } from 'react';
 import { Map } from 'react-leaflet';
 import { connect } from 'react-redux';
 import * as classNames from 'classnames';
+import Area from '../../../models/Area';
 
 import partial = require('lodash/partial');
-
-import { Area } from './types';
 
 type Props = {
   areas: Area[];

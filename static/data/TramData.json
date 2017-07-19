@@ -289,31 +289,31 @@
           "routes": [
             {
               "name": "Unnamed Mantel",
-              "difficulty": ".9",
+              "grade": ".9",
               "boulder": "c156",
               "id": "c159"
             },
             {
               "name": "One Handed Mantel",
-              "difficulty": "V5",
+              "grade": "V5",
               "boulder": "c156",
               "id": "c160"
             },
             {
               "name": "EZ Left",
-              "difficulty": "V1",
+              "grade": "V1",
               "boulder": "c156",
               "id": "c161"
             },
             {
               "name": "EZ Right",
-              "difficulty": "V2",
+              "grade": "V2",
               "boulder": "c156",
               "id": "c162"
             },
             {
               "name": "Unnamed",
-              "difficulty": "V.8",
+              "grade": "V.8",
               "boulder": "c156",
               "id": "c163"
             }
@@ -329,37 +329,37 @@
           "routes": [
             {
               "name": "Sling Blade",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c164",
               "id": "c167"
             },
             {
               "name": "Green Hornet",
-              "difficulty": "V5",
+              "grade": "V5",
               "boulder": "c164",
               "id": "c168"
             },
             {
               "name": "Unnamed",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c164",
               "id": "c169"
             },
             {
               "name": "Unnamed",
-              "difficulty": "V2",
+              "grade": "V2",
               "boulder": "c164",
               "id": "c170"
             },
             {
               "name": "Unnamed",
-              "difficulty": "V1",
+              "grade": "V1",
               "boulder": "c164",
               "id": "c171"
             },
             {
               "name": "Ian's Problem",
-              "difficulty": "V5",
+              "grade": "V5",
               "boulder": "c164",
               "id": "c172"
             }
@@ -375,43 +375,43 @@
           "routes": [
             {
               "name": "Sloper Traverse",
-              "difficulty": "V6/7",
+              "grade": "V6/7",
               "boulder": "c173",
               "id": "c176"
             },
             {
               "name": "Frank's Direct",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c173",
               "id": "c177"
             },
             {
               "name": "Frank's Problem",
-              "difficulty": "V4/5",
+              "grade": "V4/5",
               "boulder": "c173",
               "id": "c178"
             },
             {
               "name": "Short Sloper Traverse",
-              "difficulty": "V4/5",
+              "grade": "V4/5",
               "boulder": "c173",
               "id": "c179"
             },
             {
               "name": "Posse aka: Hesitation Factor",
-              "difficulty": "V7",
+              "grade": "V7",
               "boulder": "c173",
               "id": "c180"
             },
             {
               "name": "The Terminator",
-              "difficulty": "V2",
+              "grade": "V2",
               "boulder": "c173",
               "id": "c181"
             },
             {
               "name": "Frank's Roof",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c173",
               "id": "c182"
             }
@@ -427,31 +427,31 @@
           "routes": [
             {
               "name": "The Bonn Scott Memorial Face Problem",
-              "difficulty": "V4",
+              "grade": "V4",
               "boulder": "c183",
               "id": "c186"
             },
             {
               "name": "Angus",
-              "difficulty": "V9",
+              "grade": "V9",
               "boulder": "c183",
               "id": "c187"
             },
             {
               "name": "Malcomb",
-              "difficulty": "V6",
+              "grade": "V6",
               "boulder": "c183",
               "id": "c188"
             },
             {
               "name": "Big Ballz",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c183",
               "id": "c189"
             },
             {
               "name": "For Those About to Rock",
-              "difficulty": "V4",
+              "grade": "V4",
               "boulder": "c183",
               "id": "c190"
             }
@@ -742,55 +742,55 @@
           "routes": [
             {
               "name": "Unnamed",
-              "difficulty": "V0",
+              "grade": "V0",
               "boulder": "c105",
               "id": "c108"
             },
             {
               "name": "The Ledge",
-              "difficulty": "V1",
+              "grade": "V1",
               "boulder": "c105",
               "id": "c109"
             },
             {
               "name": "The Ledge Traverse",
-              "difficulty": "V2",
+              "grade": "V2",
               "boulder": "c105",
               "id": "c110"
             },
             {
               "name": "Tree Problem",
-              "difficulty": "V0-",
+              "grade": "V0-",
               "boulder": "c105",
               "id": "c111"
             },
             {
               "name": "Another Tree Problem",
-              "difficulty": "V0+",
+              "grade": "V0+",
               "boulder": "c105",
               "id": "c112"
             },
             {
               "name": "Gumby Traverse",
-              "difficulty": "V2",
+              "grade": "V2",
               "boulder": "c105",
               "id": "c113"
             },
             {
               "name": "Unnamed",
-              "difficulty": "V0",
+              "grade": "V0",
               "boulder": "c105",
               "id": "c114"
             },
             {
               "name": "Theatre of the Absurd",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c105",
               "id": "c115"
             },
             {
               "name": "The Uninspired",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c105",
               "id": "c116"
             }
@@ -806,37 +806,37 @@
           "routes": [
             {
               "name": "The Groveler",
-              "difficulty": "V5",
+              "grade": "V5",
               "boulder": "c117",
               "id": "c120"
             },
             {
               "name": "Chadinator",
-              "difficulty": "V7",
+              "grade": "V7",
               "boulder": "c117",
               "id": "c121"
             },
             {
               "name": "Flash Gordon",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c117",
               "id": "c122"
             },
             {
               "name": "Buck Rodgers",
-              "difficulty": "V2",
+              "grade": "V2",
               "boulder": "c117",
               "id": "c123"
             },
             {
               "name": "Buck Rodgers Var.",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c117",
               "id": "c124"
             },
             {
               "name": "Space Crack",
-              "difficulty": "V0",
+              "grade": "V0",
               "boulder": "c117",
               "id": "c125"
             }
@@ -852,37 +852,37 @@
           "routes": [
             {
               "name": "Mare Serenitatis",
-              "difficulty": ".7",
+              "grade": ".7",
               "boulder": "c126",
               "id": "c129"
             },
             {
               "name": "Oceanus",
-              "difficulty": ".8",
+              "grade": ".8",
               "boulder": "c126",
               "id": "c130"
             },
             {
               "name": "Sepentine Ridge",
-              "difficulty": "V0-",
+              "grade": "V0-",
               "boulder": "c126",
               "id": "c131"
             },
             {
               "name": "Sea of Tranquility",
-              "difficulty": "V1",
+              "grade": "V1",
               "boulder": "c126",
               "id": "c132"
             },
             {
               "name": "Mare Vaporum",
-              "difficulty": "V4",
+              "grade": "V4",
               "boulder": "c126",
               "id": "c133"
             },
             {
               "name": "Dark Side of the Moon",
-              "difficulty": "V5",
+              "grade": "V5",
               "boulder": "c126",
               "id": "c134"
             }
@@ -907,19 +907,19 @@
           "routes": [
             {
               "name": "George of the Jungle",
-              "difficulty": "V7",
+              "grade": "V7",
               "boulder": "c138",
               "id": "c141"
             },
             {
               "name": "Super Chicken",
-              "difficulty": "V1",
+              "grade": "V1",
               "boulder": "c138",
               "id": "c142"
             },
             {
               "name": "Tom Slick",
-              "difficulty": "V2",
+              "grade": "V2",
               "boulder": "c138",
               "id": "c143"
             }
@@ -944,37 +944,37 @@
           "routes": [
             {
               "name": "Demolition Man",
-              "difficulty": "V7",
+              "grade": "V7",
               "boulder": "c147",
               "id": "c150"
             },
             {
               "name": "Mr. Smiley Traverse",
-              "difficulty": "V10",
+              "grade": "V10",
               "boulder": "c147",
               "id": "c151"
             },
             {
               "name": "The Elf",
-              "difficulty": "V8",
+              "grade": "V8",
               "boulder": "c147",
               "id": "c152"
             },
             {
               "name": "The Elf (sit)",
-              "difficulty": "V9",
+              "grade": "V9",
               "boulder": "c147",
               "id": "c153"
             },
             {
               "name": "The Cavity",
-              "difficulty": "V7",
+              "grade": "V7",
               "boulder": "c147",
               "id": "c154"
             },
             {
               "name": "Carlton's Var.",
-              "difficulty": "V6",
+              "grade": "V6",
               "boulder": "c147",
               "id": "c155"
             }
@@ -1028,19 +1028,19 @@
           "routes": [
             {
               "name": "Tuna Juice",
-              "difficulty": "V6",
+              "grade": "V6",
               "boulder": "c94",
               "id": "c97"
             },
             {
               "name": "Starkist",
-              "difficulty": "V6",
+              "grade": "V6",
               "boulder": "c94",
               "id": "c98"
             },
             {
               "name": "Slam Dunk",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c94",
               "id": "c99"
             }
@@ -1056,13 +1056,13 @@
           "routes": [
             {
               "name": "Bambi Traverse",
-              "difficulty": "V2",
+              "grade": "V2",
               "boulder": "c100",
               "id": "c103"
             },
             {
               "name": "Unnamed",
-              "difficulty": "V4",
+              "grade": "V4",
               "boulder": "c100",
               "id": "c104"
             }
@@ -1111,7 +1111,7 @@
           "routes": [
             {
               "name": "Wesco Dildo Arete",
-              "difficulty": "V7",
+              "grade": "V7",
               "boulder": "c18",
               "id": "c21"
             }
@@ -1127,49 +1127,49 @@
           "routes": [
             {
               "name": "Whitey the Clown",
-              "difficulty": "V5",
+              "grade": "V5",
               "boulder": "c22",
               "id": "c25"
             },
             {
               "name": "Unnamed",
-              "difficulty": "V0",
+              "grade": "V0",
               "boulder": "c22",
               "id": "c26"
             },
             {
               "name": "Short Traverse",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c22",
               "id": "c27"
             },
             {
               "name": "Long Traverse",
-              "difficulty": "V4",
+              "grade": "V4",
               "boulder": "c22",
               "id": "c28"
             },
             {
               "name": "Ultra Long Traverse",
-              "difficulty": "V5",
+              "grade": "V5",
               "boulder": "c22",
               "id": "c29"
             },
             {
               "name": "Unnamed",
-              "difficulty": "V1",
+              "grade": "V1",
               "boulder": "c22",
               "id": "c30"
             },
             {
               "name": "Drifting",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c22",
               "id": "c31"
             },
             {
               "name": "Unnamed",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c22",
               "id": "c32"
             }
@@ -1194,31 +1194,31 @@
           "routes": [
             {
               "name": "Right Arete",
-              "difficulty": "V1",
+              "grade": "V1",
               "boulder": "c36",
               "id": "c39"
             },
             {
               "name": "Center Crack",
-              "difficulty": "V0",
+              "grade": "V0",
               "boulder": "c36",
               "id": "c40"
             },
             {
               "name": "Dyno Problem",
-              "difficulty": "V2",
+              "grade": "V2",
               "boulder": "c36",
               "id": "c41"
             },
             {
               "name": "Traverse",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c36",
               "id": "c42"
             },
             {
               "name": "Highball Jugs",
-              "difficulty": "V0",
+              "grade": "V0",
               "boulder": "c36",
               "id": "c43"
             }
@@ -1234,25 +1234,25 @@
           "routes": [
             {
               "name": "The Honey Pots",
-              "difficulty": "V2",
+              "grade": "V2",
               "boulder": "c44",
               "id": "c47"
             },
             {
               "name": "Snowblind",
-              "difficulty": "V8",
+              "grade": "V8",
               "boulder": "c44",
               "id": "c48"
             },
             {
               "name": "Vanishing Point",
-              "difficulty": "V9",
+              "grade": "V9",
               "boulder": "c44",
               "id": "c49"
             },
             {
               "name": "Flight of Osirus",
-              "difficulty": "V6",
+              "grade": "V6",
               "boulder": "c44",
               "id": "c50"
             }
@@ -1268,55 +1268,55 @@
           "routes": [
             {
               "name": "Ranger Rick's Big Send",
-              "difficulty": "V6",
+              "grade": "V6",
               "boulder": "c51",
               "id": "c54"
             },
             {
               "name": "Blind Hog",
-              "difficulty": "V1",
+              "grade": "V1",
               "boulder": "c51",
               "id": "c55"
             },
             {
               "name": "Fire Farts",
-              "difficulty": "V0+",
+              "grade": "V0+",
               "boulder": "c51",
               "id": "c56"
             },
             {
               "name": "It's Another Route",
-              "difficulty": "V0",
+              "grade": "V0",
               "boulder": "c51",
               "id": "c57"
             },
             {
               "name": "Inside Moves",
-              "difficulty": ".8",
+              "grade": ".8",
               "boulder": "c51",
               "id": "c58"
             },
             {
               "name": "Dynamo Hum",
-              "difficulty": "V0",
+              "grade": "V0",
               "boulder": "c51",
               "id": "c59"
             },
             {
               "name": "The 19th Hole",
-              "difficulty": "V4",
+              "grade": "V4",
               "boulder": "c51",
               "id": "c60"
             },
             {
               "name": "The Crumby Route",
-              "difficulty": ".7",
+              "grade": ".7",
               "boulder": "c51",
               "id": "c61"
             },
             {
               "name": "Floyd E. Queeb",
-              "difficulty": "V0",
+              "grade": "V0",
               "boulder": "c51",
               "id": "c62"
             }
@@ -1332,55 +1332,55 @@
           "routes": [
             {
               "name": "Electric Dimension",
-              "difficulty": "V1",
+              "grade": "V1",
               "boulder": "c63",
               "id": "c66"
             },
             {
               "name": "Between Dimentions",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c63",
               "id": "c67"
             },
             {
               "name": "Rising Force",
-              "difficulty": "V4",
+              "grade": "V4",
               "boulder": "c63",
               "id": "c68"
             },
             {
               "name": "Trilogy",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c63",
               "id": "c69"
             },
             {
               "name": "Funky Toe'n",
-              "difficulty": "V0",
+              "grade": "V0",
               "boulder": "c63",
               "id": "c70"
             },
             {
               "name": "Don't Rock the Boat",
-              "difficulty": ".8",
+              "grade": ".8",
               "boulder": "c63",
               "id": "c71"
             },
             {
               "name": "Wandering Star",
-              "difficulty": "V4",
+              "grade": "V4",
               "boulder": "c63",
               "id": "c72"
             },
             {
               "name": "Irritable Bowel Syndrome",
-              "difficulty": "V4",
+              "grade": "V4",
               "boulder": "c63",
               "id": "c73"
             },
             {
               "name": "Yardarm of the Tram",
-              "difficulty": "V1",
+              "grade": "V1",
               "boulder": "c63",
               "id": "c74"
             }
@@ -1396,31 +1396,31 @@
           "routes": [
             {
               "name": "Unnamed",
-              "difficulty": "V3/4",
+              "grade": "V3/4",
               "boulder": "c75",
               "id": "c78"
             },
             {
               "name": "The Real Man's Problem",
-              "difficulty": "V9",
+              "grade": "V9",
               "boulder": "c75",
               "id": "c79"
             },
             {
               "name": "Slot Machine aka: Re-Animator",
-              "difficulty": "V6",
+              "grade": "V6",
               "boulder": "c75",
               "id": "c80"
             },
             {
               "name": "Nipple Shredder",
-              "difficulty": "V5",
+              "grade": "V5",
               "boulder": "c75",
               "id": "c81"
             },
             {
               "name": "\"Unitizing the \"\"G\"\"",
-              "difficulty": "V8\"",
+              "grade": "V8\"",
               "boulder": "c75",
               "id": "c82"
             }
@@ -1436,31 +1436,31 @@
           "routes": [
             {
               "name": "Unnamed",
-              "difficulty": "V0",
+              "grade": "V0",
               "boulder": "c83",
               "id": "c86"
             },
             {
               "name": "Unnamed",
-              "difficulty": "V3",
+              "grade": "V3",
               "boulder": "c83",
               "id": "c87"
             },
             {
               "name": "Trailside Tango",
-              "difficulty": "V4",
+              "grade": "V4",
               "boulder": "c83",
               "id": "c88"
             },
             {
               "name": "Just Another Trailside Attraction",
-              "difficulty": "V4",
+              "grade": "V4",
               "boulder": "c83",
               "id": "c89"
             },
             {
               "name": "Unnamed",
-              "difficulty": "V1",
+              "grade": "V1",
               "boulder": "c83",
               "id": "c90"
             }

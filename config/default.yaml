@@ -1,5 +1,5 @@
 server:
-  port: 3000
+  port: 6001
   cookies:
     secret: 'temposecret8213408SFS@##$'
   sessions:

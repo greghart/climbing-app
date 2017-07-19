@@ -6,10 +6,11 @@ import { denormalize } from 'normalizr';
 
 import CragComponent from '../components/explorer/Crag';
 import { State } from '../reducer';
-import { Area, Crag } from '../components/explorer/types';
 import { selectArea } from '../ducks/explorer';
 import { CragSchema } from '../normalizr';
 import { addEntities } from '../ducks/entities';
+import Area from '../../models/Area';
+import Crag from '../../models/Crag';
 const tram = require('../../../../static/data/TramData.json');
 const santee = require('../../../../static/data/Santee.json');
 

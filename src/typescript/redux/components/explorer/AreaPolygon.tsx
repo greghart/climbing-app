@@ -2,8 +2,8 @@ import * as React from 'react';
 import { SFC, PropTypes } from 'react';
 import { Polygon, PolygonProps } from 'react-leaflet';
 
-import { Area } from './types';
 import transformCoordinates from './transformCoordinates';
+import Area from '../../../models/Area';
 
 type Props = Partial<PolygonProps> & {
   area: Area;
@@ -33,7 +33,7 @@ const AreaPolygon: SFC<Props> = (props) => {
   return (
     <Polygon
       {...props}
-      positions={transformCoordinates(props.area.coordinates)}
+      positions={props.area.coordinates}
       {...normalStyle}
       ref={(polygon) => { polygonRef = polygon; }}
       onmouseover={() => {
