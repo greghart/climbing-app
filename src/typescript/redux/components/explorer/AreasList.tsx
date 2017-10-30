@@ -49,6 +49,7 @@ const AreasList: SFC<Props> = (props) => {
         {props.areas.map((thisArea) => {
           return (
             <AreaListing
+              key={`area-${thisArea.name}`}
               onClick={partial(props.onAreaClick, thisArea)}
               area={thisArea}
               selected={props.selectedAreaId === thisArea.name}

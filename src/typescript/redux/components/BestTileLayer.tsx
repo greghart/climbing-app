@@ -15,6 +15,9 @@ const Physical = "//server.arcgisonline.com/ArcGIS/rest/services/World_Physical_
  * Component that is the best TileLayer for general purposes
  */
 const BestTileLayer: SFC<Partial<TileLayerProps>> = (props) => {
+  console.log({
+    props
+  }, 'BestTileLayer');
   return (
     <TileLayer
       {...props}

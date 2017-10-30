@@ -12,7 +12,7 @@ import Grade from '../models/Grade';
 import Crag from '../models/Crag';
 import parseCrag from './parseCrag';
 
-function getDatabase() {
+function getConnection() {
   return createConnection({
     driver: {
       type: 'postgres',
@@ -68,7 +68,8 @@ function getDatabase() {
     await connection.entityManager.persist(crag);
 
     console.log("Database connection successfully setup");
+    return connection;
   });
 }
 
-export default getDatabase;
+export default getConnection;

@@ -7,7 +7,7 @@ import getExpressApplication from './server/getExpressApplication';
 // import getAPIRouter from './api/getRouter';
 // import rollbar from './util/getRollbar';
 // import { serverOptions as rollbarServerOptions } from './util/getRollbar';
-import getDatabase from './db/getDatabase';
+import getConnection from './db';
 
 // rollbar.handleUncaughtExceptionsAndRejections(
 //   rollbarServerOptions.token,
@@ -19,7 +19,7 @@ import getDatabase from './db/getDatabase';
 // @todo Test continuous deployment
 // getAPIRouter()
 // .then((apiRouter) => {
-getDatabase()
+getConnection()
 .then(() => {
   return getExpressApplication();
 })

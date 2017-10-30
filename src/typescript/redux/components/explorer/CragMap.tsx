@@ -22,6 +22,9 @@ const CragMap: SFC<Props> = (props) => {
     props.crag.areas,
     (area) => area.name === props.selectedAreaId
   );
+  console.log({
+    props
+  }, 'CragMap.render');
   return (
     <Map
       className='map'

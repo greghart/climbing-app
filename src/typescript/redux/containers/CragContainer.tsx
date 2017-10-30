@@ -26,9 +26,11 @@ class DeferredCrag extends Component<StateProps & OwnProps & DispatchProps> {
   componentDidMount() {
     if (!this.props.crag) {
       let data: any;
+      console.log(this.props.name);
       switch (this.props.name) {
         case 'TramWay':
           data = tram;
+          break;
         default:
           data = santee;
       }
