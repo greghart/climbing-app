@@ -1,4 +1,4 @@
-import * as Promise from 'bluebird';
+import * as Bluebird from 'bluebird';
 import { Connection } from 'typeorm';
 import getConnection from './getConnection';
 
@@ -7,13 +7,13 @@ import getConnection from './getConnection';
  *
  * @example
  */
-let _connection: Promise.Thenable<Connection>;
+let _connection: Bluebird<Connection>;
 
 const getSingleConnection = () => {
   if (_connection) {
     return _connection;
   }
-  _connection = getConnection();
+  _connection = Bluebird.resolve(getConnection());
   return _connection;
 };
 

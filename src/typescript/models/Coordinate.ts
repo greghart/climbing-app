@@ -1,7 +1,6 @@
-import { AbstractEntity, Column } from 'typeorm';
+import { Column } from 'typeorm';
 import { LatLngLiteral, LatLngTuple } from 'leaflet';
 
-@AbstractEntity()
 export default class Coordinate {
 
   constructor(lat: number, lng: number) {

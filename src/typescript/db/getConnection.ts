@@ -14,24 +14,17 @@ import parseCrag from './parseCrag';
 
 function getConnection() {
   return createConnection({
-    driver: {
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'greghart',
-      password: undefined,
-      database: 'greghart'
-    },
+    type: 'postgres',
+    host: 'localhost',
+    port: 5432,
+    username: 'greghart',
+    password: undefined,
+    database: 'greghart',
     entities: [
       __dirname + '/../models/*.ts'
     ],
-    autoSchemaSync: true,
-    logging: {
-      logger: (level, message) => {
-        return debug(message);
-      },
-      logQueries: true
-    }
+    synchronize: true,
+    logging: true
   })
   .catch((err) => {
     console.error("Error on TypeORM database setup");
@@ -55,9 +48,9 @@ function getConnection() {
       return grade;
     });
 
-    const systems = await connection.entityManager.find(GradingSystem);
-    await connection.entityManager.remove(systems);
-    await connection.entityManager.persist(vGrading);
+    const systems = await connection.manager.find(GradingSystem);
+    await connection.manager.remove(systems);
+    await connection.manager.save(vGrading);
 
     // Load our static crags
     const dataRaw = await Bluebird.promisify(fs.readFile)(
@@ -65,10 +58,10 @@ function getConnection() {
     )
     const data = JSON.parse(dataRaw.toString());
     const crag = parseCrag(data);
-    await connection.entityManager.persist(crag);
+    await connection.manager.save(crag);
 
     console.log("Database connection successfully setup");
-    return connection;
+    return Promise.resolve(connection);
   });
 }
 
