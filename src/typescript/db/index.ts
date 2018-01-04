@@ -4,8 +4,6 @@ import getConnection from './getConnection';
 
 /**
  * Just maintain a single connection
- *
- * @example
  */
 let _connection: Bluebird<Connection>;
 

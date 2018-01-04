@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
 import * as promiseMiddleware from 'redux-promise';
+import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
 import rootReducer from '../reducer';
@@ -16,6 +17,7 @@ const logger = createLogger();
 
 const middlewares = [
   promiseMiddleware,
+  thunk,
   logger,
   // require('redux-immutable-state-invariant')()
 ];

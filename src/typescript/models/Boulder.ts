@@ -19,10 +19,10 @@ class Boulder {
   @Column()
   name: string;
 
-  @Column()
+  @Column('decimal')
   lat: number;
 
-  @Column()
+  @Column('decimal')
   lng: number;
 
   get coordinate(): Coordinate {
@@ -42,6 +42,16 @@ class Boulder {
 
   @OneToMany(type => Route, route => route.boulder, cascadeOneToMany)
   routes: Route[] = [];
+
+  toJSON() {
+    return Object.assign(
+      {},
+      this,
+      {
+        coordinate: this.coordinate
+      }
+    );
+  }
 
 }
 

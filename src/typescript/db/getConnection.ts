@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { createConnection, Connection } from 'typeorm';
+import * as pg from 'pg';
 import * as Bluebird from 'bluebird';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -12,6 +13,11 @@ import Grade from '../models/Grade';
 import Crag from '../models/Crag';
 import parseCrag from './parseCrag';
 
+// Abstraction leak
+// Make sure underlying db driver parses our decimals as a float
+// Obviously this isn't entirely safe
+pg.types.setTypeParser(1700, (v:any) => parseFloat(v));
+
 function getConnection() {
   return createConnection({
     type: 'postgres',
@@ -23,6 +29,7 @@ function getConnection() {
     entities: [
       __dirname + '/../models/*.ts'
     ],
+    dropSchema: true,
     synchronize: true,
     logging: true
   })

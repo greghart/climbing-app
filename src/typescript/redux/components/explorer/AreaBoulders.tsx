@@ -5,7 +5,6 @@ import { Marker } from 'react-leaflet';
 import * as L from 'leaflet';
 const DivIcon = require('react-leaflet-div-icon').default;
 
-import transformCoordinates from './transformCoordinates';
 import Area from '../../../models/Area';
 import Boulder from '../../../models/Boulder';
 
@@ -21,7 +20,7 @@ const AreaBoulders: SFC<Props> = (props) => {
         return (
           <Marker
             key={thisBoulder.id}
-            position={thisBoulder.coordinate.literal}
+            position={thisBoulder.coordinate}
             icon={L.divIcon({
               html: '*',
               className: "null"
@@ -29,7 +28,7 @@ const AreaBoulders: SFC<Props> = (props) => {
           >
             <DivIcon
               className='null'
-              position={thisBoulder.coordinate.literal}
+              position={thisBoulder.coordinate}
             >
               <span>
                 <img

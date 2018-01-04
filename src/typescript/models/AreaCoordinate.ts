@@ -14,12 +14,6 @@ export default class AreaCoordinate extends Coordinate {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @Column()
-  lat: number;
-
-  @Column()
-  lng: number;
-
   @ManyToOne(type => Area, area=> area.coordinates, cascadeManyToOne)
   area: Area;
   // boulders?: Boulder[];

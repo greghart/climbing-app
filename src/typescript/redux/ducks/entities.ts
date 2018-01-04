@@ -21,10 +21,21 @@ export type Payload = {
   schema: Schema;
 }
 
-// Actions
+/** Actions */
+
+export interface EntitiesActionPayload {
+  entities: {
+    [entityType: string]: object;
+  };
+}
 // Load entities for given schema
 export const addEntities = createAction<Payload>('climbing-app/entities/ADD_ENTITIES');
+// Request entities called with any options
+export const requestEntities = createAction<any>('ENTITIES_REQUEST');
+export const receiveEntities = createAction<EntitiesActionPayload>('ENTITIES_SUCCESS');
+export const failedEntities = createAction<null | Error>('ENTITIES_FAILURE');
 
+/** Reducer */
 /**
  * Customizer for merging of entities
  *

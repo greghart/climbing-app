@@ -19,10 +19,10 @@ export default class Crag {
   @Column()
   name: string;
 
-  @Column()
+  @Column('decimal')
   centerLat: number;
 
-  @Column()
+  @Column('decimal')
   centerLng: number;
 
   get center(): Coordinate {
@@ -46,4 +46,14 @@ export default class Crag {
   // Relationships
   @OneToMany(type => Area, area => area.crag, cascadeOneToMany)
   areas: Area[];
+
+  toJSON() {
+    return Object.assign(
+      {},
+      this,
+      {
+        center: this.center
+      }
+    );
+  }
 }

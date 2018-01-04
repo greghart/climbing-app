@@ -6,7 +6,6 @@ import find = require('lodash/find');
 
 import BestTileLayer from '../BestTileLayer';
 import AreasMap from './AreasMap';
-import transformCoordinates from './transformCoordinates';
 import Crag from '../../../models/Crag';
 import Area from '../../../models/Area';
 
@@ -36,7 +35,9 @@ const CragMap: SFC<Props> = (props) => {
       minZoom={props.crag.minZoom}
       maxZoom={props.crag.maxZoom}
       bounds={selectedArea &&
-        selectedArea.coordinates.map((c) => c.tuple)
+        selectedArea.coordinates.map((c) => {
+          return [c.lat, c.lng] as [number, number];
+        })
       }
     >
       <BestTileLayer />

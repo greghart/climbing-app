@@ -2,7 +2,6 @@ import * as React from 'react';
 import { SFC, PropTypes } from 'react';
 import { Polygon, PolygonProps } from 'react-leaflet';
 
-import transformCoordinates from './transformCoordinates';
 import Area from '../../../models/Area';
 
 type Props = Partial<PolygonProps> & {

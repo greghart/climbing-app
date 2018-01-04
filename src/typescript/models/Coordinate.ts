@@ -8,10 +8,10 @@ export default class Coordinate {
     this.lng = lng;
   }
 
-  @Column()
+  @Column('decimal')
   lat: number;
 
-  @Column()
+  @Column('decimal')
   lng: number;
 
   get literal(): LatLngLiteral {
@@ -23,6 +23,13 @@ export default class Coordinate {
 
   get tuple(): LatLngTuple {
     return [this.lat, this.lng];
+  }
+
+  toJSON() {
+    return {
+      lat: parseFloat(this.lat.toString()),
+      lng: parseFloat(this.lng.toString())
+    };
   }
 
 }

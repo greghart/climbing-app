@@ -7,12 +7,10 @@ import { denormalize } from 'normalizr';
 import CragComponent from '../components/explorer/Crag';
 import { State } from '../reducer';
 import { selectArea } from '../ducks/explorer';
+import fetchCrags from '../ducks/operations/fetchCrags';
 import { CragSchema } from '../normalizr';
-import { addEntities } from '../ducks/entities';
 import Area from '../../models/Area';
 import Crag from '../../models/Crag';
-const tram = require('../../../../static/data/TramData.json');
-const santee = require('../../../../static/data/Santee.json');
 
 interface OwnProps {
   name: string;
@@ -25,16 +23,7 @@ class DeferredCrag extends Component<StateProps & OwnProps & DispatchProps> {
 
   componentDidMount() {
     if (!this.props.crag) {
-      let data: any;
-      console.log(this.props.name);
-      switch (this.props.name) {
-        case 'TramWay':
-          data = tram;
-          break;
-        default:
-          data = santee;
-      }
-      this.props.loadCragFromJSON(data);
+      this.props.fetchCrags();
     }
   }
 
@@ -63,13 +52,8 @@ const mapDispatchToProps = {
   onAreaClick: (area: Area) => {
     return selectArea(area.name);
   },
-  loadCragFromJSON: (json: any) => {
-    return addEntities({
-      entities: json,
-      schema: CragSchema
-    })
-  }
-}
+  fetchCrags: fetchCrags('singleton-fetch')
+};
 
 type StateProps = {
   selectedAreaId: string;
@@ -77,8 +61,8 @@ type StateProps = {
 };
 type DispatchProps = {
   onAreaClick: (area: Area) => any;
-  loadCragFromJSON: any;
-}
+  fetchCrags: () => any;
+};
 export default connect<StateProps, DispatchProps, any>(
   mapStateToProps,
   mapDispatchToProps

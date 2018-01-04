@@ -7,8 +7,8 @@ const path = require('path');
 const GLOBALS = {
   'process.env': {
     'NODE_ENV': JSON.stringify('development')
-  },
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true'))
+  }
+  // __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true'))
 };
 
 module.exports = merge(config, {
@@ -18,6 +18,7 @@ module.exports = merge(config, {
     application: [
       'webpack-hot-middleware/client',
       'react-hot-loader/patch',
+      'whatwg-fetch',
       // App entry point
       path.join(__dirname, '/../src/typescript/client.tsx')
     ]

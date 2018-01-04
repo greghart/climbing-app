@@ -1,12 +1,16 @@
 import { Operation } from '../action';
 import getConnection from '../../db';
+import Crag from '../../models/Crag';
 // import RouteConfiguration from './RouteConfiguration';
 // import getOrgClient from '../../util/getOrgClient';
 
-const getCrags: Operation<void> = (req) => {
+const getCrags: Operation<void, Crag[]> = () => {
   return getConnection()
-  .then((connection) => {
-    return [];
+  .then(async (connection) => {
+    const cragRepository = connection.getRepository(Crag);
+    return await cragRepository.find({
+      relations: ['areas', 'areas.boulders', 'areas.coordinates']
+    });
   })
 }
 
@@ -41,3 +45,5 @@ const getCrags: Operation<void> = (req) => {
 // };
 
 // export default route;
+
+export default getCrags;
