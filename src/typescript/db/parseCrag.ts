@@ -11,7 +11,7 @@ function parseCrag(obj: any) {
   crag.center = new Coordinate(
     obj.center[0],
     obj.center[1]
-  )
+  );
   crag.defaultZoom = obj.zoom;
   crag.minZoom = obj.minZoom;
   crag.maxZoom = obj.maxZoom;

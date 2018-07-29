@@ -11,8 +11,8 @@ const getCrags: Operation<void, Crag[]> = () => {
     return await cragRepository.find({
       relations: ['areas', 'areas.boulders', 'areas.coordinates']
     });
-  })
-}
+  });
+};
 
 // /**
 //  * Load all business regions

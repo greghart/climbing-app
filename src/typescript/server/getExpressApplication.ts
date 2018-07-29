@@ -9,7 +9,7 @@ const state = require('express-state');
 import * as bodyParser from 'body-parser';
 import * as serveStatic from 'serve-static';
 import * as cookieParser from 'cookie-parser';
-import flash = require('connect-flash');
+import connectFlash = require('connect-flash');
 import * as cors from 'cors';
 import * as path from 'path';
 import * as Promise from 'bluebird';
@@ -77,7 +77,7 @@ function getExpressApplication(_app?: Application) {
       appSessionOptions
     )
   );
-  app.use(flash());
+  app.use(connectFlash());
 
   app.get('/crags', action(getCrags, () => {}));
   // // Allow unauthorized access to API docs, and expose to all requests

@@ -3,25 +3,34 @@ import { createAction, handleActions } from 'redux-actions';
 /**
  * Duck for tracking and updating the explorer tool state
  *
- * Leaflet tracks most DOM state, so we're really just persisting
- * selected area
+ * Leaflet tracks most DOM state internally, but we also have to track some.
  */
 export type State = { selectedAreaId?: string };
 export type Payload = string;
 
 // Actions
 export const selectArea = createAction<Payload>('climbing-app/explorer/SELECT_AREA');
+export const zoomMap = createAction<Payload>('climbing-app/explorer/ZOOM');
 
 // Reducer
 const initialState: State = {};
 
-const explorer = handleActions<State, Payload>({
-  [selectArea.toString()]: (state, { payload }) => {
-    if (!!payload) {
-      return { selectedAreaId: payload };
+const explorer = handleActions<State, Payload>(
+  {
+    [selectArea.toString()]: (state, { payload }) => {
+      if (payload) {
+        return { selectedAreaId: payload };
+      }
+      return state;
+    },
+    [zoomMap.toString()]: (state, { payload }) => {
+      if (payload) {
+        return { selectedAreaId: payload };
+      }
+      return state;
     }
-    return state;
-  }
-}, initialState);
+  },
+  initialState
+);
 
 export default explorer;

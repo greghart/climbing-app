@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { Component, SFC } from 'react';
-import { Map } from 'react-leaflet';
 import { connect } from 'react-redux';
 import { denormalize } from 'normalizr';
 
-import CragComponent from '../components/explorer/Crag';
-import { State } from '../reducer';
-import { selectArea } from '../ducks/explorer';
-import fetchCrags from '../ducks/operations/fetchCrags';
-import { CragSchema } from '../normalizr';
-import Area from '../../models/Area';
-import Crag from '../../models/Crag';
+import CragComponent from './Crag';
+import TracerComponent from '../tracer/Tracer';
+import { State } from '../../reducer';
+import { selectArea } from '../../ducks/explorer';
+import fetchCrags from '../../ducks/operations/fetchCrags';
+import { CragSchema } from '../../normalizr';
+import Area from '../../../models/Area';
+import Crag from '../../../models/Crag';
 
 interface OwnProps {
   name: string;
@@ -19,7 +18,7 @@ interface OwnProps {
 /**
  * Defer the rendering of crag until we've loaded data
  */
-class DeferredCrag extends Component<StateProps & OwnProps & DispatchProps> {
+class DeferredCrag extends React.Component<StateProps & OwnProps & DispatchProps> {
 
   componentDidMount() {
     if (!this.props.crag) {
@@ -35,7 +34,7 @@ class DeferredCrag extends Component<StateProps & OwnProps & DispatchProps> {
       <CragComponent {...this.props} />
     );
   }
-};
+}
 
 const mapStateToProps = (state: State, props: OwnProps) => {
   return {
@@ -46,7 +45,7 @@ const mapStateToProps = (state: State, props: OwnProps) => {
       state.entities
     )
   };
-}
+};
 
 const mapDispatchToProps = {
   onAreaClick: (area: Area) => {
@@ -67,4 +66,3 @@ export default connect<StateProps, DispatchProps, any>(
   mapStateToProps,
   mapDispatchToProps
 )(DeferredCrag);
-

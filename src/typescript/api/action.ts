@@ -7,7 +7,8 @@ interface ObjectResponse {
   [index: string]: Response | number | string | boolean | any;
 }
 type Response = ObjectResponse | ObjectResponse[];
-type Operation<T, Result extends Response = Response> = (args: T) => Result | Promise.Thenable<Result>;
+type Operation<T, Result extends Response = Response> =
+  (args: T) => Result | Promise.Thenable<Result>;
 type GetArgs<T> = (req: express.Request) => T;
 
 function action<T, Result>(

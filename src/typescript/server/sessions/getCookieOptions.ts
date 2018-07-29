@@ -12,11 +12,11 @@ interface Options extends express.CookieOptions {
  * @param {object} options Options to use.
  * @returns object used for both session `cookie` options and `setCookie`.
  */
-function getCookieOptions(options: Options = {}) {
-  options = {
+function getCookieOptions(_options: Options = {}) {
+  const options = {
     isLocal: false,
     browserSession: false,
-    ...options
+    ..._options
   };
   let cookieOptions: express.CookieOptions;
   if (options.isLocal) {

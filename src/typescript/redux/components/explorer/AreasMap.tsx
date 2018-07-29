@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { SFC, PropTypes } from 'react';
 import partial = require('lodash/partial');
 
 import AreaMap from './AreaMap';
@@ -11,7 +10,7 @@ interface Props {
   onAreaClick?: (area: Area) => any;
 }
 
-const AreasMap: SFC<Props> = (props) => {
+const AreasMap: React.SFC<Props> = (props) => {
   console.log({ props }, 'AreasMap');
   return (
     <div>

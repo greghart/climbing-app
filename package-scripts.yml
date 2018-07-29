@@ -8,4 +8,4 @@ scripts:
     script: cross-env PORT=3001 webpack-dashboard -- ts-node ./dev-server.ts
   lint:
     description: Lint the code, duh
-    script: eslint ./*.js ./**/*.js
+    script: tslint --project .

@@ -34,7 +34,7 @@ function getConnection() {
     logging: true
   })
   .catch((err) => {
-    console.error("Error on TypeORM database setup");
+    console.error('Error on TypeORM database setup');
     console.error(err.message);
     console.error(err.stack);
     process.exit(1);
@@ -60,14 +60,18 @@ function getConnection() {
     await connection.manager.save(vGrading);
 
     // Load our static crags
-    const dataRaw = await Bluebird.promisify(fs.readFile)(
-      path.join(__dirname, '../../../static/data/TramData.json')
-    )
-    const data = JSON.parse(dataRaw.toString());
-    const crag = parseCrag(data);
-    await connection.manager.save(crag);
+    const loadStaticCrag = async (fileName) => {
+      const dataRaw = await Bluebird.promisify(fs.readFile)(
+        path.join(__dirname, `../../../static/data/${fileName}`)
+      );
+      const data = JSON.parse(dataRaw.toString());
+      const crag = parseCrag(data);
+      await connection.manager.save(crag);
+    };
+    await loadStaticCrag('TramData.json');
+    await loadStaticCrag('Santee.json');
 
-    console.log("Database connection successfully setup");
+    console.log('Database connection successfully setup');
     return Promise.resolve(connection);
   });
 }

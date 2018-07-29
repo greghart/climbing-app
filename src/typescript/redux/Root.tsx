@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { PropTypes, SFC } from 'react';
 import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -13,7 +12,7 @@ type Props = {
   store: Store<any>;
 };
 
-const Root: SFC<Props> = ({ store }) => {
+const Root: React.SFC<Props> = ({ store }) => {
   let ComponentEl = (
     <Provider store={store}>
       <BrowserRouter>
@@ -28,7 +27,7 @@ const Root: SFC<Props> = ({ store }) => {
     ComponentEl = (
       <Provider store={store}>
         <div style={{ height: '100%', width: '100%' }}>
-          <div style={{ width: '70%', height: 'auto' }}>
+          <div style={{ width: '100%', height: 'auto' }}>
             <BrowserRouter>
               {renderRoutes(getRoutes())}
             </BrowserRouter>
@@ -43,7 +42,7 @@ const Root: SFC<Props> = ({ store }) => {
 };
 
 Root.propTypes = {
-  store: PropTypes.object.isRequired
+  store: React.PropTypes.object.isRequired
 };
 
 export default Root;

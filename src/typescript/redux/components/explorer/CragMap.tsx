@@ -1,6 +1,9 @@
 import * as React from 'react';
-import { SFC } from 'react';
-import { Map } from 'react-leaflet';
+import {
+  Map,
+  LayersControl,
+  LayerGroup
+} from 'react-leaflet';
 
 import find = require('lodash/find');
 
@@ -15,18 +18,15 @@ interface Props {
   onAreaClick: (area: Area) => any;
 }
 
-const CragMap: SFC<Props> = (props) => {
+const CragMap: React.SFC<Props> = (props) => {
   let map: Map;
   const selectedArea = find(
     props.crag.areas,
     (area) => area.name === props.selectedAreaId
   );
-  console.log({
-    props
-  }, 'CragMap.render');
   return (
     <Map
-      className='map'
+      className="map"
       ref={(_map) => {
         map = _map;
       }}
@@ -39,15 +39,27 @@ const CragMap: SFC<Props> = (props) => {
           return [c.lat, c.lng] as [number, number];
         })
       }
+      onzoomend={(e) => {
+        console.warn({
+          e,
+          zoom: map && map.leafletElement.getZoom()
+        },           'onzoomend');
+      }}
     >
       <BestTileLayer />
-      <AreasMap
-        areas={props.crag.areas}
-        selectedAreaId={props.selectedAreaId}
-        onAreaClick={(area) => {
-          props.onAreaClick(area);
-        }}
-      />
+      <LayersControl position="topright">
+        <LayersControl.Overlay name="Areas" checked={true}>
+          <LayerGroup>
+            <AreasMap
+              areas={props.crag.areas}
+              selectedAreaId={props.selectedAreaId}
+              onAreaClick={(area) => {
+                props.onAreaClick(area);
+              }}
+            />
+          </LayerGroup>
+        </LayersControl.Overlay>
+      </LayersControl>
     </Map>
   );
 };

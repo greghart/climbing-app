@@ -17,7 +17,6 @@ module.exports = {
       'node_modules'
     ],
     alias: {
-      // models: path.join(__dirname, '../src/client/assets/javascripts/models')
     },
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.json', '.scss', '.css', '.js']
   },

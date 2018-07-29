@@ -1,23 +1,23 @@
 import * as React from 'react';
-import { SFC, PropTypes } from 'react';
 import { TileLayer, TileLayerProps } from 'react-leaflet';
 
 // Newer tiles
-const WGS84 = "//wi.maptiles.arcgis.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+// tslint:disable-next-line:max-line-length
+const WGS84 = '//wi.maptiles.arcgis.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 // Classic world
-const World = "//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+// tslint:disable-next-line:max-line-length
+const World = '//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 // Muted tiles
-const Firefly = "//servicesbeta.arcgisonline.com/arcgis/rest/services/Firefly_World_Imagery/MapServer/tile/{z}/{y}/{x}";
+// tslint:disable-next-line:max-line-length
+const Firefly = '//servicesbeta.arcgisonline.com/arcgis/rest/services/Firefly_World_Imagery/MapServer/tile/{z}/{y}/{x}';
 // Physical map
-const Physical = "//server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}";
+// tslint:disable-next-line:max-line-length
+const Physical = '//server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}';
 
 /**
  * Component that is the best TileLayer for general purposes
  */
-const BestTileLayer: SFC<Partial<TileLayerProps>> = (props) => {
-  console.log({
-    props
-  }, 'BestTileLayer');
+const BestTileLayer: React.SFC<Partial<TileLayerProps>> = (props) => {
   return (
     <TileLayer
       {...props}
@@ -29,4 +29,4 @@ const BestTileLayer: SFC<Partial<TileLayerProps>> = (props) => {
   );
 };
 
-export default BestTileLayer
+export default BestTileLayer;

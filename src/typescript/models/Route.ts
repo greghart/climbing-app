@@ -27,7 +27,7 @@ export default class Route {
   grade: Grade;
 
   // Relationships
-  @ManyToOne(type => Boulder, boulder=> boulder.routes, cascadeManyToOne)
+  @ManyToOne(type => Boulder, boulder => boulder.routes, cascadeManyToOne)
   boulder: Boulder;
 
 }

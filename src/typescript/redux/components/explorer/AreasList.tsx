@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { SFC } from 'react';
 import { Map } from 'react-leaflet';
 import { connect } from 'react-redux';
 import * as classNames from 'classnames';
@@ -17,13 +16,13 @@ type AreaListingProps = {
   area: Area;
   selected: boolean;
   onClick: () => any;
-}
+};
 
-const AreaListing: SFC<AreaListingProps> = (props) => {
+const AreaListing: React.SFC<AreaListingProps> = (props) => {
   return (
     <li
       className={classNames({
-        "text-success": props.selected
+        'text-success': props.selected
       })}
       onClick={props.onClick}
     >
@@ -32,19 +31,19 @@ const AreaListing: SFC<AreaListingProps> = (props) => {
         <ul>
           {props.area.boulders.map((thisBoulder) => {
             return (
-              <li>{thisBoulder.name}</li>
-            )
+              <li key={thisBoulder.id}>{thisBoulder.name}</li>
+            );
           })}
         </ul>
         : <span />
       }
     </li>
   );
-}
+};
 
-const AreasList: SFC<Props> = (props) => {
+const AreasList: React.SFC<Props> = (props) => {
   return (
-    <div>
+    <div style={{backgroundColor: 'white', zIndex: 100000}}>
       <ul>
         {props.areas.map((thisArea) => {
           return (

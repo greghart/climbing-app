@@ -21,7 +21,11 @@ export default class GradingSystem {
   type: string;
 
   // Relationships
-  @OneToMany(type => Grade, grade => grade.gradingSystem, { cascadeUpdate: true, cascadeInsert: true })
+  @OneToMany(
+    type => Grade,
+    grade => grade.gradingSystem,
+    { cascadeUpdate: true, cascadeInsert: true }
+  )
   grades: Grade[];
 
 }

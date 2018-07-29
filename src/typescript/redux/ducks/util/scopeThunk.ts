@@ -18,6 +18,6 @@ function scopeThunk<R, S, E>(
   return (dispatch: ReduxTypes.Dispatch<S>, getState: () => S, extra: E): R => {
     return thunk(scopeDispatch(dispatch, scope), getState, extra);
   };
-};
+}
 
 export default scopeThunk;

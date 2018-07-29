@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { SFC, PropTypes } from 'react';
 import { Polygon, PolygonProps } from 'react-leaflet';
 
 import Area from '../../../models/Area';
 
 type Props = Partial<PolygonProps> & {
   area: Area;
-}
+};
 
 const normalStyle = {
   weight: 1.0,
@@ -24,7 +23,7 @@ const overStyle = {
   fillOpacity: 0.2
 };
 
-const AreaPolygon: SFC<Props> = (props) => {
+const AreaPolygon: React.SFC<Props> = (props) => {
   if (!props.area.coordinates) {
     return <span/>;
   }

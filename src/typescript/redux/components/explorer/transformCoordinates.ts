@@ -7,7 +7,7 @@ function isArray(coordinates: LatLngTuple | LatLngTuple[]): coordinates is LatLn
 /**
  * Basic helper since we sometimes have coordinates in lon lat for some reason
  */
-function transformCoordinates (coordinates?: LatLngTuple | LatLngTuple[]): LatLngTuple[] {
+function transformCoordinates(coordinates?: LatLngTuple | LatLngTuple[]): LatLngTuple[] {
   if (!coordinates) {
     return [];
   }

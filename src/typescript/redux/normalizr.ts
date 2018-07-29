@@ -16,17 +16,17 @@ export const RouteSchema = new schema.Entity('routes');
 
 // Setup all associations
 CragSchema.define({
-  areas: [ AreaSchema ]
+  areas: [AreaSchema]
 });
 
 AreaSchema.define({
   crag: CragSchema,
-  boulders: [ BoulderSchema ]
+  boulders: [BoulderSchema]
 });
 
 BoulderSchema.define({
   area: AreaSchema,
-  routes: [ RouteSchema ]
+  routes: [RouteSchema]
 });
 
 RouteSchema.define({

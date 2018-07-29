@@ -37,7 +37,7 @@ class Boulder {
   }
 
   // Relationships
-  @ManyToOne(type => Area, area=> area.boulders, cascadeManyToOne)
+  @ManyToOne(type => Area, area => area.boulders, cascadeManyToOne)
   area: Area;
 
   @OneToMany(type => Route, route => route.boulder, cascadeOneToMany)

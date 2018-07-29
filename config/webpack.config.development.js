@@ -25,7 +25,10 @@ module.exports = merge(config, {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin(GLOBALS)
+    new webpack.DefinePlugin(GLOBALS),
+    new webpack.NormalModuleReplacementPlugin(/typeorm$/, function (result) {
+      result.request = result.request.replace(/typeorm/, "typeorm/browser");
+    })
   ],
   module: {
     rules: [

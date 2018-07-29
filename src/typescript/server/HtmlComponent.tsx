@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SFC } from 'react';
+import SFC = React.SFC;
 import isLocal from '../util/isLocal';
 
 const isHot = !!module.hot;

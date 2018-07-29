@@ -37,7 +37,6 @@ Promise.resolve()
     rootEl
   );
 
-
   if (module.hot) {
     module.hot.accept('./redux/Root', () => {
       // If you use Webpack 2 in ES modules mode, you can

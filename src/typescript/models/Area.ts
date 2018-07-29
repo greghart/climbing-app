@@ -28,4 +28,5 @@ export default class Area {
 
   @OneToMany(type => Boulder, boulder => boulder.area, cascadeOneToMany)
   boulders: Boulder[] = [];
+
 }

@@ -19,7 +19,7 @@ export type State = { [index: string]: EntityMap };
 export type Payload = {
   entities: any[];
   schema: Schema;
-}
+};
 
 /** Actions */
 
@@ -61,7 +61,7 @@ export default (state: any = initialState, { type, payload }: ReduxActions.Actio
       state,
       normalize(entities, schema).entities,
       customizer
-    )
+    );
   }
   // Any action with payload.entities gets handled here.
   // Assumes normalization has occurred on the 'entities' collection
