@@ -2,4 +2,15 @@ html, body {
   height: 100vh;
 }
 
+.over-map {
+  z-index: 9999;
+}
+
+// Custom CSS to get under the leaflet zoom for other HTML
+.left-actions {
+  position: fixed;
+  left: 11px;
+  top: 80px;
+}
+
 @import './map';

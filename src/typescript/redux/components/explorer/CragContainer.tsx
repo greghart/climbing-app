@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { denormalize } from 'normalizr';
 
 import CragComponent from './Crag';
-import TracerComponent from '../tracer/Tracer';
 import { State } from '../../reducer';
 import { selectArea } from '../../ducks/explorer';
 import fetchCrags from '../../ducks/operations/fetchCrags';
 import { CragSchema } from '../../normalizr';
 import Area from '../../../models/Area';
 import Crag from '../../../models/Crag';
+import scopeObject from '../../ducks/util/scopeObject';
+import { setOpen } from '../../ducks/sidebar';
 
 interface OwnProps {
   name: string;
@@ -51,7 +52,13 @@ const mapDispatchToProps = {
   onAreaClick: (area: Area) => {
     return selectArea(area.name);
   },
-  fetchCrags: fetchCrags('singleton-fetch')
+  fetchCrags: fetchCrags('singleton-fetch'),
+  onOpenSidebar: () => {
+    return scopeObject(
+      setOpen(true),
+      'singleton-sidebar'
+    );
+  }
 };
 
 type StateProps = {
@@ -60,6 +67,7 @@ type StateProps = {
 };
 type DispatchProps = {
   onAreaClick: (area: Area) => any;
+  onOpenSidebar: () => any;
   fetchCrags: () => any;
 };
 export default connect<StateProps, DispatchProps, any>(

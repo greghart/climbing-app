@@ -12,6 +12,7 @@ type Props = SidebarProps & {
 };
 
 const MySidebar = (props: Props) => {
+  console.warn({ props }, 'MySidebar');
   return (
     <Sidebar
       {...props}
@@ -35,7 +36,7 @@ const getContainerForScope = (scope: string) => {
 
   const mapDispatchToProps = {
     onSetOpen: (isOpen: boolean) => {
-      scopeObject(
+      return scopeObject(
         setOpen(isOpen),
         scope
       );

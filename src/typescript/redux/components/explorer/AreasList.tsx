@@ -20,10 +20,14 @@ type AreaListingProps = {
 
 const AreaListing: React.SFC<AreaListingProps> = (props) => {
   return (
-    <li
-      className={classNames({
-        'text-success': props.selected
-      })}
+    <a
+      href="#"
+      className={classNames(
+        'list-group-item', 'list-group-item-action',
+        {
+          active: props.selected
+        }
+      )}
       onClick={props.onClick}
     >
       {props.area.name}
@@ -37,14 +41,14 @@ const AreaListing: React.SFC<AreaListingProps> = (props) => {
         </ul>
         : <span />
       }
-    </li>
+    </a>
   );
 };
 
 const AreasList: React.SFC<Props> = (props) => {
   return (
-    <div style={{backgroundColor: 'white', zIndex: 100000}}>
-      <ul>
+    <div>
+      <ul className="list-group">
         {props.areas.map((thisArea) => {
           return (
             <AreaListing

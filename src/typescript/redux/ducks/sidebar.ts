@@ -17,7 +17,8 @@ const initialState: State = { open: true };
 const sidebar = handleActions<State, Payload>(
   {
     [setOpen.toString()]: (state, { payload }) => {
-      if (payload) {
+      console.log({ payload }, 'sidebar');
+      if (typeof payload !== 'undefined') {
         return { open: payload };
       }
       return state;

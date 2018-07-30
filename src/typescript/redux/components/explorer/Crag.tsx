@@ -1,11 +1,7 @@
 import * as React from 'react';
-import { Map } from 'react-leaflet';
-import { connect } from 'react-redux';
-import * as classNames from 'classnames';
 
 import CragMap from './CragMap';
 import AreasList from './AreasList';
-import MapDetailLayout from '../layouts/MapDetailLayout';
 import Area from '../../../models/Area';
 import CragModel from '../../../models/Crag';
 import SidebarContainer from '../layouts/SidebarContainer';
@@ -14,6 +10,7 @@ interface Props {
   crag: CragModel;
   selectedAreaId: string;
   onAreaClick: (area: Area) => any;
+  onOpenSidebar: () => any;
 }
 
 const Crag: React.SFC<Props> = (props) => {
@@ -25,7 +22,9 @@ const Crag: React.SFC<Props> = (props) => {
         }
       }}
       sidebar={
-        <div className="h-100">
+        <div
+          className="h-100 bg-light"
+        >
           Areas
           <AreasList
             {...props}
@@ -34,7 +33,15 @@ const Crag: React.SFC<Props> = (props) => {
         </div>
       }
     >
-      <CragMap {...props} />
+      <div>
+        <div
+          className="btn btn-light over-map left-actions py-1 px-2"
+          onClick={props.onOpenSidebar}
+        >
+          <i className="fa fa-bars " />
+        </div>
+        <CragMap {...props} />
+      </div>
     </SidebarContainer>
   );
   // return (
