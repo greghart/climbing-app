@@ -21,13 +21,7 @@ const AreaBoulders: React.SFC<Props> = (props) => {
             key={thisBoulder.id}
           >
             <span>
-              <img
-                src="http://33.media.tumblr.com/avatar_ed8e84defa40_128.png"
-                style={{
-                  width: 12,
-                  height: 12
-                }}
-              />
+              <i className="fa fa-tree fa-lg "/>
             </span>
           </DivIcon>
         );

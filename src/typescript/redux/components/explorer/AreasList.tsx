@@ -19,9 +19,12 @@ type AreaListingProps = {
 };
 
 const AreaListing: React.SFC<AreaListingProps> = (props) => {
+  if (props.selected) {
+    return <AreaOpenListing {...props} />
+  }
   return (
-    <a
-      href="#"
+    <button
+      role="button"
       className={classNames(
         'list-group-item', 'list-group-item-action',
         {
@@ -32,16 +35,50 @@ const AreaListing: React.SFC<AreaListingProps> = (props) => {
     >
       {props.area.name}
       {props.selected ?
-        <ul>
+        <ul className="list-group">
           {props.area.boulders.map((thisBoulder) => {
             return (
-              <li key={thisBoulder.id}>{thisBoulder.name}</li>
+              <button
+                role="button"
+                key={thisBoulder.id}
+                href="#"
+                className="list-group-item, list-group-item-action"
+                onClick={props.onClick}
+              >
+                {thisBoulder.name}
+              </button>
             );
           })}
         </ul>
         : <span />
       }
-    </a>
+    </button>
+  );
+};
+
+const AreaOpenListing: React.SFC<any> = (props) => {
+  return (
+    <div className="card">
+      <div className="card-header">
+        {props.area.name}
+      </div>
+      <div className="card-body">
+        <ul className="list-group">
+          {props.area.boulders.map((thisBoulder) => {
+            return (
+              <button
+                role="button"
+                key={thisBoulder.id}
+                className="list-group-item list-group-item-action"
+                onClick={props.onClick}
+              >
+                {thisBoulder.name}
+              </button>
+            );
+          })}
+        </ul>
+      </div>
+    </div>
   );
 };
 
