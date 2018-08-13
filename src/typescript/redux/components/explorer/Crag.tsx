@@ -25,7 +25,7 @@ const Crag: React.SFC<Props> = (props) => {
         <div
           className="h-100 bg-light"
         >
-          Areas
+          {props.crag.name}
           <AreasList
             {...props}
             areas={props.crag.areas}
@@ -33,7 +33,7 @@ const Crag: React.SFC<Props> = (props) => {
         </div>
       }
     >
-      <div>
+      <div className="h-100">
         <div
           className="btn btn-light over-map left-actions py-1 px-2"
           onClick={props.onOpenSidebar}

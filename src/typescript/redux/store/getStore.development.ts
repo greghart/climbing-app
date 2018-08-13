@@ -3,6 +3,8 @@ import { persistState } from 'redux-devtools';
 import * as promiseMiddleware from 'redux-promise';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+import { createBrowserHistory } from 'history';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 
 import rootReducer from '../reducer';
 import DevTools from '../DevTools';

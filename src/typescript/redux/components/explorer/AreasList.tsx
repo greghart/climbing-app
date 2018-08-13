@@ -20,7 +20,7 @@ type AreaListingProps = {
 
 const AreaListing: React.SFC<AreaListingProps> = (props) => {
   if (props.selected) {
-    return <AreaOpenListing {...props} />
+    return <AreaOpenListing {...props} />;
   }
   return (
     <button
@@ -70,7 +70,6 @@ const AreaOpenListing: React.SFC<any> = (props) => {
                 role="button"
                 key={thisBoulder.id}
                 className="list-group-item list-group-item-action"
-                onClick={props.onClick}
               >
                 {thisBoulder.name}
               </button>

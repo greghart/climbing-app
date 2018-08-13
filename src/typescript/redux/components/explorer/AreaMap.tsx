@@ -42,10 +42,14 @@ const AreaMap: React.SFC<Props> = (props) => {
       {props.selected ?
       [
         <AreaPolygon
-            area={props.area}
-            onclick={props.onClick}
-          />,
-        <AreaBoulders area={props.area} />
+          key={`area-${props.area.id}-polygon`}
+          area={props.area}
+          onclick={props.onClick}
+        />,
+        <AreaBoulders
+          key={`area-${props.area.id}-boulders`}
+          area={props.area}
+        />
       ] :
         <span />
       }
