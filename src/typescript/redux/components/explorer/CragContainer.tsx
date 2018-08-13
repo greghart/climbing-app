@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { denormalize } from 'normalizr';
+import { push } from 'connected-react-router';
 
 import CragComponent from './Crag';
 import { State } from '../../reducer';
-import { selectArea } from '../../ducks/explorer';
 import fetchCrags from '../../ducks/operations/fetchCrags';
+import { selectArea } from '../../ducks/explorer';
 import { CragSchema } from '../../normalizr';
 import Area from '../../../models/Area';
 import Crag from '../../../models/Crag';
@@ -13,7 +14,8 @@ import scopeObject from '../../ducks/util/scopeObject';
 import { setOpen } from '../../ducks/sidebar';
 
 interface OwnProps {
-  name: string;
+  crag: string;
+  area?: string;
 }
 
 /**
@@ -37,28 +39,35 @@ class DeferredCrag extends React.Component<StateProps & OwnProps & DispatchProps
   }
 }
 
-const mapStateToProps = (state: State, props: OwnProps) => {
+const mapStateToProps = (state: State, ownProps: OwnProps) => {
+  console.warn({
+    ownProps
+  }, 'mapStateToProps');
   return {
-    selectedAreaId: state.explorer.selectedAreaId,
+    selectedAreaId: ownProps.area,
     crag: denormalize(
-      props.name,
+      ownProps.crag,
       CragSchema,
       state.entities
     )
   };
 };
 
-const mapDispatchToProps = {
-  onAreaClick: (area: Area) => {
-    return selectArea(area.name);
-  },
-  fetchCrags: fetchCrags('singleton-fetch'),
-  onOpenSidebar: () => {
-    return scopeObject(
-      setOpen(true),
-      'singleton-sidebar'
-    );
-  }
+const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
+  return {
+    onAreaClick: (area: Area) => {
+      return dispatch(push(`/${ownProps.crag}/${area.name}`));
+    },
+    fetchCrags: () => dispatch(
+      fetchCrags('singleton-fetch')()
+    ),
+    onOpenSidebar: () => dispatch(
+      scopeObject(
+        setOpen(true),
+        'singleton-sidebar'
+      )
+    )
+  };
 };
 
 type StateProps = {
@@ -70,7 +79,8 @@ type DispatchProps = {
   onOpenSidebar: () => any;
   fetchCrags: () => any;
 };
-export default connect<StateProps, DispatchProps, any>(
+export { OwnProps };
+export default connect<StateProps, typeof mapDispatchToProps, any>(
   mapStateToProps,
   mapDispatchToProps
 )(DeferredCrag);

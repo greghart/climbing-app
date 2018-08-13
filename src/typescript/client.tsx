@@ -2,6 +2,7 @@ import * as Promise from 'bluebird';
 import * as React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { createBrowserHistory } from 'history';
 const Redbox = require('redbox-react');
 
 require('bootstrap/dist/css/bootstrap.min.css');
@@ -26,13 +27,15 @@ const rootEl = document.getElementById('app');
 Promise.resolve()
 .then(() => {
 
+  const history = createBrowserHistory();
   const store = getStore(
-    window.preloadedState || {}
+    window.preloadedState || {},
+    history
   );
 
   render(
     <AppContainer>
-      <Root store={store} />
+      <Root store={store} history={history} />
     </AppContainer>,
     rootEl
   );
@@ -45,7 +48,7 @@ Promise.resolve()
 
       render(
         <AppContainer errorReporter={Redbox}>
-          <NextApp store={store} />
+          <NextApp store={store} history={history} />
         </AppContainer>,
         rootEl
       );

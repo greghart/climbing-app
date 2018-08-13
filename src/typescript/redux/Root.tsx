@@ -5,19 +5,22 @@ import { BrowserRouter } from 'react-router-dom';
 import {
   renderRoutes
 } from 'react-router-config';
+import { ConnectedRouter } from 'connected-react-router';
+import { History } from 'history';
 
 import getRoutes from './getRoutes';
 
 type Props = {
   store: Store<any>;
+  history: History;
 };
 
-const Root: React.SFC<Props> = ({ store }) => {
+const Root: React.SFC<Props> = ({ store, history }) => {
   let ComponentEl = (
     <Provider store={store}>
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         {renderRoutes(getRoutes())}
-      </BrowserRouter>
+      </ConnectedRouter>
     </Provider>
   );
 
@@ -28,9 +31,9 @@ const Root: React.SFC<Props> = ({ store }) => {
       <Provider store={store}>
         <div style={{ height: '100%', width: '100%' }}>
           <div style={{ width: '100%', height: 'auto' }}>
-            <BrowserRouter>
+            <ConnectedRouter history={history}>
               {renderRoutes(getRoutes())}
-            </BrowserRouter>
+            </ConnectedRouter>
           </div>
           {!window.devToolsExtension ? <DevTools /> : null}
         </div>

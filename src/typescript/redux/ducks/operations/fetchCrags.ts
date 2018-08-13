@@ -13,12 +13,6 @@ export default scopeThunker(
         return response.json();
       })
       .then((crags) => {
-        console.log(
-          {
-            crags
-          },
-          'huzzah'
-        );
         return dispatch(
           receiveEntities(
             normalize(

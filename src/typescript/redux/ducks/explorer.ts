@@ -10,7 +10,6 @@ export type Payload = string;
 
 // Actions
 export const selectArea = createAction<Payload>('climbing-app/explorer/SELECT_AREA');
-export const zoomMap = createAction<Payload>('climbing-app/explorer/ZOOM');
 
 // Reducer
 const initialState: State = {};
@@ -18,12 +17,6 @@ const initialState: State = {};
 const explorer = handleActions<State, Payload>(
   {
     [selectArea.toString()]: (state, { payload }) => {
-      if (payload) {
-        return { selectedAreaId: payload };
-      }
-      return state;
-    },
-    [zoomMap.toString()]: (state, { payload }) => {
       if (payload) {
         return { selectedAreaId: payload };
       }

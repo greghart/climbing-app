@@ -3,7 +3,7 @@ import { persistState } from 'redux-devtools';
 import * as promiseMiddleware from 'redux-promise';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import { createBrowserHistory } from 'history';
+import { History } from 'history';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 
 import rootReducer from '../reducer';
@@ -32,16 +32,21 @@ const getDebugSessionKey = function () {
   );
   return (matches && matches.length) ? matches[1] : null;
 };
+export default function getStore(initialState: any, history: History) {
+  // Enhancer is a function of router middleware, which is a function of history
+  middlewares.push(routerMiddleware(history));
+  const enhancer = compose<any>(
+    applyMiddleware(...middlewares),
+    DevTools.instrument(),
+    // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
+    persistState(getDebugSessionKey())
+  );
 
-const enhancer = compose<any>(
-  applyMiddleware(...middlewares),
-  DevTools.instrument(),
-  // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
-  persistState(getDebugSessionKey())
-);
-
-export default function getStore(initialState: any) {
-  const store = createStore<any>(rootReducer, initialState, enhancer);
+  const store = createStore<any>(
+    connectRouter(history)(rootReducer),
+    initialState,
+    enhancer
+  );
 
   // Enable hot module replacement for reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {

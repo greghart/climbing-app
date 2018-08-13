@@ -14,7 +14,7 @@ import Area from '../../../models/Area';
 
 interface Props {
   crag: Crag;
-  selectedAreaId: string;
+  selectedAreaId?: string;
   onAreaClick: (area: Area) => any;
 }
 

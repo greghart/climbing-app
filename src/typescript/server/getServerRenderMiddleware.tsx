@@ -9,7 +9,7 @@ import {
 import {
   StaticRouter,
 } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { createMemoryHistory } from 'history';
 import { Store } from 'redux';
 import * as Promise from 'bluebird';
 import * as _debug from 'debug';
@@ -67,7 +67,12 @@ export default function getServerRenderMiddleware(): express.RequestHandler {
 
   return (req: express.Request, res, next) => {
     Promise.try(() => {
-      const store = getStore({});
+      const store = getStore(
+        {},
+        createMemoryHistory({
+          initialEntries: [req.url]
+        })
+      );
       return renderApp(req, res, store);
     })
     .catch(next);
