@@ -4,6 +4,7 @@ import * as pg from 'pg';
 import * as Bluebird from 'bluebird';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as config from 'config';
 import * as _debug from 'debug';
 const debug = _debug('climbing-app:typeorm');
 
@@ -21,11 +22,11 @@ pg.types.setTypeParser(1700, (v:any) => parseFloat(v));
 function getConnection() {
   return createConnection({
     type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'greghart',
-    password: undefined,
-    database: 'greghart',
+    host: config.get<string>('server.postgres.host'),
+    port: config.get<number>('server.postgres.port'),
+    username: config.get<string>('server.postgres.username'),
+    password: config.get<string>('server.postgres.password'),
+    database: config.get<string>('server.postgres.database'),
     entities: [
       __dirname + '/../models/*.ts'
     ],
