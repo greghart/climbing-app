@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { denormalize } from 'normalizr';
 import { push } from 'connected-react-router';
 
-import CragComponent from './Crag';
+import CragComponent, { Props as CragComponentProps } from './Crag';
 import { State } from '../../reducer';
 import fetchCrags from '../../ducks/operations/fetchCrags';
 import { selectArea } from '../../ducks/explorer';
@@ -21,7 +21,7 @@ interface OwnProps {
 /**
  * Defer the rendering of crag until we've loaded data
  */
-class DeferredCrag extends React.Component<StateProps & OwnProps & DispatchProps> {
+class DeferredCrag extends React.Component<DispatchProps & CragComponentProps> {
 
   componentDidMount() {
     if (!this.props.crag) {
@@ -42,7 +42,7 @@ class DeferredCrag extends React.Component<StateProps & OwnProps & DispatchProps
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
   console.warn({
     ownProps
-  }, 'mapStateToProps');
+  }, 'CragContainer.mapStateToProps');
   return {
     selectedAreaId: ownProps.area,
     crag: denormalize(
@@ -56,7 +56,7 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
     onAreaClick: (area: Area) => {
-      return dispatch(push(`/${ownProps.crag}/${area.name}`));
+      return dispatch(push(`/explorer/${ownProps.crag}/${area.name}`));
     },
     fetchCrags: () => dispatch(
       fetchCrags('singleton-fetch')()
@@ -75,7 +75,6 @@ type StateProps = {
   crag: Crag;
 };
 type DispatchProps = {
-  onAreaClick: (area: Area) => any;
   onOpenSidebar: () => any;
   fetchCrags: () => any;
 };

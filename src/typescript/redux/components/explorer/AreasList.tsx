@@ -82,6 +82,7 @@ const AreaOpenListing: React.SFC<any> = (props) => {
 };
 
 const AreasList: React.SFC<Props> = (props) => {
+  console.warn(props, 'AreasList');
   return (
     <div>
       <ul className="list-group">
@@ -100,4 +101,5 @@ const AreasList: React.SFC<Props> = (props) => {
   );
 };
 
+export { Props as Props };
 export default AreasList;

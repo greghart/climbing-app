@@ -11,9 +11,21 @@ interface Props {
   selectedAreaId: string;
   onAreaClick: (area: Area) => any;
   onOpenSidebar: () => any;
+  sidebarChildren: any;
 }
 
+/**
+ * Main component for exploring a crag.
+ * 
+ * Sets up a basic sidebar layout.
+ * - Sidebar (crag title + sidebarChildren)
+ * - Main crag map
+ *   - Search bar (TODO)
+ *   - Action to open sidebar
+ *   - Details view (TODO)
+ */
 const Crag: React.SFC<Props> = (props) => {
+  console.warn(props, 'Crag');
   return (
     <SidebarContainer
       styles={{
@@ -26,10 +38,11 @@ const Crag: React.SFC<Props> = (props) => {
           className="h-100 bg-light"
         >
           {props.crag.name}
-          <AreasList
+          {props.sidebarChildren}
+          {/* <AreasList
             {...props}
             areas={props.crag.areas}
-          />
+          /> */}
         </div>
       }
     >
@@ -63,4 +76,5 @@ const Crag: React.SFC<Props> = (props) => {
   // );
 };
 
+export { Props };
 export default Crag;

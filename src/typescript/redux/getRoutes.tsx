@@ -1,31 +1,21 @@
 import * as React from 'react';
 import SFC = React.SFC;
-import { RouteConfig, RouteConfigComponentProps } from 'react-router-config';
-import CragContainer, { OwnProps } from './components/explorer/CragContainer';
+import { RouteConfig } from 'react-router-config';
 
-// Import all containers here
+import CragRoute from './routes/CragRoute';
+import AreasListRoute from './routes/AreasListRoute';
 
-const CragRoute: SFC<RouteConfigComponentProps<OwnProps>> = (props) => {
-  console.log({
-    props,
-    params: props.match.params
-  }, 'CragRoute');
-  return (
-    <CragContainer
-      crag={props.match.params.crag}
-      area={props.match.params.area}
-    />
-  );
-};
-
-/**
- * App encapsulates the full routes markup that our app consists of
- */
 export default function getRoutes(): RouteConfig[] {
   return [
     {
-      path: '/:crag/:area?',
+      path: '/explorer/:crag/:area?',
       component: CragRoute,
+      routes: [
+        {
+          path: '/explorer/:crag/:area',
+          component: AreasListRoute
+        }
+      ]
     }
   ];
 }
