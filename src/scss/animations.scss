@@ -1,0 +1,22 @@
+
+.slide-up {
+
+  &-enter {
+    transform: translateY(100%);
+  }
+
+  &-enter.slide-up-enter-active {
+    transform: translateY(0%);
+    transition: transform 500ms ease-in-out;
+  }
+
+  &-leave {
+    transform: translateY(0%);
+  }
+
+  &-leave.slide-up-leave-active {
+    transform: translateY(-100%);
+    transition: transform 500ms ease-in-out;
+  }
+
+}

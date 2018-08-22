@@ -66,7 +66,10 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
         setOpen(true),
         'singleton-sidebar'
       )
-    )
+    ),
+    onOpenSearch: () => {
+      return dispatch(push('/search'));
+    },
   };
 };
 

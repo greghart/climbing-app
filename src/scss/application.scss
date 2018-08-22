@@ -13,4 +13,16 @@ html, body {
   top: 80px;
 }
 
+.fixed-container {
+  position: fixed;
+  left: 2vw;
+  top: 2vh;
+  width: 96vw;
+}
+
+.fullscreen {
+  height: 100vh;
+}
+
 @import './map';
+@import './animations';

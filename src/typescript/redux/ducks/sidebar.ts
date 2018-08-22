@@ -12,7 +12,7 @@ export type Payload = boolean;
 export const setOpen = createAction<Payload>('climbing-app/sidebar/SET_OPEN');
 
 // Reducer
-const initialState: State = { open: true };
+const initialState: State = { open: false };
 
 const sidebar = handleActions<State, Payload>(
   {

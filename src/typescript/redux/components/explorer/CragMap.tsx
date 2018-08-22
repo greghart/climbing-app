@@ -34,6 +34,7 @@ const CragMap: React.SFC<Props> = (props) => {
       zoom={props.crag.defaultZoom}
       minZoom={props.crag.minZoom}
       maxZoom={props.crag.maxZoom}
+      zoomControl={false}
       bounds={selectedArea &&
         selectedArea.coordinates.map((c) => {
           return [c.lat, c.lng] as [number, number];
@@ -47,7 +48,14 @@ const CragMap: React.SFC<Props> = (props) => {
       }}
     >
       <BestTileLayer />
-      <LayersControl position="topright">
+      <AreasMap
+        areas={props.crag.areas}
+        selectedAreaId={props.selectedAreaId}
+        onAreaClick={(area) => {
+          props.onAreaClick(area);
+        }}
+      />
+      {/* <LayersControl position="topright"> 
         <LayersControl.Overlay name="Areas" checked={true}>
           <LayerGroup>
             <AreasMap
@@ -59,7 +67,7 @@ const CragMap: React.SFC<Props> = (props) => {
             />
           </LayerGroup>
         </LayersControl.Overlay>
-      </LayersControl>
+      </LayersControl> */}
     </Map>
   );
 };
