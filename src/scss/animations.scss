@@ -21,11 +21,11 @@
     transition: transform $time ease-in-out;
   }
 
-  &-leave {
+  &-exit {
     transform: translateY(0%);
   }
 
-  &-leave.slide-up-leave-active {
+  &-exit.slide-up-exit-active {
     transform: translateY(-100%);
     transition: transform $time ease-in-out;
   }

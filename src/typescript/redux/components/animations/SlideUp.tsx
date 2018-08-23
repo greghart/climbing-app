@@ -1,18 +1,23 @@
 import * as React from 'react';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 import { ANIMATION_LENGTH_MS } from '.';
+import { TransitionProps } from 'react-transition-group/Transition';
 
-const SlideUp: React.SFC<any> = (props) => {
+/**
+ * Sliding upward animation.
+ * 
+ * On enter it slides up, on exit it just keeps on sliding up!
+ */
+const SlideUp: React.SFC<Partial<TransitionProps>> = (props) => {
+  console.warn({
+    props
+  }, 'SlideUp');
   return (
-    <CSSTransitionGroup 
-      transitionName="slide-up"
-      transitionEnterTimeout={ANIMATION_LENGTH_MS}
-      transitionLeaveTimeout={ANIMATION_LENGTH_MS}
-      transitionAppearTimeout={ANIMATION_LENGTH_MS}
-      transitionAppear={false}
-    >
-      {props.children}
-    </CSSTransitionGroup>
+    <CSSTransition 
+      {...props}
+      classNames="slide-up"
+      timeout={ANIMATION_LENGTH_MS}
+    />
   );
 };
 
