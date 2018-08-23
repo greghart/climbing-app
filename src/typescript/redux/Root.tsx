@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -35,17 +36,12 @@ const Root: React.SFC<Props> = ({ store, history }) => {
               {renderRoutes(getRoutes())}
             </ConnectedRouter>
           </div>
-          {!window.devToolsExtension ? <DevTools /> : null}
         </div>
       </Provider>
     );
   }
 
   return ComponentEl;
-};
-
-Root.propTypes = {
-  store: React.PropTypes.object.isRequired
 };
 
 export default Root;

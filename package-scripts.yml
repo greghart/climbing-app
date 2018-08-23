@@ -9,3 +9,6 @@ scripts:
   lint:
     description: Lint the code, duh
     script: tslint --project . && echo 'Linted successfully'
+  compile:
+    description: Compile all typescript resources to javascript.
+    script: tsc --project .

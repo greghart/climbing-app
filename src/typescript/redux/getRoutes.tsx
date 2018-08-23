@@ -1,35 +1,22 @@
 import * as React from 'react';
 import SFC = React.SFC;
 import { RouteConfig, RouteConfigComponentProps, renderRoutes } from 'react-router-config';
-import ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 import CragRoute from './routes/CragRoute';
 import AreasListRoute from './routes/AreasListRoute';
 import SearchRoute from './routes/SearchRoute';
+import ContainerRoute from './routes/ContainerRoute';
 
-const AnimationContainer: React.SFC<RouteConfigComponentProps<any>> = (props) => {
-  return (
-    <ReactCSSTransitionGroup 
-      transitionName="slide-up"
-      transitionEnterTimeout={500}
-      transitionLeaveTimeout={500}
-    >
-      <div key={props.location.key} >
-        {renderRoutes(props.route.routes)}
-      </div>
-    </ReactCSSTransitionGroup>
-  );
-};
-
-export default function getRoutes(): RouteConfig[] {
+export default function getRoutes(): (RouteConfig | any)[] {
   return [
     {
       path: '*',
-      component: AnimationContainer,
+      component: ContainerRoute,
       routes: [
         {
           path: '/explorer/:crag/:area?',
           component: CragRoute,
+          key: 'crag',
           routes: [
             {
               path: '/explorer/:crag/:area',
@@ -39,7 +26,8 @@ export default function getRoutes(): RouteConfig[] {
         },
         {
           path: '/search',
-          component: SearchRoute
+          component: SearchRoute,
+          key: 'search'
         }
       ]
     }

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import SearchGroup from './SearchGroup';
 import SearchInput from './SearchInput';
+import SlideUp from '../animations/SlideUp';
 
 interface Props {
   onClickBack?: () => any;
@@ -24,7 +25,6 @@ const SearchLayout: React.SFC<Props> = (props) => {
           />
         </div>
       </div>
-
     </div>
   )
 }

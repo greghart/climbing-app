@@ -41,7 +41,6 @@ const AreaListing: React.SFC<AreaListingProps> = (props) => {
               <button
                 role="button"
                 key={thisBoulder.id}
-                href="#"
                 className="list-group-item, list-group-item-action"
                 onClick={props.onClick}
               >

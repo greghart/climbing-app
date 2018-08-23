@@ -35,9 +35,6 @@ type InputMap<K extends string> = {
 function scopedMapSelector<K extends string>(scope: string, reducerMap: InputMap<K>) {
   type GivenMap = typeof reducerMap;
   const selector = scopedSelector(scope);
-  type ResultMap = {
-    [P in K]: ReducerState[GivenMap[P]];
-  };
 
   return (state: ReducerState) => {
     return (mapValues(
@@ -49,7 +46,7 @@ function scopedMapSelector<K extends string>(scope: string, reducerMap: InputMap
         }
         throw new Error(`Reducer ${reducer} is not scoped state`);
       }
-    ) as ResultMap);
+    ));
   };
 }
 export { scopedMapSelector };

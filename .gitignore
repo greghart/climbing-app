@@ -13,3 +13,4 @@ dump.rdb
 # Lib
 lib/
 build/
+dist/
