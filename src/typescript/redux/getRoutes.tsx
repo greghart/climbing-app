@@ -1,7 +1,6 @@
 import * as React from 'react';
 import SFC = React.SFC;
 import { RouteConfig, RouteConfigComponentProps, renderRoutes } from 'react-router-config';
-import ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 import CragRoute from './routes/CragRoute';
 import AreasListRoute from './routes/AreasListRoute';

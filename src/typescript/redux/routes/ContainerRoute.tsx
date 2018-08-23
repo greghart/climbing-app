@@ -2,7 +2,7 @@ import * as React from 'react';
 import SFC = React.SFC;
 import { RouteConfigComponentProps, renderRoutes } from "react-router-config";
 import SlideUp from '../components/animations/SlideUp';
-import ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+import { CSSTransitionGroup } from 'react-transition-group'
 import { Switch, Route } from 'react-router';
 
 interface ContainerParams {
@@ -21,7 +21,7 @@ class ContainerRoute extends React.Component<RouteConfigComponentProps<Container
       location: props.location.pathname
     }, 'ContainerRoute');
     return (
-      <ReactCSSTransitionGroup 
+      <CSSTransitionGroup 
         transitionName="slide-up"
         transitionEnterTimeout={60000}
         transitionLeaveTimeout={60000}
@@ -45,15 +45,17 @@ class ContainerRoute extends React.Component<RouteConfigComponentProps<Container
             />
           ))}
         </Switch>
-        {/* {(renderRoutes as any)(
-          props.route.routes, 
-          null, 
-          { 
-            key: props.location.key,
-            location: props.location
-          }
-        )} */}
-      </ReactCSSTransitionGroup>
+        {/* <React.Fragment key={props.location.key}>
+          {(renderRoutes as any)(
+            props.route.routes, 
+            null, 
+            { 
+              key: props.location.key,
+              location: props.location
+            }
+          )}
+        </React.Fragment> */}
+      </CSSTransitionGroup>
     );
   }
 

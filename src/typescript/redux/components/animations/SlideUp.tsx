@@ -1,9 +1,9 @@
 import * as React from 'react';
-import ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+import { CSSTransitionGroup } from 'react-transition-group';
 
 const SlideUp: React.SFC<any> = (props) => {
   return (
-    <ReactCSSTransitionGroup 
+    <CSSTransitionGroup 
       transitionName="slide-up"
       transitionEnter={false}
       transitionLeaveTimeout={10000}
@@ -13,7 +13,7 @@ const SlideUp: React.SFC<any> = (props) => {
       <div className="slide-target" key={props.key}>
         {props.children}
       </div>
-    </ReactCSSTransitionGroup>
+    </CSSTransitionGroup>
   );
 };
 
