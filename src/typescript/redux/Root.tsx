@@ -36,7 +36,6 @@ const Root: React.SFC<Props> = ({ store, history }) => {
               {renderRoutes(getRoutes())}
             </ConnectedRouter>
           </div>
-          {!window.devToolsExtension ? <DevTools /> : null}
         </div>
       </Provider>
     );

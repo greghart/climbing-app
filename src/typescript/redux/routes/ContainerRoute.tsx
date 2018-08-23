@@ -2,7 +2,7 @@ import * as React from 'react';
 import SFC = React.SFC;
 import { RouteConfigComponentProps, renderRoutes } from "react-router-config";
 import SlideUp from '../components/animations/SlideUp';
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransitionGroup } from 'react-transition-group';
 import { Switch, Route } from 'react-router';
 
 interface ContainerParams {
@@ -10,7 +10,9 @@ interface ContainerParams {
 /**
  * The container route is a top level container to allow a single place to add global logic.
  * 
- * Currently this is to handle animations
+ * Currently this is to handle animations -- at the top level, we don't auto animate, since
+ * some components need to manage transition animation internally (such as map). Instead, we
+ * just make sure to keep elements mounted until the child can finish unmounting.
  */
 class ContainerRoute extends React.Component<RouteConfigComponentProps<ContainerParams>> {
  
@@ -22,10 +24,10 @@ class ContainerRoute extends React.Component<RouteConfigComponentProps<Container
     }, 'ContainerRoute');
     return (
       <CSSTransitionGroup 
-        transitionName="slide-up"
-        transitionEnterTimeout={60000}
-        transitionLeaveTimeout={60000}
-        transitionAppearTimeout={60000}
+        transitionName="empty"
+        transitionEnterTimeout={50000}
+        transitionLeaveTimeout={50000}
+        transitionAppearTimeout={50000}
         transitionAppear={false}
         component="div"
       >
