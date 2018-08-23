@@ -11,6 +11,7 @@ import BestTileLayer from '../BestTileLayer';
 import AreasMap from './AreasMap';
 import Crag from '../../../models/Crag';
 import Area from '../../../models/Area';
+import SlideUp from '../animations/SlideUp';
 
 interface Props {
   crag: Crag;
