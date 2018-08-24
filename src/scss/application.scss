@@ -19,6 +19,9 @@ html, body {
   top: 2vh;
   width: 96vw;
 }
+.below-fixed {
+  padding-top: calc(2vh + 3rem);
+}
 
 .fullscreen {
   height: 100vh;

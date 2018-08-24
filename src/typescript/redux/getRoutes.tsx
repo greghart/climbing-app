@@ -16,11 +16,12 @@ export default function getRoutes(): (RouteConfig | any)[] {
         {
           path: '/explorer/:crag/:area?',
           component: CragRoute,
-          key: 'crag',
+          key: 'explorer',
           routes: [
             {
               path: '/explorer/:crag/:area',
-              component: AreasListRoute
+              component: AreasListRoute,
+              key: 'explorer'
             }
           ],
         },
