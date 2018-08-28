@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
       )
     ),
     onOpenSearch: () => {
-      return dispatch(push('/search'));
+      return dispatch(push(`/search/${ownProps.crag}`));
     },
   };
 };

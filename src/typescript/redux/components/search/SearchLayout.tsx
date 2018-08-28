@@ -3,6 +3,7 @@ import SearchGroup from './SearchGroup';
 import SlideUp from '../animations/SlideUp';
 import AnimationContext from '../animations/AnimationContext';
 import SearchInputContainer from './SearchInputContainer';
+import SearchResultsContainer from './SearchResultsContainer';
 
 interface Props {
   onClickBack?: () => any;
@@ -33,6 +34,7 @@ const SearchLayout: React.SFC<Props> = (props) => {
           <SlideUp {...animation} className="below-fixed">
             <div className="row"> 
               <div className="col">
+                <SearchResultsContainer />
               </div>
             </div>
           </SlideUp>

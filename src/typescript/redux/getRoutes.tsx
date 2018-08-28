@@ -26,7 +26,7 @@ export default function getRoutes(): (RouteConfig | any)[] {
           ],
         },
         {
-          path: '/search',
+          path: '/search/:crag',
           component: SearchRoute,
           key: 'search'
         }
