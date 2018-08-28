@@ -31,8 +31,8 @@ const SearchLayout: React.SFC<Props> = (props) => {
       </div>
       <AnimationContext.Consumer>
         {animation => (
-          <SlideUp {...animation} className="below-fixed">
-            <div className="row"> 
+          <SlideUp {...animation}>
+            <div className="row below-fixed"> 
               <div className="col">
                 <SearchResultsContainer />
               </div>

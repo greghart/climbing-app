@@ -97,7 +97,7 @@
     "swagger-client": "^3.8.13",
     "tslint": "5.8.0",
     "tslint-config-airbnb": "5.9.2",
-    "typeorm": "0.1.10",
+    "typeorm": "^0.1.14",
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {

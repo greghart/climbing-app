@@ -17,7 +17,11 @@ const SlideUp: React.SFC<Partial<TransitionProps>> = (props) => {
       {...props}
       classNames="slide-up"
       timeout={ANIMATION_LENGTH_MS}
-    />
+    >
+      {(state) => (
+        props.children
+      )}
+    </CSSTransition>
   );
 };
 

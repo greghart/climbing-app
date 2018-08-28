@@ -9,7 +9,7 @@ const getCrags: Operation<void, Crag[]> = () => {
   .then(async (connection) => {
     const cragRepository = connection.getRepository(Crag);
     return await cragRepository.find({
-      relations: ['areas', 'areas.boulders', 'areas.coordinates']
+      relations: ['areas', 'areas.boulders', 'areas.coordinates', 'areas.boulders.routes']
     });
   });
 };

@@ -24,10 +24,11 @@ getConnection()
   return getExpressApplication();
 })
 .then((app: express.Express) => {
+  const port = process.env.PORT || 5001;
   app.listen(
-    app.get('port'),
+    port,
     () => {
-      debug(`Server started listening on port ${app.get('port')}`);
+      debug(`Server started listening on port ${port}`);
     }
   );
 })
