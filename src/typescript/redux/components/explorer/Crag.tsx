@@ -1,12 +1,11 @@
 import * as React from 'react';
 
 import CragMap from './CragMap';
-import AreasList from './AreasList';
 import Area from '../../../models/Area';
 import CragModel from '../../../models/Crag';
 import SidebarContainer from '../layouts/SidebarContainer';
-import SearchInput from '../search/SearchInput';
 import SearchGroup from '../search/SearchGroup';
+import SearchInputContainer from '../search/SearchInputContainer';
 
 interface Props {
   crag: CragModel;
@@ -43,10 +42,6 @@ const Crag: React.SFC<Props> = (props) => {
           >
             {props.crag.name}
             {props.sidebarChildren}
-            {/* <AreasList
-              {...props}
-              areas={props.crag.areas}
-            /> */}
           </div>
         }
       >
@@ -61,7 +56,7 @@ const Crag: React.SFC<Props> = (props) => {
                   <i className="fa fa-bars" />
                 }
                 input={
-                  <SearchInput 
+                  <SearchInputContainer
                     onClick={props.onOpenSearch}
                   />
                 }

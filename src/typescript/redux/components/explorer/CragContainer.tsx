@@ -6,10 +6,8 @@ import { push } from 'connected-react-router';
 import CragComponent, { Props as CragComponentProps } from './Crag';
 import { State } from '../../reducer';
 import fetchCrags from '../../ducks/operations/fetchCrags';
-import { selectArea } from '../../ducks/explorer';
 import { CragSchema } from '../../normalizr';
 import Area from '../../../models/Area';
-import Crag from '../../../models/Crag';
 import scopeObject from '../../ducks/util/scopeObject';
 import { setOpen } from '../../ducks/sidebar';
 
@@ -73,16 +71,10 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   };
 };
 
-type StateProps = {
-  selectedAreaId: string;
-  crag: Crag;
-};
-type DispatchProps = {
-  onOpenSidebar: () => any;
-  fetchCrags: () => any;
-};
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 export { OwnProps };
-export default connect<StateProps, typeof mapDispatchToProps, any>(
+export default connect<StateProps, DispatchProps, any>(
   mapStateToProps,
   mapDispatchToProps
 )(DeferredCrag);

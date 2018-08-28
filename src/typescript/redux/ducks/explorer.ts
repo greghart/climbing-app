@@ -17,10 +17,7 @@ const initialState: State = {};
 const explorer = handleActions<State, Payload>(
   {
     [selectArea.toString()]: (state, { payload }) => {
-      if (payload) {
-        return { selectedAreaId: payload };
-      }
-      return state;
+      return { selectedAreaId: payload };
     }
   },
   initialState

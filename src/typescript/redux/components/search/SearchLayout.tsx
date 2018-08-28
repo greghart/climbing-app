@@ -1,11 +1,13 @@
 import * as React from 'react';
 import SearchGroup from './SearchGroup';
-import SearchInput from './SearchInput';
 import SlideUp from '../animations/SlideUp';
 import AnimationContext from '../animations/AnimationContext';
+import SearchInputContainer from './SearchInputContainer';
 
 interface Props {
   onClickBack?: () => any;
+  currentSearch?: string;
+  onChangeSearch: React.FormEventHandler;
 }
 
 const SearchLayout: React.SFC<Props> = (props) => {
@@ -21,17 +23,16 @@ const SearchLayout: React.SFC<Props> = (props) => {
               <i className="fa fa-arrow-left" />
             }
             input={
-              <SearchInput />
+              <SearchInputContainer />
             }
           />
         </div>
       </div>
       <AnimationContext.Consumer>
         {animation => (
-          <SlideUp {...animation}>
-            <div className="row below-fixed">
+          <SlideUp {...animation} className="below-fixed">
+            <div className="row"> 
               <div className="col">
-                Hello thar!
               </div>
             </div>
           </SlideUp>
