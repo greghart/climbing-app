@@ -1,19 +1,20 @@
 import * as React from "react";
 
-function withMountAction<P> (Component: React.ComponentType<P>, action: (props: P) => any) {
+function withMountAction<P> (action: (props: P) => any) {
+  return (Component: React.ComponentType<P>) => {
 
-  return class WithMount extends React.Component<P> {
+    return class WithMount extends React.Component<P> {
 
-    componentDidMount() {
-      return action(this.props);
+      componentDidMount() {
+        return action(this.props);
+      }
+
+      render() {
+        return <Component {...this.props} />;
+      }
+
     }
-
-    render() {
-      return <Component {...this.props} />;
-    }
-
-  }
-
+  };
 }
 
 export default withMountAction;

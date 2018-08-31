@@ -14,3 +14,4 @@ const SearchRoute: SFC<RouteConfigComponentProps<SearchParams>> = (props) => {
 
 export default SearchRoute;
 
+

@@ -81,7 +81,7 @@ const RouteResult: React.SFC<RouteProps> = (props) => {
   )
 }
 
-const SearchResults = (props) => {
+const SearchResults: React.SFC<Props> = (props) => {
   const results = filter(
     getSearchableEntitiesForCrag(props.crag),
     (thisEntity) => {

@@ -13,6 +13,8 @@ export default function getRoutes(): (RouteConfig | any)[] {
       path: '*',
       component: ContainerRoute,
       routes: [
+        // Explorer -- map view of a crag w/ an optional area
+        // Includes a sidebar list (for now -- TODO REMOVE)
         {
           path: '/explorer/:crag/:area?',
           component: CragRoute,
@@ -25,10 +27,32 @@ export default function getRoutes(): (RouteConfig | any)[] {
             }
           ],
         },
+        // Search page
         {
           path: '/search/:crag',
           component: SearchRoute,
           key: 'search'
+        },
+        // Show an area
+        // TODO
+        {
+          path: '/areas/:id',
+          component: SearchRoute,
+          key: 'area'
+        },
+        // Show a boulder
+        // TODO
+        {
+          path: '/boulders/:id',
+          component: SearchRoute,
+          key: 'boulder'
+        },
+        // Show a route
+        // TODO
+        {
+          path: '/routes/:id',
+          component: SearchRoute,
+          key: 'route'
         }
       ]
     }
