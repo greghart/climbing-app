@@ -29,43 +29,52 @@ interface Props {
 const Crag: React.SFC<Props> = (props) => {
   console.warn(props, 'Crag');
   return (
-    <div>
-      <SidebarContainer
-        styles={{
-          sidebar: {
-            zIndex: '99999'
-          }
-        }}
-        sidebar={
-          <div
-            className="h-100 bg-light"
-          >
-            {props.crag.name}
-            {props.sidebarChildren}
-          </div>
+    <div className="container">
+    <SidebarContainer
+      styles={{
+        sidebar: {
+          zIndex: '1000'
+        },
+        content: {
+          overflowY: 'none'
         }
-      >
-        <div className="h-100">
-          <div
-            className="over-map fixed-container row no-gutters"
-          >
-            <div className="col">
-              <SearchGroup
-                onClickPrepend={props.onOpenSidebar}
-                prepend={
-                  <i className="fa fa-bars" />
-                }
-                input={
-                  <SearchInputContainer
-                    onClick={props.onOpenSearch}
-                  />
-                }
-              />
+      }}
+      sidebar={
+        <div className="h-100 bg-light">
+          {props.crag.name}
+          {props.sidebarChildren}
+        </div>
+      }
+    >
+      <div className="h-100">
+        <div className="fixed-container over-map">
+          <div className="container">
+            <div className="row no-gutters pt-3">
+              <div className="col">
+                <SearchGroup
+                  onClickPrepend={props.onOpenSidebar}
+                  prepend={
+                    <i className="fa fa-bars" />
+                  }
+                  input={
+                    <SearchInputContainer
+                      onClick={props.onOpenSearch}
+                    />
+                  }
+                />
+              </div>
             </div>
           </div>
-          <CragMap {...props} />
         </div>
-      </SidebarContainer>
+        <div className="container px-0">
+          <div className="row no-gutters">
+            <div className="col">
+              <CragMap {...props} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </SidebarContainer>
     </div>
   );
   // return (

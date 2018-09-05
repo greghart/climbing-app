@@ -3,7 +3,7 @@ html, body {
 }
 
 .over-map {
-  z-index: 9999;
+  z-index: 999;
 }
 
 // Custom CSS to get under the leaflet zoom for other HTML
@@ -13,12 +13,16 @@ html, body {
   top: 80px;
 }
 
+// We need a fixed container for showing up over the map.
 .fixed-container {
-  position: fixed;
-  left: 2vw;
-  top: 2vh;
-  width: 96vw;
+  position: absolute;
+  width: 100%;
+  background-color: 'transparent';
+  // left: 15px;
+  // top: 2vh;
+  // width: calc(100vw - 30px);
 }
+
 .below-fixed {
   padding-top: calc(2vh + 3rem);
 }
@@ -26,6 +30,12 @@ html, body {
 .fullscreen {
   height: 100vh;
   overflow-y: scroll;
+}
+
+// Grow up like a column would (but without all the other stuff)
+.grow-up {
+  flex-grow: 1;
+  max-width: 100%;
 }
 
 @import './map';
