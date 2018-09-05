@@ -2,16 +2,17 @@ import * as React from 'react';
 import SFC = React.SFC;
 import { RouteConfigComponentProps } from "react-router-config";
 
-import SearchContainer from '../components/search/SearchContainer';
+import RouteLayout from '../components/routes/RouteLayout';
 
-interface SearchParams {
+interface RouteParams {
 }
-const SearchRoute: SFC<RouteConfigComponentProps<SearchParams>> = (props) => {
+
+const RouteRoute: SFC<RouteConfigComponentProps<RouteParams>> = (props) => {
   return (
-    <SearchContainer />
+    <RouteLayout />
   );
 };
 
-export default SearchRoute;
+export default RouteRoute;
 
 

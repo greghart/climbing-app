@@ -6,6 +6,7 @@ import Area from '../../../models/Area';
 import Boulder from '../../../models/Boulder';
 import Route from '../../../models/Route';
 import getSearchableEntitiesForCrag, { isArea, isBoulder } from './getSearchableEntitiesForCrag';
+import { Link } from 'react-router-dom';
 
 const _labelMatchesSearch = (label, search = '') => {
   const _label = label.toLowerCase().trim();
@@ -72,12 +73,14 @@ interface RouteProps {
 }
 const RouteResult: React.SFC<RouteProps> = (props) => {
   return (
-    <ResultLayout 
-      right={<React.Fragment>
-        <p className="mb-0">{props.route.name}</p>
-        <small className="text-muted">{props.route.boulder.area.name} | {props.route.boulder.name}</small>
-      </React.Fragment>}
-    />
+    <Link to={`/routes/${props.route.id}`}>
+      <ResultLayout 
+        right={<React.Fragment>
+          <p className="mb-0">{props.route.name}</p>
+          <small className="text-muted">{props.route.boulder.area.name} | {props.route.boulder.name}</small>
+        </React.Fragment>}
+      />
+    </Link>
   )
 }
 

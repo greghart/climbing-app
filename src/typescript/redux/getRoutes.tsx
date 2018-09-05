@@ -4,8 +4,9 @@ import { RouteConfig, RouteConfigComponentProps, renderRoutes } from 'react-rout
 
 import CragRoute from './routes/CragRoute';
 import AreasListRoute from './routes/AreasListRoute';
-import SearchRoute from './routes/SearchRoute';
 import ContainerRoute from './routes/ContainerRoute';
+import SearchLayout from './components/search/SearchLayout';
+import RouteRoute from './routes/RouteRoute';
 
 export default function getRoutes(): (RouteConfig | any)[] {
   return [
@@ -30,28 +31,28 @@ export default function getRoutes(): (RouteConfig | any)[] {
         // Search page
         {
           path: '/search/:crag',
-          component: SearchRoute,
+          component: SearchLayout,
           key: 'search'
         },
         // Show an area
         // TODO
         {
           path: '/areas/:id',
-          component: SearchRoute,
+          component: SearchLayout,
           key: 'area'
         },
         // Show a boulder
         // TODO
         {
           path: '/boulders/:id',
-          component: SearchRoute,
+          component: SearchLayout,
           key: 'boulder'
         },
         // Show a route
         // TODO
         {
           path: '/routes/:id',
-          component: SearchRoute,
+          component: RouteRoute,
           key: 'route'
         }
       ]

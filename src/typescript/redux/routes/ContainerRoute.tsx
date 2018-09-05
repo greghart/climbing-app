@@ -18,8 +18,8 @@ const ContainerRoute: React.SFC<RouteConfigComponentProps<any>> = (props) => {
     location: props.location.pathname
   }, 'ContainerRoute');
   return (
-    <TransitionGroup>
-      <Empty key={props.location.key}>
+    // <TransitionGroup>
+    //   <Empty key={props.location.key}>
         <Switch key={props.location.key} location={props.location}>
           {props.route.routes.map((route, i) => {
             return (
@@ -32,7 +32,12 @@ const ContainerRoute: React.SFC<RouteConfigComponentProps<any>> = (props) => {
                   const Component: any = route.component;
                   return (
                     <AnimationContext.Provider 
-                      value={{ in: subProps.history.location === subProps.location }}
+                      value={{ 
+                        in: (
+                          // subProps.history.location === subProps.location
+                          false
+                        )
+                      }}
                       key={(route as any).key || i}
                     >
                       <Component 
@@ -46,8 +51,8 @@ const ContainerRoute: React.SFC<RouteConfigComponentProps<any>> = (props) => {
             );
           })}
         </Switch>
-      </Empty>
-    </TransitionGroup>
+      // </Empty>
+    // </TransitionGroup>
   );
 }
 
