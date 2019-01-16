@@ -4,6 +4,7 @@
 node_modules
 dump.rdb
 .vscode/
+scratch/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

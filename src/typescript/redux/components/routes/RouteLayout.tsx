@@ -48,7 +48,7 @@ const RouteLayout: React.SFC<Props> = (props) => {
       }
       content={
         <div className="p-2">
-          <ul className="nav nav-tabs mb-1">
+          <ul className="nav nav-tabs row no-gutters mb-1">
             <li className="nav-item col">
               <button role="button" className="nav-link btn btn-link active">Overview</button>
             </li>
@@ -72,7 +72,8 @@ const RouteLayout: React.SFC<Props> = (props) => {
               </div>
             </li>
             <InfoItem icon="hand-rock">
-              V2 <small>About 30ft. tall</small>
+              {props.route.gradeRaw}
+              {props.route.length && <small> About {props.route.length}ft. tall</small>}
             </InfoItem>
             <InfoItem icon="check-double">
               You climbed this 1 year ago

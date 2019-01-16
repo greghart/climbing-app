@@ -19,62 +19,70 @@ import parseCrag from './parseCrag';
 // Obviously this isn't entirely safe
 pg.types.setTypeParser(1700, (v:any) => parseFloat(v));
 
+// Application level fixtures
+// @todo Refactor
+// @todo V-Grade
+const loadFixtures = async (connection: Connection) => {
+  const vGrading = new GradingSystem();
+  vGrading.name = 'Vermin (V) Scale';
+  vGrading.type = 'boulder';
+  vGrading.grades = [
+    'B', ...Array.from({ length: 18 }, (v, i) => i)
+  ].map((g, i) => {
+    const grade = new Grade();
+    grade.name = `V${g}`;
+    grade.order = i;
+    return grade;
+  });
+
+  const systems = await connection.manager.find(GradingSystem);
+  await connection.manager.remove(systems);
+  await connection.manager.save(vGrading);
+
+  // Load our static crags
+  const loadStaticCrag = async (fileName) => {
+    const dataRaw = await Bluebird.promisify(fs.readFile)(
+      path.join(__dirname, `../../../static/data/${fileName}`)
+    );
+    const data = JSON.parse(dataRaw.toString());
+    const crag = parseCrag(data);
+    await connection.manager.save(crag);
+  };
+  await loadStaticCrag('TramData.json');
+  await loadStaticCrag('Santee.json');
+
+  console.log('Database connection successfully setup');
+};
+
 function getConnection() {
   return createConnection({
     type: 'sqlite',
+    database: config.get<string>('server.database.sqlite.database'),
     // type: 'postgres',
-    // host: config.get<string>('server.postgres.host'),
-    // port: config.get<number>('server.postgres.port'),
-    // username: config.get<string>('server.postgres.username'),
-    // password: config.get<string>('server.postgres.password'),
-    database: config.get<string>('server.postgres.database'),
+    // host: config.get<string>('server.database.postgres.host'),
+    // port: config.get<number>('server.database.postgres.port'),
+    // username: config.get<string>('server.database.postgres.username'),
+    // password: config.get<string>('server.database.postgres.password'),
+    // database: config.get<string>('server.database.postgres.database'),
     entities: [
       __dirname + '/../models/*.ts'
     ],
-    dropSchema: true,
-    synchronize: true,
+    dropSchema: config.get<boolean>('server.database.sync'),
+    synchronize: config.get<boolean>('server.database.sync'),
     logging: true
+  })
+  .then(async (connection) => {
+    if (config.get<boolean>('server.database.sync')) {
+      await loadFixtures(connection);
+    }
+    return connection;
   })
   .catch((err) => {
     console.error('Error on TypeORM database setup');
     console.error(err.message);
     console.error(err.stack);
     process.exit(1);
-  })
-  .then(async (connection: Connection) => {
-    // Application level fixtures
-    // TODO Refactor
-    // V-Grade
-    const vGrading = new GradingSystem();
-    vGrading.name = 'Vermin (V) Scale';
-    vGrading.type = 'boulder';
-    vGrading.grades = [
-      'B', ...Array.from({ length: 18 }, (v, i) => i)
-    ].map((g, i) => {
-      const grade = new Grade();
-      grade.name = `V${g}`;
-      grade.order = i;
-      return grade;
-    });
-
-    const systems = await connection.manager.find(GradingSystem);
-    await connection.manager.remove(systems);
-    await connection.manager.save(vGrading);
-
-    // Load our static crags
-    const loadStaticCrag = async (fileName) => {
-      const dataRaw = await Bluebird.promisify(fs.readFile)(
-        path.join(__dirname, `../../../static/data/${fileName}`)
-      );
-      const data = JSON.parse(dataRaw.toString());
-      const crag = parseCrag(data);
-      await connection.manager.save(crag);
-    };
-    await loadStaticCrag('TramData.json');
-    await loadStaticCrag('Santee.json');
-
-    console.log('Database connection successfully setup');
-    return Promise.resolve(connection);
+    throw(err);
   });
 }
 
