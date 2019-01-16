@@ -21,11 +21,12 @@ pg.types.setTypeParser(1700, (v:any) => parseFloat(v));
 
 function getConnection() {
   return createConnection({
-    type: 'postgres',
-    host: config.get<string>('server.postgres.host'),
-    port: config.get<number>('server.postgres.port'),
-    username: config.get<string>('server.postgres.username'),
-    password: config.get<string>('server.postgres.password'),
+    type: 'sqlite',
+    // type: 'postgres',
+    // host: config.get<string>('server.postgres.host'),
+    // port: config.get<number>('server.postgres.port'),
+    // username: config.get<string>('server.postgres.username'),
+    // password: config.get<string>('server.postgres.password'),
     database: config.get<string>('server.postgres.database'),
     entities: [
       __dirname + '/../models/*.ts'

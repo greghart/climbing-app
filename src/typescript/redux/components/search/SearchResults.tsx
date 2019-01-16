@@ -45,7 +45,7 @@ interface AreaProps {
 }
 const AreaResult: React.SFC<AreaProps> = (props) => {
   return (
-    <ResultLayout 
+    <ResultLayout
       right={<React.Fragment>
         <p className="mb-0">{props.area.name}</p>
       </React.Fragment>}
@@ -59,7 +59,7 @@ interface BoulderProps {
 }
 const BoulderResult: React.SFC<BoulderProps> = (props) => {
   return (
-    <ResultLayout 
+    <ResultLayout
       right={<React.Fragment>
         <p className="mb-0">{props.boulder.name}</p>
         <small className="text-muted">{props.boulder.area.name}</small>
@@ -73,8 +73,8 @@ interface RouteProps {
 }
 const RouteResult: React.SFC<RouteProps> = (props) => {
   return (
-    <Link to={`/routes/${props.route.id}`}>
-      <ResultLayout 
+    <Link to={`/show/${props.crag.name}/${props.route.boulder.area.id}/${props.route.boulder.id}/${props.route.id}`}>
+      <ResultLayout
         right={<React.Fragment>
           <p className="mb-0">{props.route.name}</p>
           <small className="text-muted">{props.route.boulder.area.name} | {props.route.boulder.name}</small>
@@ -94,7 +94,7 @@ const SearchResults: React.SFC<Props> = (props) => {
       )
     }
   )
-  console.warn({ 
+  console.warn({
     props,
     results
   }, 'SearchResults');
@@ -102,7 +102,7 @@ const SearchResults: React.SFC<Props> = (props) => {
     <ul className="list-group">
       {results.map((thisResult) => {
         return (
-          <li 
+          <li
             className="list-group-item list-group-item-action"
             key={`${thisResult._type}-${thisResult.id}`}
           >

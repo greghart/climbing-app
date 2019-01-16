@@ -17,7 +17,7 @@ interface AreasListParams {
 type OwnProps = RouteConfigComponentProps<AreasListParams>;
 // const DeferredAreaList: SFC<AreasListProps & RouteConfigComponentProps<CragParams & AreasListParams>> = (props) => {
 //   return (
-//     <AreasList 
+//     <AreasList
 //       areas={props.areas}
 //       onAreaClick={props.}
 //       selectedAreaId={props.match.params.area}
@@ -30,9 +30,6 @@ type StateProps = {
   areas: Area[];
 };
 const mapStateToProps = (state: State, ownProps: OwnProps): StateProps => {
-  console.warn({
-    ownProps
-  }, 'mapStateToProps');
   return {
     selectedAreaId: ownProps.match.params.area,
     areas: get(

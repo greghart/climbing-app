@@ -7,7 +7,7 @@ import AnimationContext from '../components/animations/AnimationContext';
 
 /**
  * The container route is a top level container to allow a single place to add global logic.
- * 
+ *
  * Currently this is to handle animations -- at the top level, we don't auto animate, since
  * some components need to manage transition animation internally (such as map). Instead, we
  * just make sure to keep elements mounted until the child can finish unmounting.
@@ -31,8 +31,8 @@ const ContainerRoute: React.SFC<RouteConfigComponentProps<any>> = (props) => {
                 render={(subProps: any) => {
                   const Component: any = route.component;
                   return (
-                    <AnimationContext.Provider 
-                      value={{ 
+                    <AnimationContext.Provider
+                      value={{
                         in: (
                           // subProps.history.location === subProps.location
                           false
@@ -40,9 +40,9 @@ const ContainerRoute: React.SFC<RouteConfigComponentProps<any>> = (props) => {
                       }}
                       key={(route as any).key || i}
                     >
-                      <Component 
-                        {...subProps} 
-                        route={route} 
+                      <Component
+                        {...subProps}
+                        route={route}
                       />
                     </AnimationContext.Provider>
                   );

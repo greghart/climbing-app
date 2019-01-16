@@ -35,7 +35,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onSelect: (entity: Area | Boulder | Route) => {
       // TODO Implement
-    }, 
+    },
     fetchCrags: () => dispatch(
       fetchCrags('singleton-fetch')()
     ),
@@ -58,6 +58,6 @@ export default compose(
     }
   ),
   withLoader<Props>(
-    (props) => !props.crag 
+    (props) => !props.crag
   )
 )(SearchResults);

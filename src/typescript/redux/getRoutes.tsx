@@ -34,7 +34,7 @@ export default function getRoutes(): (RouteConfig | any)[] {
           component: SearchLayout,
           key: 'search'
         },
-        // Show an area
+        // Show Pages
         // TODO
         {
           path: '/areas/:id',
@@ -51,7 +51,7 @@ export default function getRoutes(): (RouteConfig | any)[] {
         // Show a route
         // TODO
         {
-          path: '/routes/:id',
+          path: '/show/:crag/:area/:boulder/:route',
           component: RouteRoute,
           key: 'route'
         }
