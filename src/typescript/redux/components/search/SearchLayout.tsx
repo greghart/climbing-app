@@ -16,14 +16,18 @@ const SearchLayout: React.SFC<Props> = (props) => {
     <PageLayout
       key="search"
       header={
-        <GoBackHeader 
+        <GoBackHeader
           input={
             <SearchInputContainer />
           }
         />
       }
       content={
-        <SearchResultsContainer />
+        <div className="row mt-2 h-100">
+          <div className="col mh-100 mb-2">
+            <SearchResultsContainer />
+          </div>
+        </div>
       }
     />
   );

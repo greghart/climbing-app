@@ -11,18 +11,19 @@ const RouteBreadcrumbs: React.SFC<Props> = (props) => {
   return (
     <div className="dropdown w-100">
       <a
-        className="btn btn-light border-left w-100"
+        className="btn btn-link w-100"
         role="button"
         id="breadcrumbsLink"
         data-toggle="dropdown"
         aria-haspopup="true"
         aria-expanded="false"
       >
-        <Truncate
+        {/* <Truncate
           text={`${props.route.boulder.area.crag.name} / ${props.route.boulder.area.name} / ${props.route.boulder.name} / ${props.route.name}`}
           length={40}
           reverse={true}
-        />
+        /> */}
+        {props.route.name}
         <i className="fa fa-caret-down ml-2" />
         {/* {`${props.route.boulder.area.crag.name} / ${props.route.boulder.area.name} / ${props.route.boulder.name} / ${props.route.name}`} */}
       </a>
