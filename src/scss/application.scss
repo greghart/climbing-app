@@ -32,10 +32,23 @@ html, body {
   overflow-y: scroll;
 }
 
-// Grow up like a column would (but without all the other stuff)
-.grow-up {
-  flex-grow: 1;
-  max-width: 100%;
+.truncated {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Flex helpers
+.flex {
+  // Grow up like a column would (but without all the other stuff)
+  &-grow-up {
+    flex-grow: 1;
+    max-width: 100%;
+  }
+  &-no-wrap {
+    flex-wrap: nowrap;
+  }
 }
 
 @import './map';

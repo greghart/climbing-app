@@ -15,11 +15,10 @@ const RouteLayout: React.SFC<Props> = (props) => {
       key="route"
       header={
         <GoBackHeader
+          groupClass="flex-no-wrap"
           input={
-            <div className="input-group-append grow-up">
-              <button className="btn btn-light border-left w-100">
-                <RouteBreadcrumbs route={props.route} />
-              </button>
+            <div className="input-group-append flex-grow-up">
+              <RouteBreadcrumbs route={props.route} />
             </div>
           }
         />

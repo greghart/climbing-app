@@ -1,6 +1,6 @@
 /**
  * A fixed header that has a backbutton prepend setup
- * 
+ *
  * Connected already
  */
 import * as React from 'react';
@@ -16,7 +16,7 @@ interface Props {
 
 const GoBackHeader: React.SFC<Props> = (props) => {
   return (
-    <SearchGroup 
+    <SearchGroup
       {...props}
       prepend={
         <i className="fa fa-arrow-left" />

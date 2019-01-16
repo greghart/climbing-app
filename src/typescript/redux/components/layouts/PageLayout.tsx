@@ -4,7 +4,7 @@ import SlideUp from "../animations/SlideUp";
 
 /**
  * A layout for a normal (non-map) page
- * 
+ *
  * Handles:
  *   * Fullscreen
  *   * Background color
@@ -33,7 +33,7 @@ const PageLayout: React.SFC<Props> = (props) => {
           }, 'PageLayout');
           return (
             <SlideUp {...animation} appear={true}>
-              <div className="row mt-2 h-100"> 
+              <div className="row mt-2 h-100">
                 <div className="col mh-100 mb-2">
                   {props.content}
                 </div>

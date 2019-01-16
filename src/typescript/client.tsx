@@ -5,9 +5,13 @@ import { AppContainer } from 'react-hot-loader';
 import { createBrowserHistory } from 'history';
 const Redbox = require('redbox-react');
 
-require('bootstrap/dist/css/bootstrap.min.css');
-require('leaflet/dist/leaflet.css');
-require('application.scss');
+// Client-side only imports
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'leaflet/dist/leaflet.css';
+import 'application.scss';
+import 'popper.js';
+import 'bootstrap/js/dist/util';
+import 'bootstrap/js/dist/dropdown';
 
 const getStore = require('./redux/store/getStore');
 import Root from './redux/Root';
