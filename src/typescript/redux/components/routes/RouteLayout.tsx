@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { Location } from 'history';
 
 import PageLayout from '../layouts/PageLayout';
-import GoBackHeader from '../layouts/GoBackHeader';
 import Route from '../../../models/Route';
 import RouteBreadcrumbs from './RouteBreadcrumbs';
+import SearchGroup from '../search/SearchGroup';
 
 interface Props {
   route: Route;
@@ -21,9 +21,14 @@ interface Props {
 const RouteLayoutHeader: React.SFC<Props> = (props) => {
   return (
     <React.Fragment>
-      <GoBackHeader
+      <SearchGroup
         groupClass="flex-no-wrap px-3"
         buttonClass="btn-link text-dark"
+        prepend={
+          <Link to={`/explorer/${props.route.boulder.area.crag.name}`}>
+            <i className="fa fa-arrow-left" />
+          </Link>
+        }
         input={
           <div className="input-group-append flex-grow-up">
             <RouteBreadcrumbs route={props.route} />

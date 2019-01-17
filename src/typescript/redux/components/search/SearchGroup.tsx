@@ -5,7 +5,7 @@ import classNames = require('classnames');
 interface Props {
   groupClass?: string;
   buttonClass?: string;
-  onClickPrepend: React.MouseEventHandler<any>;
+  onClickPrepend?: React.MouseEventHandler<any>;
   prepend: React.ReactNode;
   input: React.ReactNode;
 }

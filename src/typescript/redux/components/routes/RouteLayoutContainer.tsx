@@ -11,6 +11,7 @@ import withLoader from '../../decorators/withLoader';
 import withMountAction from '../../decorators/withMountAction';
 import fetchRoute from '../../ducks/operations/fetchRoute';
 import Route from '../../../models/Route';
+import { Dispatch } from 'react';
 
 interface OwnProps {
   routeId: string,
@@ -40,16 +41,17 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
 };
 
 type Props = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 
 const hasDependants = (props: Props) =>
   (props.route && props.route.boulder && props.route.boulder.area && props.route.boulder.area.crag)
 
 export default compose(
-  connect<Props, ReturnType<typeof mapDispatchToProps>, OwnProps>(
+  connect<Props, DispatchProps, OwnProps>(
     mapStateToProps,
     mapDispatchToProps
   ),
-  withMountAction(
+  withMountAction<Props & DispatchProps>(
     (props) => {
       if (!hasDependants(props)) {
         props.fetchRoute();

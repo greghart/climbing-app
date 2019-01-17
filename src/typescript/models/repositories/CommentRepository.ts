@@ -12,6 +12,7 @@ export default class CommentRepository extends Repository<Comment> {
 
   async commentOnRoute(route: Route, comment: Comment) {
     let commentable = await route.commentable;
+    // Build the commentable if we need to
     if (!commentable) {
       commentable = new Commentable();
       commentable.descriptor = `route-${route.id}`;

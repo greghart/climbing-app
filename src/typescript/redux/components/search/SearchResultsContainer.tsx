@@ -43,14 +43,15 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 type Props = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 
 export default compose(
   withRouter,
-  connect<Props, ReturnType<typeof mapDispatchToProps>, OwnProps>(
+  connect<Props, DispatchProps, OwnProps>(
     mapStateToProps,
     mapDispatchToProps
   ),
-  withMountAction(
+  withMountAction<Props & DispatchProps>(
     (props) => {
       props.fetchCrags();
       // if (!props.crag) {

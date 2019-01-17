@@ -11,7 +11,7 @@ const CragRoute: SFC<RouteConfigComponentProps<CragParams>> = (props) => {
   console.warn(props, 'CragRoute');
   return (
     <CragContainer
-      crag={props.match.params.crag}
+      cragId={props.match.params.crag}
       area={props.match.params.area}
       sidebarChildren={renderRoutes(props.route.routes)}
     />

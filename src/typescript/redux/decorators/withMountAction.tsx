@@ -1,7 +1,8 @@
 import * as React from "react";
 
 function withMountAction<P> (action: (props: P) => any) {
-  return (Component: React.ComponentType<P>) => {
+
+  return (Component: React.ComponentType<P>): React.ComponentType<P> => {
 
     return class WithMount extends React.Component<P> {
 

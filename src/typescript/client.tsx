@@ -19,6 +19,10 @@ import Root from './redux/Root';
 // Get the DOM Element that will host our React application
 const rootEl = document.getElementById('app');
 
+declare global {
+  interface Window { preloadedState: any; }
+}
+
 // // Don't initialize app until our API is connected, it makes things much
 // // simpler in the end
 // getSwagger(

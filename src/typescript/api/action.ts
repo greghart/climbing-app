@@ -8,25 +8,20 @@ interface ObjectResponse {
 }
 type Response = ObjectResponse | ObjectResponse[];
 type Operation<T, Result extends Response = Response> =
-  (args: T) => Result | Promise.Thenable<Result>;
+  (args?: T) => Result | Promise.Thenable<Result>;
 type GetArgs<T> = (req: express.Request) => T;
-
-function isVoidArgs(getArgs?: GetArgs<any> | undefined): getArgs is GetArgs<void> {
-  return getArgs == undefined;
-}
 
 function action<Result, T>(
   operation: Operation<T, Result>,
   getArgs?: GetArgs<T>
 ): express.RequestHandler {
-  if (isVoidArgs(getArgs)) {
-    (getArgs as GetArgs<void>) = () => {};
+  if (getArgs == undefined) {
+    getArgs = () => { return undefined; };
   }
   return (req, res, next) => {
-    const args: T = getArgs(req);
     return Promise.try<Response>(() => {
       return operation(
-        args
+        getArgs(req)
       );
     })
     .then((response) => {

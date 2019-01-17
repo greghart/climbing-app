@@ -9,20 +9,22 @@ import SearchInputContainer from '../search/SearchInputContainer';
 
 interface Props {
   crag: CragModel;
+  cragId: string;
   selectedAreaId: string;
   onAreaClick: (area: Area) => any;
   onOpenSidebar: () => any;
   onOpenSearch: () => any;
+  fetchCrags: () => any;
   sidebarChildren: React.ReactNode;
 }
 
 /**
  * Main component for exploring a crag.
- * 
+ *
  * Sets up a basic sidebar layout.
  * - Sidebar (crag title + sidebarChildren)
  * - Main crag map
- *   - Search bar (TODO)
+ *   - Search bar
  *   - Action to open sidebar
  *   - Details view (TODO)
  */
