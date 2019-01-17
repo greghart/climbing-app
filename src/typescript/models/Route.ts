@@ -24,6 +24,12 @@ export default class Route {
   @Column({ nullable: true })
   length?: number; // In feet
 
+  @Column({ nullable: true })
+  description?: string;
+
+  @Column({ nullable: true })
+  firstAscent?: string;
+
   // TODO Formalize route type, and decide normalized safe way to constrain
   // boulders to only have bouldering grades
   @ManyToOne(type => Grade, grade => grade.routes)

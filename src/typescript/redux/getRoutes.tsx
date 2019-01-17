@@ -7,6 +7,9 @@ import AreasListRoute from './routes/AreasListRoute';
 import ContainerRoute from './routes/ContainerRoute';
 import SearchLayout from './components/search/SearchLayout';
 import RouteRoute from './routes/RouteRoute';
+import RouteLayoutOverview from './components/routes/RouteLayoutOverview';
+import RouteLayoutPhotos from './components/routes/RouteLayoutPhotos';
+import RouteLayoutComments from './components/routes/RouteLayoutComments';
 
 export default function getRoutes(): (RouteConfig | any)[] {
   return [
@@ -52,7 +55,25 @@ export default function getRoutes(): (RouteConfig | any)[] {
         {
           path: '/route/:route',
           component: RouteRoute,
-          key: 'route'
+          key: 'route',
+          routes: [
+            {
+              path: '/route/:route/comments',
+              component: RouteLayoutComments,
+              key: 'route_comments'
+            },
+            {
+              path: '/route/:route/photos',
+              component: RouteLayoutPhotos,
+              key: 'route_photos'
+            },
+            // Default is overview
+            {
+              path: '/route/:route/(overview)?',
+              component: RouteLayoutOverview,
+              key: 'route_overview'
+            }
+          ]
         }
       ]
     }

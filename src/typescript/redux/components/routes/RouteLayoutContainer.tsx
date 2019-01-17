@@ -1,17 +1,21 @@
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { RouteConfig } from 'react-router-config';
+import { denormalize } from 'normalizr';
+import { Location } from 'history';
 
 import RouteLayout from './RouteLayout';
 import { State } from '../../reducer';
-import { denormalize } from 'normalizr';
-import { RouteSchema, BoulderSchema, CragSchema, AreaSchema } from '../../normalizr';
+import { RouteSchema } from '../../normalizr';
 import withLoader from '../../decorators/withLoader';
 import withMountAction from '../../decorators/withMountAction';
 import fetchRoute from '../../ducks/operations/fetchRoute';
 import Route from '../../../models/Route';
 
 interface OwnProps {
-  routeId: string
+  routeId: string,
+  routerConfig: RouteConfig,
+  routerLocation: Location
 }
 
 /**
