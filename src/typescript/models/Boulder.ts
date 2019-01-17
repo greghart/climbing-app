@@ -41,7 +41,7 @@ class Boulder {
   area: Area;
 
   @OneToMany(type => Route, route => route.boulder, cascadeOneToMany)
-  routes: Route[] = [];
+  routes: Route[];
 
   toJSON() {
     return Object.assign(

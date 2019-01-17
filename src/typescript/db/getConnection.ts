@@ -11,8 +11,11 @@ const debug = _debug('climbing-app:typeorm');
 Bluebird.promisifyAll(fs);
 import GradingSystem from '../models/GradingSystem';
 import Grade from '../models/Grade';
-import Crag from '../models/Crag';
 import parseCrag from './parseCrag';
+import User from '../models/User';
+import Route from '../models/Route';
+import Comment from '../models/Comment';
+import CommentRepository from '../models/repositories/CommentRepository';
 
 // Abstraction leak
 // Make sure underlying db driver parses our decimals as a float
@@ -35,9 +38,13 @@ const loadFixtures = async (connection: Connection) => {
     return grade;
   });
 
-  const systems = await connection.manager.find(GradingSystem);
-  await connection.manager.remove(systems);
   await connection.manager.save(vGrading);
+
+  // Load base user
+  const admin = new User();
+  admin.email = 'greghartemail@gmail.com';
+  admin.name = 'Greg Hart';
+  await connection.manager.save(admin);
 
   // Load our static crags
   const loadStaticCrag = async (fileName) => {
@@ -50,6 +57,19 @@ const loadFixtures = async (connection: Connection) => {
   };
   await loadStaticCrag('TramData.json');
   await loadStaticCrag('Santee.json');
+
+  // Setup a comment as a sample
+  const franksDirect = await connection.manager.findOne(Route, { where: { name: "Frank's Direct" } });
+  if (franksDirect) {
+    await connection.manager.getCustomRepository(CommentRepository).commentOnRoute(
+      franksDirect,
+      connection.manager.create(Comment, { text: 'Wow this is actually working', user: admin })
+    );
+    await connection.manager.getCustomRepository(CommentRepository).commentOnRoute(
+      franksDirect,
+      connection.manager.create(Comment, { text: 'Wow this is actually working again!', user: admin })
+    );
+  }
 
   console.log('Database connection successfully setup');
 };

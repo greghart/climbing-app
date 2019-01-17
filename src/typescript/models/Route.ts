@@ -2,13 +2,15 @@ import {
   Column,
   Entity,
   ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn
 } from 'typeorm';
 
 import Boulder from './Boulder';
 import Grade from './Grade';
 import { cascadeManyToOne } from '../db/cascadeOptions';
+import Commentable from './Commentable';
 
 @Entity()
 export default class Route {
@@ -38,5 +40,9 @@ export default class Route {
   // Relationships
   @ManyToOne(type => Boulder, boulder => boulder.routes, cascadeManyToOne)
   boulder: Boulder;
+
+  @OneToOne(type => Commentable)
+  @JoinColumn()
+  commentable: Promise<Commentable>;
 
 }
