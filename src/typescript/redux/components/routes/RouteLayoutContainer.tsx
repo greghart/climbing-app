@@ -8,11 +8,9 @@ import { RouteSchema, BoulderSchema, CragSchema, AreaSchema } from '../../normal
 import withLoader from '../../decorators/withLoader';
 import withMountAction from '../../decorators/withMountAction';
 import fetchRoute from '../../ducks/operations/fetchRoute';
+import Route from '../../../models/Route';
 
 interface OwnProps {
-  cragId: string,
-  areaId: string,
-  boulderId: string,
   routeId: string
 }
 
@@ -21,42 +19,12 @@ interface OwnProps {
  */
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
   console.warn({ ownProps }, 'RouteLayoutContainer.mapStateToProps');
-  const route = denormalize(
+  const route: Route = denormalize(
     ownProps.routeId,
     RouteSchema,
     state.entities
   );
-  if (!route) {
-    return {};
-  }
-  return {
-    route: {
-      ...denormalize(
-        ownProps.routeId,
-        RouteSchema,
-        state.entities
-      ),
-      boulder: {
-        ...denormalize(
-          ownProps.boulderId,
-          BoulderSchema,
-          state.entities
-        ),
-        area: {
-          ...denormalize(
-            ownProps.areaId,
-            AreaSchema,
-            state.entities
-          ),
-          crag: denormalize(
-            ownProps.cragId,
-            CragSchema,
-            state.entities
-          )
-        }
-      }
-    }
-  };
+  return { route };
 };
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
@@ -69,6 +37,9 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
 
 type Props = ReturnType<typeof mapStateToProps>;
 
+const hasDependants = (props: Props) =>
+  (props.route && props.route.boulder && props.route.boulder.area && props.route.boulder.area.crag)
+
 export default compose(
   connect<Props, ReturnType<typeof mapDispatchToProps>, OwnProps>(
     mapStateToProps,
@@ -76,12 +47,12 @@ export default compose(
   ),
   withMountAction(
     (props) => {
-      if (!props.route) {
+      if (!hasDependants(props)) {
         props.fetchRoute();
       }
     }
   ),
   withLoader<Props>(
-    (props) => !props.route
+    (props) => !hasDependants(props)
   )
 )(RouteLayout);

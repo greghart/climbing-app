@@ -49,9 +49,8 @@ export default function getRoutes(): (RouteConfig | any)[] {
           key: 'boulder'
         },
         // Show a route
-        // TODO
         {
-          path: '/show/:crag/:area/:boulder/:route',
+          path: '/route/:route',
           component: RouteRoute,
           key: 'route'
         }

@@ -73,7 +73,7 @@ interface RouteProps {
 }
 const RouteResult: React.SFC<RouteProps> = (props) => {
   return (
-    <Link to={`/show/${props.crag.name}/${props.route.boulder.area.id}/${props.route.boulder.id}/${props.route.id}`}>
+    <Link to={`/route/${props.route.id}`}>
       <ResultLayout
         right={<React.Fragment>
           <p className="mb-0">{props.route.name}</p>
