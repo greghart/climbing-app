@@ -11,10 +11,17 @@ type Operation<T, Result extends Response = Response> =
   (args: T) => Result | Promise.Thenable<Result>;
 type GetArgs<T> = (req: express.Request) => T;
 
-function action<T, Result>(
+function isVoidArgs(getArgs?: GetArgs<any> | undefined): getArgs is GetArgs<void> {
+  return getArgs == undefined;
+}
+
+function action<Result, T>(
   operation: Operation<T, Result>,
-  getArgs: GetArgs<T>
+  getArgs?: GetArgs<T>
 ): express.RequestHandler {
+  if (isVoidArgs(getArgs)) {
+    (getArgs as GetArgs<void>) = () => {};
+  }
   return (req, res, next) => {
     const args: T = getArgs(req);
     return Promise.try<Response>(() => {

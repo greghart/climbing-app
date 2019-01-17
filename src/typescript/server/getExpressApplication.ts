@@ -30,8 +30,7 @@ import getServerRenderMiddleware from './getServerRenderMiddleware';
 
 // other routers
 // import { UniversalErrorMiddleware } from './util/errors/UniversalErrorFactory';
-import getCrags from '../api/routes/crags';
-import action from '../api/action';
+import api from '../api';
 
 // Application with express-state
 interface Application extends express.Express {
@@ -79,7 +78,7 @@ function getExpressApplication(_app?: Application) {
   );
   app.use(connectFlash());
 
-  app.get('/crags', action(getCrags, () => {}));
+  app.use('/api', api);
   // // Allow unauthorized access to API docs, and expose to all requests
   // app.get('/api-docs', (req, res, next) => {
   //   res.send(apiRouter.apiDocs);
@@ -104,6 +103,8 @@ function getExpressApplication(_app?: Application) {
 
   // app.use(UniversalErrorMiddleware);
   // app.use(getServerErrorMiddleware());
+
+  // TODO 404
 
   return app;
 }

@@ -3,6 +3,9 @@ scripts:
   api:
     description: Run just the API
     script: cross-env DEBUG=climbing-app* PORT=3001 ts-node ./src/typescript/server.ts
+  apiWatch:
+    description: Watch just the API
+    script: cross-env DEBUG=climbing-app* PORT=3001 tsnd --respawn ./src/typescript/server.ts
   dev:
     description: Monitor your code and run dev server
     script: cross-env PORT=3001 webpack-dashboard -- ts-node ./dev-server.ts

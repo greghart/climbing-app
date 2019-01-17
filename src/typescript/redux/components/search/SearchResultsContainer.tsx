@@ -52,9 +52,10 @@ export default compose(
   ),
   withMountAction(
     (props) => {
-      if (!props.crag) {
-        props.fetchCrags();
-      }
+      props.fetchCrags();
+      // if (!props.crag) {
+      //   props.fetchCrags();
+      // }
     }
   ),
   withLoader<Props>(

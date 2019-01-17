@@ -14,10 +14,10 @@ interface RouteParams {
 const RouteRoute: SFC<RouteConfigComponentProps<RouteParams>> = (props) => {
   return (
     <RouteLayoutContainer
-      crag={props.match.params.crag}
-      area={props.match.params.area}
-      boulder={props.match.params.boulder}
-      route={props.match.params.route}
+      cragId={props.match.params.crag}
+      areaId={props.match.params.area}
+      boulderId={props.match.params.boulder}
+      routeId={props.match.params.route}
     />
   );
 };
