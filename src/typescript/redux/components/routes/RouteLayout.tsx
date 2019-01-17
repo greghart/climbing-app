@@ -48,15 +48,21 @@ const RouteLayout: React.SFC<Props> = (props) => {
       }
       content={
         <div className="p-2">
-          <ul className="nav nav-tabs row no-gutters mb-1">
-            <li className="nav-item col">
-              <button role="button" className="nav-link btn btn-link active">Overview</button>
+          <ul className="nav nav-tabs nav-justified show-tabs mb-1">
+            <li className="nav-item">
+              <a className="nav-link active">
+                <span className="highlight-tab border-primary">Overview</span>
+              </a>
             </li>
-            <li className="nav-item col">
-              <button role="button" className="nav-link btn btn-link">Discussion</button>
+            <li className="nav-item">
+              <a className="nav-link">
+                <span className="highlight-tab border-primary">Comments</span>
+              </a>
             </li>
-            <li className="nav-item col">
-              <button role="button" className="nav-link btn btn-link">Photos</button>
+            <li className="nav-item">
+              <a className="nav-link">
+                <span className="highlight-tab border-primary">Photos</span>
+              </a>
             </li>
           </ul>
           <RouteActions />

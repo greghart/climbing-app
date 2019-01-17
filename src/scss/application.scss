@@ -51,5 +51,15 @@ html, body {
   }
 }
 
+.show-tabs {
+  border-bottom-style: groove;
+
+  .active .highlight-tab {
+    border-bottom: .2rem solid;
+    border-bottom-left-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+  }
+}
+
 @import './map';
 @import './animations';
