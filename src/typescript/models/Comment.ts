@@ -2,11 +2,13 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  ManyToOne
+  ManyToOne,
+  BeforeInsert
 } from 'typeorm';
 
 import Commentable from './Commentable';
 import User from './User';
+import Timestamps from './Timestamps';
 import { cascadeManyToOne } from '../db/cascadeOptions';
 
 /**
@@ -29,6 +31,9 @@ export default class Comment {
 
   @ManyToOne(type => User, user => user.comments, cascadeManyToOne)
   user: User;
+
+  @Column(type => Timestamps)
+  timestamps: Timestamps;
 
 }
 

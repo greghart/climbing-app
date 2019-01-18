@@ -23,7 +23,6 @@ export default class Grade {
   name: string;
 
   // Certain grading systems can set a plus or minus modifier
-  // TODO Would this make sense to be a polymorphic type?
   @Column({ default: false })
   isPlus: boolean;
 

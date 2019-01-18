@@ -26,7 +26,7 @@ interface Props {
  * - Main crag map
  *   - Search bar
  *   - Action to open sidebar
- *   - Details view (TODO)
+ *   - Details view
  */
 const Crag: React.SFC<Props> = (props) => {
   console.warn(props, 'Crag');

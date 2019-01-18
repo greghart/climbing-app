@@ -15,14 +15,7 @@ const getRoute: Operation<[string, { includeComments: boolean }], Client> = ([id
   .then(async (connection) => {
     const routeRepository = connection.getRepository(Route);
     return await routeRepository.findOneById(id, { relations });
-  })
-  // TODO How should we handle lazy properties being sent to the client when they're eagerly loaded?
-  .then(async (route) => {
-    return {
-      ...omit(route, '__commentable__', '__has_commentable__'),
-      commentable: (route as any).__commentable__
-    } as Client;
-  })
+  });
 };
 
 export default getRoute;

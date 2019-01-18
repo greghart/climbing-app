@@ -43,9 +43,9 @@ export default class Route {
   @ManyToOne(type => Boulder, boulder => boulder.routes, cascadeManyToOne)
   boulder: Boulder;
 
-  @OneToOne(type => Commentable)
+  @OneToOne(type => Commentable, { nullable: true })
   @JoinColumn()
-  commentable: Promise<Commentable>;
+  commentable?: Commentable;
 
 }
 

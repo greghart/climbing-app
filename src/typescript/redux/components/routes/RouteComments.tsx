@@ -7,7 +7,7 @@ import ProfileIcon from '../users/ProfileIcon';
 
 interface Props {
   myRoute: Route;
-  comments: (Omit<Comment, 'user' | 'commentable'> & { user: Omit<User, 'comments'> })[];
+  comments: (Omit<Comment, 'commentable'>)[]
 }
 
 const RouteComments: React.SFC<Props> = (props) => {
@@ -23,7 +23,10 @@ const RouteComments: React.SFC<Props> = (props) => {
                   <ProfileIcon user={thisComment.user} />
                 </div>
                 <div className="col">
-                  {thisComment.text}
+                  <p>
+                    {thisComment.text}
+                  </p>
+                  <small>Posted {thisComment.timestamps.createdAt}</small>
                 </div>
               </div>
             </li>
@@ -42,7 +45,12 @@ RouteComments.defaultProps = {
       user: {
         id: 1,
         email: 'greghartemail@gmail.com',
-        name: 'Greg Hart'
+        name: 'Greg Hart',
+        comments: []
+      },
+      timestamps: {
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     },
     {
@@ -51,7 +59,12 @@ RouteComments.defaultProps = {
       user: {
         id: 1,
         email: 'greghartemail@gmail.com',
-        name: 'Greg Hart'
+        name: 'Greg Hart',
+        comments: []
+      },
+      timestamps: {
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     }
   ]
