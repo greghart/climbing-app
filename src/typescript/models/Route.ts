@@ -4,13 +4,15 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   OneToOne,
-  JoinColumn
+  JoinColumn,
+  OneToMany
 } from 'typeorm';
 
 import Boulder from './Boulder';
 import Grade from './Grade';
 import { cascadeManyToOne } from '../db/cascadeOptions';
 import Commentable from './Commentable';
+import { UnPromisifiedObject } from '../externals';
 
 @Entity()
 export default class Route {
@@ -46,3 +48,6 @@ export default class Route {
   commentable: Promise<Commentable>;
 
 }
+
+type Client = UnPromisifiedObject<Route>;
+export { Client };

@@ -9,3 +9,5 @@ TypeORM currently has two modes for an association -- always eager load, or alwa
 lazy load. That is, this is specified during model declaration.
 
 Lazy loading is implemented by having relations wrapped in Promises.
+Unfortunately, this forces us on the client to setup different typings, as model data will
+be already loaded.

@@ -8,3 +8,6 @@ declare interface Window {
   // Dev tools extension
   devToolsExtension: any;
 }
+
+type UnPromisify<T> = T extends Promise<infer U> ? U : T;
+type UnPromisifiedObject<T> = {[k in keyof T]: UnPromisify<T[k]>}

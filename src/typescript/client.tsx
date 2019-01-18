@@ -6,7 +6,6 @@ import { createBrowserHistory } from 'history';
 const Redbox = require('redbox-react');
 
 // Client-side only imports
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'leaflet/dist/leaflet.css';
 import 'application.scss';
 import 'popper.js';

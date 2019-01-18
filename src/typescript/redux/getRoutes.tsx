@@ -9,7 +9,7 @@ import SearchLayout from './components/search/SearchLayout';
 import RouteRoute from './routes/RouteRoute';
 import RouteLayoutOverview from './components/routes/RouteLayoutOverview';
 import RouteLayoutPhotos from './components/routes/RouteLayoutPhotos';
-import RouteLayoutComments from './components/routes/RouteLayoutComments';
+import RouteCommentsContainer from './components/routes/RouteCommentsContainer';
 
 export default function getRoutes(): (RouteConfig | any)[] {
   return [
@@ -59,7 +59,7 @@ export default function getRoutes(): (RouteConfig | any)[] {
           routes: [
             {
               path: '/route/:route/comments',
-              component: RouteLayoutComments,
+              component: RouteCommentsContainer,
               key: 'route_comments'
             },
             {

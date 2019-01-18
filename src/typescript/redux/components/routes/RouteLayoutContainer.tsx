@@ -1,5 +1,3 @@
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { RouteConfig } from 'react-router-config';
 import { denormalize } from 'normalizr';
 import { Location } from 'history';
@@ -7,11 +5,9 @@ import { Location } from 'history';
 import RouteLayout from './RouteLayout';
 import { State } from '../../reducer';
 import { RouteSchema } from '../../normalizr';
-import withLoader from '../../decorators/withLoader';
-import withMountAction from '../../decorators/withMountAction';
 import fetchRoute from '../../ducks/operations/fetchRoute';
 import Route from '../../../models/Route';
-import { Dispatch } from 'react';
+import asyncComponent from '../../decorators/asyncComponent';
 
 interface OwnProps {
   routeId: string,
@@ -19,9 +15,6 @@ interface OwnProps {
   routerLocation: Location
 }
 
-/**
- * Container around search results.
- */
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
   console.warn({ ownProps }, 'RouteLayoutContainer.mapStateToProps');
   const route: Route = denormalize(
@@ -34,31 +27,16 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
-    fetchRoute: () => dispatch(
+    fetch: () => dispatch(
       fetchRoute('singleton-fetch')({ id: ownProps.routeId })
     ),
   };
 };
 
-type Props = ReturnType<typeof mapStateToProps>;
-type DispatchProps = ReturnType<typeof mapDispatchToProps>;
-
-const hasDependants = (props: Props) =>
-  (props.route && props.route.boulder && props.route.boulder.area && props.route.boulder.area.crag)
-
-export default compose(
-  connect<Props, DispatchProps, OwnProps>(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  withMountAction<Props & DispatchProps>(
-    (props) => {
-      if (!hasDependants(props)) {
-        props.fetchRoute();
-      }
-    }
-  ),
-  withLoader<Props>(
-    (props) => !hasDependants(props)
+export default asyncComponent(
+  mapStateToProps,
+  mapDispatchToProps,
+  (props) => (
+    !!(props.route && props.route.boulder && props.route.boulder.area && props.route.boulder.area.crag)
   )
-)(RouteLayout);
+)(RouteLayout)

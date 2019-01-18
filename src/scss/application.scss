@@ -1,3 +1,5 @@
+@import "~bootstrap/scss/bootstrap";
+
 html, body {
   height: 100vh;
 }
@@ -61,5 +63,7 @@ html, body {
   }
 }
 
+
 @import './map';
 @import './animations';
+@import './users';

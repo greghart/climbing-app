@@ -89,7 +89,7 @@ const RouteLayoutContent: React.SFC<Props> = (props) => {
 };
 
 const RouteLayout: React.SFC<Props> = (props) => {
-  console.warn({ props }, 'ROuteLayout')
+  console.warn({ props }, 'RouteLayout')
   return (
     <PageLayout
       key="route"
