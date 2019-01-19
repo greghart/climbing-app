@@ -1,11 +1,11 @@
+import omit = require('lodash/omit');
+import * as Bluebird from 'bluebird';
 import { Operation } from '../action';
 import getConnection from '../../db';
-import Route, { Client } from '../../models/Route';
-import omit = require('lodash/omit');
+import Route from '../../models/Route';
 
-const getRoute: Operation<[string, { includeComments: boolean }], Client> = ([id, { includeComments }]) => {
+const getRoute: Operation<[string, { includeComments: boolean }], Route> = ([id, { includeComments }]) => {
   const relations = ['boulder', 'boulder.area', 'boulder.area.crag'];
-  console.log({ includeComments });
   if (includeComments) {
     relations.push('commentable');
     relations.push('commentable.comments');
@@ -15,6 +15,13 @@ const getRoute: Operation<[string, { includeComments: boolean }], Client> = ([id
   .then(async (connection) => {
     const routeRepository = connection.getRepository(Route);
     return await routeRepository.findOneById(id, { relations });
+  })
+  .then((route) => {
+    // Signal client that we've not found comments
+    if (includeComments && route.commentable === undefined) {
+      route.commentable = null;
+    }
+    return route;
   });
 };
 

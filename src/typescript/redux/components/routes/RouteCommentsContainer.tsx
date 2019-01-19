@@ -2,7 +2,7 @@ import { denormalize } from 'normalizr';
 
 import { State } from '../../reducer';
 import fetchRoute from '../../ducks/operations/fetchRoute';
-import { Client as Route } from '../../../models/Route';
+import Route from '../../../models/Route';
 import asyncComponent from '../../decorators/asyncComponent';
 import RouteComments from './RouteComments';
 
@@ -15,7 +15,7 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const route = ownProps.myRoute;
   return {
     route,
-    comments: route && route.commentable && route.commentable.comments
+    comments: (route && route.commentable && route.commentable.comments) || []
   };
 };
 

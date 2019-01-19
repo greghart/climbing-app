@@ -9,9 +9,9 @@ interface Props {
 // Breadcrumbs will truncate and allow dropdown
 const RouteBreadcrumbs: React.SFC<Props> = (props) => {
   return (
-    <div className="dropdown w-100">
+    <div className="dropdown w-100 text-center">
       <a
-        className="btn btn-link w-100"
+        className="btn btn-link"
         role="button"
         id="breadcrumbsLink"
         data-toggle="dropdown"

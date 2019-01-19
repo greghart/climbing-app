@@ -1,4 +1,4 @@
-import { EntityRepository, Repository } from "typeorm";
+import { EntityRepository, Repository, ObjectType } from "typeorm";
 import Route from "../Route";
 import Comment from "../Comment";
 import Commentable from "../Commentable";
@@ -11,25 +11,33 @@ import get = require("lodash/get");
 @EntityRepository(Comment)
 export default class CommentRepository extends Repository<Comment> {
 
-  async commentOnRoute(route: Route, comment: Comment) {
+  /**
+   * Find or get the commentable instance for an entity
+   *
+   * @returns a commentable that will be attached to the entity
+   */
+  async findOrGetCommentable<E extends { id: any, commentable?: Commentable }>(entity: E) {
     // Find an existing commentable, if any
-    let commentable = route.commentable ?
-      route.commentable :
+    let commentable = entity.commentable ?
+      entity.commentable :
       get(await
-        this.manager.getRepository(Route)
-        .createQueryBuilder('route')
-        .innerJoinAndSelect('route.commentable', 'commentable')
+        this.manager.getRepository(entity.constructor)
+        .createQueryBuilder('entity')
+        .innerJoinAndSelect('entity.commentable', 'commentable')
         .getOne()
       , 'commentable');
-    // Build the commentable if needed
     if (!commentable) {
       commentable = new Commentable();
-      commentable.descriptor = `route-${route.id}`;
+      commentable.descriptor = `${entity.constructor.name}-${entity.id}`;
       await this.manager.save(commentable);
-      route.commentable = commentable;
-      await this.manager.save(route);
+      entity.commentable = commentable;
+      await this.manager.save(entity);
     }
-    comment.commentable = commentable;
+    return commentable;
+  }
+
+  async commentOnRoute(route: Route, comment: Comment) {
+    comment.commentable = await this.findOrGetCommentable(route);
     await this.manager.save(comment);
   }
 

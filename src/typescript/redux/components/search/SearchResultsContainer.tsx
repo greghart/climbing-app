@@ -33,9 +33,6 @@ const mapStateToProps = (state: State, ownProps: RouteConfigComponentProps<{ cra
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSelect: (entity: Area | Boulder | Route) => {
-      // TODO Implement
-    },
     fetchCrags: () => dispatch(
       fetchCrags('singleton-fetch')()
     ),

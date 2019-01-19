@@ -94,10 +94,6 @@ const SearchResults: React.SFC<Props> = (props) => {
       )
     }
   )
-  console.warn({
-    props,
-    results
-  }, 'SearchResults');
   return (
     <ul className="list-group">
       {results.map((thisResult) => {

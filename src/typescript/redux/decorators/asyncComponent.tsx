@@ -16,7 +16,8 @@ import { State } from "../reducer";
  * A significant concern is distinguishing have we tried to load data versus do
  * we just not have any data. The API *must* send data to allow the client to
  * make this distinction, or the client must track this state itself.
- * @todo Best practice on this.
+ * Currently, we rely on the server sending `null` to indicate lack of data as opposed
+ * to not knowing whether we have data.
  */
 
 export default function asyncComponent<StateProps, DispatchProps, OwnProps>(

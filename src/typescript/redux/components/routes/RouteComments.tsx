@@ -11,10 +11,14 @@ interface Props {
 }
 
 const RouteComments: React.SFC<Props> = (props) => {
-  console.warn(props, 'RouteComments');
   return (
     <div>
       <ul className="list-group list-group-flush">
+        {props.comments.length === 0 && (
+          <li className="list-group-item">
+            No comments yet. Be the first one!
+          </li>
+        )}
         {props.comments.map((thisComment) => {
           return (
             <li className="list-group-item" key={thisComment.id}>

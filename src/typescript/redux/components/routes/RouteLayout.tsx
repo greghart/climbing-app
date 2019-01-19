@@ -30,8 +30,15 @@ const RouteLayoutHeader: React.SFC<Props> = (props) => {
           </Link>
         }
         input={
-          <div className="input-group-append flex-grow-up">
-            <RouteBreadcrumbs route={props.route} />
+          <div className="input-group-append flex-grow-up row">
+            <div className="col">
+              <RouteBreadcrumbs route={props.route} />
+            </div>
+            <Link to={`/explorer/${props.route.boulder.area.crag.name}/${props.route.boulder.area.name}`}>
+              <div className="col-auto pt-2">
+                  <i className="fa fa-globe" />
+              </div>
+              </Link>
           </div>
         }
       />

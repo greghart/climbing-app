@@ -48,6 +48,3 @@ export default class Route {
   commentable?: Commentable;
 
 }
-
-type Client = UnPromisifiedObject<Route>;
-export { Client };
