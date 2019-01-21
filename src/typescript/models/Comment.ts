@@ -18,6 +18,13 @@ import { cascadeManyToOne } from '../db/cascadeOptions';
  */
 @Entity()
 export default class Comment {
+
+  constructor() {
+    this.timestamps = new Timestamps();
+    this.timestamps.createdAt = new Date();
+    this.timestamps.updatedAt = new Date();
+  }
+
   @PrimaryGeneratedColumn()
   id: number;
 

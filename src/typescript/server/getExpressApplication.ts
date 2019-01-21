@@ -104,7 +104,9 @@ function getExpressApplication(_app?: Application) {
   // app.use(UniversalErrorMiddleware);
   // app.use(getServerErrorMiddleware());
 
-  // TODO 404
+  app.use(function (req, res, next) {
+    res.status(404).send("Sorry can't find that!")
+  })
 
   return app;
 }

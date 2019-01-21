@@ -35,7 +35,10 @@ RouteSchema.define({
 });
 
 CommentableSchema.define({
-  comments: [CommentSchema]
+  comments: [CommentSchema],
+  route: RouteSchema
 })
 
-CommentSchema.define({});
+CommentSchema.define({
+  commentable: CommentableSchema
+});

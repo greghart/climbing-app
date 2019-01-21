@@ -13,7 +13,7 @@ interface InfoProps {
 }
 const InfoItem: React.SFC<InfoProps> = (props) => {
   return (
-    <li className="list-group-item">
+    <li className="list-group-item list-group-item-action">
       <div className="row align-items-center">
         <div className="col-1">
           <i className={`fa fa-${props.icon} text-primary`} />
@@ -35,7 +35,7 @@ const RouteLayoutOverview: React.SFC<Props> = (props) => {
     <React.Fragment>
       <RouteActions />
       <ul className="list-group">
-        <li className="list-group-item">
+        <li className="list-group-item list-group-item-action">
           <div className="row justify-content-between">
             <div className="col">
               More about this climb

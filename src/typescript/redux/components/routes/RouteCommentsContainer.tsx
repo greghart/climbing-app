@@ -1,5 +1,3 @@
-import { denormalize } from 'normalizr';
-
 import { State } from '../../reducer';
 import fetchRoute from '../../ducks/operations/fetchRoute';
 import Route from '../../../models/Route';

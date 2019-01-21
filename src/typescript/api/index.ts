@@ -33,8 +33,8 @@ function extractTwo<R1, R2> (extractOne: Extract<R1>, extractTwo: Extract<R2>): 
 router.get('/crags', action(getCrags));
 router.get('/route/:id', action(getRoute, extractTwo(extractId, extractQueryOptions)));
 
-router.use(() => {
-  console.log("WHAAAT");
+router.use((req, res, next) => {
+  res.status(404).send('API endpoint not found');
 });
 
 export default router;

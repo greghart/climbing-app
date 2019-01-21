@@ -38,7 +38,7 @@ const RouteLayoutHeader: React.SFC<Props> = (props) => {
               <div className="col-auto pt-2">
                   <i className="fa fa-globe" />
               </div>
-              </Link>
+            </Link>
           </div>
         }
       />
@@ -53,7 +53,7 @@ const RouteLayoutHeader: React.SFC<Props> = (props) => {
  * Includes highlevel tabs, and then delegates to sub-children
  */
 const RouteLayoutContent: React.SFC<Props> = (props) => {
-  const activeToken = props.routerLocation.pathname.split('/').slice(-1)[0]
+  const activeToken = props.routerLocation.pathname.split('/')[3]
   const activeLink: 'overview' | 'comments' | 'photos' = (
     activeToken == 'comments' ? 'comments':
       activeToken == 'photos' ? 'photos' :
@@ -96,7 +96,6 @@ const RouteLayoutContent: React.SFC<Props> = (props) => {
 };
 
 const RouteLayout: React.SFC<Props> = (props) => {
-  console.warn({ props }, 'RouteLayout')
   return (
     <PageLayout
       key="route"

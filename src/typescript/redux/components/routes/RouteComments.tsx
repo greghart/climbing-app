@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Omit } from 'utility-types';
+import { Link } from 'react-router-dom';
 import Route from '../../../models/Route';
-import Comment from '../../../models/Comment';
-import User from '../../../models/User';
-import ProfileIcon from '../users/ProfileIcon';
+import CommentModel from '../../../models/Comment';
+import Comment from './Comment';
 
 interface Props {
   myRoute: Route;
-  comments: (Omit<Comment, 'commentable'>)[]
+  comments: (Omit<CommentModel, 'commentable'>)[]
 }
 
 const RouteComments: React.SFC<Props> = (props) => {
@@ -19,21 +19,16 @@ const RouteComments: React.SFC<Props> = (props) => {
             No comments yet. Be the first one!
           </li>
         )}
+        <li className="list-group-item">
+          <Link
+            to={`/route/${props.myRoute.id}/comments/new`}
+            className="btn btn-primary">
+            Add Comment
+          </Link>
+        </li>
         {props.comments.map((thisComment) => {
           return (
-            <li className="list-group-item" key={thisComment.id}>
-              <div className="row">
-                <div className="col-auto">
-                  <ProfileIcon user={thisComment.user} />
-                </div>
-                <div className="col">
-                  <p>
-                    {thisComment.text}
-                  </p>
-                  <small>Posted {thisComment.timestamps.createdAt}</small>
-                </div>
-              </div>
-            </li>
+            <Comment key={thisComment.id} comment={thisComment} user={thisComment.user}/>
           );
         })}
       </ul>

@@ -10,6 +10,7 @@ import RouteRoute from './routes/RouteRoute';
 import RouteLayoutOverview from './components/routes/RouteLayoutOverview';
 import RouteLayoutPhotos from './components/routes/RouteLayoutPhotos';
 import RouteCommentsContainer from './components/routes/RouteCommentsContainer';
+import RouteNewCommentContainer from './components/routes/RouteNewCommentContainer';
 
 export default function getRoutes(): (RouteConfig | any)[] {
   return [
@@ -59,8 +60,14 @@ export default function getRoutes(): (RouteConfig | any)[] {
           routes: [
             {
               path: '/route/:route/comments',
+              exact: true,
               component: RouteCommentsContainer,
               key: 'route_comments'
+            },
+            {
+              path: '/route/:route/comments/new',
+              component: RouteNewCommentContainer,
+              key: 'route_comments_new'
             },
             {
               path: '/route/:route/photos',
