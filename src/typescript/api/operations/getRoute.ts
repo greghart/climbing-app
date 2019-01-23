@@ -1,5 +1,4 @@
 import omit = require('lodash/omit');
-import * as Bluebird from 'bluebird';
 import { Operation } from '../action';
 import getConnection from '../../db';
 import Route from '../../models/Route';

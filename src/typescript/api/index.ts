@@ -5,9 +5,11 @@
  * documented APIs (and alongside TypeScript that'd be neat), but it's not quite there yet
  */
 import * as express from 'express';
+import * as path from 'path';
+import { Server } from 'typescript-rest';
 import action from './action';
-import getCrags from './routes/getCrags';
-import getRoute from './routes/getRoute';
+import RoutesService from './services/RoutesService';
+import CragsService from './services/CragsService';
 
 const router = express.Router();
 
@@ -30,8 +32,8 @@ function extractTwo<R1, R2> (extractOne: Extract<R1>, extractTwo: Extract<R2>): 
   };
 }
 
-router.get('/crags', action(getCrags));
-router.get('/route/:id', action(getRoute, extractTwo(extractId, extractQueryOptions)));
+// Server.swagger(router, path.join(__dirname, '../../../static/data/swagger.yaml'), '/api-docs', undefined, ['http']);
+Server.buildServices(router, RoutesService, CragsService);
 
 router.use((req, res, next) => {
   res.status(404).send('API endpoint not found');
