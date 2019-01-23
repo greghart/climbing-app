@@ -1,7 +1,8 @@
 import { Path, GET, PathParam, QueryParam } from 'typescript-rest';
+import { Tags, Response } from 'typescript-rest-swagger';
 
-import CragModel from '../../models/Crag';
 import getCrags from '../operations/getCrags';
+import Crag from '../../models/Crag';
 
 /**
  * Climbing routes controller.
@@ -12,7 +13,9 @@ export default class CragsService {
 
   @GET
   @Path('')
-  public async getCrags() {
+  @Tags('crags')
+  @Response<object>(200, 'Retrieve all crag data')
+  public async getCrags(): Promise<any> {
     return getCrags();
   }
 

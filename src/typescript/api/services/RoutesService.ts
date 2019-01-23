@@ -1,7 +1,9 @@
 import { Path, GET, PathParam, QueryParam } from 'typescript-rest';
+import { Tags, Response } from 'typescript-rest-swagger';
 
-import RouteModel from '../../models/Route';
 import getRoute from '../operations/getRoute';
+import Route from '../../models/Route';
+import { Omit } from 'utility-types';
 
 /**
  * Climbing routes controller.
@@ -11,11 +13,13 @@ import getRoute from '../operations/getRoute';
 export default class RoutesService {
 
   @GET
-  @Path('/:id')
+  @Path(':id')
+  @Tags('routes')
+  @Response<object>(200, 'Get data on a climbing route')
   public async getRoute(
     @PathParam('id') id: string,
     @QueryParam('includeComments') includeComments: boolean
-  ): Promise<RouteModel> {
+  ): Promise<{}> {
     return getRoute([id, { includeComments }]);
   }
 

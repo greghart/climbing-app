@@ -5,11 +5,11 @@
  * documented APIs (and alongside TypeScript that'd be neat), but it's not quite there yet
  */
 import * as express from 'express';
-import * as path from 'path';
+import * as swaggerUi from 'swagger-ui-express';
 import { Server } from 'typescript-rest';
-import action from './action';
 import RoutesService from './services/RoutesService';
 import CragsService from './services/CragsService';
+import buildSwagger from './buildSwagger';
 
 const router = express.Router();
 
@@ -32,7 +32,12 @@ function extractTwo<R1, R2> (extractOne: Extract<R1>, extractTwo: Extract<R2>): 
   };
 }
 
-// Server.swagger(router, path.join(__dirname, '../../../static/data/swagger.yaml'), '/api-docs', undefined, ['http']);
+router.use('/docs', swaggerUi.serve);
+router.get('/docs', swaggerUi.setup(buildSwagger(), {
+  swaggerOptions: {
+    docExpansion: 'none'
+  }
+}));
 Server.buildServices(router, RoutesService, CragsService);
 
 router.use((req, res, next) => {

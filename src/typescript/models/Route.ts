@@ -12,7 +12,6 @@ import Boulder from './Boulder';
 import Grade from './Grade';
 import { cascadeManyToOne } from '../db/cascadeOptions';
 import Commentable from './Commentable';
-import { UnPromisifiedObject } from '../externals';
 
 @Entity()
 export default class Route {
