@@ -4,26 +4,33 @@ import { Field, InjectedFormProps } from 'redux-form';
 import Comment from './Comment';
 import User from '../../../models/User';
 import CommentModel from '../../../models/Comment';
+import { Dispatch } from 'redux';
+import { OnSubmit } from '../types';
 
 interface Props {
   user: User;
   // Hook into meta enter submit
   handleCustomSubmit: (e: any) => any;
+  onSubmit: OnSubmit<FormData, Props>;
 }
 
-const RouteNewComment: React.SFC<InjectedFormProps<{ text: string }> & Props> = (props) => {
+interface FormData {
+  text: string;
+}
+
+const RouteNewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   return (
     <Comment
       comment={new CommentModel()}
       body={
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit!(props.onSubmit)}>
           <div className="form-group">
             <Field
               name="text"
               component="textarea"
               className="form-control"
               rows={3}
-              onKeyPress={(e) => {
+              onKeyPress={(e: KeyboardEvent) => {
                 if (e.key == 'Enter' && e.metaKey) {
                   props.handleCustomSubmit(e);
                 }
@@ -50,4 +57,4 @@ RouteNewComment.defaultProps = {
 }
 
 export default RouteNewComment;
-
+export { FormData, Props };

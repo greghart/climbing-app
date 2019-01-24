@@ -23,39 +23,31 @@ export default (options) => {
       return response.json();
     })
     .then((comment) => {
-      console.warn({
-        test: {
-          ...comment.commentable,
-          comments: [
-            omit(comment, 'commentable'),
-            ...options.route.commentable.comments
-          ]
-        }
-      }, 'receive')
       // Receive the new comment, and add to commentable
-      // @todo make this easier next time
-      return dispatch(
-        receiveEntities(
-          normalize(
-            {
-              ...comment.commentable,
-              comments: [
-                omit(comment, 'commentable'),
-                ...options.route.commentable.comments
-              ]
-            },
-            CommentableSchema,
+      /**
+       * @todo Decide a consistent scalable way to handle data merging
+       * Here, we want to go back to the comments page.
+       * However, it could be that existing comments are already loaded, we don't know.
+       * We can split on this logic, or just reload every time.
+       * This decision also affects above how we receive the incoming entity
+       */
+      if (options.route.commentable) {
+        return dispatch(
+          receiveEntities(
+            normalize(
+              {
+                ...comment.commentable,
+                comments: [
+                  omit(comment, 'commentable'),
+                  ...options.route.commentable.comments
+                ]
+              },
+              CommentableSchema,
+            )
           )
         )
-      )
+      }
     })
-    /**
-     * @todo Decide a consistent scalable way to handle data merging
-     * Here, we want to go back to the comments page.
-     * However, it could be that existing comments are already loaded, we don't know.
-     * We can split on this logic, or just reload every time.
-     * This decision also affects above how we receive the incoming entity
-     */
     .then(() => {
       return dispatch(
         push(`/route/${options.route.id}/comments`)

@@ -4,21 +4,7 @@ import scopeObject from './scopeObject';
 import * as ReduxTypes from 'redux';
 import * as ReduxActions from 'redux-actions';
 import * as ThunkTypes from 'redux-thunk';
-
-type ActionOrThunk<Payload> = (
-  ReduxActions.Action<Payload> |
-  ThunkTypes.ThunkAction<any, any, any>
-);
-
-declare module 'redux' {
-  /* tslint:disable:callable-types */
-  export interface Dispatch<S> {
-    <Payload>(
-      action: ActionOrThunk<Payload>
-    ): Payload & { scope: string };
-  }
-  /* tslint:enable:callable-types */
-}
+import { ActionOrThunk } from '../../../externals';
 
 // Type guard for Thunks
 const isThunk = (

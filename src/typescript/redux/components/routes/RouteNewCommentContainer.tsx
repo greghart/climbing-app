@@ -1,12 +1,14 @@
 import { reduxForm, submit } from 'redux-form';
 import { connect } from 'react-redux';
+import * as t from 'io-ts';
 
 // import createComment from '../../ducks/operations/createComment';
-import RouteNewComment from './RouteNewComment';
+import RouteNewComment, { Props as FormProps } from './RouteNewComment';
 import User from '../../../models/User';
 import Route from '../../../models/Route';
 import createCommentForRoute from '../../ducks/operations/createCommentForRoute';
 import { compose } from 'redux';
+import { MapDispatchToPropsFunction } from '../types';
 
 // We just need the route id for connecting
 interface OwnProps {
@@ -14,22 +16,20 @@ interface OwnProps {
   user: User
 }
 
-const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
+// Form object for run-time validation
+const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
   return {
-    onSubmit: ({ text }: { text: string }) => {
+    onSubmit: (data) => {
       return dispatch(
-        createCommentForRoute({ text, user: ownProps.user, route: ownProps.myRoute })
-      )
-      .then(() => {
-        console.log('Waiting!')
-      });
+        createCommentForRoute({ text: data.text, user: ownProps.user, route: ownProps.myRoute })
+      );
     },
     handleCustomSubmit: () => dispatch(submit('route-comment-form'))
   };
 };
 
 export default compose(
-  connect(
+  connect<{}, typeof mapDispatchToProps>(
     undefined,
     mapDispatchToProps
   ),
