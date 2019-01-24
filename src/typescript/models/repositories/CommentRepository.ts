@@ -38,7 +38,7 @@ export default class CommentRepository extends Repository<Comment> {
 
   async commentOnRoute(route: Route, comment: Comment) {
     comment.commentable = await this.findOrGetCommentable(route);
-    await this.manager.save(comment);
+    return this.manager.save(comment);
   }
 
 }

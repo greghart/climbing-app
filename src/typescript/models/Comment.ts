@@ -31,8 +31,6 @@ export default class Comment {
   @Column()
   text: string;
 
-  // This column isn't necessary, but makes it slightly easier to track what
-  // entities have been setup for comments
   @ManyToOne(type => Commentable, commentable => commentable.comments, cascadeManyToOne)
   commentable: Commentable;
 

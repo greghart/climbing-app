@@ -16,7 +16,6 @@ interface Props {
 }
 
 const Comment: React.SFC<Props> = (props) => {
-  console.warn(props, 'Comment');
   return (
     <li className="list-group-item">
       <div className="row">

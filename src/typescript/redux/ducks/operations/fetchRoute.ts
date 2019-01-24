@@ -12,7 +12,7 @@ export default scopeThunker(
   (options, scope) => {
     return (dispatch) => {
       console.log(options);
-      return fetch(`/api/route/${options.id}?${queryParams(omit(options, 'id'))}`)
+      return fetch(`/api/routes/${options.id}?${queryParams(omit(options, 'id'))}`)
       .then((response) => {
         return response.json();
       })

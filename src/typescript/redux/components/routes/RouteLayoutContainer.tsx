@@ -16,7 +16,6 @@ interface OwnProps {
 }
 
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
-  console.warn({ ownProps }, 'RouteLayoutContainer.mapStateToProps');
   const route: Route = denormalize(
     ownProps.routeId,
     RouteSchema,

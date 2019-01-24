@@ -74,6 +74,8 @@ const loadFixtures = async (connection: Connection) => {
   console.log('Database connection successfully setup');
 };
 
+let _connectionPool;
+
 function getConnection() {
   return createConnection({
     type: 'sqlite',

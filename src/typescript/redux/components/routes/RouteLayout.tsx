@@ -8,6 +8,7 @@ import PageLayout from '../layouts/PageLayout';
 import Route from '../../../models/Route';
 import RouteBreadcrumbs from './RouteBreadcrumbs';
 import SearchGroup from '../search/SearchGroup';
+import GoBackHeader from '../layouts/GoBackHeader';
 
 interface Props {
   route: Route;
@@ -21,7 +22,7 @@ interface Props {
 const RouteLayoutHeader: React.SFC<Props> = (props) => {
   return (
     <React.Fragment>
-      <SearchGroup
+      <GoBackHeader
         groupClass="flex-no-wrap px-3"
         buttonClass="btn-link text-dark"
         prepend={
