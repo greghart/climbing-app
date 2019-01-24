@@ -3,13 +3,14 @@
 
 const path = require('path');
 import * as express from 'express';
+import getExpressApplication from './src/typescript/server/getExpressApplication';
+import getConnection from './src/typescript/db/getConnection';
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const config = require('./config/webpack.config.development.js');
-import getExpressApplication from './src/typescript/server/getExpressApplication';
 
 const app = express();
 console.log({ config }, 'webpack config');
@@ -18,7 +19,7 @@ const compiler = webpack(config);
 // Apply CLI dashboard for your webpack dev server
 compiler.apply(new DashboardPlugin());
 
-const host = process.env.HOST || 'localhost';
+const host = process.env.HOST || '0.0.0.0';
 const port = process.env.PORT || 5001;
 
 function log(...args: any[]) {
@@ -38,9 +39,11 @@ app.use(webpackHotMiddleware(compiler));
 
 // getAPIRouter()
 // .then((apiRouter) => {
-getExpressApplication(app)
+getConnection()
 .then(() => {
-
+  getExpressApplication(app)
+})
+.then(() => {
   app.listen(
     parseInt(port.toString(), 10),
     host,

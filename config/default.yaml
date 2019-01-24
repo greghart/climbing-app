@@ -8,9 +8,18 @@ server:
   redis:
     host: localhost
     port: 6379
-  postgres:
-    host: localhost 
-    port: 5432
-    username: greg
-    password: postgrespw
-    database: greg
+  database:
+    sync: false
+    postgres:
+      host: localhost
+      port: 5432
+      username: greg
+      password: postgrespw
+      database: greg
+    sqlite:
+      database: ./scratch/dev_db.sqlite
+  swagger:
+    host: penguin.linux.test:3001
+    name: Climbing App OpenAPI Documentation
+    license: MIT
+    basePath: /api

@@ -62,7 +62,7 @@ function getExpressApplication(_app?: Application) {
   }));
   app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
   app.use('/build', serveStatic(
-    path.join(__dirname, '../build')
+    path.join(__dirname, '../../../build')
   ));
 
   // Setup cookies and sessions

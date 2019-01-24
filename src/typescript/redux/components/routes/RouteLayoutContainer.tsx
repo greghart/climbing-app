@@ -1,5 +1,6 @@
 import { RouteConfig } from 'react-router-config';
 import { denormalize } from 'normalizr';
+import { createSelector } from 'reselect';
 import { Location } from 'history';
 
 import RouteLayout from './RouteLayout';
@@ -15,13 +16,27 @@ interface OwnProps {
   routerLocation: Location
 }
 
+const selectEntities = (state: State) => state.entities
+const selectProps = (state: State, props: OwnProps) => props.routeId
+const selectRoute = (entities, routeId) => denormalize(
+  routeId,
+  RouteSchema,
+  entities
+)
+// Single route at a time, so just use a single selector for now
+const getRoute = createSelector<State, OwnProps, any, string, Route>(
+  selectEntities,
+  selectProps,
+  selectRoute
+)
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
-  const route: Route = denormalize(
-    ownProps.routeId,
-    RouteSchema,
-    state.entities
-  );
-  return { route };
+  return { route: getRoute(state, ownProps) };
+  // return {
+  //   route: selectRoute(
+  //     selectEntities(state),
+  //     selectProps(state, ownProps)
+  //   )
+  // }
 };
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {

@@ -1,17 +1,25 @@
 scripts:
   default: nps dev
-  api:
-    description: Run just the API
-    script: cross-env DEBUG=climbing-app* PORT=3001 ts-node ./src/typescript/server.ts
-  apiWatch:
-    description: Watch just the API
-    script: cross-env DEBUG=climbing-app* PORT=3001 tsnd --respawn ./src/typescript/server.ts
   dev:
     description: Monitor your code and run dev server
-    script: cross-env PORT=3001 webpack-dashboard -- ts-node ./dev-server.ts
-  devServer:
-    description: Run webpack dev server
-    script: cross-env DEBUG=climbing-app* PORT=3001 ts-node ./dev-server.ts
+    script: cross-env DEBUG=climbing-app* PORT=3001 webpack-dashboard -- ts-node ./dev-server.ts
+  prod:
+    description: Build and run code like in production
+    script: cross-env-shell DEBUG=climbing-app* NODE_ENV=production PORT=3001 "nps prod.sub"
+    sub:
+      description: The actual commands to run
+      script: concurrent "nps build.prod" "nps run.api"
+  build:
+    prod:
+      description: Build your code once and run server
+      script: cross-env DEBUG=climbing-app* PORT=3001 NODE_ENV=production webpack --config=./config/webpack.config.production.js
+  run:
+    api:
+      description: Run just the API
+      script: cross-env DEBUG=climbing-app* PORT=3001 ts-node ./src/typescript/server.ts
+    apiWatch:
+      description: Watch just the API
+      script: cross-env DEBUG=climbing-app* PORT=3001 tsnd --respawn ./src/typescript/server.ts
   lint:
     description: Lint the code, duh
     script: tslint --project . && echo 'Linted successfully'

@@ -23,9 +23,9 @@ const HtmlComponent: SFC<HtmlComponentProps> = (props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no" />
         <meta charSet="utf-8" />
         <meta property="og:title" content="Climbing App" />
-        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en" />
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Symbol" />
         <script src="https://use.fontawesome.com/470e7e519a.js" />
-        <script src="/js/vendor.bundle.js" />
+        <script src="/build/js/vendor.bundle.js" />
         <link
           rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
@@ -39,7 +39,7 @@ const HtmlComponent: SFC<HtmlComponentProps> = (props) => {
           dangerouslySetInnerHTML={{ __html: content }}
         />
         <script dangerouslySetInnerHTML={{ __html: state }} />
-        <script src="/js/application.js" />
+        <script src="/build/js/application.js" />
       </body>
     </html>
   );

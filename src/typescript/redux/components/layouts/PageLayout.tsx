@@ -26,7 +26,8 @@ const PageLayout: React.SFC<Props> = (props) => {
           {props.header}
         </div>
       </div>
-      <AnimationContext.Consumer>
+      {props.content}
+      {/* <AnimationContext.Consumer>
         {(animation) => {
           return (
             <SlideUp {...animation} appear={true}>
@@ -34,7 +35,7 @@ const PageLayout: React.SFC<Props> = (props) => {
             </SlideUp>
           );
         }}
-      </AnimationContext.Consumer>
+      </AnimationContext.Consumer> */}
     </div>
   );
 }
