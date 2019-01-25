@@ -68,6 +68,7 @@
     "fetch": "1.1.0",
     "file-loader": "^0.11.2",
     "helmet": "^3.13.0",
+    "io-ts": "^1.7.0",
     "isomorphic-fetch": "2.2.1",
     "jquery": "^3.3.1",
     "js-yaml": "^3.8.4",

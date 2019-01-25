@@ -1,5 +1,5 @@
 // Some default cascade options to make things a bit easier to work with
-import * as typeorm from 'typeorm';
+import { RelationOptions } from 'typeorm';
 
 // Cascade one to many -- we want nested creates and updates to persist
 export const cascadeOneToMany = {
@@ -8,6 +8,6 @@ export const cascadeOneToMany = {
 };
 
 // Cascade many to one -- we want parent owner delets to cascade to children
-export const cascadeManyToOne: { onDelete: 'CASCADE' } = {
+export const cascadeManyToOne: RelationOptions = {
   onDelete: 'CASCADE'
 };

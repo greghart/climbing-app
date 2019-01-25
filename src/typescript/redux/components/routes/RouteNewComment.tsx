@@ -6,6 +6,7 @@ import User from '../../../models/User';
 import CommentModel from '../../../models/Comment';
 import { Dispatch } from 'redux';
 import { OnSubmit } from '../types';
+import RenderField, { fxn as renderField } from '../form/RenderField';
 
 interface Props {
   user: User;
@@ -14,8 +15,11 @@ interface Props {
   onSubmit: OnSubmit<FormData, Props>;
 }
 
+// The mapping from redux-form to FormData is not strictly safe
+// That is, we can't know <Fields> will be setup
+// @todo Setup runtime boundary validation here?
 interface FormData {
-  text: string;
+  text?: string;
 }
 
 const RouteNewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
@@ -23,23 +27,19 @@ const RouteNewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) 
     <Comment
       comment={new CommentModel()}
       body={
-        <form onSubmit={props.handleSubmit!(props.onSubmit)}>
-          <div className="form-group">
-            <Field
-              name="text"
-              component="textarea"
-              className="form-control"
-              rows={3}
-              onKeyPress={(e: KeyboardEvent) => {
-                if (e.key == 'Enter' && e.metaKey) {
-                  props.handleCustomSubmit(e);
-                }
-              }}
-            />
-            <small id="emailHelp" className="form-text text-muted">
-              Press Meta+Enter to save
-            </small>
-          </div>
+        <form>
+          <Field
+            name="text"
+            component={renderField}
+            inputComponent="textarea"
+            rows={3}
+            onKeyPress={(e: KeyboardEvent) => {
+              if (e.key == 'Enter' && e.metaKey) {
+                props.handleCustomSubmit(e);
+              }
+            }}
+            help={<span>Press Meta+Enter to save</span>}
+          />
         </form>
       }
       user={props.user}

@@ -42,7 +42,7 @@ export default class Route {
   @ManyToOne(type => Boulder, boulder => boulder.routes, cascadeManyToOne)
   boulder: Boulder;
 
-  @OneToOne(type => Commentable, { nullable: true })
+  @OneToOne(type => Commentable, { nullable: true, onDelete: 'SET NULL' })
   @JoinColumn()
   commentable?: Commentable;
 

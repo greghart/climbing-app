@@ -1,6 +1,6 @@
 import { reduxForm, submit } from 'redux-form';
 import { connect } from 'react-redux';
-import * as t from 'io-ts';
+import { debounce } from 'lodash';
 
 // import createComment from '../../ducks/operations/createComment';
 import RouteNewComment, { Props as FormProps } from './RouteNewComment';
@@ -24,7 +24,9 @@ const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProp
         createCommentForRoute({ text: data.text, user: ownProps.user, route: ownProps.myRoute })
       );
     },
-    handleCustomSubmit: () => dispatch(submit('route-comment-form'))
+    handleCustomSubmit: () => {
+      dispatch(submit('route-comment-form'))
+    }
   };
 };
 
