@@ -18,6 +18,7 @@ declare interface Window {
  */
 type UnPromisify<T> = T extends Promise<infer U> ? U : T;
 type UnPromisifiedObject<T> = {[k in keyof T]: UnPromisify<T[k]>}
+type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never;
 
 /**
  * REDUX

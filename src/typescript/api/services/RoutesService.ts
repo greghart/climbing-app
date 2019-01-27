@@ -19,7 +19,7 @@ export default class RoutesService {
   @Tags('routes')
   @Response<object>(200, 'Get data on a climbing route')
   public async getRoute(
-    @PathParam('id') id: string,
+    @PathParam('id') id: string | number,
     @QueryParam('includeComments') includeComments?: boolean
   ) {
     return getRoute(id, { includeComments });
@@ -30,7 +30,7 @@ export default class RoutesService {
   @Tags('routes')
   @Response<object>(201, 'Add a comment for a route')
   public async addComment(
-    @PathParam('id') id: string,
+    @PathParam('id') id: string | number,
     data: { text: string }
   ) {
     const user = await getRepository(User).findOneById(1)

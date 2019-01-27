@@ -7,6 +7,7 @@ import { receiveEntities } from '../entities';
 import { CommentableSchema } from '../../normalizr';
 import validate from './util/validate';
 import getSwagger from './util/getSwagger';
+import fetchRoute from './fetchRoute';
 
 /**
  * Run-time boundary validation:
@@ -53,6 +54,10 @@ export default (options) => {
               CommentableSchema,
             )
           )
+        )
+      } else {
+        return dispatch(
+          fetchRoute('reload-fetch')(options.route.id, true)
         )
       }
     })

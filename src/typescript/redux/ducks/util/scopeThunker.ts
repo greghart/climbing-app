@@ -8,10 +8,10 @@ import * as ThunkTypes from 'redux-thunk';
  * @param {function} - Action creator that we know returns a thunk
  * @returns {function} A new action creator that first curries scope.
  */
-export default (thunker: (...args: any[]) => ThunkTypes.ThunkAction<any, any, any>) => {
+export default <T extends any[]>(thunker: (...args: T) => ThunkTypes.ThunkAction<any, any, any>) => {
   return (scope: string) => {
-    return (...args: any[]) => {
-      return scopeThunk(thunker(...args, scope), scope);
+    return (...args: T) => {
+      return scopeThunk(thunker(...args), scope);
     };
   };
 };

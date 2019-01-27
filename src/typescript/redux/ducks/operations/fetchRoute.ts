@@ -3,13 +3,14 @@ import { normalize, Schema } from 'normalizr';
 import { receiveEntities } from '../entities';
 import scopeThunker from '../util/scopeThunker';
 import { RouteSchema } from '../../normalizr';
-import getSwagger from './util/getSwagger';
+import getSwagger, { SwaggerAPI } from './util/getSwagger';
+import { ArgumentTypes } from '../../../externals';
 
 // TODO Refactor this to make adding API operations a breeze
-export default scopeThunker(
-  (options, scope) => {
+export default scopeThunker<ArgumentTypes<SwaggerAPI['routes']['getRoute']>>(
+  (id, includeComments) => {
     return (dispatch) => {
-      getSwagger().routes.getRoute(options.id, options.includeComments)
+      getSwagger().routes.getRoute(id, includeComments)
       .then((route) => {
         return dispatch(
           receiveEntities(

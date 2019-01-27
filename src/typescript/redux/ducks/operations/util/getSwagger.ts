@@ -4,6 +4,7 @@ import * as Return from 'typescript-rest/dist/server-return';
 
 import { CragsServiceType } from "../../../../api/services/CragsService";
 import { RoutesServiceType } from '../../../../api/services/RoutesService';
+import { ArgumentTypes } from '../../../../externals';
 
 /**
  * Setup a type-safe swagger client
@@ -22,7 +23,6 @@ type AllowedNames<Base, Condition> =
         FilterFlags<Base, Condition>[keyof Base]
 type SubType<Base, Condition> =
         Pick<Base, AllowedNames<Base, Condition>>
-type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never;
 type ExtractNewResource<T> = T extends Promise<Return.NewResource<infer X>> ? X : T;
 type Extracted<Base> = {
   [Key in keyof Base]:
@@ -108,4 +108,5 @@ const getSwagger = () => {
   return (swagger as SwaggerAPI);
 }
 
+export { SwaggerAPI };
 export default getSwagger;

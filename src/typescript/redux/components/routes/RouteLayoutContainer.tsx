@@ -42,7 +42,7 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
     fetch: () => dispatch(
-      fetchRoute('singleton-fetch')({ id: ownProps.routeId })
+      fetchRoute('singleton-fetch')(ownProps.routeId)
     ),
   };
 };

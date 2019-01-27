@@ -24,6 +24,7 @@ export default class CommentRepository extends Repository<Comment> {
         this.manager.getRepository(entity.constructor)
         .createQueryBuilder('entity')
         .innerJoinAndSelect('entity.commentable', 'commentable')
+        .whereInIds(entity.id)
         .getOne()
       , 'commentable');
     if (!commentable) {

@@ -6,7 +6,7 @@ interface Options {
   includeComments: boolean;
 }
 
-const getRoute = (id: string, options: Options = { includeComments: false }) => {
+const getRoute = (id: string | number, options: Options = { includeComments: false }) => {
   const query = getRepository(Route).createQueryBuilder('routes')
   .whereInIds(id)
   .leftJoinAndSelect('routes.boulder', 'boulder')

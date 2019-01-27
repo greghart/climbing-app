@@ -13,10 +13,6 @@ import AnimationContext from '../components/animations/AnimationContext';
  * just make sure to keep elements mounted until the child can finish unmounting.
  */
 const ContainerRoute: React.SFC<RouteConfigComponentProps<any>> = (props) => {
-  console.warn({
-    props,
-    location: props.location.pathname
-  }, 'ContainerRoute');
   return (
     // <TransitionGroup>
     //   <Empty key={props.location.key}>
