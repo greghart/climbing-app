@@ -1,17 +1,14 @@
-import { normalize, Schema } from 'normalizr';
-import * as fetch from 'isomorphic-fetch';
+import { normalize } from 'normalizr';
 
 import { receiveEntities } from '../entities';
 import scopeThunker from '../util/scopeThunker';
 import { CragSchema } from '../../normalizr';
+import getSwagger from './util/getSwagger';
 
 export default scopeThunker(
   (options, scope) => {
     return (dispatch) => {
-      return fetch('/api/crags')
-      .then((response) => {
-        return response.json();
-      })
+      return getSwagger().crags.getCrags()
       .then((crags) => {
         return dispatch(
           receiveEntities(
@@ -23,6 +20,5 @@ export default scopeThunker(
         );
       });
     };
-    // 'singleton-fetch'
   }
 );

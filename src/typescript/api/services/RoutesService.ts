@@ -20,7 +20,7 @@ export default class RoutesService {
   @Response<object>(200, 'Get data on a climbing route')
   public async getRoute(
     @PathParam('id') id: string,
-    @QueryParam('includeComments') includeComments: boolean
+    @QueryParam('includeComments') includeComments?: boolean
   ) {
     return getRoute(id, { includeComments });
   }

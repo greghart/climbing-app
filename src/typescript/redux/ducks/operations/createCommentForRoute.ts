@@ -1,12 +1,12 @@
 import { normalize } from 'normalizr';
-import * as fetch from 'isomorphic-fetch';
-import { push } from 'connected-react-router';
+import { replace } from 'connected-react-router';
 import omit = require('lodash/omit');
 import * as t from 'io-ts';
 
 import { receiveEntities } from '../entities';
 import { CommentableSchema } from '../../normalizr';
 import validate from './util/validate';
+import getSwagger from './util/getSwagger';
 
 /**
  * Run-time boundary validation:
@@ -27,19 +27,10 @@ export default (options) => {
   return (dispatch) => {
     return validate({ text: options.text }, FormData)
     .then((commentData) => {
-      return fetch(`/api/routes/${options.route.id}/comments`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          ...commentData,
-          userId: 1//options.user.id
-        })
-      });
-    })
-    .then((response) => {
-      return response.json();
+      return getSwagger().routes.addComment(
+        options.route.id,
+        commentData
+      );
     })
     .then((comment) => {
       // Receive the new comment, and add to commentable
@@ -67,7 +58,7 @@ export default (options) => {
     })
     .then(() => {
       return dispatch(
-        push(`/route/${options.route.id}/comments`)
+        replace(`/route/${options.route.id}/comments`)
       );
     });
   };

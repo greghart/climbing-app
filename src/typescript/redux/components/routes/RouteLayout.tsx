@@ -66,7 +66,7 @@ const RouteLayoutContent: React.SFC<Props> = (props) => {
         <li className="nav-item">
           <Link
             to={`/route/${props.route.id}/overview`}
-            replace={true}
+            replace
             className={classNames('nav-link', { active: activeLink == 'overview' })}
           >
             <span className="highlight-tab border-primary">Overview</span>
@@ -75,7 +75,7 @@ const RouteLayoutContent: React.SFC<Props> = (props) => {
         <li className="nav-item">
           <Link
             to={`/route/${props.route.id}/comments`}
-            replace={true}
+            replace
             className={classNames('nav-link', { active: activeLink == 'comments' })}
           >
             <span className="highlight-tab border-primary">Comments</span>
@@ -84,7 +84,7 @@ const RouteLayoutContent: React.SFC<Props> = (props) => {
         <li className="nav-item">
           <Link
             to={`/route/${props.route.id}/photos`}
-            replace={true}
+            replace
             className={classNames('nav-link', { active: activeLink == 'photos' })}
           >
             <span className="highlight-tab border-primary">Photos</span>
