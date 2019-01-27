@@ -32,8 +32,12 @@ function extractTwo<R1, R2> (extractOne: Extract<R1>, extractTwo: Extract<R2>): 
   };
 }
 
+const swagger = buildSwagger();
+router.get('/swagger.json', (req, res, next) => {
+  res.json(swagger);
+});
 router.use('/docs', swaggerUi.serve);
-router.get('/docs', swaggerUi.setup(buildSwagger(), {
+router.get('/docs', swaggerUi.setup(swagger, {
   swaggerOptions: {
     docExpansion: 'none'
   }

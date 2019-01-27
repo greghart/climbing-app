@@ -1,7 +1,7 @@
 scripts:
   default: nps dev
   dev:
-    description: Monitor your code and run dev server
+    description: Monitor your client code and run dev server. This does not reload server!
     script: cross-env DEBUG=climbing-app* PORT=3001 webpack-dashboard -- ts-node ./dev-server.ts
   prod:
     description: Build and run code like in production
@@ -11,7 +11,7 @@ scripts:
       script: concurrent "nps build.prod" "nps run.api"
   build:
     prod:
-      description: Build your code once and run server
+      description: Build your client code production style
       script: cross-env DEBUG=climbing-app* PORT=3001 NODE_ENV=production webpack --config=./config/webpack.config.production.js
   run:
     api:

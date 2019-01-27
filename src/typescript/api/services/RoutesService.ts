@@ -21,7 +21,7 @@ export default class RoutesService {
   public async getRoute(
     @PathParam('id') id: string,
     @QueryParam('includeComments') includeComments: boolean
-  ): Promise<{}> {
+  ) {
     return getRoute(id, { includeComments });
   }
 
@@ -46,3 +46,6 @@ export default class RoutesService {
   }
 
 }
+
+type RoutesServiceType = typeof RoutesService.prototype;
+export { RoutesServiceType };

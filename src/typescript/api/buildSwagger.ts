@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as config from 'config';
+import * as util from 'util';
 import { MetadataGenerator } from 'typescript-rest-swagger/dist/metadata/metadataGenerator';
 import { SpecGenerator } from 'typescript-rest-swagger/dist/swagger/generator';
 
@@ -19,7 +20,7 @@ export default () => {
   const spec = new SpecGenerator(metadata, swaggerConfig as any).getSpec();
   console.log({
     swaggerConfig,
-    spec
   });
+  console.log(util.inspect(spec, { depth: null }))
   return spec;
 }

@@ -15,9 +15,11 @@ export default class CragsService {
   @Path('')
   @Tags('crags')
   @Response<object>(200, 'Retrieve all crag data')
-  public async getCrags(): Promise<any> {
+  public async getCrags() {
     return getCrags();
   }
 
 }
 
+type CragsServiceType = typeof CragsService.prototype;
+export { CragsServiceType };
