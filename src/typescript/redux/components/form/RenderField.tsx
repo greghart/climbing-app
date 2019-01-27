@@ -36,7 +36,9 @@ const RenderField: React.SFC<WrappedFieldProps & AppProps> = (props) => {
   const id = props.id || nextId();
   return (
     <div className="form-group">
-      <label htmlFor={id}>{props.label}</label>
+      {props.label &&
+        <label htmlFor={id}>{props.label}</label>
+      }
       <div>
         {React.createElement(inputComponent, {
           placeholder: label,

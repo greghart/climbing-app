@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Omit } from 'utility-types';
-import { Field, InjectedFormProps } from 'redux-form';
+import { Field, InjectedFormProps, FormErrors } from 'redux-form';
 import Comment from './Comment';
 import User from '../../../models/User';
 import CommentModel from '../../../models/Comment';
@@ -13,6 +13,7 @@ interface Props {
   // Hook into meta enter submit
   handleCustomSubmit: (e: any) => any;
   onSubmit: OnSubmit<FormData, Props>;
+  submitErrors: FormErrors<FormData, unknown>;
 }
 
 // The mapping from redux-form to FormData is not strictly safe
@@ -27,7 +28,10 @@ const RouteNewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) 
     <Comment
       comment={new CommentModel()}
       body={
-        <form>
+        <form className="p-0">
+          {props.error &&
+            <span className="text-danger">{props.error}</span>
+          }
           <Field
             name="text"
             component={renderField}

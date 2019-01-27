@@ -1,6 +1,6 @@
-import { reduxForm, submit } from 'redux-form';
+import { reduxForm, submit, getFormSubmitErrors, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
-import { debounce } from 'lodash';
+import * as Bluebird from 'bluebird';
 
 // import createComment from '../../ducks/operations/createComment';
 import RouteNewComment, { Props as FormProps } from './RouteNewComment';
@@ -16,16 +16,29 @@ interface OwnProps {
   user: User
 }
 
+// a unique name for the form -- we can scope this as needed
+const form = 'route-comment-form';
+
 // Form object for run-time validation
 const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
-      return dispatch(
-        createCommentForRoute({ text: data.text, user: ownProps.user, route: ownProps.myRoute })
-      );
+      return Bluebird.resolve(
+        dispatch(
+          createCommentForRoute(ownProps.myRoute, data.text)
+        )
+      )
+      .catch((err) => {
+        if (!(err instanceof SubmissionError)) {
+          throw new SubmissionError({
+            _error: err.message
+          });
+        }
+        throw err;
+      });
     },
     handleCustomSubmit: () => {
-      dispatch(submit('route-comment-form'))
+      dispatch(submit(form))
     }
   };
 };
@@ -36,7 +49,6 @@ export default compose(
     mapDispatchToProps
   ),
   reduxForm({
-    // a unique name for the form
-    form: 'route-comment-form'
+    form
   })
 )(RouteNewComment);

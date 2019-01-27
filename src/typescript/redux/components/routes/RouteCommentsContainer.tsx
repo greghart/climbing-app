@@ -20,7 +20,7 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
     fetch: () => dispatch(
-      fetchRoute('singleton-fetch')(ownProps.myRoute.id, true)
+      fetchRoute('singleton-fetch')(ownProps.myRoute.id.toString(), true)
     ),
   };
 };
@@ -29,7 +29,6 @@ export default asyncComponent(
   mapStateToProps,
   mapDispatchToProps,
   (props) => {
-    console.warn(props, 'RouteCommentsContainer')
     return (props.route && props.route.commentable !== undefined);
   }
 )(RouteComments);

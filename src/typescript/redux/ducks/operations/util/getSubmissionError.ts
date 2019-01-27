@@ -1,12 +1,10 @@
 import * as t from 'io-ts';
 import { SubmissionError } from 'redux-form';
-import { Left } from 'fp-ts/lib/Either';
 
 /**
  * Get a redux-form SubmissionError from an io-ts validation errors array
  */
 const getSubmissionError = (errs: t.Errors): SubmissionError => {
-  console.warn(errs, 'getSubmissionError');
   return new SubmissionError(
     errs.reduce(
       (memo, thisErr) => {

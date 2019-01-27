@@ -8,6 +8,7 @@ import { CommentableSchema } from '../../normalizr';
 import validate from './util/validate';
 import getSwagger from './util/getSwagger';
 import fetchRoute from './fetchRoute';
+import Route from '../../../models/Route';
 
 /**
  * Run-time boundary validation:
@@ -24,12 +25,12 @@ const FormData = t.type({
 })
 
 // TODO Refactor this to make adding API operations a breeze
-export default (options) => {
+export default (route: Route, text: string) => {
   return (dispatch) => {
-    return validate({ text: options.text }, FormData)
+    return validate({ text: text }, FormData)
     .then((commentData) => {
       return getSwagger().routes.addComment(
-        options.route.id,
+        route.id.toString(),
         commentData
       );
     })
@@ -40,7 +41,7 @@ export default (options) => {
        * Currently we have to invert to make sure the commentable gets the new comment
        * That means some spreads, an omit, etc.
        */
-      if (options.route.commentable) {
+      if (route.commentable) {
         return dispatch(
           receiveEntities(
             normalize(
@@ -48,7 +49,7 @@ export default (options) => {
                 ...comment.commentable,
                 comments: [
                   omit(comment, 'commentable'),
-                  ...options.route.commentable.comments
+                  ...route.commentable.comments
                 ]
               },
               CommentableSchema,
@@ -57,13 +58,13 @@ export default (options) => {
         )
       } else {
         return dispatch(
-          fetchRoute('reload-fetch')(options.route.id, true)
+          fetchRoute('reload-fetch')(route.id.toString(), true)
         )
       }
     })
     .then(() => {
       return dispatch(
-        replace(`/route/${options.route.id}/comments`)
+        replace(`/route/${route.id}/comments`)
       );
     });
   };
