@@ -11,6 +11,7 @@ import RoutesService from './services/RoutesService';
 import CragsService from './services/CragsService';
 import BouldersService from './services/BouldersService';
 import buildSwagger from './buildSwagger';
+import CommentablesService from './services/CommentablesService';
 
 const router = express.Router();
 
@@ -43,7 +44,13 @@ router.get('/docs', swaggerUi.setup(swagger, {
     docExpansion: 'none'
   }
 }));
-Server.buildServices(router, RoutesService, CragsService, BouldersService);
+Server.buildServices(
+  router,
+  RoutesService,
+  CragsService,
+  BouldersService,
+  CommentablesService
+);
 
 router.use((req, res, next) => {
   res.status(404).send('API endpoint not found');

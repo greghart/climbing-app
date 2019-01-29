@@ -18,7 +18,7 @@ const BoulderLayout: React.SFC<Props> = (props) => {
         linkTo: `/explorer/${props.boulder.area.crag.name}/${props.boulder.area.name}`
       }}
       tabsProps={{
-        routeBase: 'boulder',
+        routeBase: 'boulders',
         entity: props.boulder
       }}
       extraProps={{

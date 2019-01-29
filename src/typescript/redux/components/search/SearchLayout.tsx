@@ -4,6 +4,7 @@ import SearchInputContainer from './SearchInputContainer';
 import SearchResultsContainer from './SearchResultsContainer';
 import PageLayout from '../layouts/PageLayout';
 import GoBackHeader from '../layouts/GoBackHeader';
+import { ExtractProps } from '../../../externals';
 
 interface Props {
   onClickBack?: () => any;

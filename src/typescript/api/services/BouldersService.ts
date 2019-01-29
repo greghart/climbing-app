@@ -1,5 +1,5 @@
 import * as Rest from 'typescript-rest';
-import { Path, GET, PathParam, QueryParam, POST } from 'typescript-rest';
+import { Path, GET, PathParam, QueryParam } from 'typescript-rest';
 import { Tags, Response } from 'typescript-rest-swagger';
 import { getRepository } from 'typeorm';
 
@@ -8,8 +8,7 @@ import addCommentToBoulder from '../operations/addCommentToBoulder';
 import User from '../../models/User';
 
 /**
- * Climbing boulders controller.
- * Note the semantic distinction between a climbing boulder and a server boulder!
+ * Climbing boulders service.
  */
 @Path('/boulders')
 export default class BouldersService {
@@ -49,4 +48,3 @@ export default class BouldersService {
 
 type BouldersServiceType = typeof BouldersService.prototype;
 export { BouldersServiceType };
-

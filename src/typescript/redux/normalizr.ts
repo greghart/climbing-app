@@ -26,7 +26,8 @@ AreaSchema.define({
 
 BoulderSchema.define({
   area: AreaSchema,
-  routes: [RouteSchema]
+  routes: [RouteSchema],
+  commentable: CommentableSchema
 });
 
 RouteSchema.define({
@@ -35,8 +36,7 @@ RouteSchema.define({
 });
 
 CommentableSchema.define({
-  comments: [CommentSchema],
-  route: RouteSchema
+  comments: [CommentSchema]
 })
 
 CommentSchema.define({

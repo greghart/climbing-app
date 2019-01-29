@@ -21,7 +21,7 @@ const RouteComments: React.SFC<Props> = (props) => {
         )}
         <li className="list-group-item">
           <Link
-            to={`/route/${props.myRoute.id}/comments/new`}
+            to={`/routes/${props.myRoute.id}/comments/new`}
             className="btn btn-primary">
             Add Comment
           </Link>

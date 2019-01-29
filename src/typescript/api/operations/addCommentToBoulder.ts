@@ -14,5 +14,3 @@ const addCommentToBoulder = (boulder: Boulder, text: string, user: User) => {
 };
 
 export default addCommentToBoulder;
-
-

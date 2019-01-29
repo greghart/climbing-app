@@ -1,21 +1,23 @@
 import * as React from 'react';
-import fetchRoute from '../../ducks/operations/fetchRoute';
+
 import Boulder from '../../../models/Boulder';
-import ShowCommentsContainer from '../comments/ShowCommentsContainer';
+import withCommentable from './withCommentable';
+import ShowCommentable from '../comments/ShowCommentable';
 
 interface OwnProps {
   boulder: Boulder,
 }
 
-const RouteCommentsContainer: React.SFC<OwnProps> = (props) => {
+const Container = withCommentable()(ShowCommentable);
+
+const BoulderCommentsContainer: React.SFC<OwnProps> = (props) => {
   return (
-    <ShowCommentsContainer
-      action={() => fetchRoute('singleton-fetch')(props.boulder.id.toString(), true)}
-      entity={props.boulder}
-      newRoute={`/route/${props.boulder.id}/comments/new`}
+    <Container
+      {...props}
+      newRoute={`/boulders/${props.boulder.id}/comments/new`}
+      commentable={props.boulder.commentable}
     />
   );
 }
 
-export default RouteCommentsContainer;
-
+export default BoulderCommentsContainer;

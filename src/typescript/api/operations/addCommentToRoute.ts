@@ -14,4 +14,3 @@ const addCommentToRoute = (route: Route, text: string, user: User) => {
 };
 
 export default addCommentToRoute;
-

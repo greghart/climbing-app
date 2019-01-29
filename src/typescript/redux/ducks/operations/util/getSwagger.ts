@@ -6,6 +6,7 @@ import { CragsServiceType } from "../../../../api/services/CragsService";
 import { RoutesServiceType } from '../../../../api/services/RoutesService';
 import { ArgumentTypes } from '../../../../externals';
 import { BouldersServiceType } from '../../../../api/services/BouldersService';
+import { CommentablesServiceType } from '../../../../api/services/CommentablesService';
 
 /**
  * Setup a type-safe swagger client
@@ -39,9 +40,10 @@ type APIType<Type> = Extracted<SubType<Type, BasicFunction>>;
  * the object signature Swagger expects
  */
 interface SwaggerAPI {
-  crags: APIType<CragsServiceType>,
-  routes: APIType<RoutesServiceType>
-  boulders: APIType<BouldersServiceType>
+  crags: APIType<CragsServiceType>;
+  routes: APIType<RoutesServiceType>;
+  boulders: APIType<BouldersServiceType>;
+  commentables: APIType<CommentablesServiceType>;
 }
 
 type DeclaredRoute<Service extends keyof SwaggerAPI, Op extends keyof SwaggerAPI[Service]> = (
@@ -63,6 +65,12 @@ const declaredRoutes: DeclaredRoutes = {
   },
   boulders: {
     getBoulder: (id, includeComments) => { return { id, includeComments } }
+  },
+  commentables: {
+    getCommentable: (id) => { return { id } },
+    addComment: (id, data) => { return { id, data } },
+    commentableForBoulder: (id) => { return { id } },
+    commentableForRoute: (id) => { return { id } },
   }
 }
 

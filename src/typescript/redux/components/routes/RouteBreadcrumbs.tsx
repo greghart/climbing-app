@@ -14,7 +14,7 @@ const RouteBreadcrumbs: React.SFC<Props> = (props) => {
       links={[
         { content: props.route.boulder.area.crag.name },
         { content: props.route.boulder.area.name },
-        { content: props.route.boulder.name },
+        { content: props.route.boulder.name, to: `/boulders/${props.route.boulder.id}` },
         { content: props.route.name },
       ]}
     />

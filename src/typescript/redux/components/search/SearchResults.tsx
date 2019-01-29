@@ -59,7 +59,7 @@ interface BoulderProps {
 }
 const BoulderResult: React.SFC<BoulderProps> = (props) => {
   return (
-    <Link to={`/boulder/${props.boulder.id}`}>
+    <Link to={`/boulders/${props.boulder.id}`}>
       <ResultLayout
         right={<React.Fragment>
           <p className="mb-0">{props.boulder.name}</p>
@@ -75,7 +75,7 @@ interface RouteProps {
 }
 const RouteResult: React.SFC<RouteProps> = (props) => {
   return (
-    <Link to={`/route/${props.route.id}`}>
+    <Link to={`/routes/${props.route.id}`}>
       <ResultLayout
         right={<React.Fragment>
           <p className="mb-0">{props.route.name}</p>

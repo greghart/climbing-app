@@ -7,8 +7,7 @@ import { receiveEntities } from '../entities';
 import { CommentableSchema } from '../../normalizr';
 import validate from './util/validate';
 import getSwagger from './util/getSwagger';
-import fetchRoute from './fetchRoute';
-import Route from '../../../models/Route';
+import Commentable from '../../../models/Commentable';
 
 /**
  * Run-time boundary validation:
@@ -24,48 +23,31 @@ const FormData = t.type({
   text: t.refinement(t.string, text => text.length > 2, 'text.minLength')
 })
 
-// TODO Refactor this to make adding API operations a breeze
-export default (route: Route, text: string) => {
+export default (commentable: Commentable, text: string) => {
   return (dispatch) => {
     return validate({ text: text }, FormData)
     .then((commentData) => {
-      return getSwagger().routes.addComment(
-        route.id.toString(),
+      return getSwagger().commentables.addComment(
+        commentable.id.toString(),
         commentData
       );
     })
     .then((comment) => {
       // Receive the new comment, and add to commentable
-      /**
-       * @todo A better way to handle different sides of relationships?
-       * Currently we have to invert to make sure the commentable gets the new comment
-       * That means some spreads, an omit, etc.
-       */
-      if (route.commentable) {
-        return dispatch(
-          receiveEntities(
-            normalize(
-              {
-                ...comment.commentable,
-                comments: [
-                  omit(comment, 'commentable'),
-                  ...route.commentable.comments
-                ]
-              },
-              CommentableSchema,
-            )
+      return dispatch(
+        receiveEntities(
+          normalize(
+            {
+              ...commentable,
+              comments: [
+                omit(comment, 'commentable'),
+                ...commentable.comments
+              ]
+            },
+            CommentableSchema,
           )
         )
-      } else {
-        return dispatch(
-          fetchRoute('reload-fetch')(route.id.toString(), true)
-        )
-      }
+      )
     })
-    .then(() => {
-      return dispatch(
-        replace(`/route/${route.id}/comments`)
-      );
-    });
   };
 };

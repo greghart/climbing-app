@@ -15,6 +15,8 @@ import RouteCommentsContainer from './components/routes/RouteCommentsContainer';
 import RouteNewCommentContainer from './components/routes/RouteNewCommentContainer';
 // Show Boulder
 import BoulderRoute from './routes/BoulderRoute';
+import BoulderCommentsContainer from './components/boulders/BoulderCommentsContainer';
+import BoulderNewCommentContainer from './components/boulders/BoulderNewCommentContainer';
 
 export default function getRoutes(): (RouteConfig | any)[] {
   return [
@@ -52,23 +54,23 @@ export default function getRoutes(): (RouteConfig | any)[] {
         // Show a boulder
         // TODO
         {
-          path: '/boulder/:boulder',
+          path: '/boulders/:boulder',
           component: BoulderRoute,
           key: 'boulder',
           routes: [
-            // {
-            //   path: '/route/:route/comments',
-            //   exact: true,
-            //   component: RouteCommentsContainer,
-            //   key: 'route_comments'
-            // },
-            // {
-            //   path: '/route/:route/comments/new',
-            //   component: RouteNewCommentContainer,
-            //   key: 'route_comments_new'
-            // },
             {
-              path: '/boulder/:boulder/photos',
+              path: '/boulders/:boulder/comments',
+              exact: true,
+              component: BoulderCommentsContainer,
+              key: 'boulder_comments'
+            },
+            {
+              path: '/boulders/:boulder/comments/new',
+              component: BoulderNewCommentContainer,
+              key: 'boulder_comments_new'
+            },
+            {
+              path: '/boulders/:boulder/photos',
               component: RouteLayoutPhotos,
               key: 'boulder_photos'
             }
@@ -82,29 +84,29 @@ export default function getRoutes(): (RouteConfig | any)[] {
         },
         // Show a route
         {
-          path: '/route/:route',
+          path: '/routes/:route',
           component: RouteRoute,
           key: 'route',
           routes: [
             {
-              path: '/route/:route/comments',
+              path: '/routes/:routes/comments',
               exact: true,
               component: RouteCommentsContainer,
               key: 'route_comments'
             },
             {
-              path: '/route/:route/comments/new',
+              path: '/routes/:routes/comments/new',
               component: RouteNewCommentContainer,
               key: 'route_comments_new'
             },
             {
-              path: '/route/:route/photos',
+              path: '/routes/:routes/photos',
               component: RouteLayoutPhotos,
               key: 'route_photos'
             },
             // Default is overview
             {
-              path: '/route/:route/(overview)?',
+              path: '/routes/:routes/(overview)?',
               component: RouteLayoutOverview,
               key: 'route_overview'
             }
