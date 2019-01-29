@@ -38,7 +38,7 @@ const RouteLayoutOverview: React.SFC<Props> = (props) => {
         <li className="list-group-item list-group-item-action">
           <div className="row justify-content-between">
             <div className="col">
-              More about this climb
+              (TODO) More about this climb
             </div>
             <div className="col text-right">
               <i className="fa fa-chevron-right" />

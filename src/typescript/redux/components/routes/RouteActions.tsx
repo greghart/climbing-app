@@ -6,17 +6,17 @@ const RouteActions: React.SFC = () => {
       <button role="button" className="btn btn-link col">
         <i className="fa fa-lg fa-directions" />
         <br/>
-        Directions
+        (TODO) Directions
       </button>
       <button role="button" className="btn btn-link col">
         <i className="fa fa-lg fa-star" />
         <br/>
-        Rate
+        (TODO) Rate
       </button>
       <button role="button" className="btn btn-link col">
         <i className="fa fa-lg fa-dumbbell" />
         <br/>
-        Project!
+        (TODO) Project!
       </button>
     </div>
   );

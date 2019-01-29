@@ -87,7 +87,7 @@ const RouteLayoutContent: React.SFC<Props> = (props) => {
             replace
             className={classNames('nav-link', { active: activeLink == 'photos' })}
           >
-            <span className="highlight-tab border-primary">Photos</span>
+            <span className="highlight-tab border-primary">(TODO) Photos</span>
           </Link>
         </li>
       </ul>

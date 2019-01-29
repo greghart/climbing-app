@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { polygon } from 'leaflet';
-import { LayerGroup } from 'react-leaflet';
-const DivIcon = require('react-leaflet-div-icon').default;
+import { polygon, divIcon } from 'leaflet';
+import { LayerGroup, Marker } from 'react-leaflet';
 
 import AreaPolygon from './AreaPolygon';
 import AreaBoulders from './AreaBoulders';
@@ -21,24 +20,22 @@ const AreaMap: React.SFC<Props> = (props) => {
   const myBounds = polygon(props.area.coordinates).getBounds();
   return (
     <LayerGroup>
-      <DivIcon
-        className="null"
+      <Marker
+        icon={divIcon({
+          className: 'null',
+          html: `
+            <h5 style="transform: translate(-50%, 0); position: absolute; color: white">
+              ${props.area.name}
+            </h5>
+          `
+        })}
         position={{
           lat: (myBounds.getNorth() + myBounds.getCenter().lat) / 2.0,
           lng: myBounds.getCenter().lng
         }}
         onClick={props.onClick}
       >
-        <h5
-          style={{
-            transform: 'translate(-50%, 0)',
-            position: 'absolute',
-            color: 'white'
-          }}
-        >
-          {props.area.name}
-        </h5>
-      </DivIcon>
+      </Marker>
       {props.selected ?
       [
         <AreaPolygon
