@@ -5,15 +5,14 @@ import * as Return from 'typescript-rest/dist/server-return';
 import { CragsServiceType } from "../../../../api/services/CragsService";
 import { RoutesServiceType } from '../../../../api/services/RoutesService';
 import { ArgumentTypes } from '../../../../externals';
+import { BouldersServiceType } from '../../../../api/services/BouldersService';
 
 /**
  * Setup a type-safe swagger client
  */
 
-/**
- * Some very helpful types to extract just methods from our services (just in case)
- * https://medium.com/dailyjs/typescript-create-a-condition-based-subset-types-9d902cea5b8c
- */
+// Extract just methods from our services (just in case)
+// https://medium.com/dailyjs/typescript-create-a-condition-based-subset-types-9d902cea5b8c
 type BasicFunction = (...args: any[]) => any;
 type FilterFlags<Base, Condition> = {
   [Key in keyof Base]:
@@ -23,11 +22,14 @@ type AllowedNames<Base, Condition> =
         FilterFlags<Base, Condition>[keyof Base]
 type SubType<Base, Condition> =
         Pick<Base, AllowedNames<Base, Condition>>
+// Extract wrapped return types
 type ExtractNewResource<T> = T extends Promise<Return.NewResource<infer X>> ? X : T;
 type Extracted<Base> = {
   [Key in keyof Base]:
     Base[Key] extends BasicFunction ? (...args: ArgumentTypes<Base[Key]>) => ExtractNewResource<ReturnType<Base[Key]>> : Base[Key]
 }
+type APIType<Type> = Extracted<SubType<Type, BasicFunction>>;
+
 /**
  * We must manually declare our operations, as we want to skip a codegen step and
  * can't use transformers consistently or easily.
@@ -37,9 +39,11 @@ type Extracted<Base> = {
  * the object signature Swagger expects
  */
 interface SwaggerAPI {
-  crags: Extracted<SubType<CragsServiceType, BasicFunction>>,
-  routes: Extracted<SubType<RoutesServiceType, BasicFunction>>
+  crags: APIType<CragsServiceType>,
+  routes: APIType<RoutesServiceType>
+  boulders: APIType<BouldersServiceType>
 }
+
 type DeclaredRoute<Service extends keyof SwaggerAPI, Op extends keyof SwaggerAPI[Service]> = (
   true |
   (SwaggerAPI[Service][Op] extends Function ? ((...args: ArgumentTypes<SwaggerAPI[Service][Op]>) => Object | null): never) | undefined
@@ -56,6 +60,9 @@ const declaredRoutes: DeclaredRoutes = {
   routes: {
     getRoute: (id, includeComments) => { return { id, includeComments } },
     addComment: (id, data) => { return { id, data }; }
+  },
+  boulders: {
+    getBoulder: (id, includeComments) => { return { id, includeComments } }
   }
 }
 

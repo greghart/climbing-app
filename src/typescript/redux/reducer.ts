@@ -21,4 +21,11 @@ const reducer = combineReducers<State>({
   form: formReducer
 });
 
+// Build some obvious selectors
+// TODO Flesh this out to separate modules if it grows too large
+const selectors = {
+  selectEntities: (state: State) => state.entities
+};
+
+export { selectors };
 export default reducer;

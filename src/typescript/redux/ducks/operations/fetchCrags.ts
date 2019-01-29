@@ -6,7 +6,7 @@ import { CragSchema } from '../../normalizr';
 import getSwagger from './util/getSwagger';
 
 export default scopeThunker(
-  (options, scope) => {
+  (options) => {
     return (dispatch) => {
       return getSwagger().crags.getCrags()
       .then((crags) => {

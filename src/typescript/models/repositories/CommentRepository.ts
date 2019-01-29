@@ -1,8 +1,13 @@
 import { EntityRepository, Repository, ObjectType } from "typeorm";
-import Route from "../Route";
 import Comment from "../Comment";
 import Commentable from "../Commentable";
 import get = require("lodash/get");
+
+// Base interface for a commentable entity
+interface CommentableEntity {
+  id: any,
+  commentable?: Commentable
+}
 
 /**
  * A custom comment repository repository to help us abstract away the
@@ -16,7 +21,7 @@ export default class CommentRepository extends Repository<Comment> {
    *
    * @returns a commentable that will be attached to the entity
    */
-  async findOrGetCommentable<E extends { id: any, commentable?: Commentable }>(entity: E) {
+  async findOrGetCommentable(entity: CommentableEntity) {
     // Find an existing commentable, if any
     let commentable = entity.commentable ?
       entity.commentable :
@@ -37,8 +42,8 @@ export default class CommentRepository extends Repository<Comment> {
     return commentable;
   }
 
-  async commentOnRoute(route: Route, comment: Comment) {
-    comment.commentable = await this.findOrGetCommentable(route);
+  async commentOn(entity: CommentableEntity, comment: Comment) {
+    comment.commentable = await this.findOrGetCommentable(entity);
     return this.manager.save(comment);
   }
 

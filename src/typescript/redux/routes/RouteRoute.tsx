@@ -19,5 +19,3 @@ const RouteRoute: SFC<RouteConfigComponentProps<RouteParams>> = (props) => {
 };
 
 export default RouteRoute;
-
-

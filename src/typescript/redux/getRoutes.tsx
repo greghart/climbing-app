@@ -1,16 +1,20 @@
 import * as React from 'react';
-import SFC = React.SFC;
-import { RouteConfig, RouteConfigComponentProps, renderRoutes } from 'react-router-config';
+import { RouteConfig } from 'react-router-config';
 
+// Explorer
 import CragRoute from './routes/CragRoute';
 import AreasListRoute from './routes/AreasListRoute';
 import ContainerRoute from './routes/ContainerRoute';
+// Search
 import SearchLayout from './components/search/SearchLayout';
+// Show Route
 import RouteRoute from './routes/RouteRoute';
 import RouteLayoutOverview from './components/routes/RouteLayoutOverview';
 import RouteLayoutPhotos from './components/routes/RouteLayoutPhotos';
 import RouteCommentsContainer from './components/routes/RouteCommentsContainer';
 import RouteNewCommentContainer from './components/routes/RouteNewCommentContainer';
+// Show Boulder
+import BoulderRoute from './routes/BoulderRoute';
 
 export default function getRoutes(): (RouteConfig | any)[] {
   return [
@@ -48,9 +52,33 @@ export default function getRoutes(): (RouteConfig | any)[] {
         // Show a boulder
         // TODO
         {
-          path: '/boulders/:id',
-          component: SearchLayout,
-          key: 'boulder'
+          path: '/boulder/:boulder',
+          component: BoulderRoute,
+          key: 'boulder',
+          routes: [
+            // {
+            //   path: '/route/:route/comments',
+            //   exact: true,
+            //   component: RouteCommentsContainer,
+            //   key: 'route_comments'
+            // },
+            // {
+            //   path: '/route/:route/comments/new',
+            //   component: RouteNewCommentContainer,
+            //   key: 'route_comments_new'
+            // },
+            {
+              path: '/boulder/:boulder/photos',
+              component: RouteLayoutPhotos,
+              key: 'boulder_photos'
+            }
+            // Default is overview
+            // {
+            //   path: '/boulder/:boulder/(overview)?',
+            //   component: BoulderLayoutOverview,
+            //   key: 'boulder_overview'
+            // }
+          ]
         },
         // Show a route
         {

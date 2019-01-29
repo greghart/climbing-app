@@ -3,13 +3,16 @@ import {
   Entity,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn
 } from 'typeorm';
 
 import Area from './Area';
 import Coordinate from './Coordinate';
 import Route from './Route';
 import { cascadeManyToOne, cascadeOneToMany } from '../db/cascadeOptions';
+import Commentable from './Commentable';
 
 @Entity()
 class Boulder {
@@ -43,6 +46,11 @@ class Boulder {
   @OneToMany(type => Route, route => route.boulder, cascadeOneToMany)
   routes: Route[];
 
+  @OneToOne(type => Commentable, { nullable: true, onDelete: 'SET NULL' })
+  @JoinColumn()
+  commentable?: Commentable;
+
+  // Serialization
   toJSON() {
     return Object.assign(
       {},

@@ -10,6 +10,7 @@ function defaultIsLoading(props: { isLoading?: boolean }) {
 function withLoader<P> (isLoading: (props: P) => boolean = defaultIsLoading) {
   return (Component: React.ComponentType<P>) => {
     return (props: P) => {
+      console.warn({ props }, 'withLoader');
       if (isLoading(props)) {
         return <span>Loading...</span>;
       }

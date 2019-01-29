@@ -9,6 +9,7 @@ import * as swaggerUi from 'swagger-ui-express';
 import { Server } from 'typescript-rest';
 import RoutesService from './services/RoutesService';
 import CragsService from './services/CragsService';
+import BouldersService from './services/BouldersService';
 import buildSwagger from './buildSwagger';
 
 const router = express.Router();
@@ -42,7 +43,7 @@ router.get('/docs', swaggerUi.setup(swagger, {
     docExpansion: 'none'
   }
 }));
-Server.buildServices(router, RoutesService, CragsService);
+Server.buildServices(router, RoutesService, CragsService, BouldersService);
 
 router.use((req, res, next) => {
   res.status(404).send('API endpoint not found');

@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 import { Location } from 'history';
 
 import RouteLayout from './RouteLayout';
-import { State } from '../../reducer';
+import { State, selectors } from '../../reducer';
 import { RouteSchema } from '../../normalizr';
 import fetchRoute from '../../ducks/operations/fetchRoute';
 import Route from '../../../models/Route';
@@ -16,7 +16,6 @@ interface OwnProps {
   routerLocation: Location
 }
 
-const selectEntities = (state: State) => state.entities
 const selectProps = (state: State, props: OwnProps) => props.routeId
 const selectRoute = (entities, routeId) => denormalize(
   routeId,
@@ -25,18 +24,12 @@ const selectRoute = (entities, routeId) => denormalize(
 )
 // Single route at a time, so just use a single selector for now
 const getRoute = createSelector<State, OwnProps, any, string, Route>(
-  selectEntities,
+  selectors.selectEntities,
   selectProps,
   selectRoute
 )
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
   return { route: getRoute(state, ownProps) };
-  // return {
-  //   route: selectRoute(
-  //     selectEntities(state),
-  //     selectProps(state, ownProps)
-  //   )
-  // }
 };
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {

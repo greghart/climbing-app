@@ -21,7 +21,7 @@ interface FormData {
   text?: string;
 }
 
-const RouteNewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
+const NewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   return (
     <Comment
       comment={new CommentModel()}
@@ -49,7 +49,7 @@ const RouteNewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) 
   )
 };
 
-RouteNewComment.defaultProps = {
+NewComment.defaultProps = {
   user: {
     id: 1,
     email: 'greghartnewcomment',
@@ -58,5 +58,6 @@ RouteNewComment.defaultProps = {
   }
 }
 
-export default RouteNewComment;
+export default NewComment;
 export { FormData, Props };
+

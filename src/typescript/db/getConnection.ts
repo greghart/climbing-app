@@ -58,19 +58,6 @@ const loadFixtures = async (connection: Connection) => {
   await loadStaticCrag('TramData.json');
   await loadStaticCrag('Santee.json');
 
-  // Setup a comment as a sample
-  const franksDirect = await connection.manager.findOne(Route, { where: { name: "Frank's Direct" } });
-  if (franksDirect) {
-    await connection.manager.getCustomRepository(CommentRepository).commentOnRoute(
-      franksDirect,
-      connection.manager.create(Comment, { text: 'Wow this is actually working', user: admin })
-    );
-    await connection.manager.getCustomRepository(CommentRepository).commentOnRoute(
-      franksDirect,
-      connection.manager.create(Comment, { text: 'Wow this is actually working again!', user: admin })
-    );
-  }
-
   console.log('Database connection successfully setup');
 };
 
