@@ -3,6 +3,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   output: {
@@ -21,6 +22,7 @@ module.exports = {
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.json', '.scss', '.css', '.js']
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin(),
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
       $: 'jquery',
@@ -40,9 +42,10 @@ module.exports = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: [
-          'awesome-typescript-loader'
-        ]
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true
+        }
       },
       // Images
       // Inline base64 URLs for <=8k images, direct URLs for the rest
