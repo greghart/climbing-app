@@ -17,6 +17,7 @@ import RouteNewCommentContainer from './components/routes/RouteNewCommentContain
 import BoulderRoute from './routes/BoulderRoute';
 import BoulderCommentsContainer from './components/boulders/BoulderCommentsContainer';
 import BoulderNewCommentContainer from './components/boulders/BoulderNewCommentContainer';
+import BoulderLayoutOverview from './components/boulders/BoulderLayoutOverview';
 
 export default function getRoutes(): (RouteConfig | any)[] {
   return [
@@ -73,13 +74,13 @@ export default function getRoutes(): (RouteConfig | any)[] {
               path: '/boulders/:boulder/photos',
               component: RouteLayoutPhotos,
               key: 'boulder_photos'
-            }
+            },
             // Default is overview
-            // {
-            //   path: '/boulder/:boulder/(overview)?',
-            //   component: BoulderLayoutOverview,
-            //   key: 'boulder_overview'
-            // }
+            {
+              path: '/boulders/:boulder/(overview)?',
+              component: BoulderLayoutOverview,
+              key: 'boulder_overview'
+            }
           ]
         },
         // Show a route

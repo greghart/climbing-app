@@ -38,3 +38,20 @@ declare module 'redux' {
   }
   /* tslint:enable:callable-types */
 }
+
+/**
+ * MONKEY PATCHES AND FIXES
+ */
+
+// Fix normalizr to reflect actual schema objects
+declare module 'normalizr' {
+  namespace schema {
+    interface Entity {
+      idAttribute: string;
+      key: string;
+      schema: {
+        [index: string]: Entity
+      } | [Entity]
+    }
+  }
+}

@@ -9,6 +9,7 @@ interface Options {
 const getBoulder = (id: string | number, options: Options = { includeComments: false }) => {
   const query = getRepository(Boulder).createQueryBuilder('boulders')
   .whereInIds(id)
+  .leftJoinAndSelect('boulders.routes', 'routes')
   .leftJoinAndSelect('boulders.area', 'area')
   .leftJoinAndSelect('area.crag', 'crag')
   if (options.includeComments) {
