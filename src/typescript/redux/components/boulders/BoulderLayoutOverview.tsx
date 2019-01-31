@@ -15,16 +15,18 @@ const BoulderLayoutOverview: React.SFC<Props> = (props) => {
         (TODO)Boulder description
       </p>
       <ul className="list-group">
-        <li className="list-group-item list-group-item-action">
-          <div className="row justify-content-between">
-            <div className="col">
-              (TODO) More about this boulder
+        <Link to={`/boulders/${props.boulder.id}/routes/new`}>
+          <li className="list-group-item list-group-item-action">
+            <div className="row justify-content-between">
+              <div className="col">
+                Add a new route on this boulder
+              </div>
+              <div className="col text-right">
+                <i className="fa fa-chevron-right" />
+              </div>
             </div>
-            <div className="col text-right">
-              <i className="fa fa-chevron-right" />
-            </div>
-          </div>
-        </li>
+          </li>
+        </Link>
         <InfoItem icon="list">
           {props.boulder.routes.length} routes on this boulder
         </InfoItem>

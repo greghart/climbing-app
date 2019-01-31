@@ -29,7 +29,8 @@ const ShowLayoutTabs: React.SFC<Props> = (props) => {
   const activeLink: 'overview' | 'comments' | 'photos' = (
     activeToken == 'comments' ? 'comments':
       activeToken == 'photos' ? 'photos' :
-        'overview'
+        activeToken == 'overview' || activeToken == '' ?
+          'overview': null
   )
   return (
     <div className="p-2">

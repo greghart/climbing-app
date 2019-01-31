@@ -3,30 +3,31 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import * as Bluebird from 'bluebird';
 
-import NewComment, { Props as FormProps } from './NewComment';
-import User from '../../../models/User';
+import NewRoute, { Props as FormProps } from './NewRoute';
 import { MapDispatchToPropsFunction } from '../types';
-import Commentable from '../../../models/Commentable';
-import createComment from '../../ducks/operations/createComment';
+import createRoute from '../../ducks/operations/createRoute';
 import handleReduxFormErrors from '../util/handleReduxFormErrors';
 import { replace } from 'connected-react-router';
+import Boulder from '../../../models/Boulder';
+import User from '../../../models/User';
 
 interface OwnProps {
-  commentable: Commentable,
+  boulder: Boulder,
   user: User,
   // Where to redirect to after creation
   redirect: string;
 }
 
-// Use one form for all "commentable" -- for now we assume one at a time.
-const form = 'commentable-form';
+// Use one form for all routes -- for now we assume one at a time.
+const form = 'route-form';
 
 const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
+      console.log(data, 'submitted')
       return Bluebird.resolve(
         dispatch(
-          createComment(ownProps.commentable, data.text)
+          createRoute(ownProps.boulder, data)
         )
       )
       .then(() => {
@@ -35,14 +36,11 @@ const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProp
         );
       })
       .catch(handleReduxFormErrors);
-    },
-    handleCustomSubmit: () => {
-      dispatch(submit(form))
     }
   };
 };
 
-const Test = compose<React.ComponentType, React.ComponentType, React.ComponentType>(
+export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
   connect<{}, typeof mapDispatchToProps>(
     undefined,
     mapDispatchToProps
@@ -50,6 +48,4 @@ const Test = compose<React.ComponentType, React.ComponentType, React.ComponentTy
   reduxForm({
     form
   })
-)(NewComment) as React.ComponentType<OwnProps>;
-
-export default Test;
+)(NewRoute) as React.ComponentType<OwnProps>;

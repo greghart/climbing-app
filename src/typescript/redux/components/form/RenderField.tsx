@@ -1,12 +1,13 @@
 import * as React from 'react';
 import classNames = require('classnames');
-import { WrappedFieldProps } from 'redux-form';
+import { WrappedFieldProps, Field } from 'redux-form';
 
 /**
  * Climbing App field specific props
  */
 interface AppProps {
   label: string;
+  placeholder?: string;
   id?: string;
   help?: React.ReactNode;
   className?: string;
@@ -41,7 +42,7 @@ const RenderField: React.SFC<WrappedFieldProps & AppProps> = (props) => {
       }
       <div>
         {React.createElement(inputComponent, {
-          placeholder: label,
+          placeholder: props.placeholder || label,
           ...input,
           ...rest,
           className: classNames('form-control', { 'is-invalid': meta.touched && meta.error }, props.className),
@@ -69,5 +70,14 @@ RenderField.defaultProps = {
 const fxn = (data) => {
   return <RenderField {...data} />;
 }
-export { fxn }
+
+const MyField = (props) => {
+  return (
+    <Field
+      {...props}
+      component={fxn}
+    />
+  )
+}
+export { fxn, MyField }
 export default RenderField;

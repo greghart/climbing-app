@@ -1,12 +1,12 @@
 import * as React from 'react';
 import Route from '../../../models/Route';
-import NewCommentsContainer from '../comments/NewCommentsContainer';
+import NewCommentContainer from '../comments/NewCommentContainer';
 import withCommentable from './withCommentable';
 
 interface OwnProps {
   myRoute: Route,
 }
-const Container = withCommentable()(NewCommentsContainer);
+const Container = withCommentable()(NewCommentContainer);
 
 const RouteNewCommentContainer: React.SFC<OwnProps> = (props) => {
   return (
