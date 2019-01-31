@@ -22,6 +22,9 @@ class Boulder {
   @Column()
   name: string;
 
+  @Column()
+  description: string;
+
   @Column('decimal')
   lat: number;
 

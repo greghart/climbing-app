@@ -7,6 +7,7 @@ import { SubmissionError } from "redux-form";
  */
 function handleReduxFormErrors(err: Error) {
   if (!(err instanceof SubmissionError)) {
+    console.error('wrapping error to redux form', err)
     throw new SubmissionError({
       _error: err.message
     });

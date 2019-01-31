@@ -32,7 +32,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProp
       )
       .then(() => {
         return dispatch(
-          replace(ownProps.redirect)
+          replace(`/boulders/${ownProps.boulder.id}`)
         );
       })
       .catch(handleReduxFormErrors);

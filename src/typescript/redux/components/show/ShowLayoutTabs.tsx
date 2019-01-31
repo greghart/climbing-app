@@ -29,7 +29,7 @@ const ShowLayoutTabs: React.SFC<Props> = (props) => {
   const activeLink: 'overview' | 'comments' | 'photos' = (
     activeToken == 'comments' ? 'comments':
       activeToken == 'photos' ? 'photos' :
-        activeToken == 'overview' || activeToken == '' ?
+        activeToken == 'overview' || activeToken == undefined ?
           'overview': null
   )
   return (
@@ -59,7 +59,7 @@ const ShowLayoutTabs: React.SFC<Props> = (props) => {
             replace
             className={classNames('nav-link', { active: activeLink == 'photos' })}
           >
-            <span className="highlight-tab border-primary">(TODO) Photos</span>
+            <span className="highlight-tab border-primary">Photos</span>
           </Link>
         </li>
       </ul>

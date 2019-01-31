@@ -8,18 +8,24 @@ import * as React from 'react';
 interface InfoProps {
   icon: string;
   children: React.ReactNode;
+  includeLi?: boolean;
 }
+
 const InfoItem: React.SFC<InfoProps> = (props) => {
+  const Wrapper = props.includeLi ? 'li' : React.Fragment;
   return (
-    <li className="list-group-item list-group-item-action">
+    <Wrapper className="list-group-item list-group-item-action">
       <div className="row align-items-center">
         <div className="col-1">
           <i className={`fa fa-${props.icon} text-primary`} />
         </div>
         <div className="col">{props.children}</div>
       </div>
-    </li>
-  )
+    </Wrapper>
+  );
 }
 
+InfoItem.defaultProps = {
+  includeLi: true
+};
 export default InfoItem;

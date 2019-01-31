@@ -9,6 +9,7 @@ import { RouteSchema } from '../../normalizr';
 import fetchRoute from '../../ducks/operations/fetchRoute';
 import Route from '../../../models/Route';
 import asyncComponent from '../../decorators/asyncComponent';
+import selectNormalizr from '../../util/selectNormalizr';
 
 interface OwnProps {
   routeId: string,
@@ -19,7 +20,10 @@ interface OwnProps {
 const selectProps = (state: State, props: OwnProps) => props.routeId
 const selectRoute = (entities, routeId) => denormalize(
   routeId,
-  RouteSchema,
+  selectNormalizr(
+    RouteSchema,
+    { boulder: { area: { crag: 'empty' } }, commentable: true }
+  ),
   entities
 )
 // Single route at a time, so just use a single selector for now

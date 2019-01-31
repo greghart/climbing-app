@@ -81,6 +81,11 @@ export default function getRoutes(): (RouteConfig | any)[] {
               component: BoulderNewRouteContainer,
               key: 'boulder_routes_new'
             },
+            // {
+            //   path: '/boulders/:boulder/edit',
+            //   component: BoulderEditContainer,
+            //   key: 'boulder_routes_edit'
+            // },
             // Default is overview
             {
               path: '/boulders/:boulder/(overview)?',

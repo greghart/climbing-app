@@ -1,11 +1,18 @@
 import * as Rest from 'typescript-rest';
 import { Path, GET, PathParam, QueryParam } from 'typescript-rest';
 import { Tags, Response } from 'typescript-rest-swagger';
-import { getRepository } from 'typeorm';
 
 import getBoulder from '../operations/getBoulder';
-import addCommentToBoulder from '../operations/addCommentToBoulder';
-import User from '../../models/User';
+import addRoute from '../operations/addRoute';
+
+// Payload for route data
+interface AddRoutePayload {
+  name: string;
+  description: string;
+  gradeRaw: string;
+  length?: number;
+  firstAscent?: string;
+}
 
 /**
  * Climbing boulders service.
@@ -25,22 +32,21 @@ export default class BouldersService {
   }
 
   @Rest.POST
-  @Path(':id/comments')
+  @Path(':id/routes')
   @Tags('boulders')
-  @Response<object>(201, 'Add a comment for a boulder')
-  public async addComment(
+  @Response<object>(201, 'Add a route to a boulder')
+  public async addRoute(
+    // Routes must be added to a boulder currently
     @PathParam('id') id: string,
-    data: { text: string }
+    data: AddRoutePayload
   ) {
-    const user = await getRepository(User).findOneById(1)
     const boulder = await getBoulder(id);
-    return addCommentToBoulder(
+    return addRoute(
       boulder,
-      data.text,
-      user
+      data
     )
-    .then((comment) => {
-      return new Rest.Return.NewResource(`/boulders/${boulder.id}`, comment)
+    .then((route) => {
+      return new Rest.Return.NewResource(`/boulders/${boulder.id}`, route)
     })
   }
 
@@ -48,3 +54,4 @@ export default class BouldersService {
 
 type BouldersServiceType = typeof BouldersService.prototype;
 export { BouldersServiceType };
+export { AddRoutePayload };

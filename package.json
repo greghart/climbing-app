@@ -31,7 +31,7 @@
     "@types/lodash": "^4.14.116",
     "@types/normalizr": "^2.0.18",
     "@types/prop-types": "^15.5.5",
-    "@types/react": "^16.7.20",
+    "@types/react": "^16.8.0",
     "@types/react-addons-css-transition-group": "^15.0.5",
     "@types/react-dom": "^16.0.7",
     "@types/react-intl": "^2.3.1",

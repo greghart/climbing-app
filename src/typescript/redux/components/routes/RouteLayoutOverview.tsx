@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import RouteActions from './RouteActions';
 import Route from '../../../models/Route';
 import InfoItem from '../show/InfoItem';
+import ActionItem from '../show/ActionItem';
 
 interface Props {
   myRoute: Route;
@@ -15,14 +17,11 @@ const RouteLayoutOverview: React.SFC<Props> = (props) => {
       <RouteActions />
       <ul className="list-group">
         <li className="list-group-item list-group-item-action">
-          <div className="row justify-content-between">
-            <div className="col">
-              (TODO) More about this climb
-            </div>
-            <div className="col text-right">
-              <i className="fa fa-chevron-right" />
-            </div>
-          </div>
+          <Link to={`/routes/${props.myRoute.id}/edit`}>
+            <ActionItem includeLi={false}>
+              Edit this route
+            </ActionItem>
+          </Link>
         </li>
         <InfoItem icon="hand-rock">
           {route.gradeRaw}
