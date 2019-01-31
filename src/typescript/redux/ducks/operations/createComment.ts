@@ -1,5 +1,4 @@
 import { normalize } from 'normalizr';
-import { replace } from 'connected-react-router';
 import omit = require('lodash/omit');
 import * as t from 'io-ts';
 

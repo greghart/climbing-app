@@ -48,6 +48,5 @@ export default function selectNormalizr(
     }
   );
 
-  console.warn({ newSchema });
   return isArray(schema) ? [newSchema] : newSchema;
 }
