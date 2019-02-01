@@ -6,30 +6,24 @@ import { BoulderSchema } from '../../normalizr';
 import validate from './util/validate';
 import getSwagger from './util/getSwagger';
 import Boulder from '../../../models/Boulder';
-import RouteType from './types/route';
+import BoulderType from './types/boulder';
 
 export default (boulder: Boulder, data: { [index: string]: any }) => {
   return (dispatch) => {
-    return validate(data, RouteType)
-    .then((routeData) => {
-      return getSwagger().boulders.addRoute(
+    return validate(data, BoulderType)
+    .then((boulderData) => {
+      return getSwagger().boulders.updateBoulder(
         boulder.id.toString(),
-        routeData
+        boulderData
       );
     })
-    .then((route) => {
-      // Receive the new route, and add to boulder
+    .then((boulder) => {
+      // Receive the updated boulder
       return dispatch(
         receiveEntities(
           normalize(
-            {
-              ...boulder,
-              routes: [
-                omit(route, 'boulder'),
-                ...boulder.routes
-              ]
-            },
-            BoulderSchema,
+            boulder,
+            BoulderSchema
           )
         )
       )

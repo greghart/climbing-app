@@ -22,8 +22,8 @@ class Boulder {
   @Column()
   name: string;
 
-  @Column()
-  description: string;
+  @Column({ nullable: true })
+  description?: string;
 
   @Column('decimal')
   lat: number;

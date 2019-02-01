@@ -6,13 +6,22 @@ function defaultIsLoading(props: { isLoading?: boolean }) {
 
 /**
  * Defer the rendering of component until we've loaded data
- */
+ * @param - Is the component loading?
+ * @param - Should we pass down a loading prop or no?
+ **/
 function withLoader<P> (isLoading: (props: P) => boolean = defaultIsLoading) {
   return (Component: React.ComponentType<P>) => {
     return (props: P) => {
-      console.warn({ props }, 'withLoader');
       if (isLoading(props)) {
-        return <span>Loading...</span>;
+        return (
+          <div className="container">
+            <div className="row align-items-middle justify-content-center">
+              <div className="col">
+                Loading...
+              </div>
+            </div>
+          </div>
+        );
       }
       return <Component {...props} />;
     }

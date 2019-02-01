@@ -11,19 +11,24 @@ interface ActionProps {
   includeLi?: boolean;
 }
 const ActionItem: React.FunctionComponent<ActionProps> = (props) => {
-  const Wrapper = props.includeLi ? 'li' : React.Fragment;
-  return (
-    <Wrapper className="list-group-item list-group-item-action">
-      <div className="row justify-content-between align-items-center">
-        <div className="col">
-          {props.children}
-        </div>
-        <div className="col-1">
-          <i className={`fa fa-${props.icon} text-primary`} />
-        </div>
+  const body = (
+    <div className="row justify-content-between align-items-center">
+      <div className="col">
+        {props.children}
       </div>
-    </Wrapper>
-  )
+      <div className="col-1">
+        <i className={`fa fa-${props.icon} text-primary`} />
+      </div>
+    </div>
+  );
+  if (props.includeLi) {
+    return (
+      <li className="list-group-item list-group-item-action">
+        {body}
+      </li>
+    );
+  }
+  return body;
 }
 
 ActionItem.defaultProps = {

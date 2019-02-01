@@ -1,29 +1,35 @@
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { replace } from 'connected-react-router';
 import * as Bluebird from 'bluebird';
 
-import RouteForm, { Props as FormProps } from '../routes/RouteForm';
+import BoulderForm, { Props as FormProps } from './BoulderForm';
 import { MapDispatchToPropsFunction } from '../types';
-import createRoute from '../../ducks/operations/createRoute';
+import updateBoulder from '../../ducks/operations/updateBoulder';
 import handleReduxFormErrors from '../util/handleReduxFormErrors';
-import { replace } from 'connected-react-router';
 import Boulder from '../../../models/Boulder';
 
 interface OwnProps {
+  // Boulder to edit
   boulder: Boulder,
 }
 
 // Use one form for all routes -- for now we assume one at a time.
-const form = 'route-form';
+const form = 'boulder-form-edit';
+
+const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
+  return {
+    initialValues: ownProps.boulder
+  };
+}
 
 const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
-      console.log(data, 'submitted')
       return Bluebird.resolve(
         dispatch(
-          createRoute(ownProps.boulder, data)
+          updateBoulder(ownProps.boulder, data)
         )
       )
       .then(() => {
@@ -38,10 +44,12 @@ const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProp
 
 export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
   connect(
-    undefined,
+    mapStateToProps,
     mapDispatchToProps
   ),
   reduxForm({
-    form
+    form,
+    enableReinitialize: true
   })
-)(RouteForm) as React.ComponentType<OwnProps>;
+)(BoulderForm) as React.ComponentType<OwnProps>;
+

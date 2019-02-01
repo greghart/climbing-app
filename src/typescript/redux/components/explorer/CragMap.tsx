@@ -59,7 +59,7 @@ const CragMap: React.SFC<Props> = (props) => {
                 props.onAreaClick(area);
               }}
             />
-            {/* <LayersControl position="topright"> 
+            {/* <LayersControl position="topright">
               <LayersControl.Overlay name="Areas" checked={true}>
                 <LayerGroup>
                   <AreasMap

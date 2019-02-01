@@ -15,6 +15,9 @@ const RouteLayoutOverview: React.SFC<Props> = (props) => {
   return (
     <React.Fragment>
       <RouteActions />
+      <p>
+        {props.myRoute.description}
+      </p>
       <ul className="list-group">
         <li className="list-group-item list-group-item-action">
           <Link to={`/routes/${props.myRoute.id}/edit`}>

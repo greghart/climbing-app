@@ -61,10 +61,12 @@ const declaredRoutes: DeclaredRoutes = {
   },
   routes: {
     getRoute: (id, includeComments) => { return { id, includeComments } },
+    updateRoute: (id, data) => { return { id, data } }
   },
   boulders: {
     getBoulder: (id, includeComments) => { return { id, includeComments } },
-    addRoute: (id, data) => { return { id, data } }
+    addRoute: (id, data) => { return { id, data } },
+    updateBoulder: (id, data) => { return { id, data } }
   },
   commentables: {
     getCommentable: (id) => { return { id } },

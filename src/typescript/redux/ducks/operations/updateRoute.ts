@@ -2,38 +2,32 @@ import { normalize } from 'normalizr';
 import omit = require('lodash/omit');
 
 import { receiveEntities } from '../entities';
-import { BoulderSchema } from '../../normalizr';
+import { RouteSchema } from '../../normalizr';
 import validate from './util/validate';
 import getSwagger from './util/getSwagger';
-import Boulder from '../../../models/Boulder';
+import Route from '../../../models/Route';
 import RouteType from './types/route';
 
-export default (boulder: Boulder, data: { [index: string]: any }) => {
+export default (route: Route, data: { [index: string]: any }) => {
   return (dispatch) => {
+    console.warn(route, data, 'updateRoute');
     return validate(data, RouteType)
     .then((routeData) => {
-      return getSwagger().boulders.addRoute(
-        boulder.id.toString(),
+      return getSwagger().routes.updateRoute(
+        route.id.toString(),
         routeData
       );
     })
     .then((route) => {
-      // Receive the new route, and add to boulder
+      // Receive the updated route
       return dispatch(
         receiveEntities(
           normalize(
-            {
-              ...boulder,
-              routes: [
-                omit(route, 'boulder'),
-                ...boulder.routes
-              ]
-            },
-            BoulderSchema,
+            route,
+            RouteSchema
           )
         )
       )
     })
   };
 };
-

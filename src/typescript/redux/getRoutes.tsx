@@ -7,18 +7,20 @@ import AreasListRoute from './routes/AreasListRoute';
 import ContainerRoute from './routes/ContainerRoute';
 // Search
 import SearchLayout from './components/search/SearchLayout';
-// Show Route
+// Route
 import RouteRoute from './routes/RouteRoute';
 import RouteLayoutOverview from './components/routes/RouteLayoutOverview';
 import RouteLayoutPhotos from './components/routes/RouteLayoutPhotos';
 import RouteCommentsContainer from './components/routes/RouteCommentsContainer';
 import RouteNewCommentContainer from './components/routes/RouteNewCommentContainer';
-// Show Boulder
+// Boulder
 import BoulderRoute from './routes/BoulderRoute';
 import BoulderCommentsContainer from './components/boulders/BoulderCommentsContainer';
 import BoulderNewCommentContainer from './components/boulders/BoulderNewCommentContainer';
 import BoulderLayoutOverview from './components/boulders/BoulderLayoutOverview';
 import BoulderNewRouteContainer from './components/boulders/BoulderNewRouteContainer';
+import RouteEditContainer from './components/routes/RouteEditContainer';
+import BoulderEditContainer from './components/boulders/BoulderEditContainer';
 
 export default function getRoutes(): (RouteConfig | any)[] {
   return [
@@ -81,11 +83,11 @@ export default function getRoutes(): (RouteConfig | any)[] {
               component: BoulderNewRouteContainer,
               key: 'boulder_routes_new'
             },
-            // {
-            //   path: '/boulders/:boulder/edit',
-            //   component: BoulderEditContainer,
-            //   key: 'boulder_routes_edit'
-            // },
+            {
+              path: '/boulders/:boulder/edit',
+              component: BoulderEditContainer,
+              key: 'boulder_routes_edit'
+            },
             // Default is overview
             {
               path: '/boulders/:boulder/(overview)?',
@@ -115,6 +117,11 @@ export default function getRoutes(): (RouteConfig | any)[] {
               path: '/routes/:routes/photos',
               component: RouteLayoutPhotos,
               key: 'route_photos'
+            },
+            {
+              path: '/routes/:routes/edit',
+              component: RouteEditContainer,
+              key: 'route_edit'
             },
             // Default is overview
             {

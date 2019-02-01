@@ -10,7 +10,6 @@ interface Props {
 }
 
 const BoulderLayoutOverview: React.SFC<Props> = (props) => {
-  console.warn({ props }, 'BoulderLayoutOverview');
   return (
     <React.Fragment>
       <p>
@@ -52,7 +51,7 @@ const BoulderLayoutOverview: React.SFC<Props> = (props) => {
               <ul className="list-group list-group-flush mt-2">
                 {props.boulder.routes.map((thisRoute) => {
                   return (
-                    <Link to={`/routes/${thisRoute.id}`}>
+                    <Link to={`/routes/${thisRoute.id}`} key={thisRoute.id}>
                       <InfoItem icon="hand-rock" key={`route-${thisRoute.id}`} >
                         {thisRoute.name} ({thisRoute.gradeRaw})
                       </InfoItem>

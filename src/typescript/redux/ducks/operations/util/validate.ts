@@ -10,8 +10,8 @@ import getSubmissionError from './getSubmissionError';
  * That is, we don't know the data we get back necessarily.
  * It also acts as additional client-side validations
  */
-const validate = <A, O, I>(comment: I, type: t.Type<A, O, I>): Promise<A> => {
-  const result = type.decode(comment)
+const validate = <A, O, I>(data: I, type: t.Type<A, O, I>): Promise<t.TypeOf<typeof type>> => {
+  const result = type.decode(data)
   return new Promise((resolve, reject) => {
     result.fold(
       (errors) => {

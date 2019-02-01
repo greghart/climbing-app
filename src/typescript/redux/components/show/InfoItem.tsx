@@ -12,17 +12,22 @@ interface InfoProps {
 }
 
 const InfoItem: React.SFC<InfoProps> = (props) => {
-  const Wrapper = props.includeLi ? 'li' : React.Fragment;
-  return (
-    <Wrapper className="list-group-item list-group-item-action">
-      <div className="row align-items-center">
-        <div className="col-1">
-          <i className={`fa fa-${props.icon} text-primary`} />
-        </div>
-        <div className="col">{props.children}</div>
+  const body = (
+    <div className="row align-items-center">
+      <div className="col-1">
+        <i className={`fa fa-${props.icon} text-primary`} />
       </div>
-    </Wrapper>
+      <div className="col">{props.children}</div>
+    </div>
   );
+  if (props.includeLi) {
+    return (
+      <li className="list-group-item list-group-item-action">
+        {body}
+      </li>
+    );
+  }
+  return body;
 }
 
 InfoItem.defaultProps = {

@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { Field, InjectedFormProps, FormErrors } from 'redux-form';
-import User from '../../../models/User';
+import { InjectedFormProps, FormErrors } from 'redux-form';
 import { OnSubmit } from '../types';
 import { MyField } from '../form/RenderField';
+import Cancel from '../form/Cancel';
+import Submit from '../form/Submit';
 
 interface Props {
-  user: User;
-  // Hook into meta enter submit
-  handleCustomSubmit: (e: any) => any;
   onSubmit: OnSubmit<FormData, Props>;
   submitErrors: FormErrors<FormData, unknown>;
 }
@@ -20,7 +18,7 @@ interface FormData {
   firstAscent?: string,
 }
 
-const NewRoute: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
+const RouteForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   return (
     <form onSubmit={props.handleSubmit} className="m-3">
       {props.error &&
@@ -52,27 +50,12 @@ const NewRoute: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
         placeholder="John Long, 1979"
       />
       <div>
-        <button className="btn btn-primary" type="submit" disabled={props.submitting}>
-          Submit
-        </button>
-        <button className="btn btn-secondary ml-2" type="button" disabled={props.pristine || props.submitting} onClick={props.reset}>
-          Clear Values
-        </button>
+        <Submit {...props} />
+        <Cancel {...props} />
       </div>
     </form>
   );
 };
 
-NewRoute.defaultProps = {
-  user: {
-    id: 1,
-    email: 'greghartnewcomment',
-    name: "Greg",
-    comments: []
-  }
-}
-
-export default NewRoute;
+export default RouteForm;
 export { FormData, Props };
-
-
