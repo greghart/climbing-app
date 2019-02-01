@@ -3,9 +3,10 @@ import reduce = require('lodash/reduce');
 import * as Return from 'typescript-rest/dist/server-return';
 
 import { CragsServiceType } from "../../../../api/services/CragsService";
+import { AreasServiceType } from '../../../../api/services/AreasService';
+import { BouldersServiceType } from '../../../../api/services/BouldersService';
 import { RoutesServiceType } from '../../../../api/services/RoutesService';
 import { ArgumentTypes } from '../../../../externals';
-import { BouldersServiceType } from '../../../../api/services/BouldersService';
 import { CommentablesServiceType } from '../../../../api/services/CommentablesService';
 
 /**
@@ -41,8 +42,9 @@ type APIType<Type> = Extracted<SubType<Type, BasicFunction>>;
  */
 interface SwaggerAPI {
   crags: APIType<CragsServiceType>;
-  routes: APIType<RoutesServiceType>;
+  areas: APIType<AreasServiceType>;
   boulders: APIType<BouldersServiceType>;
+  routes: APIType<RoutesServiceType>;
   commentables: APIType<CommentablesServiceType>;
 }
 
@@ -59,20 +61,26 @@ const declaredRoutes: DeclaredRoutes = {
   crags: {
     getCrags: true,
   },
-  routes: {
-    getRoute: (id, includeComments) => { return { id, includeComments } },
-    updateRoute: (id, data) => { return { id, data } }
+  areas: {
+    getArea: (id, includeComments) => { return { id, includeComments } },
+    addBoulder: (id, data) => { return { id, data } },
+    updateArea: (id, data) => { return { id, data } }
   },
   boulders: {
     getBoulder: (id, includeComments) => { return { id, includeComments } },
     addRoute: (id, data) => { return { id, data } },
     updateBoulder: (id, data) => { return { id, data } }
   },
+  routes: {
+    getRoute: (id, includeComments) => { return { id, includeComments } },
+    updateRoute: (id, data) => { return { id, data } }
+  },
   commentables: {
     getCommentable: (id) => { return { id } },
     addComment: (id, data) => { return { id, data } },
     commentableForBoulder: (id) => { return { id } },
     commentableForRoute: (id) => { return { id } },
+    commentableForArea: (id) => { return { id } },
   }
 }
 

@@ -15,7 +15,7 @@ interface FormData {
   description?: string
 }
 
-const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
+const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   return (
     <form onSubmit={props.handleSubmit} className="m-3">
       {props.error &&
@@ -30,7 +30,6 @@ const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
         label="Description"
         inputComponent="textarea"
         rows="3"
-        normalize={(v) => v == '' ? null : v }
       />
       <div>
         <Submit {...props} />
@@ -40,6 +39,6 @@ const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   );
 };
 
-export default BoulderForm;
+export default AreaForm;
 export { FormData, Props };
 

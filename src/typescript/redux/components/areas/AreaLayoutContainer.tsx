@@ -3,46 +3,46 @@ import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
 import { Location } from 'history';
 
-import BoulderLayout from './BoulderLayout';
+import AreaLayout from './AreaLayout';
 import { State, selectors } from '../../reducer';
-import { BoulderSchema } from '../../normalizr';
-import fetchBoulder from '../../ducks/operations/fetchBoulder';
-import Boulder from '../../../models/Boulder';
+import { AreaSchema } from '../../normalizr';
+import fetchArea from '../../ducks/operations/fetchArea';
+import Area from '../../../models/Area';
 import asyncComponent from '../../decorators/asyncComponent';
 import selectNormalizr from '../../util/selectNormalizr';
 
 interface OwnProps {
-  boulderId: string,
+  areaId: string,
   routerConfig: RouteConfig,
   routerLocation: Location
 }
 
-const selectProps = (state: State, props: OwnProps) => props.boulderId
-const selectBoulder = (entities, boulderId) => denormalize(
-  boulderId,
+const selectProps = (state: State, props: OwnProps) => props.areaId
+const selectArea = (entities, areaId) => denormalize(
+  areaId,
   selectNormalizr(
-    BoulderSchema,
-    { area: { crag: 'empty' }, routes: 'empty', commentable: true }
+    AreaSchema,
+    { crag: 'empty', boulders: 'empty', commentable: true }
   ),
   entities
 )
-// Single boulder at a time, so just use a single selector for now
-const getBoulder = createSelector<State, OwnProps, any, string, Boulder>(
+// Single area at a time, so just use a single selector for now
+const getArea = createSelector<State, OwnProps, any, string, Area>(
   selectors.selectEntities,
   selectProps,
-  selectBoulder
+  selectArea
 )
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
   console.warn({
     state, ownProps
   }, 'mapStateToProps');
-  return { boulder: getBoulder(state, ownProps) };
+  return { area: getArea(state, ownProps) };
 };
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
     fetch: () => dispatch(
-      fetchBoulder('singleton-fetch')(ownProps.boulderId)
+      fetchArea('singleton-fetch')(ownProps.areaId)
     ),
   };
 };
@@ -51,6 +51,6 @@ export default asyncComponent(
   mapStateToProps,
   mapDispatchToProps,
   (props) => (
-    !!(props.boulder && props.boulder.area && props.boulder.area.crag && props.boulder.routes)
+    !!(props.area && props.area.boulders && props.area.crag)
   )
-)(BoulderLayout)
+)(AreaLayout)

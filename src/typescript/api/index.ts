@@ -12,6 +12,7 @@ import CragsService from './services/CragsService';
 import BouldersService from './services/BouldersService';
 import buildSwagger from './buildSwagger';
 import CommentablesService from './services/CommentablesService';
+import AreasService from './services/AreasService';
 
 const router = express.Router();
 
@@ -48,6 +49,7 @@ Server.buildServices(
   router,
   RoutesService,
   CragsService,
+  AreasService,
   BouldersService,
   CommentablesService
 );

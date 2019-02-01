@@ -7,6 +7,8 @@ import AreasListRoute from './routes/AreasListRoute';
 import ContainerRoute from './routes/ContainerRoute';
 // Search
 import SearchLayout from './components/search/SearchLayout';
+// Area
+import AreaRoute from './routes/AreaRoute';
 // Route
 import RouteRoute from './routes/RouteRoute';
 import RouteLayoutOverview from './components/routes/RouteLayoutOverview';
@@ -21,6 +23,11 @@ import BoulderLayoutOverview from './components/boulders/BoulderLayoutOverview';
 import BoulderNewRouteContainer from './components/boulders/BoulderNewRouteContainer';
 import RouteEditContainer from './components/routes/RouteEditContainer';
 import BoulderEditContainer from './components/boulders/BoulderEditContainer';
+import AreaCommentsContainer from './components/areas/AreaCommentsContainer';
+import AreaNewCommentContainer from './components/areas/AreaNewCommentContainer';
+import AreaNewBoulderContainer from './components/areas/AreaNewBoulderContainer';
+import AreaEditContainer from './components/areas/AreaEditContainer';
+import AreaLayoutOverview from './components/areas/AreaLayoutOverview';
 
 export default function getRoutes(): (RouteConfig | any)[] {
   return [
@@ -28,6 +35,7 @@ export default function getRoutes(): (RouteConfig | any)[] {
       path: '*',
       component: ContainerRoute,
       routes: [
+
         // Explorer -- map view of a crag w/ an optional area
         // Includes a sidebar list (for now -- TODO REMOVE)
         {
@@ -42,21 +50,56 @@ export default function getRoutes(): (RouteConfig | any)[] {
             }
           ],
         },
+
         // Search page
         {
           path: '/search/:crag',
           component: SearchLayout,
           key: 'search'
         },
+
         // Show Pages
-        // TODO
+        // Show an area
         {
-          path: '/areas/:id',
-          component: SearchLayout,
-          key: 'area'
+          path: '/areas/:area',
+          component: AreaRoute,
+          key: 'area',
+          routes: [
+            {
+              path: '/areas/:area/comments',
+              exact: true,
+              component: AreaCommentsContainer,
+              key: 'area_comments'
+            },
+            {
+              path: '/areas/:area/comments/new',
+              component: AreaNewCommentContainer,
+              key: 'area_comments_new'
+            },
+            {
+              path: '/areas/:area/photos',
+              component: RouteLayoutPhotos,
+              key: 'area_photos'
+            },
+            {
+              path: '/areas/:area/boulders/new',
+              component: AreaNewBoulderContainer,
+              key: 'area_boulders_new'
+            },
+            {
+              path: '/areas/:area/edit',
+              component: AreaEditContainer,
+              key: 'area_edit'
+            },
+            // Default is overview
+            {
+              path: '/areas/:area/(overview)?',
+              component: AreaLayoutOverview,
+              key: 'area_overview'
+            }
+          ]
         },
         // Show a boulder
-        // TODO
         {
           path: '/boulders/:boulder',
           component: BoulderRoute,
@@ -86,7 +129,7 @@ export default function getRoutes(): (RouteConfig | any)[] {
             {
               path: '/boulders/:boulder/edit',
               component: BoulderEditContainer,
-              key: 'boulder_routes_edit'
+              key: 'boulder_edit'
             },
             // Default is overview
             {

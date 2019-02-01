@@ -15,11 +15,6 @@ type Props = Pick<ExtractProps<typeof Accordion>, 'header' | 'content'> & {
 
 const mapStateToProps = (state: State, ownProps: Props) => {
   const target = scopedSelector(ownProps.scope)(state.accordion).open;
-  console.warn({
-    state,
-    ownProps,
-    target
-  }, 'AccordionContainer')
   return {
     isOpen: target == undefined ? ownProps.defaultOpen : target
   };

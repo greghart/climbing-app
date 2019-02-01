@@ -45,11 +45,13 @@ interface AreaProps {
 }
 const AreaResult: React.SFC<AreaProps> = (props) => {
   return (
-    <ResultLayout
-      right={<React.Fragment>
-        <p className="mb-0">{props.area.name}</p>
-      </React.Fragment>}
-    />
+    <Link to={`/areas/${props.area.id}`}>
+      <ResultLayout
+        right={<React.Fragment>
+          <p className="mb-0">{props.area.name}</p>
+        </React.Fragment>}
+      />
+    </Link>
   )
 }
 

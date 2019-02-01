@@ -12,8 +12,8 @@ const BoulderBreadcrumbs: React.SFC<Props> = (props) => {
     <ShowBreadcrumbs
       title={props.boulder.name}
       links={[
-        { content: props.boulder.area.crag.name },
-        { content: props.boulder.area.name },
+        { content: `${props.boulder.area.crag.name} (TODO)` },
+        { content: props.boulder.area.name, to: `/areas/${props.boulder.area.id}` },
         { content: props.boulder.name },
       ]}
     />

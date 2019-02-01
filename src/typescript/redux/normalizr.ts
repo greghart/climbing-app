@@ -21,7 +21,8 @@ CragSchema.define({
 
 AreaSchema.define({
   crag: CragSchema,
-  boulders: [BoulderSchema]
+  boulders: [BoulderSchema],
+  commentable: CommentableSchema
 });
 
 BoulderSchema.define({

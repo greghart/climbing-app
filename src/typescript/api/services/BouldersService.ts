@@ -1,13 +1,13 @@
+import { getRepository } from 'typeorm';
 import * as Rest from 'typescript-rest';
 import { Tags, Response } from 'typescript-rest-swagger';
 
 import getBoulder from '../operations/getBoulder';
 import addRoute from '../operations/addRoute';
 import { RoutePayload } from './RoutesService';
-import { getRepository } from 'typeorm';
 import Boulder from '../../models/Boulder';
 
-// Payload for route data
+// Payload for boulder data
 interface BoulderPayload {
   name: string;
   description?: string;
@@ -66,3 +66,4 @@ export default class BouldersService {
 
 type BouldersServiceType = typeof BouldersService.prototype;
 export { BouldersServiceType };
+export { BoulderPayload };

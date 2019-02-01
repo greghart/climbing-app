@@ -1,5 +1,4 @@
 import { getRepository } from 'typeorm';
-import { Omit } from 'utility-types';
 
 import Boulder from '../../models/Boulder';
 import Route from '../../models/Route';

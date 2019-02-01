@@ -95,4 +95,5 @@ function getConnection() {
   });
 }
 
+export { loadFixtures };
 export default getConnection;

@@ -18,7 +18,6 @@ interface Props {
 }
 
 const Accordion: React.SFC<Props> = (props) => {
-  console.warn({ props }, 'Accordion');
   const defaultChevron = props.isOpen ?
     <i className="fa fa-chevron-right"/> :
     <i className="fa fa-chevron-down"/>;
