@@ -7,7 +7,7 @@ import { State } from '../../reducer';
 
 /**
  * Container around search input.
- * 
+ *
  * Currently singleton state
  */
 const mapStateToProps = (state: State) => {
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
       return dispatch(
         search(e.target.value),
       );
-    } 
+    }
   };
 };
 

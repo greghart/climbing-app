@@ -12,6 +12,9 @@ const getArea = (id: string | number, options: Options = { includeComments: fals
   .leftJoinAndSelect('areas.boulders', 'boulders')
   .leftJoinAndSelect('areas.crag', 'crag')
   .leftJoinAndSelect('areas.coordinates', 'coordinates')
+  .orderBy({
+    'coordinates.id': 'ASC'
+  })
   if (options.includeComments) {
     query.leftJoinAndSelect('areas.commentable', 'commentable');
     query.leftJoinAndSelect('commentable.comments', 'comments');

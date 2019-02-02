@@ -17,4 +17,11 @@ export default class AreaCoordinate extends Coordinate {
   @ManyToOne(type => Area, area => area.coordinates, cascadeManyToOne)
   area: Area;
   // boulders?: Boulder[];
+
+  toJSON() {
+    return {
+      id: this.id,
+      ...super.toJSON()
+    }
+  }
 }

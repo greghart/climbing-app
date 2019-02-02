@@ -3,16 +3,17 @@
  * Top level view for Tracer component
  *
  * Tracer allows user to click points on a map and save them
- * Implemented as a layer which will need to be put in a LayerContainer
  */
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import * as Leaflet from 'leaflet';
 import { LatLngTuple } from 'leaflet';
 import { Map, Polyline, Polygon } from 'react-leaflet';
 import BestTileLayer from '../BestTileLayer';
+import FixedContainerOverMap from '../layouts/FixedContainerOverMap';
+import SearchGroup from '../search/SearchGroup';
 
 interface TracerProps {
-
+  bounds: Leaflet.LatLngBoundsExpression;
 }
 
 interface TracerState {
@@ -21,7 +22,7 @@ interface TracerState {
   current: LatLngTuple;
 }
 
-class Tracer extends React.Component<any, TracerState> {
+class Tracer extends React.Component<TracerProps, TracerState> {
 
   constructor(props) {
     super(props);
@@ -40,7 +41,7 @@ class Tracer extends React.Component<any, TracerState> {
     // If it's a "finishing" point, close the polyline and set it as a polygon
     if (
       this.state.points.length > 2 &&
-      e.latlng.distanceTo(this.state.points[0]) < 1
+      e.latlng.distanceTo(this.state.points[0]) < 2
     ) {
       this.setState({
         points: [],
@@ -110,51 +111,48 @@ class Tracer extends React.Component<any, TracerState> {
 
   render() {
     return (
-      <div onKeyPress={this.onControlKeys}>
-        <div className="row">
-          <div
-            className="col-md-10"
-            style={{
-              width: '80%',
-              height: '80vh'
-            }}
-          >
-            <Map
-              ref="map"
-              style={{
-                width: '100%',
-                height: '100%',
-                zIndex: 99999
-              }}
-              center={[32.85052, -117.02223]}
-              zoom={18}
-              minZoom={15}
-              maxZoom={22}
-              onclick={this.onClick}
-              onmousemove={this.onMouseMove}
-            >
-              <BestTileLayer />
-              {this.getPoints()}
-            </Map>
-          </div>
-          <div className="col-md-2">
-            <button
-              className="btn btn-success"
-              onClick={this.onSubmit}
-            >
-              Submit
-            </button>
-            <hr/>
-            <div className="row">
-              <div className="col-md-12">
-                {/* Controls */}
-                <button
-                  className="btn"
-                  onClick={this.undo}
-                />
+      /** Fill up whatever space is given to the tracer */
+      <div className="w-100 h-100" onKeyPress={this.onControlKeys}>
+        <FixedContainerOverMap>
+          <SearchGroup
+            onClickPrepend={() => {}}
+            groupClass="flex-no-wrap"
+            prepend={
+              <i className="fa fa-check" />
+            }
+            input={
+              <div className="input-group-append flex-grow-up bg-light align-items-center">
+                Trace the boulder's location
               </div>
-            </div>
-          </div>
+            }
+          />
+        </FixedContainerOverMap>
+        <div
+          className="row no-gutters"
+          style={{
+            width: '100%',
+            height: '100%'
+          }}
+        >
+          <Map
+            ref="map"
+            style={{
+              width: '100%',
+              height: '100%'
+            }}
+            center={[32.85052, -117.02223]}
+            bounds={this.props.bounds}
+            zoom={18}
+            minZoom={15}
+            maxZoom={22}
+            zoomControl={false}
+            onclick={this.onClick}
+            onmousemove={this.onMouseMove}
+          >
+            <BestTileLayer />
+            {this.props.children}
+            {this.getPoints()}
+          </Map>
         </div>
       </div>
     );

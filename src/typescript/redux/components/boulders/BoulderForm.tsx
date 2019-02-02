@@ -1,4 +1,5 @@
 import * as React from 'react';
+import sortBy = require('lodash/sortBy');
 import { InjectedFormProps, FormErrors, Field, WrappedFieldProps, Fields } from 'redux-form';
 import { OnSubmit } from '../types';
 import MyField from '../form/MyField';
@@ -48,6 +49,7 @@ const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
           <Fields
             names={['lat', 'lng']}
             component={LocationField}
+            positions={sortBy(props.area.coordinates, 'id')}
             bounds={props.area.coordinates.map((c) => {
               return [c.lat, c.lng] as [number, number];
             })}
