@@ -1,6 +1,8 @@
 import * as React from 'react';
 import classNames = require('classnames');
-import { WrappedFieldProps, Field } from 'redux-form';
+import { WrappedFieldProps, Field, BaseFieldProps, GenericFieldHTMLAttributes } from 'redux-form';
+import { ExtractProps } from '../../../externals';
+import omit = require('lodash/omit');
 
 /**
  * Climbing App field specific props
@@ -12,7 +14,7 @@ interface AppProps {
   help?: React.ReactNode;
   className?: string;
   // Input Component to use
-  inputComponent: 'input' | 'textarea' | 'select';
+  inputComponent?: 'input' | 'textarea' | 'select';
 }
 
 /**
@@ -32,7 +34,7 @@ function nextId() {
  *   * A possible error slot
  *   * A possible help slot
  */
-const RenderField: React.SFC<WrappedFieldProps & AppProps> = (props) => {
+const RenderField: React.ComponentType<WrappedFieldProps & AppProps> = (props) => {
   const { input, meta, label, inputComponent, help, ...rest } = props;
   const id = props.id || nextId();
   return (
@@ -67,17 +69,13 @@ RenderField.defaultProps = {
   inputComponent: 'input'
 }
 
-const fxn = (data) => {
-  return <RenderField {...data} />;
-}
-
-const MyField = (props) => {
+const MyField: React.ComponentType<GenericFieldHTMLAttributes | BaseFieldProps | AppProps> = (props) => {
   return (
-    <Field
-      {...props}
-      component={fxn}
+    <Field<GenericFieldHTMLAttributes | BaseFieldProps | AppProps>
+      component={RenderField}
+      {...omit(props, 'component')}
     />
   )
 }
-export { fxn, MyField }
-export default RenderField;
+
+export default MyField;

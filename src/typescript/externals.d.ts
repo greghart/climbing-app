@@ -19,7 +19,8 @@ declare interface Window {
 type UnPromisify<T> = T extends Promise<infer U> ? U : T;
 type UnPromisifiedObject<T> = {[k in keyof T]: UnPromisify<T[k]>}
 type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never;
-type ExtractProps<TComponentOrTProps> = TComponentOrTProps extends React.ComponentType<infer TProps> ? TProps : TComponentOrTProps;
+type ExtractProps<TComponentOrTProps> = TComponentOrTProps extends React.ComponentType<infer TProps> ? TProps :
+  TComponentOrTProps extends React.Component<infer TProps> ? TProps : TComponentOrTProps;
 
 /**
  * REDUX
@@ -41,6 +42,11 @@ declare module 'redux' {
 
 /**
  * MONKEY PATCHES AND FIXES
+ */
+
+/**
+ * @todo Monkeypatch redux-form to fix https://github.com/DefinitelyTyped/DefinitelyTyped/issues/31215
+ * @todo Monkeypatch typescript-rest to fix https://github.com/thiagobustamante/typescript-rest/issues/78
  */
 
 // Fix normalizr to reflect actual schema objects

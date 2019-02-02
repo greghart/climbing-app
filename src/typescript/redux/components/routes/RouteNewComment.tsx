@@ -4,7 +4,7 @@ import Comment from './Comment';
 import User from '../../../models/User';
 import CommentModel from '../../../models/Comment';
 import { OnSubmit } from '../types';
-import { fxn as renderField } from '../form/RenderField';
+import MyField from '../form/MyField';
 
 interface Props {
   user: User;
@@ -30,10 +30,9 @@ const RouteNewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) 
           {props.error &&
             <span className="text-danger">{props.error}</span>
           }
-          <Field
+          <MyField
             name="text"
-            component={renderField}
-            inputComponent="textarea"
+            inputComponent="textarea2"
             rows={3}
             onKeyPress={(e: KeyboardEvent) => {
               if (e.key == 'Enter' && e.metaKey) {

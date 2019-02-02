@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { InjectedFormProps, FormErrors } from 'redux-form';
 import { OnSubmit } from '../types';
-import { MyField } from '../form/RenderField';
+import MyField from '../form/MyField';
 import Cancel from '../form/Cancel';
 import Submit from '../form/Submit';
 

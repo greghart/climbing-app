@@ -20,7 +20,8 @@ const form = 'boulder-form-edit';
 
 const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
   return {
-    initialValues: ownProps.boulder
+    initialValues: ownProps.boulder,
+    area: ownProps.boulder.area
   };
 }
 

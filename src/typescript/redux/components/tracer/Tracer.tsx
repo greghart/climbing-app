@@ -111,7 +111,6 @@ class Tracer extends React.Component<any, TracerState> {
   render() {
     return (
       <div onKeyPress={this.onControlKeys}>
-        <h2>Tracer</h2>
         <div className="row">
           <div
             className="col-md-10"
@@ -124,7 +123,8 @@ class Tracer extends React.Component<any, TracerState> {
               ref="map"
               style={{
                 width: '100%',
-                height: '100%'
+                height: '100%',
+                zIndex: 99999
               }}
               center={[32.85052, -117.02223]}
               zoom={18}

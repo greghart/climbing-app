@@ -11,6 +11,7 @@ const getArea = (id: string | number, options: Options = { includeComments: fals
   .whereInIds(id)
   .leftJoinAndSelect('areas.boulders', 'boulders')
   .leftJoinAndSelect('areas.crag', 'crag')
+  .leftJoinAndSelect('areas.coordinates', 'coordinates')
   if (options.includeComments) {
     query.leftJoinAndSelect('areas.commentable', 'commentable');
     query.leftJoinAndSelect('commentable.comments', 'comments');
