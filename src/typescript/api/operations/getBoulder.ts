@@ -12,6 +12,7 @@ const getBoulder = (id: string | number, options: Options = { includeComments: f
   .leftJoinAndSelect('boulders.routes', 'routes')
   .leftJoinAndSelect('boulders.area', 'area')
   .leftJoinAndSelect('area.crag', 'crag')
+  .leftJoinAndSelect('area.coordinates', 'area_coordinates')
   if (options.includeComments) {
     query.leftJoinAndSelect('boulders.commentable', 'commentable');
     query.leftJoinAndSelect('commentable.comments', 'comments');

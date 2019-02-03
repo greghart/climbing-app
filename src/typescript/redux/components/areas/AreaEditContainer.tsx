@@ -2,6 +2,7 @@ import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { replace } from 'connected-react-router';
+import { pick } from 'lodash';
 import * as Bluebird from 'bluebird';
 
 import AreaForm, { Props as FormProps } from './AreaForm';
@@ -20,7 +21,8 @@ const form = 'area-form-edit';
 
 const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
   return {
-    initialValues: ownProps.area
+    initialValues: pick(ownProps.area, 'name', 'description', 'coordinates'),
+    __coordinates: ownProps.area.coordinates
   };
 }
 

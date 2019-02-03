@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { InjectedFormProps, FormErrors } from 'redux-form';
+import { InjectedFormProps, FormErrors, Fields } from 'redux-form';
 import { OnSubmit } from '../types';
 import MyField from '../form/MyField';
 import Cancel from '../form/Cancel';
 import Submit from '../form/Submit';
+import PolygonField from '../form/PolygonField';
 
 interface Props {
   onSubmit: OnSubmit<FormData, Props>;
   submitErrors: FormErrors<FormData, unknown>;
+  __coordinates: any;
 }
 
 interface FormData {
@@ -31,6 +33,21 @@ const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
         inputComponent="textarea"
         rows="3"
       />
+      <div className="form-group">
+        <label>
+          Location
+        </label>
+        <div>
+          <Fields
+            names={['coordinates', 'coordinates_is_updating']}
+            component={PolygonField}
+            bounds={props.__coordinates.map((c) => {
+              return [c.lat, c.lng] as [number, number];
+            })}
+            isUpdating={true}
+          />
+        </div>
+      </div>
       <div>
         <Submit {...props} />
         <Cancel {...props} />
