@@ -45,14 +45,14 @@ const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
           Location
         </label>
         <div>
-          {props.area.name} /
           <Fields
-            names={['lat', 'lng']}
+            names={['coordinate.lat', 'coordinate.lng', 'coord_is_updating']}
             component={LocationField}
             positions={sortBy(props.area.coordinates, 'id')}
             bounds={props.area.coordinates.map((c) => {
               return [c.lat, c.lng] as [number, number];
             })}
+            isUpdating={true}
           />
         </div>
       </div>
@@ -66,4 +66,3 @@ const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
 
 export default BoulderForm;
 export { FormData, Props };
-

@@ -1,9 +1,14 @@
 import { Column } from 'typeorm';
 import { LatLngLiteral, LatLngTuple } from 'leaflet';
+import isNumber = require('lodash/isNumber');
 
 interface Serialized {
   lat: number;
   lng: number;
+}
+
+function isValidCoordinate(coordinate: Partial<Coordinate>): coordinate is Coordinate {
+  return isNumber(coordinate.lat) && isNumber(coordinate.lng);
 }
 
 export default class Coordinate {
@@ -42,3 +47,5 @@ export default class Coordinate {
   }
 
 }
+
+export { isValidCoordinate };
