@@ -18,9 +18,11 @@ function parseCrag(obj: any) {
   crag.areas = obj.areas.map((thisArea: any) => {
     const area = new Area();
     area.name = thisArea.name;
-    area.coordinates = (thisArea.coordinates || []).map((thisCoordinate: [number, number]) => {
+    area.coordinates = (thisArea.coordinates || []).map((thisCoordinate: [number, number], i) => {
       const [lng, lat] = thisCoordinate;
-      return new AreaCoordinate(lat, lng);
+      const ac = new AreaCoordinate(lat, lng);
+      ac.order = i;
+      return ac;
     });
     area.boulders = (thisArea.boulders || []).map((thisBoulder: any) => {
       const boulder = new Boulder();

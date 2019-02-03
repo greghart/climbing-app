@@ -43,7 +43,12 @@ const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (pr
         bounds={coordinates.input.value}
         onCancel={() => isUpdating.input.onChange(false)}
         onSubmit={(newCoordinates) => {
-          coordinates.input.onChange(newCoordinates);
+          coordinates.input.onChange(newCoordinates.map((thisC, i) => {
+            return {
+              ...thisC,
+              order: i
+            }
+          }));
           isUpdating.input.onChange(false);
         }}
       >

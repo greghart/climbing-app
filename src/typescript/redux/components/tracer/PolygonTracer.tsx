@@ -54,7 +54,7 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
     // If it's a "finishing" point, 'close' the polyline and set it as a polygon
     if (
       this.state.points.length > 2 &&
-      e.latlng.distanceTo(this.state.points[0]) < 4
+      e.latlng.distanceTo(this.state.points[0]) < 16
     ) {
       const newPoints = this.state.points.concat([this.state.points[0]])
       this.setState({
