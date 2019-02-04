@@ -62,7 +62,7 @@ const declaredRoutes: DeclaredRoutes = {
     getCrags: true,
   },
   areas: {
-    getArea: (id, includeComments) => { return { id, includeComments } },
+    getAreas: (ids, includeComments) => { return { ids, includeComments } },
     addBoulder: (id, data) => { return { id, data } },
     updateArea: (id, data) => { return { id, data } }
   },

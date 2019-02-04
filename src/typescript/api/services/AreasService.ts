@@ -3,6 +3,7 @@ import * as Rest from 'typescript-rest';
 import { Tags, Response } from 'typescript-rest-swagger';
 
 import getArea from '../operations/getArea';
+import getAreas from '../operations/getAreas';
 import addBoulder from '../operations/addBoulder';
 import { BoulderPayload } from './BouldersService';
 import Area from '../../models/Area';
@@ -19,15 +20,20 @@ interface AreaPayload {
 @Rest.Path('/areas')
 export default class AreasService {
 
+  /**
+   *
+   * @param ids A CSV of ids to request
+   * @param includeComments Whether to include comments for each area
+   */
   @Rest.GET
-  @Rest.Path(':id')
+  @Rest.Path(':ids')
   @Tags('areas')
-  @Response<object>(200, 'Get data on a climbing area')
-  public async getArea(
-    @Rest.PathParam('id') id: string,
+  @Response<object>(200, 'Get data on a climbing area or areas')
+  public async getAreas(
+    @Rest.PathParam('ids') ids: string,
     @Rest.QueryParam('includeComments') includeComments?: boolean
   ) {
-    return getArea(id, { includeComments });
+    return getAreas(ids.split(','), { includeComments });
   }
 
   @Rest.POST

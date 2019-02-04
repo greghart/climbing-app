@@ -6,6 +6,7 @@ type SchemaDescription = {
   // False won't include the sub-schema at all
   // 'empty' will include it but without any sub-schemas of the sub-schema
   // an extra schmea description will recurse down
+  // Defaults to false
   [index: string]: true | false | 'empty' | SchemaDescription;
 }
 /**

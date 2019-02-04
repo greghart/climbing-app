@@ -10,6 +10,7 @@ import Coordinate from '../../../models/Coordinate';
 interface Props {
   area: Area;
   selected: boolean;
+  outline?: boolean;
   onClick?: () => any;
 }
 
@@ -36,19 +37,18 @@ const AreaMap: React.SFC<Props> = (props) => {
         onClick={props.onClick}
       >
       </Marker>
-      {props.selected ?
-      [
+      {(props.outline || props.selected) &&
         <AreaPolygon
           key={`area-${props.area.id}-polygon`}
           area={props.area}
           onclick={props.onClick}
-        />,
+        />
+      }
+      {props.selected &&
         <AreaBoulders
           key={`area-${props.area.id}-boulders`}
           area={props.area}
         />
-      ] :
-        <span />
       }
     </LayerGroup>
   );

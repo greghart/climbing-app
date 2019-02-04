@@ -15,7 +15,7 @@ import AnimationContext from '../animations/AnimationContext';
 interface Props {
   crag: Crag;
   selectedAreaId?: string;
-  onAreaClick: (area: Area) => any;
+  onAreaClick?: (area: Area) => any;
 }
 
 const CragMap: React.SFC<Props> = (props) => {
@@ -56,7 +56,7 @@ const CragMap: React.SFC<Props> = (props) => {
               areas={props.crag.areas}
               selectedAreaId={props.selectedAreaId}
               onAreaClick={(area) => {
-                props.onAreaClick(area);
+                props.onAreaClick && props.onAreaClick(area);
               }}
             />
             {/* <LayersControl position="topright">

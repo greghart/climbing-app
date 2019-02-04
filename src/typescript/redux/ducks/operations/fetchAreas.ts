@@ -3,10 +3,10 @@ import { SwaggerAPI } from './util/getSwagger';
 import { ArgumentTypes } from '../../../externals';
 import fetchEntities from './util/fetchEntities';
 
-export default fetchEntities<ArgumentTypes<SwaggerAPI['areas']['getArea']>>(
-  (swagger, id, includeComments) => {
-    return swagger.areas.getArea(id, includeComments);
+export default fetchEntities<ArgumentTypes<SwaggerAPI['areas']['getAreas']>>(
+  (swagger, ids, includeComments) => {
+    return swagger.areas.getAreas(ids, includeComments);
   },
-  AreaSchema
+  [AreaSchema]
 );
 

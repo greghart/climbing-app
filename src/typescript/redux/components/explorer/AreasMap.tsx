@@ -6,12 +6,13 @@ import Area from '../../../models/Area';
 
 interface Props {
   areas: Area[];
+  isLoading?: boolean;
   selectedAreaId?: string;
+  outlineAreas?: boolean;
   onAreaClick?: (area: Area) => any;
 }
 
 const AreasMap: React.SFC<Props> = (props) => {
-  console.log({ props }, 'AreasMap');
   return (
     <div>
       {props.areas.map((area) => {
@@ -20,7 +21,8 @@ const AreasMap: React.SFC<Props> = (props) => {
             key={area.name}
             area={area}
             selected={props.selectedAreaId === area.name}
-            onClick={partial(props.onAreaClick, area)}
+            outline={props.outlineAreas}
+            onClick={props.onAreaClick && partial(props.onAreaClick, area)}
           />
         );
       })}

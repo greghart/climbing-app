@@ -6,7 +6,7 @@ import { Location } from 'history';
 import AreaLayout from './AreaLayout';
 import { State, selectors } from '../../reducer';
 import { AreaSchema } from '../../normalizr';
-import fetchArea from '../../ducks/operations/fetchArea';
+import fetchAreas from '../../ducks/operations/fetchAreas';
 import Area from '../../../models/Area';
 import asyncComponent from '../../decorators/asyncComponent';
 import selectNormalizr from '../../util/selectNormalizr';
@@ -42,7 +42,7 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
     fetch: () => dispatch(
-      fetchArea('singleton-fetch')(ownProps.areaId)
+      fetchAreas('singleton-fetch')(ownProps.areaId)
     ),
   };
 };

@@ -13,7 +13,7 @@ import Area from '../../../models/Area';
 
 interface OwnProps {
   // Area to edit
-  area: Area,
+  area: Area
 }
 
 // Use one form for all routes -- for now we assume one at a time.
@@ -22,7 +22,7 @@ const form = 'area-form-edit';
 const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
   return {
     initialValues: pick(ownProps.area, 'name', 'description', 'coordinates'),
-    __coordinates: ownProps.area.coordinates
+    area: ownProps.area
   };
 }
 

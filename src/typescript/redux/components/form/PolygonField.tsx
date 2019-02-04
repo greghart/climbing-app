@@ -11,11 +11,15 @@ interface PolygonProps {
   // We will use the first name as the coordinates to polygon
   // The second name will be an updating flag
   names: [string, string];
+  // Other layers to include on the map
+  otherLayers?: React.ReactNode[];
 }
 
 const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (props) => {
   const coordinates = get(props, props.names[0]);
   const isUpdating = get(props, props.names[1]);
+
+  const sortedCoordinates = sortBy(coordinates.input.value, 'order');
 
   if (!isUpdating.input.value) {
     return (
@@ -23,8 +27,8 @@ const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (pr
         <div className="row">
           <div className="col-8">
             {/** TODO Handle new area as well */}
-            <BaseMap bounds={sortBy(coordinates.input.value, 'id')} style={{ paddingBottom: '50%' }}>
-              <MyPolygon positions={sortBy(coordinates.input.value, 'id')} />
+            <BaseMap bounds={sortedCoordinates} style={{ paddingBottom: '50%' }}>
+              <MyPolygon positions={sortedCoordinates} />
             </BaseMap>
           </div>
         </div>
@@ -52,6 +56,7 @@ const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (pr
           isUpdating.input.onChange(false);
         }}
       >
+        {props.otherLayers}
       </PolygonTracer>
     </div>
   );

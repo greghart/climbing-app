@@ -14,7 +14,7 @@ import getSwagger, { SwaggerAPI } from '../util/getSwagger';
  */
 function fetchEntities<ArgTypes extends any[]>(
   get: (swagger: SwaggerAPI, ...args: ArgTypes) => any,
-  schema: schema.Entity
+  schema: schema.Entity | [schema.Entity]
 ) {
   return scopeThunker<ArgTypes>(
     (scope, ...args) => {

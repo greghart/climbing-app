@@ -27,6 +27,7 @@ export default class AreaCoordinate extends Coordinate {
   toJSON() {
     return {
       id: this.id,
+      order: this.order,
       ...super.toJSON()
     }
   }

@@ -18,11 +18,11 @@ interface PolygonTracerProps {
   bounds: Leaflet.LatLngBoundsExpression;
   onCancel: React.MouseEventHandler;
   onSubmit?: (coordinates: Leaflet.LatLngLiteral[]) => unknown;
-  onPolygonComplete?: (coordinates: Coordinate[]) => unknown;
+  onPolygonComplete?: (coordinates: Leaflet.LatLngLiteral[]) => unknown;
 }
 
 interface PolygonTracerState {
-  points: Array<LatLngTuple>;
+  points: Array<Leaflet.LatLngLiteral>;
   current: LatLngTuple;
   isDone: boolean;
 }
@@ -37,14 +37,8 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
       isDone: false
     };
     this.onClick = this.onClick.bind(this);
-    this.getCoordinates = this.getCoordinates.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onControlKeys = this.onControlKeys.bind(this);
-  }
-
-  getCoordinates() {
-    return this.state.points.map(([lat, lng]) => new Coordinate(lat, lng));
-
   }
 
   onClick(e) {
@@ -62,7 +56,7 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
         isDone: true
       })
       if (this.props.onPolygonComplete) {
-        this.props.onPolygonComplete(newPoints.map(([lat, lng]) => new Coordinate(lat, lng)));
+        this.props.onPolygonComplete(newPoints);
       }
     } else {
       this.setState({
@@ -93,7 +87,7 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
 
   getPoints() {
     if (this.state.isDone) {
-      return <MyPolygon positions={this.state.points} />;
+      return <MyPolygon positions={this.state.points} fillColor="#00d103" dashArray="" />;
     }
     // Polyline of all existing points, plus one to cursor
     // We keep them separate for efficiency (base doesn't have to re-render )
