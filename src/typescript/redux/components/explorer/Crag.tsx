@@ -12,7 +12,8 @@ interface Props {
   cragId: string;
   selectedAreaId: string;
   onAreaClick: (area: Area) => any;
-  onOpenSidebar: () => any;
+  onCloseSidebar: () => unknown;
+  onOpenSidebar: () => unknown;
   onOpenSearch: () => any;
   fetchCrags: () => any;
   sidebarChildren: React.ReactNode;
@@ -43,7 +44,17 @@ const Crag: React.SFC<Props> = (props) => {
       }}
       sidebar={
         <div className="h-100 bg-light">
-          {props.crag.name}
+          <SearchGroup
+            onClickPrepend={props.onCloseSidebar}
+            prepend={
+              <i className="fa fa-bars" />
+            }
+            input={
+              <div className="input-group-append flex-grow-up align-items-center text-center">
+                {props.crag.name}
+              </div>
+            }
+          />
           {props.sidebarChildren}
         </div>
       }

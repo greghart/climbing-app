@@ -41,6 +41,12 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
     fetchCrags: () => dispatch(
       fetchCrags('singleton-fetch')()
     ),
+    onCloseSidebar: () => dispatch(
+      scopeObject(
+        setOpen(false),
+        'singleton-sidebar'
+      )
+    ),
     onOpenSidebar: () => dispatch(
       scopeObject(
         setOpen(true),

@@ -51,7 +51,9 @@ const MyPolygon: React.SFC<Props> = (props) => {
           ...directStyles
         });
       }}
-    />
+    >
+      {props.children}
+    </Polygon>
   );
 };
 

@@ -70,7 +70,7 @@ const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
                     ),
                     props.area.id.toString()
                   )}
-                  outlineAreas={true}
+                  showPolygons={true}
                 />
                 <AreaBoulders
                   area={props.area}

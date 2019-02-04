@@ -5,6 +5,7 @@ import * as classNames from 'classnames';
 import Area from '../../../models/Area';
 
 import partial = require('lodash/partial');
+import { Link } from 'react-router-dom';
 
 type Props = {
   areas: Area[];
@@ -31,9 +32,11 @@ const AreaListing: React.SFC<AreaListingProps> = (props) => {
           active: props.selected
         }
       )}
-      onClick={props.onClick}
     >
-      {props.area.name}
+      <span onClick={props.onClick}>{props.area.name}</span>
+      <Link to={`/areas/${props.area.id}`} className="ml-2">
+        <i className="fa fa-external-link-alt" />
+      </Link>
       {props.selected ?
         <ul className="list-group">
           {props.area.boulders.map((thisBoulder) => {
