@@ -6,12 +6,12 @@ import { RouteSchema } from '../../normalizr';
 import validate from './util/validate';
 import getSwagger from './util/getSwagger';
 import Route from '../../../models/Route';
-import RouteType from './types/route';
+import RouteCodec from '../../../codecs/RouteCodec';
 
 export default (route: Route, data: { [index: string]: any }) => {
   return (dispatch) => {
     console.warn(route, data, 'updateRoute');
-    return validate(data, RouteType)
+    return validate(data, RouteCodec)
     .then((routeData) => {
       return getSwagger().routes.updateRoute(
         route.id.toString(),

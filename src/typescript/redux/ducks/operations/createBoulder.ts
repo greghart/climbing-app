@@ -6,12 +6,12 @@ import { AreaSchema } from '../../normalizr';
 import validate from './util/validate';
 import getSwagger from './util/getSwagger';
 import Area from '../../../models/Area';
-import BoulderType from './types/boulder';
+import BoulderCodec from '../../../codecs/BoulderCodec';
 
 export default (area: Area, data: { [index: string]: any }) => {
   return (dispatch) => {
     console.warn(data, 'createBoulder');
-    return validate(data, BoulderType)
+    return validate(data, BoulderCodec)
     .then((boulderData) => {
       return getSwagger().areas.addBoulder(
         area.id.toString(),

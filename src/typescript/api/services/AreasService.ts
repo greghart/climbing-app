@@ -1,17 +1,20 @@
-import { getRepository } from 'typeorm';
 import * as Rest from 'typescript-rest';
+import * as t from 'io-ts';
 import { Tags, Response } from 'typescript-rest-swagger';
 
 import getArea from '../operations/getArea';
 import getAreas from '../operations/getAreas';
 import addBoulder from '../operations/addBoulder';
 import { BoulderPayload } from './BouldersService';
-import Area from '../../models/Area';
+import updateArea from '../operations/updateArea';
+import validate from '../util/validate';
+import AreaCodec from '../../codecs/AreaCodec';
 
-// Payload for area data
+// For swagger generation we need dead simple types
 interface AreaPayload {
   name: string;
   description?: string;
+  coordinates: Array<{ lat: number, lng: number, order: number }>;
 }
 
 /**
@@ -28,7 +31,7 @@ export default class AreasService {
   @Rest.GET
   @Rest.Path(':ids')
   @Tags('areas')
-  @Response<object>(200, 'Get data on a climbing area or areas')
+  @Response<AreaPayload[]>(200, 'Get data on a climbing area or areas')
   public async getAreas(
     @Rest.PathParam('ids') ids: string,
     @Rest.QueryParam('includeComments') includeComments?: boolean
@@ -64,12 +67,11 @@ export default class AreasService {
     data: AreaPayload
   ) {
     const area = await getArea(id);
-    Object.assign(area, data);
-    return getRepository(Area).save(area);
+    const payload = await validate(data, AreaCodec);
+    return updateArea(area, payload)
   }
 
 }
 
 type AreasServiceType = typeof AreasService.prototype;
 export { AreasServiceType };
-

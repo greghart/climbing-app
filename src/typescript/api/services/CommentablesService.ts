@@ -11,7 +11,7 @@ import getBoulder from '../operations/getBoulder';
 import getArea from '../operations/getArea';
 
 const getComments = (id: string | number) => {
-  return getRepository(Commentable).findOneById(id, {
+  return getRepository(Commentable).findOne(id, {
     relations: ['comments', 'comments.user']
   });
 };
@@ -89,8 +89,8 @@ export default class CommentablesService {
     @Rest.PathParam('id') id: string,
     data: { text: string }
   ) {
-    const user = await getRepository(User).findOneById(1)
-    const commentable = await getRepository(Commentable).findOneById(id);
+    const user = await getRepository(User).findOne(1)
+    const commentable = await getRepository(Commentable).findOne(id);
     return addCommentToCommentable(
       commentable,
       data.text,

@@ -2,8 +2,7 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  ManyToOne,
-  BeforeInsert
+  ManyToOne
 } from 'typeorm';
 
 import Commentable from './Commentable';

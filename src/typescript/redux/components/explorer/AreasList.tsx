@@ -63,6 +63,9 @@ const AreaOpenListing: React.SFC<any> = (props) => {
     <div className="card">
       <div className="card-header">
         {props.area.name}
+        <Link to={`/areas/${props.area.id}`} className="ml-2">
+          <i className="fa fa-external-link-alt" />
+        </Link>
       </div>
       <div className="card-body">
         <ul className="list-group">

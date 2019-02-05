@@ -51,7 +51,7 @@ export default compose<React.ComponentType, React.ComponentType, React.Component
   ),
   reduxForm({
     form,
-    enableReinitialize: true
+    enableReinitialize: false
   })
 )(AreaForm) as React.ComponentType<OwnProps>;
 

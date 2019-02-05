@@ -119,9 +119,7 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
             onClickPrepend={this.props.onCancel}
             groupClass="flex-no-wrap"
             prepend={
-              <a role="button" className="btn btn-link">
-                <i className="fa fa-times-circle" />
-              </a>
+              <i className="fa fa-times-circle" />
             }
             input={
               <div className="input-group-append flex-grow-up bg-light align-items-center text-center">

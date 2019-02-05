@@ -54,6 +54,10 @@ Server.buildServices(
   CommentablesService
 );
 
+router.use((err, req, res, next) => {
+  res.status(err.statusCode || 500).send(err.message);
+});
+
 router.use((req, res, next) => {
   res.status(404).send('API endpoint not found');
 });

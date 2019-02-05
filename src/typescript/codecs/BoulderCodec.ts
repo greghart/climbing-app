@@ -1,7 +1,7 @@
 import * as t from 'io-ts';
 import * as types from './util';
 
-const BoulderType = t.type({
+const BoulderCodec = t.type({
   name: types.minLength,
   description: t.union([
     t.null,
@@ -9,5 +9,5 @@ const BoulderType = t.type({
   ])
 });
 
-export default BoulderType;
+export default BoulderCodec;
 

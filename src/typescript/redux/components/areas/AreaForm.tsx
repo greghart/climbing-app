@@ -8,7 +8,7 @@ import { OnSubmit } from '../types';
 import MyField from '../form/MyField';
 import Cancel from '../form/Cancel';
 import Submit from '../form/Submit';
-import PolygonField from '../form/PolygonField';
+import PolygonField, { PolygonFieldProps } from '../form/PolygonField';
 import AreasMap from '../explorer/AreasMap';
 import AreaBoulders from '../explorer/AreaBoulders';
 import fetchCragContainer from '../crags/fetchCragContainer';
@@ -61,7 +61,7 @@ const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
           Location
         </label>
         <div>
-          <Fields
+          <Fields<PolygonFieldProps>
             names={['coordinates', 'coordinates_is_updating']}
             component={PolygonField}
             otherLayers={(sortedCoordinates) => (

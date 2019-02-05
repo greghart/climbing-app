@@ -7,6 +7,7 @@ import {
 
 import Route from './Route';
 import Grade from './Grade';
+import { cascadeOneToMany } from '../db/cascadeOptions';
 
 @Entity()
 export default class GradingSystem {
@@ -24,7 +25,7 @@ export default class GradingSystem {
   @OneToMany(
     type => Grade,
     grade => grade.gradingSystem,
-    { cascadeUpdate: true, cascadeInsert: true }
+    cascadeOneToMany
   )
   grades: Grade[];
 

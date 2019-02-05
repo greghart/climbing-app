@@ -23,6 +23,14 @@ module.exports = {
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin(),
+    // Direct typescript to a browser compatible
+    new webpack.NormalModuleReplacementPlugin(/typeorm$/, function (result) {
+      result.request = result.request.replace(/typeorm/, "typeorm/browser");
+    }),
+    new webpack.NormalModuleReplacementPlugin(/react-native-sqlite-storage$/, function (result) {
+      result.request = result.request.replace(/typeorm/, "typeorm/browser");
+    }),
+    // Provide globals we setup
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
       $: 'jquery',

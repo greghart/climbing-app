@@ -3,7 +3,7 @@ import range = require('lodash/range');
 import * as types from './util';
 
 const validGrades = range(16).map((i) => `V${i}`)
-const RouteType = t.type({
+const RouteCodec = t.type({
   name: types.minLength,
   description: types.minLength,
   gradeRaw: t.refinement(
@@ -23,4 +23,4 @@ const RouteType = t.type({
   ])
 });
 
-export default RouteType;
+export default RouteCodec;

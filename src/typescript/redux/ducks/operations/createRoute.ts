@@ -6,11 +6,11 @@ import { BoulderSchema } from '../../normalizr';
 import validate from './util/validate';
 import getSwagger from './util/getSwagger';
 import Boulder from '../../../models/Boulder';
-import RouteType from './types/route';
+import RouteCodec from '../../../codecs/RouteCodec';
 
 export default (boulder: Boulder, data: { [index: string]: any }) => {
   return (dispatch) => {
-    return validate(data, RouteType)
+    return validate(data, RouteCodec)
     .then((routeData) => {
       return getSwagger().boulders.addRoute(
         boulder.id.toString(),

@@ -36,6 +36,11 @@ const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (pr
           <small>
             Edit <i className="fa fa-edit ml-2"/>
           </small>
+          {coordinates.meta.touched && coordinates.meta.error && (
+            <div className="invalid-feedback">
+              {coordinates.meta.error}
+            </div>
+          )}
         </div>
       </div>
     );
@@ -62,4 +67,5 @@ const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (pr
   );
 };
 
+export { PolygonProps as PolygonFieldProps };
 export default PolygonField;
