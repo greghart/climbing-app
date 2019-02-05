@@ -5,7 +5,7 @@ import { push } from 'connected-react-router';
 
 import Crag from './Crag';
 import { State } from '../../reducer';
-import fetchCrags from '../../ducks/operations/fetchCrags';
+import fetchCrag from '../../ducks/operations/fetchCrag';
 import { CragSchema } from '../../normalizr';
 import Area from '../../../models/Area';
 import scopeObject from '../../ducks/util/scopeObject';
@@ -38,8 +38,8 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
     onAreaClick: (area: Area) => {
       return dispatch(push(`/explorer/${ownProps.cragId}/${area.name}`));
     },
-    fetchCrags: () => dispatch(
-      fetchCrags('singleton-fetch')()
+    fetchCrag: () => dispatch(
+      fetchCrag('singleton-fetch')([ownProps.cragId])
     ),
     onCloseSidebar: () => dispatch(
       scopeObject(
@@ -69,6 +69,7 @@ type Composed<C, StateProps, DispatchProps, OwnProps> =
   ConnectedComponentClass<C, Omit<GetProps<C>, keyof Shared<StateProps & DispatchProps, GetProps<C>>> & OwnProps>;
 
 // Compose confuses things -- here is an alternative syntax if we're interested.
+// @todo Refactor to asyncComponent
 export default compose(
   connect(
     mapStateToProps,
@@ -77,7 +78,7 @@ export default compose(
   withMountAction<GetProps<typeof Crag>>(
     (props) => {
       if (!hasDependants(props)) {
-        props.fetchCrags();
+        props.fetchCrag(props.cragId);
       }
     }
   ),
@@ -85,22 +86,3 @@ export default compose(
     (props) => !hasDependants(props)
   )
 )(Crag) as Composed<typeof Crag, Props, DispatchProps, OwnProps>;
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(
-//   withMountAction<GetProps<typeof Crag>>(
-//     (props) => {
-//       if (!hasDependants(props)) {
-//         props.fetchCrags();
-//       }
-//     }
-//   )(
-//     withLoader<GetProps<typeof Crag>>(
-//       (props) => {
-//         return !hasDependants(props)
-//       }
-//     )(Crag)
-//   )
-// )

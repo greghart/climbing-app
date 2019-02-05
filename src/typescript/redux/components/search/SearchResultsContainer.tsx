@@ -5,21 +5,18 @@ import { RouteConfigComponentProps } from 'react-router-config';
 
 import SearchResults from './SearchResults';
 import { State } from '../../reducer';
-import Area from '../../../models/Area';
-import Boulder from '../../../models/Boulder';
-import Route from '../../../models/Route';
 import { denormalize } from 'normalizr';
 import { CragSchema } from '../../normalizr';
 import withLoader from '../../decorators/withLoader';
 import withMountAction from '../../decorators/withMountAction';
-import fetchCrags from '../../ducks/operations/fetchCrags';
+import fetchCrag from '../../ducks/operations/fetchCrag';
 
 type OwnProps = RouteConfigComponentProps<{ crag: string }>;
 
 /**
  * Container around search results.
  */
-const mapStateToProps = (state: State, ownProps: RouteConfigComponentProps<{ crag: string }>) => {
+const mapStateToProps = (state: State, ownProps: OwnProps) => {
   console.warn({ ownProps }, 'SearchResultsContainer.mapStateToProps');
   return {
     search: state.search.search,
@@ -31,10 +28,10 @@ const mapStateToProps = (state: State, ownProps: RouteConfigComponentProps<{ cra
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
-    fetchCrags: () => dispatch(
-      fetchCrags('singleton-fetch')()
+    fetchCrag: () => dispatch(
+      fetchCrag('singleton-fetch')([ownProps.match.params.crag])
     ),
   };
 };
@@ -50,10 +47,7 @@ export default compose(
   ),
   withMountAction<Props & DispatchProps>(
     (props) => {
-      props.fetchCrags();
-      // if (!props.crag) {
-      //   props.fetchCrags();
-      // }
+      props.fetchCrag();
     }
   ),
   withLoader<Props>(

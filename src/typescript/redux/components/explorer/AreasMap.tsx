@@ -6,7 +6,6 @@ import Area from '../../../models/Area';
 
 interface Props {
   areas: Area[];
-  isLoading?: boolean;
   selectedAreaId?: string;
   // Whether to show all polygons. Note, we always show selected areas's polygon
   showPolygons?: boolean;
@@ -14,6 +13,7 @@ interface Props {
 }
 
 const AreasMap: React.SFC<Props> = (props) => {
+  console.warn(props, 'AreasMap');
   return (
     <div>
       {props.areas.map((area) => {

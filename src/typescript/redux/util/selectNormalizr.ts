@@ -9,6 +9,8 @@ type SchemaDescription = {
   // Defaults to false
   [index: string]: true | false | 'empty' | SchemaDescription;
 }
+export { SchemaDescription };
+
 /**
  * Trim given normalizr schema to just certain sub-schemas.
  *

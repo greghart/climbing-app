@@ -56,4 +56,8 @@ export default class Crag {
       }
     );
   }
+
+  // @todo See fetchCragContainer todo
+  _isLoaded?: boolean;
+
 }

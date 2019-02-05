@@ -1,19 +1,20 @@
 import * as React from 'react';
 import { InjectedFormProps, FormErrors, Fields } from 'redux-form';
-import map = require('lodash/map');
-import without = require('lodash/without');
+import reject = require('lodash/reject');
+import { Omit } from 'utility-types/dist/mapped-types';
 
 import Area from '../../../models/Area';
 import { OnSubmit } from '../types';
 import MyField from '../form/MyField';
 import Cancel from '../form/Cancel';
 import Submit from '../form/Submit';
-import fetchIdsContainer from './fetchIdsContainer';
 import PolygonField from '../form/PolygonField';
 import AreasMap from '../explorer/AreasMap';
 import AreaBoulders from '../explorer/AreaBoulders';
-import AreaPolygon from '../explorer/AreaPolygon';
+import fetchCragContainer from '../crags/fetchCragContainer';
+import Crag from '../../../models/Crag';
 import { ExtractProps } from '../../../externals';
+import MyPolygon from '../map/MyPolygon';
 
 interface Props {
   // Crag needed to constrain map bounds for example
@@ -27,7 +28,18 @@ interface FormData {
   description?: string
 }
 
-const ConnectAreasMap = fetchIdsContainer(AreasMap)
+/**
+ * When editing area polygon, we want to show crag areas except this one
+ */
+type OtherAreasMapProps = Omit<ExtractProps<typeof AreasMap>, 'areas'> & {
+  crag: Crag;
+  exceptAreaId: number;
+}
+const _OtherAreasMap: React.ComponentType<OtherAreasMapProps> = (props) => {
+  return <AreasMap {...props} areas={reject(props.crag.areas, (a) => a.id === props.exceptAreaId)} />;
+}
+const OtherAreasMap = fetchCragContainer(_OtherAreasMap)
+
 const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   return (
     <form onSubmit={props.handleSubmit} className="m-3">
@@ -52,31 +64,23 @@ const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
           <Fields
             names={['coordinates', 'coordinates_is_updating']}
             component={PolygonField}
-            bounds={props.area.coordinates.map((c) => {
-              return [c.lat, c.lng] as [number, number];
-            })}
-            otherLayers={
+            otherLayers={(sortedCoordinates) => (
               <React.Fragment>
-                <AreaPolygon
-                  area={props.area}
+                <MyPolygon
+                  positions={sortedCoordinates}
                   fillOpacity={0.1}
                   fillColor="#f41f5c"
                 />
-                <ConnectAreasMap
-                  areaIds={without(
-                    map(
-                      (props.area.crag.areas as any),
-                      (a) => a.toString()
-                    ),
-                    props.area.id.toString()
-                  )}
+                <OtherAreasMap
+                  cragId={props.area.crag.name}
+                  exceptAreaId={props.area.id}
                   showPolygons={true}
                 />
                 <AreaBoulders
                   area={props.area}
                 />
               </React.Fragment>
-            }
+            )}
           />
         </div>
       </div>

@@ -18,7 +18,7 @@ interface Props {
 }
 
 const AreaMap: React.SFC<Props> = (props) => {
-  if (props.area.coordinates.length === 0) {
+  if (!props.area.coordinates || props.area.coordinates.length === 0) {
     return <span />;
   }
   // We need the polygon to center tooltip, so we just hide it based on `polygon`

@@ -11,8 +11,8 @@ interface PolygonProps {
   // We will use the first name as the coordinates to polygon
   // The second name will be an updating flag
   names: [string, string];
-  // Other layers to include on the map
-  otherLayers?: React.ReactNode[];
+  // Other layers to include on the map -- takes form level coords as an argument
+  otherLayers?: (sortedCoordinates) => React.ReactNode;
 }
 
 const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (props) => {
@@ -56,7 +56,7 @@ const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (pr
           isUpdating.input.onChange(false);
         }}
       >
-        {props.otherLayers}
+        {props.otherLayers(sortedCoordinates)}
       </PolygonTracer>
     </div>
   );

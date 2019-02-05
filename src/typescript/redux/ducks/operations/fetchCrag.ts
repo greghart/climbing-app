@@ -6,15 +6,15 @@ import { CragSchema } from '../../normalizr';
 import getSwagger from './util/getSwagger';
 
 export default scopeThunker(
-  (options) => {
+  (scope, id) => {
     return (dispatch) => {
-      return getSwagger().crags.getCrags()
-      .then((crags) => {
+      return getSwagger().crags.getCrag(id)
+      .then((crag) => {
         return dispatch(
           receiveEntities(
             normalize(
-              crags,
-              [CragSchema]
+              crag,
+              CragSchema
             )
           )
         );

@@ -15,7 +15,7 @@ interface Props {
   onCloseSidebar: () => unknown;
   onOpenSidebar: () => unknown;
   onOpenSearch: () => any;
-  fetchCrags: () => any;
+  fetchCrag: (id: any) => unknown;
   sidebarChildren: React.ReactNode;
 }
 

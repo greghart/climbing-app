@@ -59,7 +59,7 @@ type DeclaredRoutes = {
 }
 const declaredRoutes: DeclaredRoutes = {
   crags: {
-    getCrags: true,
+    getCrag: (id) => { return { id } }
   },
   areas: {
     getAreas: (ids, includeComments) => { return { ids, includeComments } },
