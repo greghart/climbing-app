@@ -72,7 +72,7 @@ const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
                   fillColor="#f41f5c"
                 />
                 <OtherAreasMap
-                  cragId={props.area.crag.name}
+                  cragId={props.area.crag.id}
                   exceptAreaId={props.area.id}
                   showPolygons={true}
                 />

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteConfig } from 'react-router-config';
 
 // Explorer
-import CragRoute from './routes/CragRoute';
+import CragExplorerRoute from './routes/CragExplorerRoute';
 import AreasListRoute from './routes/AreasListRoute';
 import ContainerRoute from './routes/ContainerRoute';
 // Search
@@ -28,6 +28,7 @@ import AreaNewCommentContainer from './components/areas/AreaNewCommentContainer'
 import AreaNewBoulderContainer from './components/areas/AreaNewBoulderContainer';
 import AreaEditContainer from './components/areas/AreaEditContainer';
 import AreaLayoutOverview from './components/areas/AreaLayoutOverview';
+import CragRoute from './routes/CragRoute';
 
 export default function getRoutes(): (RouteConfig | any)[] {
   return [
@@ -40,7 +41,7 @@ export default function getRoutes(): (RouteConfig | any)[] {
         // Includes a sidebar list (for now -- TODO REMOVE)
         {
           path: '/explorer/:crag/:area?',
-          component: CragRoute,
+          component: CragExplorerRoute,
           key: 'explorer',
           routes: [
             {
@@ -59,6 +60,46 @@ export default function getRoutes(): (RouteConfig | any)[] {
         },
 
         // Show Pages
+        // Show a crag
+        {
+          path: '/crags/:crag',
+          component: CragRoute,
+          key: 'crag_show',
+          routes: [
+            // {
+            //   path: '/crags/:crag/comments',
+            //   exact: true,
+            //   component: CragCommentsContainer,
+            //   key: 'crag_comments'
+            // },
+            // {
+            //   path: '/crags/:crag/comments/new',
+            //   component: CragNewCommentContainer,
+            //   key: 'crag_comments_new'
+            // },
+            // {
+            //   path: '/crags/:crag/photos',
+            //   component: RouteLayoutPhotos,
+            //   key: 'crag_photos'
+            // },
+            // {
+            //   path: '/crags/:crag/areas/new',
+            //   component: CragNewAreaContainer,
+            //   key: 'crag_areas_new'
+            // },
+            // {
+            //   path: '/crag/:crag/edit',
+            //   component: CragEditContainer,
+            //   key: 'crag_edit'
+            // },
+            // // Default is overview
+            // {
+            //   path: '/crags/:crag/(overview)?',
+            //   component: CragLayoutOverview,
+            //   key: 'crag_overview'
+            // }
+          ]
+        },
         // Show an area
         {
           path: '/areas/:area',

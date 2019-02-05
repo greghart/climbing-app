@@ -21,7 +21,7 @@ const AreasMap: React.SFC<Props> = (props) => {
           <AreaMap
             key={area.name}
             area={area}
-            polygon={props.showPolygons || props.selectedAreaId === area.name}
+            polygon={props.showPolygons || props.selectedAreaId === area.id.toString()}
             onClick={props.onAreaClick && partial(props.onAreaClick, area)}
           />
         );

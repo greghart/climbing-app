@@ -35,22 +35,24 @@ const ShowBreadcrumbs: React.SFC<Props> = (props) => {
         }
         {/* {`${props.route.boulder.area.crag.name} / ${props.route.boulder.area.name} / ${props.route.boulder.name} / ${props.route.name}`} */}
       </a>
-      <div className="dropdown-menu" aria-labelledby="breadcrumbsLink">
-        {props.links.map((thisLink, i) => {
-          if (!thisLink.to) {
-            return(
-              <a key={thisLink.to || i} className="dropdown-item">
+      {props.links.length > 0 &&
+        <div className="dropdown-menu" aria-labelledby="breadcrumbsLink">
+          {props.links.map((thisLink, i) => {
+            if (!thisLink.to) {
+              return(
+                <a key={thisLink.to || i} className="dropdown-item">
+                  {thisLink.content}
+                </a>
+              );
+            }
+            return (
+              <Link key={thisLink.to} to={thisLink.to} className="dropdown-item">
                 {thisLink.content}
-              </a>
+              </Link>
             );
-          }
-          return (
-            <Link key={thisLink.to} to={thisLink.to} className="dropdown-item">
-              {thisLink.content}
-            </Link>
-          );
-        })}
-      </div>
+          })}
+        </div>
+      }
 
     </div>
   )

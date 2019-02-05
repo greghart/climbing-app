@@ -14,7 +14,7 @@ const RouteLayout: React.SFC<Props> = (props) => {
       {...props}
       headerProps={{
         title: <RouteBreadcrumbs route={props.route} />,
-        linkTo: `/explorer/${props.route.boulder.area.crag.name}/${props.route.boulder.area.name}`
+        linkTo: `/explorer/${props.route.boulder.area.crag.id}/${props.route.boulder.area.id}`
       }}
       tabsProps={{
         routeBase: 'routes',

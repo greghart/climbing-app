@@ -37,23 +37,6 @@ const AreaListing: React.SFC<AreaListingProps> = (props) => {
       <Link to={`/areas/${props.area.id}`} className="ml-2">
         <i className="fa fa-external-link-alt" />
       </Link>
-      {props.selected ?
-        <ul className="list-group">
-          {props.area.boulders.map((thisBoulder) => {
-            return (
-              <button
-                role="button"
-                key={thisBoulder.id}
-                className="list-group-item, list-group-item-action"
-                onClick={props.onClick}
-              >
-                {thisBoulder.name}
-              </button>
-            );
-          })}
-        </ul>
-        : <span />
-      }
     </button>
   );
 };
@@ -77,6 +60,9 @@ const AreaOpenListing: React.SFC<any> = (props) => {
                 className="list-group-item list-group-item-action"
               >
                 {thisBoulder.name}
+                <Link to={`/boulders/${thisBoulder.id}`} className="ml-2">
+                  <i className="fa fa-external-link-alt" />
+                </Link>
               </button>
             );
           })}
@@ -97,7 +83,7 @@ const AreasList: React.SFC<Props> = (props) => {
               key={`area-${thisArea.name}`}
               onClick={partial(props.onAreaClick, thisArea)}
               area={thisArea}
-              selected={props.selectedAreaId === thisArea.name}
+              selected={props.selectedAreaId === thisArea.id.toString()}
             />
           );
         })}

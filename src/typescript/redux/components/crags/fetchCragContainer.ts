@@ -15,13 +15,14 @@ import { Omit } from 'utility-types/dist/mapped-types';
  * Decorator to fetch needed data for a crag
  */
 
+type Id = number | string;
 interface OwnProps {
   // Id or name
-  cragId: string
+  cragId: Id
 };
 
 const selectProps = (state: State, props: OwnProps) => props.cragId
-const selectCrag = (entities: State['entities'], cragId: string) => denormalize(
+const selectCrag = (entities: State['entities'], cragId: Id) => denormalize(
   cragId,
   selectNormalizr(
     CragSchema,
@@ -30,7 +31,7 @@ const selectCrag = (entities: State['entities'], cragId: string) => denormalize(
   entities
 )
 
-const getCrag = createSelector<State, OwnProps, any, string, Crag>(
+const getCrag = createSelector<State, OwnProps, any, Id, Crag>(
   selectors.selectEntities,
   selectProps,
   selectCrag
@@ -41,10 +42,10 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
   // @todo Need to add "managed" loading state
   // It's no longer enough to check what data exists, since we may have some areas but not others,
   // and we can't know. Currently we use a flag from the direct operation we want, but that is hacky
-  const isLoading = !crag._isLoaded;
+  const isLoaded = crag && crag._isLoaded;
   return {
     crag,
-    isLoading
+    isLoading: !isLoaded
   }
 };
 

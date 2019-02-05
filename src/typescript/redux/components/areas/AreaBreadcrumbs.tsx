@@ -12,7 +12,7 @@ const AreaBreadcrumbs: React.SFC<Props> = (props) => {
     <ShowBreadcrumbs
       title={props.area.name}
       links={[
-        { content: props.area.crag.name },
+        { content: props.area.crag.name, to: `/crags/${props.area.crag.id}` },
         { content: props.area.name },
       ]}
     />

@@ -1,11 +1,14 @@
-import Crag from '../../models/Crag';
 import { getRepository } from 'typeorm';
+import Crag from '../../models/Crag';
 
 const getCrags = (id: number | string) => {
   // Crag IDs for client can also be name
   return getRepository(Crag)
   .findOne({
-    where: { name: id },
+    where: [
+      { name: id },
+      { id }
+    ],
     relations: ['areas', 'areas.boulders', 'areas.coordinates', 'areas.boulders.routes']
   })
   .then((crag) => {

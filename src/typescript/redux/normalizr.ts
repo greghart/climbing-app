@@ -5,9 +5,7 @@
  */
 import { schema } from 'normalizr';
 
-export const CragSchema = new schema.Entity('crags', undefined, {
-  idAttribute: 'name'
-});
+export const CragSchema = new schema.Entity('crags');
 export const AreaSchema = new schema.Entity('areas');
 export const BoulderSchema = new schema.Entity('boulders');
 export const RouteSchema = new schema.Entity('routes');

@@ -1,21 +1,27 @@
 import * as React from 'react';
 import SFC = React.SFC;
-import { RouteConfigComponentProps, renderRoutes } from "react-router-config";
-import CragContainer from "../components/explorer/CragContainer";
+import { RouteConfigComponentProps } from "react-router-config";
+
+import CragLayout from '../components/crags/CragLayout';
+import fetchCragContainer from '../components/crags/fetchCragContainer';
+
+const CragLayoutContainer = fetchCragContainer(CragLayout);
 
 interface CragParams {
   crag: string;
-  area?: string;
 }
+
 const CragRoute: SFC<RouteConfigComponentProps<CragParams>> = (props) => {
-  console.warn(props, 'CragRoute');
   return (
-    <CragContainer
+    <CragLayoutContainer
       cragId={props.match.params.crag}
-      area={props.match.params.area}
-      sidebarChildren={renderRoutes(props.route.routes)}
+      routerConfig={props.route}
+      routerLocation={props.location}
     />
   );
 };
 
 export default CragRoute;
+
+
+

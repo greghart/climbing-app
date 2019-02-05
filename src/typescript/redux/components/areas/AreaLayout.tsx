@@ -15,7 +15,7 @@ const AreaLayout: React.SFC<Props> = (props) => {
       {...props}
       headerProps={{
         title: <AreaBreadcrumbs area={props.area} />,
-        linkTo: `/explorer/${props.area.crag.name}/${props.area.name}`
+        linkTo: `/explorer/${props.area.crag.id}/${props.area.id}`
       }}
       tabsProps={{
         routeBase: 'areas',

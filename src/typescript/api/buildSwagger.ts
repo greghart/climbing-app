@@ -11,9 +11,6 @@ const swaggerConfig = {
 
 /**
  * Builds a swagger file of our API
- *
- * @todo Note, currently the generator doesn't handle complicated TypeORM types, so
- * we need to manually annotate if we want proper return types.
  */
 export default () => {
   const metadata = new MetadataGenerator(swaggerConfig.entryFile).generate();

@@ -22,7 +22,7 @@ const CragMap: React.SFC<Props> = (props) => {
   let map: Map;
   const selectedArea = find(
     props.crag.areas,
-    (area) => area.name === props.selectedAreaId
+    (area) => area.id.toString() === props.selectedAreaId
   );
   return (
     <AnimationContext.Consumer>

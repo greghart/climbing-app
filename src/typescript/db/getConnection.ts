@@ -23,7 +23,6 @@ import CommentRepository from '../models/repositories/CommentRepository';
 pg.types.setTypeParser(1700, (v:any) => parseFloat(v));
 
 // Application level fixtures
-// @todo Refactor
 // @todo V-Grade
 const loadFixtures = async (connection: Connection) => {
   const vGrading = new GradingSystem();

@@ -48,7 +48,7 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   const params = ownProps.match.params;
   return {
     onAreaClick: (area: Area) => {
-      return dispatch(push(`/explorer/${params.crag}/${area.name}`));
+      return dispatch(push(`/explorer/${params.crag}/${area.id}`));
     }
   };
 };
