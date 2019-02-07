@@ -9,26 +9,31 @@ import ContainerRoute from './routes/ContainerRoute';
 import SearchLayout from './components/search/SearchLayout';
 // Area
 import AreaRoute from './routes/AreaRoute';
+import AreaCommentsContainer from './components/areas/AreaCommentsContainer';
+import AreaNewCommentContainer from './components/areas/AreaNewCommentContainer';
+import AreaNewBoulderContainer from './components/areas/AreaNewBoulderContainer';
+import AreaEditContainer from './components/areas/AreaEditContainer';
+import AreaLayoutOverview from './components/areas/AreaLayoutOverview';
 // Route
 import RouteRoute from './routes/RouteRoute';
 import RouteLayoutOverview from './components/routes/RouteLayoutOverview';
 import RouteLayoutPhotos from './components/routes/RouteLayoutPhotos';
 import RouteCommentsContainer from './components/routes/RouteCommentsContainer';
 import RouteNewCommentContainer from './components/routes/RouteNewCommentContainer';
+import RouteEditContainer from './components/routes/RouteEditContainer';
 // Boulder
 import BoulderRoute from './routes/BoulderRoute';
 import BoulderCommentsContainer from './components/boulders/BoulderCommentsContainer';
 import BoulderNewCommentContainer from './components/boulders/BoulderNewCommentContainer';
 import BoulderLayoutOverview from './components/boulders/BoulderLayoutOverview';
 import BoulderNewRouteContainer from './components/boulders/BoulderNewRouteContainer';
-import RouteEditContainer from './components/routes/RouteEditContainer';
 import BoulderEditContainer from './components/boulders/BoulderEditContainer';
-import AreaCommentsContainer from './components/areas/AreaCommentsContainer';
-import AreaNewCommentContainer from './components/areas/AreaNewCommentContainer';
-import AreaNewBoulderContainer from './components/areas/AreaNewBoulderContainer';
-import AreaEditContainer from './components/areas/AreaEditContainer';
-import AreaLayoutOverview from './components/areas/AreaLayoutOverview';
+// Crags
 import CragRoute from './routes/CragRoute';
+import CragCommentsContainer from './components/crags/CragCommentsContainer';
+import CragNewCommentContainer from './components/crags/CragNewCommentContainer';
+import CragEditContainer from './components/crags/CragEditContainer';
+import CragLayoutOverview from './components/crags/CragLayoutOverview';
 
 export default function getRoutes(): (RouteConfig | any)[] {
   return [
@@ -66,17 +71,17 @@ export default function getRoutes(): (RouteConfig | any)[] {
           component: CragRoute,
           key: 'crag_show',
           routes: [
-            // {
-            //   path: '/crags/:crag/comments',
-            //   exact: true,
-            //   component: CragCommentsContainer,
-            //   key: 'crag_comments'
-            // },
-            // {
-            //   path: '/crags/:crag/comments/new',
-            //   component: CragNewCommentContainer,
-            //   key: 'crag_comments_new'
-            // },
+            {
+              path: '/crags/:crag/comments',
+              exact: true,
+              component: CragCommentsContainer,
+              key: 'crag_comments'
+            },
+            {
+              path: '/crags/:crag/comments/new',
+              component: CragNewCommentContainer,
+              key: 'crag_comments_new'
+            },
             // {
             //   path: '/crags/:crag/photos',
             //   component: RouteLayoutPhotos,
@@ -87,17 +92,17 @@ export default function getRoutes(): (RouteConfig | any)[] {
             //   component: CragNewAreaContainer,
             //   key: 'crag_areas_new'
             // },
-            // {
-            //   path: '/crag/:crag/edit',
-            //   component: CragEditContainer,
-            //   key: 'crag_edit'
-            // },
-            // // Default is overview
-            // {
-            //   path: '/crags/:crag/(overview)?',
-            //   component: CragLayoutOverview,
-            //   key: 'crag_overview'
-            // }
+            {
+              path: '/crags/:crag/edit',
+              component: CragEditContainer,
+              key: 'crag_edit'
+            },
+            // Default is overview
+            {
+              path: '/crags/:crag/(overview)?',
+              component: CragLayoutOverview,
+              key: 'crag_overview'
+            }
           ]
         },
         // Show an area

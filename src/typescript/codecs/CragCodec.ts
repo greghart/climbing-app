@@ -1,7 +1,7 @@
 import * as t from 'io-ts';
 import * as types from './util';
 
-const BoulderCodec = t.type({
+const CragCodec = t.type({
   name: types.minLength,
   description: t.union([
     t.null,
@@ -9,4 +9,4 @@ const BoulderCodec = t.type({
   ])
 });
 
-export default BoulderCodec;
+export default CragCodec;

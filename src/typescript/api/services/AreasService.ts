@@ -73,5 +73,6 @@ export default class AreasService {
 
 }
 
+export { AreaPayload };
 type AreasServiceType = typeof AreasService.prototype;
 export { AreasServiceType };

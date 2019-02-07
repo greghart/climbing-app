@@ -9,6 +9,7 @@ import CommentRepository from '../../models/repositories/CommentRepository';
 import getRoute from '../operations/getRoute';
 import getBoulder from '../operations/getBoulder';
 import getArea from '../operations/getArea';
+import Crag from '../../models/Crag';
 
 const getComments = (id: string | number) => {
   return getRepository(Commentable).findOne(id, {
@@ -75,6 +76,22 @@ export default class CommentablesService {
     return getArea(id)
     .then((area) => {
       return getCustomRepository(CommentRepository).findOrGetCommentable(area)
+    })
+    .then((commentable) => {
+      return getComments(commentable.id);
+    });
+  }
+
+  @Rest.GET
+  @Rest.Path('/crag/:id')
+  @Swagger.Tags('commentables')
+  @Swagger.Response<object>(302, 'Get the commentable for a crag')
+  public async commentableForCrag(
+    @Rest.PathParam('id') id: string
+  ) {
+    return getRepository(Crag).findOne(id)
+    .then((crag) => {
+      return getCustomRepository(CommentRepository).findOrGetCommentable(crag)
     })
     .then((commentable) => {
       return getComments(commentable.id);

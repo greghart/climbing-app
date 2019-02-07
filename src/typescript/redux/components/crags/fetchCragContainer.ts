@@ -26,7 +26,7 @@ const selectCrag = (entities: State['entities'], cragId: Id) => denormalize(
   cragId,
   selectNormalizr(
     CragSchema,
-    { areas: true }
+    { areas: true, commentable: true }
   ),
   entities
 )

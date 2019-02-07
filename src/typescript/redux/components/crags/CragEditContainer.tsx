@@ -1,35 +1,42 @@
-import * as React from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { replace } from 'connected-react-router';
+import { pick } from 'lodash';
 import * as Bluebird from 'bluebird';
 
-import BoulderForm, { Props as FormProps } from '../boulders/BoulderForm';
+import CragForm, { Props as FormProps } from './CragForm';
 import { MapDispatchToPropsFunction } from '../types';
-import createBoulder from '../../ducks/operations/createBoulder';
+import updateCrag from '../../ducks/operations/updateCrag';
 import handleReduxFormErrors from '../util/handleReduxFormErrors';
-import { replace } from 'connected-react-router';
-import Area from '../../../models/Area';
+import Crag from '../../../models/Crag';
 
 interface OwnProps {
-  area: Area,
+  // Crag to edit
+  crag: Crag
 }
 
-// Use one form for all boulders -- for now we assume one at a time.
-const form = 'boulder-form';
+// Use one form for all routes -- for now we assume one at a time.
+const form = 'crag-form-edit';
+
+const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
+  return {
+    initialValues: pick(ownProps.crag, 'name', 'description'),
+    crag: ownProps.crag
+  };
+}
 
 const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
-      console.log(data, 'submitted')
       return Bluebird.resolve(
         dispatch(
-          createBoulder(ownProps.area, data)
+          updateCrag(ownProps.crag, data)
         )
       )
       .then(() => {
         return dispatch(
-          replace(`/areas/${ownProps.area.id}`)
+          replace(`/crags/${ownProps.crag.id}`)
         );
       })
       .catch(handleReduxFormErrors);
@@ -39,10 +46,11 @@ const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProp
 
 export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
   connect(
-    undefined,
+    mapStateToProps,
     mapDispatchToProps
   ),
   reduxForm({
-    form
+    form,
+    enableReinitialize: false
   })
-)(BoulderForm) as React.ComponentType<OwnProps>;
+)(CragForm) as React.ComponentType<OwnProps>;

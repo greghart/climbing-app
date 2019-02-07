@@ -1,63 +1,39 @@
 import * as Bluebird from 'bluebird';
-import { normalize } from 'normalizr';
+import { normalize, Schema } from 'normalizr';
 
-import { BoulderSchema, RouteSchema, AreaSchema } from '../../normalizr';
-import getSwagger from './util/getSwagger';
-import Area from '../../../models/Area';
-import Boulder from '../../../models/Boulder';
-import Route from '../../../models/Route';
+import { BoulderSchema, RouteSchema, AreaSchema, CragSchema } from '../../normalizr';
+import getSwagger, { SwaggerAPI } from './util/getSwagger';
+import Commentable from '../../../models/Commentable';
 import { receiveEntities } from '../entities';
 
-const fetchCommentableForArea = (area: Area) => {
-  return (dispatch) => {
-    Bluebird.resolve(getSwagger().commentables.commentableForArea(area.id.toString()))
-    .then((commentable) => {
-      area.commentable = commentable;
-      return dispatch(
-        receiveEntities(
-          normalize(
-            area,
-            AreaSchema
+type CommentableFetchers = 'commentableForCrag' | 'commentableForArea' | 'commentableForBoulder' | 'commentableForRoute';
+const getFetchCommentable = (schema: Schema, api: CommentableFetchers) => {
+  return (entity: { id: string | number, commentable?: Commentable }) => {
+    return (dispatch) => {
+      Bluebird.resolve(getSwagger().commentables[api](entity.id.toString()))
+      .then((commentable) => {
+        entity.commentable = commentable;
+        return dispatch(
+          receiveEntities(
+            normalize(
+              entity,
+              schema
+            )
           )
         )
-      )
-    })
+      })
+    }
   }
-}
+};
 
-const fetchCommentableForBoulder = (boulder: Boulder) => {
-  return (dispatch) => {
-    Bluebird.resolve(getSwagger().commentables.commentableForBoulder(boulder.id.toString()))
-    .then((commentable) => {
-      boulder.commentable = commentable;
-      return dispatch(
-        receiveEntities(
-          normalize(
-            boulder,
-            BoulderSchema
-          )
-        )
-      )
-    })
-  }
-}
+const fetchCommentableForCrag = getFetchCommentable(CragSchema, 'commentableForCrag');
+const fetchCommentableForArea = getFetchCommentable(AreaSchema, 'commentableForArea');
+const fetchCommentableForBoulder = getFetchCommentable(BoulderSchema, 'commentableForBoulder');
+const fetchCommentableForRoute = getFetchCommentable(RouteSchema, 'commentableForRoute');
 
-const fetchCommentableForRoute = (route: Route) => {
-  return (dispatch) => {
-    Bluebird.resolve(getSwagger().commentables.commentableForRoute(route.id.toString()))
-    .then((commentable) => {
-      console.log(commentable);
-      route.commentable = commentable;
-      return dispatch(
-        receiveEntities(
-          normalize(
-            route,
-            RouteSchema
-          )
-        )
-      )
-    })
-  }
-}
-
-export { fetchCommentableForArea, fetchCommentableForBoulder, fetchCommentableForRoute };
+export {
+  fetchCommentableForCrag,
+  fetchCommentableForArea,
+  fetchCommentableForBoulder,
+  fetchCommentableForRoute
+};

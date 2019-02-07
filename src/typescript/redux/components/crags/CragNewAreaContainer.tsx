@@ -4,19 +4,19 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import * as Bluebird from 'bluebird';
 
-import BoulderForm, { Props as FormProps } from '../boulders/BoulderForm';
+import AreaForm, { Props as FormProps } from '../areas/AreaForm';
 import { MapDispatchToPropsFunction } from '../types';
-import createBoulder from '../../ducks/operations/createBoulder';
+import createArea from '../../ducks/operations/createArea';
 import handleReduxFormErrors from '../util/handleReduxFormErrors';
 import { replace } from 'connected-react-router';
-import Area from '../../../models/Area';
+import Crag from '../../../models/Crag';
 
 interface OwnProps {
-  area: Area,
+  crag: Crag,
 }
 
-// Use one form for all boulders -- for now we assume one at a time.
-const form = 'boulder-form';
+// Use one form for all areas -- for now we assume one at a time.
+const form = 'area-form';
 
 const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
   return {
@@ -24,12 +24,12 @@ const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProp
       console.log(data, 'submitted')
       return Bluebird.resolve(
         dispatch(
-          createBoulder(ownProps.area, data)
+          createArea(ownProps.crag, data)
         )
       )
       .then(() => {
         return dispatch(
-          replace(`/areas/${ownProps.area.id}`)
+          replace(`/crags/${ownProps.crag.id}`)
         );
       })
       .catch(handleReduxFormErrors);
@@ -45,4 +45,5 @@ export default compose<React.ComponentType, React.ComponentType, React.Component
   reduxForm({
     form
   })
-)(BoulderForm) as React.ComponentType<OwnProps>;
+)(AreaForm) as React.ComponentType<OwnProps>;
+

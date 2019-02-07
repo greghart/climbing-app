@@ -2,13 +2,16 @@ import {
   Column,
   Entity,
   OneToMany,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn
 } from 'typeorm';
 import { LatLngLiteral, LatLngTuple } from 'leaflet';
 
 import Coordinate from './Coordinate';
 import Area from './Area';
 import { cascadeOneToMany } from '../db/cascadeOptions';
+import Commentable from './Commentable';
 
 @Entity()
 export default class Crag {
@@ -18,6 +21,9 @@ export default class Crag {
 
   @Column()
   name: string;
+
+  @Column({ nullable: true })
+  description?: string;
 
   @Column('decimal')
   centerLat: number;
@@ -56,6 +62,10 @@ export default class Crag {
       }
     );
   }
+
+  @OneToOne(type => Commentable, { nullable: true, onDelete: 'SET NULL' })
+  @JoinColumn()
+  commentable?: Commentable;
 
   // @todo See fetchCragContainer todo
   _isLoaded?: boolean;

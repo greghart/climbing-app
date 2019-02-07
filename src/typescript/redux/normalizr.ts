@@ -14,7 +14,8 @@ export const CommentSchema = new schema.Entity('comments');
 
 // Setup all associations
 CragSchema.define({
-  areas: [AreaSchema]
+  areas: [AreaSchema],
+  commentable: CommentableSchema
 });
 
 AreaSchema.define({

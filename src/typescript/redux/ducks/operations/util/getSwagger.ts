@@ -57,9 +57,11 @@ type DeclaredRoutes = {
     [Op in keyof SwaggerAPI[Service]]?: DeclaredRoute<Service, Op>
   }
 }
-const declaredRoutes: DeclaredRoutes = {
+const declaredRoutes = {
   crags: {
-    getCrag: (id) => { return { id } }
+    getCrag: (id) => { return { id } },
+    addArea: (id, data) => { return { id, data } },
+    updateCrag: (id, data) => { return { id, data } },
   },
   areas: {
     getAreas: (ids, includeComments) => { return { ids, includeComments } },
@@ -81,6 +83,7 @@ const declaredRoutes: DeclaredRoutes = {
     commentableForBoulder: (id) => { return { id } },
     commentableForRoute: (id) => { return { id } },
     commentableForArea: (id) => { return { id } },
+    commentableForCrag: (id) => { return { id } },
   }
 }
 
@@ -117,6 +120,11 @@ function setupService<
   );
 }
 
+type DeclaredAPI = {
+  [Service in keyof typeof declaredRoutes]: {
+    [Op in keyof (typeof declaredRoutes)[Service]]: Op extends keyof SwaggerAPI[Service] ? SwaggerAPI[Service][Op] : null
+  }
+}
 function setupAPI(routes: DeclaredRoutes) {
   return reduce(
     Object.keys(routes),
@@ -130,7 +138,7 @@ function setupAPI(routes: DeclaredRoutes) {
 
 const swagger = setupAPI(declaredRoutes);
 const getSwagger = () => {
-  return (swagger as SwaggerAPI);
+  return (swagger as DeclaredAPI);
 }
 
 export { SwaggerAPI };

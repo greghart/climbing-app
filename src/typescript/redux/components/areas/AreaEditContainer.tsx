@@ -54,4 +54,3 @@ export default compose<React.ComponentType, React.ComponentType, React.Component
     enableReinitialize: false
   })
 )(AreaForm) as React.ComponentType<OwnProps>;
-
