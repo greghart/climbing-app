@@ -13,6 +13,7 @@ import BouldersService from './services/BouldersService';
 import buildSwagger from './buildSwagger';
 import CommentablesService from './services/CommentablesService';
 import AreasService from './services/AreasService';
+import PolygonsService from './services/PolygonsService';
 
 const router = express.Router();
 
@@ -51,10 +52,13 @@ Server.buildServices(
   CragsService,
   AreasService,
   BouldersService,
-  CommentablesService
+  CommentablesService,
+  PolygonsService
 );
 
 router.use((err, req, res, next) => {
+  console.error(err.message)
+  console.error(err.stack)
   res.status(err.statusCode || 500).send(err.message);
 });
 

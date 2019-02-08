@@ -1,7 +1,6 @@
 import * as React from 'react';
 import classNames = require('classnames');
 import { WrappedFieldProps, Field, BaseFieldProps, GenericFieldHTMLAttributes } from 'redux-form';
-import { ExtractProps } from '../../../externals';
 import omit = require('lodash/omit');
 
 /**

@@ -13,7 +13,8 @@ const getAreas = (ids: Id | Array<Id>, options: Options = { includeComments: fal
   .whereInIds(ids)
   .leftJoinAndSelect('areas.boulders', 'boulders')
   .leftJoinAndSelect('areas.crag', 'crag')
-  .leftJoinAndSelect('areas.coordinates', 'coordinates')
+  .leftJoinAndSelect('areas.polygon', 'polygon')
+  .leftJoinAndSelect('polygon.coordinates', 'coordinates')
   .orderBy({
     'coordinates.order': 'ASC'
   })

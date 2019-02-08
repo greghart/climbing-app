@@ -1,13 +1,13 @@
 import * as React from 'react';
 import sortBy = require('lodash/sortBy');
-import { InjectedFormProps, FormErrors, Field, WrappedFieldProps, Fields } from 'redux-form';
+import { InjectedFormProps, FormErrors, Fields, Field } from 'redux-form';
 import { OnSubmit } from '../types';
 import MyField from '../form/MyField';
 import Cancel from '../form/Cancel';
 import Submit from '../form/Submit';
 import Area from '../../../models/Area';
 import LocationField from '../form/LocationField';
-import { ExtractProps } from '../../../externals';
+import ErrorWrapper from '../form/ErrorWrapper';
 
 interface Props {
   onSubmit: OnSubmit<FormData, Props>;
@@ -24,8 +24,9 @@ interface FormData {
 }
 
 const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
+  console.warn({ props }, 'BoulderForm');
   return (
-    <form onSubmit={props.handleSubmit} className="m-3">
+    <form onSubmit={props.handleSubmit(props.onSubmit)} className="m-3">
       {props.error &&
         <span className="text-danger">{props.error}</span>
       }
@@ -44,12 +45,16 @@ const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
         <label>
           Location
         </label>
+        <Field
+          name="coordinate"
+          component={ErrorWrapper}
+        />
         <div>
           <Fields
             names={['coordinate.lat', 'coordinate.lng', 'coord_is_updating']}
             component={LocationField}
-            positions={sortBy(props.area.coordinates, 'id')}
-            bounds={props.area.coordinates.map((c) => {
+            positions={sortBy(props.area.polygon.coordinates, 'order')}
+            bounds={props.area.polygon.coordinates.map((c) => {
               return [c.lat, c.lng] as [number, number];
             })}
             isUpdating={true}

@@ -21,7 +21,7 @@ const form = 'area-form-edit';
 
 const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
   return {
-    initialValues: pick(ownProps.area, 'name', 'description', 'coordinates'),
+    initialValues: pick(ownProps.area, 'name', 'description', 'polygon'),
     area: ownProps.area
   };
 }

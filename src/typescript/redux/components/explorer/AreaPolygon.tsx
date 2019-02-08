@@ -13,7 +13,7 @@ const AreaPolygon: React.SFC<Props> = (props) => {
   return (
     <MyPolygon
       {...props}
-      positions={sortBy(props.area.coordinates, 'order')}
+      positions={sortBy(props.area.polygon.coordinates, 'order')}
     />
   );
 };

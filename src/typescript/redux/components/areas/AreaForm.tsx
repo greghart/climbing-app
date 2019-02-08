@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as Leaflet from 'leaflet';
 import { InjectedFormProps, FormErrors, Fields } from 'redux-form';
 import reject = require('lodash/reject');
 import { Omit } from 'utility-types/dist/mapped-types';
@@ -42,7 +43,7 @@ const OtherAreasMap = fetchCragContainer(_OtherAreasMap)
 
 const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   return (
-    <form onSubmit={props.handleSubmit} className="m-3">
+    <form onSubmit={props.handleSubmit(props.onSubmit)} className="m-3">
       {props.error &&
         <span className="text-danger">{props.error}</span>
       }
@@ -62,8 +63,9 @@ const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
         </label>
         <div>
           <Fields<PolygonFieldProps>
-            names={['coordinates', 'coordinates_is_updating']}
+            names={['polygon', 'polygon_is_updating']}
             component={PolygonField}
+            bounds={Leaflet.latLng(props.area.crag.center).toBounds(2500)}
             otherLayers={(sortedCoordinates) => (
               <React.Fragment>
                 <MyPolygon

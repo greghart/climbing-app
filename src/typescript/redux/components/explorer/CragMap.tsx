@@ -40,7 +40,7 @@ const CragMap: React.SFC<Props> = (props) => {
             maxZoom={props.crag.maxZoom}
             zoomControl={false}
             bounds={selectedArea &&
-              selectedArea.coordinates.map((c) => {
+              selectedArea.polygon.coordinates.map((c) => {
                 return [c.lat, c.lng] as [number, number];
               })
             }

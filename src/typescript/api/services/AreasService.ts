@@ -14,7 +14,9 @@ import AreaCodec from '../../codecs/AreaCodec';
 interface AreaPayload {
   name: string;
   description?: string;
-  coordinates: Array<{ lat: number, lng: number, order: number }>;
+  polygon: {
+    coordinates: { lat: number, lng: number, order: number }[];
+  }
 }
 
 /**

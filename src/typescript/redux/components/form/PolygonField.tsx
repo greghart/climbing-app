@@ -13,13 +13,21 @@ interface PolygonProps {
   names: [string, string];
   // Other layers to include on the map -- takes form level coords as an argument
   otherLayers?: (sortedCoordinates) => React.ReactNode;
+  // PolygonField supports there not being coordinates already
+  // In this case, supplied bounds will be used for framing the tracer
+  bounds?: Leaflet.LatLngBoundsExpression;
 }
 
 const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (props) => {
-  const coordinates = get(props, props.names[0]);
+  const polygon = get(props, props.names[0]);
   const isUpdating = get(props, props.names[1]);
 
-  const sortedCoordinates = sortBy(coordinates.input.value, 'order');
+  const sortedCoordinates = sortBy(polygon.input.value.coordinates || [], 'order');
+  const boundsToUse = sortedCoordinates.length > 0 ? sortedCoordinates : props.bounds;
+  console.warn({
+    props,
+    sortedCoordinates
+  }, 'PolygonField');
 
   if (!isUpdating.input.value) {
     return (
@@ -27,7 +35,7 @@ const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (pr
         <div className="row">
           <div className="col-8">
             {/** TODO Handle new area as well */}
-            <BaseMap bounds={sortedCoordinates} style={{ paddingBottom: '50%' }}>
+            <BaseMap bounds={boundsToUse} style={{ paddingBottom: '50%' }}>
               <MyPolygon positions={sortedCoordinates} />
             </BaseMap>
           </div>
@@ -36,9 +44,9 @@ const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (pr
           <small>
             Edit <i className="fa fa-edit ml-2"/>
           </small>
-          {coordinates.meta.touched && coordinates.meta.error && (
+          {polygon.meta.touched && polygon.meta.error && (
             <div className="invalid-feedback">
-              {coordinates.meta.error}
+              {polygon.meta.error}
             </div>
           )}
         </div>
@@ -49,15 +57,16 @@ const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (pr
   return (
     <div className="fixed-container fullscreen">
       <PolygonTracer
-        bounds={coordinates.input.value}
+        bounds={boundsToUse}
         onCancel={() => isUpdating.input.onChange(false)}
         onSubmit={(newCoordinates) => {
-          coordinates.input.onChange(newCoordinates.map((thisC, i) => {
+          polygon.input.value.coordinates = newCoordinates.map((thisC, i) => {
             return {
               ...thisC,
               order: i
             }
-          }));
+          });
+          polygon.input.onChange(polygon.input.value);
           isUpdating.input.onChange(false);
         }}
       >

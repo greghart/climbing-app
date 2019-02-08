@@ -16,6 +16,7 @@ const validate = <A, O, I>(data: I, type: t.Type<A, O, I>): Promise<t.TypeOf<typ
     result.fold(
       (errors) => {
         // Defer rejection to workaround devtools catching this
+        console.error({ data, type }, 'API.validate')
         defer(
           () => reject(
             new BadRequestError(`Invalid payload given to API! ${PathReporter.report(result)}`)

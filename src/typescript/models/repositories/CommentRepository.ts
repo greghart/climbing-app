@@ -1,4 +1,4 @@
-import { EntityRepository, Repository, ObjectType } from "typeorm";
+import { EntityRepository, Repository } from "typeorm";
 import Comment from "../Comment";
 import Commentable from "../Commentable";
 import get = require("lodash/get");

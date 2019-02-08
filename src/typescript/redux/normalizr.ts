@@ -11,6 +11,7 @@ export const BoulderSchema = new schema.Entity('boulders');
 export const RouteSchema = new schema.Entity('routes');
 export const CommentableSchema = new schema.Entity('commentables');
 export const CommentSchema = new schema.Entity('comments');
+export const PolygonSchema = new schema.Entity('polygons');
 
 // Setup all associations
 CragSchema.define({
@@ -21,7 +22,8 @@ CragSchema.define({
 AreaSchema.define({
   crag: CragSchema,
   boulders: [BoulderSchema],
-  commentable: CommentableSchema
+  commentable: CommentableSchema,
+  polygon: PolygonSchema
 });
 
 BoulderSchema.define({

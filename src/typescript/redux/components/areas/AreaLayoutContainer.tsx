@@ -22,7 +22,7 @@ const selectArea = (entities, areaId) => denormalize(
   areaId,
   selectNormalizr(
     AreaSchema,
-    { crag: 'empty', boulders: 'empty', commentable: true }
+    { crag: 'empty', boulders: 'empty', commentable: true, polygon: true }
   ),
   entities
 )

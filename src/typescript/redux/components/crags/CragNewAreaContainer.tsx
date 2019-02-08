@@ -1,3 +1,4 @@
+import { pick } from 'lodash';
 import * as React from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
@@ -16,12 +17,25 @@ interface OwnProps {
 }
 
 // Use one form for all areas -- for now we assume one at a time.
-const form = 'area-form';
+const form = 'area-form-new';
+
+const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
+  return {
+    initialValues: {
+      polygon: {
+        coordinates: []
+      }
+    },
+    area: {
+      id: 'new',
+      crag: ownProps.crag
+    }
+  };
+}
 
 const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
-      console.log(data, 'submitted')
       return Bluebird.resolve(
         dispatch(
           createArea(ownProps.crag, data)
@@ -39,7 +53,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProp
 
 export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
   connect(
-    undefined,
+    mapStateToProps,
     mapDispatchToProps
   ),
   reduxForm({

@@ -34,6 +34,7 @@ import CragCommentsContainer from './components/crags/CragCommentsContainer';
 import CragNewCommentContainer from './components/crags/CragNewCommentContainer';
 import CragEditContainer from './components/crags/CragEditContainer';
 import CragLayoutOverview from './components/crags/CragLayoutOverview';
+import CragNewAreaContainer from './components/crags/CragNewAreaContainer';
 
 export default function getRoutes(): (RouteConfig | any)[] {
   return [
@@ -87,11 +88,11 @@ export default function getRoutes(): (RouteConfig | any)[] {
             //   component: RouteLayoutPhotos,
             //   key: 'crag_photos'
             // },
-            // {
-            //   path: '/crags/:crag/areas/new',
-            //   component: CragNewAreaContainer,
-            //   key: 'crag_areas_new'
-            // },
+            {
+              path: '/crags/:crag/areas/new',
+              component: CragNewAreaContainer,
+              key: 'crag_areas_new'
+            },
             {
               path: '/crags/:crag/edit',
               component: CragEditContainer,

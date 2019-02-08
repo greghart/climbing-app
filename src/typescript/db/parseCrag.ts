@@ -1,9 +1,10 @@
 import Crag from '../models/Crag';
 import Coordinate from '../models/Coordinate';
 import Area from '../models/Area';
-import AreaCoordinate from '../models/AreaCoordinate';
 import Boulder from '../models/Boulder';
 import Route from '../models/Route';
+import Polygon from '../models/Polygon';
+import PolygonCoordinate from '../models/PolygonCoordinate';
 
 function parseCrag(obj: any) {
   const crag = new Crag();
@@ -15,14 +16,16 @@ function parseCrag(obj: any) {
   crag.defaultZoom = obj.zoom;
   crag.minZoom = obj.minZoom;
   crag.maxZoom = obj.maxZoom;
-  crag.areas = obj.areas.map((thisArea: any) => {
+  crag.areas = obj.areas.map((thisArea: any, i) => {
     const area = new Area();
     area.name = thisArea.name;
-    area.coordinates = (thisArea.coordinates || []).map((thisCoordinate: [number, number], i) => {
+    area.polygon = new Polygon();
+    area.polygon.descriptor = `area-${i+1}`;
+    area.polygon.coordinates = (thisArea.coordinates || []).map((thisCoordinate: [number, number], i) => {
       const [lng, lat] = thisCoordinate;
-      const ac = new AreaCoordinate(lat, lng);
-      ac.order = i;
-      return ac;
+      const pc = new PolygonCoordinate(lat, lng);
+      pc.order = i;
+      return pc;
     });
     area.boulders = (thisArea.boulders || []).map((thisBoulder: any) => {
       const boulder = new Boulder();
