@@ -2,28 +2,29 @@ import * as t from 'io-ts';
 import { getConnection, getCustomRepository } from 'typeorm';
 import omit = require('lodash/omit');
 
-import Area from '../../models/Area';
-import AreaCodec from '../../codecs/AreaCodec';
+import Boulder from '../../models/Boulder';
+import BoulderCodec from '../../codecs/BoulderCodec';
 import setPolygon from './setPolygon';
 import PolygonRepository from '../../models/repositories/PolygonRepository';
 
-const updateArea = async (area: Area, data: t.TypeOf<typeof AreaCodec>) => {
+const updateBoulder = async (boulder: Boulder, data: t.TypeOf<typeof BoulderCodec>) => {
   return (await getConnection()).transaction((transactionalEntityManager) => {
     return Promise.resolve()
     // Setup polygon if necessary
     .then(async () => {
       if (data.polygon) {
         return setPolygon(
-          await getCustomRepository(PolygonRepository).findOrGetPolygon(area),
+          await getCustomRepository(PolygonRepository).findOrGetPolygon(boulder),
           data.polygon.coordinates
         );
       }
     })
     .then(() => {
-      Object.assign(area, omit(data, 'polygon'))
-      return transactionalEntityManager.save(area);
+      Object.assign(boulder, omit(data, 'polygon'))
+      return transactionalEntityManager.save(boulder);
     });
   });
 };
 
-export default updateArea;
+export default updateBoulder;
+

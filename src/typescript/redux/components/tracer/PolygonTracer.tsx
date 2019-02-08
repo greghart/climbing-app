@@ -15,6 +15,8 @@ import SearchGroup from '../search/SearchGroup';
 import MyPolygon from '../map/MyPolygon';
 
 interface PolygonTracerProps {
+  title?: string;
+  magnetSizeMeters?: number;
   bounds: Leaflet.LatLngBoundsExpression;
   onCancel: React.MouseEventHandler;
   onSubmit?: (coordinates: Leaflet.LatLngLiteral[]) => unknown;
@@ -28,6 +30,11 @@ interface PolygonTracerState {
 }
 
 class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerState> {
+
+  static defaultProps = {
+    title: 'Trace',
+    magnetSizeMeters: 16
+  };
 
   constructor(props) {
     super(props);
@@ -48,7 +55,7 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
     // If it's a "finishing" point, 'close' the polyline and set it as a polygon
     if (
       this.state.points.length > 2 &&
-      e.latlng.distanceTo(this.state.points[0]) < 16
+      e.latlng.distanceTo(this.state.points[0]) < this.props.magnetSizeMeters
     ) {
       const newPoints = this.state.points.concat([this.state.points[0]])
       this.setState({
@@ -124,7 +131,7 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
             input={
               <div className="input-group-append flex-grow-up bg-light align-items-center text-center">
                 <div className="col">
-                  Trace the area. (z to undo)
+                  {this.props.title} (z to undo)
                 </div>
                 <div className="col-auto">
                   {this.state.isDone &&
@@ -174,4 +181,3 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
 }
 
 export default PolygonTracer;
-

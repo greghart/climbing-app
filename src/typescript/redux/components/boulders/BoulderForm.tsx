@@ -1,13 +1,19 @@
 import * as React from 'react';
 import sortBy = require('lodash/sortBy');
-import { InjectedFormProps, FormErrors, Fields, Field } from 'redux-form';
+import get = require('lodash/get');
+import { InjectedFormProps, FormErrors, Fields, Field, WrappedFieldsProps } from 'redux-form';
+
 import { OnSubmit } from '../types';
+import Area from '../../../models/Area';
+import Coordinate, { isValidCoordinate } from '../../../models/Coordinate';
 import MyField from '../form/MyField';
 import Cancel from '../form/Cancel';
 import Submit from '../form/Submit';
-import Area from '../../../models/Area';
 import LocationField from '../form/LocationField';
 import ErrorWrapper from '../form/ErrorWrapper';
+import PolygonField, { PolygonFieldProps } from '../form/PolygonField';
+import MyPolygon from '../map/MyPolygon';
+import BoulderIcon from '../map/BoulderIcon';
 
 interface Props {
   onSubmit: OnSubmit<FormData, Props>;
@@ -23,6 +29,22 @@ interface FormData {
   lng?: number,
 }
 
+// Location icon that's connected to the form location.
+// Used in polygon map.
+const LocationIcon: React.ComponentType<WrappedFieldsProps> = (props) => {
+  const lat = get(props, props.names[0]);
+  const lng = get(props, props.names[1]);
+  const coordinate: Partial<Coordinate> = {
+    lat: lat.input.value as unknown as number,
+    lng: lng.input.value as unknown as number
+  };
+  return isValidCoordinate(coordinate) && (
+    <BoulderIcon
+      position={coordinate}
+    />
+  );
+
+}
 const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   console.warn({ props }, 'BoulderForm');
   return (
@@ -58,6 +80,39 @@ const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
               return [c.lat, c.lng] as [number, number];
             })}
             isUpdating={true}
+          />
+        </div>
+      </div>
+      <div className="form-group">
+        <label>
+          Polygon (Optional)
+        </label>
+        <div>
+          <Fields<PolygonFieldProps>
+            names={['polygon', 'polygon_is_updating']}
+            component={PolygonField}
+            bounds={props.area.polygon.coordinates.map<[number, number]>((c) => [c.lat, c.lng])}
+            otherLayers={(sortedCoordinates) => (
+              <React.Fragment>
+                <Fields
+                  names={['coordinate.lat', 'coordinate.lng']}
+                  component={LocationIcon}
+                />
+                <MyPolygon
+                  key='old-polygon'
+                  positions={sortedCoordinates}
+                  fillOpacity={0.1}
+                  fillColor="#f41f5c"
+                />
+                {props.area.polygon &&
+                  <MyPolygon positions={props.area.polygon.coordinates} />
+                }
+              </React.Fragment>
+            )}
+            tracerProps={{
+              title: 'Trace the boulder',
+              magnetSizeMeters: 1
+            }}
           />
         </div>
       </div>

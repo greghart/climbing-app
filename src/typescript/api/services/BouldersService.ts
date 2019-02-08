@@ -6,6 +6,9 @@ import getBoulder from '../operations/getBoulder';
 import addRoute from '../operations/addRoute';
 import { RoutePayload } from './RoutesService';
 import Boulder from '../../models/Boulder';
+import validate from '../util/validate';
+import BoulderCodec from '../../codecs/BoulderCodec';
+import updateBoulder from '../operations/updateBoulder';
 
 // Payload for boulder data
 interface BoulderPayload {
@@ -58,8 +61,8 @@ export default class BouldersService {
     data: BoulderPayload
   ) {
     const boulder = await getBoulder(id);
-    Object.assign(boulder, data);
-    return getRepository(Boulder).save(boulder);
+    const payload = await validate(data, BoulderCodec);
+    return updateBoulder(boulder, payload);
   }
 
 }

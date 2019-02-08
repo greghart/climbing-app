@@ -14,6 +14,7 @@ import Route from './Route';
 import { cascadeManyToOne, cascadeOneToMany } from '../db/cascadeOptions';
 import Commentable from './Commentable';
 import BoulderCoordinate from './BoulderCoordinate';
+import Polygon from './Polygon';
 
 @Entity()
 class Boulder {
@@ -30,9 +31,10 @@ class Boulder {
   @Column(type => Coordinate)
   coordinate: Coordinate;
 
-  // Polygon coordinates of an outline of a boulder
-  @OneToMany(type => BoulderCoordinate, coordinate => coordinate.boulder, cascadeOneToMany)
-  polygon: BoulderCoordinate[];
+  // Polygon coordinates of an outline of a boulder, optional
+  @OneToOne(type => Polygon, { nullable: true, onDelete: 'SET NULL', cascade: ['insert', 'update']})
+  @JoinColumn()
+  polygon?: Polygon;
 
   // Relationships
   @ManyToOne(type => Area, area => area.boulders, cascadeManyToOne)

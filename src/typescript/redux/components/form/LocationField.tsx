@@ -55,7 +55,7 @@ const LocationField: React.ComponentType<WrappedFieldsProps & LocationProps> = (
     );
   }
   return (
-    <div className="fixed-container fullscreen">
+    <div className="fixed-container fullscreen over-map bg-dark">
       <BoulderLocationSetterContainer
         bounds={props.bounds}
         defaultCurrent={isValidCoordinate(coordinate) ? coordinate : undefined}

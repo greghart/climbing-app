@@ -9,6 +9,7 @@ import addArea from '../operations/addArea';
 import validate from '../util/validate';
 import CragCodec from '../../codecs/CragCodec';
 import { AreaPayload } from './AreasService';
+import AreaCodec from '../../codecs/AreaCodec';
 
 // For swagger generation we need dead simple types
 interface CragPayload {
@@ -56,9 +57,10 @@ export default class CragsService {
     data: AreaPayload
   ) {
     const crag = await getRepository(Crag).findOne(id)
+    const payload = await validate(data, AreaCodec);
     return addArea(
       crag,
-      data
+      payload
     )
     .then((area) => {
       return new Rest.Return.NewResource(`/crags/${crag.id}`, area)

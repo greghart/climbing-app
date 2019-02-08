@@ -9,6 +9,7 @@ import { BoulderPayload } from './BouldersService';
 import updateArea from '../operations/updateArea';
 import validate from '../util/validate';
 import AreaCodec from '../../codecs/AreaCodec';
+import BoulderCodec from '../../codecs/BoulderCodec';
 
 // For swagger generation we need dead simple types
 interface AreaPayload {
@@ -51,9 +52,10 @@ export default class AreasService {
     data: BoulderPayload
   ) {
     const area = await getArea(id);
+    const payload = await validate(data, BoulderCodec);
     return addBoulder(
       area,
-      data
+      payload
     )
     .then((boulder) => {
       return new Rest.Return.NewResource(`/areas/${area.id}`, boulder)

@@ -1,4 +1,4 @@
-import { getRepository, FindOneOptions } from 'typeorm';
+import { getRepository } from 'typeorm';
 
 import Route from '../../models/Route';
 

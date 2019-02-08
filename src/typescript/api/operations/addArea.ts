@@ -1,14 +1,13 @@
-import { getRepository, getCustomRepository } from 'typeorm';
+import * as t from 'io-ts';
+import { getRepository } from 'typeorm';
 
 import Crag from '../../models/Crag';
 import Area from '../../models/Area';
-import { AreaPayload } from '../services/AreasService';
 import setPolygon from './setPolygon';
 import Polygon from '../../models/Polygon';
+import AreaCodec from '../../codecs/AreaCodec';
 
-const addArea = async (crag: Crag, data: AreaPayload) => {
-  // Catch-22 an area _needs_ a polygon, cause that's kind of the business case.
-  // But a polygon is not really able to be setup with the right descriptor
+const addArea = async (crag: Crag, data: t.TypeOf<typeof AreaCodec>) => {
   // Setup area
   const area = new Area();
   Object.assign(area, data);

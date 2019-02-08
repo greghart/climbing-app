@@ -14,11 +14,13 @@ const RouteCodec = t.type({
   // Optional
   length: t.union([
     t.undefined,
+    t.null,
     t.Integer,
     t.refinement(types.integerFromString, (h) => h <= 29029, 'length.tallerThanEverest'),
   ]),
   firstAscent: t.union([
     t.undefined,
+    t.null,
     types.minLength
   ])
 });

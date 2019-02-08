@@ -11,6 +11,8 @@ const getBoulder = (id: string | number, options: Options = { includeComments: f
   .whereInIds(id)
   .leftJoinAndSelect('boulders.routes', 'routes')
   .leftJoinAndSelect('boulders.area', 'area')
+  .leftJoinAndSelect('boulders.polygon', 'polygon')
+  .leftJoinAndSelect('polygon.coordinates', 'coordinates')
   .leftJoinAndSelect('area.crag', 'crag')
   .leftJoinAndSelect('area.polygon', 'area_polygon')
   .leftJoinAndSelect('area_polygon.coordinates', 'area_coordinates')

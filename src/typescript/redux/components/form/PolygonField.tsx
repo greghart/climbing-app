@@ -1,11 +1,13 @@
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
-import get = require('lodash/get');
 import { WrappedFieldsProps } from 'redux-form';
+import get = require('lodash/get');
+import sortBy = require('lodash/sortBy');
+
 import PolygonTracer from '../tracer/PolygonTracer';
 import BaseMap from '../map/BaseMap';
 import MyPolygon from '../map/MyPolygon';
-import sortBy = require('lodash/sortBy');
+import { ExtractProps } from '../../../externals';
 
 interface PolygonProps {
   // We will use the first name as the coordinates to polygon
@@ -16,6 +18,8 @@ interface PolygonProps {
   // PolygonField supports there not being coordinates already
   // In this case, supplied bounds will be used for framing the tracer
   bounds?: Leaflet.LatLngBoundsExpression;
+  // Additional props to tracer
+  tracerProps?: Partial<ExtractProps<typeof PolygonTracer>>;
 }
 
 const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (props) => {
@@ -55,18 +59,20 @@ const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (pr
   }
 
   return (
-    <div className="fixed-container fullscreen">
+    <div className="fixed-container fullscreen over-map bg-dark">
       <PolygonTracer
+        {...props.tracerProps}
         bounds={boundsToUse}
         onCancel={() => isUpdating.input.onChange(false)}
         onSubmit={(newCoordinates) => {
-          polygon.input.value.coordinates = newCoordinates.map((thisC, i) => {
+          const value = polygon.input.value || {};
+          value.coordinates = newCoordinates.map((thisC, i) => {
             return {
               ...thisC,
               order: i
             }
           });
-          polygon.input.onChange(polygon.input.value);
+          polygon.input.onChange(value);
           isUpdating.input.onChange(false);
         }}
       >
