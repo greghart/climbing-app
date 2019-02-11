@@ -12,6 +12,7 @@ import Boulder from './Boulder';
 import Grade from './Grade';
 import { cascadeManyToOne } from '../db/cascadeOptions';
 import Commentable from './Commentable';
+import Coordinate from './Coordinate';
 
 @Entity()
 export default class Route {
@@ -45,5 +46,9 @@ export default class Route {
   @OneToOne(type => Commentable, { nullable: true, onDelete: 'SET NULL' })
   @JoinColumn()
   commentable?: Commentable;
+
+  // Location of the route -- this will be setup on a polygon of the boulder
+  @Column(type => Coordinate)
+  coordinate?: Coordinate;
 
 }

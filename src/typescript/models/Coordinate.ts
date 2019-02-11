@@ -36,6 +36,9 @@ export default class Coordinate {
   }
 
   toJSON(): Serialized {
+    if (!(this.lat && this.lng)){
+      return null;
+    }
     return {
       lat: parseFloat(this.lat.toString()),
       lng: parseFloat(this.lng.toString())

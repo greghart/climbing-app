@@ -15,8 +15,8 @@ interface PointOnPolygonFieldProps {
   // We will use the first two names as lat and lng properties respectively
   // The third name should be a flag to say we're updating or not
   names: [string, string, string];
-  // Other layers to include on the map -- takes form level coords as an argument
-  otherLayers?: (sortedCoordinates) => React.ReactNode;
+  // Other layers to include on the map
+  otherLayers?: (coordinate: Partial<Coordinate>) => React.ReactNode;
   // Additional props to tracer
   pointOnPolygonProps?: Partial<ExtractProps<typeof PointOnPolygon>>;
 }
@@ -65,7 +65,9 @@ const PointOnPolygonField: React.ComponentType<WrappedFieldsProps & PointOnPolyg
           lng.input.onChange(newPosition[1]);
           isUpdating.input.onChange(false);
         }}
-      />
+      >
+        {props.otherLayers(coordinate)}
+      </PointOnPolygon>
     </div>
   )
 };

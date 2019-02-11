@@ -13,7 +13,6 @@ import Coordinate from './Coordinate';
 import Route from './Route';
 import { cascadeManyToOne, cascadeOneToMany } from '../db/cascadeOptions';
 import Commentable from './Commentable';
-import BoulderCoordinate from './BoulderCoordinate';
 import Polygon from './Polygon';
 
 @Entity()

@@ -22,6 +22,13 @@ const RouteCodec = t.type({
     t.undefined,
     t.null,
     types.minLength
+  ]),
+  coordinate: t.union([
+    t.undefined,
+    t.type({
+      lat: t.number,
+      lng: t.number
+    })
   ])
 });
 
