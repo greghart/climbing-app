@@ -1,13 +1,17 @@
 import * as React from 'react';
-import { InjectedFormProps, FormErrors } from 'redux-form';
+import { InjectedFormProps, FormErrors, Fields } from 'redux-form';
 import { OnSubmit } from '../types';
 import MyField from '../form/MyField';
 import Cancel from '../form/Cancel';
 import Submit from '../form/Submit';
+import Route from '../../../models/Route';
+import get = require('lodash/get');
+import PointOnPolygonField from '../form/PointOnPolygonField';
 
 interface Props {
   onSubmit: OnSubmit<FormData, Props>;
   submitErrors: FormErrors<FormData, unknown>;
+  myRoute: Route;
 }
 
 interface FormData {
@@ -19,6 +23,7 @@ interface FormData {
 }
 
 const RouteForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
+  console.warn(props, 'RouteForm');
   return (
     <form onSubmit={props.handleSubmit} className="m-3">
       {props.error &&
@@ -49,6 +54,16 @@ const RouteForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
         label="First Ascent"
         placeholder="John Long, 1979"
       />
+      <div className="form-group">
+        <label>
+          Location
+        </label>
+        <Fields
+          names={['coordinate.lat', 'coordinate.lng', 'isUpdating']}
+          component={PointOnPolygonField}
+          positions={get(props, 'myRoute.boulder.polygon.coordinates').map((c) => [c.lat, c.lng])}
+        />
+      </div>
       <div>
         <Submit {...props} />
         <Cancel {...props} />

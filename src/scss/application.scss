@@ -8,6 +8,10 @@ html, body {
   z-index: 9999;
 }
 
+.over-all {
+  z-index: 10000;
+}
+
 // Custom CSS to get under the leaflet zoom for other HTML
 .left-actions {
   position: fixed;

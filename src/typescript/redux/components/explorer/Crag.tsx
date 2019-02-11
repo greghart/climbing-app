@@ -36,7 +36,7 @@ const Crag: React.SFC<Props> = (props) => {
     <SidebarContainer
       styles={{
         sidebar: {
-          zIndex: '1000'
+          zIndex: '10000'
         },
         content: {
           overflowY: 'none'

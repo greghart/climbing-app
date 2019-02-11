@@ -10,6 +10,8 @@ const getRoute = (id: string | number, options: Options = { includeComments: fal
   const query = getRepository(Route).createQueryBuilder('routes')
   .whereInIds(id)
   .leftJoinAndSelect('routes.boulder', 'boulder')
+  .leftJoinAndSelect('boulder.polygon', 'polygon')
+  .leftJoinAndSelect('polygon.coordinates', 'coordinates')
   .leftJoinAndSelect('boulder.area', 'area')
   .leftJoinAndSelect('area.crag', 'crag')
   if (options.includeComments) {

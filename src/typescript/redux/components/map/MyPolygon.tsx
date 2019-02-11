@@ -34,7 +34,6 @@ const MyPolygon: React.SFC<Props> = (props) => {
   // Direct styles should override objects
   const directStyles = pick(props, 'weight', 'opacity', 'color', 'dashArray', 'fillOpacity', 'fillColor');
   let polygonRef: Polygon;
-  console.warn({ props }, 'MyPolygon')
   return (
     <Polygon
       {...normalStyle}

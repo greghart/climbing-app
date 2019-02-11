@@ -22,7 +22,7 @@ const selectRoute = (entities, routeId) => denormalize(
   routeId,
   selectNormalizr(
     RouteSchema,
-    { boulder: { area: { crag: 'empty' } }, commentable: true }
+    { boulder: { polygon: true, area: { crag: 'empty' } }, commentable: true }
   ),
   entities
 )
