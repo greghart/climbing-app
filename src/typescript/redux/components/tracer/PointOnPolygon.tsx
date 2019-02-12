@@ -53,6 +53,7 @@ function processLines(positions: LatLngTuple[]): LineData[] {
 interface PointOnPolygonProps {
   positions: LatLngTuple[];
   onSubmit?: (coordinates: LatLngTuple) => unknown;
+  onCancel?: React.MouseEventHandler;
 }
 
 interface PointOnPolygonState {
@@ -147,7 +148,7 @@ class PointOnPolygon extends React.Component<PointOnPolygonProps, PointOnPolygon
       <div className="w-100 h-100">
         <FixedContainerOverMap>
           <SearchGroup
-            onClickPrepend={() => {}}
+            onClickPrepend={this.props.onCancel}
             groupClass="flex-no-wrap"
             prepend={
               <i className="fa fa-times-circle" />
@@ -194,10 +195,10 @@ class PointOnPolygon extends React.Component<PointOnPolygonProps, PointOnPolygon
             onmousemove={this.onMouseMove}
           >
             <BestTileLayer />
-            {this.props.children}
             {this.renderGivenPolygon()}
             {this.renderCurrentPoint()}
             {this.renderConfirmed()}
+            {this.props.children}
           </Map>
         </div>
       </div>

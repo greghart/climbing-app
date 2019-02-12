@@ -17,7 +17,13 @@ function closestPoint(a, b, p) {
 
   const dot = aToP[0] * aToB[0] + aToP[1] * aToB[1];
 
-  const t = dot / aToB2;
+  const t = Math.max(
+    Math.min(
+      dot / aToB2,
+      1
+    ),
+    0
+  );
 
   return {
     x: a.x + aToB[0]*t,

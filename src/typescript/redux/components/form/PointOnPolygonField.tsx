@@ -65,6 +65,7 @@ const PointOnPolygonField: React.ComponentType<WrappedFieldsProps & PointOnPolyg
           lng.input.onChange(newPosition[1]);
           isUpdating.input.onChange(false);
         }}
+        onCancel={() => isUpdating.input.onChange(false)}
       >
         {props.otherLayers(coordinate)}
       </PointOnPolygon>
