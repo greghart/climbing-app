@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ThunkTypes from 'redux-thunk';
+import * as Leaflet from 'leaflet';
 
 /**
  * WINDOW
@@ -60,4 +61,26 @@ declare module 'normalizr' {
       } | [Entity]
     }
   }
+}
+
+// React-leaflet issues
+
+// Missing some types for Tooltip
+type MissingProps = {
+  onOpen?: () => unknown;
+  onClose?: () => unknown;
+}
+
+declare module "react-leaflet" {
+  export interface TooltipProps extends Leaflet.TooltipOptions {
+    children?: Children;
+    onOpen?(): unknown;
+    onClose?(): unknown;
+  }
+  // export class Tooltip<P extends TooltipProps = TooltipProps, E extends Leaflet.Tooltip = Leaflet.Tooltip> extends MapComponent<P, E> {
+  //     onTooltipOpen(arg: { tooltip: E }): void;
+  //     onTooltipClose(arg: { tooltip: E }): void;
+  //     renderTooltipContent(): void;
+  //     removeTooltipContent(): void;
+  // }
 }

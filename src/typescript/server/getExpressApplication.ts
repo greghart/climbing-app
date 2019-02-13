@@ -64,6 +64,9 @@ function getExpressApplication(_app?: Application) {
   app.use('/build', serveStatic(
     path.join(__dirname, '../../../build')
   ));
+  app.use('/static', serveStatic(
+    path.join(__dirname, '../../../static')
+  ));
 
   // Setup cookies and sessions
   app.use(

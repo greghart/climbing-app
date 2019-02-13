@@ -4,17 +4,29 @@ import InfoItem from '../show/InfoItem';
 import { Link } from 'react-router-dom';
 import ActionItem from '../show/ActionItem';
 import AccordionContainer from '../layouts/AccordionContainer';
+import BaseMap from '../map/BaseMap';
+import BoulderMap from './BoulderMap';
 
 interface Props {
   boulder: Boulder;
 }
 
 const BoulderLayoutOverview: React.SFC<Props> = (props) => {
+  console.warn({ props }, 'BoulderLayoutOverview');
   return (
     <React.Fragment>
       <p>
         {props.boulder.description}
       </p>
+      <div className="row">
+        {props.boulder.polygon &&
+          <div className="col">
+            <BaseMap boundsCoordinates={props.boulder.polygon.coordinates} style={{ paddingBottom: '50%' }}>
+              <BoulderMap boulder={props.boulder} />
+            </BaseMap>
+          </div>
+        }
+      </div>
       <ul className="list-group">
         <li className="list-group-item list-group-item-action">
           <Link to={`/boulders/${props.boulder.id}/routes/new`}>

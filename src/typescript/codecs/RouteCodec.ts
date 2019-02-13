@@ -2,7 +2,7 @@ import * as t from 'io-ts';
 import range = require('lodash/range');
 import * as types from './util';
 
-const validGrades = range(16).map((i) => `V${i}`)
+const validGrades = ['VB'].concat(range(16).map((i) => `V${i}`))
 const RouteCodec = t.type({
   name: types.minLength,
   description: types.minLength,

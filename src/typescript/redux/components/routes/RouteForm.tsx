@@ -1,19 +1,23 @@
 import * as React from 'react';
 import { InjectedFormProps, FormErrors, Fields } from 'redux-form';
+import get = require('lodash/get');
+
 import { OnSubmit } from '../types';
 import MyField from '../form/MyField';
 import Cancel from '../form/Cancel';
 import Submit from '../form/Submit';
 import Route from '../../../models/Route';
-import get = require('lodash/get');
+import Boulder from '../../../models/Boulder';
+import { isValidCoordinate } from '../../../models/Coordinate';
 import PointOnPolygonField from '../form/PointOnPolygonField';
 import ConfirmedCircle from '../tracer/ConfirmedCircle';
-import { isValidCoordinate } from '../../../models/Coordinate';
+import BoulderMap from '../boulders/BoulderMap';
 
 interface Props {
   onSubmit: OnSubmit<FormData, Props>;
   submitErrors: FormErrors<FormData, unknown>;
   myRoute: Route;
+  boulder: Boulder;
 }
 
 interface FormData {
@@ -63,15 +67,19 @@ const RouteForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
         <Fields<any>
           names={['coordinate.lat', 'coordinate.lng', 'isUpdating']}
           component={PointOnPolygonField}
-          positions={get(props, 'myRoute.boulder.polygon.coordinates').map((c) => [c.lat, c.lng])}
+          positions={get(props, 'boulder.polygon.coordinates', []).map((c) => [c.lat, c.lng])}
           otherLayers={(coordinate) => (
-            isValidCoordinate(coordinate) &&
-            <ConfirmedCircle
-              key='old-polygon'
-              center={[coordinate.lat, coordinate.lng]}
-              color="blue"
-              fillColor="blue"
-            />
+            <React.Fragment>
+              <BoulderMap boulder={props.boulder} />
+              {isValidCoordinate(coordinate) &&
+                <ConfirmedCircle
+                  key='old-polygon'
+                  center={[coordinate.lat, coordinate.lng]}
+                  color="blue"
+                  fillColor="blue"
+                />
+              }
+            </React.Fragment>
           )}
         />
       </div>

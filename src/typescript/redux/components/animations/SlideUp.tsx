@@ -5,7 +5,7 @@ import { TransitionProps } from 'react-transition-group/Transition';
 
 /**
  * Sliding upward animation.
- * 
+ *
  * On enter it slides up, on exit it just keeps on sliding up!
  */
 const SlideUp: React.SFC<Partial<TransitionProps>> = (props) => {
@@ -13,7 +13,7 @@ const SlideUp: React.SFC<Partial<TransitionProps>> = (props) => {
     props
   }, 'SlideUp');
   return (
-    <CSSTransition 
+    <CSSTransition
       {...props}
       classNames="slide-up"
       timeout={ANIMATION_LENGTH_MS}

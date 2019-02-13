@@ -21,7 +21,8 @@ const form = 'route-form-edit';
 
 const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
   return {
-    initialValues: ownProps.myRoute
+    initialValues: ownProps.myRoute,
+    boulder: ownProps.myRoute.boulder
   };
 }
 

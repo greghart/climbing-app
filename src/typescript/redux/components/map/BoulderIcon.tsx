@@ -2,9 +2,11 @@ import * as React from 'react';
 import { divIcon } from 'leaflet';
 import { Marker } from 'react-leaflet';
 
+const mapIcon = '<span><i class="fa fa-map-marked fa-lg text-light"/></span>';
+const boulderIcon = '<img class="my-icon" src="/static/ico/boulder_icon.svg.png"/>';
 const icon = divIcon({
   className: 'null',
-  html: '<span><i class="fa fa-map-marked fa-lg text-light"/></span>'
+  html: boulderIcon
 })
 
 const BoulderIcon = (props) => {
