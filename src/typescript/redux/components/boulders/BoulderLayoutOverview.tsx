@@ -21,7 +21,11 @@ const BoulderLayoutOverview: React.SFC<Props> = (props) => {
       <div className="row">
         {props.boulder.polygon &&
           <div className="col">
-            <BaseMap boundsCoordinates={props.boulder.polygon.coordinates} style={{ paddingBottom: '50%' }}>
+            <BaseMap
+              boundsCoordinates={props.boulder.polygon.coordinates}
+              style={{ paddingBottom: '50%' }}
+              scrollWheelZoom={false}
+            >
               <BoulderMap boulder={props.boulder} />
             </BaseMap>
           </div>
