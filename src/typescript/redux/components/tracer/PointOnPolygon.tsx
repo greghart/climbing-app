@@ -9,7 +9,7 @@ import { LatLngTuple, LatLng } from 'leaflet';
 import { Map, Circle } from 'react-leaflet';
 import minBy = require('lodash/minBy');
 
-import * as distances from '../../util/distances';
+import * as mapLib from '../../../util/mapLib';
 import BestTileLayer from '../BestTileLayer';
 import FixedContainerOverMap from '../layouts/FixedContainerOverMap';
 import SearchGroup from '../search/SearchGroup';
@@ -41,7 +41,7 @@ function processLines(positions: LatLngTuple[]): LineData[] {
         deltaX,
         deltaY,
         slope: deltaY / deltaX,
-        magnitude: distances.dist(
+        magnitude: mapLib.dist(
           { x: thisPosition[1], y: thisPosition[0] },
           { x: endPosition[1], y: endPosition[0] }
         )
@@ -98,14 +98,14 @@ class PointOnPolygon extends React.Component<PointOnPolygonProps, PointOnPolygon
     const closestLine = minBy(
       this.state.processedLines,
       (thisLine) => {
-        return distances.distToSegmentSquared(
+        return mapLib.distToSegmentSquared(
           { x: e.latlng.lng, y: e.latlng.lat },
           { x: thisLine.p1[1], y: thisLine.p1[0] },
           { x: thisLine.p2[1], y: thisLine.p2[0] }
         )
       }
     )
-    const closestPoint = distances.closestPoint(
+    const closestPoint = mapLib.closestPoint(
       { x: closestLine.p1[1], y: closestLine.p1[0] },
       { x: closestLine.p2[1], y: closestLine.p2[0] },
       { x: e.latlng.lng, y: e.latlng.lat },

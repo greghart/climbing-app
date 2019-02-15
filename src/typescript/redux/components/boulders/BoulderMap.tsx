@@ -16,7 +16,6 @@ import reduce = require('lodash/reduce');
 import Boulder from '../../../models/Boulder';
 import Route from '../../../models/Route';
 import MyPolygon from '../map/MyPolygon';
-import * as distances from '../../util/distances';
 import ConfirmedCircle from '../tracer/ConfirmedCircle';
 
 interface Props {

@@ -1,3 +1,9 @@
+/**
+ * Various functions for calculating map distances and angles
+ * @param x Vari
+ */
+
+// DISTANCE FUNCTIONS
 function sqr(x) { return x * x }
 function dist2(v, w) { return sqr(v.x - w.x) + sqr(v.y - w.y) }
 function dist(v, w) { return Math.sqrt(dist2(v, w)); }
@@ -29,16 +35,8 @@ function closestPoint(a, b, p) {
     x: a.x + aToB[0]*t,
     y: a.y + aToB[1]*t
   };
-  // const aTob = [b.x - a.x, b.y - a.y];
-  // const perpendicular = [ -aTob[1], aTob[0] ];
-  // const q = {
-  //   x: p.x + perpendicular[0],
-  //   y: p.y + perpendicular[1]
-  // };
-  // return {
-  //   x: ((a.x*b.y - a.y*b.x)*(p.x - q.x) - (a.x-b.x)*(p.x*q.y - p.y*q.x)) / ((a.x - b.x)*(p.y-q.y) - (a.y - b.y)*(p.y-q.y)),
-  //   y: ((a.x*b.y - a.y*b.x)*(p.y - q.y) - (a.y-b.y)*(p.x*q.y - p.y*q.x)) / ((a.x - b.x)*(p.y-q.y) - (a.y - b.y)*(p.y-q.y))
-  // };
 }
+
+// ANGLE FUNCTIONS
 
 export { sqr, dist, dist2, distToSegmentSquared, distToSegment, closestPoint }

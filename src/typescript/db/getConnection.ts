@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { createConnection, Connection } from 'typeorm';
 import * as pg from 'pg';
 import * as Bluebird from 'bluebird';
@@ -13,9 +12,6 @@ import GradingSystem from '../models/GradingSystem';
 import Grade from '../models/Grade';
 import parseCrag from './parseCrag';
 import User from '../models/User';
-import Route from '../models/Route';
-import Comment from '../models/Comment';
-import CommentRepository from '../models/repositories/CommentRepository';
 
 // Abstraction leak
 // Make sure underlying db driver parses our decimals as a float

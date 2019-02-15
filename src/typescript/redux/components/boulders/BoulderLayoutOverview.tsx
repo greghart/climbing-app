@@ -18,20 +18,23 @@ const BoulderLayoutOverview: React.SFC<Props> = (props) => {
       <p>
         {props.boulder.description}
       </p>
-      <div className="row">
-        {props.boulder.polygon &&
-          <div className="col">
+      <ul className="list-group">
+
+        {/* Boulder map */}
+        <li className="list-group-item p-1">
+          {props.boulder.polygon &&
             <BaseMap
+              className="rounded"
               boundsCoordinates={props.boulder.polygon.coordinates}
               style={{ paddingBottom: '50%' }}
               scrollWheelZoom={false}
             >
               <BoulderMap boulder={props.boulder} />
             </BaseMap>
-          </div>
-        }
-      </div>
-      <ul className="list-group">
+          }
+        </li>
+
+        {/* New route action */}
         <li className="list-group-item list-group-item-action">
           <Link to={`/boulders/${props.boulder.id}/routes/new`}>
             <ActionItem includeLi={false}>
@@ -39,6 +42,8 @@ const BoulderLayoutOverview: React.SFC<Props> = (props) => {
             </ActionItem>
           </Link>
         </li>
+
+        {/* Edit boulder action */}
         <li className="list-group-item list-group-item-action">
           <Link to={`/boulders/${props.boulder.id}/edit`}>
             <ActionItem includeLi={false}>
@@ -47,6 +52,7 @@ const BoulderLayoutOverview: React.SFC<Props> = (props) => {
           </Link>
         </li>
 
+        {/* Route list inline */}
         <li className="list-group-item list-group-item-action">
           <AccordionContainer
             scope="boulder-layout"

@@ -9,15 +9,16 @@ type ExpectedProps = (
   Partial<Pick<ExtractProps<typeof Circle>, KnownProps>>
 );
 
-const ConfirmedCircle: React.ComponentType<ExpectedProps> = (props) => {
+const ConfirmedCircle: React.ComponentType<ExpectedProps> = React.forwardRef<Circle, ExpectedProps>((props, ref) => {
   return (
     <Circle
+      ref={ref}
       color="red"
       fillColor="#f03"
       radius={.1}
       {...props}
     />
   );
-};
+});
 
 export default ConfirmedCircle;
