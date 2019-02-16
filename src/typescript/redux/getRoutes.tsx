@@ -28,6 +28,7 @@ import BoulderNewCommentContainer from './components/boulders/BoulderNewCommentC
 import BoulderLayoutOverview from './components/boulders/BoulderLayoutOverview';
 import BoulderNewRouteContainer from './components/boulders/BoulderNewRouteContainer';
 import BoulderEditContainer from './components/boulders/BoulderEditContainer';
+import BoulderSun from './components/boulders/BoulderSun';
 // Crags
 import CragRoute from './routes/CragRoute';
 import CragCommentsContainer from './components/crags/CragCommentsContainer';
@@ -177,6 +178,11 @@ export default function getRoutes(): (RouteConfig | any)[] {
               path: '/boulders/:boulder/edit',
               component: BoulderEditContainer,
               key: 'boulder_edit'
+            },
+            {
+              path: '/boulders/:boulder/sun',
+              component: BoulderSun,
+              key: 'boulder_sun'
             },
             // Default is overview
             {

@@ -20,6 +20,7 @@ import ConfirmedCircle from '../tracer/ConfirmedCircle';
 
 interface Props {
   boulder: Boulder;
+  showRoutes?: boolean;
   onClickRoute?: (route: Route) => unknown;
 }
 
@@ -88,13 +89,10 @@ const groupRoutesByCoordinate = (routes: Route[]) => {
   )
 }
 
-const BoulderMap: React.ComponentType<Props> = (props) => {
-  const grouped = groupRoutesByCoordinate(props.boulder.routes);
-  console.warn(grouped);
+const RouteMarkers: React.ComponentType<{ routes: Route[] }> = (props) => {
   return (
     <React.Fragment>
-      <MyPolygon positions={props.boulder.polygon.coordinates} />
-      {groupRoutesByCoordinate(props.boulder.routes).map((thisGroup) => (
+      {groupRoutesByCoordinate(props.routes).map((thisGroup) => (
         <ConfirmedCircle
           center={[thisGroup.coordinate.lat, thisGroup.coordinate.lng]}
           // radius={thisGroup.size}
@@ -116,8 +114,20 @@ const BoulderMap: React.ComponentType<Props> = (props) => {
     </React.Fragment>
   );
 }
+
+const BoulderMap: React.ComponentType<Props> = (props) => {
+  const grouped = groupRoutesByCoordinate(props.boulder.routes);
+  console.warn(grouped);
+  return (
+    <React.Fragment>
+      <MyPolygon positions={props.boulder.polygon.coordinates} />
+      {props.showRoutes && <RouteMarkers routes={props.boulder.routes} />}
+    </React.Fragment>
+  );
+}
 BoulderMap.defaultProps = {
-  onClickRoute: () => {}
+  onClickRoute: () => {},
+  showRoutes: true
 };
 
 const mapDispatchToProps = (dispatch) => {

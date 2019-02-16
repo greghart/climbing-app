@@ -51,7 +51,4 @@ export default class Route {
   @Column(type => Coordinate)
   coordinate?: Coordinate;
 
-  static getBoulderAngle(route: Route, boulder: Boulder) {
-  }
-
 }

@@ -4,8 +4,9 @@ import InfoItem from '../show/InfoItem';
 import { Link } from 'react-router-dom';
 import ActionItem from '../show/ActionItem';
 import AccordionContainer from '../layouts/AccordionContainer';
-import BaseMap from '../map/BaseMap';
 import BoulderMap from './BoulderMap';
+import InlineMap from '../map/InlineMap';
+import LinkItem from '../show/LinkItem';
 
 interface Props {
   boulder: Boulder;
@@ -23,14 +24,11 @@ const BoulderLayoutOverview: React.SFC<Props> = (props) => {
         {/* Boulder map */}
         <li className="list-group-item p-1">
           {props.boulder.polygon &&
-            <BaseMap
-              className="rounded"
+            <InlineMap
               boundsCoordinates={props.boulder.polygon.coordinates}
-              style={{ paddingBottom: '50%' }}
-              scrollWheelZoom={false}
             >
               <BoulderMap boulder={props.boulder} />
-            </BaseMap>
+            </InlineMap>
           }
         </li>
 
@@ -52,22 +50,47 @@ const BoulderLayoutOverview: React.SFC<Props> = (props) => {
           </Link>
         </li>
 
+        {/* Sun angles inline */}
+        <LinkItem
+          to={`/boulders/${props.boulder.id}/sun`}
+          icon="sun"
+        >
+          View sun angles on boulder
+        </LinkItem>
+
+        {/* <li className="list-group-item list-group-item-action">
+          <AccordionContainer
+            scope="boulder-sun"
+            header={(defaultChevron) => (
+              <InfoItem icon="sun" includeLi={false}>
+                Sun Angles on Boulder
+                <span className="ml-2">
+                  {defaultChevron}
+                </span>
+              </InfoItem>
+            )}
+            content={
+              <InlineMap
+                className="m-1"
+                boundsCoordinates={props.boulder.polygon.coordinates}
+              >
+                <BoulderMap boulder={props.boulder} />
+              </InlineMap>
+            }
+          />
+        </li> */}
+
         {/* Route list inline */}
         <li className="list-group-item list-group-item-action">
           <AccordionContainer
             scope="boulder-layout"
             header={(defaultChevron) => (
-              <div className="row align-items-center">
-                <div className="col-1">
-                  <i className="fa fa-list text-primary"/>
-                </div>
-                <div className="col">
-                  {props.boulder.routes.length} routes on this boulder
-                  <span className="ml-2">
-                    {defaultChevron}
-                  </span>
-                </div>
-              </div>
+              <InfoItem icon="list" includeLi={false}>
+                {props.boulder.routes.length} routes on this boulder
+                <span className="ml-2">
+                  {defaultChevron}
+                </span>
+              </InfoItem>
             )}
             content={
               <ul className="list-group list-group-flush mt-2">

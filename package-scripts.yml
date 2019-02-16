@@ -26,3 +26,6 @@ scripts:
   compile:
     description: Compile all typescript resources to javascript.
     script: tsc --project .
+  test:
+    description: Run test suite
+    script: mocha ./test/**/*.ts

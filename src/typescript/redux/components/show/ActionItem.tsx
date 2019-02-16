@@ -8,6 +8,8 @@ import * as React from 'react';
 interface ActionProps {
   icon?: string;
   children: React.ReactNode;
+  // Needed for links, because we want the whole thing to be clickable,
+  // but a <a> can't be a child of a <ul>
   includeLi?: boolean;
 }
 const ActionItem: React.FunctionComponent<ActionProps> = (props) => {
@@ -16,7 +18,7 @@ const ActionItem: React.FunctionComponent<ActionProps> = (props) => {
       <div className="col">
         {props.children}
       </div>
-      <div className="col-1">
+      <div className="col-2">
         <i className={`fa fa-${props.icon} text-primary`} />
       </div>
     </div>
