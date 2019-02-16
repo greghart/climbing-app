@@ -1,3 +1,5 @@
+import { LatLngTuple, LatLngExpression } from "leaflet";
+
 /**
  * Various functions for calculating map distances and angles
  */
@@ -97,5 +99,46 @@ function getAngle(a: Vector, b: Vector) {
     )
   )
 }
+function latLngToMeters(v: number) {
+  return v / 111111;
+}
+function _rotateVector(a: VectorTuple, radians: number): [number, number] {
+  return [
+    Math.cos(radians)*a[0] - Math.sin(radians)*a[1],
+    Math.sin(radians)*a[0] + Math.cos(radians)*a[1]
+  ];
+}
+function rotate(a: VectorLiteral, radians: number): VectorLiteral;
+function rotate(a: VectorTuple, radians: number): VectorTuple;
+function rotate(a: Vector, radians: number): Vector {
+  if (vectorIsTuple(a)) {
+    return _rotateVector(a, radians);
+  }
+  const newTuple = _rotateVector([a.x, a.y], radians);
+  return { x: newTuple[0], y: newTuple[1] };
+}
 
-export { sqr, dist, dist2, distToSegmentSquared, distToSegment, closestPoint, getAngle, measure };
+function latLngIsTuple(a: LatLngExpression): a is LatLngTuple {
+  return !!(a as LatLngTuple).length;
+}
+function normalizeLatLng(a: LatLngExpression): LatLngTuple {
+  if (latLngIsTuple(a)) {
+    return a;
+  }
+  return [a.lat, a.lng];
+}
+
+export {
+  sqr,
+  dist,
+  dist2,
+  distToSegmentSquared,
+  distToSegment,
+  closestPoint,
+  getAngle,
+  measure,
+  magnitude,
+  normalizeLatLng,
+  latLngToMeters,
+  rotate,
+};

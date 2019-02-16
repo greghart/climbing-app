@@ -1,11 +1,12 @@
 import * as React from 'react';
 import * as SunCalc from 'suncalc';
-import { Map } from 'react-leaflet';
+import { Polyline, Map } from 'react-leaflet';
 
 import Boulder from '../../../models/Boulder';
 import InlineMap from '../map/InlineMap';
 import BoulderMap from './BoulderMap';
-import { Polyline } from 'react-leaflet';
+import { latLngToMeters } from '../../../util/mapLib';
+import Arrow from '../map/Arrow';
 
 interface Props {
   boulder: Boulder;
@@ -20,8 +21,9 @@ const TimeEntry: React.SFC<{ label: string, value: Date }> = (props) => {
   )
 }
 const BoulderSun: React.SFC<Props> = (props) => {
+  const d = new Date()
   const sunPosition = SunCalc.getPosition(
-    new Date(),
+    d,
     props.boulder.coordinate.lat,
     props.boulder.coordinate.lng
   )
@@ -37,9 +39,13 @@ const BoulderSun: React.SFC<Props> = (props) => {
     Math.sin(sunPosition.azimuth + Math.PI),
   ]
   // Direct sun ray at a point a couple meters off boulder
+  const base: [number, number] = [
+    props.boulder.coordinate.lat + latLngToMeters(unitVector[0]) * 2,
+    props.boulder.coordinate.lng + latLngToMeters(unitVector[1]) * 2
+  ];
   const point: [number, number] = [
-    props.boulder.coordinate.lat + (unitVector[0] / 111111) * 6,
-    props.boulder.coordinate.lng + (unitVector[1] / 111111) * 6
+    base[0] + latLngToMeters(unitVector[0]) * 6,
+    base[1] + latLngToMeters(unitVector[1]) * 6
   ];
 
   // Need refs to do some x/y conversions
@@ -55,7 +61,7 @@ const BoulderSun: React.SFC<Props> = (props) => {
         <BoulderMap
           boulder={props.boulder}
         />
-        <Polyline
+        <Arrow
           key="sun-line"
           ref={(polyline) => {
             if (!mapRef.current) {
@@ -68,15 +74,9 @@ const BoulderSun: React.SFC<Props> = (props) => {
               size: mapRef.current.leafletElement.getSize(),
               unitVector
             })
-            // polyline.leafletElement.addLatLng(
-            //   mapRef.current.leafletElement.containerPointToLatLng([
-            //     unitVector[1] * 20 + mapRef.current.leafletElement.getSize().y / 2,
-            //     unitVector[0] * 20 + mapRef.current.leafletElement.getSize().x / 2,
-            //   ])
-            // )
           }}
           positions={[
-            [props.boulder.coordinate.lat, props.boulder.coordinate.lng],
+            base,
             point,
           ]}
           color="yellow"
