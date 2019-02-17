@@ -10,10 +10,10 @@ import * as mapLib from '../../../util/mapLib';
  * A polyline with a little arrow head at the top
  */
 type Props = Omit<ExtractProps<typeof Polyline>, 'positions'> & {
-  // // The angle of the arrow to make with the vector
-  // arrowAngle: number,
-  // // The size of the arrow in "meters"
-  // arrowSize: number,
+  // The angle of the arrow to make with the vector
+  arrowAngle?: number,
+  // The size of the arrow as a ratio of the last line
+  arrowSize?: number,
   positions: LatLngExpression[]
 };
 
@@ -36,22 +36,22 @@ const Arrow = React.forwardRef<Polyline, Props>((props) => {
     baseVector[1] / mapLib.magnitude(baseVector)
   ]
   // Now make two vectors -- one at a 45 degree angle from the unit vector
-  const vectorA = mapLib.rotate(unitVector, Math.PI / 4)
-  const vectorB = mapLib.rotate(unitVector, -Math.PI / 4)
+  const vectorA = mapLib.rotate(unitVector, mapLib.degreesToRads(props.arrowAngle))
+  const vectorB = mapLib.rotate(unitVector, mapLib.degreesToRads(-props.arrowAngle))
 
   // Convert to new polylines
   const lineA = [
     pointB,
     [
-      pointB[0] + vectorA[0] * baseMagnitude / 5,
-      pointB[1] + vectorA[1] * baseMagnitude / 5,
+      pointB[0] + vectorA[0] * baseMagnitude * props.arrowSize,
+      pointB[1] + vectorA[1] * baseMagnitude * props.arrowSize
     ]
   ] as LatLngExpression[];
   const lineB = [
     pointB,
     [
-      pointB[0] + vectorB[0] * baseMagnitude / 5,
-      pointB[1] + vectorB[1] * baseMagnitude / 5,
+      pointB[0] + vectorB[0] * baseMagnitude * props.arrowSize,
+      pointB[1] + vectorB[1] * baseMagnitude * props.arrowSize
     ]
   ] as LatLngExpression[];
 
@@ -77,5 +77,9 @@ const Arrow = React.forwardRef<Polyline, Props>((props) => {
     </React.Fragment>
   )
 });
+Arrow.defaultProps = {
+  arrowAngle: 45,
+  arrowSize: .2
+}
 
 export default Arrow;

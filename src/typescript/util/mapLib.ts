@@ -78,6 +78,9 @@ function magnitude(a: Vector) {
 function radsToDegrees(x: number) {
   return x * 180 / Math.PI;
 }
+function degreesToRads(x: number) {
+  return x * Math.PI / 180;
+}
 
 function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
   var R = 6378.137; // Radius of earth in KM
@@ -141,4 +144,6 @@ export {
   normalizeLatLng,
   latLngToMeters,
   rotate,
+  radsToDegrees,
+  degreesToRads
 };

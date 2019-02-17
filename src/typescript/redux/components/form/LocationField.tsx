@@ -3,11 +3,8 @@ import * as Leaflet from 'leaflet';
 import get = require('lodash/get');
 import { WrappedFieldsProps } from 'redux-form';
 
-import Tracer from '../tracer/Tracer';
 import MyPolygon from '../map/MyPolygon';
 import Coordinate, { isValidCoordinate } from '../../../models/Coordinate';
-import CoordinateMap from '../map/CoordinateMap';
-import BoulderLocationSetter from '../boulders/BoulderLocationSetter';
 import BoulderLocationSetterContainer from '../boulders/BoulderLocationSetterContainer';
 import BoulderIcon from '../map/BoulderIcon';
 import BaseMap from '../map/BaseMap';

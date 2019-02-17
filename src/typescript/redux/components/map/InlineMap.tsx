@@ -19,6 +19,7 @@ const InlineMap = React.forwardRef<Map, Props>((props, ref) => {
       className={classNames(props.className, 'rounded')}
       style={{ paddingBottom: '50%' }}
       scrollWheelZoom={false}
+      dragging={false}
     />
   );
 });
