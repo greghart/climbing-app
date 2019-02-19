@@ -1,11 +1,12 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Location } from 'history';
+import { Omit } from 'utility-types/dist/mapped-types';
 
 interface Props {
   // Highlight active tab based on current location
-  routerLocation: Location;
+  location: Location;
   // Root URL scheme (eg. 'route')
   routeBase: string;
   // Entity we're showing, just needs an id
@@ -25,7 +26,7 @@ interface Props {
  *  * assumes a common routing convention `/{entity}/{id}/{overview|comments|photos}?
  */
 const ShowLayoutTabs: React.SFC<Props> = (props) => {
-  const activeToken = props.routerLocation.pathname.split('/')[3]
+  const activeToken = props.location.pathname.split('/')[3]
   const activeLink: 'overview' | 'comments' | 'photos' = (
     activeToken == 'comments' ? 'comments':
       activeToken == 'photos' ? 'photos' :
@@ -68,5 +69,7 @@ const ShowLayoutTabs: React.SFC<Props> = (props) => {
   );
 };
 
-export { Props };
-export default ShowLayoutTabs;
+const ConnectedShowLayoutTabs = withRouter<Omit<Props, 'location'>>(ShowLayoutTabs);
+
+export default ConnectedShowLayoutTabs;
+export { ShowLayoutTabs as Pure };

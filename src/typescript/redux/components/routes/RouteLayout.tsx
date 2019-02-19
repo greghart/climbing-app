@@ -9,6 +9,7 @@ type Props = RouterProps & {
 }
 
 const RouteLayout: React.SFC<Props> = (props) => {
+  console.warn({ props });
   return (
     <ShowLayout
       {...props}

@@ -2,12 +2,12 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { renderRoutes, RouteConfig } from 'react-router-config';
 import { Location } from 'history';
-import { Omit } from 'utility-types';
 import omit = require('lodash/omit');
 
 import PageLayout from '../layouts/PageLayout';
-import ShowLayoutHeader, { Props as HeaderProps } from '../show/ShowLayoutHeader';
-import ShowLayoutTabs, { Props as TabsProps} from '../show/ShowLayoutTabs';
+import ShowLayoutHeader from '../show/ShowLayoutHeader';
+import ShowLayoutTabs from '../show/ShowLayoutTabs';
+import { ExtractProps } from '../../../externals';
 
 // Separate router props so we can have smarter consumers
 interface RouterProps {
@@ -16,8 +16,8 @@ interface RouterProps {
 };
 
 type Props = RouterProps & {
-  headerProps: HeaderProps;
-  tabsProps: Omit<TabsProps, 'routerLocation'>;
+  headerProps: ExtractProps<typeof ShowLayoutHeader>;
+  tabsProps: ExtractProps<typeof ShowLayoutTabs>;
   // Extra props to send to child routes
   extraProps?: any;
 }
@@ -40,7 +40,6 @@ const ShowLayout: React.SFC<Props> = (props) => {
       }
       content={
         <ShowLayoutTabs
-          routerLocation={props.routerLocation}
           {...props.tabsProps}
         >
           {renderRoutes(props.routerConfig.routes, props.extraProps)}
