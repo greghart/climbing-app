@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { connect, GetProps, InferableComponentEnhancerWithProps, Omit, Shared, ConnectedComponentClass } from 'react-redux';
+import { connect, GetProps, Omit, Shared, ConnectedComponentClass } from 'react-redux';
 import { denormalize } from 'normalizr';
 import { push } from 'connected-react-router';
 
@@ -21,15 +20,15 @@ interface OwnProps {
 
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
   console.warn({
-    ownProps
-  }, 'CragContainer.mapStateToProps');
+    ownProps,
+  },           'CragContainer.mapStateToProps');
   return {
     selectedAreaId: ownProps.area,
     crag: denormalize(
       ownProps.cragId,
       CragSchema,
-      state.entities
-    )
+      state.entities,
+    ),
   };
 };
 
@@ -39,19 +38,19 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
       return dispatch(push(`/explorer/${ownProps.cragId}/${area.id}`));
     },
     fetchCrag: () => dispatch(
-      fetchCrag('singleton-fetch')([ownProps.cragId])
+      fetchCrag('singleton-fetch')([ownProps.cragId]),
     ),
     onCloseSidebar: () => dispatch(
       scopeObject(
         setOpen(false),
-        'singleton-sidebar'
-      )
+        'singleton-sidebar',
+      ),
     ),
     onOpenSidebar: () => dispatch(
       scopeObject(
         setOpen(true),
-        'singleton-sidebar'
-      )
+        'singleton-sidebar',
+      ),
     ),
     onOpenSearch: () => {
       return dispatch(push(`/search/${ownProps.cragId}`));
@@ -63,26 +62,31 @@ type Props = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 
 const hasDependants = (props: Props) =>
-  (props.crag && props.crag.areas)
+  (props.crag && props.crag.areas);
 
-type Composed<C, StateProps, DispatchProps, OwnProps> =
-  ConnectedComponentClass<C, Omit<GetProps<C>, keyof Shared<StateProps & DispatchProps, GetProps<C>>> & OwnProps>;
+type Composed<C, StateProps, DispatchProps, OwnProps> = ConnectedComponentClass<
+  C,
+  Omit<
+    GetProps<C>,
+    keyof Shared<StateProps & DispatchProps, GetProps<C>>
+  > & OwnProps
+>;
 
 // Compose confuses things -- here is an alternative syntax if we're interested.
 // @todo Refactor to asyncComponent
 export default compose(
   connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
   ),
   withMountAction<GetProps<typeof Crag>>(
     (props) => {
       if (!hasDependants(props)) {
         props.fetchCrag(props.cragId);
       }
-    }
+    },
   ),
   withLoader<GetProps<typeof Crag>>(
-    (props) => !hasDependants(props)
-  )
+    (props) => !hasDependants(props),
+  ),
 )(Crag) as Composed<typeof Crag, Props, DispatchProps, OwnProps>;

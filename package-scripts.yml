@@ -23,6 +23,9 @@ scripts:
   lint:
     description: Lint the code, duh
     script: tslint --project . && echo 'Linted successfully'
+    fix:
+      description: Fix all the code problems we can
+      script: tslint --project . --fix && echo 'Lint problems fixed'
   compile:
     description: Compile all typescript resources to javascript.
     script: tsc --project .

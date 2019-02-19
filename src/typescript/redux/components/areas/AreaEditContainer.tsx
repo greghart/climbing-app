@@ -13,7 +13,7 @@ import Area from '../../../models/Area';
 
 interface OwnProps {
   // Area to edit
-  area: Area
+  area: Area;
 }
 
 // Use one form for all routes -- for now we assume one at a time.
@@ -22,35 +22,37 @@ const form = 'area-form-edit';
 const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
   return {
     initialValues: pick(ownProps.area, 'name', 'description', 'polygon'),
-    area: ownProps.area
+    area: ownProps.area,
   };
-}
+};
 
-const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
+const mapDispatchToProps: MapDispatchToPropsFunction<
+  Partial<FormProps>, OwnProps
+> = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
       return Bluebird.resolve(
         dispatch(
-          updateArea(ownProps.area, data)
-        )
+          updateArea(ownProps.area, data),
+        ),
       )
       .then(() => {
         return dispatch(
-          replace(`/areas/${ownProps.area.id}`)
+          replace(`/areas/${ownProps.area.id}`),
         );
       })
       .catch(handleReduxFormErrors);
-    }
+    },
   };
 };
 
 export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
   connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
   ),
   reduxForm({
     form,
-    enableReinitialize: false
-  })
+    enableReinitialize: false,
+  }),
 )(AreaForm) as React.ComponentType<OwnProps>;

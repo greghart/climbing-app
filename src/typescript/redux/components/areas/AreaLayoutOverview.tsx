@@ -68,4 +68,3 @@ const AreaLayoutOverview: React.SFC<Props> = (props) => {
 };
 
 export default AreaLayoutOverview;
-

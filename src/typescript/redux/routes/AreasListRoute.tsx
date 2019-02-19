@@ -15,16 +15,6 @@ interface AreasListParams {
   area: string;
 }
 type OwnProps = RouteConfigComponentProps<AreasListParams>;
-// const DeferredAreaList: SFC<AreasListProps & RouteConfigComponentProps<CragParams & AreasListParams>> = (props) => {
-//   return (
-//     <AreasList
-//       areas={props.areas}
-//       onAreaClick={props.}
-//       selectedAreaId={props.match.params.area}
-//     />
-//   )
-// }
-
 type StateProps = {
   selectedAreaId: string;
   areas: Area[];
@@ -36,11 +26,11 @@ const mapStateToProps = (state: State, ownProps: OwnProps): StateProps => {
       denormalize(
         ownProps.match.params.crag,
         CragSchema,
-        state.entities
+        state.entities,
       ),
       'areas',
-      []
-    )
+      [],
+    ),
   };
 };
 
@@ -49,11 +39,11 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
     onAreaClick: (area: Area) => {
       return dispatch(push(`/explorer/${params.crag}/${area.id}`));
-    }
+    },
   };
 };
 
 export default connect<StateProps, typeof mapDispatchToProps, any>(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AreasList);

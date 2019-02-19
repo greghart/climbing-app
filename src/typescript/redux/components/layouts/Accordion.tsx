@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames = require('classnames');
+import classnames = require('classnames');
 import isFunction = require('lodash/isFunction');
 
 /**

@@ -13,14 +13,14 @@ import { ExtractProps } from '../../../externals';
 interface RouterProps {
   routerConfig: RouteConfig;
   routerLocation: Location;
-};
+}
 
 type Props = RouterProps & {
   headerProps: ExtractProps<typeof ShowLayoutHeader>;
   tabsProps: ExtractProps<typeof ShowLayoutTabs>;
   // Extra props to send to child routes
   extraProps?: any;
-}
+};
 
 /**
  * All ShowLayouts are a typical PageLayout with:
@@ -48,7 +48,7 @@ const ShowLayout: React.SFC<Props> = (props) => {
       className={classNames({ 'p-0': true, 'bg-secondary': false, 'bg-white': true })}
     />
   );
-}
+};
 
 export { RouterProps };
 export default ShowLayout;

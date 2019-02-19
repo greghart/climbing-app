@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { InjectedFormProps } from "redux-form";
+import { InjectedFormProps } from 'redux-form';
 
 import withGoBack from '../../decorators/withGoBack';
 
@@ -17,7 +17,7 @@ const _Cancel: React.SFC<InjectedFormProps<unknown> & { goBack: () => unknown }>
       Cancel
     </button>
   );
-}
+};
 const Cancel = withGoBack(_Cancel);
 
 export default Cancel;

@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   ManyToOne,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import Boulder from './Boulder';
@@ -24,8 +24,7 @@ export default class BoulderCoordinate extends Coordinate {
   toJSON() {
     return {
       id: this.id,
-      ...super.toJSON()
-    }
+      ...super.toJSON(),
+    };
   }
 }
-

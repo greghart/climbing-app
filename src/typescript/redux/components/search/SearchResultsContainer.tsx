@@ -23,15 +23,15 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
     crag: denormalize(
       ownProps.match.params.crag,
       CragSchema,
-      state.entities
-    )
+      state.entities,
+    ),
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
     fetchCrag: () => dispatch(
-      fetchCrag('singleton-fetch')([ownProps.match.params.crag])
+      fetchCrag('singleton-fetch')([ownProps.match.params.crag]),
     ),
   };
 };
@@ -43,14 +43,14 @@ export default compose(
   withRouter,
   connect<Props, DispatchProps, OwnProps>(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
   ),
   withMountAction<Props & DispatchProps>(
     (props) => {
       props.fetchCrag();
-    }
+    },
   ),
   withLoader<Props>(
-    (props) => !props.crag
-  )
+    (props) => !props.crag,
+  ),
 )(SearchResults);

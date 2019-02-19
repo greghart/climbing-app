@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  OneToMany
+  OneToMany,
 } from 'typeorm';
 
 import Comment from './Comment';
@@ -25,4 +25,3 @@ export default class Commentable {
   comments: Comment[];
 
 }
-

@@ -27,7 +27,7 @@ export default class RoutesService {
   @Response<RoutePayload>(200, 'Get data on a climbing route')
   public async getRoute(
     @Rest.PathParam('id') id: string,
-    @Rest.QueryParam('includeComments') includeComments?: boolean
+    @Rest.QueryParam('includeComments') includeComments?: boolean,
   ) {
     return getRoute(id, { includeComments });
   }
@@ -38,7 +38,7 @@ export default class RoutesService {
   @Response<RoutePayload>(200, 'Update a route')
   public async updateRoute(
     @Rest.PathParam('id') id: string,
-    data: RoutePayload
+    data: RoutePayload,
   ) {
     const route = await getRoute(id);
     Object.assign(route, data);

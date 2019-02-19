@@ -1,6 +1,6 @@
 import * as React from 'react';
 import SFC = React.SFC;
-import { RouteConfigComponentProps } from "react-router-config";
+import { RouteConfigComponentProps } from 'react-router-config';
 
 import RouteLayoutContainer from '../components/routes/RouteLayoutContainer';
 

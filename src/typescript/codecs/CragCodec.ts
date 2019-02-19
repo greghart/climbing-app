@@ -6,7 +6,7 @@ const CragCodec = t.type({
   description: t.union([
     t.null,
     types.minLength,
-  ])
+  ]),
 });
 
 export default CragCodec;

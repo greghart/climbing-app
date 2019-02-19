@@ -23,18 +23,18 @@ const GoBackHeader: React.SFC<Props> = (props) => {
       }
       onClickPrepend={props.onClickPrepend}
     />
-  )
+  );
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onClickPrepend: () => {
       return dispatch(goBack());
-    }
+    },
   };
 };
 
 export default connect<void, ReturnType<typeof mapDispatchToProps>, any>(
   undefined,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(GoBackHeader);

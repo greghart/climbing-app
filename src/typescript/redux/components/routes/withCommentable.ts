@@ -7,7 +7,7 @@ import Route from '../../../models/Route';
 import { InferableComponentEnhancerWithProps } from 'react-redux';
 
 interface OwnProps {
-  myRoute: Route
+  myRoute: Route;
 }
 
 /**
@@ -17,12 +17,12 @@ function withCommentable<InputProps extends OwnProps>() {
   return compose(
     withMountDispatch<InputProps>(
       (props) => fetchCommentableForRoute(props.myRoute),
-      (props) => !props.myRoute.commentable
+      (props) => !props.myRoute.commentable,
     ),
     withLoader<InputProps>(
-      (props) => !props.myRoute.commentable
-    )
+      (props) => !props.myRoute.commentable,
+    ),
   ) as InferableComponentEnhancerWithProps<{}, InputProps>;
-};
+}
 
 export default withCommentable;

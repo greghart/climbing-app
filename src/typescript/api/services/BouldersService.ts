@@ -28,7 +28,7 @@ export default class BouldersService {
   @Response<object>(200, 'Get data on a climbing boulder')
   public async getBoulder(
     @Rest.PathParam('id') id: string,
-    @Rest.QueryParam('includeComments') includeComments?: boolean
+    @Rest.QueryParam('includeComments') includeComments?: boolean,
   ) {
     return getBoulder(id, { includeComments });
   }
@@ -40,16 +40,16 @@ export default class BouldersService {
   public async addRoute(
     // Routes must be added to a boulder currently
     @Rest.PathParam('id') id: string,
-    data: RoutePayload
+    data: RoutePayload,
   ) {
     const boulder = await getBoulder(id);
     return addRoute(
       boulder,
-      data
+      data,
     )
     .then((route) => {
-      return new Rest.Return.NewResource(`/boulders/${boulder.id}`, route)
-    })
+      return new Rest.Return.NewResource(`/boulders/${boulder.id}`, route);
+    });
   }
 
   @Rest.PUT
@@ -58,7 +58,7 @@ export default class BouldersService {
   @Response<BoulderPayload>(200, 'Update a boulder')
   public async updateBoulder(
     @Rest.PathParam('id') id: string,
-    data: BoulderPayload
+    data: BoulderPayload,
   ) {
     const boulder = await getBoulder(id);
     const payload = await validate(data, BoulderCodec);

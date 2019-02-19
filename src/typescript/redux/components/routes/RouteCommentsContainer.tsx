@@ -5,7 +5,7 @@ import withCommentable from './withCommentable';
 import ShowCommentable from '../comments/ShowCommentable';
 
 interface OwnProps {
-  myRoute: Route,
+  myRoute: Route;
 }
 
 const Container = withCommentable()(ShowCommentable);
@@ -18,6 +18,6 @@ const RouteCommentsContainer: React.SFC<OwnProps> = (props) => {
       commentable={props.myRoute.commentable}
     />
   );
-}
+};
 
 export default RouteCommentsContainer;

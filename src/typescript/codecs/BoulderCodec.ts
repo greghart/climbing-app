@@ -11,9 +11,9 @@ const BoulderCodec = t.type({
   ]),
   coordinate: t.type({
     lat: t.number,
-    lng: t.number
+    lng: t.number,
   }),
-  polygon: PolygonCodec
+  polygon: PolygonCodec,
 });
 
 export default BoulderCodec;

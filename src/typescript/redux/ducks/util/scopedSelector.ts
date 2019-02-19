@@ -45,7 +45,7 @@ function scopedMapSelector<K extends string>(scope: string, reducerMap: InputMap
           return selector(target);
         }
         throw new Error(`Reducer ${reducer} is not scoped state`);
-      }
+      },
     ));
   };
 }

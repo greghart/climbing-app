@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames = require('classnames');
+import classnames = require('classnames');
 import { WrappedFieldProps, Field, BaseFieldProps, GenericFieldHTMLAttributes } from 'redux-form';
 import { ExtractProps } from '../../../externals';
 import omit = require('lodash/omit');
@@ -24,13 +24,13 @@ const ErrorWrapper: React.ComponentType<WrappedFieldProps & AdditionalProps> = (
         </div>
       )}
     </React.Fragment>
-  )
+  );
 };
 
 ErrorWrapper.defaultProps = {
   renderBody: (props) => (
     `${props.input.name} - ${props.meta.error}`
-  )
-}
+  ),
+};
 
 export default ErrorWrapper;

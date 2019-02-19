@@ -3,7 +3,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   ManyToOne,
-  OneToMany
+  OneToMany,
 } from 'typeorm';
 
 import { cascadeManyToOne, cascadeOneToMany } from '../db/cascadeOptions';
@@ -21,12 +21,12 @@ export default class Upload {
   id: number;
 
   @Column()
-  s3_key: string;
+  s3Key: string;
 
   @Column()
-  s3_bucket: string;
+  s3Bucket: string;
 
   @Column()
-  original_name: string;
+  originalName: string;
 
 }

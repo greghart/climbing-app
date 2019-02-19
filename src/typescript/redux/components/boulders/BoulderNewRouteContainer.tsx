@@ -11,37 +11,38 @@ import { replace } from 'connected-react-router';
 import Boulder from '../../../models/Boulder';
 
 interface OwnProps {
-  boulder: Boulder,
+  boulder: Boulder;
 }
 
 // Use one form for all routes -- for now we assume one at a time.
 const form = 'route-form';
 
-const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
+type MapDispatchToProps = MapDispatchToPropsFunction<Partial<FormProps>, OwnProps>;
+const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
-      console.log(data, 'submitted')
+      console.log(data, 'submitted');
       return Bluebird.resolve(
         dispatch(
-          createRoute(ownProps.boulder, data)
-        )
+          createRoute(ownProps.boulder, data),
+        ),
       )
       .then(() => {
         return dispatch(
-          replace(`/boulders/${ownProps.boulder.id}`)
+          replace(`/boulders/${ownProps.boulder.id}`),
         );
       })
       .catch(handleReduxFormErrors);
-    }
+    },
   };
 };
 
 export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
   connect(
     undefined,
-    mapDispatchToProps
+    mapDispatchToProps,
   ),
   reduxForm({
-    form
-  })
+    form,
+  }),
 )(RouteForm) as React.ComponentType<OwnProps>;

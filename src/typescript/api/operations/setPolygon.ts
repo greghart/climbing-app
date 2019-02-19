@@ -7,12 +7,15 @@ import Polygon from '../../models/Polygon';
  *
  * @param coordinates Coordinates of polygon, should be in order, or have order
  */
-const setPolygon = async (polygon: Polygon, coordinates: { lat: number, lng: number, order?: number }[]) => {
+const setPolygon = async (
+  polygon: Polygon,
+  coordinates: { lat: number, lng: number, order?: number }[]
+) => {
   const polygonCoordinates = coordinates.map((thisCoordinate, i) => {
     const pc = new PolygonCoordinate(thisCoordinate.lat, thisCoordinate.lng);
     pc.order = thisCoordinate.order || i;
     return pc;
-  })
+  });
   const queryRunner = getConnection().createQueryRunner();
   // await queryRunner.startTransaction();
   // Remove old coordinates, if any, and add new ones
@@ -24,7 +27,7 @@ const setPolygon = async (polygon: Polygon, coordinates: { lat: number, lng: num
       .execute();
   }
   polygon.coordinates = polygonCoordinates;
-  return getRepository(Polygon).save(polygon)
+  return getRepository(Polygon).save(polygon);
   // commit transaction now:
   // await queryRunner.commitTransaction();
 

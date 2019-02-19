@@ -54,8 +54,8 @@ export default function getRoutes(): (RouteConfig | any)[] {
             {
               path: '/explorer/:crag/:area',
               component: AreasListRoute,
-              key: 'explorer'
-            }
+              key: 'explorer',
+            },
           ],
         },
 
@@ -63,7 +63,7 @@ export default function getRoutes(): (RouteConfig | any)[] {
         {
           path: '/search/:crag',
           component: SearchLayout,
-          key: 'search'
+          key: 'search',
         },
 
         // Show Pages
@@ -77,12 +77,12 @@ export default function getRoutes(): (RouteConfig | any)[] {
               path: '/crags/:crag/comments',
               exact: true,
               component: CragCommentsContainer,
-              key: 'crag_comments'
+              key: 'crag_comments',
             },
             {
               path: '/crags/:crag/comments/new',
               component: CragNewCommentContainer,
-              key: 'crag_comments_new'
+              key: 'crag_comments_new',
             },
             // {
             //   path: '/crags/:crag/photos',
@@ -92,20 +92,20 @@ export default function getRoutes(): (RouteConfig | any)[] {
             {
               path: '/crags/:crag/areas/new',
               component: CragNewAreaContainer,
-              key: 'crag_areas_new'
+              key: 'crag_areas_new',
             },
             {
               path: '/crags/:crag/edit',
               component: CragEditContainer,
-              key: 'crag_edit'
+              key: 'crag_edit',
             },
             // Default is overview
             {
               path: '/crags/:crag/(overview)?',
               component: CragLayoutOverview,
-              key: 'crag_overview'
-            }
-          ]
+              key: 'crag_overview',
+            },
+          ],
         },
         // Show an area
         {
@@ -117,35 +117,35 @@ export default function getRoutes(): (RouteConfig | any)[] {
               path: '/areas/:area/comments',
               exact: true,
               component: AreaCommentsContainer,
-              key: 'area_comments'
+              key: 'area_comments',
             },
             {
               path: '/areas/:area/comments/new',
               component: AreaNewCommentContainer,
-              key: 'area_comments_new'
+              key: 'area_comments_new',
             },
             {
               path: '/areas/:area/photos',
               component: RouteLayoutPhotos,
-              key: 'area_photos'
+              key: 'area_photos',
             },
             {
               path: '/areas/:area/boulders/new',
               component: AreaNewBoulderContainer,
-              key: 'area_boulders_new'
+              key: 'area_boulders_new',
             },
             {
               path: '/areas/:area/edit',
               component: AreaEditContainer,
-              key: 'area_edit'
+              key: 'area_edit',
             },
             // Default is overview
             {
               path: '/areas/:area/(overview)?',
               component: AreaLayoutOverview,
-              key: 'area_overview'
-            }
-          ]
+              key: 'area_overview',
+            },
+          ],
         },
         // Show a boulder
         {
@@ -157,40 +157,40 @@ export default function getRoutes(): (RouteConfig | any)[] {
               path: '/boulders/:boulder/comments',
               exact: true,
               component: BoulderCommentsContainer,
-              key: 'boulder_comments'
+              key: 'boulder_comments',
             },
             {
               path: '/boulders/:boulder/comments/new',
               component: BoulderNewCommentContainer,
-              key: 'boulder_comments_new'
+              key: 'boulder_comments_new',
             },
             {
               path: '/boulders/:boulder/photos',
               component: RouteLayoutPhotos,
-              key: 'boulder_photos'
+              key: 'boulder_photos',
             },
             {
               path: '/boulders/:boulder/routes/new',
               component: BoulderNewRouteContainer,
-              key: 'boulder_routes_new'
+              key: 'boulder_routes_new',
             },
             {
               path: '/boulders/:boulder/edit',
               component: BoulderEditContainer,
-              key: 'boulder_edit'
+              key: 'boulder_edit',
             },
             {
               path: '/boulders/:boulder/sun',
               component: BoulderSun,
-              key: 'boulder_sun'
+              key: 'boulder_sun',
             },
             // Default is overview
             {
               path: '/boulders/:boulder/(overview)?',
               component: BoulderLayoutOverview,
-              key: 'boulder_overview'
-            }
-          ]
+              key: 'boulder_overview',
+            },
+          ],
         },
         // Show a route
         {
@@ -202,32 +202,32 @@ export default function getRoutes(): (RouteConfig | any)[] {
               path: '/routes/:routes/comments',
               exact: true,
               component: RouteCommentsContainer,
-              key: 'route_comments'
+              key: 'route_comments',
             },
             {
               path: '/routes/:routes/comments/new',
               component: RouteNewCommentContainer,
-              key: 'route_comments_new'
+              key: 'route_comments_new',
             },
             {
               path: '/routes/:routes/photos',
               component: RouteLayoutPhotos,
-              key: 'route_photos'
+              key: 'route_photos',
             },
             {
               path: '/routes/:routes/edit',
               component: RouteEditContainer,
-              key: 'route_edit'
+              key: 'route_edit',
             },
             // Default is overview
             {
               path: '/routes/:routes/(overview)?',
               component: RouteLayoutOverview,
-              key: 'route_overview'
-            }
-          ]
-        }
-      ]
-    }
+              key: 'route_overview',
+            },
+          ],
+        },
+      ],
+    },
   ];
 }

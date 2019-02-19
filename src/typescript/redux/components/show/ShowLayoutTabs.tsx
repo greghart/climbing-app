@@ -12,7 +12,7 @@ interface Props {
   // Entity we're showing, just needs an id
   entity: {
     id: string | number;
-  }
+  };
   // Delegate content to children
   children?: React.ReactNode;
 }
@@ -26,13 +26,13 @@ interface Props {
  *  * assumes a common routing convention `/{entity}/{id}/{overview|comments|photos}?
  */
 const ShowLayoutTabs: React.SFC<Props> = (props) => {
-  const activeToken = props.location.pathname.split('/')[3]
+  const activeToken = props.location.pathname.split('/')[3];
   const activeLink: 'overview' | 'comments' | 'photos' = (
-    activeToken == 'comments' ? 'comments':
-      activeToken == 'photos' ? 'photos' :
-        activeToken == 'overview' || activeToken == undefined ?
-          'overview': null
-  )
+    activeToken === 'comments' ? 'comments' :
+      activeToken === 'photos' ? 'photos' :
+        activeToken === 'overview' || activeToken === undefined ?
+          'overview' : null
+  );
   return (
     <div className="p-2">
       <ul className="nav nav-tabs nav-justified show-tabs mb-1">
@@ -40,7 +40,7 @@ const ShowLayoutTabs: React.SFC<Props> = (props) => {
           <Link
             to={`/${props.routeBase}/${props.entity.id}/overview`}
             replace
-            className={classNames('nav-link', { active: activeLink == 'overview' })}
+            className={classNames('nav-link', { active: activeLink === 'overview' })}
           >
             <span className="highlight-tab border-primary">Overview</span>
           </Link>
@@ -49,7 +49,7 @@ const ShowLayoutTabs: React.SFC<Props> = (props) => {
           <Link
             to={`/${props.routeBase}/${props.entity.id}/comments`}
             replace
-            className={classNames('nav-link', { active: activeLink == 'comments' })}
+            className={classNames('nav-link', { active: activeLink === 'comments' })}
           >
             <span className="highlight-tab border-primary">Comments</span>
           </Link>
@@ -58,7 +58,7 @@ const ShowLayoutTabs: React.SFC<Props> = (props) => {
           <Link
             to={`/${props.routeBase}/${props.entity.id}/photos`}
             replace
-            className={classNames('nav-link', { active: activeLink == 'photos' })}
+            className={classNames('nav-link', { active: activeLink === 'photos' })}
           >
             <span className="highlight-tab border-primary">Photos</span>
           </Link>

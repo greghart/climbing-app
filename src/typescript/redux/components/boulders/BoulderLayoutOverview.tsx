@@ -113,4 +113,3 @@ const BoulderLayoutOverview: React.SFC<Props> = (props) => {
 };
 
 export default BoulderLayoutOverview;
-

@@ -6,7 +6,6 @@
  */
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
-import { LatLngTuple } from 'leaflet';
 import { Map, Polyline } from 'react-leaflet';
 import Coordinate from '../../../models/Coordinate';
 import BestTileLayer from '../BestTileLayer';
@@ -25,7 +24,7 @@ interface PolygonTracerProps {
 
 interface PolygonTracerState {
   points: Array<Leaflet.LatLngLiteral>;
-  current: LatLngTuple;
+  current: Leaflet.LatLngTuple;
   isDone: boolean;
 }
 
@@ -33,7 +32,7 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
 
   static defaultProps = {
     title: 'Trace',
-    magnetSizeMeters: 16
+    magnetSizeMeters: 16,
   };
 
   constructor(props) {
@@ -41,7 +40,7 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
     this.state = {
       points: [],
       current: null,
-      isDone: false
+      isDone: false,
     };
     this.onClick = this.onClick.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -57,17 +56,17 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
       this.state.points.length > 2 &&
       e.latlng.distanceTo(this.state.points[0]) < this.props.magnetSizeMeters
     ) {
-      const newPoints = this.state.points.concat([this.state.points[0]])
+      const newPoints = this.state.points.concat([this.state.points[0]]);
       this.setState({
         points: newPoints,
-        isDone: true
-      })
+        isDone: true,
+      });
       if (this.props.onPolygonComplete) {
         this.props.onPolygonComplete(newPoints);
       }
     } else {
       this.setState({
-        points: this.state.points.concat([e.latlng])
+        points: this.state.points.concat([e.latlng]),
       });
     }
   }
@@ -87,7 +86,7 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
     if (this.state.points.length > 0) {
       this.setState({
         points: this.state.points.slice(0, -1),
-        isDone: false
+        isDone: false,
       });
     }
   }
@@ -110,11 +109,32 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
           key="current-line-pending"
           positions={[
             this.state.points[this.state.points.length - 1],
-            this.state.current
+            this.state.current,
           ]}
         />
       ),
     ];
+  }
+
+  getInput() {
+    return (
+      <div className="input-group-append flex-grow-up bg-light align-items-center text-center">
+        <div className="col">
+          {this.props.title} (z to undo)
+        </div>
+        <div className="col-auto">
+          {this.state.isDone &&
+            <a
+              role="button"
+              className="btn btn-link"
+              onClick={() => this.props.onSubmit && this.props.onSubmit(this.state.points)}
+            >
+              <i className="fa fa-check pull-right"/>
+            </a>
+          }
+        </div>
+      </div>
+    );
   }
 
   render() {
@@ -128,38 +148,20 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
             prepend={
               <i className="fa fa-times-circle" />
             }
-            input={
-              <div className="input-group-append flex-grow-up bg-light align-items-center text-center">
-                <div className="col">
-                  {this.props.title} (z to undo)
-                </div>
-                <div className="col-auto">
-                  {this.state.isDone &&
-                    <a
-                      role="button"
-                      className="btn btn-link"
-                      onClick={() => this.props.onSubmit && this.props.onSubmit(this.state.points)}
-                    >
-                      <i className="fa fa-check pull-right"/>
-                    </a>
-                  }
-                </div>
-              </div>
-
-            }
+            input={this.getInput()}
           />
         </FixedContainerOverMap>
         <div
           className="row no-gutters"
           style={{
             width: '100%',
-            height: '100%'
+            height: '100%',
           }}
         >
           <Map
             style={{
               width: '100%',
-              height: '100%'
+              height: '100%',
             }}
             bounds={this.props.bounds}
             zoom={18}

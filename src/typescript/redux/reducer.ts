@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form'
+import { reducer as formReducer } from 'redux-form';
 import explorer, { State as ExplorerState } from './ducks/explorer';
 import entities, { State as EntitiesState } from './ducks/entities';
 import sidebar, { State as SidebarState } from './ducks/sidebar';
@@ -18,16 +18,16 @@ export type State = {
 const reducer = combineReducers<State>({
   explorer,
   entities,
+  search,
   sidebar: freeScopeReducer(sidebar),
-  search: search,
   form: formReducer,
-  accordion: freeScopeReducer(accordion)
+  accordion: freeScopeReducer(accordion),
 });
 
 // Build some obvious selectors
 // TODO Flesh this out to separate modules if it grows too large
 const selectors = {
-  selectEntities: (state: State) => state.entities
+  selectEntities: (state: State) => state.entities,
 };
 
 export { selectors };

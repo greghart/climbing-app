@@ -68,5 +68,3 @@ const CragLayoutOverview: React.SFC<Props> = (props) => {
 };
 
 export default CragLayoutOverview;
-
-

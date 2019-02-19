@@ -19,7 +19,7 @@ function normalizeRenderer<P>(potential: React.ReactNode | Renderer<P>): Rendere
   }
   return (input: P) => {
     return potential;
-  }
+  };
 }
 
 export { Renderable, Renderer };

@@ -5,9 +5,9 @@ const PolygonCodec = t.type({
     t.type({
       lat: t.number,
       lng: t.number,
-      order: t.number
-    })
-  )
+      order: t.number,
+    }),
+  ),
 });
 
 export default PolygonCodec;

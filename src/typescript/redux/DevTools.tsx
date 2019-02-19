@@ -15,5 +15,5 @@ export default createDevTools(
                >
     <LogMonitor theme="nicinabox" />
     <SliderMonitor keyboardEnabled />
-  </DockMonitor>
+  </DockMonitor>,
 );

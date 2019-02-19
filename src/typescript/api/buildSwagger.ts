@@ -6,7 +6,7 @@ import { SpecGenerator } from 'typescript-rest-swagger/dist/swagger/generator';
 
 const swaggerConfig = {
   ...config.get<object>('server.swagger'),
-  entryFile: path.join(__dirname + '/../../../src/typescript/api/index.ts')
+  entryFile: path.join(`${__dirname}/../../../src/typescript/api/index.ts`),
 };
 
 /**
@@ -18,6 +18,6 @@ export default () => {
   console.log({
     swaggerConfig,
   });
-  console.log(util.inspect(spec, { depth: null }))
+  console.log(util.inspect(spec, { depth: null }));
   return spec;
-}
+};

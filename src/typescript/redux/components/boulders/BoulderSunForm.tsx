@@ -21,7 +21,7 @@ const _BoulderSunForm: React.SFC<InjectedFormProps<FormData, Props> & Props> = (
   const times = SunCalc.getTimes(
     new Date(),
     props.boulder.coordinate.lat,
-    props.boulder.coordinate.lng
+    props.boulder.coordinate.lng,
   );
   const bottomHour = times.sunrise.getHours();
   const topHour = times.sunset.getHours();
@@ -29,19 +29,19 @@ const _BoulderSunForm: React.SFC<InjectedFormProps<FormData, Props> & Props> = (
   const marks = Array(numTicks).fill(0).reduce(
     (memo, any, i) => {
       const amPm = bottomHour + i >= 12 ? 'PM' : 'AM';
-      const showAmPm = i == 0 || bottomHour + i == 12;
-      memo[bottomHour*4 + i*4] = showAmPm ?
+      const showAmPm = i === 0 || bottomHour + i === 12;
+      memo[bottomHour * 4 + i * 4] = showAmPm ?
         bottomHour + i + amPm :
         ((bottomHour + i) % 12);
       return memo;
     },
-    {}
-  )
+    {},
+  );
   console.warn({
     marks,
     topHour,
-    bottomHour
-  }, 'BoulderSunForm');
+    bottomHour,
+  },           'BoulderSunForm');
   return (
     <form onSubmit={props.handleSubmit(props.onSubmit)} className="m-3">
       <Field
@@ -55,14 +55,14 @@ const _BoulderSunForm: React.SFC<InjectedFormProps<FormData, Props> & Props> = (
         className="mb-4"
       />
     </form>
-  )
+  );
 };
 
 const BoulderSunForm = reduxForm<FormData, Props>({
   initialValues: {
-    givenHour: new Date().getHours() * 4
+    givenHour: new Date().getHours() * 4,
   },
-  form: 'boulder-sun-form'
+  form: 'boulder-sun-form',
 })(_BoulderSunForm);
 
 export default BoulderSunForm;

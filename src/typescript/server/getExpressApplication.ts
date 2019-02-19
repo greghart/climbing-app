@@ -48,8 +48,8 @@ function getExpressApplication(_app?: Application) {
   // Server favicon
   app.use(
     favicon(
-      path.join(__dirname, '../../../static/ico/favicon.ico')
-    )
+      path.join(__dirname, '../../../static/ico/favicon.ico'),
+    ),
   );
   // Security headers can make things annoying during local dev
   if (!isLocal()) {
@@ -58,26 +58,26 @@ function getExpressApplication(_app?: Application) {
   app.use(cors({ origin: '*' }));
   app.use(bodyParser.json({
     limit: '100mb',
-    strict: false
+    strict: false,
   }));
   app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
   app.use('/build', serveStatic(
-    path.join(__dirname, '../../../build')
+    path.join(__dirname, '../../../build'),
   ));
   app.use('/static', serveStatic(
-    path.join(__dirname, '../../../static')
+    path.join(__dirname, '../../../static'),
   ));
 
   // Setup cookies and sessions
   app.use(
     cookieParser(
-      config.get<string>('server.cookies.secret')
-    )
+      config.get<string>('server.cookies.secret'),
+    ),
   );
   app.use(
     session(
-      appSessionOptions
-    )
+      appSessionOptions,
+    ),
   );
   app.use(connectFlash());
 
@@ -107,9 +107,9 @@ function getExpressApplication(_app?: Application) {
   // app.use(UniversalErrorMiddleware);
   // app.use(getServerErrorMiddleware());
 
-  app.use(function (req, res, next) {
-    res.status(404).send("Sorry can't find that!")
-  })
+  app.use((req, res, next) => {
+    res.status(404).send("Sorry can't find that!");
+  });
 
   return app;
 }

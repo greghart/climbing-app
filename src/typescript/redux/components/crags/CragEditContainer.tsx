@@ -13,7 +13,7 @@ import Crag from '../../../models/Crag';
 
 interface OwnProps {
   // Crag to edit
-  crag: Crag
+  crag: Crag;
 }
 
 // Use one form for all routes -- for now we assume one at a time.
@@ -22,35 +22,36 @@ const form = 'crag-form-edit';
 const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
   return {
     initialValues: pick(ownProps.crag, 'name', 'description'),
-    crag: ownProps.crag
+    crag: ownProps.crag,
   };
-}
+};
 
-const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
+type MapDispatchToProps = MapDispatchToPropsFunction<Partial<FormProps>, OwnProps>;
+const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
       return Bluebird.resolve(
         dispatch(
-          updateCrag(ownProps.crag, data)
-        )
+          updateCrag(ownProps.crag, data),
+        ),
       )
       .then(() => {
         return dispatch(
-          replace(`/crags/${ownProps.crag.id}`)
+          replace(`/crags/${ownProps.crag.id}`),
         );
       })
       .catch(handleReduxFormErrors);
-    }
+    },
   };
 };
 
 export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
   connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
   ),
   reduxForm({
     form,
-    enableReinitialize: false
-  })
+    enableReinitialize: false,
+  }),
 )(CragForm) as React.ComponentType<OwnProps>;

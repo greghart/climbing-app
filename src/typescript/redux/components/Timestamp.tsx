@@ -11,9 +11,8 @@ function isDate(timestamp: Date | string): timestamp is Date {
 const Timestamp: React.SFC<Props> = (props) => {
   if (isDate(props.timestamp)) {
     return <span>{props.timestamp.toISOString()}</span>;
-  } else {
-    return <span>{props.timestamp}</span>;
   }
-}
+  return <span>{props.timestamp}</span>;
+};
 
 export default Timestamp;

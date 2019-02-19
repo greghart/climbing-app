@@ -9,11 +9,11 @@ const mapDispatchToProps = (dispatch) => {
   return {
     goBack: () => {
       return dispatch(goBack());
-    }
+    },
   };
 };
 
 export default connect(
   undefined,
-  mapDispatchToProps
+  mapDispatchToProps,
 );

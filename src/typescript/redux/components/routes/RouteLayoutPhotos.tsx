@@ -10,8 +10,7 @@ const RouteLayoutPhotos: React.SFC<Props> = (props) => {
     <div>
       Photos will go here.
     </div>
-  )
+  );
 };
 
 export default RouteLayoutPhotos;
-

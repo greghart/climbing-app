@@ -9,12 +9,12 @@ import setPolygon from '../operations/setPolygon';
 
 const getPolygon = (id: string | number) => {
   return getRepository(Polygon).findOne(id, {
-    relations: ['coordinates']
+    relations: ['coordinates'],
   });
 };
 
 interface PolygonPayload {
-  coordinates: Array<{ lat: number, lng: number, order: number }>;
+  coordinates: { lat: number, lng: number, order: number }[];
 }
 
 /**
@@ -28,7 +28,7 @@ export default class PolygonsService {
   @Swagger.Tags('polygons')
   @Swagger.Response<object>(200, 'Get data for a polygon')
   public async getPolygon(
-    @Rest.PathParam('id') id: string
+    @Rest.PathParam('id') id: string,
   ) {
     return getPolygon(id);
   }
@@ -54,11 +54,11 @@ export default class PolygonsService {
   @Swagger.Tags('polygons')
   @Swagger.Response<object>(302, 'Get the polygon for a area')
   public async polygonForArea(
-    @Rest.PathParam('id') id: string
+    @Rest.PathParam('id') id: string,
   ) {
     return getArea(id)
     .then((area) => {
-      return getCustomRepository(PolygonRepository).findOrGetPolygon(area)
+      return getCustomRepository(PolygonRepository).findOrGetPolygon(area);
     })
     .then((polygon) => {
       return getPolygon(polygon.id);
@@ -104,4 +104,3 @@ export default class PolygonsService {
 
 type PolygonsServiceType = typeof PolygonsService.prototype;
 export { PolygonsServiceType };
-

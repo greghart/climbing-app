@@ -13,7 +13,7 @@ import Crag from '../../models/Crag';
 
 const getComments = (id: string | number) => {
   return getRepository(Commentable).findOne(id, {
-    relations: ['comments', 'comments.user']
+    relations: ['comments', 'comments.user'],
   });
 };
 
@@ -28,7 +28,7 @@ export default class CommentablesService {
   @Swagger.Tags('commentables')
   @Swagger.Response<object>(200, 'Get data a commentable')
   public async getCommentable(
-    @Rest.PathParam('id') id: string
+    @Rest.PathParam('id') id: string,
   ) {
     return getComments(id);
   }
@@ -39,11 +39,11 @@ export default class CommentablesService {
   @Swagger.Tags('commentables')
   @Swagger.Response<object>(302, 'Get the commentable for a route')
   public async commentableForRoute(
-    @Rest.PathParam('id') id: string
+    @Rest.PathParam('id') id: string,
   ) {
     return getRoute(id)
     .then((route) => {
-      return getCustomRepository(CommentRepository).findOrGetCommentable(route)
+      return getCustomRepository(CommentRepository).findOrGetCommentable(route);
     })
     .then((commentable) => {
       return getComments(commentable.id);
@@ -55,11 +55,11 @@ export default class CommentablesService {
   @Swagger.Tags('commentables')
   @Swagger.Response<object>(302, 'Get the commentable for a boulder')
   public async commentableForBoulder(
-    @Rest.PathParam('id') id: string
+    @Rest.PathParam('id') id: string,
   ) {
     return getBoulder(id)
     .then((boulder) => {
-      return getCustomRepository(CommentRepository).findOrGetCommentable(boulder)
+      return getCustomRepository(CommentRepository).findOrGetCommentable(boulder);
     })
     .then((commentable) => {
       return getComments(commentable.id);
@@ -71,11 +71,11 @@ export default class CommentablesService {
   @Swagger.Tags('commentables')
   @Swagger.Response<object>(302, 'Get the commentable for a area')
   public async commentableForArea(
-    @Rest.PathParam('id') id: string
+    @Rest.PathParam('id') id: string,
   ) {
     return getArea(id)
     .then((area) => {
-      return getCustomRepository(CommentRepository).findOrGetCommentable(area)
+      return getCustomRepository(CommentRepository).findOrGetCommentable(area);
     })
     .then((commentable) => {
       return getComments(commentable.id);
@@ -87,11 +87,11 @@ export default class CommentablesService {
   @Swagger.Tags('commentables')
   @Swagger.Response<object>(302, 'Get the commentable for a crag')
   public async commentableForCrag(
-    @Rest.PathParam('id') id: string
+    @Rest.PathParam('id') id: string,
   ) {
     return getRepository(Crag).findOne(id)
     .then((crag) => {
-      return getCustomRepository(CommentRepository).findOrGetCommentable(crag)
+      return getCustomRepository(CommentRepository).findOrGetCommentable(crag);
     })
     .then((commentable) => {
       return getComments(commentable.id);
@@ -104,18 +104,18 @@ export default class CommentablesService {
   @Swagger.Response<object>(201, 'Add a comment for a commentable')
   public async addComment(
     @Rest.PathParam('id') id: string,
-    data: { text: string }
+    data: { text: string },
   ) {
-    const user = await getRepository(User).findOne(1)
+    const user = await getRepository(User).findOne(1);
     const commentable = await getRepository(Commentable).findOne(id);
     return addCommentToCommentable(
       commentable,
       data.text,
-      user
+      user,
     )
     .then((comment) => {
-      return new Rest.Return.NewResource(`/commentables/${commentable.id}`, comment)
-    })
+      return new Rest.Return.NewResource(`/commentables/${commentable.id}`, comment);
+    });
   }
 
 }

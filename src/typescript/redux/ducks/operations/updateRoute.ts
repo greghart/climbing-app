@@ -15,7 +15,7 @@ export default (route: Route, data: { [index: string]: any }) => {
     .then((routeData) => {
       return getSwagger().routes.updateRoute(
         route.id.toString(),
-        routeData
+        routeData,
       );
     })
     .then((route) => {
@@ -24,10 +24,10 @@ export default (route: Route, data: { [index: string]: any }) => {
         receiveEntities(
           normalize(
             route,
-            RouteSchema
-          )
-        )
-      )
-    })
+            RouteSchema,
+          ),
+        ),
+      );
+    });
   };
 };

@@ -7,7 +7,7 @@ import getExpressApplication from './server/getExpressApplication';
 // import getAPIRouter from './api/getRouter';
 // import rollbar from './util/getRollbar';
 // import { serverOptions as rollbarServerOptions } from './util/getRollbar';
-import getConnection from './db';
+import db from './db';
 
 // rollbar.handleUncaughtExceptionsAndRejections(
 //   rollbarServerOptions.token,
@@ -29,7 +29,7 @@ getConnection()
     port,
     () => {
       debug(`Server started listening on port ${port}`);
-    }
+    },
   );
 })
 // Catch errors during app startup

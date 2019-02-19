@@ -1,6 +1,6 @@
 import * as React from 'react';
 import SFC = React.SFC;
-import { RouteConfigComponentProps } from "react-router-config";
+import { RouteConfigComponentProps } from 'react-router-config';
 
 import BoulderLayoutContainer from '../components/boulders/BoulderLayoutContainer';
 
@@ -19,4 +19,3 @@ const BoulderRoute: SFC<RouteConfigComponentProps<BoulderParams>> = (props) => {
 };
 
 export default BoulderRoute;
-

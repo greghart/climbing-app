@@ -16,6 +16,6 @@ const FixedContainerOverMap: React.ComponentType<Props> = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default FixedContainerOverMap;

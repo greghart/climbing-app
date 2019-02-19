@@ -35,7 +35,7 @@ const RouteNewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) 
             inputComponent="textarea2"
             rows={3}
             onKeyPress={(e: KeyboardEvent) => {
-              if (e.key == 'Enter' && e.metaKey) {
+              if (e.key === 'Enter' && e.metaKey) {
                 props.handleCustomSubmit(e);
               }
             }}
@@ -45,17 +45,17 @@ const RouteNewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) 
       }
       user={props.user}
     />
-  )
+  );
 };
 
 RouteNewComment.defaultProps = {
   user: {
     id: 1,
     email: 'greghartnewcomment',
-    name: "Greg",
-    comments: []
-  }
-}
+    name: 'Greg',
+    comments: [],
+  },
+};
 
 export default RouteNewComment;
 export { FormData, Props };

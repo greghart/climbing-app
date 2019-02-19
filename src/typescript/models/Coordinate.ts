@@ -27,7 +27,7 @@ export default class Coordinate {
   get literal(): LatLngLiteral {
     return {
       lat: this.lat,
-      lng: this.lng
+      lng: this.lng,
     };
   }
 
@@ -36,12 +36,12 @@ export default class Coordinate {
   }
 
   toJSON(): Serialized {
-    if (!(this.lat && this.lng)){
+    if (!(this.lat && this.lng)) {
       return null;
     }
     return {
       lat: parseFloat(this.lat.toString()),
-      lng: parseFloat(this.lng.toString())
+      lng: parseFloat(this.lng.toString()),
     };
   }
 

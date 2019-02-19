@@ -20,7 +20,7 @@ function getSessionOptions(
   isLocal: boolean,
   sessionSecret: string,
   redisHost: string,
-  redisPort: number
+  redisPort: number,
 ) {
   return {
     name: appKeyPrefix,
@@ -30,14 +30,14 @@ function getSessionOptions(
     resave: false,
     cookie: getCookieOptions({
       isLocal,
-      browserSession: true
+      browserSession: true,
     }),
     store: new RedisStore({
       host: redisHost,
       port: redisPort,
       ttl: 60 * 60 * 24 * 30, // Browser sessions are maintained for 30 days
-      prefix: `${appKeyPrefix}|`
-    })
+      prefix: `${appKeyPrefix}|`,
+    }),
   };
 }
 
@@ -45,7 +45,7 @@ const appSessionOptions = getSessionOptions(
   isLocal(),
   config.get<string>('server.cookies.secret'),
   config.get<string>('server.redis.host'),
-  config.get<number>('server.redis.port')
+  config.get<number>('server.redis.port'),
 );
 
 export { appSessionOptions };

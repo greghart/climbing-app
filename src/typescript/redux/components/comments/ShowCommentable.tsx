@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Omit } from 'utility-types';
 import { Link } from 'react-router-dom';
 import Commentable from '../../../models/Commentable';
-import CommentModel from '../../../models/Comment';
+import Comment from '../../../models/Comment';
 import Comment from './Comment';
 
 interface Props {
@@ -35,7 +35,7 @@ const ShowComments: React.SFC<Props> = (props) => {
         })}
       </ul>
     </div>
-  )
+  );
 };
 
 ShowComments.defaultProps = {
@@ -50,12 +50,12 @@ ShowComments.defaultProps = {
           id: 1,
           email: 'greghartemail@gmail.com',
           name: 'Greg Hart',
-          comments: []
+          comments: [],
         },
         timestamps: {
           createdAt: new Date(),
-          updatedAt: new Date()
-        }
+          updatedAt: new Date(),
+        },
       },
       {
         id: 2,
@@ -64,15 +64,15 @@ ShowComments.defaultProps = {
           id: 1,
           email: 'greghartemail@gmail.com',
           name: 'Greg Hart',
-          comments: []
+          comments: [],
         },
         timestamps: {
           createdAt: new Date(),
-          updatedAt: new Date()
-        }
-      }
-    ]
-  }
-}
+          updatedAt: new Date(),
+        },
+      },
+    ],
+  },
+};
 
 export default ShowComments;

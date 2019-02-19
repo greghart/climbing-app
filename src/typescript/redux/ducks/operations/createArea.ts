@@ -15,7 +15,7 @@ export default (crag: Crag, data: { [index: string]: any }) => {
     .then((areaData) => {
       return getSwagger().crags.addArea(
         crag.id.toString(),
-        areaData
+        areaData,
       );
     })
     .then((area) => {
@@ -27,16 +27,13 @@ export default (crag: Crag, data: { [index: string]: any }) => {
               ...crag,
               areas: [
                 omit(area, 'crag'),
-                ...crag.areas
-              ]
+                ...crag.areas,
+              ],
             },
             CragSchema,
-          )
-        )
-      )
-    })
+          ),
+        ),
+      );
+    });
   };
 };
-
-
-

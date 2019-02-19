@@ -25,8 +25,8 @@ interface Props {
 }
 
 interface FormData {
-  name?: string,
-  description?: string
+  name?: string;
+  description?: string;
 }
 
 /**
@@ -35,11 +35,14 @@ interface FormData {
 type OtherAreasMapProps = Omit<ExtractProps<typeof AreasMap>, 'areas'> & {
   crag: Crag;
   exceptAreaId: number;
-}
+};
 const _OtherAreasMap: React.ComponentType<OtherAreasMapProps> = (props) => {
-  return <AreasMap {...props} areas={reject(props.crag.areas, (a) => a.id === props.exceptAreaId)} />;
-}
-const OtherAreasMap = fetchCragContainer(_OtherAreasMap)
+  return <AreasMap
+    {...props}
+    areas={reject(props.crag.areas, (a) => a.id === props.exceptAreaId)}
+  />;
+};
+const OtherAreasMap = fetchCragContainer(_OtherAreasMap);
 
 const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   return (
@@ -96,4 +99,3 @@ const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
 
 export default AreaForm;
 export { FormData, Props };
-

@@ -1,8 +1,8 @@
-import { compose } from "redux";
-import { connect } from "react-redux";
-import withMountAction from "./withMountAction";
-import withLoader from "./withLoader";
-import { State } from "../reducer";
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import withMountAction from './withMountAction';
+import withLoader from './withLoader';
+import { State } from '../reducer';
 
 /**
  * Shortcut to getting a normal composed decorator for an async component.
@@ -24,24 +24,24 @@ export default function asyncComponent<StateProps, DispatchProps, OwnProps>(
   mapStateToProps: (state: State, ownProps: OwnProps) => StateProps,
   mapDispatchToProps: (dispatch, ownProps: OwnProps) => DispatchProps,
   hasDependants: (props: StateProps) => boolean,
-  options: { fetchDispatch: string } = { fetchDispatch: 'fetch' }
+  options: { fetchDispatch: string } = { fetchDispatch: 'fetch' },
 ) {
   // type Props = ReturnType<typeof mapStateToProps>;
   // type DispatchProps = ReturnType<typeof mapDispatchToProps>;
   return compose(
     connect<StateProps, DispatchProps, OwnProps>(
       mapStateToProps,
-      mapDispatchToProps
+      mapDispatchToProps,
     ),
     withMountAction<StateProps & DispatchProps>(
       (props) => {
         if (!hasDependants(props)) {
           props[options.fetchDispatch]();
         }
-      }
+      },
     ),
     withLoader<StateProps>(
-      (props) => !hasDependants(props)
-    )
+      (props) => !hasDependants(props),
+    ),
   );
 }

@@ -3,7 +3,7 @@ import {
   Entity,
   OneToMany,
   ManyToOne,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import Route from './Route';

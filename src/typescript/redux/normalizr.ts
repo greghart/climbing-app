@@ -16,31 +16,31 @@ export const PolygonSchema = new schema.Entity('polygons');
 // Setup all associations
 CragSchema.define({
   areas: [AreaSchema],
-  commentable: CommentableSchema
+  commentable: CommentableSchema,
 });
 
 AreaSchema.define({
   crag: CragSchema,
   boulders: [BoulderSchema],
   commentable: CommentableSchema,
-  polygon: PolygonSchema
+  polygon: PolygonSchema,
 });
 
 BoulderSchema.define({
   area: AreaSchema,
   routes: [RouteSchema],
-  commentable: CommentableSchema
+  commentable: CommentableSchema,
 });
 
 RouteSchema.define({
   boulder: BoulderSchema,
-  commentable: CommentableSchema
+  commentable: CommentableSchema,
 });
 
 CommentableSchema.define({
-  comments: [CommentSchema]
-})
+  comments: [CommentSchema],
+});
 
 CommentSchema.define({
-  commentable: CommentableSchema
+  commentable: CommentableSchema,
 });

@@ -9,7 +9,7 @@ type ExpectedProps = (
   Partial<Pick<ExtractProps<typeof Circle>, KnownProps>>
 );
 
-const ConfirmedCircle: React.ComponentType<ExpectedProps> = React.forwardRef<Circle, ExpectedProps>((props, ref) => {
+const ConfirmedCircle = React.forwardRef<Circle, ExpectedProps>((props, ref) => {
   return (
     <Circle
       ref={ref}

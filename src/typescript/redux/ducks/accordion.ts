@@ -22,9 +22,9 @@ const accordion = handleActions<State, Payload>(
         return { open: payload };
       }
       return state;
-    }
+    },
   },
-  initialState
+  initialState,
 );
 
 export default accordion;

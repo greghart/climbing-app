@@ -1,6 +1,6 @@
 import * as React from 'react';
 import SFC = React.SFC;
-import { RouteConfigComponentProps } from "react-router-config";
+import { RouteConfigComponentProps } from 'react-router-config';
 
 import AreaLayoutContainer from '../components/areas/AreaLayoutContainer';
 
@@ -19,5 +19,3 @@ const AreaRoute: SFC<RouteConfigComponentProps<AreaParams>> = (props) => {
 };
 
 export default AreaRoute;
-
-

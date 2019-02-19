@@ -5,16 +5,15 @@ import Coordinate, { isValidCoordinate } from '../../../models/Coordinate';
 import BestTileLayer from '../BestTileLayer';
 import BoulderIcon from '../map/BoulderIcon';
 
-
 interface Props {
   coordinate: Partial<Coordinate>;
-  left?: (props: Props) => React.ReactNode
+  left?: (props: Props) => React.ReactNode;
 }
 
 const defaultLeft = (props: Props) => (
   isValidCoordinate(props.coordinate) ?
     <span>{props.coordinate.lat} x { props.coordinate.lng }</span> :
-    "No coordinate"
+    'No coordinate'
 );
 
 /**
@@ -44,10 +43,10 @@ const CoordinateMap: React.ComponentType<Props> = (props) => {
       </div>
     </div>
   );
-}
+};
 
 CoordinateMap.defaultProps = {
-  left: defaultLeft
+  left: defaultLeft,
 };
 
 export default CoordinateMap;

@@ -3,7 +3,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   ManyToOne,
-  OneToMany
+  OneToMany,
 } from 'typeorm';
 
 import { cascadeManyToOne, cascadeOneToMany } from '../db/cascadeOptions';
@@ -29,5 +29,3 @@ export default class User {
   comments: Comment[];
 
 }
-
-

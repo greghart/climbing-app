@@ -43,11 +43,15 @@ const RenderField: React.ComponentType<WrappedFieldProps & AppProps> = (props) =
       }
       <div>
         {React.createElement(inputComponent, {
+          id,
           placeholder: props.placeholder || label,
           ...input,
           ...rest,
-          className: classNames('form-control', { 'is-invalid': meta.touched && meta.error }, props.className),
-          id
+          className: classNames(
+            'form-control',
+            { 'is-invalid': meta.touched && meta.error },
+            props.className
+          ),
         })}
         {help && (
           <small className="form-text text-muted">
@@ -65,16 +69,17 @@ const RenderField: React.ComponentType<WrappedFieldProps & AppProps> = (props) =
 };
 
 RenderField.defaultProps = {
-  inputComponent: 'input'
-}
+  inputComponent: 'input',
+};
 
-const MyField: React.ComponentType<GenericFieldHTMLAttributes | BaseFieldProps | AppProps> = (props) => {
+type FieldType = React.ComponentType<GenericFieldHTMLAttributes | BaseFieldProps | AppProps>;
+const MyField: FieldType = (props) => {
   return (
     <Field<GenericFieldHTMLAttributes | BaseFieldProps | AppProps>
       component={RenderField}
       {...omit(props, 'component')}
     />
-  )
-}
+  );
+};
 
 export default MyField;

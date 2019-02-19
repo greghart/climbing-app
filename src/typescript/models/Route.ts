@@ -5,7 +5,7 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
-  OneToMany
+  OneToMany,
 } from 'typeorm';
 
 import Boulder from './Boulder';

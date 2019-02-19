@@ -1,6 +1,6 @@
 import reduce = require('lodash/reduce');
 import isArray = require('lodash/isArray');
-import Crag from "../../../models/Crag";
+import Crag from '../../../models/Crag';
 import Area from '../../../models/Area';
 import Boulder from '../../../models/Boulder';
 import Route from '../../../models/Route';
@@ -11,14 +11,14 @@ type Searchable = Tagged & (Area | Boulder | Route);
 
 const withType = (type: Tag) => (extra) => (input) => {
   if (isArray(input)) {
-    return input.map(withType(type)(extra))
+    return input.map(withType(type)(extra));
   }
   return {
     ...input,
     ...extra,
-    _type: type
+    _type: type,
   };
-}
+};
 const withArea = withType('area');
 const withBoulder = withType('boulder');
 const withRoute = withType('route');
@@ -28,19 +28,19 @@ function getSearchableEntitiesForCrag(crag: Crag): Array<Searchable> {
     crag.areas,
     (memo, area) => {
       memo.push(withArea({})(area));
-      memo = memo.concat(withBoulder({ area })(area.boulders));
-      memo = memo.concat(
+      return memo
+      .concat(withBoulder({ area })(area.boulders))
+      .concat(
         reduce(
           area.boulders,
           (memo, boulder) => {
-            return memo.concat(withRoute({ boulder: { ...boulder, area }})(boulder.routes));
+            return memo.concat(withRoute({ boulder: { ...boulder, area } })(boulder.routes));
           },
-          []
-        )
+          [],
+        ),
       );
-      return memo;
     },
-    []
+    [],
   );
 }
 
@@ -55,4 +55,3 @@ function isRoute(input: Searchable): input is Route {
 }
 export { isArea, isBoulder, isRoute };
 export default getSearchableEntitiesForCrag;
-

@@ -13,7 +13,7 @@ import { replace } from 'connected-react-router';
 import Crag from '../../../models/Crag';
 
 interface OwnProps {
-  crag: Crag,
+  crag: Crag;
 }
 
 // Use one form for all areas -- for now we assume one at a time.
@@ -23,41 +23,41 @@ const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
   return {
     initialValues: {
       polygon: {
-        coordinates: []
-      }
+        coordinates: [],
+      },
     },
     area: {
       id: 'new',
-      crag: ownProps.crag
-    }
+      crag: ownProps.crag,
+    },
   };
-}
+};
 
-const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
+type MapDispatchToProps = MapDispatchToPropsFunction<Partial<FormProps>, OwnProps>;
+const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
       return Bluebird.resolve(
         dispatch(
-          createArea(ownProps.crag, data)
-        )
+          createArea(ownProps.crag, data),
+        ),
       )
       .then(() => {
         return dispatch(
-          replace(`/crags/${ownProps.crag.id}`)
+          replace(`/crags/${ownProps.crag.id}`),
         );
       })
       .catch(handleReduxFormErrors);
-    }
+    },
   };
 };
 
 export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
   connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
   ),
   reduxForm({
-    form
-  })
+    form,
+  }),
 )(AreaForm) as React.ComponentType<OwnProps>;
-

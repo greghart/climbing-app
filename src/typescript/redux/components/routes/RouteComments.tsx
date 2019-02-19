@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Omit } from 'utility-types';
 import { Link } from 'react-router-dom';
 import Route from '../../../models/Route';
-import CommentModel from '../../../models/Comment';
+import Comment from '../../../models/Comment';
 import Comment from './Comment';
 
 interface Props {
   myRoute: Route;
-  comments: (Omit<CommentModel, 'commentable'>)[]
+  comments: (Omit<CommentModel, 'commentable'>)[];
 }
 
 const RouteComments: React.SFC<Props> = (props) => {
@@ -33,7 +33,7 @@ const RouteComments: React.SFC<Props> = (props) => {
         })}
       </ul>
     </div>
-  )
+  );
 };
 
 RouteComments.defaultProps = {
@@ -45,12 +45,12 @@ RouteComments.defaultProps = {
         id: 1,
         email: 'greghartemail@gmail.com',
         name: 'Greg Hart',
-        comments: []
+        comments: [],
       },
       timestamps: {
         createdAt: new Date(),
-        updatedAt: new Date()
-      }
+        updatedAt: new Date(),
+      },
     },
     {
       id: 2,
@@ -59,14 +59,14 @@ RouteComments.defaultProps = {
         id: 1,
         email: 'greghartemail@gmail.com',
         name: 'Greg Hart',
-        comments: []
+        comments: [],
       },
       timestamps: {
         createdAt: new Date(),
-        updatedAt: new Date()
-      }
-    }
-  ]
-}
+        updatedAt: new Date(),
+      },
+    },
+  ],
+};
 
 export default RouteComments;

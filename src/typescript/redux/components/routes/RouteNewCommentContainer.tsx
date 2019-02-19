@@ -4,7 +4,7 @@ import NewCommentContainer from '../comments/NewCommentContainer';
 import withCommentable from './withCommentable';
 
 interface OwnProps {
-  myRoute: Route,
+  myRoute: Route;
 }
 const Container = withCommentable()(NewCommentContainer);
 
@@ -17,13 +17,12 @@ const RouteNewCommentContainer: React.SFC<OwnProps> = (props) => {
       // TODO user-feature
       user={{
         id: 1,
-        name: "Greg Hart",
+        name: 'Greg Hart',
         email: 'greghartemail@gmail.com',
-        comments: []
+        comments: [],
       }}
     />
   );
-}
+};
 
 export default RouteNewCommentContainer;
-

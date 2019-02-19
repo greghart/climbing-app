@@ -28,9 +28,9 @@ const InfoItem: React.SFC<InfoProps> = (props) => {
     );
   }
   return body;
-}
+};
 
 InfoItem.defaultProps = {
-  includeLi: true
+  includeLi: true,
 };
 export default InfoItem;

@@ -11,8 +11,8 @@ interface Props {
 }
 
 interface FormData {
-  name?: string,
-  description?: string,
+  name?: string;
+  description?: string;
 }
 
 const RouteForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
@@ -41,4 +41,3 @@ const RouteForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
 
 export default RouteForm;
 export { FormData, Props };
-

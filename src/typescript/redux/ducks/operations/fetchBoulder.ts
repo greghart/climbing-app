@@ -7,5 +7,5 @@ export default fetchEntities<ArgumentTypes<SwaggerAPI['boulders']['getBoulder']>
   (swagger, id, includeComments) => {
     return swagger.boulders.getBoulder(id, includeComments);
   },
-  BoulderSchema
+  BoulderSchema,
 );

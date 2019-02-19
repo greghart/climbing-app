@@ -13,7 +13,7 @@ export default (area: Area, data: { [index: string]: any }) => {
     .then((areaData) => {
       return getSwagger().areas.updateArea(
         area.id.toString(),
-        areaData
+        areaData,
       );
     })
     .then((area) => {
@@ -22,12 +22,10 @@ export default (area: Area, data: { [index: string]: any }) => {
         receiveEntities(
           normalize(
             area,
-            AreaSchema
-          )
-        )
-      )
-    })
+            AreaSchema,
+          ),
+        ),
+      );
+    });
   };
 };
-
-

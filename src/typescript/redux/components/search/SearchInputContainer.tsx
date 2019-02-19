@@ -12,7 +12,7 @@ import { State } from '../../reducer';
  */
 const mapStateToProps = (state: State) => {
   return {
-    value: state.search.search
+    value: state.search.search,
   };
 };
 
@@ -22,11 +22,15 @@ const mapDispatchToProps = (dispatch) => {
       return dispatch(
         search(e.target.value),
       );
-    }
+    },
   };
 };
 
-export default connect<ReturnType<typeof mapStateToProps>, ReturnType<typeof mapDispatchToProps>, any>(
+export default connect<
+  ReturnType<typeof mapStateToProps>,
+  ReturnType<typeof mapDispatchToProps>,
+  any
+>(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(SearchInput);

@@ -31,11 +31,11 @@ const ActionItem: React.FunctionComponent<ActionProps> = (props) => {
     );
   }
   return body;
-}
+};
 
 ActionItem.defaultProps = {
   icon: 'chevron-right',
-  includeLi: true
+  includeLi: true,
 };
 
 export default ActionItem;

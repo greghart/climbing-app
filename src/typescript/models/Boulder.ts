@@ -5,7 +5,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   OneToOne,
-  JoinColumn
+  JoinColumn,
 } from 'typeorm';
 
 import Area from './Area';
@@ -31,7 +31,10 @@ class Boulder {
   coordinate: Coordinate;
 
   // Polygon coordinates of an outline of a boulder, optional
-  @OneToOne(type => Polygon, { nullable: true, onDelete: 'SET NULL', cascade: ['insert', 'update']})
+  @OneToOne(
+    type => Polygon,
+    { nullable: true, onDelete: 'SET NULL', cascade: ['insert', 'update'] }
+  )
   @JoinColumn()
   polygon?: Polygon;
 
@@ -52,8 +55,8 @@ class Boulder {
       {},
       this,
       {
-        coordinate: this.coordinate
-      }
+        coordinate: this.coordinate,
+      },
     );
   }
 

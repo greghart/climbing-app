@@ -18,9 +18,9 @@ const explorer = handleActions<State, Payload>(
   {
     [selectArea.toString()]: (state, { payload }) => {
       return { selectedAreaId: payload };
-    }
+    },
   },
-  initialState
+  initialState,
 );
 
 export default explorer;

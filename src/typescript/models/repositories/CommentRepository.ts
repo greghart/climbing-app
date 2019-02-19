@@ -1,12 +1,12 @@
-import { EntityRepository, Repository } from "typeorm";
-import Comment from "../Comment";
-import Commentable from "../Commentable";
-import get = require("lodash/get");
+import { EntityRepository, Repository } from 'typeorm';
+import Comment from '../Comment';
+import Commentable from '../Commentable';
+import get = require('lodash/get');
 
 // Base interface for a commentable entity
 interface CommentableEntity {
-  id: any,
-  commentable?: Commentable
+  id: any;
+  commentable?: Commentable;
 }
 
 /**
@@ -31,7 +31,7 @@ export default class CommentRepository extends Repository<Comment> {
         .innerJoinAndSelect('entity.commentable', 'commentable')
         .whereInIds(entity.id)
         .getOne()
-      , 'commentable');
+      ,   'commentable');
     if (!commentable) {
       commentable = new Commentable();
       commentable.descriptor = `${entity.constructor.name}-${entity.id}`;

@@ -5,7 +5,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   OneToOne,
-  JoinColumn
+  JoinColumn,
 } from 'typeorm';
 
 import Crag from './Crag';
@@ -37,7 +37,10 @@ export default class Area {
   commentable?: Commentable;
 
   // Areas must be defined with a polygon
-  @OneToOne(type => Polygon, { nullable: false, onDelete: 'SET NULL', cascade: ['insert', 'update']})
+  @OneToOne(
+    type => Polygon,
+    { nullable: false, onDelete: 'SET NULL', cascade: ['insert', 'update'] }
+  )
   @JoinColumn()
   polygon: Polygon;
 

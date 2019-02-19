@@ -1,12 +1,12 @@
-import { EntityRepository, Repository } from "typeorm";
-import PolygonCoordinate from "../PolygonCoordinate";
-import Polygon from "../Polygon";
-import get = require("lodash/get");
+import { EntityRepository, Repository } from 'typeorm';
+import PolygonCoordinate from '../PolygonCoordinate';
+import Polygon from '../Polygon';
+import get = require('lodash/get');
 
 // Base interface for a polygon entity
 interface PolygonEntity {
-  id: any,
-  polygon?: Polygon
+  id: any;
+  polygon?: Polygon;
 }
 
 /**
@@ -31,7 +31,7 @@ export default class PolygonRepository extends Repository<PolygonCoordinate> {
         .innerJoinAndSelect('entity.polygon', 'polygon')
         .whereInIds(entity.id)
         .getOne()
-      , 'polygon');
+      ,   'polygon');
     if (!polygon) {
       polygon = new Polygon();
       polygon.descriptor = `${entity.constructor.name}-${entity.id}`;
@@ -43,4 +43,3 @@ export default class PolygonRepository extends Repository<PolygonCoordinate> {
   }
 
 }
-

@@ -20,15 +20,15 @@ export const numberFromString = new t.Type<number, string, unknown>(
   (u, c) =>
     t.string.validate(u, c).chain(s => {
       if (isNaN(Number(s))) {
-        return t.failure(u, c)
+        return t.failure(u, c);
       }
       return t.success(Number(s));
     }),
-  a => a.toString()
+  a => a.toString(),
 );
 
 export const integerFromString = t.refinement(
   numberFromString,
   t.Integer.predicate,
-  'integerFromString'
+  'integerFromString',
 );

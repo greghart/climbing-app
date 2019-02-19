@@ -16,20 +16,20 @@ function getCookieOptions(_options: Options = {}) {
   const options = {
     isLocal: false,
     browserSession: false,
-    ..._options
+    ..._options,
   };
   let cookieOptions: express.CookieOptions;
   if (options.isLocal) {
     cookieOptions = {
       signed: true,
-      httpOnly: true
+      httpOnly: true,
     };
   } else {
     cookieOptions = {
       domain: '.power-putty.com',
       secure: true,
       httpOnly: true,
-      signed: true
+      signed: true,
     };
   }
   // cookie will only last for the current browser session

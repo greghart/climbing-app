@@ -5,7 +5,7 @@ import NewCommentContainer from '../comments/NewCommentContainer';
 import withCommentable from './withCommentable';
 
 interface OwnProps {
-  area: Area,
+  area: Area;
 }
 const Container = withCommentable()(NewCommentContainer);
 
@@ -18,12 +18,12 @@ const AreaNewCommentContainer: React.SFC<OwnProps> = (props) => {
       // TODO user-feature
       user={{
         id: 1,
-        name: "Greg Hart",
+        name: 'Greg Hart',
         email: 'greghartemail@gmail.com',
-        comments: []
+        comments: [],
       }}
     />
   );
-}
+};
 
 export default AreaNewCommentContainer;

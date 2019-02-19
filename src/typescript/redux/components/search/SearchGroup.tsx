@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { props } from 'bluebird';
-import classNames = require('classnames');
+import classnames = require('classnames');
 
 interface Props {
   groupClass?: string;
@@ -19,7 +19,7 @@ const SearchGroup: React.SFC<Props> = (props) => {
         <button
           className={classNames(
             'btn',
-            props.buttonClass || 'btn-light'
+            props.buttonClass || 'btn-light',
           )}
           type="button"
           onClick={props.onClickPrepend}

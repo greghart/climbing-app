@@ -13,7 +13,7 @@ import updateRoute from '../../ducks/operations/updateRoute';
 
 interface OwnProps {
   // Route to edit
-  myRoute: Route,
+  myRoute: Route;
 }
 
 // Use one form for all routes -- for now we assume one at a time.
@@ -22,35 +22,36 @@ const form = 'route-form-edit';
 const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
   return {
     initialValues: ownProps.myRoute,
-    boulder: ownProps.myRoute.boulder
+    boulder: ownProps.myRoute.boulder,
   };
-}
+};
 
-const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
+type MapDispatchToProps = MapDispatchToPropsFunction<Partial<FormProps>, OwnProps>;
+const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
       return Bluebird.resolve(
         dispatch(
-          updateRoute(ownProps.myRoute, data)
-        )
+          updateRoute(ownProps.myRoute, data),
+        ),
       )
       .then(() => {
         return dispatch(
-          replace(`/routes/${ownProps.myRoute.id}`)
+          replace(`/routes/${ownProps.myRoute.id}`),
         );
       })
       .catch(handleReduxFormErrors);
-    }
+    },
   };
 };
 
 export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
   connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
   ),
   reduxForm({
     form,
-    enableReinitialize: true
-  })
+    enableReinitialize: true,
+  }),
 )(RouteForm) as React.ComponentType<OwnProps>;

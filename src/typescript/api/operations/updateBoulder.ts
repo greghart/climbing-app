@@ -15,16 +15,15 @@ const updateBoulder = async (boulder: Boulder, data: t.TypeOf<typeof BoulderCode
       if (data.polygon) {
         return setPolygon(
           await getCustomRepository(PolygonRepository).findOrGetPolygon(boulder),
-          data.polygon.coordinates
+          data.polygon.coordinates,
         );
       }
     })
     .then(() => {
-      Object.assign(boulder, omit(data, 'polygon'))
+      Object.assign(boulder, omit(data, 'polygon'));
       return transactionalEntityManager.save(boulder);
     });
   });
 };
 
 export default updateBoulder;
-

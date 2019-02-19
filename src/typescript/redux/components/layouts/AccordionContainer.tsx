@@ -11,12 +11,12 @@ import { ExtractProps } from '../../../externals';
 type Props = Pick<ExtractProps<typeof Accordion>, 'header' | 'content'> & {
   scope: string;
   defaultOpen?: boolean;
-}
+};
 
 const mapStateToProps = (state: State, ownProps: Props) => {
   const target = scopedSelector(ownProps.scope)(state.accordion).open;
   return {
-    isOpen: target == undefined ? ownProps.defaultOpen : target
+    isOpen: target === undefined ? ownProps.defaultOpen : target,
   };
 };
 
@@ -25,18 +25,18 @@ const mapDispatchToProps = (dispatch, ownProps: Props) => {
     onToggle: (isOpen: boolean) => dispatch(
       scopeObject(
         setOpen(!isOpen),
-        ownProps.scope
-      )
-    )
+        ownProps.scope,
+      ),
+    ),
   };
 };
 
 const AccordionContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Accordion);
 AccordionContainer.defaultProps = {
-  defaultOpen: true
-}
+  defaultOpen: true,
+};
 
 export default AccordionContainer;

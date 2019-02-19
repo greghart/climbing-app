@@ -29,4 +29,3 @@ const addArea = async (crag: Crag, data: t.TypeOf<typeof AreaCodec>) => {
 };
 
 export default addArea;
-

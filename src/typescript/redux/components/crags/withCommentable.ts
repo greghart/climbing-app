@@ -7,7 +7,7 @@ import Crag from '../../../models/Crag';
 import { InferableComponentEnhancerWithProps } from 'react-redux';
 
 interface OwnProps {
-  crag: Crag
+  crag: Crag;
 }
 
 /**
@@ -17,12 +17,12 @@ function withCommentable<InputProps extends OwnProps>() {
   return compose(
     withMountDispatch<InputProps>(
       (props) => fetchCommentableForCrag(props.crag),
-      (props) => !props.crag.commentable
+      (props) => !props.crag.commentable,
     ),
     withLoader<InputProps>(
-      (props) => !props.crag.commentable
-    )
+      (props) => !props.crag.commentable,
+    ),
   ) as InferableComponentEnhancerWithProps<{}, InputProps>;
-};
+}
 
 export default withCommentable;

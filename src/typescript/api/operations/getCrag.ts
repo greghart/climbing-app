@@ -7,13 +7,19 @@ const getCrags = (id: number | string) => {
   .findOne({
     where: [
       { name: id },
-      { id }
+      { id },
     ],
-    relations: ['areas', 'areas.boulders', 'areas.polygon', 'areas.polygon.coordinates', 'areas.boulders.routes']
+    relations: [
+      'areas',
+      'areas.boulders',
+      'areas.polygon',
+      'areas.polygon.coordinates',
+      'areas.boulders.routes',
+    ],
   })
   .then((crag) => {
     crag._isLoaded = true;
-    return crag
+    return crag;
   });
 };
 

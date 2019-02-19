@@ -30,5 +30,5 @@ const ClickableRouteIcon: React.ComponentType<Props> = (props) => {
     </ConfirmedCircle>
   );
 
-}
+};
 export default ClickableRouteIcon;

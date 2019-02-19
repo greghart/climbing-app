@@ -11,12 +11,15 @@ interface ContainerState {
   actualCurrent?: Coordinate;
 }
 
-class BoulderLocationSetterContainer extends React.Component<ContainerProps & ExtractProps<typeof BoulderLocationSetter>, ContainerState> {
+class BoulderLocationSetterContainer extends React.Component<
+  ContainerProps & ExtractProps<typeof BoulderLocationSetter>,
+  ContainerState
+> {
 
   constructor(props) {
     super(props);
     this.state = {
-      actualCurrent: props.defaultCurrent
+      actualCurrent: props.defaultCurrent,
     };
     this.onClick = this.onClick.bind(this);
   }
@@ -24,7 +27,7 @@ class BoulderLocationSetterContainer extends React.Component<ContainerProps & Ex
   onClick(e: Leaflet.LeafletMouseEvent) {
     const c = new Coordinate(e.latlng.lat, e.latlng.lng);
     this.setState({
-      actualCurrent: c
+      actualCurrent: c,
     });
   }
 

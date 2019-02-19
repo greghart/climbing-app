@@ -13,7 +13,7 @@ export default (boulder: Boulder, data: { [index: string]: any }) => {
     .then((boulderData) => {
       return getSwagger().boulders.updateBoulder(
         boulder.id.toString(),
-        boulderData
+        boulderData,
       );
     })
     .then((boulder) => {
@@ -22,11 +22,10 @@ export default (boulder: Boulder, data: { [index: string]: any }) => {
         receiveEntities(
           normalize(
             boulder,
-            BoulderSchema
-          )
-        )
-      )
-    })
+            BoulderSchema,
+          ),
+        ),
+      );
+    });
   };
 };
-

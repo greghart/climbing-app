@@ -25,7 +25,7 @@ const loadFixtures = async (connection: Connection) => {
   vGrading.name = 'Vermin (V) Scale';
   vGrading.type = 'boulder';
   vGrading.grades = [
-    'B', ...Array.from({ length: 18 }, (v, i) => i)
+    'B', ...Array.from({ length: 18 }, (v, i) => i),
   ].map((g, i) => {
     const grade = new Grade();
     grade.name = `V${g}`;
@@ -44,7 +44,7 @@ const loadFixtures = async (connection: Connection) => {
   // Load our static crags
   const loadStaticCrag = async (fileName) => {
     const dataRaw = await Bluebird.promisify(fs.readFile)(
-      path.join(__dirname, `../../../static/data/${fileName}`)
+      path.join(__dirname, `../../../static/data/${fileName}`),
     );
     const data = JSON.parse(dataRaw.toString());
     const crag = parseCrag(data);
@@ -55,8 +55,6 @@ const loadFixtures = async (connection: Connection) => {
 
   console.log('Database connection successfully setup');
 };
-
-let _connectionPool;
 
 function getConnection() {
   return createConnection({
@@ -69,11 +67,11 @@ function getConnection() {
     // password: config.get<string>('server.database.postgres.password'),
     // database: config.get<string>('server.database.postgres.database'),
     entities: [
-      __dirname + '/../models/*.ts'
+      `${__dirname}/../models/*.ts`,
     ],
     dropSchema: config.get<boolean>('server.database.sync'),
     synchronize: config.get<boolean>('server.database.sync'),
-    logging: true
+    logging: true,
   })
   .then(async (connection) => {
     if (config.get<boolean>('server.database.sync')) {

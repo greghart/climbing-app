@@ -7,7 +7,7 @@ import Boulder from '../../../models/Boulder';
 import { InferableComponentEnhancerWithProps } from 'react-redux';
 
 interface OwnProps {
-  boulder: Boulder
+  boulder: Boulder;
 }
 
 /**
@@ -17,13 +17,12 @@ function withCommentable<InputProps extends OwnProps>() {
   return compose(
     withMountDispatch<InputProps>(
       (props) => fetchCommentableForBoulder(props.boulder),
-      (props) => !props.boulder.commentable
+      (props) => !props.boulder.commentable,
     ),
     withLoader<InputProps>(
-      (props) => !props.boulder.commentable
-    )
+      (props) => !props.boulder.commentable,
+    ),
   ) as InferableComponentEnhancerWithProps<{}, InputProps>;
-};
+}
 
 export default withCommentable;
-

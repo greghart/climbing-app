@@ -19,15 +19,15 @@ function normalizeError<A, I, O>(err: t.ValidationError) {
   const key = map(
     filter(
       contextWeCareAbout,
-      (thisContext) => isNaN(Number(thisContext.key))
+      (thisContext) => isNaN(Number(thisContext.key)),
     ),
-    'key'
+    'key',
   ).join('.');
 
   // Get the actual type that failed, so we can show the right description
   // Generally this is the final type, but we need to break out the refinement
   // from its' base and the refinement itself failing.
-  const finalType = contextWeCareAbout[contextWeCareAbout.length-1].type;
+  const finalType = contextWeCareAbout[contextWeCareAbout.length - 1].type;
   const actualType = (() => {
     if (!(finalType instanceof t.RefinementType)) {
       return finalType;
@@ -51,7 +51,7 @@ function normalizeError<A, I, O>(err: t.ValidationError) {
   const message = (
     err.message ||
     (
-      (actualType instanceof t.InterfaceType && `undefined`)
+      (actualType instanceof t.InterfaceType && 'undefined')
     ) ||
     actualType.name
   );
@@ -59,28 +59,27 @@ function normalizeError<A, I, O>(err: t.ValidationError) {
   return {
     key,
     message,
-    actualType
+    actualType,
   };
 }
-
 
 /**
  * Get a redux-form SubmissionError from an io-ts validation errors array
  */
 function getSubmissionError<A, O, I>(errs: t.Errors): SubmissionError {
-  console.warn('========================================')
+  console.warn('========================================');
   console.warn(errs);
   return new SubmissionError(
     errs.reduce(
       (memo, thisError) => {
         // TODO Add translation
-        const { key, message } = normalizeError(thisError)
+        const { key, message } = normalizeError(thisError);
         set(memo, key, message);
-        return memo
+        return memo;
       },
-      { _error: 'Client-side validations failed' }
-    )
-  )
-};
+      { _error: 'Client-side validations failed' },
+    ),
+  );
+}
 
 export default getSubmissionError;

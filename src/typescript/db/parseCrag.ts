@@ -11,7 +11,7 @@ function parseCrag(obj: any) {
   crag.name = obj.name;
   crag.center = new Coordinate(
     obj.center[0],
-    obj.center[1]
+    obj.center[1],
   );
   crag.defaultZoom = obj.zoom;
   crag.minZoom = obj.minZoom;
@@ -20,8 +20,9 @@ function parseCrag(obj: any) {
     const area = new Area();
     area.name = thisArea.name;
     area.polygon = new Polygon();
-    area.polygon.descriptor = `area-${i+1}`;
-    area.polygon.coordinates = (thisArea.coordinates || []).map((thisCoordinate: [number, number], i) => {
+    area.polygon.descriptor = `area-${i + 1}`;
+    area.polygon.coordinates = (thisArea.coordinates || [])
+    .map((thisCoordinate: [number, number], i) => {
       const [lng, lat] = thisCoordinate;
       const pc = new PolygonCoordinate(lat, lng);
       pc.order = i;
@@ -32,7 +33,7 @@ function parseCrag(obj: any) {
       boulder.name = thisBoulder.name;
       boulder.coordinate = new Coordinate(
         thisBoulder.coordinates[0],
-        thisBoulder.coordinates[1]
+        thisBoulder.coordinates[1],
       );
       boulder.routes = (thisBoulder.routes || []).map((thisRoute: any) => {
         const route = new Route();

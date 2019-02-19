@@ -1,7 +1,7 @@
-import * as React from "react";
-import AnimationContext from "../animations/AnimationContext";
-import SlideUp from "../animations/SlideUp";
-import classNames = require("classnames");
+import * as React from 'react';
+import AnimationContext from '../animations/AnimationContext';
+import SlideUp from '../animations/SlideUp';
+import classnames = require('classnames');
 
 /**
  * A layout for a normal (non-map) page
@@ -38,10 +38,10 @@ const PageLayout: React.SFC<Props> = (props) => {
       </AnimationContext.Consumer> */}
     </div>
   );
-}
+};
 
 PageLayout.defaultProps = {
-  className: 'bg-secondary'
+  className: 'bg-secondary',
 };
 
 export default PageLayout;

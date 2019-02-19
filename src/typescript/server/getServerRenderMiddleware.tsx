@@ -4,7 +4,7 @@ import * as ReactDOMServer from 'react-dom/server';
 import {
   matchRoutes,
   renderRoutes,
-  MatchedRoute
+  MatchedRoute,
 } from 'react-router-config';
 import {
   StaticRouter,
@@ -56,7 +56,7 @@ function renderApp(req: express.Request, res: ResponseWithExpose, store: Store<a
     <HtmlComponent
       content=""
       state={res.locals.state.toString()}
-    />
+    />,
   );
   res.header('Content-Type', 'text/html; charset=utf-8');
   res.write(doctype + html);
@@ -70,8 +70,8 @@ export default function getServerRenderMiddleware(): express.RequestHandler {
       const store = getStore(
         {},
         createMemoryHistory({
-          initialEntries: [req.url]
-        })
+          initialEntries: [req.url],
+        }),
       );
       return renderApp(req, res, store);
     })

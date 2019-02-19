@@ -10,8 +10,8 @@ import { TransitionProps } from 'react-transition-group/Transition';
  */
 const SlideUp: React.SFC<Partial<TransitionProps>> = (props) => {
   console.warn({
-    props
-  }, 'SlideUp');
+    props,
+  },           'SlideUp');
   return (
     <CSSTransition
       {...props}

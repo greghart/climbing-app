@@ -13,13 +13,13 @@ const getRoute = (id: string | number, options: Options = { includeComments: fal
   .leftJoinAndSelect('boulder.polygon', 'polygon')
   .leftJoinAndSelect('polygon.coordinates', 'coordinates')
   .leftJoinAndSelect('boulder.area', 'area')
-  .leftJoinAndSelect('area.crag', 'crag')
+  .leftJoinAndSelect('area.crag', 'crag');
   if (options.includeComments) {
     query.leftJoinAndSelect('routes.commentable', 'commentable');
     query.leftJoinAndSelect('commentable.comments', 'comments');
     query.leftJoinAndSelect('comments.user', 'user');
     query.orderBy({
-      'comments.id': 'DESC'
+      'comments.id': 'DESC',
     });
   }
 

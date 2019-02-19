@@ -19,16 +19,16 @@ import Commentable from '../../../models/Commentable';
  **/
 
 const FormData = t.type({
-  text: t.refinement(t.string, text => text.length > 2, 'text.minLength')
-})
+  text: t.refinement(t.string, text => text.length > 2, 'text.minLength'),
+});
 
 export default (commentable: Commentable, text: string) => {
   return (dispatch) => {
-    return validate({ text: text }, FormData)
+    return validate({ text }, FormData)
     .then((commentData) => {
       return getSwagger().commentables.addComment(
         commentable.id.toString(),
-        commentData
+        commentData,
       );
     })
     .then((comment) => {
@@ -40,13 +40,13 @@ export default (commentable: Commentable, text: string) => {
               ...commentable,
               comments: [
                 omit(comment, 'commentable'),
-                ...commentable.comments
-              ]
+                ...commentable.comments,
+              ],
             },
             CommentableSchema,
-          )
-        )
-      )
-    })
+          ),
+        ),
+      );
+    });
   };
 };

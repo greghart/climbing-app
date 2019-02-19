@@ -9,11 +9,11 @@ import * as ReduxActions from 'redux-actions';
  */
 export default <Payload>(
   action: ReduxActions.Action<Payload>,
-  scope: string
+  scope: string,
 ): ReduxActions.Action<Payload> & { scope: string } => {
   return {
     ...action,
     // Concat existing scope if any
-    scope: ((action as any).scope || '') + scope
+    scope: ((action as any).scope || '') + scope,
   };
 };

@@ -21,11 +21,11 @@ interface Props {
 }
 
 interface FormData {
-  name?: string,
-  gradeRaw?: string,
-  length?: number,
-  description?: string,
-  firstAscent?: string,
+  name?: string;
+  gradeRaw?: string;
+  length?: number;
+  description?: string;
+  firstAscent?: string;
 }
 
 const RouteForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
@@ -73,7 +73,7 @@ const RouteForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
               <BoulderMap boulder={props.boulder} />
               {isValidCoordinate(coordinate) &&
                 <ConfirmedCircle
-                  key='old-polygon'
+                  key="old-polygon"
                   center={[coordinate.lat, coordinate.lng]}
                   color="blue"
                   fillColor="blue"

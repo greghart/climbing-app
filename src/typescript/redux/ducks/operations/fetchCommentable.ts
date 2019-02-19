@@ -6,7 +6,9 @@ import getSwagger, { SwaggerAPI } from './util/getSwagger';
 import Commentable from '../../../models/Commentable';
 import { receiveEntities } from '../entities';
 
-type CommentableFetchers = 'commentableForCrag' | 'commentableForArea' | 'commentableForBoulder' | 'commentableForRoute';
+type CommentableFetchers = (
+  'commentableForCrag' | 'commentableForArea' | 'commentableForBoulder' | 'commentableForRoute'
+);
 const getFetchCommentable = (schema: Schema, api: CommentableFetchers) => {
   return (entity: { id: string | number, commentable?: Commentable }) => {
     return (dispatch) => {
@@ -17,13 +19,13 @@ const getFetchCommentable = (schema: Schema, api: CommentableFetchers) => {
           receiveEntities(
             normalize(
               entity,
-              schema
-            )
-          )
-        )
-      })
-    }
-  }
+              schema,
+            ),
+          ),
+        );
+      });
+    };
+  };
 };
 
 const fetchCommentableForCrag = getFetchCommentable(CragSchema, 'commentableForCrag');
@@ -35,5 +37,5 @@ export {
   fetchCommentableForCrag,
   fetchCommentableForArea,
   fetchCommentableForBoulder,
-  fetchCommentableForRoute
+  fetchCommentableForRoute,
 };

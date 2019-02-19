@@ -35,12 +35,12 @@ const freeScopeReducer = <S, P>(reducer: Reducer<S>) => {
       return {
         ...state,
         [key]: reducer(state[key], action),
-        init: initialState
+        init: initialState,
       };
     }
     return {
       ...state,
-      init: initialState
+      init: initialState,
     };
   };
 };

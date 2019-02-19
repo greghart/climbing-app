@@ -6,8 +6,8 @@ const mapIcon = '<span><i class="fa fa-map-marked fa-lg text-light"/></span>';
 const boulderIcon = '<img class="my-icon" src="/static/ico/boulder_icon.svg.png"/>';
 const icon = divIcon({
   className: 'null',
-  html: boulderIcon
-})
+  html: boulderIcon,
+});
 
 const BoulderIcon = (props) => {
   return (

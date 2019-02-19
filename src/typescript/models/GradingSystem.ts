@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   OneToMany,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import Route from './Route';
@@ -25,7 +25,7 @@ export default class GradingSystem {
   @OneToMany(
     type => Grade,
     grade => grade.gradingSystem,
-    cascadeOneToMany
+    cascadeOneToMany,
   )
   grades: Grade[];
 

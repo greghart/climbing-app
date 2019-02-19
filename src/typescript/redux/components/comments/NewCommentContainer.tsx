@@ -12,8 +12,8 @@ import handleReduxFormErrors from '../util/handleReduxFormErrors';
 import { replace } from 'connected-react-router';
 
 interface OwnProps {
-  commentable: Commentable,
-  user: User,
+  commentable: Commentable;
+  user: User;
   // Where to redirect to after creation
   redirect: string;
 }
@@ -21,34 +21,34 @@ interface OwnProps {
 // Use one form for all "commentable" -- for now we assume one at a time.
 const form = 'commentable-form';
 
-const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
+type MapDispatchToProps = MapDispatchToPropsFunction<Partial<FormProps>, OwnProps>;
+const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
       return Bluebird.resolve(
         dispatch(
-          createComment(ownProps.commentable, data.text)
-        )
+          createComment(ownProps.commentable, data.text),
+        ),
       )
       .then(() => {
         return dispatch(
-          replace(ownProps.redirect)
+          replace(ownProps.redirect),
         );
       })
       .catch(handleReduxFormErrors);
     },
     handleCustomSubmit: () => {
-      dispatch(submit(form))
-    }
+      dispatch(submit(form));
+    },
   };
 };
-
 
 export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
   connect<{}, typeof mapDispatchToProps>(
     undefined,
-    mapDispatchToProps
+    mapDispatchToProps,
   ),
   reduxForm({
-    form
-  })
+    form,
+  }),
 )(NewComment) as React.ComponentType<OwnProps>;

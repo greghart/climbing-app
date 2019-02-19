@@ -3,7 +3,7 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { createBrowserHistory } from 'history';
-const Redbox = require('redbox-react');
+import Redbox from 'redbox-react';
 
 // Client-side only imports
 import 'leaflet/dist/leaflet.css';
@@ -37,14 +37,14 @@ Promise.resolve()
   const history = createBrowserHistory();
   const store = getStore(
     window.preloadedState || {},
-    history
+    history,
   );
 
   render(
     <AppContainer>
       <Root store={store} history={history} />
     </AppContainer>,
-    rootEl
+    rootEl,
   );
 
   if (module.hot) {
@@ -57,7 +57,7 @@ Promise.resolve()
         <AppContainer errorReporter={Redbox}>
           <NextApp store={store} history={history} />
         </AppContainer>,
-        rootEl
+        rootEl,
       );
     });
   }

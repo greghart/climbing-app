@@ -25,7 +25,7 @@ const LocationField: React.ComponentType<WrappedFieldsProps & LocationProps> = (
   const isUpdating = get(props, props.names[2]);
   const coordinate: Partial<Coordinate> = {
     lat: lat.input.value as unknown as number,
-    lng: lng.input.value as unknown as number
+    lng: lng.input.value as unknown as number,
   };
 
   if (!isUpdating.input.value) {

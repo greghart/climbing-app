@@ -8,7 +8,10 @@ import { pick } from 'lodash';
  *
  * Transparent so it can be seen alongside other components
  */
-type Style = Pick<PolygonProps, 'weight' | 'opacity' | 'color' | 'dashArray' | 'fillOpacity' | 'fillColor'>;
+type Style = Pick<
+  PolygonProps,
+  'weight' | 'opacity' | 'color' | 'dashArray' | 'fillOpacity' | 'fillColor'
+>;
 type Props = PolygonProps & {
   normalStyle?: Style
   overStyle?: Style;
@@ -20,19 +23,22 @@ const normalStyle = {
   color: 'white',
   dashArray: '3',
   fillOpacity: 0.2,
-  fillColor: '#088da5'
+  fillColor: '#088da5',
 };
 
 const overStyle = {
   weight: 5,
   color: '#666',
   dashArray: '',
-  fillOpacity: 0.2
+  fillOpacity: 0.2,
 };
 
 const MyPolygon: React.SFC<Props> = (props) => {
   // Direct styles should override objects
-  const directStyles = pick(props, 'weight', 'opacity', 'color', 'dashArray', 'fillOpacity', 'fillColor');
+  const directStyles = pick(
+    props,
+    'weight', 'opacity', 'color', 'dashArray', 'fillOpacity', 'fillColor'
+  );
   let polygonRef: Polygon;
   return (
     <Polygon
@@ -42,13 +48,13 @@ const MyPolygon: React.SFC<Props> = (props) => {
       onmouseover={() => {
         polygonRef.setStyle({
           ...props.overStyle,
-          ...directStyles
+          ...directStyles,
         });
       }}
       onmouseout={() => {
         polygonRef.setStyle({
           ...props.normalStyle,
-          ...directStyles
+          ...directStyles,
         });
       }}
     >
@@ -59,7 +65,7 @@ const MyPolygon: React.SFC<Props> = (props) => {
 
 MyPolygon.defaultProps = {
   normalStyle,
-  overStyle
-}
+  overStyle,
+};
 
 export default MyPolygon;

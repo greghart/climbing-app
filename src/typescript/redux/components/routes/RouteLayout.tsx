@@ -6,8 +6,17 @@ import ShowLayout, { RouterProps } from '../show/ShowLayout';
 
 type Props = RouterProps & {
   route: Route;
-}
+};
 
+// TODO Reverse router
+const exploreRoute = (route: Route) => {
+  return `/explorer/${[
+    route.boulder.area.crag.id,
+    route.boulder.area.id,
+    route.boulder.id,
+    route.id
+  ].join('/')}`;
+};
 const RouteLayout: React.SFC<Props> = (props) => {
   console.warn({ props });
   return (
@@ -15,18 +24,18 @@ const RouteLayout: React.SFC<Props> = (props) => {
       {...props}
       headerProps={{
         title: <RouteBreadcrumbs route={props.route} />,
-        linkTo: `/explorer/${props.route.boulder.area.crag.id}/${props.route.boulder.area.id}/${props.route.boulder.id}/${props.route.id}`
+        linkTo: exploreRoute(props.route)
       }}
       tabsProps={{
         routeBase: 'routes',
-        entity: props.route
+        entity: props.route,
       }}
       extraProps={{
-        myRoute: props.route
+        myRoute: props.route,
       }}
     />
   );
-}
+};
 RouteLayout.defaultProps = {
   route: {
     id: 1,
@@ -35,10 +44,10 @@ RouteLayout.defaultProps = {
     boulder: {
       name: 'EZ Boulder',
       area: {
-        name: 'TramWay'
-      }
-    }
-  } as any
+        name: 'TramWay',
+      },
+    },
+  } as any,
 };
 
 export default RouteLayout;

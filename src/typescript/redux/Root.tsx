@@ -4,7 +4,7 @@ import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import {
-  renderRoutes
+  renderRoutes,
 } from 'react-router-config';
 import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import SFC = React.SFC;
-import { RouteConfigComponentProps } from "react-router-config";
+import { RouteConfigComponentProps } from 'react-router-config';
 
 import CragLayout from '../components/crags/CragLayout';
 import fetchCragContainer from '../components/crags/fetchCragContainer';
@@ -22,6 +22,3 @@ const CragRoute: SFC<RouteConfigComponentProps<CragParams>> = (props) => {
 };
 
 export default CragRoute;
-
-
-

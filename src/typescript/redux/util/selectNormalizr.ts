@@ -8,7 +8,7 @@ type SchemaDescription = {
   // an extra schmea description will recurse down
   // Defaults to false
   [index: string]: true | false | 'empty' | SchemaDescription;
-}
+};
 export { SchemaDescription };
 
 /**
@@ -21,34 +21,34 @@ export { SchemaDescription };
  */
 export default function selectNormalizr(
   schema: NormalizrSchema.Entity | [NormalizrSchema.Entity],
-  query: SchemaDescription
+  query: SchemaDescription,
 ) {
   const selectedSchemas : { [index: string]: any } = {};
-  const resolvedSchema = isArray(schema) ? schema[0] : schema
+  const resolvedSchema = isArray(schema) ? schema[0] : schema;
   Object.keys(resolvedSchema.schema).forEach((thisKey) => {
     const thisQuery = query[thisKey] || false;
-    if (thisQuery === true){
+    if (thisQuery === true) {
       selectedSchemas[thisKey] = resolvedSchema.schema[thisKey];
     } else if (thisQuery === false) {
       // No-op
-    } else if (thisQuery=== 'empty') {
+    } else if (thisQuery === 'empty') {
       selectedSchemas[thisKey] = selectNormalizr(
         resolvedSchema.schema[thisKey],
-        {}
-      )
+        {},
+      );
     } else {
       selectedSchemas[thisKey] = selectNormalizr(
         resolvedSchema.schema[thisKey],
-        thisQuery
-      )
+        thisQuery,
+      );
     }
-  })
+  });
   const newSchema = new NormalizrSchema.Entity(
     resolvedSchema.key,
     selectedSchemas,
     {
-      idAttribute: resolvedSchema.idAttribute
-    }
+      idAttribute: resolvedSchema.idAttribute,
+    },
   );
 
   return isArray(schema) ? [newSchema] : newSchema;

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Tooltip } from 'react-leaflet';
 
-import { ExtractProps } from "../../../externals";
+import { ExtractProps } from '../../../externals';
 import { LeafletMouseEvent, LeafletEvent } from 'leaflet';
 
 type Props = ExtractProps<typeof Tooltip> & {
   onClick: (e: LeafletEvent | MouseEvent) => unknown;
-}
+};
 
 /**
  * Setup a clickable tooltip
@@ -24,8 +24,8 @@ class ClickableTooltip extends React.Component<Props> {
   handleClick(e) {
     console.warn({
       e,
-      isPopupOpen: this.ref.current.leafletElement.isPopupOpen()
-    }, 'This is a click');
+      isPopupOpen: this.ref.current.leafletElement.isPopupOpen(),
+    },           'This is a click');
     if (this.ref.current.leafletElement.isPopupOpen()) {
       this.props.onClick && this.props.onClick(e);
     }
@@ -47,14 +47,14 @@ class ClickableTooltip extends React.Component<Props> {
   onTooltipOpen() {
     console.log('setting up', {
       this: this,
-      el: this.ref.current.leafletElement.getElement()
-    })
+      el: this.ref.current.leafletElement.getElement(),
+    });
     this.ref.current.leafletElement.on('click', this.handleClick);
     this.ref.current.leafletElement.getElement().addEventListener('click', this.handleClick);
   }
 
   onTooltipClose() {
-    console.warn('on close?')
+    console.warn('on close?');
     this.ref.current.leafletElement.off('click', this.handleClick);
   }
 

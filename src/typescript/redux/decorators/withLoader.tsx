@@ -1,7 +1,7 @@
-import * as React from "react";
+import * as React from 'react';
 
 function defaultIsLoading(props: { isLoading?: boolean }) {
-  return props.isLoading === true;
+  return props.isLoading;
 }
 
 /**
@@ -9,7 +9,7 @@ function defaultIsLoading(props: { isLoading?: boolean }) {
  * @param - Is the component loading?
  * @param - Should we pass down a loading prop or no?
  **/
-function withLoader<P> (isLoading: (props: P) => boolean = defaultIsLoading) {
+function withLoader<P>(isLoading: (props: P) => boolean = defaultIsLoading) {
   return (Component: React.ComponentType<P>) => {
     return (props: P) => {
       if (isLoading(props)) {
@@ -24,7 +24,7 @@ function withLoader<P> (isLoading: (props: P) => boolean = defaultIsLoading) {
         );
       }
       return <Component {...props} />;
-    }
+    };
   };
 }
 

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import User from '../../../models/User';
 import { Omit } from 'utility-types';
+import * as classNames from 'classnames';
+import User from '../../../models/User';
 
 interface Props {
   user: Omit<User, 'comments'>;
@@ -13,7 +14,7 @@ const colors = [
   ['bg-danger', 'text-white'],
   ['bg-warning', 'text-dark'],
   ['bg-info', 'text-white'],
-  ['bg-light','text-dark'],
+  ['bg-light', 'text-dark'],
   ['bg-dark', 'text-white'],
 ];
 function getRandomInt(max) {
@@ -21,11 +22,16 @@ function getRandomInt(max) {
 }
 const getRandomColorClass = () => {
   return colors[getRandomInt(colors.length)].join(' ');
-}
+};
 
 const ProfileIcon: React.SFC<Props> = (props) => {
   return (
-    <div className={`rounded-circle profile-icon ${colors[props.user.id % colors.length].join(' ')}`}>
+    <div
+      className={classNames(
+        'rounded-circle profile-icon',
+        colors[props.user.id % colors.length].join(' ')
+      )}
+    >
       {props.user.name[0]}
     </div>
   );

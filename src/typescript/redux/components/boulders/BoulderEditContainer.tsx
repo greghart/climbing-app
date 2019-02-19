@@ -12,7 +12,7 @@ import Boulder from '../../../models/Boulder';
 
 interface OwnProps {
   // Boulder to edit
-  boulder: Boulder,
+  boulder: Boulder;
 }
 
 // Use one form for all routes -- for now we assume one at a time.
@@ -21,36 +21,36 @@ const form = 'boulder-form-edit';
 const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
   return {
     initialValues: ownProps.boulder,
-    area: ownProps.boulder.area
+    area: ownProps.boulder.area,
   };
-}
+};
 
-const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
+type MapDispatchToProps = MapDispatchToPropsFunction<Partial<FormProps>, OwnProps>;
+const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
       return Bluebird.resolve(
         dispatch(
-          updateBoulder(ownProps.boulder, data)
-        )
+          updateBoulder(ownProps.boulder, data),
+        ),
       )
       .then(() => {
         return dispatch(
-          replace(`/boulders/${ownProps.boulder.id}`)
+          replace(`/boulders/${ownProps.boulder.id}`),
         );
       })
       .catch(handleReduxFormErrors);
-    }
+    },
   };
 };
 
 export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
   connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
   ),
   reduxForm({
     form,
-    enableReinitialize: true
-  })
+    enableReinitialize: true,
+  }),
 )(BoulderForm) as React.ComponentType<OwnProps>;
-

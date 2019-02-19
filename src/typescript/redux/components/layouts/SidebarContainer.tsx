@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Sidebar, { SidebarProps } from 'react-sidebar';
+import reactSidebar, { SidebarProps } from 'react-sidebar';
 import { connect } from 'react-redux';
 
 import { setOpen } from '../../ducks/sidebar';
@@ -30,7 +30,7 @@ const getContainerForScope = (scope: string) => {
   const mapStateToProps = (state: State) => {
     const target = scopedSelector(scope)(state.sidebar);
     return {
-      open: target.open
+      open: target.open,
     };
   };
 
@@ -38,9 +38,9 @@ const getContainerForScope = (scope: string) => {
     onSetOpen: (isOpen: boolean) => {
       return scopeObject(
         setOpen(isOpen),
-        scope
+        scope,
       );
-    }
+    },
   };
 
   type StateProps = {
@@ -51,7 +51,7 @@ const getContainerForScope = (scope: string) => {
   };
   return connect<StateProps, DispatchProps, Props>(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
   )(MySidebar);
 };
 

@@ -29,7 +29,7 @@ export default class CragsService {
   @Rest.Path(':id')
   @Response<object>(200, 'Retrieve crag data')
   public async getCrag(
-    @Rest.PathParam('id') id: string
+    @Rest.PathParam('id') id: string,
   ) {
     return getCrag(id);
   }
@@ -40,11 +40,11 @@ export default class CragsService {
   @Response<CragPayload>(200, 'Update a crag')
   public async updateCrag(
     @Rest.PathParam('id') id: string,
-    data: CragPayload
+    data: CragPayload,
   ) {
     const crag = await getCrag(id);
     const payload = await validate(data, CragCodec);
-    return updateCrag(crag, payload)
+    return updateCrag(crag, payload);
   }
 
   @Rest.POST
@@ -54,17 +54,17 @@ export default class CragsService {
   public async addArea(
     // Areas must be added to a crag currently
     @Rest.PathParam('id') id: string,
-    data: AreaPayload
+    data: AreaPayload,
   ) {
-    const crag = await getRepository(Crag).findOne(id)
+    const crag = await getRepository(Crag).findOne(id);
     const payload = await validate(data, AreaCodec);
     return addArea(
       crag,
-      payload
+      payload,
     )
     .then((area) => {
-      return new Rest.Return.NewResource(`/crags/${crag.id}`, area)
-    })
+      return new Rest.Return.NewResource(`/crags/${crag.id}`, area);
+    });
   }
 }
 

@@ -8,7 +8,7 @@ interface Options {
 
 type Id = string | number;
 
-const getAreas = (ids: Id | Array<Id>, options: Options = { includeComments: false }) => {
+const getAreas = (ids: Id | Id[], options: Options = { includeComments: false }) => {
   const query = getRepository(Area).createQueryBuilder('areas')
   .whereInIds(ids)
   .leftJoinAndSelect('areas.boulders', 'boulders')
@@ -16,26 +16,26 @@ const getAreas = (ids: Id | Array<Id>, options: Options = { includeComments: fal
   .leftJoinAndSelect('areas.polygon', 'polygon')
   .leftJoinAndSelect('polygon.coordinates', 'coordinates')
   .orderBy({
-    'coordinates.order': 'ASC'
-  })
+    'coordinates.order': 'ASC',
+  });
   if (options.includeComments) {
     query.leftJoinAndSelect('areas.commentable', 'commentable');
     query.leftJoinAndSelect('commentable.comments', 'comments');
     query.leftJoinAndSelect('comments.user', 'user');
     query.orderBy({
-      'comments.id': 'DESC'
+      'comments.id': 'DESC',
     });
   }
 
   return query.getMany()
-  .then((areas) =>{
+  .then((areas) => {
     // Signal client that we've found comments or not
     if (options.includeComments) {
       areas.forEach((thisArea) => {
         if (thisArea.commentable === undefined) {
           thisArea.commentable = null;
         }
-      })
+      });
     }
     return areas;
   });

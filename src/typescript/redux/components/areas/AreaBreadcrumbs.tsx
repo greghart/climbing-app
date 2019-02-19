@@ -17,8 +17,6 @@ const AreaBreadcrumbs: React.SFC<Props> = (props) => {
       ]}
     />
   );
-}
+};
 
 export default AreaBreadcrumbs;
-
-

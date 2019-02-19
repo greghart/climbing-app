@@ -14,11 +14,11 @@ export default scopeThunker(
           receiveEntities(
             normalize(
               crag,
-              CragSchema
-            )
-          )
+              CragSchema,
+            ),
+          ),
         );
       });
     };
-  }
+  },
 );

@@ -12,37 +12,38 @@ import { replace } from 'connected-react-router';
 import Area from '../../../models/Area';
 
 interface OwnProps {
-  area: Area,
+  area: Area;
 }
 
 // Use one form for all boulders -- for now we assume one at a time.
 const form = 'boulder-form';
 
-const mapDispatchToProps: MapDispatchToPropsFunction<Partial<FormProps>, OwnProps> = (dispatch, ownProps) => {
+type MapDispatchToProps = MapDispatchToPropsFunction<Partial<FormProps>, OwnProps>;
+const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
-      console.log(data, 'submitted')
+      console.log(data, 'submitted');
       return Bluebird.resolve(
         dispatch(
-          createBoulder(ownProps.area, data)
-        )
+          createBoulder(ownProps.area, data),
+        ),
       )
       .then(() => {
         return dispatch(
-          replace(`/areas/${ownProps.area.id}`)
+          replace(`/areas/${ownProps.area.id}`),
         );
       })
       .catch(handleReduxFormErrors);
-    }
+    },
   };
 };
 
 export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
   connect(
     undefined,
-    mapDispatchToProps
+    mapDispatchToProps,
   ),
   reduxForm({
-    form
-  })
+    form,
+  }),
 )(BoulderForm) as React.ComponentType<OwnProps>;

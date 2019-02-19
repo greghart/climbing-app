@@ -3,7 +3,7 @@ import { Omit } from 'utility-types';
 
 import ProfileIcon from '../users/ProfileIcon';
 import Timestamp from '../Timestamp';
-import CommentModel from '../../../models/Comment';
+import Comment from '../../../models/Comment';
 import User from '../../../models/User';
 import normalizeRenderer, { Renderable } from '../util/normalizeRenderer';
 
@@ -34,8 +34,7 @@ Comment.defaultProps = {
   body: (comment: Base) => <div>
     <p>{comment.text}</p>
     <small>Posted <Timestamp timestamp={comment.timestamps.createdAt}/></small>
-  </div>
+  </div>,
 };
 
 export default Comment;
-

@@ -8,7 +8,7 @@ import { ActionOrThunk } from '../../../externals';
 
 // Type guard for Thunks
 const isThunk = (
-  action: ActionOrThunk<any>
+  action: ActionOrThunk<any>,
 ): action is ThunkTypes.ThunkAction<any, any, any> => {
   return isFunction(action);
 };
@@ -23,14 +23,14 @@ const isThunk = (
  */
 export default (dispatch: ReduxTypes.Dispatch<any>, scope: string) => {
   const newDispatcher: ReduxTypes.Dispatch<any> = <Payload>(
-    action: ActionOrThunk<Payload>
+    action: ActionOrThunk<Payload>,
   ) => {
     // We dont support nested scoping dispatches, so dont try to.
     if (isThunk(action)) {
       return dispatch(action);
     }
     return dispatch(
-      scopeObject(action, scope)
+      scopeObject(action, scope),
     );
   };
   return newDispatcher;

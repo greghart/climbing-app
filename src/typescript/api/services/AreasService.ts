@@ -17,7 +17,7 @@ interface AreaPayload {
   description?: string;
   polygon: {
     coordinates: { lat: number, lng: number, order: number }[];
-  }
+  };
 }
 
 /**
@@ -37,7 +37,7 @@ export default class AreasService {
   @Response<AreaPayload[]>(200, 'Get data on a climbing area or areas')
   public async getAreas(
     @Rest.PathParam('ids') ids: string,
-    @Rest.QueryParam('includeComments') includeComments?: boolean
+    @Rest.QueryParam('includeComments') includeComments?: boolean,
   ) {
     return getAreas(ids.split(','), { includeComments });
   }
@@ -49,17 +49,17 @@ export default class AreasService {
   public async addBoulder(
     // Boulders must be added to an area currently
     @Rest.PathParam('id') id: string,
-    data: BoulderPayload
+    data: BoulderPayload,
   ) {
     const area = await getArea(id);
     const payload = await validate(data, BoulderCodec);
     return addBoulder(
       area,
-      payload
+      payload,
     )
     .then((boulder) => {
-      return new Rest.Return.NewResource(`/areas/${area.id}`, boulder)
-    })
+      return new Rest.Return.NewResource(`/areas/${area.id}`, boulder);
+    });
   }
 
   @Rest.PUT
@@ -68,11 +68,11 @@ export default class AreasService {
   @Response<AreaPayload>(200, 'Update a area')
   public async updateArea(
     @Rest.PathParam('id') id: string,
-    data: AreaPayload
+    data: AreaPayload,
   ) {
     const area = await getArea(id);
     const payload = await validate(data, AreaCodec);
-    return updateArea(area, payload)
+    return updateArea(area, payload);
   }
 
 }

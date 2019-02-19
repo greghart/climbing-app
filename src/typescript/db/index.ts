@@ -8,14 +8,14 @@ import getConnection from './getConnection';
  * Actually, typeorm manages active connection internally, so as long as we
  * create a connection, we can directly use typeorm API...neat!
  */
-let _connection: Bluebird<Connection>;
+let connection: Bluebird<Connection>;
 
 const getSingleConnection = () => {
-  if (_connection) {
-    return _connection;
+  if (connection) {
+    return connection;
   }
-  _connection = Bluebird.resolve(getConnection());
-  return _connection;
+  connection = Bluebird.resolve(getConnection());
+  return connection;
 };
 
 export default getSingleConnection;

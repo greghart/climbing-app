@@ -15,12 +15,12 @@ const updateArea = async (area: Area, data: t.TypeOf<typeof AreaCodec>) => {
       if (data.polygon) {
         return setPolygon(
           await getCustomRepository(PolygonRepository).findOrGetPolygon(area),
-          data.polygon.coordinates
+          data.polygon.coordinates,
         );
       }
     })
     .then(() => {
-      Object.assign(area, omit(data, 'polygon'))
+      Object.assign(area, omit(data, 'polygon'));
       return transactionalEntityManager.save(area);
     });
   });

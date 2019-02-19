@@ -21,13 +21,14 @@ interface PointOnPolygonFieldProps {
   pointOnPolygonProps?: Partial<ExtractProps<typeof PointOnPolygon>>;
 }
 
-const PointOnPolygonField: React.ComponentType<WrappedFieldsProps & PointOnPolygonFieldProps> = (props) => {
+type FieldType = React.ComponentType<WrappedFieldsProps & PointOnPolygonFieldProps>;
+const PointOnPolygonField: FieldType = (props) => {
   const lat = get(props, props.names[0]);
   const lng = get(props, props.names[1]);
   const isUpdating = get(props, props.names[2]);
   const coordinate: Partial<Coordinate> = {
     lat: lat.input.value as unknown as number,
-    lng: lng.input.value as unknown as number
+    lng: lng.input.value as unknown as number,
   };
 
   if (!props.positions) {
@@ -70,7 +71,7 @@ const PointOnPolygonField: React.ComponentType<WrappedFieldsProps & PointOnPolyg
         {props.otherLayers(coordinate)}
       </PointOnPolygon>
     </div>
-  )
+  );
 };
 
 export { PointOnPolygonFieldProps };

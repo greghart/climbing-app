@@ -11,21 +11,23 @@ const Truncate: React.SFC<Props> = (props) => {
   const sliceLength = props.length - props.placeholder.length;
   const truncated = props.reverse ?
     props.text.slice(
-      Math.max(0, props.text.length - sliceLength)
+      Math.max(0, props.text.length - sliceLength),
     ) :
     props.text.slice(
       0,
-      props.text.length - sliceLength
-    )
+      props.text.length - sliceLength,
+    );
   return (
-    <span title={props.text}>{props.reverse && props.placeholder}{truncated}{!props.reverse && props.placeholder}</span>
+    <span title={props.text}>
+      {props.reverse && props.placeholder}{truncated}{!props.reverse && props.placeholder}
+    </span>
   );
 };
 Truncate.defaultProps = {
   text: '',
   length: 40,
   placeholder: '...',
-  reverse: false
+  reverse: false,
 };
 
 export default Truncate;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouteConfigComponentProps, renderRoutes } from "react-router-config";
+import { RouteConfigComponentProps, renderRoutes } from 'react-router-config';
 import { Switch, Route } from 'react-router';
 import { TransitionGroup } from 'react-transition-group';
 import Empty from '../components/animations/Empty';
@@ -32,7 +32,7 @@ const ContainerRoute: React.SFC<RouteConfigComponentProps<any>> = (props) => {
                         in: (
                           // subProps.history.location === subProps.location
                           false
-                        )
+                        ),
                       }}
                       key={(route as any).key || i}
                     >
@@ -50,6 +50,6 @@ const ContainerRoute: React.SFC<RouteConfigComponentProps<any>> = (props) => {
     //   </Empty>
     // </TransitionGroup>
   );
-}
+};
 
 export default ContainerRoute;

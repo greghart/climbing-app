@@ -60,7 +60,7 @@ export default (state: any = initialState, { type, payload }: ReduxActions.Actio
       {},
       state,
       normalize(entities, schema).entities,
-      customizer
+      customizer,
     );
   }
   // Any action with payload.entities gets handled here.
@@ -71,7 +71,7 @@ export default (state: any = initialState, { type, payload }: ReduxActions.Actio
       {},
       state,
       payload.entities,
-      customizer
+      customizer,
     );
   }
 

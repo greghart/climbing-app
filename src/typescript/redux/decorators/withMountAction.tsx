@@ -1,6 +1,6 @@
-import * as React from "react";
+import * as React from 'react';
 
-function withMountAction<P> (action: (props: P) => any) {
+function withMountAction<P>(action: (props: P) => any) {
 
   return (Component: React.ComponentType<P>): React.ComponentType<P> => {
 
@@ -14,7 +14,7 @@ function withMountAction<P> (action: (props: P) => any) {
         return <Component {...this.props} />;
       }
 
-    }
+    };
   };
 }
 

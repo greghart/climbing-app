@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
 import * as promiseMiddleware from 'redux-promise';
-import thunk from 'redux-thunk';
+import reduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { History } from 'history';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 
-import rootReducer from '../reducer';
+import reducer from '../reducer';
 import DevTools from '../DevTools';
 
 /**
@@ -39,13 +39,13 @@ export default function getStore(initialState: any, history: History) {
     applyMiddleware(...middlewares),
     DevTools.instrument(),
     // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
-    persistState(getDebugSessionKey())
+    persistState(getDebugSessionKey()),
   );
 
   const store = createStore<any>(
     connectRouter(history)(rootReducer),
     initialState,
-    enhancer
+    enhancer,
   );
 
   // Enable hot module replacement for reducers (requires Webpack or Browserify HMR to be enabled)

@@ -16,8 +16,8 @@ const SliderField: React.ComponentType<WrappedFieldProps & Props> = (props) => {
   const { input, meta, label, ...rest } = props;
   console.warn({
     props,
-    Slider
-  }, 'SliderField');
+    Slider,
+  },           'SliderField');
   return (
     <div className="form-group">
       {props.label &&

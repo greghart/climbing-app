@@ -22,7 +22,7 @@ const CragMap: React.SFC<Props> = (props) => {
   let map: Map;
   const selectedArea = find(
     props.crag.areas,
-    (area) => area.id.toString() === props.selectedAreaId
+    (area) => area.id.toString() === props.selectedAreaId,
   );
   return (
     <AnimationContext.Consumer>
@@ -47,7 +47,7 @@ const CragMap: React.SFC<Props> = (props) => {
             onzoomend={(e) => {
               console.warn({
                 e,
-                zoom: map && map.leafletElement.getZoom()
+                zoom: map && map.leafletElement.getZoom(),
               },           'onzoomend');
             }}
           >

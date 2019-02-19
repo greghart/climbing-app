@@ -18,17 +18,17 @@ const TimeEntry: React.SFC<{ label: string, value: Date }> = (props) => {
       <th>{props.label}</th>
       <td>{props.value.toLocaleTimeString()}</td>
     </tr>
-  )
-}
+  );
+};
 const BoulderSun: React.SFC<Props> = (props) => {
   const times = SunCalc.getTimes(
     new Date(),
     props.boulder.coordinate.lat,
-    props.boulder.coordinate.lng
+    props.boulder.coordinate.lng,
   );
 
   // Need refs to do some x/y conversions
-  const mapRef = React.createRef<Map>()
+  const mapRef = React.createRef<Map>();
 
   return (
     <React.Fragment>
@@ -56,7 +56,7 @@ const BoulderSun: React.SFC<Props> = (props) => {
         </tbody>
       </table>
     </React.Fragment>
-  )
-}
+  );
+};
 
 export default BoulderSun;

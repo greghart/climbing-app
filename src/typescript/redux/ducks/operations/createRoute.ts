@@ -14,7 +14,7 @@ export default (boulder: Boulder, data: { [index: string]: any }) => {
     .then((routeData) => {
       return getSwagger().boulders.addRoute(
         boulder.id.toString(),
-        routeData
+        routeData,
       );
     })
     .then((route) => {
@@ -26,14 +26,13 @@ export default (boulder: Boulder, data: { [index: string]: any }) => {
               ...boulder,
               routes: [
                 omit(route, 'boulder'),
-                ...boulder.routes
-              ]
+                ...boulder.routes,
+              ],
             },
             BoulderSchema,
-          )
-        )
-      )
-    })
+          ),
+        ),
+      );
+    });
   };
 };
-

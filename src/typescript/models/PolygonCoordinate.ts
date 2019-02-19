@@ -3,7 +3,7 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
-  Index
+  Index,
 } from 'typeorm';
 import Polygon from './Polygon';
 import Coordinate from './Coordinate';
@@ -32,7 +32,7 @@ export default class PolygonCoordinate extends Coordinate {
     return {
       id: this.id,
       order: this.order,
-      ...super.toJSON()
-    }
+      ...super.toJSON(),
+    };
   }
 }

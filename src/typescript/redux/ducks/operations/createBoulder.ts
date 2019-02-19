@@ -15,7 +15,7 @@ export default (area: Area, data: { [index: string]: any }) => {
     .then((boulderData) => {
       return getSwagger().areas.addBoulder(
         area.id.toString(),
-        boulderData
+        boulderData,
       );
     })
     .then((boulder) => {
@@ -27,15 +27,13 @@ export default (area: Area, data: { [index: string]: any }) => {
               ...area,
               boulders: [
                 omit(boulder, 'area'),
-                ...area.boulders
-              ]
+                ...area.boulders,
+              ],
             },
             AreaSchema,
-          )
-        )
-      )
-    })
+          ),
+        ),
+      );
+    });
   };
 };
-
-

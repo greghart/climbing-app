@@ -12,37 +12,37 @@ import asyncComponent from '../../decorators/asyncComponent';
 import selectNormalizr from '../../util/selectNormalizr';
 
 interface OwnProps {
-  areaId: string,
-  routerConfig: RouteConfig,
-  routerLocation: Location
+  areaId: string;
+  routerConfig: RouteConfig;
+  routerLocation: Location;
 }
 
-const selectProps = (state: State, props: OwnProps) => props.areaId
+const selectProps = (state: State, props: OwnProps) => props.areaId;
 const selectArea = (entities, areaId) => denormalize(
   areaId,
   selectNormalizr(
     AreaSchema,
-    { crag: 'empty', boulders: 'empty', commentable: true, polygon: true }
+    { crag: 'empty', boulders: 'empty', commentable: true, polygon: true },
   ),
-  entities
-)
+  entities,
+);
 // Single area at a time, so just use a single selector for now
 const getArea = createSelector<State, OwnProps, any, string, Area>(
   selectors.selectEntities,
   selectProps,
-  selectArea
-)
+  selectArea,
+);
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
   console.warn({
-    state, ownProps
-  }, 'mapStateToProps');
+    state, ownProps,
+  },           'mapStateToProps');
   return { area: getArea(state, ownProps) };
 };
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
     fetch: () => dispatch(
-      fetchAreas('singleton-fetch')(ownProps.areaId)
+      fetchAreas('singleton-fetch')(ownProps.areaId),
     ),
   };
 };
@@ -52,5 +52,5 @@ export default asyncComponent(
   mapDispatchToProps,
   (props) => (
     !!(props.area && props.area.boulders && props.area.crag)
-  )
-)(AreaLayout)
+  ),
+)(AreaLayout);

@@ -33,10 +33,10 @@ const ResultLayout: React.SFC<ResultLayoutProps> = (props) => {
         {props.right}
       </div>
     </div>
-  )
-}
+  );
+};
 ResultLayout.defaultProps = {
-  left: <i className="fa fa-map-marker-alt" />
+  left: <i className="fa fa-map-marker-alt" />,
 };
 
 interface AreaProps {
@@ -52,8 +52,8 @@ const AreaResult: React.SFC<AreaProps> = (props) => {
         </React.Fragment>}
       />
     </Link>
-  )
-}
+  );
+};
 
 interface BoulderProps {
   boulder: Boulder;
@@ -69,8 +69,8 @@ const BoulderResult: React.SFC<BoulderProps> = (props) => {
         </React.Fragment>}
       />
     </Link>
-  )
-}
+  );
+};
 interface RouteProps {
   route: Route;
   crag: Crag;
@@ -81,12 +81,14 @@ const RouteResult: React.SFC<RouteProps> = (props) => {
       <ResultLayout
         right={<React.Fragment>
           <p className="mb-0">{props.route.name}</p>
-          <small className="text-muted">{props.route.boulder.area.name} | {props.route.boulder.name}</small>
+          <small className="text-muted">
+            {props.route.boulder.area.name} | {props.route.boulder.name}
+          </small>
         </React.Fragment>}
       />
     </Link>
-  )
-}
+  );
+};
 
 const SearchResults: React.SFC<Props> = (props) => {
   const results = filter(
@@ -94,10 +96,10 @@ const SearchResults: React.SFC<Props> = (props) => {
     (thisEntity) => {
       return _labelMatchesSearch(
         thisEntity.name,
-        props.search
-      )
-    }
-  )
+        props.search,
+      );
+    },
+  );
   return (
     <ul className="list-group">
       {results.map((thisResult) => {
@@ -116,7 +118,7 @@ const SearchResults: React.SFC<Props> = (props) => {
         );
       })}
     </ul>
-  )
-}
+  );
+};
 
 export default SearchResults;

@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "tslint-config-airbnb",
+    "tslint-react-hooks"
+  ],
+  "rules": {
+    "trailing-comma": [
+      true,
+      {
+        "multiline": {
+          "functions": "ignore"
+        }
+      }
+    ],
+    "import-name": [false],
+    "variable-name": [
+      true,
+      "allow-pascal-case",
+      "allow-leading-underscore"
+    ],
+    "ter-arrow-parens": [false],
+    "prefer-array-literal": [false]
+  }
+}

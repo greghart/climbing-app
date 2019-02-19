@@ -6,7 +6,6 @@
  */
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
-import { LatLngTuple } from 'leaflet';
 import { Map, Polyline, Polygon } from 'react-leaflet';
 import BestTileLayer from '../BestTileLayer';
 import FixedContainerOverMap from '../layouts/FixedContainerOverMap';
@@ -17,9 +16,9 @@ interface TracerProps {
 }
 
 interface TracerState {
-  points: Array<LatLngTuple>;
-  built: Array<Array<LatLngTuple>>;
-  current: LatLngTuple;
+  points: Array<Leaflet.LatLngTuple>;
+  built: Array<Array<Leaflet.LatLngTuple>>;
+  current: Leaflet.LatLngTuple;
 }
 
 class Tracer extends React.Component<TracerProps, TracerState> {
@@ -29,7 +28,7 @@ class Tracer extends React.Component<TracerProps, TracerState> {
     this.state = {
       points: [],
       built: [],
-      current: null
+      current: null,
     };
     this.onClick = this.onClick.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -45,11 +44,11 @@ class Tracer extends React.Component<TracerProps, TracerState> {
     ) {
       this.setState({
         points: [],
-        built: this.state.built.concat([this.state.points])
+        built: this.state.built.concat([this.state.points]),
       });
     } else {
       this.setState({
-        points: this.state.points.concat([e.latlng])
+        points: this.state.points.concat([e.latlng]),
       });
     }
   }
@@ -93,7 +92,7 @@ class Tracer extends React.Component<TracerProps, TracerState> {
           key="current-line-pending"
           positions={[
             this.state.points[this.state.points.length - 1],
-            this.state.current
+            this.state.current,
           ]}
         />
       ),
@@ -105,7 +104,7 @@ class Tracer extends React.Component<TracerProps, TracerState> {
             color="green"
           />
         );
-      })
+      }),
     ];
   }
 
@@ -131,14 +130,14 @@ class Tracer extends React.Component<TracerProps, TracerState> {
           className="row no-gutters"
           style={{
             width: '100%',
-            height: '100%'
+            height: '100%',
           }}
         >
           <Map
             ref="map"
             style={{
               width: '100%',
-              height: '100%'
+              height: '100%',
             }}
             center={[32.85052, -117.02223]}
             bounds={this.props.bounds}

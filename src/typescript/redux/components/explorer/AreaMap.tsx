@@ -24,7 +24,7 @@ const AreaMap: React.SFC<Props> = (props) => {
   // We need the polygon to center tooltip, so we just hide it based on `polygon`
   const hidePolygonProps = props.polygon ? {} : {
     opacity: 0.0,
-    fillOpacity: 0.0
+    fillOpacity: 0.0,
   };
   return (
     <LayerGroup>
@@ -53,6 +53,6 @@ const AreaMap: React.SFC<Props> = (props) => {
 AreaMap.defaultProps = {
   polygon: false,
   tooltip: true,
-  boulders: false
-}
+  boulders: false,
+};
 export default AreaMap;

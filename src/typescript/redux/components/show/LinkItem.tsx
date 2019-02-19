@@ -23,4 +23,3 @@ const LinkItem: React.FunctionComponent<LinkProps> = (props) => {
 };
 
 export default LinkItem;
-

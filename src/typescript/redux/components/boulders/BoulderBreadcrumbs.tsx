@@ -18,7 +18,6 @@ const BoulderBreadcrumbs: React.SFC<Props> = (props) => {
       ]}
     />
   );
-}
+};
 
 export default BoulderBreadcrumbs;
-

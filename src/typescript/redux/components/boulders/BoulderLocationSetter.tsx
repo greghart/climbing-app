@@ -16,6 +16,20 @@ interface Props {
 }
 
 const BoulderLocationSetter: React.ComponentType<Props> = (props) => {
+  const input = (
+    <div className="input-group-append flex-grow-up bg-light align-items-center text-center">
+      <div className="col">
+        Set the boulder's location
+      </div>
+      <div className="col-auto">
+        {props.current &&
+          <a role="button" className="btn btn-link" onClick={() => props.onSubmit(props.current)}>
+            <i className="fa fa-check pull-right"/>
+          </a>
+        }
+      </div>
+    </div>
+  );
   return (
     <div className="w-100 h-100">
       <FixedContainerOverMap>
@@ -27,34 +41,20 @@ const BoulderLocationSetter: React.ComponentType<Props> = (props) => {
               <i className="fa fa-times-circle" />
             </a>
           }
-          input={
-            <div className="input-group-append flex-grow-up bg-light align-items-center text-center">
-              <div className="col">
-                Set the boulder's location
-              </div>
-              <div className="col-auto">
-                {props.current &&
-                  <a role="button" className="btn btn-link" onClick={() => props.onSubmit(props.current)}>
-                    <i className="fa fa-check pull-right"/>
-                  </a>
-                }
-              </div>
-            </div>
-
-          }
+          input={input}
         />
       </FixedContainerOverMap>
       <div
         className="row no-gutters"
         style={{
           width: '100%',
-          height: '100%'
+          height: '100%',
         }}
       >
         <Map
           style={{
             width: '100%',
-            height: '100%'
+            height: '100%',
           }}
           bounds={props.bounds}
           zoom={18}

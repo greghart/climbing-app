@@ -1,7 +1,7 @@
 import * as React from 'react';
 import SFC = React.SFC;
-import { RouteConfigComponentProps, renderRoutes } from "react-router-config";
-import CragContainer from "../components/explorer/CragContainer";
+import { RouteConfigComponentProps, renderRoutes } from 'react-router-config';
+import CragContainer from '../components/explorer/CragContainer';
 
 interface CragParams {
   crag: string;

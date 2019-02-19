@@ -18,24 +18,24 @@ import { Omit } from 'utility-types/dist/mapped-types';
 type Id = number | string;
 interface OwnProps {
   // Id or name
-  cragId: Id
-};
+  cragId: Id;
+}
 
-const selectProps = (state: State, props: OwnProps) => props.cragId
+const selectProps = (state: State, props: OwnProps) => props.cragId;
 const selectCrag = (entities: State['entities'], cragId: Id) => denormalize(
   cragId,
   selectNormalizr(
     CragSchema,
-    { areas: true, commentable: true }
+    { areas: true, commentable: true },
   ),
-  entities
-)
+  entities,
+);
 
 const getCrag = createSelector<State, OwnProps, any, Id, Crag>(
   selectors.selectEntities,
   selectProps,
-  selectCrag
-)
+  selectCrag,
+);
 
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const crag = getCrag(state, ownProps);
@@ -45,14 +45,14 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const isLoaded = crag && crag._isLoaded;
   return {
     crag,
-    isLoading: !isLoaded
-  }
+    isLoading: !isLoaded,
+  };
 };
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
     fetch: () => dispatch(
-      fetchCrag('singleton-fetch-crag')(ownProps.cragId)
+      fetchCrag('singleton-fetch-crag')(ownProps.cragId),
     ),
   };
 };
@@ -64,9 +64,8 @@ function fetchCragContainer<P extends Partial<StateProps>>(component: React.Comp
     mapDispatchToProps,
     (props) => (
       !props.isLoading
-    )
+    ),
   )(component) as unknown as React.ComponentType<OwnProps & Omit<P, keyof StateProps>>;
 }
 
 export default fetchCragContainer;
-

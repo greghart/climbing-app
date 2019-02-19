@@ -15,9 +15,9 @@ const searchReducer = handleActions<State, string>(
   {
     [search.toString()]: (state, { payload }) => {
       return { search: payload };
-    }
+    },
   },
-  initialState
+  initialState,
 );
 
 export default searchReducer;

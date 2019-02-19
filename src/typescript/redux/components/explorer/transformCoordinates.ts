@@ -17,7 +17,7 @@ function transformCoordinates(coordinates?: LatLngTuple | LatLngTuple[]): LatLng
     });
   }
   return [
-    [parseFloat(coordinates[1].toString()), parseFloat(coordinates[0].toString())]
+    [parseFloat(coordinates[1].toString()), parseFloat(coordinates[0].toString())],
   ];
 }
 

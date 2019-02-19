@@ -7,7 +7,7 @@ import Area from '../../../models/Area';
 import { InferableComponentEnhancerWithProps } from 'react-redux';
 
 interface OwnProps {
-  area: Area
+  area: Area;
 }
 
 /**
@@ -17,13 +17,12 @@ function withCommentable<InputProps extends OwnProps>() {
   return compose(
     withMountDispatch<InputProps>(
       (props) => fetchCommentableForArea(props.area),
-      (props) => !props.area.commentable
+      (props) => !props.area.commentable,
     ),
     withLoader<InputProps>(
-      (props) => !props.area.commentable
-    )
+      (props) => !props.area.commentable,
+    ),
   ) as InferableComponentEnhancerWithProps<{}, InputProps>;
-};
+}
 
 export default withCommentable;
-

@@ -10,10 +10,8 @@ const AreaCodec = t.exact(
       t.undefined,
       types.minLength,
     ]),
-    polygon: PolygonCodec
-  })
+    polygon: PolygonCodec,
+  }),
 );
 
 export default AreaCodec;
-
-

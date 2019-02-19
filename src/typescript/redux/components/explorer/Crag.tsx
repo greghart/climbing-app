@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import CragMap from './CragMap';
 import Area from '../../../models/Area';
-import CragModel from '../../../models/Crag';
+import Crag from '../../../models/Crag';
 import SidebarContainer from '../layouts/SidebarContainer';
 import SearchGroup from '../search/SearchGroup';
 import SearchInputContainer from '../search/SearchInputContainer';
@@ -36,11 +36,11 @@ const Crag: React.SFC<Props> = (props) => {
     <SidebarContainer
       styles={{
         sidebar: {
-          zIndex: '10000'
+          zIndex: '10000',
         },
         content: {
-          overflowY: 'none'
-        }
+          overflowY: 'none',
+        },
       }}
       sidebar={
         <div className="h-100 bg-light">

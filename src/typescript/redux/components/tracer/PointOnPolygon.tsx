@@ -30,24 +30,24 @@ interface LineData {
 function processLines(positions: LatLngTuple[]): LineData[] {
   return positions.map(
     (thisPosition, index) => {
-      const endPosition = index < positions.length-1 ?
-        positions[index+1] :
+      const endPosition = index < positions.length - 1 ?
+        positions[index + 1] :
         positions[0];
       const deltaX = endPosition[1] - thisPosition[1];
       const deltaY = endPosition[0] - thisPosition[0];
       return {
-        p1: thisPosition,
-        p2: endPosition,
         deltaX,
         deltaY,
+        p1: thisPosition,
+        p2: endPosition,
         slope: deltaY / deltaX,
         magnitude: mapLib.dist(
           { x: thisPosition[1], y: thisPosition[0] },
-          { x: endPosition[1], y: endPosition[0] }
-        )
-      }
-    }
-  )
+          { x: endPosition[1], y: endPosition[0] },
+        ),
+      };
+    },
+  );
 }
 
 interface PointOnPolygonProps {
@@ -66,7 +66,6 @@ interface PointOnPolygonState {
   _previous?: LatLng;
 }
 
-
 class PointOnPolygon extends React.Component<PointOnPolygonProps, PointOnPolygonState> {
 
   constructor(props) {
@@ -75,7 +74,7 @@ class PointOnPolygon extends React.Component<PointOnPolygonProps, PointOnPolygon
       currentPoint: undefined,
       currentDistance: 0,
       confirmed: undefined,
-      processedLines: processLines(props.positions)
+      processedLines: processLines(props.positions),
     };
     this.onClick = this.onClick.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -90,7 +89,7 @@ class PointOnPolygon extends React.Component<PointOnPolygonProps, PointOnPolygon
   onClick(e) {
     // Set the temporarily confirmed point
     this.setState({
-      confirmed: this.state.currentPoint
+      confirmed: this.state.currentPoint,
     });
   }
 
@@ -101,24 +100,23 @@ class PointOnPolygon extends React.Component<PointOnPolygonProps, PointOnPolygon
         return mapLib.distToSegmentSquared(
           { x: e.latlng.lng, y: e.latlng.lat },
           { x: thisLine.p1[1], y: thisLine.p1[0] },
-          { x: thisLine.p2[1], y: thisLine.p2[0] }
-        )
-      }
-    )
+          { x: thisLine.p2[1], y: thisLine.p2[0] },
+        );
+      },
+    );
     const closestPoint = mapLib.closestPoint(
       { x: closestLine.p1[1], y: closestLine.p1[0] },
       { x: closestLine.p2[1], y: closestLine.p2[0] },
       { x: e.latlng.lng, y: e.latlng.lat },
-    )
+    );
     this.setState({
-      currentPoint: [closestPoint.y, closestPoint.x]
-    })
+      currentPoint: [closestPoint.y, closestPoint.x],
+    });
   }
 
   renderGivenPolygon() {
-    return <MyPolygon positions={this.props.positions} />
+    return <MyPolygon positions={this.props.positions} />;
   }
-
 
   renderCurrentPoint() {
     if (!this.state.currentPoint) {
@@ -132,7 +130,7 @@ class PointOnPolygon extends React.Component<PointOnPolygonProps, PointOnPolygon
         radius={.1}
         center={this.state.currentPoint}
       />
-    )
+    );
   }
 
   renderConfirmed() {
@@ -163,7 +161,9 @@ class PointOnPolygon extends React.Component<PointOnPolygonProps, PointOnPolygon
                     <a
                       role="button"
                       className="btn btn-link"
-                      onClick={() => this.props.onSubmit && this.props.onSubmit(this.state.confirmed)}
+                      onClick={() => this.props.onSubmit &&
+                        this.props.onSubmit(this.state.confirmed)
+                      }
                     >
                       <i className="fa fa-check pull-right"/>
                     </a>
@@ -177,14 +177,14 @@ class PointOnPolygon extends React.Component<PointOnPolygonProps, PointOnPolygon
           className="row no-gutters"
           style={{
             width: '100%',
-            height: '100%'
+            height: '100%',
           }}
         >
           <Map
             ref="map"
             style={{
               width: '100%',
-              height: '100%'
+              height: '100%',
             }}
             bounds={this.props.positions}
             zoom={18}
@@ -207,5 +207,5 @@ class PointOnPolygon extends React.Component<PointOnPolygonProps, PointOnPolygon
 
 }
 
-export { PointOnPolygonProps }
+export { PointOnPolygonProps };
 export default PointOnPolygon;

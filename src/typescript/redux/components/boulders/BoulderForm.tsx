@@ -19,14 +19,14 @@ interface Props {
   onSubmit: OnSubmit<FormData, Props>;
   submitErrors: FormErrors<FormData, unknown>;
   // The area this boulder is in. Used to help set location
-  area: Area
+  area: Area;
 }
 
 interface FormData {
-  name?: string,
-  description?: string,
-  lat?: number,
-  lng?: number,
+  name?: string;
+  description?: string;
+  lat?: number;
+  lng?: number;
 }
 
 // Location icon that's connected to the form location.
@@ -36,7 +36,7 @@ const LocationIcon: React.ComponentType<WrappedFieldsProps> = (props) => {
   const lng = get(props, props.names[1]);
   const coordinate: Partial<Coordinate> = {
     lat: lat.input.value as unknown as number,
-    lng: lng.input.value as unknown as number
+    lng: lng.input.value as unknown as number,
   };
   return isValidCoordinate(coordinate) && (
     <BoulderIcon
@@ -44,7 +44,7 @@ const LocationIcon: React.ComponentType<WrappedFieldsProps> = (props) => {
     />
   );
 
-}
+};
 const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   console.warn({ props }, 'BoulderForm');
   return (
@@ -61,7 +61,7 @@ const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
         label="Description"
         inputComponent="textarea"
         rows="3"
-        normalize={(v) => v == '' ? null : v }
+        normalize={(v) => v === '' ? null : v }
       />
       <div className="form-group">
         <label>
@@ -99,7 +99,7 @@ const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
                   component={LocationIcon}
                 />
                 <MyPolygon
-                  key='old-polygon'
+                  key="old-polygon"
                   positions={sortedCoordinates}
                   fillOpacity={0.1}
                   fillColor="#f41f5c"
@@ -111,7 +111,7 @@ const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
             )}
             tracerProps={{
               title: 'Trace the boulder',
-              magnetSizeMeters: 1
+              magnetSizeMeters: 1,
             }}
           />
         </div>

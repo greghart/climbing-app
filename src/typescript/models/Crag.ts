@@ -4,7 +4,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   OneToOne,
-  JoinColumn
+  JoinColumn,
 } from 'typeorm';
 import { LatLngLiteral, LatLngTuple } from 'leaflet';
 
@@ -34,7 +34,7 @@ export default class Crag {
   get center(): Coordinate {
     return new Coordinate(
       this.centerLat,
-      this.centerLng
+      this.centerLng,
     );
   }
   set center(obj: Coordinate) {
@@ -58,8 +58,8 @@ export default class Crag {
       {},
       this,
       {
-        center: this.center
-      }
+        center: this.center,
+      },
     );
   }
 

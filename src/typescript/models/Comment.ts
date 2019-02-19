@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  ManyToOne
+  ManyToOne,
 } from 'typeorm';
 
 import Commentable from './Commentable';
@@ -40,4 +40,3 @@ export default class Comment {
   timestamps: Timestamps;
 
 }
-

@@ -18,31 +18,31 @@ interface Props {
 }
 
 const BoulderSunLine: React.ComponentType<Props> = (props) => {
-  const d = new Date()
+  const d = new Date();
   d.setHours(props.hour);
   const sunPosition = SunCalc.getPosition(
     d,
     props.coordinate.lat,
-    props.coordinate.lng
-  )
-  console.log(sunPosition.altitude, 'altitude')
+    props.coordinate.lng,
+  );
+  console.log(sunPosition.altitude, 'altitude');
   // Suncalc gives azimuth based on 0 radians at the unit vector (0, -1) (ie. south)
   const unitVector = [
     Math.cos(sunPosition.azimuth + Math.PI),
     Math.sin(sunPosition.azimuth + Math.PI),
-  ]
+  ];
   // Direct sun ray at a point a couple meters off boulder
   const base: [number, number] = [
     props.coordinate.lat + latLngToMeters(unitVector[0]) * 1,
-    props.coordinate.lng + latLngToMeters(unitVector[1]) * 1
+    props.coordinate.lng + latLngToMeters(unitVector[1]) * 1,
   ];
   const size = Math.max(
     6 * (sunPosition.altitude / 1.1),
-    1.5
-  )
+    1.5,
+  );
   const point: [number, number] = [
     base[0] + latLngToMeters(unitVector[0]) * size,
-    base[1] + latLngToMeters(unitVector[1]) * size
+    base[1] + latLngToMeters(unitVector[1]) * size,
   ];
   return (
     <Arrow
@@ -65,11 +65,11 @@ const BoulderSunLine: React.ComponentType<Props> = (props) => {
 const selector = formValueSelector('boulder-sun-form');
 const mapStateToProps = (state: State) => {
   return {
-    hour: selector(state, 'givenHour') / 4
+    hour: selector(state, 'givenHour') / 4,
   };
-}
+};
 const ConnectedBoulderSunLine = connect(
-  mapStateToProps
-)(BoulderSunLine)
+  mapStateToProps,
+)(BoulderSunLine);
 
 export default ConnectedBoulderSunLine;

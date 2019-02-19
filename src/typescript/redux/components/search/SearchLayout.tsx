@@ -32,6 +32,6 @@ const SearchLayout: React.SFC<Props> = (props) => {
       }
     />
   );
-}
+};
 
 export default SearchLayout;

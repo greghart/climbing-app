@@ -13,7 +13,7 @@ export default (crag: Crag, data: { [index: string]: any }) => {
     .then((cragData) => {
       return getSwagger().crags.updateCrag(
         crag.id.toString(),
-        cragData
+        cragData,
       );
     })
     .then((crag) => {
@@ -22,13 +22,10 @@ export default (crag: Crag, data: { [index: string]: any }) => {
         receiveEntities(
           normalize(
             crag,
-            CragSchema
-          )
-        )
-      )
-    })
+            CragSchema,
+          ),
+        ),
+      );
+    });
   };
 };
-
-
-

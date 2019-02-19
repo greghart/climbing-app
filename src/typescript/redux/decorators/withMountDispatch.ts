@@ -8,19 +8,22 @@ import withMountAction from './withMountAction';
  *
  * Dispatch an action on mount (if you need to)
  */
-function withMountDispatch<P>(action: (props: P) => any, shouldRun: (props: P) => boolean = () => true) {
+function withMountDispatch<P>(
+  action: (props: P) => any,
+  shouldRun: (props: P) => boolean = () => true
+) {
   return compose(
     connect(),
     withMountAction<P & { dispatch: Dispatch<any> }>(
       (props) => {
         if (shouldRun(props)) {
           return props.dispatch(
-            action(props)
+            action(props),
           );
         }
-      }
-    )
-  ) as InferableComponentEnhancerWithProps<{ dispatch: Dispatch<any> }, P>
+      },
+    ),
+  ) as InferableComponentEnhancerWithProps<{ dispatch: Dispatch<any> }, P>;
 }
 
 export default withMountDispatch;

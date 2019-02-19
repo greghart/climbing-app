@@ -30,8 +30,8 @@ const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (pr
   const boundsToUse = sortedCoordinates.length > 0 ? sortedCoordinates : props.bounds;
   console.warn({
     props,
-    sortedCoordinates
-  }, 'PolygonField');
+    sortedCoordinates,
+  },           'PolygonField');
 
   if (!isUpdating.input.value) {
     return (
@@ -69,8 +69,8 @@ const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (pr
           value.coordinates = newCoordinates.map((thisC, i) => {
             return {
               ...thisC,
-              order: i
-            }
+              order: i,
+            };
           });
           polygon.input.onChange(value);
           isUpdating.input.onChange(false);

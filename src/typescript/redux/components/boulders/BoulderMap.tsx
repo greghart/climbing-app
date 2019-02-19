@@ -41,7 +41,7 @@ const groupRoutesByCoordinate = (routes: Route[]) => {
       }
       return memo;
     },
-    []
+    [],
   );
   return reduce(
     placeable,
@@ -61,7 +61,7 @@ const groupRoutesByCoordinate = (routes: Route[]) => {
           }
           // Add next point to our circle, and find new center
           const distanceToNextPoint = Leaflet.latLng(currentCenter).distanceTo(
-            Leaflet.latLng(otherRoute.coordinate)
+            Leaflet.latLng(otherRoute.coordinate),
           );
           if (distanceToNextPoint < currentEchelon) {
             alreadyGrouped[otherRoute.id] = true;
@@ -69,25 +69,31 @@ const groupRoutesByCoordinate = (routes: Route[]) => {
             // Build up the circle
             currentEchelon += distanceToNextPoint;
             const newCenter = {
-              lat: currentCenter.lat + (otherRoute.coordinate.lat - currentCenter.lat) / (otherMemo.length+1),
-              lng: currentCenter.lng + (otherRoute.coordinate.lng - currentCenter.lng) / (otherMemo.length+1)
-            }
+              lat: (
+                currentCenter.lat + (otherRoute.coordinate.lat - currentCenter.lat) /
+                (otherMemo.length + 1)
+              ),
+              lng: (
+                currentCenter.lng + (otherRoute.coordinate.lng - currentCenter.lng) /
+                (otherMemo.length + 1)
+              ),
+            };
             currentCenter = newCenter;
           }
           return otherMemo;
         },
-        []
-      )
+        [],
+      );
       memo.push({
         coordinate: currentCenter,
         size: currentEchelon,
-        routes: grouped.concat(thisRoute)
-      })
+        routes: grouped.concat(thisRoute),
+      });
       return memo;
     },
-    []
-  )
-}
+    [],
+  );
+};
 
 const RouteMarkers: React.ComponentType<{ routes: Route[] }> = (props) => {
   return (
@@ -113,7 +119,7 @@ const RouteMarkers: React.ComponentType<{ routes: Route[] }> = (props) => {
       ))}
     </React.Fragment>
   );
-}
+};
 
 const BoulderMap: React.ComponentType<Props> = (props) => {
   const grouped = groupRoutesByCoordinate(props.boulder.routes);
@@ -124,22 +130,21 @@ const BoulderMap: React.ComponentType<Props> = (props) => {
       {props.showRoutes && <RouteMarkers routes={props.boulder.routes} />}
     </React.Fragment>
   );
-}
+};
 BoulderMap.defaultProps = {
   onClickRoute: () => {},
-  showRoutes: true
+  showRoutes: true,
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onClickRoute: (r: Route) => {
       return dispatch(push(`/routes/${r.id}`));
-    }
+    },
   };
 };
 
 export default connect<void, ReturnType<typeof mapDispatchToProps>, any>(
   undefined,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(BoulderMap);
-

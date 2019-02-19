@@ -6,7 +6,7 @@ import ShowBreadcrumbs from '../show/ShowBreadcrumbs';
 
 type Props = RouterProps & {
   crag: Crag;
-}
+};
 
 const CragLayout: React.SFC<Props> = (props) => {
   console.warn({ props }, 'CragLayout');
@@ -15,22 +15,22 @@ const CragLayout: React.SFC<Props> = (props) => {
       {...props}
       headerProps={{
         title: <ShowBreadcrumbs title={props.crag.name} links={[]} />,
-        linkTo: `/explorer/${props.crag.id}`
+        linkTo: `/explorer/${props.crag.id}`,
       }}
       tabsProps={{
         routeBase: 'crags',
-        entity: props.crag
+        entity: props.crag,
       }}
       extraProps={{
-        crag: props.crag
+        crag: props.crag,
       }}
     />
   );
-}
+};
 CragLayout.defaultProps = {
   crag: {
-    name: 'Test Crag'
-  } as any
+    name: 'Test Crag',
+  } as any,
 };
 
 export default CragLayout;

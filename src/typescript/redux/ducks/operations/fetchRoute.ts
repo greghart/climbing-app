@@ -7,5 +7,5 @@ export default fetchEntities<ArgumentTypes<SwaggerAPI['routes']['getRoute']>>(
   (swagger, id, includeComments) => {
     return swagger.routes.getRoute(id, includeComments);
   },
-  RouteSchema
+  RouteSchema,
 );

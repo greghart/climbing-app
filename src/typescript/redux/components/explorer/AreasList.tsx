@@ -29,8 +29,8 @@ const AreaListing: React.SFC<AreaListingProps> = (props) => {
       className={classNames(
         'list-group-item', 'list-group-item-action',
         {
-          active: props.selected
-        }
+          active: props.selected,
+        },
       )}
     >
       <span onClick={props.onClick}>{props.area.name}</span>
