@@ -1,7 +1,5 @@
-import { RouteConfig } from 'react-router-config';
 import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
-import { Location } from 'history';
 
 import RouteLayout from './RouteLayout';
 import { State, selectors } from '../../reducer';
@@ -13,8 +11,6 @@ import selectNormalizr from '../../util/selectNormalizr';
 
 interface OwnProps {
   routeId: string;
-  routerConfig: RouteConfig;
-  routerLocation: Location;
 }
 
 const selectProps = (state: State, props: OwnProps) => props.routeId;

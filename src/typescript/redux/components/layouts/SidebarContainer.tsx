@@ -1,5 +1,5 @@
 import * as React from 'react';
-import reactSidebar, { SidebarProps } from 'react-sidebar';
+import Sidebar, { SidebarProps } from 'react-sidebar';
 import { connect } from 'react-redux';
 
 import { setOpen } from '../../ducks/sidebar';

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Omit } from 'utility-types';
 import { Link } from 'react-router-dom';
 import Commentable from '../../../models/Commentable';
-import Comment from '../../../models/Comment';
+import CommentModel from '../../../models/Comment';
 import Comment from './Comment';
 
 interface Props {

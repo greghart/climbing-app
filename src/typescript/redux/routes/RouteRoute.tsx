@@ -10,11 +10,7 @@ interface RouteParams {
 
 const RouteRoute: SFC<RouteConfigComponentProps<RouteParams>> = (props) => {
   return (
-    <RouteLayoutContainer
-      routeId={props.match.params.route}
-      routerConfig={props.route}
-      routerLocation={props.location}
-    />
+    <RouteLayoutContainer routeId={props.match.params.route} />
   );
 };
 

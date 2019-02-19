@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import Route from '../../../models/Route';
 import RouteBreadcrumbs from './RouteBreadcrumbs';
-import ShowLayout, { RouterProps } from '../show/ShowLayout';
+import ShowLayout from '../show/ShowLayout';
 
-type Props = RouterProps & {
+type Props = {
   route: Route;
 };
 

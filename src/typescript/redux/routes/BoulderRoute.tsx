@@ -12,8 +12,6 @@ const BoulderRoute: SFC<RouteConfigComponentProps<BoulderParams>> = (props) => {
   return (
     <BoulderLayoutContainer
       boulderId={props.match.params.boulder}
-      routerConfig={props.route}
-      routerLocation={props.location}
     />
   );
 };

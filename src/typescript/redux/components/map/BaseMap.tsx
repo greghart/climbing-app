@@ -23,11 +23,11 @@ const BaseMap = React.forwardRef<Map, Props>((props, ref) => {
       zoom={18}
       minZoom={15}
       maxZoom={22}
+      ref={ref}
+      {...props}
       bounds={props.boundsCoordinates &&
         props.boundsCoordinates.map<[number, number]>((c) => [c.lat, c.lng])
       }
-      ref={ref}
-      {...props}
     >
       <BestTileLayer />
       {props.children}

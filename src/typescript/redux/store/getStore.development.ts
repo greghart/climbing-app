@@ -19,7 +19,7 @@ const logger = createLogger();
 
 const middlewares = [
   promiseMiddleware,
-  thunk,
+  reduxThunk,
   logger,
   // require('redux-immutable-state-invariant')()
 ];
@@ -43,7 +43,7 @@ export default function getStore(initialState: any, history: History) {
   );
 
   const store = createStore<any>(
-    connectRouter(history)(rootReducer),
+    connectRouter(history)(reducer),
     initialState,
     enhancer,
   );

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { Omit } from 'utility-types/dist/mapped-types';
 import { RouteConfig } from 'react-router-config';
 
 // Explorer
@@ -36,9 +36,27 @@ import CragNewCommentContainer from './components/crags/CragNewCommentContainer'
 import CragEditContainer from './components/crags/CragEditContainer';
 import CragLayoutOverview from './components/crags/CragLayoutOverview';
 import CragNewAreaContainer from './components/crags/CragNewAreaContainer';
+import provideRoute from './routes/provideRoute';
 
-export default function getRoutes(): (RouteConfig | any)[] {
-  return [
+type MyRouteConfig = Omit<RouteConfig, 'routes'> & {
+  // We can key a route for animation purposes
+  key?: string;
+  routes?: MyRouteConfig[];
+};
+
+function wrapAllRoutes(routeConfig: MyRouteConfig[]) {
+  return routeConfig.map((thisConfig) => {
+    // We know that every component will be passed the route info by react-router
+    thisConfig.component = provideRoute(thisConfig.component as any);
+    if (thisConfig.routes) {
+      thisConfig.routes = wrapAllRoutes(thisConfig.routes);
+    }
+    return thisConfig;
+  });
+}
+
+export default function getRoutes(): MyRouteConfig[] {
+  return wrapAllRoutes([
     {
       path: '*',
       component: ContainerRoute,
@@ -229,5 +247,5 @@ export default function getRoutes(): (RouteConfig | any)[] {
         },
       ],
     },
-  ];
+  ]);
 }

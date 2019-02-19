@@ -3,7 +3,7 @@ import { Omit } from 'utility-types';
 
 import ProfileIcon from '../users/ProfileIcon';
 import Timestamp from '../Timestamp';
-import Comment from '../../../models/Comment';
+import CommentModel from '../../../models/Comment';
 import User from '../../../models/User';
 import normalizeRenderer, { Renderable } from '../util/normalizeRenderer';
 

@@ -7,7 +7,7 @@ import getExpressApplication from './server/getExpressApplication';
 // import getAPIRouter from './api/getRouter';
 // import rollbar from './util/getRollbar';
 // import { serverOptions as rollbarServerOptions } from './util/getRollbar';
-import db from './db';
+import getConnection from './db';
 
 // rollbar.handleUncaughtExceptionsAndRejections(
 //   rollbarServerOptions.token,

@@ -126,7 +126,9 @@ const BoulderMap: React.ComponentType<Props> = (props) => {
   console.warn(grouped);
   return (
     <React.Fragment>
-      <MyPolygon positions={props.boulder.polygon.coordinates} />
+      {props.boulder.polygon &&
+        <MyPolygon positions={props.boulder.polygon.coordinates} />
+      }
       {props.showRoutes && <RouteMarkers routes={props.boulder.routes} />}
     </React.Fragment>
   );

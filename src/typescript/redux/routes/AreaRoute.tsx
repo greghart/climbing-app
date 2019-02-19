@@ -12,8 +12,6 @@ const AreaRoute: SFC<RouteConfigComponentProps<AreaParams>> = (props) => {
   return (
     <AreaLayoutContainer
       areaId={props.match.params.area}
-      routerConfig={props.route}
-      routerLocation={props.location}
     />
   );
 };

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as SunCalc from 'suncalc';
+import * as Leaflet from 'leaflet';
 import { Map } from 'react-leaflet';
 
 import Boulder from '../../../models/Boulder';
@@ -21,6 +22,13 @@ const TimeEntry: React.SFC<{ label: string, value: Date }> = (props) => {
   );
 };
 const BoulderSun: React.SFC<Props> = (props) => {
+  if (!props.boulder.coordinate) {
+    return (
+      <p className="text-warning">
+        This boulder doesn't have location data.
+      </p>
+    );
+  }
   const times = SunCalc.getTimes(
     new Date(),
     props.boulder.coordinate.lat,
@@ -38,7 +46,13 @@ const BoulderSun: React.SFC<Props> = (props) => {
       />
       <InlineMap
         className="m-1"
-        boundsCoordinates={props.boulder.polygon.coordinates}
+        boundsCoordinates={props.boulder.polygon &&
+          props.boulder.polygon.coordinates
+        }
+        bounds={new Leaflet.LatLng(
+          props.boulder.coordinate.lat,
+          props.boulder.coordinate.lng
+        ).toBounds(3)}
         ref={mapRef}
       >
         <BoulderMap

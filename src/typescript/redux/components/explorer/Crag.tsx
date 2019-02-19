@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import CragMap from './CragMap';
 import Area from '../../../models/Area';
-import Crag from '../../../models/Crag';
+import CragModel from '../../../models/Crag';
 import SidebarContainer from '../layouts/SidebarContainer';
 import SearchGroup from '../search/SearchGroup';
 import SearchInputContainer from '../search/SearchInputContainer';

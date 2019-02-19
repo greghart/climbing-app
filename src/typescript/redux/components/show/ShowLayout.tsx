@@ -8,14 +8,11 @@ import PageLayout from '../layouts/PageLayout';
 import ShowLayoutHeader from '../show/ShowLayoutHeader';
 import ShowLayoutTabs from '../show/ShowLayoutTabs';
 import { ExtractProps } from '../../../externals';
+import RouteContext from '../../context/RouteContext';
 
-// Separate router props so we can have smarter consumers
-interface RouterProps {
-  routerConfig: RouteConfig;
-  routerLocation: Location;
-}
+interface RouterProps {}
 
-type Props = RouterProps & {
+type Props = {
   headerProps: ExtractProps<typeof ShowLayoutHeader>;
   tabsProps: ExtractProps<typeof ShowLayoutTabs>;
   // Extra props to send to child routes
@@ -30,6 +27,7 @@ type Props = RouterProps & {
  *  * content that is delegated to router
  */
 const ShowLayout: React.SFC<Props> = (props) => {
+  const routeContext = React.useContext(RouteContext);
   return (
     <PageLayout
       {...omit(props, 'headerProps', 'tabsProps', 'routerLocation')}
@@ -42,7 +40,7 @@ const ShowLayout: React.SFC<Props> = (props) => {
         <ShowLayoutTabs
           {...props.tabsProps}
         >
-          {renderRoutes(props.routerConfig.routes, props.extraProps)}
+          {renderRoutes(routeContext.route.routes, props.extraProps)}
         </ShowLayoutTabs>
       }
       className={classNames({ 'p-0': true, 'bg-secondary': false, 'bg-white': true })}

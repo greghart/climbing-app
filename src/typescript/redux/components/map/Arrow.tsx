@@ -17,7 +17,7 @@ type Props = Omit<ExtractProps<typeof Polyline>, 'positions'> & {
   positions: LatLngExpression[],
 };
 
-const Arrow = React.forwardRef<Polyline, Props>((props) => {
+const Arrow = React.forwardRef<Polyline, Props>((props, ref) => {
   // The vector to set an arrow on should be the last vector
   const pointB = mapLib.normalizeLatLng(
     props.positions[props.positions.length - 2],
@@ -65,6 +65,7 @@ const Arrow = React.forwardRef<Polyline, Props>((props) => {
     <React.Fragment>
       <Polyline
         {...props}
+        ref={ref}
       />
       <Polyline
         {...props}

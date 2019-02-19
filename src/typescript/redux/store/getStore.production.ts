@@ -8,7 +8,7 @@ import { History } from 'history';
 
 const middlewares = [
   promiseMiddleware,
-  thunk,
+  reduxThunk,
 ];
 export default function getStore(initialState: any, history: History) {
   // Enhancer is a function of router middleware, which is a function of history
@@ -17,7 +17,7 @@ export default function getStore(initialState: any, history: History) {
     applyMiddleware(...middlewares),
   );
   const store = createStore<any>(
-    connectRouter(history)(rootReducer),
+    connectRouter(history)(reducer),
     initialState,
     enhancer,
   );
