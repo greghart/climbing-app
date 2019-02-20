@@ -6,6 +6,7 @@ import sidebar, { State as SidebarState } from './ducks/sidebar';
 import search, { State as SearchState } from './ducks/search';
 import accordion, { State as AccordionState } from './ducks/accordion';
 import freeScopeReducer, { FreeScopeReducerState } from './ducks/util/freeScopeReducer';
+import { connectRouter } from 'connected-react-router';
 
 export type State = {
   explorer: ExplorerState;
@@ -15,13 +16,14 @@ export type State = {
   accordion: FreeScopeReducerState<AccordionState>;
 };
 
-const reducer = combineReducers<State>({
+const reducer = (history) => combineReducers<State>({
   explorer,
   entities,
   search,
   sidebar: freeScopeReducer(sidebar),
   form: formReducer,
   accordion: freeScopeReducer(accordion),
+  router: connectRouter(history)
 });
 
 // Build some obvious selectors

@@ -4,6 +4,6 @@ import { RouteConfigComponentProps } from 'react-router-config';
 /**
  * Context that keeps the current parent route config information.
  *
- * Will be overridden by any sub-routes that are setup using `renderRoutes`
+ * Note this is specifically for react-router-config, so we can keep track of sub routes.
  */
 export default React.createContext<Pick<RouteConfigComponentProps, 'route' | 'location'>>(null);

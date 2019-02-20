@@ -2,7 +2,9 @@ import * as React from 'react';
 import SFC = React.SFC;
 import { RouteConfigComponentProps } from 'react-router-config';
 
-import AreaLayoutContainer from '../components/areas/AreaLayoutContainer';
+import AreaLayout from '../components/areas/AreaLayout';
+import withArea from '../components/areas/withArea';
+const AreaLayoutContainer = withArea(AreaLayout);
 
 interface AreaParams {
   area: string;

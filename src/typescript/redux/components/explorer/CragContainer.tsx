@@ -34,8 +34,12 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
-    onAreaClick: (area: Area) => {
-      return dispatch(push(`/explorer/${ownProps.cragId}/${area.id}`));
+    // Go to area, or remove area
+    onAreaClick: (area?: Area) => {
+      if (area) {
+        return dispatch(push(`/explorer/${ownProps.cragId}/${area.id}`));
+      }
+      return dispatch(push(`/explorer/${ownProps.cragId}`));
     },
     fetchCrag: () => dispatch(
       fetchCrag('singleton-fetch')([ownProps.cragId]),

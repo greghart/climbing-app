@@ -1,7 +1,6 @@
 import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
 
-import AreaLayout from './AreaLayout';
 import { State, selectors } from '../../reducer';
 import { AreaSchema } from '../../normalizr';
 import fetchAreas from '../../ducks/operations/fetchAreas';
@@ -46,4 +45,4 @@ export default asyncComponent(
   (props) => (
     !!(props.area && props.area.boulders && props.area.crag)
   ),
-)(AreaLayout);
+);

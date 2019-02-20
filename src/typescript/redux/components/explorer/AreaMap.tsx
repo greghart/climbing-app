@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { polygon } from 'leaflet';
+import { polygon, LeafletMouseEvent } from 'leaflet';
 import { LayerGroup, Tooltip } from 'react-leaflet';
 
 import AreaPolygon from './AreaPolygon';
@@ -14,7 +14,7 @@ interface Props {
   tooltip?: boolean;
   // Show boulders of this area
   boulders?: boolean;
-  onClick?: () => any;
+  onClick?: (e: LeafletMouseEvent) => any;
 }
 
 const AreaMap: React.SFC<Props> = (props) => {

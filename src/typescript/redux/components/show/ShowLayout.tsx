@@ -28,6 +28,12 @@ type Props = {
  */
 const ShowLayout: React.SFC<Props> = (props) => {
   const routeContext = React.useContext(RouteContext);
+  const test = renderRoutes(routeContext.route.routes, props.extraProps);
+  console.warn({
+    props,
+    routeContext,
+    test
+  },           'ShowLayout');
   return (
     <PageLayout
       {...omit(props, 'headerProps', 'tabsProps', 'routerLocation')}
@@ -40,7 +46,9 @@ const ShowLayout: React.SFC<Props> = (props) => {
         <ShowLayoutTabs
           {...props.tabsProps}
         >
-          {renderRoutes(routeContext.route.routes, props.extraProps)}
+          <React.Fragment key={routeContext.location.pathname}>
+            {renderRoutes(routeContext.route.routes, props.extraProps)}
+          </React.Fragment>
         </ShowLayoutTabs>
       }
       className={classNames({ 'p-0': true, 'bg-secondary': false, 'bg-white': true })}

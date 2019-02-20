@@ -25,9 +25,9 @@ const CragMap: React.SFC<Props> = (props) => {
     (area) => area.id.toString() === props.selectedAreaId,
   );
   return (
-    <AnimationContext.Consumer>
-      {animation => (
-        <SlideUp {...animation} appear>
+    // <AnimationContext.Consumer>
+    //   {animation => (
+    //     <SlideUp {...animation} appear>
           <Map
             className="map"
             key="map"
@@ -45,19 +45,24 @@ const CragMap: React.SFC<Props> = (props) => {
               })
             }
             onzoomend={(e) => {
-              console.warn({
-                e,
-                zoom: map && map.leafletElement.getZoom(),
-              },           'onzoomend');
+            }}
+            onclick={(e) => {
+              if (!e.originalEvent.defaultPrevented) {
+                props.onAreaClick(null);
+              }
             }}
           >
             <BestTileLayer />
             <AreasMap
               areas={props.crag.areas}
               selectedAreaId={props.selectedAreaId}
-              onAreaClick={(area) => {
+              onAreaClick={(area, e) => {
                 props.onAreaClick && props.onAreaClick(area);
+                e.originalEvent.preventDefault();
+                e.originalEvent.stopPropagation();
+                return false;
               }}
+              showPolygons={true}
             />
             {/* <LayersControl position="topright">
               <LayersControl.Overlay name="Areas" checked={true}>
@@ -73,9 +78,9 @@ const CragMap: React.SFC<Props> = (props) => {
               </LayersControl.Overlay>
             </LayersControl> */}
           </Map>
-        </SlideUp>
-      )}
-    </AnimationContext.Consumer>
+    //     </SlideUp>
+    //   )}
+    // </AnimationContext.Consumer>
   );
 };
 

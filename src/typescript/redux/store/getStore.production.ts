@@ -3,7 +3,7 @@ import * as promiseMiddleware from 'redux-promise';
 import reduxThunk from 'redux-thunk';
 
 import reducer from '../reducer';
-import { routerMiddleware, connectRouter } from 'connected-react-router';
+import { routerMiddleware } from 'connected-react-router';
 import { History } from 'history';
 
 const middlewares = [
@@ -17,7 +17,7 @@ export default function getStore(initialState: any, history: History) {
     applyMiddleware(...middlewares),
   );
   const store = createStore<any>(
-    connectRouter(history)(reducer),
+    reducer(history),
     initialState,
     enhancer,
   );

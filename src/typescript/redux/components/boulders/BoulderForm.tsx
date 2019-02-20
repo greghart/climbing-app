@@ -31,7 +31,8 @@ interface FormData {
 
 // Location icon that's connected to the form location.
 // Used in polygon map.
-const LocationIcon: React.ComponentType<WrappedFieldsProps> = (props) => {
+type LocationIconProps = WrappedFieldsProps & { names: [string, string] };
+const LocationIcon: React.ComponentType<LocationIconProps> = (props) => {
   const lat = get(props, props.names[0]);
   const lng = get(props, props.names[1]);
   const coordinate: Partial<Coordinate> = {

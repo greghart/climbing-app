@@ -1,11 +1,13 @@
 import * as React from 'react';
+import { renderRoutes } from 'react-router-config';
 
-import CragMap from './CragMap';
 import Area from '../../../models/Area';
 import CragModel from '../../../models/Crag';
+import CragMap from './CragMap';
 import SidebarContainer from '../layouts/SidebarContainer';
 import SearchGroup from '../search/SearchGroup';
 import SearchInputContainer from '../search/SearchInputContainer';
+import RouteContext from '../../context/RouteContext';
 
 interface Props {
   crag: CragModel;
@@ -30,17 +32,19 @@ interface Props {
  *   - Details view
  */
 const Crag: React.SFC<Props> = (props) => {
-  console.warn(props, 'Crag');
+  const routeContext = React.useContext(RouteContext);
   return (
-    <div className="container">
     <SidebarContainer
       styles={{
         sidebar: {
           zIndex: '10000',
         },
         content: {
-          overflowY: 'none',
+          overflowY: 'none'
         },
+        overlay: {
+          zIndex: '10000'
+        }
       }}
       sidebar={
         <div className="h-100 bg-light">
@@ -79,6 +83,17 @@ const Crag: React.SFC<Props> = (props) => {
             </div>
           </div>
         </div>
+        {/** Sub-routes are injected as a fixed container over the map */}
+        {/** Position them rooted at the bottom of the screen */}
+        <div className="fixed-container h-100">
+          <div className="container h-100">
+            <div className="row h-100 no-gutters align-items-end">
+              <div className="col mb-3 over-map">
+                {renderRoutes(routeContext.route.routes, { crag: props.crag })}
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="container px-0">
           <div className="row no-gutters">
             <div className="col">
@@ -88,25 +103,7 @@ const Crag: React.SFC<Props> = (props) => {
         </div>
       </div>
     </SidebarContainer>
-    </div>
   );
-  // return (
-  //   <MapDetailLayout
-  //     title={`Crag ${props.crag.name}`}
-  //     Map={
-  //       <CragMap {...props} />
-  //     }
-  //     Detail={
-  //       <div>
-  //         Areas
-  //         <AreasList
-  //           {...props}
-  //           areas={props.crag.areas}
-  //         />
-  //       </div>
-  //     }
-  //   />
-  // );
 };
 
 export { Props };

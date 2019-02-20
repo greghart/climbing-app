@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as classNames from 'classnames';
-import { Link, withRouter } from 'react-router-dom';
 import { Location } from 'history';
 import { Omit } from 'utility-types/dist/mapped-types';
 
@@ -33,6 +34,11 @@ const ShowLayoutTabs: React.SFC<Props> = (props) => {
         activeToken === 'overview' || activeToken === undefined ?
           'overview' : null
   );
+  console.warn({
+    props,
+    activeToken,
+    activeLink
+  },           'ShowLayoutTabs');
   return (
     <div className="p-2">
       <ul className="nav nav-tabs nav-justified show-tabs mb-1">
@@ -69,7 +75,11 @@ const ShowLayoutTabs: React.SFC<Props> = (props) => {
   );
 };
 
-const ConnectedShowLayoutTabs = withRouter<Omit<Props, 'location'>>(ShowLayoutTabs);
+// const ConnectedShowLayoutTabs = Omit<Props, 'location'>>(ShowLayoutTabs);
+const mapStateToProps = state => ({
+  location: state.router.location
+});
+const ConnectedShowLayoutTabs = connect(mapStateToProps)(ShowLayoutTabs);
 
 export default ConnectedShowLayoutTabs;
 export { ShowLayoutTabs as Pure };

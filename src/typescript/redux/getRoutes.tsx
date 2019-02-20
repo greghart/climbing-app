@@ -1,10 +1,13 @@
+import * as React from 'react';
 import { Omit } from 'utility-types/dist/mapped-types';
 import { RouteConfig } from 'react-router-config';
 
+import ContainerRoute from './routes/ContainerRoute';
+import AnimationContainerRoute from './routes/AnimationContainerRoute';
 // Explorer
 import CragExplorerRoute from './routes/CragExplorerRoute';
 import AreasListRoute from './routes/AreasListRoute';
-import ContainerRoute from './routes/ContainerRoute';
+import { Connected as AreaOverlayContainer } from './components/explorer/AreaOverlay';
 // Search
 import SearchLayout from './components/search/SearchLayout';
 // Area
@@ -61,9 +64,9 @@ export default function getRoutes(): MyRouteConfig[] {
       path: '*',
       component: ContainerRoute,
       routes: [
-
-        // Explorer -- map view of a crag w/ an optional area
-        // Includes a sidebar list (for now -- TODO REMOVE)
+        // Explorer -- map view of a crag
+        // Sub routes are map overlays
+        // Sidebar is available that will be settings, UX TBD
         {
           path: '/explorer/:crag/:area?',
           component: CragExplorerRoute,
@@ -71,7 +74,9 @@ export default function getRoutes(): MyRouteConfig[] {
           routes: [
             {
               path: '/explorer/:crag/:area',
-              component: AreasListRoute,
+              component: (props) => (
+                <AreaOverlayContainer areaId={props.match.params.area} />
+              ),
               key: 'explorer',
             },
           ],

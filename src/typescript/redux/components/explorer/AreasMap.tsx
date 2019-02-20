@@ -3,13 +3,14 @@ import partial = require('lodash/partial');
 
 import AreaMap from './AreaMap';
 import Area from '../../../models/Area';
+import { LeafletMouseEvent } from 'leaflet';
 
 interface Props {
   areas: Area[];
   selectedAreaId?: string;
   // Whether to show all polygons. Note, we always show selected areas's polygon
   showPolygons?: boolean;
-  onAreaClick?: (area: Area) => any;
+  onAreaClick?: (area: Area, e: LeafletMouseEvent) => any;
 }
 
 const AreasMap: React.SFC<Props> = (props) => {

@@ -4,7 +4,7 @@ import * as promiseMiddleware from 'redux-promise';
 import reduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { History } from 'history';
-import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { routerMiddleware } from 'connected-react-router';
 
 import reducer from '../reducer';
 import DevTools from '../DevTools';
@@ -43,7 +43,7 @@ export default function getStore(initialState: any, history: History) {
   );
 
   const store = createStore<any>(
-    connectRouter(history)(reducer),
+    reducer(history),
     initialState,
     enhancer,
   );

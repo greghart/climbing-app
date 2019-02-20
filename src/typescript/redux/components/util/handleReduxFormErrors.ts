@@ -6,7 +6,7 @@ import { SubmissionError } from 'redux-form';
  * Ensures anything we don't expect still gets caught
  */
 function handleReduxFormErrors(err: Error) {
-  console.error('oh boi');
+  console.error('handleReduxFormErrors');
   console.error(err);
   if (!(err instanceof SubmissionError)) {
     console.error('wrapping error to redux form', err);
