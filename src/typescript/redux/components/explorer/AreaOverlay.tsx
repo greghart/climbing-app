@@ -3,6 +3,7 @@ import OverlayDetail from './OverlayDetail';
 import Area from '../../../models/Area';
 import Crag from '../../../models/Crag';
 import withArea from '../areas/withArea';
+import Truncate from '../Truncate';
 
 type NeededProps = 'id' | 'name' | 'description';
 interface Props {
@@ -13,7 +14,9 @@ interface Props {
 const AreaOverlayContent: React.FunctionComponent<Props> = (props) => {
   return (
     <React.Fragment>
-      <p>{props.area.description}</p>
+      <p>
+        <Truncate length={140} text={props.area.description} />
+      </p>
       TODO: Boulders breakdown of some sort?
       TODO: Routes breakdown of some sort?
     </React.Fragment>

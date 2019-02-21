@@ -21,18 +21,13 @@ const AreaMap: React.SFC<Props> = (props) => {
   if (!props.area.polygon.coordinates || props.area.polygon.coordinates.length === 0) {
     return <span />;
   }
-  // We need the polygon to center tooltip, so we just hide it based on `polygon`
-  const hidePolygonProps = props.polygon ? {} : {
-    opacity: 0.0,
-    fillOpacity: 0.0,
-  };
   return (
     <LayerGroup>
       <AreaPolygon
         key={`area-${props.area.id}-polygon`}
         area={props.area}
         onclick={props.onClick}
-        {...hidePolygonProps}
+        show={props.polygon}
       >
         {props.tooltip &&
           <Tooltip permanent={true} direction="center">

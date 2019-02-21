@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Polygon, PolygonProps } from 'react-leaflet';
 
-import { pick } from 'lodash';
+import { pick, omit } from 'lodash';
 
 /**
  * A nice looking polygon for displaying
@@ -15,6 +15,10 @@ type Style = Pick<
 type Props = PolygonProps & {
   normalStyle?: Style
   overStyle?: Style;
+  // Whether to show the polygon
+  // It can be useful to use a polygon for tooltip positioning,
+  // but we dont' want to show it
+  show?: boolean;
 };
 
 const normalStyle = {
@@ -39,24 +43,26 @@ const MyPolygon: React.SFC<Props> = (props) => {
     props,
     'weight', 'opacity', 'color', 'dashArray', 'fillOpacity', 'fillColor'
   );
+  const myNormalStyle = omit(normalStyle, Object.keys(directStyles));
+  const myOverStyle = omit(overStyle, Object.keys(directStyles));
   let polygonRef: Polygon;
+  if (!props.show) {
+    directStyles.opacity = 0;
+    directStyles.fillOpacity = 0;
+  }
   return (
     <Polygon
       {...normalStyle}
       {...props}
-      ref={(polygon) => { polygonRef = polygon; }}
-      onmouseover={() => {
-        polygonRef.setStyle({
-          ...props.overStyle,
-          ...directStyles,
-        });
+      {...directStyles}
+      ref={(polygon) => {
+        polygonRef = polygon;
+        if (polygonRef) {
+          polygonRef.setStyle(directStyles);
+        }
       }}
-      onmouseout={() => {
-        polygonRef.setStyle({
-          ...props.normalStyle,
-          ...directStyles,
-        });
-      }}
+      onmouseover={() => props.show && polygonRef.setStyle(myOverStyle)}
+      onmouseout={() => props.show && polygonRef.setStyle(myNormalStyle)}
     >
       {props.children}
     </Polygon>
@@ -66,6 +72,7 @@ const MyPolygon: React.SFC<Props> = (props) => {
 MyPolygon.defaultProps = {
   normalStyle,
   overStyle,
+  show: true
 };
 
 export default MyPolygon;

@@ -45,6 +45,8 @@ type MyRouteConfig = Omit<RouteConfig, 'routes'> & {
   // We can key a route for animation purposes
   key?: string;
   routes?: MyRouteConfig[];
+  // Explorer components can setup a map component and a detail component
+  mapComponent: React.Component;
 };
 
 function wrapAllRoutes(routeConfig: MyRouteConfig[]) {
@@ -76,6 +78,9 @@ export default function getRoutes(): MyRouteConfig[] {
               path: '/explorer/:crag/:area',
               component: (props) => (
                 <AreaOverlayContainer areaId={props.match.params.area} />
+              ),
+              mapComponent: (props) => (
+                <span />
               ),
               key: 'explorer',
             },

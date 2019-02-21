@@ -62,7 +62,7 @@ const CragMap: React.SFC<Props> = (props) => {
                 e.originalEvent.stopPropagation();
                 return false;
               }}
-              showPolygons={true}
+              showPolygons={false}
             />
             {/* <LayersControl position="topright">
               <LayersControl.Overlay name="Areas" checked={true}>

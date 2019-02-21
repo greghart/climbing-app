@@ -13,7 +13,7 @@ const CragRoute: SFC<RouteConfigComponentProps<CragParams>> = (props) => {
     <CragContainer
       cragId={props.match.params.crag}
       area={props.match.params.area}
-      sidebarChildren={renderRoutes(props.route.routes)}
+      sidebarChildren={<span />}
     />
   );
 };

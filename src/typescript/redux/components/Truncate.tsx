@@ -8,6 +8,9 @@ interface Props {
 }
 
 const Truncate: React.SFC<Props> = (props) => {
+  if (props.text.length <= props.length) {
+    return <span>{props.text}</span>;
+  }
   const sliceLength = props.length - props.placeholder.length;
   const truncated = props.reverse ?
     props.text.slice(
@@ -15,7 +18,7 @@ const Truncate: React.SFC<Props> = (props) => {
     ) :
     props.text.slice(
       0,
-      props.text.length - sliceLength,
+      sliceLength,
     );
   return (
     <span title={props.text}>
