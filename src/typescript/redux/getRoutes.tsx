@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { Omit } from 'utility-types/dist/mapped-types';
-import { RouteConfig } from 'react-router-config';
+import { RouteConfig, RouteConfigComponentProps } from 'react-router-config';
 
 import ContainerRoute from './routes/ContainerRoute';
 import AnimationContainerRoute from './routes/AnimationContainerRoute';
+// Models, used for typing sub-routes
+import Crag from '../models/Crag';
 // Explorer
 import CragExplorerRoute from './routes/CragExplorerRoute';
 import AreasListRoute from './routes/AreasListRoute';
 import { Connected as AreaOverlayContainer } from './components/explorer/AreaOverlay';
+import { Connected as AreaMap } from './components/explorer/AreaMap';
 // Search
 import SearchLayout from './components/search/SearchLayout';
 // Area
@@ -46,8 +49,9 @@ type MyRouteConfig = Omit<RouteConfig, 'routes'> & {
   key?: string;
   routes?: MyRouteConfig[];
   // Explorer components can setup a map component and a detail component
-  mapComponent: React.Component;
+  mapComponent?: React.ComponentType<RouteConfigComponentProps<any>>;
 };
+export { MyRouteConfig };
 
 function wrapAllRoutes(routeConfig: MyRouteConfig[]) {
   return routeConfig.map((thisConfig) => {
@@ -69,6 +73,9 @@ export default function getRoutes(): MyRouteConfig[] {
         // Explorer -- map view of a crag
         // Sub routes are map overlays
         // Sidebar is available that will be settings, UX TBD
+        // @todo When we render sub routes, we know we can pass optional props...
+        //    - How do we signal this to the type system/do we need to?
+        //    - How do we signal this to the developer if not?
         {
           path: '/explorer/:crag/:area?',
           component: CragExplorerRoute,
@@ -77,12 +84,17 @@ export default function getRoutes(): MyRouteConfig[] {
             {
               path: '/explorer/:crag/:area',
               component: (props) => (
-                <AreaOverlayContainer areaId={props.match.params.area} />
+                <AreaOverlayContainer {...props} areaId={props.match.params.area} />
               ),
-              mapComponent: (props) => (
-                <span />
-              ),
-              key: 'explorer',
+              mapComponent: (props) => {
+                return (
+                  <AreaMap
+                    areaId={props.match.params.area}
+                    polygon={true}
+                  />
+                );
+              },
+              key: 'explorer_area',
             },
           ],
         },

@@ -1,5 +1,5 @@
 import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { connect, InferableComponentEnhancerWithProps } from 'react-redux';
 import withMountAction from './withMountAction';
 import withLoader from './withLoader';
 import { State } from '../reducer';
@@ -43,5 +43,5 @@ export default function asyncComponent<StateProps, DispatchProps, OwnProps>(
     withLoader<StateProps>(
       (props) => !hasDependants(props),
     ),
-  );
+  ) as InferableComponentEnhancerWithProps<StateProps & DispatchProps, OwnProps>;
 }

@@ -7,6 +7,8 @@ import fetchAreas from '../../ducks/operations/fetchAreas';
 import Area from '../../../models/Area';
 import asyncComponent from '../../decorators/asyncComponent';
 import selectNormalizr from '../../util/selectNormalizr';
+import { Matching } from 'react-redux';
+import { debounce } from 'lodash';
 
 interface OwnProps {
   areaId: string;
@@ -31,18 +33,29 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
   return { area: getArea(state, ownProps) };
 };
 
+const runFetch = debounce((dispatch, areaId) => {
+  return dispatch(fetchAreas('singleton-fetch')(areaId));
+});
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
-    fetch: () => dispatch(
-      fetchAreas('singleton-fetch')(ownProps.areaId),
-    ),
+    fetch: () => runFetch(dispatch, ownProps.areaId)
   };
 };
 
-export default asyncComponent(
-  mapStateToProps,
-  mapDispatchToProps,
-  (props) => (
-    !!(props.area && props.area.boulders && props.area.crag)
-  ),
-);
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ReturnType<typeof mapDispatchToProps>;
+function withArea<P>(component: React.ComponentType<P>) {
+  return asyncComponent<
+    StateProps,
+    DispatchProps,
+    OwnProps
+  >(
+    mapStateToProps,
+    mapDispatchToProps,
+    (props) => {
+      return !!(props.area && props.area.boulders && props.area.crag);
+    },
+  )(component);
+}
+
+export default withArea;

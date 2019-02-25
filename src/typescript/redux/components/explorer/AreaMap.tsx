@@ -5,6 +5,7 @@ import { LayerGroup, Tooltip } from 'react-leaflet';
 import AreaPolygon from './AreaPolygon';
 import AreaBoulders from './AreaBoulders';
 import Area from '../../../models/Area';
+import withArea from '../areas/withArea';
 
 interface Props {
   area: Area;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const AreaMap: React.SFC<Props> = (props) => {
+  console.warn({ props }, 'AreaMap');
   if (!props.area.polygon.coordinates || props.area.polygon.coordinates.length === 0) {
     return <span />;
   }
@@ -50,4 +52,7 @@ AreaMap.defaultProps = {
   tooltip: true,
   boulders: false,
 };
+
+const Connected = withArea(AreaMap);
+export { Connected };
 export default AreaMap;

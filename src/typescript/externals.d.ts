@@ -48,6 +48,7 @@ declare module 'redux' {
 /**
  * @todo Monkeypatch redux-form to fix https://github.com/DefinitelyTyped/DefinitelyTyped/issues/31215
  * @todo Monkeypatch typescript-rest to fix https://github.com/thiagobustamante/typescript-rest/issues/78
+ * @todo Monkeypatch react-redux to fix https://github.com/DefinitelyTyped/DefinitelyTyped/issues/31363
  */
 
 // Fix normalizr to reflect actual schema objects

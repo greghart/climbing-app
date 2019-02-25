@@ -2,15 +2,16 @@ import * as React from 'react';
 import {
   Map,
 } from 'react-leaflet';
-
+import { renderRoutes } from 'react-router-config';
 import find = require('lodash/find');
+import lodashMap = require('lodash/map');
 
 import BestTileLayer from '../BestTileLayer';
 import AreasMap from './AreasMap';
 import Crag from '../../../models/Crag';
 import Area from '../../../models/Area';
-import SlideUp from '../animations/SlideUp';
-import AnimationContext from '../animations/AnimationContext';
+import RouteContext from '../../context/RouteContext';
+import { MyRouteConfig } from '../../getRoutes';
 
 interface Props {
   crag: Crag;
@@ -19,6 +20,8 @@ interface Props {
 }
 
 const CragMap: React.SFC<Props> = (props) => {
+  const routeContext = React.useContext(RouteContext);
+
   let map: Map;
   const selectedArea = find(
     props.crag.areas,
@@ -55,7 +58,6 @@ const CragMap: React.SFC<Props> = (props) => {
             <BestTileLayer />
             <AreasMap
               areas={props.crag.areas}
-              selectedAreaId={props.selectedAreaId}
               onAreaClick={(area, e) => {
                 props.onAreaClick && props.onAreaClick(area);
                 e.originalEvent.preventDefault();
@@ -64,6 +66,18 @@ const CragMap: React.SFC<Props> = (props) => {
               }}
               showPolygons={false}
             />
+            {renderRoutes(
+              lodashMap(
+                routeContext.route.routes,
+                (r: MyRouteConfig) => {
+                  return {
+                    ...r,
+                    component: r.mapComponent
+                  };
+                }
+              ),
+              { crag: props.crag },
+            )}
             {/* <LayersControl position="topright">
               <LayersControl.Overlay name="Areas" checked={true}>
                 <LayerGroup>

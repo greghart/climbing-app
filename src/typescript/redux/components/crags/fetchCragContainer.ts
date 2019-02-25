@@ -58,14 +58,14 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
-function fetchCragContainer<P extends Partial<StateProps>>(component: React.ComponentType<P>) {
+function fetchCragContainer<P>(component: React.ComponentType<P>) {
   return asyncComponent<StateProps, ReturnType<typeof mapDispatchToProps>, OwnProps>(
     mapStateToProps,
     mapDispatchToProps,
     (props) => (
       !props.isLoading
     ),
-  )(component) as unknown as React.ComponentType<OwnProps & Omit<P, keyof StateProps>>;
+  )(component);
 }
 
 export default fetchCragContainer;
