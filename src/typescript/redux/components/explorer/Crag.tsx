@@ -12,7 +12,6 @@ import RouteContext from '../../context/RouteContext';
 interface Props {
   crag: CragModel;
   cragId: string;
-  selectedAreaId: string;
   onAreaClick: (area: Area) => any;
   onCloseSidebar: () => unknown;
   onOpenSidebar: () => unknown;

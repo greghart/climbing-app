@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { polygon, LeafletMouseEvent } from 'leaflet';
-import { LayerGroup, Tooltip } from 'react-leaflet';
+import * as Leaflet from 'leaflet';
+import { Map, LayerGroup, Tooltip } from 'react-leaflet';
 
 import AreaPolygon from './AreaPolygon';
 import AreaBoulders from './AreaBoulders';
@@ -15,7 +15,10 @@ interface Props {
   tooltip?: boolean;
   // Show boulders of this area
   boulders?: boolean;
-  onClick?: (e: LeafletMouseEvent) => any;
+  onClick?: (e: Leaflet.LeafletMouseEvent) => any;
+  // Optional ref to the map, allowing us to navigate to this area as an effect
+  mapRef?: React.RefObject<Map>;
+  mapFitBounds?: boolean;
 }
 
 const AreaMap: React.SFC<Props> = (props) => {
@@ -23,6 +26,18 @@ const AreaMap: React.SFC<Props> = (props) => {
   if (!props.area.polygon.coordinates || props.area.polygon.coordinates.length === 0) {
     return <span />;
   }
+  React.useEffect(
+    () => {
+      if (props.mapRef && props.mapFitBounds) {
+        props.mapRef.current.leafletElement.fitBounds(
+          props.area.polygon.coordinates.map((c) => {
+            return [c.lat, c.lng] as [number, number];
+          })
+        );
+      }
+    },
+    [props.area.id]
+  );
   return (
     <LayerGroup>
       <AreaPolygon
@@ -51,6 +66,7 @@ AreaMap.defaultProps = {
   polygon: false,
   tooltip: true,
   boulders: false,
+  mapFitBounds: false
 };
 
 const Connected = withArea(AreaMap);

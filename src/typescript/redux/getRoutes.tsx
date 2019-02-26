@@ -1,11 +1,10 @@
 import * as React from 'react';
+import * as Leaflet from 'leaflet';
 import { Omit } from 'utility-types/dist/mapped-types';
 import { RouteConfig, RouteConfigComponentProps } from 'react-router-config';
 
 import ContainerRoute from './routes/ContainerRoute';
 import AnimationContainerRoute from './routes/AnimationContainerRoute';
-// Models, used for typing sub-routes
-import Crag from '../models/Crag';
 // Explorer
 import CragExplorerRoute from './routes/CragExplorerRoute';
 import AreasListRoute from './routes/AreasListRoute';
@@ -49,7 +48,7 @@ type MyRouteConfig = Omit<RouteConfig, 'routes'> & {
   key?: string;
   routes?: MyRouteConfig[];
   // Explorer components can setup a map component and a detail component
-  mapComponent?: React.ComponentType<RouteConfigComponentProps<any>>;
+  mapComponent?: React.ComponentType<RouteConfigComponentProps<any> & { map: Leaflet.Map }>;
 };
 export { MyRouteConfig };
 
@@ -95,7 +94,10 @@ export default function getRoutes(): MyRouteConfig[] {
                   <AreaMap
                     key={props.match.params.area}
                     areaId={props.match.params.area}
+                    {...props}
                     polygon={true}
+                    boulders={true}
+                    mapFitBounds={true}
                   />
                 );
               },

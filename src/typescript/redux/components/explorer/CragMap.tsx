@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {
-  Map,
-} from 'react-leaflet';
+import { Map } from 'react-leaflet';
 import { renderRoutes } from 'react-router-config';
 import find = require('lodash/find');
 import lodashMap = require('lodash/map');
@@ -15,18 +13,13 @@ import { MyRouteConfig } from '../../getRoutes';
 
 interface Props {
   crag: Crag;
-  selectedAreaId?: string;
   onAreaClick?: (area: Area) => any;
 }
 
 const CragMap: React.SFC<Props> = (props) => {
   const routeContext = React.useContext(RouteContext);
+  const mapRef = React.createRef<Map>();
 
-  let map: Map;
-  const selectedArea = find(
-    props.crag.areas,
-    (area) => area.id.toString() === props.selectedAreaId,
-  );
   return (
     // <AnimationContext.Consumer>
     //   {animation => (
@@ -34,19 +27,12 @@ const CragMap: React.SFC<Props> = (props) => {
           <Map
             className="map"
             key="map"
-            ref={(_map) => {
-              map = _map;
-            }}
+            ref={mapRef}
             center={props.crag.center}
             zoom={props.crag.defaultZoom}
             minZoom={props.crag.minZoom}
             maxZoom={props.crag.maxZoom}
             zoomControl={false}
-            bounds={selectedArea &&
-              selectedArea.polygon.coordinates.map((c) => {
-                return [c.lat, c.lng] as [number, number];
-              })
-            }
             onzoomend={(e) => {
             }}
             onclick={(e) => {
@@ -76,14 +62,13 @@ const CragMap: React.SFC<Props> = (props) => {
                   };
                 }
               ),
-              { crag: props.crag },
+              { mapRef, crag: props.crag },
             )}
             {/* <LayersControl position="topright">
               <LayersControl.Overlay name="Areas" checked={true}>
                 <LayerGroup>
                   <AreasMap
                     areas={props.crag.areas}
-                    selectedAreaId={props.selectedAreaId}
                     onAreaClick={(area) => {
                       props.onAreaClick(area);
                     }}

@@ -23,7 +23,6 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
     ownProps,
   },           'CragContainer.mapStateToProps');
   return {
-    selectedAreaId: ownProps.area,
     crag: denormalize(
       ownProps.cragId,
       CragSchema,
