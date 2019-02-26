@@ -84,11 +84,16 @@ export default function getRoutes(): MyRouteConfig[] {
             {
               path: '/explorer/:crag/:area',
               component: (props) => (
-                <AreaOverlayContainer {...props} areaId={props.match.params.area} />
+                <AreaOverlayContainer
+                  key={props.match.params.area}
+                  {...props}
+                  areaId={props.match.params.area}
+                />
               ),
               mapComponent: (props) => {
                 return (
                   <AreaMap
+                    key={props.match.params.area}
                     areaId={props.match.params.area}
                     polygon={true}
                   />

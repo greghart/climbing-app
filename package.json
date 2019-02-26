@@ -78,6 +78,7 @@
     "rc-slider": "^8.6.5",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
+    "react-google-charts": "^3.0.10",
     "react-intl": "^2.3.0",
     "react-leaflet": "^2.2.0",
     "react-redux": "^6.0.1",

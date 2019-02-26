@@ -11,10 +11,8 @@ const getCrags = (id: number | string) => {
     ],
     relations: [
       'areas',
-      'areas.boulders',
       'areas.polygon',
       'areas.polygon.coordinates',
-      'areas.boulders.routes',
     ],
   })
   .then((crag) => {

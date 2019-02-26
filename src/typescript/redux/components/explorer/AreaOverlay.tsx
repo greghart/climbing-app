@@ -1,11 +1,14 @@
 import * as React from 'react';
+import reduce = require('lodash/reduce');
+
 import OverlayDetail from './OverlayDetail';
 import Area from '../../../models/Area';
 import Crag from '../../../models/Crag';
 import withArea from '../areas/withArea';
 import Truncate from '../Truncate';
+import RoutesDifficultyBreakdown from '../charts/RoutesDifficultyBreakdown';
 
-type NeededProps = 'id' | 'name' | 'description';
+type NeededProps = 'id' | 'name' | 'description' | 'boulders';
 interface Props {
   crag: Crag;
   area: Pick<Area, NeededProps>;
@@ -17,13 +20,23 @@ const AreaOverlayContent: React.FunctionComponent<Props> = (props) => {
       <p>
         <Truncate length={140} text={props.area.description} />
       </p>
-      TODO: Boulders breakdown of some sort?
-      TODO: Routes breakdown of some sort?
+      <RoutesDifficultyBreakdown
+        routes={
+          reduce(
+            props.area.boulders,
+            (memo, thisBoulder) => {
+              return memo.concat(thisBoulder.routes || []);
+            },
+            []
+          )
+        }
+      />
     </React.Fragment>
   );
 };
 
 const AreaOverlay: React.FunctionComponent<Props> = (props) => {
+  console.warn({ props }, 'AreaOverlay');
   return (
     <OverlayDetail
       header={props.area.name}
@@ -38,6 +51,7 @@ AreaOverlay.defaultProps = {
     id: 1,
     name: 'Sample Area',
     description: 'An area of some sort',
+    boulders: []
   }
 };
 
