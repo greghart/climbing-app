@@ -17,6 +17,7 @@ import withArea from '../areas/withArea';
 import useAreaMapNavigator from './useAreaMapNavigator';
 import useBoulderMapNavigator from './useBoulderMapNavigator';
 import { LeafletMouseEvent } from 'leaflet';
+import { ConnectedRouteOverlay } from './RouteOverlay';
 
 /**
  * @todo When we render sub routes, we know we can pass optional props...
@@ -129,7 +130,11 @@ const routes = [
       {
         path: '/explorer/:crag/:area/:boulder/:route',
         component: (props) => (
-          <span>Route time!</span>
+          <ConnectedRouteOverlay
+            key={props.match.params.route}
+            {...props}
+            routeId={props.match.params.route}
+          />
         ),
         mapComponent: (props) => (
           <React.Fragment>

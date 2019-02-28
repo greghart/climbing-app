@@ -1,5 +1,4 @@
 import * as React from 'react';
-import reduce = require('lodash/reduce');
 
 import OverlayDetail from './OverlayDetail';
 import Boulder from '../../../models/Boulder';
