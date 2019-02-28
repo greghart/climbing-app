@@ -14,7 +14,7 @@ interface Props {
 const OverlayDetail: React.FunctionComponent<Props> = (props) => {
   return (
     <div className="card">
-      <h6 className="card-header">
+      <h6 className="card-header p-1">
         {props.header}
         {props.linkTo && (
           <Link to={props.linkTo} className="ml-2">
@@ -22,7 +22,7 @@ const OverlayDetail: React.FunctionComponent<Props> = (props) => {
           </Link>
         )}
       </h6>
-      <div className="card-body">
+      <div className="card-body p-1">
         {props.content}
       </div>
     </div>

@@ -6,10 +6,7 @@ import { RouteConfig, RouteConfigComponentProps } from 'react-router-config';
 import ContainerRoute from './routes/ContainerRoute';
 import AnimationContainerRoute from './routes/AnimationContainerRoute';
 // Explorer
-import CragExplorerRoute from './routes/CragExplorerRoute';
-import AreasListRoute from './routes/AreasListRoute';
-import { Connected as AreaOverlayContainer } from './components/explorer/AreaOverlay';
-import { Connected as AreaMap } from './components/explorer/AreaMap';
+import explorerRoutes from './components/explorer/routes';
 // Search
 import SearchLayout from './components/search/SearchLayout';
 // Area
@@ -69,43 +66,7 @@ export default function getRoutes(): MyRouteConfig[] {
       path: '*',
       component: ContainerRoute,
       routes: [
-        // Explorer -- map view of a crag
-        // Sub routes are map overlays
-        // Sidebar is available that will be settings, UX TBD
-        // @todo When we render sub routes, we know we can pass optional props...
-        //    - How do we signal this to the type system/do we need to?
-        //    - How do we signal this to the developer if not?
-        {
-          path: '/explorer/:crag/:area?',
-          component: CragExplorerRoute,
-          key: 'explorer',
-          routes: [
-            {
-              path: '/explorer/:crag/:area',
-              component: (props) => (
-                <AreaOverlayContainer
-                  key={props.match.params.area}
-                  {...props}
-                  areaId={props.match.params.area}
-                />
-              ),
-              mapComponent: (props) => {
-                return (
-                  <AreaMap
-                    key={props.match.params.area}
-                    areaId={props.match.params.area}
-                    {...props}
-                    polygon={true}
-                    boulders={true}
-                    mapFitBounds={true}
-                  />
-                );
-              },
-              key: 'explorer_area',
-            },
-          ],
-        },
-
+        ...explorerRoutes,
         // Search page
         {
           path: '/search/:crag',

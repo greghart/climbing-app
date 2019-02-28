@@ -7,18 +7,19 @@ import fetchAreas from '../../ducks/operations/fetchAreas';
 import Area from '../../../models/Area';
 import asyncComponent from '../../decorators/asyncComponent';
 import selectNormalizr from '../../util/selectNormalizr';
-import AreaOverlay from './AreaOverlay';
+import { Matching } from 'react-redux';
+import { debounce } from 'lodash';
 
 interface OwnProps {
-  area: string;
+  areaId: string;
 }
 
-const selectProps = (state: State, props: OwnProps) => props.area;
+const selectProps = (state: State, props: OwnProps) => props.areaId;
 const selectArea = (entities, areaId) => denormalize(
   areaId,
   selectNormalizr(
     AreaSchema,
-    { crag: 'empty', boulders: 'empty' }
+    { crag: 'empty', boulders: true, commentable: true, polygon: true },
   ),
   entities,
 );
@@ -29,24 +30,33 @@ const getArea = createSelector<State, OwnProps, any, string, Area>(
   selectArea,
 );
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
-  console.warn({
-    state, ownProps,
-  },           'mapStateToProps');
   return { area: getArea(state, ownProps) };
 };
 
+const runFetch = debounce((dispatch, areaId) => {
+  return dispatch(fetchAreas('singleton-fetch')(areaId));
+});
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
+  console.log('withArea', ownProps.areaId);
   return {
-    fetch: () => dispatch(
-      fetchAreas('singleton-fetch')(ownProps.area),
-    ),
+    fetch: () => runFetch(dispatch, ownProps.areaId)
   };
 };
 
-export default asyncComponent(
-  mapStateToProps,
-  mapDispatchToProps,
-  (props) => (
-    !!(props.area && props.area.boulders && props.area.crag)
-  ),
-)(AreaOverlay);
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ReturnType<typeof mapDispatchToProps>;
+function withArea<P>(component: React.ComponentType<P>) {
+  return asyncComponent<
+    StateProps,
+    DispatchProps,
+    OwnProps
+  >(
+    mapStateToProps,
+    mapDispatchToProps,
+    (props) => {
+      return !!(props.area && props.area.boulders && props.area.crag);
+    },
+  )(component);
+}
+
+export default withArea;

@@ -7,7 +7,7 @@ interface CragParams {
   crag: string;
   area?: string;
 }
-const CragRoute: SFC<RouteConfigComponentProps<CragParams>> = (props) => {
+const CragExplorerRoute: SFC<RouteConfigComponentProps<CragParams>> = (props) => {
   console.warn(props, 'CragRoute');
   return (
     <CragContainer
@@ -18,4 +18,4 @@ const CragRoute: SFC<RouteConfigComponentProps<CragParams>> = (props) => {
   );
 };
 
-export default CragRoute;
+export default CragExplorerRoute;

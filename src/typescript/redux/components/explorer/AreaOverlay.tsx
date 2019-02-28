@@ -18,7 +18,7 @@ const AreaOverlayContent: React.FunctionComponent<Props> = (props) => {
   return (
     <React.Fragment>
       <p>
-        <Truncate length={140} text={props.area.description} />
+        <Truncate length={40} text={props.area.description} />
       </p>
       <RoutesDifficultyBreakdown
         routes={
@@ -30,6 +30,7 @@ const AreaOverlayContent: React.FunctionComponent<Props> = (props) => {
             []
           )
         }
+        height="135px"
       />
     </React.Fragment>
   );
@@ -55,6 +56,6 @@ AreaOverlay.defaultProps = {
   }
 };
 
-const Connected = withArea(AreaOverlay);
-export { Connected };
+const ConnectedAreaOverlay = withArea(AreaOverlay);
+export { ConnectedAreaOverlay };
 export default AreaOverlay;

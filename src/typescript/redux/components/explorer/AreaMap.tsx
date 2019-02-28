@@ -6,38 +6,25 @@ import AreaPolygon from './AreaPolygon';
 import AreaBoulders from './AreaBoulders';
 import Area from '../../../models/Area';
 import withArea from '../areas/withArea';
+import { ExtractProps } from '../../../externals';
+import useAreaMapNavigator from './useAreaMapNavigator';
 
 interface Props {
   area: Area;
+  onClick?: (e: Leaflet.LeafletMouseEvent) => any;
   // Show the polygon of the area
   polygon?: boolean;
   // Show the name tooltip of the area
   tooltip?: boolean;
   // Show boulders of this area
   boulders?: boolean;
-  onClick?: (e: Leaflet.LeafletMouseEvent) => any;
-  // Optional ref to the map, allowing us to navigate to this area as an effect
-  mapRef?: React.RefObject<Map>;
-  mapFitBounds?: boolean;
+  onBoulderClick?: ExtractProps<typeof AreaBoulders>['onBoulderClick'];
 }
 
 const AreaMap: React.SFC<Props> = (props) => {
-  console.warn({ props }, 'AreaMap');
   if (!props.area.polygon.coordinates || props.area.polygon.coordinates.length === 0) {
     return <span />;
   }
-  React.useEffect(
-    () => {
-      if (props.mapRef && props.mapFitBounds) {
-        props.mapRef.current.leafletElement.fitBounds(
-          props.area.polygon.coordinates.map((c) => {
-            return [c.lat, c.lng] as [number, number];
-          })
-        );
-      }
-    },
-    [props.area.id]
-  );
   return (
     <LayerGroup>
       <AreaPolygon
@@ -56,6 +43,7 @@ const AreaMap: React.SFC<Props> = (props) => {
         <AreaBoulders
           key={`area-${props.area.id}-boulders`}
           area={props.area}
+          onBoulderClick={props.onBoulderClick}
         />
       }
     </LayerGroup>
@@ -65,10 +53,9 @@ const AreaMap: React.SFC<Props> = (props) => {
 AreaMap.defaultProps = {
   polygon: false,
   tooltip: true,
-  boulders: false,
-  mapFitBounds: false
+  boulders: false
 };
 
-const Connected = withArea(AreaMap);
-export { Connected };
+const ConnectedAreaMap = withArea(AreaMap);
+export { ConnectedAreaMap };
 export default AreaMap;

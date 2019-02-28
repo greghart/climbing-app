@@ -58,7 +58,7 @@ const CragMap: React.SFC<Props> = (props) => {
                 (r: MyRouteConfig) => {
                   return {
                     ...r,
-                    component: r.mapComponent
+                    component: r.mapComponent || ((props) => <span />)
                   };
                 }
               ),
