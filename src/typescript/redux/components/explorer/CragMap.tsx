@@ -42,16 +42,6 @@ const CragMap: React.SFC<Props> = (props) => {
             }}
           >
             <BestTileLayer />
-            <AreasMap
-              areas={props.crag.areas}
-              onAreaClick={(area, e) => {
-                props.onAreaClick && props.onAreaClick(area);
-                e.originalEvent.preventDefault();
-                e.originalEvent.stopPropagation();
-                return false;
-              }}
-              showPolygons={false}
-            />
             {renderRoutes(
               lodashMap(
                 routeContext.route.routes,

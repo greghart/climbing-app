@@ -17,7 +17,7 @@ const BoulderOverlayContent: React.FunctionComponent<Props> = (props) => {
   return (
     <React.Fragment>
       <p>
-        <Truncate length={40} text={props.boulder.description} />
+        <Truncate length={80} text={props.boulder.description} />
       </p>
       <RoutesDifficultyBreakdown
         routes={props.boulder.routes}

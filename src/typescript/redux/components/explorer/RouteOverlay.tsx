@@ -4,8 +4,9 @@ import OverlayDetail from './OverlayDetail';
 import Route from '../../../models/Route';
 import Crag from '../../../models/Crag';
 import withRoute from '../routes/withRoute';
+import Truncate from '../Truncate';
 
-type NeededProps = 'id' | 'name' | 'gradeRaw' | 'coordinate';
+type NeededProps = 'id' | 'name' | 'gradeRaw' | 'description' | 'coordinate';
 interface Props {
   crag: Crag;
   route: Pick<Route, NeededProps>;
@@ -14,7 +15,9 @@ interface Props {
 const RouteOverlayContent: React.FunctionComponent<Props> = (props) => {
   return (
     <React.Fragment>
-      <h6>{props.route.gradeRaw}</h6>
+      <p>
+        <Truncate length={180} text={props.route.description} />
+      </p>
     </React.Fragment>
   );
 };
@@ -22,7 +25,7 @@ const RouteOverlayContent: React.FunctionComponent<Props> = (props) => {
 const RouteOverlay: React.FunctionComponent<Props> = (props) => {
   return (
     <OverlayDetail
-      header={props.route.name}
+      header={`${props.route.name} (${props.route.gradeRaw})`}
       linkTo={`/routes/${props.route.id}`}
       content={<RouteOverlayContent {...props} />}
     />

@@ -7,8 +7,6 @@ import { LeafletMouseEvent } from 'leaflet';
 
 interface Props {
   areas: Area[];
-  // Whether to show all polygons. Note, we always show selected areas's polygon
-  showPolygons?: boolean;
   onAreaClick?: (area: Area, e: LeafletMouseEvent) => any;
 }
 
@@ -20,6 +18,7 @@ const AreasMap: React.SFC<Props> = (props) => {
         return (
           <AreaMap
             key={area.name}
+            {...props}
             area={area}
             onClick={props.onAreaClick && partial(props.onAreaClick, area)}
           />

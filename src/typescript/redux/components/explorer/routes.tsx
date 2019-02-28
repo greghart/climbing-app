@@ -8,6 +8,7 @@ import Crag from '../../../models/Crag';
 import Area from '../../../models/Area';
 import Boulder from '../../../models/Boulder';
 import CragExplorerRoute from '../../routes/CragExplorerRoute';
+import AreasMap from './AreasMap';
 import { ConnectedAreaMap } from './AreaMap';
 import { ConnectedAreaOverlay } from './AreaOverlay';
 import { ConnectedBoulderOverlay } from './BoulderOverlay';
@@ -88,7 +89,7 @@ const BoulderNavigator = withBoulder((props: { boulder: Boulder } & SubProps) =>
  *  * Navigate to boulder explorer on boulder click
  */
 type AreaMapProps = RouteConfigComponentProps<{ area: string }> & SubProps;
-const mapDispatchToProps = (dispatch, ownProps: AreaMapProps) => {
+const areaMapMapDispatchToProps = (dispatch, ownProps: AreaMapProps) => {
   const root = `/explorer/${ownProps.crag.id}/${ownProps.match.params.area}`;
   return {
     onBoulderClick: (b: Boulder) => {
@@ -101,7 +102,7 @@ const AreaNavigator = withArea((props: { area: Area } & SubProps) => {
   useAreaMapNavigator(props.mapRef, props.area);
   return <React.Fragment />;
 });
-const ClickableAreaMap = connect(undefined, mapDispatchToProps)(ConnectedAreaMap);
+const ClickableAreaMap = connect(undefined, areaMapMapDispatchToProps)(ConnectedAreaMap);
 const AreaMapRoute: React.ComponentType<AreaMapProps> = (props) => {
   return (
     <ClickableAreaMap
@@ -109,11 +110,31 @@ const AreaMapRoute: React.ComponentType<AreaMapProps> = (props) => {
       areaId={props.match.params.area}
       polygon={true}
       boulders={true}
+      tooltip={false}
       onClick={blockClicks}
       {...props}
     />
   );
 };
+
+/**
+ * Glue base crag map to explorer workflow.
+ *
+ * We want to:
+ *   * Show area tooltips and have them click into area explorer routes
+ */
+type CragMapProps = RouteConfigComponentProps<{ crag: string }> & SubProps;
+const cragMapMapDispatchToProps = (dispatch, ownProps: CragMapProps) => {
+  const root = `/explorer/${ownProps.crag.id}`;
+  return {
+    onAreaClick: (a: Area, e) => {
+      e.originalEvent.preventDefault();
+      e.originalEvent.stopPropagation();
+      return dispatch(push(`${root}/${a.id}`));
+    },
+  };
+};
+const ClickableAreasMap = connect(undefined, cragMapMapDispatchToProps)(AreasMap);
 
 /**
  * Routes for the explorer
@@ -205,6 +226,16 @@ const routes = [
           </React.Fragment>
         ),
         key: 'explorer_area',
+      },
+      {
+        path: '/explorer/:crag',
+        component: () => <span />,
+        mapComponent: (props) => (
+          <ClickableAreasMap
+            {...props}
+            areas={props.crag.areas}
+          />
+        )
       },
     ],
   }

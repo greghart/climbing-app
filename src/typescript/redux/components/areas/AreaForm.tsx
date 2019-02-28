@@ -79,7 +79,6 @@ const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
                 <OtherAreasMap
                   cragId={props.area.crag.id}
                   exceptAreaId={props.area.id}
-                  showPolygons={true}
                 />
                 <AreaBoulders
                   area={props.area}
