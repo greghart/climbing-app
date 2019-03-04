@@ -160,10 +160,10 @@ const routes = [
         mapComponent: (props) => (
           <React.Fragment>
             {/** Show the area polygon */}
-            <AreaMapRoute
+            {/* <AreaMapRoute
               {...props}
               mapFitBounds={false}
-            />
+            /> */}
             {/** Show the boulder map */}
             <BoulderMapRoute
               {...props}
@@ -191,10 +191,10 @@ const routes = [
         mapComponent: (props) => (
           <React.Fragment>
             {/** Show the area polygon */}
-            <AreaMapRoute
+            {/* <AreaMapRoute
               {...props}
               mapFitBounds={false}
-            />
+            /> */}
             <BoulderMapRoute
               {...props}
               boulderId={props.match.params.boulder}

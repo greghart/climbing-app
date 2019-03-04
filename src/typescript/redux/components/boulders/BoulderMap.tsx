@@ -27,6 +27,7 @@ const BoulderMap: React.ComponentType<Props> = (props) => {
         <MyPolygon
           positions={props.boulder.polygon.coordinates}
           onclick={props.onClick}
+          fillOpacity={0.1}
         />
       }
       {props.showRoutes && <RouteMarkers

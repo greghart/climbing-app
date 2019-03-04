@@ -15,3 +15,5 @@ scratch/
 lib/
 build/
 dist/
+
+static/tiles

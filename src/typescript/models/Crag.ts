@@ -25,22 +25,8 @@ export default class Crag {
   @Column({ nullable: true })
   description?: string;
 
-  @Column('decimal')
-  centerLat: number;
-
-  @Column('decimal')
-  centerLng: number;
-
-  get center(): Coordinate {
-    return new Coordinate(
-      this.centerLat,
-      this.centerLng,
-    );
-  }
-  set center(obj: Coordinate) {
-    this.centerLat = obj.lat;
-    this.centerLng = obj.lng;
-  }
+  @Column(type => Coordinate)
+  center: Coordinate;
 
   @Column('int')
   defaultZoom: number;
@@ -52,16 +38,6 @@ export default class Crag {
   // Relationships
   @OneToMany(type => Area, area => area.crag, cascadeOneToMany)
   areas: Area[];
-
-  toJSON() {
-    return Object.assign(
-      {},
-      this,
-      {
-        center: this.center,
-      },
-    );
-  }
 
   @OneToOne(type => Commentable, { nullable: true, onDelete: 'SET NULL' })
   @JoinColumn()

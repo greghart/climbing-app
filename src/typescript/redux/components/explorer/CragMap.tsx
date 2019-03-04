@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as Leaflet from 'leaflet';
 import { Map } from 'react-leaflet';
 import { renderRoutes } from 'react-router-config';
 import find = require('lodash/find');
@@ -30,8 +31,11 @@ const CragMap: React.SFC<Props> = (props) => {
             ref={mapRef}
             center={props.crag.center}
             zoom={props.crag.defaultZoom}
-            minZoom={props.crag.minZoom}
+            minZoom={17}
             maxZoom={props.crag.maxZoom}
+            maxBounds={
+              Leaflet.latLng(props.crag.center).toBounds(450)
+            }
             zoomControl={false}
             onzoomend={(e) => {
             }}
