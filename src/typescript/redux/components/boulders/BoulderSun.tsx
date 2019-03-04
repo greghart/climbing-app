@@ -2,12 +2,13 @@ import * as React from 'react';
 import * as SunCalc from 'suncalc';
 import * as Leaflet from 'leaflet';
 import { Map } from 'react-leaflet';
+import { Link } from 'react-router-dom';
 
 import Boulder from '../../../models/Boulder';
 import InlineMap from '../map/InlineMap';
 import BoulderMap from './BoulderMap';
-import BoulderSunForm from './BoulderSunForm';
-import BoulderSunLine from './BoulderSunLine';
+import SunForm from '../sun/SunForm';
+import SunLine from '../sun/SunLine';
 
 interface Props {
   boulder: Boulder;
@@ -26,6 +27,9 @@ const BoulderSun: React.SFC<Props> = (props) => {
     return (
       <p className="text-warning">
         This boulder doesn't have location data.
+        <Link to={`/boulders/${props.boulder.id}/edit`}>
+          Set it now!
+        </Link>
       </p>
     );
   }
@@ -40,9 +44,9 @@ const BoulderSun: React.SFC<Props> = (props) => {
 
   return (
     <React.Fragment>
-      <BoulderSunForm
+      <SunForm
         onSubmit={(...args) => console.log(args) }
-        boulder={props.boulder}
+        coordinate={props.boulder.coordinate}
       />
       <InlineMap
         className="m-1"
@@ -58,7 +62,7 @@ const BoulderSun: React.SFC<Props> = (props) => {
         <BoulderMap
           boulder={props.boulder}
         />
-        <BoulderSunLine coordinate={props.boulder.coordinate} />
+        <SunLine coordinate={props.boulder.coordinate} />
       </InlineMap>
       <h5>Important times</h5>
       <table>

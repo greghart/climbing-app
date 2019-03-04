@@ -6,7 +6,7 @@ import * as React from 'react';
  * Aligns an icon and some children
  */
 interface InfoProps {
-  icon: string;
+  icon?: string;
   children: React.ReactNode;
   includeLi?: boolean;
 }

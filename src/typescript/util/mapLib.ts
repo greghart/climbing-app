@@ -149,4 +149,7 @@ export {
   rotate,
   radsToDegrees,
   degreesToRads,
+  Vector,
+  VectorLiteral,
+  VectorTuple
 };

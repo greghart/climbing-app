@@ -23,6 +23,7 @@ import RouteLayoutPhotos from './components/routes/RouteLayoutPhotos';
 import RouteCommentsContainer from './components/routes/RouteCommentsContainer';
 import RouteNewCommentContainer from './components/routes/RouteNewCommentContainer';
 import RouteEditContainer from './components/routes/RouteEditContainer';
+import RouteSun from './components/routes/RouteSun';
 // Boulder
 import BoulderRoute from './routes/BoulderRoute';
 import BoulderCommentsContainer from './components/boulders/BoulderCommentsContainer';
@@ -226,6 +227,11 @@ export default function getRoutes(): MyRouteConfig[] {
               path: '/routes/:routes/edit',
               component: RouteEditContainer,
               key: 'route_edit',
+            },
+            {
+              path: '/routes/:routes/sun',
+              component: RouteSun,
+              key: 'route_sun',
             },
             // Default is overview
             {

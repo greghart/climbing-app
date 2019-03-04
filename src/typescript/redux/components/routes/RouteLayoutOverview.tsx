@@ -4,6 +4,7 @@ import RouteActions from './RouteActions';
 import Route from '../../../models/Route';
 import InfoItem from '../show/InfoItem';
 import ActionItem from '../show/ActionItem';
+import LinkItem from '../show/LinkItem';
 
 interface Props {
   myRoute: Route;
@@ -26,18 +27,24 @@ const RouteLayoutOverview: React.SFC<Props> = (props) => {
             </ActionItem>
           </Link>
         </li>
+        <LinkItem
+          to={`/routes/${props.myRoute.id}/sun`}
+          icon="sun"
+        >
+          View sun angles for route
+        </LinkItem>
         <InfoItem icon="hand-rock">
           {route.gradeRaw}
           {route.length && <small> About {route.length}ft. tall</small>}
+        </InfoItem>
+        <InfoItem icon="sun">
+          (TODO) This route may have shade right now
         </InfoItem>
         <InfoItem icon="check-double">
           (TODO) You climbed this 1 year ago
         </InfoItem>
         <InfoItem icon="list">
           (TODO) 8 people have climbed this
-        </InfoItem>
-        <InfoItem icon="sun">
-          (TODO) This route may have shade right now
         </InfoItem>
         <InfoItem icon="history">
           (TODO) First Ascent by John Long and John Bachar, around 1973

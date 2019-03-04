@@ -7,21 +7,21 @@ import { InjectedFormProps, reduxForm, Field } from 'redux-form';
 
 import { OnSubmit } from '../types';
 import SliderField from '../form/SliderField';
-import Boulder from '../../../models/Boulder';
+import Coordinate from '../../../models/Coordinate';
 
 interface Props {
   onSubmit: OnSubmit<FormData, Props>;
-  boulder: Boulder;
+  coordinate: Coordinate;
 }
 interface FormData {
   givenHour: number;
 }
 
-const _BoulderSunForm: React.SFC<InjectedFormProps<FormData, Props> & Props> = (props) => {
+const _SunForm: React.SFC<InjectedFormProps<FormData, Props> & Props> = (props) => {
   const times = SunCalc.getTimes(
     new Date(),
-    props.boulder.coordinate.lat,
-    props.boulder.coordinate.lng,
+    props.coordinate.lat,
+    props.coordinate.lng,
   );
   const bottomHour = times.sunrise.getHours();
   const topHour = times.sunset.getHours();
@@ -37,11 +37,7 @@ const _BoulderSunForm: React.SFC<InjectedFormProps<FormData, Props> & Props> = (
     },
     {},
   );
-  console.warn({
-    marks,
-    topHour,
-    bottomHour,
-  },           'BoulderSunForm');
+
   return (
     <form onSubmit={props.handleSubmit(props.onSubmit)} className="m-3">
       <Field
@@ -51,18 +47,18 @@ const _BoulderSunForm: React.SFC<InjectedFormProps<FormData, Props> & Props> = (
         max={topHour * 4}
         step={4}
         name="givenHour"
-        label="At what hour?"
+        label="Sun angle at what hour?"
         className="mb-4"
       />
     </form>
   );
 };
 
-const BoulderSunForm = reduxForm<FormData, Props>({
+const SunForm = reduxForm<FormData, Props>({
   initialValues: {
     givenHour: new Date().getHours() * 4,
   },
-  form: 'boulder-sun-form',
-})(_BoulderSunForm);
+  form: 'sun-form',
+})(_SunForm);
 
-export default BoulderSunForm;
+export default SunForm;

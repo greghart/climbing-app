@@ -17,7 +17,7 @@ interface Props {
   hour: number;
 }
 
-const BoulderSunLine: React.ComponentType<Props> = (props) => {
+const _SunLine: React.ComponentType<Props> = (props) => {
   const d = new Date();
   d.setHours(props.hour);
   const sunPosition = SunCalc.getPosition(
@@ -25,7 +25,14 @@ const BoulderSunLine: React.ComponentType<Props> = (props) => {
     props.coordinate.lat,
     props.coordinate.lng,
   );
-  console.log(sunPosition.altitude, 'altitude');
+  console.log(
+    {
+      ...sunPosition,
+      degrees: sunPosition.azimuth * 180 / Math.PI,
+      altitudeDegrees: sunPosition.altitude * 180 / Math.PI
+    },
+    'sunPosition'
+  );
   // Suncalc gives azimuth based on 0 radians at the unit vector (0, -1) (ie. south)
   const unitVector = [
     Math.cos(sunPosition.azimuth + Math.PI),
@@ -62,14 +69,14 @@ const BoulderSunLine: React.ComponentType<Props> = (props) => {
 };
 
 // Currently this component is mostly made to connect to sun form, so hook it up now
-const selector = formValueSelector('boulder-sun-form');
+const selector = formValueSelector('sun-form');
 const mapStateToProps = (state: State) => {
   return {
     hour: selector(state, 'givenHour') / 4,
   };
 };
-const ConnectedBoulderSunLine = connect(
+const SunLine = connect(
   mapStateToProps,
-)(BoulderSunLine);
+)(_SunLine);
 
-export default ConnectedBoulderSunLine;
+export default SunLine;
