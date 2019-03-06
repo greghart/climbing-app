@@ -65,6 +65,7 @@ type DeclaredRoutes = {
 const declaredRoutes = {
   crags: {
     getCrag: (id) => { return { id }; },
+    exportCrag: (id) => { return { id }; },
     addArea: (id, data) => { return { id, data }; },
     updateCrag: (id, data) => { return { id, data }; },
   },

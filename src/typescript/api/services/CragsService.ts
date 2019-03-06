@@ -10,6 +10,7 @@ import validate from '../util/validate';
 import CragCodec from '../../codecs/CragCodec';
 import { AreaPayload } from './AreasService';
 import AreaCodec from '../../codecs/AreaCodec';
+import exportCrag from '../operations/exportCrag';
 
 // For swagger generation we need dead simple types
 interface CragPayload {
@@ -32,6 +33,16 @@ export default class CragsService {
     @Rest.PathParam('id') id: string,
   ) {
     return getCrag(id);
+  }
+
+  @Rest.GET
+  @Tags('crags')
+  @Rest.Path(':id/export')
+  @Response<object>(200, 'Export crag data')
+  public async exportCrag(
+    @Rest.PathParam('id') id: string,
+  ) {
+    return exportCrag(id);
   }
 
   @Rest.PUT

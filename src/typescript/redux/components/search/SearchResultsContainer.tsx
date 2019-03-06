@@ -9,13 +9,15 @@ import { denormalize } from 'normalizr';
 import { CragSchema } from '../../normalizr';
 import withLoader from '../../decorators/withLoader';
 import withMountAction from '../../decorators/withMountAction';
-import fetchCrag from '../../ducks/operations/fetchCrag';
+import exportCrag from '../../ducks/operations/exportCrag';
+import { formValueSelector } from 'redux-form';
 
 type OwnProps = RouteConfigComponentProps<{ crag: string }>;
 
 /**
  * Container around search results.
  */
+const formSelector = formValueSelector('search-form');
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
   console.warn({ ownProps }, 'SearchResultsContainer.mapStateToProps');
   return {
@@ -25,13 +27,18 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
       CragSchema,
       state.entities,
     ),
+    form: {
+      entityType: formSelector(state, 'entityType'),
+      filterShade: formSelector(state, 'filterShade'),
+      shadeAtHour: formSelector(state, 'shadeAtHour'),
+    }
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
     fetchCrag: () => dispatch(
-      fetchCrag('singleton-fetch')([ownProps.match.params.crag]),
+      exportCrag('singleton-fetch')([ownProps.match.params.crag]),
     ),
   };
 };
