@@ -29,12 +29,12 @@ function getSearchableEntitiesForCrag(crag: Crag): Array<Searchable> {
     (memo, area) => {
       memo.push(withArea({})(area));
       return memo
-      .concat(withBoulder({ area })(area.boulders))
+      .concat(withBoulder({ area })(area.boulders || []))
       .concat(
         reduce(
           area.boulders,
           (memo, boulder) => {
-            return memo.concat(withRoute({ boulder: { ...boulder, area } })(boulder.routes));
+            return memo.concat(withRoute({ boulder: { ...boulder, area } })(boulder.routes || []));
           },
           [],
         ),
@@ -45,13 +45,13 @@ function getSearchableEntitiesForCrag(crag: Crag): Array<Searchable> {
 }
 
 function isArea(input: Searchable): input is Area {
-  return !!(input as Area).boulders;
+  return input._type === 'area';
 }
 function isBoulder(input: Searchable): input is Boulder {
-  return !!(input as Boulder).routes;
+  return input._type === 'boulder';
 }
 function isRoute(input: Searchable): input is Route {
-  return !isArea(input) && !isBoulder(input);
+  return input._type === 'route';
 }
-export { isArea, isBoulder, isRoute };
+export { isArea, isBoulder, isRoute, Tag, Searchable };
 export default getSearchableEntitiesForCrag;

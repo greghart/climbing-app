@@ -17,6 +17,9 @@ const DisplaySunValue: React.FunctionComponent<Props> = (props) => {
   if (props.sunValue > .25) {
     return <span>Shady</span>;
   }
+  if (props.sunValue < 0) {
+    return <span>Unknown Sun Angles</span>;
+  }
   return <span>Very Shady</span>;
 };
 

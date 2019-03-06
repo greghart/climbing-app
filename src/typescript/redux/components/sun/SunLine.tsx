@@ -25,14 +25,6 @@ const _SunLine: React.ComponentType<Props> = (props) => {
     props.coordinate.lat,
     props.coordinate.lng,
   );
-  console.log(
-    {
-      ...sunPosition,
-      degrees: sunPosition.azimuth * 180 / Math.PI,
-      altitudeDegrees: sunPosition.altitude * 180 / Math.PI
-    },
-    'sunPosition'
-  );
   // Suncalc gives azimuth based on 0 radians at the unit vector (0, -1) (ie. south)
   const unitVector = [
     Math.cos(sunPosition.azimuth + Math.PI),

@@ -5,6 +5,8 @@ import SearchResultsContainer from './SearchResultsContainer';
 import PageLayout from '../layouts/PageLayout';
 import GoBackHeader from '../layouts/GoBackHeader';
 import { ExtractProps } from '../../../externals';
+import AccordionContainer from '../layouts/AccordionContainer';
+import SearchFilters from './SearchFilters';
 
 interface Props {
   onClickBack?: () => any;
@@ -26,6 +28,22 @@ const SearchLayout: React.SFC<Props> = (props) => {
       content={
         <div className="row mt-2 h-100">
           <div className="col mh-100 mb-2">
+            <div className="card mb-2">
+              <div className="card-body p-1">
+                <AccordionContainer
+                  scope="search-filters"
+                  header={(defaultChevron) => (
+                    <span>Open Search Filters {defaultChevron}</span>
+                  )}
+                  defaultOpen={false}
+                  content={() => (
+                    <SearchFilters
+                      onSubmit={() => {}}
+                    />
+                  )}
+                />
+              </div>
+            </div>
             <SearchResultsContainer />
           </div>
         </div>

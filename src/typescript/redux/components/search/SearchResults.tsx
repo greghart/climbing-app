@@ -1,22 +1,55 @@
 import * as React from 'react';
 import filter = require('lodash/filter');
+import { Link } from 'react-router-dom';
 
 import Crag from '../../../models/Crag';
 import Area from '../../../models/Area';
 import Boulder from '../../../models/Boulder';
 import Route from '../../../models/Route';
-import getSearchableEntitiesForCrag, { isArea, isBoulder } from './getSearchableEntitiesForCrag';
-import { Link } from 'react-router-dom';
+import { FormData as SearchFilterFormData } from './SearchFilters';
+import
+  getSearchableEntitiesForCrag,
+  { isArea, isBoulder, Tag, Searchable, isRoute }
+  from './getSearchableEntitiesForCrag';
+import getNormalizedSunValueForRoute from '../sun/getNormalizedSunValueForRoute';
 
-const _labelMatchesSearch = (label, search = '') => {
-  const _label = label.toLowerCase().trim();
+type GetMatcher = (...args: any[]) => (s: Searchable) => boolean;
+const searchMatcher: GetMatcher = (search = '') => {
   const _search = search.toLowerCase().trim();
-  return _label.indexOf(_search) !== -1;
+  return (s: Searchable) => {
+    return s.name.toLowerCase().trim().indexOf(_search) !== -1;
+  };
+};
+const typeMatcher: GetMatcher = (type: Tag | 'any') => {
+  if (!type || (type === 'any')) {
+    return (s) => true;
+  }
+  return (s) => {
+    return s._type === type;
+  };
+};
+const sunMatcher: GetMatcher = (apply: boolean = false, givenHour: number) => {
+  if (!apply) {
+    return (s) => true;
+  }
+  const time = new Date();
+  if (givenHour) {
+    time.setHours(givenHour);
+  }
+  return (s) => {
+    if (!isRoute(s)) {
+      return false;
+    }
+    const sunValue = getNormalizedSunValueForRoute(s, time);
+    // Totally arbitrary :o
+    return sunValue < .6 && sunValue > 0;
+  };
 };
 
 interface Props {
   search: string;
   crag: Crag;
+  form: SearchFilterFormData;
 }
 
 interface ResultLayoutProps {
@@ -91,12 +124,16 @@ const RouteResult: React.SFC<RouteProps> = (props) => {
 };
 
 const SearchResults: React.SFC<Props> = (props) => {
+  const filterSearch = searchMatcher(props.search);
+  const filterType = typeMatcher(props.form.entityType);
+  const filterSun = sunMatcher(props.form.filterShade, props.form.shadeAtHour / 4);
   const results = filter(
     getSearchableEntitiesForCrag(props.crag),
     (thisEntity) => {
-      return _labelMatchesSearch(
-        thisEntity.name,
-        props.search,
+      return (
+        filterType(thisEntity) &&
+        filterSearch(thisEntity) &&
+        filterSun(thisEntity)
       );
     },
   );

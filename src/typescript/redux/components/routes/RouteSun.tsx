@@ -56,7 +56,7 @@ const RouteSun: React.SFC<Props> = (props) => {
         coordinate={props.myRoute.coordinate}
       />
       <p className="text-info">
-        Current sun status: <ConnectedDisplaySunValueForRoute route={props.myRoute} />
+        Given Hour Sun Status: <ConnectedDisplaySunValueForRoute route={props.myRoute} />
       </p>
       <InlineMap
         className="m-1"

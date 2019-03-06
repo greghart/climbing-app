@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Route from '../../../models/Route';
-import getNormalizedSunValue from './getNormalizedSunValue';
 import DisplaySunValue from './DisplaySunValue';
 import { formValueSelector } from 'redux-form';
 import { State } from '../../reducer';
 import { connect } from 'react-redux';
+import getNormalizedSunValueForRoute from './getNormalizedSunValueForRoute';
 
 interface Props {
   route: Route;
@@ -20,15 +20,7 @@ const DisplaySunValueForRoute: React.FunctionComponent<Props> = (props) => {
   if (props.hour) {
     time.setHours(props.hour);
   }
-  const sunValue = getNormalizedSunValue(
-    [
-      props.route.coordinate.lat - props.route.boulder.coordinate.lat,
-      props.route.coordinate.lng - props.route.boulder.coordinate.lng,
-    ],
-    props.route.coordinate,
-    time
-  );
-  return <DisplaySunValue sunValue={sunValue} />;
+  return <DisplaySunValue sunValue={getNormalizedSunValueForRoute(props.route, time)} />;
 
 };
 

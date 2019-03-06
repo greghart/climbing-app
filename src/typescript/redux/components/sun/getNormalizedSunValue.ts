@@ -40,6 +40,12 @@ function getNormalizedSunValue(
     .4 * altitudeValue +
     .6 * angleValue
   );
+  console.log({
+    normalizedSun,
+    altitudeValue,
+    angleValue,
+    inputSunAngle
+  });
 
   return normalizedSun;
 }

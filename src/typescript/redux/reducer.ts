@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { reducer as formReducer, FormStateMap } from 'redux-form';
 import explorer, { State as ExplorerState } from './ducks/explorer';
 import entities, { State as EntitiesState } from './ducks/entities';
 import sidebar, { State as SidebarState } from './ducks/sidebar';
@@ -14,6 +14,7 @@ export type State = {
   sidebar: FreeScopeReducerState<SidebarState>;
   search: SearchState;
   accordion: FreeScopeReducerState<AccordionState>;
+  form: FormStateMap
 };
 
 const reducer = (history) => combineReducers<State>({

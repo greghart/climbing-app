@@ -14,6 +14,7 @@ interface AppProps {
   className?: string;
   // Input Component to use
   inputComponent?: 'input' | 'textarea' | 'select';
+  type?: string;
 }
 
 /**
@@ -26,6 +27,28 @@ function nextId() {
 }
 
 /**
+ * Render the input itself
+ */
+const RenderInput: React.ComponentType<WrappedFieldProps & AppProps> = (props) => {
+  const { input, meta, label, inputComponent, help, ...rest } = props;
+  return (
+    React.createElement(inputComponent, {
+      id,
+      placeholder: props.placeholder || label,
+      ...input,
+      ...rest,
+      className: classNames(
+        {
+          'is-invalid': meta.touched && meta.error ,
+          'form-check-input': rest.type === 'checkbox',
+          'form-control': rest.type !== 'checkbox'
+        },
+        props.className
+      ),
+    })
+  );
+};
+/**
  * Custom form field rendering
  * All fields will have:
  *   * A label
@@ -36,23 +59,20 @@ function nextId() {
 const RenderField: React.ComponentType<WrappedFieldProps & AppProps> = (props) => {
   const { input, meta, label, inputComponent, help, ...rest } = props;
   const id = props.id || nextId();
+  // Some slight rendering differences for checkboxes, but otherwise pretty standard.
   return (
-    <div className="form-group">
-      {props.label &&
+    <div className={classNames({
+      'form-check': rest.type === 'checkbox',
+      'form-group': rest.type !== 'checkbox'
+    })}>
+      {rest.type !== 'checkbox' && props.label &&
+        <label htmlFor={id}>{props.label}</label>
+      }
+      <RenderInput {...props} id={id} />
+      {rest.type === 'checkbox' && props.label &&
         <label htmlFor={id}>{props.label}</label>
       }
       <div>
-        {React.createElement(inputComponent, {
-          id,
-          placeholder: props.placeholder || label,
-          ...input,
-          ...rest,
-          className: classNames(
-            'form-control',
-            { 'is-invalid': meta.touched && meta.error },
-            props.className
-          ),
-        })}
         {help && (
           <small className="form-text text-muted">
             {help}
