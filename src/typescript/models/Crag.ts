@@ -6,12 +6,12 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { LatLngLiteral, LatLngTuple } from 'leaflet';
 
 import Coordinate from './Coordinate';
 import Area from './Area';
 import { cascadeOneToMany } from '../db/cascadeOptions';
 import Commentable from './Commentable';
+import Trail from './Trail';
 
 @Entity()
 export default class Crag {
@@ -42,6 +42,10 @@ export default class Crag {
   @OneToOne(type => Commentable, { nullable: true, onDelete: 'SET NULL' })
   @JoinColumn()
   commentable?: Commentable;
+
+  @OneToOne(type => Trail, { nullable: true, onDelete: 'SET NULL' })
+  @JoinColumn()
+  trail?: Trail;
 
   // @todo See fetchCragContainer todo
   _isLoaded?: boolean;

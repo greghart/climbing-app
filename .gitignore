@@ -1,3 +1,4 @@
+# Dev files
 *.log
 .DS_Store
 .idea
@@ -5,6 +6,10 @@ node_modules
 dump.rdb
 .vscode/
 scratch/
+# Local config just for running migrations
+ormconfig.json
+# Don't need persisted migrations for now
+migration/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
