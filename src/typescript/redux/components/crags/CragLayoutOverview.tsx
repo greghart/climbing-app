@@ -24,6 +24,13 @@ const CragLayoutOverview: React.SFC<Props> = (props) => {
           </Link>
         </li>
         <li className="list-group-item list-group-item-action">
+          <Link to={`/crags/${props.crag.id}/trail/new`}>
+            <ActionItem includeLi={false}>
+              Setup a trail in this crag
+            </ActionItem>
+          </Link>
+        </li>
+        <li className="list-group-item list-group-item-action">
           <Link to={`/crags/${props.crag.id}/edit`}>
             <ActionItem includeLi={false}>
               Edit this crag

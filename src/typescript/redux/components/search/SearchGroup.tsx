@@ -9,7 +9,7 @@ interface Props {
   onClickAppend?: React.MouseEventHandler<any>;
   prepend: React.ReactNode;
   input: React.ReactNode;
-  append: React.ReactNode;
+  append?: React.ReactNode;
 }
 /**
  * Our searcher is always part of a basic group

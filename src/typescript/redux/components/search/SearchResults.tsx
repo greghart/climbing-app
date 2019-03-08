@@ -113,7 +113,7 @@ const RouteResult: React.SFC<RouteProps> = (props) => {
     <Link to={`/routes/${props.route.id}`}>
       <ResultLayout
         right={<React.Fragment>
-          <p className="mb-0">{props.route.name}</p>
+          <p className="mb-0">{props.route.name} ({props.route.gradeRaw})</p>
           <small className="text-muted">
             {props.route.boulder.area.name} | {props.route.boulder.name}
           </small>

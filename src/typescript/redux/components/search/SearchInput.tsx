@@ -5,7 +5,7 @@ const SearchInput = (props) => {
     <input
       type="text"
       className="form-control"
-      placeholder="Search by crag, boulder, or route"
+      placeholder="Search by area, boulder, or route"
       autoFocus
       onChange={props.onChange}
       {...props}

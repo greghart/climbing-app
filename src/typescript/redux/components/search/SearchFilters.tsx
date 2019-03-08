@@ -37,7 +37,7 @@ const _SearchFilters: React.SFC<InjectedFormProps<FormData, Props> & Props> = (p
       </MyField>
       <MyField
         type="checkbox"
-        label="Only show routes without direct sun at:"
+        label="Only show shady-ish routes at:"
         name="filterShade"
       />
       <SunHoursField

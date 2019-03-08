@@ -3,10 +3,19 @@ import * as Leaflet from 'leaflet';
 import { Omit } from 'utility-types/dist/mapped-types';
 import { RouteConfig, RouteConfigComponentProps } from 'react-router-config';
 
+/**
+ * Top-level config based routing
+ *
+ * Sub-pages can store their own routes in a `routes` file by convention.
+ * @todo set up router objects akin to express routers on the client
+ */
+
 import ContainerRoute from './routes/ContainerRoute';
 import AnimationContainerRoute from './routes/AnimationContainerRoute';
 // Explorer
 import explorerRoutes from './components/explorer/routes';
+// Crags
+import cragRoutes from './components/crags/routes';
 // Search
 import SearchLayout from './components/search/SearchLayout';
 // Area
@@ -32,13 +41,6 @@ import BoulderLayoutOverview from './components/boulders/BoulderLayoutOverview';
 import BoulderNewRouteContainer from './components/boulders/BoulderNewRouteContainer';
 import BoulderEditContainer from './components/boulders/BoulderEditContainer';
 import BoulderSun from './components/boulders/BoulderSun';
-// Crags
-import CragRoute from './routes/CragRoute';
-import CragCommentsContainer from './components/crags/CragCommentsContainer';
-import CragNewCommentContainer from './components/crags/CragNewCommentContainer';
-import CragEditContainer from './components/crags/CragEditContainer';
-import CragLayoutOverview from './components/crags/CragLayoutOverview';
-import CragNewAreaContainer from './components/crags/CragNewAreaContainer';
 import provideRoute from './routes/provideRoute';
 
 type MyRouteConfig = Omit<RouteConfig, 'routes'> & {
@@ -76,46 +78,7 @@ export default function getRoutes(): MyRouteConfig[] {
         },
 
         // Show Pages
-        // Show a crag
-        {
-          path: '/crags/:crag',
-          component: CragRoute,
-          key: 'crag_show',
-          routes: [
-            {
-              path: '/crags/:crag/comments',
-              exact: true,
-              component: CragCommentsContainer,
-              key: 'crag_comments',
-            },
-            {
-              path: '/crags/:crag/comments/new',
-              component: CragNewCommentContainer,
-              key: 'crag_comments_new',
-            },
-            // {
-            //   path: '/crags/:crag/photos',
-            //   component: RouteLayoutPhotos,
-            //   key: 'crag_photos'
-            // },
-            {
-              path: '/crags/:crag/areas/new',
-              component: CragNewAreaContainer,
-              key: 'crag_areas_new',
-            },
-            {
-              path: '/crags/:crag/edit',
-              component: CragEditContainer,
-              key: 'crag_edit',
-            },
-            // Default is overview
-            {
-              path: '/crags/:crag/(overview)?',
-              component: CragLayoutOverview,
-              key: 'crag_overview',
-            },
-          ],
-        },
+        ...cragRoutes,
         // Show an area
         {
           path: '/areas/:area',

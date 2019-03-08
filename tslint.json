@@ -21,5 +21,11 @@
     "ter-arrow-parens": [false],
     "prefer-array-literal": [false],
     "ter-func-call-spacing": [false]
+  },
+  "linterOptions": {
+    "exclude": [
+      "migration/",
+      "scratch/"
+    ]
   }
 }
