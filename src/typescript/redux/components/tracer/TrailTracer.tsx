@@ -5,7 +5,7 @@
  */
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
-import { Map, Polyline, Circle, Marker } from 'react-leaflet';
+import { Map, Polyline, Marker, CircleMarker } from 'react-leaflet';
 import findIndex = require('lodash/findIndex');
 import reduce = require('lodash/reduce');
 
@@ -13,6 +13,8 @@ import BestTileLayer from '../BestTileLayer';
 import FixedContainerOverMap from '../layouts/FixedContainerOverMap';
 import SearchGroup from '../search/SearchGroup';
 import classNames = require('classnames');
+
+const mapIcon = '<span><i class="fa fa-circle"/></span>';
 
 // We store our trail graph with lat lng literals as nodes and an adjacency list
 type Node = Leaflet.LatLngLiteral;
@@ -69,8 +71,7 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
     };
     this.onClick = this.onClick.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
-    this.onKeyUp = this.onKeyUp.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
     this.onDragSelectedStart = this.onDragSelectedStart.bind(this);
     this.onDragSelectedEnd = this.onDragSelectedEnd.bind(this);
   }
@@ -194,31 +195,27 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
     }
   }
 
-  onKeyDown(e: React.KeyboardEvent<any>) {
+  onKeyPress(e: React.KeyboardEvent<any>) {
     // Turn manipulate on ctrl key, and off on release
     if (e.key === ' ') {
       this.setState({
-        mode: 'manipulate'
+        mode: this.state.mode === 'insert' ? 'manipulate' : 'insert'
       });
     }
   }
 
-  onKeyUp(e: React.KeyboardEvent<any>) {
-    if (e.key === ' ') {
-      this.setState({
-        mode: 'insert'
-      });
-    }
+  onDragSelectedStart(nodeIndex: number) {
+    return (e: Leaflet.LeafletMouseEvent) => {
+    };
   }
 
-  onDragSelectedStart(e: React.MouseEvent) {
-    console.log('onDragStart');
-    console.log(e);
-  }
-
-  onDragSelectedEnd(e: React.MouseEvent) {
-    console.log('onDragEnd');
-    console.log(e);
+  onDragSelectedEnd(nodeIndex: number) {
+    return (e: Leaflet.DragEndEvent) => {
+      const point = this.state.nodes[nodeIndex];
+      point.lat = e.target._latlng.lat;
+      point.lng = e.target._latlng.lng;
+      this.forceUpdate();
+    };
   }
 
   undo() {
@@ -269,14 +266,17 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
       ...this.state.nodes.map((thisNode, index) => (
         <Marker
           key={`marker-${thisNode.lat}-${thisNode.lng}`}
+          icon={Leaflet.divIcon({
+            className: index === this.state.currentlySelected ? 'text-primary' : 'text-success',
+            html: mapIcon,
+          })}
           position={thisNode}
-        >
-          <Circle
-            center={thisNode}
-            radius={0.2}
-            color={index === this.state.currentlySelected ? 'green' : 'red'}
-          />
-        </Marker>
+          radius={4}
+          color={index === this.state.currentlySelected ? 'green' : 'red'}
+          draggable={this.state.mode === 'manipulate'}
+          ondragstart={this.onDragSelectedStart(index)}
+          ondragend={this.onDragSelectedEnd(index)}
+        />
       ))
     ];
   }
@@ -285,7 +285,7 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
     return (
       <div className="input-group-append flex-grow-up bg-light align-items-center text-center">
         <div className="col">
-          {this.props.title} (TODO Instructions and mobile mode)
+          {this.props.title}
         </div>
         <div className="col-auto">
           <a
@@ -343,8 +343,8 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
         </div>
         <div className="col-12 col-sm-auto text-left">
           <p className="text-info small">
-            Hold Space to go into "Manipulate" mode (or press on mobile). <br/>
-            This allows you to select your current node and move it around.
+            Hit Space to toggle "Manipulate" mode (or press on mobile). <br/>
+            This allows you to select your current node and move nodes around.
           </p>
         </div>
       </div>
@@ -356,8 +356,7 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
       /** Fill up whatever space is given to the tracer */
       <div
         className="w-100 h-100"
-        onKeyDown={this.onKeyDown}
-        onKeyUp={this.onKeyUp}
+        onKeyPress={this.onKeyPress}
       >
         <FixedContainerOverMap>
           <SearchGroup
