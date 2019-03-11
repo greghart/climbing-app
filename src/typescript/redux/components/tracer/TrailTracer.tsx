@@ -14,6 +14,7 @@ import FixedContainerOverMap from '../layouts/FixedContainerOverMap';
 import SearchGroup from '../search/SearchGroup';
 import classNames = require('classnames');
 import { ExtractProps } from '../../../externals';
+import { adjacencyGraph, GraphInterface, AdjacencyGraph } from '../util/graph';
 
 const mapIcon = '<span><i class="fa fa-circle"/></span>';
 const selectedIcon = Leaflet.divIcon({
@@ -34,14 +35,12 @@ interface TrailTracerProps {
   magnetSizeMeters?: number;
   bounds: Leaflet.LatLngBoundsExpression;
   onCancel: React.MouseEventHandler;
-  onSubmit?: (nodes: Node[], adjacency: AdjacencyMap) => unknown;
+  onSubmit?: (graph: AdjacencyGraph) => unknown;
 }
 
 type Mode = 'insert' | 'manipulate';
 interface TrailTracerState {
-  nodes: Node[];
-  // Adjacency list. Uses array index of `nodes`
-  adjacency: AdjacencyMap;
+  graph: AdjacencyGraph;
   // Currently selected node
   currentlySelected?: number;
   // Current mode of tracer.
@@ -80,7 +79,6 @@ class DraggableMarker extends React.Component<DraggableMarkerProps, { isDragging
   }
 
   onDragStart(e: Leaflet.LeafletMouseEvent) {
-    // A drag click is not a click click
     this.setState({ isDragging: true });
   }
 
@@ -90,11 +88,6 @@ class DraggableMarker extends React.Component<DraggableMarkerProps, { isDragging
   }
 
   onDrag(e: Leaflet.DragEndEvent) {
-    // const point = this.state.nodes[nodeIndex];
-    // point.lat = e.target._latlng.lat;
-    // point.lng = e.target._latlng.lng;
-    // this.forceUpdate();
-    console.log(e, 'drag');
     this.props.onUpdate(e.target._latlng);
   }
 
@@ -135,8 +128,7 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
   constructor(props) {
     super(props);
     this.state = {
-      nodes: [],
-      adjacency: {},
+      graph: adjacencyGraph.initialize(),
       currentlySelected: undefined,
       mode: 'insert',
       current: undefined,
@@ -172,91 +164,72 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
   onClickManipulate(e) {
     // Click an existing node
     const existingNodeIndex = findIndex(
-      this.state.nodes,
+      adjacencyGraph.getNodes(this.state.graph),
       (thisNode) => e.latlng.distanceTo(thisNode) < this.props.magnetSizeMeters
     );
-    if (existingNodeIndex !== -1) {
-      this.setState({
-        currentlySelected: existingNodeIndex
-      });
-    }
+    this.setState({
+      currentlySelected: existingNodeIndex === -1 ? undefined : existingNodeIndex
+    });
   }
 
   onClickInsert(e) {
-    // First node is special, nothing to do
-    if (this.state.nodes.length === 0) {
+    // Just add node if starting a new chain
+    if (this.state.currentlySelected === undefined) {
+      const key = adjacencyGraph.addNode(this.state.graph, e.latlng);
       this.setState({
-        nodes: [e.latlng],
-        currentlySelected: 0
+        currentlySelected: key
       });
       return;
     }
 
     // Target node index
     let targetNodeIndex;
-    // New nodes
-    let newNodes;
 
-    // If it's an existing point, just add a new edge
     const existingNodeIndex = findIndex(
-      this.state.nodes,
+      adjacencyGraph.getNodes(this.state.graph),
       (thisNode) => e.latlng.distanceTo(thisNode) < this.props.magnetSizeMeters
     );
     // If it's an existing node, just add a new edge
     if (existingNodeIndex !== -1) {
       targetNodeIndex = existingNodeIndex;
-      newNodes = this.state.nodes;
     // Otherwise, add a new vertex and a new edge
     } else {
-      newNodes = this.state.nodes.concat([e.latlng]);
-      targetNodeIndex = newNodes.length - 1;
+      targetNodeIndex = adjacencyGraph.addNode(this.state.graph, e.latlng);
     }
 
-    // Special case, don't allow clicking currently selected
-    if (this.state.currentlySelected === targetNodeIndex) {
+    adjacencyGraph.addEdge(
+      this.state.graph,
+      this.state.currentlySelected,
+      targetNodeIndex
+    );
+
+    console.warn('insert', this.state.graph);
+    this.setState({
+      graph: this.state.graph,
+      currentlySelected: targetNodeIndex
+    });
+    return;
+  }
+
+  addEdge(adjacency, i, j) {
+    // Special case, don't connecting current to itself of course
+    if (i === j) {
       return;
     }
     // We ensure one way paths by only storing edges as the lower index
     // Base node index
-    let baseNodeIndex = this.state.currentlySelected;
-    // Regardless, we always "select" the next one
-    const nextSelected = targetNodeIndex;
-    if (this.state.currentlySelected > targetNodeIndex) {
-      baseNodeIndex = targetNodeIndex;
-      targetNodeIndex = this.state.currentlySelected;
-    }
+    const base = i > j ? j : i;
+    const target = i > j ? i : j;
 
-    // Setup new adjacency if it doesn't already exist
-    const existingAdjacency = this.state.adjacency[baseNodeIndex] || [];
-    const newAdjacency = existingAdjacency.indexOf(targetNodeIndex) === -1 ?
-      existingAdjacency.concat([targetNodeIndex]) :
+    // Setup adjacency and add (if not already)
+    const existingAdjacency = adjacency[base] || [];
+    const newAdjacency = existingAdjacency.indexOf(target) === -1 ?
+      existingAdjacency.concat([target]) :
       existingAdjacency;
-    this.setState({
-      adjacency: {
-        ...this.state.adjacency,
-        [baseNodeIndex]: newAdjacency
-      },
-      nodes: newNodes,
-      currentlySelected: nextSelected
-    });
-    return;
-    // if (
-    //   this.state.points.length > 2 &&
-    //   e.latlng.distanceTo(this.state.points[0]) < this.props.magnetSizeMeters
-    // ) {
-    //   const newPoints = this.state.points.concat([this.state.points[0]]);
-    //   this.setState({
-    //     points: newPoints,
-    //     isDone: true,
-    //   });
-    //   if (this.props.onTrailComplete) {
-    //     this.props.onTrailComplete(newPoints);
-    //   }
-    // } else {
-    //   this.setState({
-    //     points: this.state.points.concat([e.latlng]),
-    //   });
-    // }
+    return {
+      ...adjacency,
+      [base]: newAdjacency
+    };
   }
 
   onMouseMove(e: Leaflet.LeafletMouseEvent) {
@@ -274,29 +247,23 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
     }
   }
 
-  undo() {
-    // if (this.state.points.length > 0) {
-    //   this.setState({
-    //     points: this.state.points.slice(0, -1),
-    //     isDone: false,
-    //   });
-    // }
+  removeNode(nodeIndex: number) {
   }
 
   getPoints() {
     // Polyline of all existing edges, plus one to cursor
     return [
       ...reduce(
-        this.state.nodes,
+        adjacencyGraph.getNodes(this.state.graph),
         (memo, thisNode, index) => {
           return memo
           // Add edges
-          .concat((this.state.adjacency[index] || []).map((targetNodeIndex) => (
+          .concat(adjacencyGraph.getEdges(this.state.graph, index).map((targetNodeIndex) => (
             <Polyline
               key={`line-${index}-${targetNodeIndex}`}
               positions={[
                 thisNode,
-                this.state.nodes[targetNodeIndex]
+                adjacencyGraph.getNode(this.state.graph, targetNodeIndex)
               ]}
               color="red"
             />
@@ -313,13 +280,13 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
         <Polyline
           key="current-line-pending"
           positions={[
-            this.state.nodes[this.state.currentlySelected],
+            adjacencyGraph.getNode(this.state.graph, this.state.currentlySelected),
             this.state.current,
           ]}
         />
       ),
       // Add non selected node markers
-      ...this.state.nodes.map((thisNode, index) => (
+      ...adjacencyGraph.getNodes(this.state.graph).map((thisNode, index) => (
         <DraggableMarker
           key={`marker-${index}`}
           icon={index === this.state.currentlySelected ? selectedIcon : normalIcon}
@@ -327,17 +294,16 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
           color={index === this.state.currentlySelected ? 'green' : 'red'}
           draggable={this.state.mode === 'manipulate'}
           onUpdate={(latlng) => {
-            const point = this.state.nodes[index];
+            const point = adjacencyGraph.getNode(this.state.graph, index);
             point.lat = latlng.lat;
             point.lng = latlng.lng;
             this.forceUpdate();
           }}
-          onclick={(e) => {
-            e.originalEvent.preventDefault();
-            this.setState({
-              currentlySelected: index
-            });
-          }}
+          // onclick={(e) => {
+          //   this.setState({
+          //     currentlySelected: index
+          //   });
+          // }}
         />
       ))
     ];
@@ -355,7 +321,7 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
             className="btn btn-link"
             onClick={() => (
               this.props.onSubmit &&
-              this.props.onSubmit(this.state.nodes, this.state.adjacency)
+              this.props.onSubmit(this.state.graph)
             )}
           >
             <i className="fa fa-check pull-right"/>
