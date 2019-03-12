@@ -36,6 +36,7 @@ interface TrailTracerProps {
   bounds: Leaflet.LatLngBoundsExpression;
   onCancel: React.MouseEventHandler;
   onSubmit?: (graph: AdjacencyGraph) => unknown;
+  defaultGraph?: AdjacencyGraph;
 }
 
 type Mode = 'insert' | 'manipulate';
@@ -149,7 +150,7 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
   constructor(props) {
     super(props);
     this.state = {
-      graph: adjacencyGraph.initialize(),
+      graph: props.defaultGraph || adjacencyGraph.initialize(),
       currentlySelected: undefined,
       mode: 'insert',
       current: undefined,

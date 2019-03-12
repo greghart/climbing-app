@@ -8,23 +8,10 @@ import CragNewCommentContainer from './CragNewCommentContainer';
 import CragEditContainer from './CragEditContainer';
 import CragLayoutOverview from './CragLayoutOverview';
 import CragNewAreaContainer from './CragNewAreaContainer';
-import TrailTracer from '../tracer/TrailTracer';
-import TrailField, { TrailFieldProps } from '../form/TrailField';
+import CragTrail from './CragTrail';
 
 type SubProps = {
   crag: Crag;
-};
-
-const TrailRoute: React.FunctionComponent<SubProps> = (props) => {
-  const TrailFieldAny = TrailField as React.ComponentType<any>;
-  return (
-    <TrailFieldAny
-      names={['a', 'b', 'c']}
-      bounds={
-        Leaflet.latLng(props.crag.center).toBounds(450)
-      }
-    />
-  );
 };
 
 const routes = [
@@ -57,7 +44,7 @@ const routes = [
       },
       {
         path: '/crags/:crag/trail/new',
-        component: TrailRoute,
+        component: CragTrail,
         key: 'crag_trail_new',
       },
       {

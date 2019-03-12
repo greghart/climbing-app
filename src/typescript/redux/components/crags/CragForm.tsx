@@ -15,7 +15,7 @@ interface FormData {
   description?: string;
 }
 
-const RouteForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
+const CragForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   return (
     <form onSubmit={props.handleSubmit} className="m-3">
       {props.error &&
@@ -39,5 +39,5 @@ const RouteForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   );
 };
 
-export default RouteForm;
+export default CragForm;
 export { FormData, Props };

@@ -17,7 +17,7 @@ interface GraphInterface<Graph, Key = number> {
   // Get outgoing edges for a node
   getEdges(graph: Graph, k: Key): Key[];
   // Add a node and return key to the new node
-  addNode(graph: Graph, node: Node): Key;
+  addNode(graph: Graph, node: Node, key?: Key): Key;
   // Add an edge to the graph
   addEdge(graph: Graph, i: Key, j: Key): void;
   removeNode(graph: Graph, k: Key);
@@ -55,8 +55,8 @@ const adjacencyGraph: GraphInterface<AdjacencyGraph> = {
     return graph.adjacency[k] || [];
   },
 
-  addNode: (graph, node) => {
-    const key = graph._counter;
+  addNode: (graph, node, _key?: number) => {
+    const key = !!_key ? _key : graph._counter;
     graph._counter += 1;
     graph.nodes[key] = node;
     return key;
