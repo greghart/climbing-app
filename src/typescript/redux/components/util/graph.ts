@@ -57,6 +57,11 @@ const adjacencyGraph: GraphInterface<AdjacencyGraph> = {
 
   addNode: (graph, node, _key?: number) => {
     const key = !!_key ? _key : graph._counter;
+    // If we get server ids, make sure there's no collision
+    // TODO Make a more universal use client id system
+    if (key > graph._counter) {
+      graph._counter = key;
+    }
     graph._counter += 1;
     graph.nodes[key] = node;
     return key;

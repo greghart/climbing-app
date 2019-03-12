@@ -9,6 +9,7 @@ import CragEditContainer from './CragEditContainer';
 import CragLayoutOverview from './CragLayoutOverview';
 import CragNewAreaContainer from './CragNewAreaContainer';
 import CragTrail from './CragTrail';
+import CragTrailContainer from './CragTrailContainer';
 
 type SubProps = {
   crag: Crag;
@@ -44,7 +45,7 @@ const routes = [
       },
       {
         path: '/crags/:crag/trail/new',
-        component: CragTrail,
+        component: CragTrailContainer,
         key: 'crag_trail_new',
       },
       {

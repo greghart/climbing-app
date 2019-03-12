@@ -15,9 +15,8 @@ import { Polyline } from 'react-leaflet';
 interface TrailProps {
   // We will use:
   //  [0] -- nodes
-  //  [1] -- edges
-  //  [2] -- updating flag
-  names: [string, string, string];
+  //  [1] -- updating flag
+  names: [string, string];
   // Other layers to include on the map -- takes form level coords as an argument
   otherLayers?: () => React.ReactNode;
   bounds: Leaflet.LatLngBoundsExpression;
@@ -25,14 +24,18 @@ interface TrailProps {
   tracerProps?: Partial<ExtractProps<typeof TrailTracer>>;
 }
 
-type ClientEdge = {
-  a: number;
-  b: number;
-};
-function adaptRawToGraph(nodes: TrailNode[], edges: ClientEdge[]): AdjacencyGraph {
+function adaptRawToGraph(nodes: TrailNode[]): AdjacencyGraph {
   const graph = adjacencyGraph.initialize();
-  nodes.forEach((thisNode) => adjacencyGraph.addNode(graph, thisNode, parseInt(thisNode.id, 10)));
-  edges.forEach((thisEdge) => adjacencyGraph.addEdge(graph, thisEdge.a, thisEdge.b));
+  nodes.forEach((thisNode) => {
+    adjacencyGraph.addNode(graph, thisNode, parseInt(thisNode.id, 10));
+    thisNode.edges.forEach((thisEdge) =>
+      adjacencyGraph.addEdge(
+        graph,
+        parseInt((thisEdge as unknown as any).a, 10),
+        parseInt((thisEdge as unknown as any).b, 10)
+      )
+    );
+  });
   return graph;
 }
 function adaptGraphToRaw(graph: AdjacencyGraph) {
@@ -41,28 +44,25 @@ function adaptGraphToRaw(graph: AdjacencyGraph) {
     (memo, key) => {
       memo.nodes.push({
         id: key,
-        ...adjacencyGraph.getNode(graph, key)
-      });
-      memo.edges = memo.edges.concat(
-        adjacencyGraph.getEdges(graph, key).map((target) => {
+        ...adjacencyGraph.getNode(graph, key),
+        edges: adjacencyGraph.getEdges(graph, key).map((target) => {
           return {
             a: key,
             b: target
           };
         })
-      );
+      });
       return memo;
     },
-    { nodes: [], edges: [] }
+    { nodes: [] }
   );
 }
 
 const TrailField: React.ComponentType<WrappedFieldsProps & TrailProps> = (props) => {
   const nodes = get(props, props.names[0]);
-  const edges = get(props, props.names[1]);
-  const isUpdating = get(props, props.names[2]);
+  const isUpdating = get(props, props.names[1]);
 
-  const graph = adaptRawToGraph(nodes.input.value || [], edges.input.value || []);
+  const graph = adaptRawToGraph(nodes.input.value || []);
   if (!isUpdating.input.value) {
     return (
       <div>
@@ -77,6 +77,8 @@ const TrailField: React.ComponentType<WrappedFieldsProps & TrailProps> = (props)
                     adjacencyGraph.getEdges(graph, index)
                     .map((targetNodeIndex) => (
                       <Polyline
+                        key={index}
+                        weight={2}
                         positions={[
                           thisNode,
                           adjacencyGraph.getNode(graph, targetNodeIndex)
@@ -115,7 +117,6 @@ const TrailField: React.ComponentType<WrappedFieldsProps & TrailProps> = (props)
         onSubmit={(graph) => {
           const raw = adaptGraphToRaw(graph);
           nodes.input.onChange(raw.nodes);
-          edges.input.onChange(raw.edges);
           isUpdating.input.onChange(false);
           // const value = polygon.input.value || {};
           // value.coordinates = newCoordinates.map((thisC, i) => {

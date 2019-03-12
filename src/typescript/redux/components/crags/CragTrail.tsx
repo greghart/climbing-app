@@ -18,8 +18,9 @@ interface Props {
 }
 
 interface FormData {
-  nodes: TrailNode[];
-  edges: TrailEdge[];
+  trail: {
+    nodes: TrailNode[]
+  };
 }
 
 const CragTrail: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
@@ -29,7 +30,7 @@ const CragTrail: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
         <span className="text-danger">{props.error}</span>
       }
       <Fields<TrailFieldProps>
-        names={['trail.nodes', 'trail.edges', 'trail_is_updating']}
+        names={['trail.nodes', 'trail_is_updating']}
         bounds={
           Leaflet.latLng(props.crag.center).toBounds(350)
         }

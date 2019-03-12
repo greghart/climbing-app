@@ -4,7 +4,6 @@ import {
   PrimaryGeneratedColumn,
   Index,
 } from 'typeorm';
-import Coordinate from './Coordinate';
 import { cascadeManyToOne } from '../db/cascadeOptions';
 import TrailNode from './TrailNode';
 
@@ -17,10 +16,18 @@ export default class TrailEdge {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @ManyToOne(type => TrailNode, node => node.edges)
+  @ManyToOne(type => TrailNode, node => node.edges, cascadeManyToOne)
   a: TrailNode;
 
-  @ManyToOne(type => TrailNode, node => node.edges)
+  @ManyToOne(type => TrailNode, node => node.edges, cascadeManyToOne)
   b: TrailNode;
+
+  toJSON() {
+    return {
+      ...this,
+      a: this.a.id,
+      b: this.b.id
+    };
+  }
 
 }

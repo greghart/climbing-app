@@ -11,6 +11,7 @@ import CragCodec from '../../codecs/CragCodec';
 import { AreaPayload } from './AreasService';
 import AreaCodec from '../../codecs/AreaCodec';
 import exportCrag from '../operations/exportCrag';
+import getCragTrail from '../operations/getCragTrail';
 
 // For swagger generation we need dead simple types
 interface CragPayload {
@@ -33,6 +34,16 @@ export default class CragsService {
     @Rest.PathParam('id') id: string,
   ) {
     return getCrag(id);
+  }
+
+  @Rest.GET
+  @Tags('crags')
+  @Rest.Path(':id/trail')
+  @Response<object>(200, 'Retrieve trail for a crag')
+  public async getTrail(
+    @Rest.PathParam('id') id: string,
+  ) {
+    return getCragTrail(id);
   }
 
   @Rest.GET

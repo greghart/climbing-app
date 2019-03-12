@@ -56,7 +56,7 @@ function isEdge(selection: CurrentSelection): selection is EdgeSelection {
   return selection && selection.type === 'edge';
 }
 function isEdgeSelected(selection: CurrentSelection, u: number, v: number) {
-  return isEdge(selection) && selection.key[0] === u && selection.key[1];
+  return isEdge(selection) && selection.key[0] === u && selection.key[1] === v;
 }
 function isNodeSelected(selection: CurrentSelection, k: number) {
   return isNode(selection) && selection.key === k;
@@ -210,20 +210,8 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
   }
 
   onClickInsert(e) {
-    // Just add node if starting a new chain
-    if (this.state.currentlySelected === undefined) {
-      const key = adjacencyGraph.addNode(this.state.graph, e.latlng);
-      this.setState({
-        currentlySelected: {
-          key,
-          type: 'node'
-        }
-      });
-      return;
-    }
-
     // If currently selecting an edge, we can't really insert anything
-    if (!isNode(this.state.currentlySelected)) {
+    if (isEdge(this.state.currentlySelected)) {
       return;
     }
 
@@ -237,6 +225,30 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
         return e.latlng.distanceTo(thisNode) < this.props.magnetSizeMeters;
       }
     );
+
+    // If starting a new chain
+    if (this.state.currentlySelected === undefined) {
+      // if clicking near an existing node, select it
+      if (existingNodeIndex !== undefined) {
+        this.setState({
+          currentlySelected: {
+            key: existingNodeIndex,
+            type: 'node'
+          }
+        });
+      // otherwise, just add a new node and select that one
+      } else {
+        const key = adjacencyGraph.addNode(this.state.graph, e.latlng);
+        this.setState({
+          currentlySelected: {
+            key,
+            type: 'node'
+          }
+        });
+      }
+      return;
+    }
+
     // If it's an existing node, just add a new edge
     if (existingNodeIndex !== undefined) {
       targetNodeIndex = existingNodeIndex;

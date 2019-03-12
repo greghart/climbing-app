@@ -7,6 +7,7 @@ import {
 
 import { cascadeOneToMany } from '../db/cascadeOptions';
 import TrailNode from './TrailNode';
+import TrailEdge from './TrailEdge';
 
 /**
  * Entity that represents the trails within a given crag.

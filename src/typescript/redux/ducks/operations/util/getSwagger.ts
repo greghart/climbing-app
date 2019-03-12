@@ -68,6 +68,7 @@ const declaredRoutes = {
     exportCrag: (id) => { return { id }; },
     addArea: (id, data) => { return { id, data }; },
     updateCrag: (id, data) => { return { id, data }; },
+    getTrail: (id) => { return { id }; },
   },
   areas: {
     getAreas: (ids, includeComments) => { return { ids, includeComments }; },
