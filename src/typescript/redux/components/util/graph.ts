@@ -2,6 +2,8 @@
  * Some functional components for manipulating a graph
  */
 import * as Leaflet from 'leaflet';
+import without = require('lodash/without');
+import values = require('lodash/values');
 
 type Node = Leaflet.LatLngLiteral;
 
@@ -11,24 +13,29 @@ interface GraphInterface<Graph, Key = number> {
   initialize(): Graph;
   getNode(graph: Graph, k: Key): Node;
   getNodes(graph: Graph): Node[];
+  getNodeKeys(graph: Graph): Key[];
   // Get outgoing edges for a node
   getEdges(graph: Graph, k: Key): Key[];
   // Add a node and return key to the new node
   addNode(graph: Graph, node: Node): Key;
   // Add an edge to the graph
   addEdge(graph: Graph, i: Key, j: Key): void;
+  removeNode(graph: Graph, k: Key);
+  removeEdge(graph: Graph, i: Key, j: Key);
 }
 
 type AdjacencyMap = { [index: number]: number[] };
 interface AdjacencyGraph {
-  nodes: Node[];
+  nodes: { [key: number]: Node; };
+  _counter: number;
   adjacency: AdjacencyMap;
 }
 const adjacencyGraph: GraphInterface<AdjacencyGraph> = {
   initialize: () => {
     return {
-      nodes: [],
-      adjacency: {}
+      nodes: {},
+      adjacency: {},
+      _counter: 0
     };
   },
 
@@ -37,7 +44,11 @@ const adjacencyGraph: GraphInterface<AdjacencyGraph> = {
   },
 
   getNodes: (graph) => {
-    return graph.nodes;
+    return values(graph.nodes);
+  },
+
+  getNodeKeys: (graph) => {
+    return Object.keys(graph.nodes).map((i) => parseInt(i, 10));
   },
 
   getEdges: (graph, k) => {
@@ -45,8 +56,25 @@ const adjacencyGraph: GraphInterface<AdjacencyGraph> = {
   },
 
   addNode: (graph, node) => {
-    graph.nodes.push(node);
-    return graph.nodes.length - 1;
+    const key = graph._counter;
+    graph._counter += 1;
+    graph.nodes[key] = node;
+    return key;
+  },
+
+  removeNode: (graph, k) => {
+    // Remove node and all edges
+    delete graph.nodes[k];
+    delete graph.adjacency[k];
+    Object.keys(graph.adjacency).forEach((thisI) => {
+      graph.adjacency[thisI] = without(graph.adjacency[thisI], k);
+    });
+  },
+
+  removeEdge: (graph, _i, _j) => {
+    const i = _i > _j ? _j : _i;
+    const j = _i > _j ? _i : _j;
+    graph.adjacency[i] = without(graph.adjacency[i], j);
   },
 
   addEdge: (graph, i, j) => {

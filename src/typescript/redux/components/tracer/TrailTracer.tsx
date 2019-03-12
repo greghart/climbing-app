@@ -6,7 +6,7 @@
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
 import { Map, Polyline, Marker, CircleMarker } from 'react-leaflet';
-import findIndex = require('lodash/findIndex');
+import find = require('lodash/find');
 import reduce = require('lodash/reduce');
 
 import BestTileLayer from '../BestTileLayer';
@@ -39,10 +39,31 @@ interface TrailTracerProps {
 }
 
 type Mode = 'insert' | 'manipulate';
+type NodeSelection = {
+  type: 'node';
+  key: number;
+};
+type EdgeSelection = {
+  type: 'edge';
+  key: [number, number];
+};
+type CurrentSelection = NodeSelection | EdgeSelection;
+function isNode(selection: CurrentSelection): selection is NodeSelection {
+  return selection && selection.type === 'node';
+}
+function isEdge(selection: CurrentSelection): selection is EdgeSelection {
+  return selection && selection.type === 'edge';
+}
+function isEdgeSelected(selection: CurrentSelection, u: number, v: number) {
+  return isEdge(selection) && selection.key[0] === u && selection.key[1];
+}
+function isNodeSelected(selection: CurrentSelection, k: number) {
+  return isNode(selection) && selection.key === k;
+}
 interface TrailTracerState {
   graph: AdjacencyGraph;
   // Currently selected node
-  currentlySelected?: number;
+  currentlySelected?: CurrentSelection;
   // Current mode of tracer.
   mode: 'insert' | 'manipulate';
   isDragging: boolean;
@@ -137,6 +158,7 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
     this.onClick = this.onClick.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
+    this.trashCurrent = this.trashCurrent.bind(this);
   }
 
   /**
@@ -152,6 +174,21 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
     return this.state.mode;
   }
 
+  trashCurrent() {
+    if (this.state.currentlySelected === undefined) {
+      return;
+    }
+    if (isNode(this.state.currentlySelected)) {
+      adjacencyGraph.removeNode(this.state.graph, this.state.currentlySelected.key);
+    }
+    if (isEdge(this.state.currentlySelected)) {
+      adjacencyGraph.removeEdge(this.state.graph, ...this.state.currentlySelected.key);
+    }
+    this.setState({
+      currentlySelected: undefined
+    });
+  }
+
   onClick(e) {
     const mode = this.getMode(e);
     if (mode === 'insert') {
@@ -162,14 +199,13 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
   }
 
   onClickManipulate(e) {
-    // Click an existing node
-    const existingNodeIndex = findIndex(
-      adjacencyGraph.getNodes(this.state.graph),
-      (thisNode) => e.latlng.distanceTo(thisNode) < this.props.magnetSizeMeters
-    );
-    this.setState({
-      currentlySelected: existingNodeIndex === -1 ? undefined : existingNodeIndex
-    });
+    // Manipulate mode clicks handled on map entities themselves
+    // If we get to the top level handler, just select none
+    if (!e.originalEvent.defaultPrevented) {
+      this.setState({
+        currentlySelected: undefined
+      });
+    }
   }
 
   onClickInsert(e) {
@@ -177,20 +213,31 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
     if (this.state.currentlySelected === undefined) {
       const key = adjacencyGraph.addNode(this.state.graph, e.latlng);
       this.setState({
-        currentlySelected: key
+        currentlySelected: {
+          key,
+          type: 'node'
+        }
       });
+      return;
+    }
+
+    // If currently selecting an edge, we can't really insert anything
+    if (!isNode(this.state.currentlySelected)) {
       return;
     }
 
     // Target node index
     let targetNodeIndex;
 
-    const existingNodeIndex = findIndex(
-      adjacencyGraph.getNodes(this.state.graph),
-      (thisNode) => e.latlng.distanceTo(thisNode) < this.props.magnetSizeMeters
+    const existingNodeIndex = find(
+      adjacencyGraph.getNodeKeys(this.state.graph),
+      (thisNodeKey) => {
+        const thisNode = adjacencyGraph.getNode(this.state.graph, thisNodeKey);
+        return e.latlng.distanceTo(thisNode) < this.props.magnetSizeMeters;
+      }
     );
     // If it's an existing node, just add a new edge
-    if (existingNodeIndex !== -1) {
+    if (existingNodeIndex !== undefined) {
       targetNodeIndex = existingNodeIndex;
     // Otherwise, add a new vertex and a new edge
     } else {
@@ -199,14 +246,16 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
 
     adjacencyGraph.addEdge(
       this.state.graph,
-      this.state.currentlySelected,
+      this.state.currentlySelected.key,
       targetNodeIndex
     );
 
-    console.warn('insert', this.state.graph);
     this.setState({
       graph: this.state.graph,
-      currentlySelected: targetNodeIndex
+      currentlySelected: {
+        type: 'node',
+        key: targetNodeIndex,
+      }
     });
     return;
   }
@@ -245,6 +294,9 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
         mode: this.state.mode === 'insert' ? 'manipulate' : 'insert'
       });
     }
+    if (this.state.mode === 'manipulate' && (e.key === 'Delete' || e.key === 'd')) {
+      this.trashCurrent();
+    }
   }
 
   removeNode(nodeIndex: number) {
@@ -254,8 +306,9 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
     // Polyline of all existing edges, plus one to cursor
     return [
       ...reduce(
-        adjacencyGraph.getNodes(this.state.graph),
-        (memo, thisNode, index) => {
+        adjacencyGraph.getNodeKeys(this.state.graph),
+        (memo, index) => {
+          const thisNode = adjacencyGraph.getNode(this.state.graph, index);
           return memo
           // Add edges
           .concat(adjacencyGraph.getEdges(this.state.graph, index).map((targetNodeIndex) => (
@@ -265,7 +318,20 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
                 thisNode,
                 adjacencyGraph.getNode(this.state.graph, targetNodeIndex)
               ]}
-              color="red"
+              color={isEdgeSelected(this.state.currentlySelected, index, targetNodeIndex) ?
+                'blue' : 'red'
+              }
+              onclick={this.state.mode !== 'manipulate' ? undefined : (e) => {
+                e.originalEvent.preventDefault();
+                e.originalEvent.stopPropagation();
+                this.setState({
+                  currentlySelected: {
+                    type: 'edge',
+                    key: [index, targetNodeIndex]
+                  }
+                });
+                return false;
+              }}
             />
           )));
         },
@@ -275,37 +341,44 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
         (
           this.state.mode === 'insert' &&
           this.state.current &&
-          this.state.currentlySelected !== undefined
+          isNode(this.state.currentlySelected)
         ) &&
         <Polyline
           key="current-line-pending"
           positions={[
-            adjacencyGraph.getNode(this.state.graph, this.state.currentlySelected),
+            adjacencyGraph.getNode(this.state.graph, this.state.currentlySelected.key),
             this.state.current,
           ]}
         />
       ),
       // Add non selected node markers
-      ...adjacencyGraph.getNodes(this.state.graph).map((thisNode, index) => (
-        <DraggableMarker
-          key={`marker-${index}`}
-          icon={index === this.state.currentlySelected ? selectedIcon : normalIcon}
-          position={thisNode}
-          color={index === this.state.currentlySelected ? 'green' : 'red'}
-          draggable={this.state.mode === 'manipulate'}
-          onUpdate={(latlng) => {
-            const point = adjacencyGraph.getNode(this.state.graph, index);
-            point.lat = latlng.lat;
-            point.lng = latlng.lng;
-            this.forceUpdate();
-          }}
-          // onclick={(e) => {
-          //   this.setState({
-          //     currentlySelected: index
-          //   });
-          // }}
-        />
-      ))
+      ...adjacencyGraph.getNodeKeys(this.state.graph).map((index) => {
+        const thisNode = adjacencyGraph.getNode(this.state.graph, index);
+        return (
+          <DraggableMarker
+            key={`marker-${index}`}
+            icon={isNodeSelected(this.state.currentlySelected, index) ? selectedIcon : normalIcon}
+            position={thisNode}
+            color={isNodeSelected(this.state.currentlySelected, index) ? 'green' : 'red'}
+            draggable={this.state.mode === 'manipulate'}
+            onUpdate={(latlng) => {
+              const point = adjacencyGraph.getNode(this.state.graph, index);
+              point.lat = latlng.lat;
+              point.lng = latlng.lng;
+              this.forceUpdate();
+            }}
+            onclick={this.state.mode !== 'manipulate' ? undefined : (e) => {
+              this.setState({
+                currentlySelected: {
+                  type: 'node',
+                  key: index
+                }
+              });
+              return false;
+            }}
+          />
+        );
+      })
     ];
   }
 
@@ -368,12 +441,15 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
               /> Select
             </label>
           </div>
+          {this.state.mode === 'manipulate' && (
+            <i className="fa fa-trash ml-2" onClick={this.trashCurrent} />
+          )}
         </div>
         <div className="col-12 col-sm-auto text-left">
           <p className="text-info small">
             Hit Space to toggle "Select" mode (or press on mobile).
             This allows you to select your base node to start a new trail branch,
-            or move existing nodes.
+            move existing nodes, or delete nodes.
           </p>
         </div>
       </div>
