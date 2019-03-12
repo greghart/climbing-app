@@ -77,7 +77,7 @@ const TrailField: React.ComponentType<WrappedFieldsProps & TrailProps> = (props)
                     adjacencyGraph.getEdges(graph, index)
                     .map((targetNodeIndex) => (
                       <Polyline
-                        key={index}
+                        key={`${index}-${targetNodeIndex}`}
                         weight={2}
                         positions={[
                           thisNode,

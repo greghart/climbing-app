@@ -8,6 +8,9 @@ interface Props {
 }
 
 const Truncate: React.SFC<Props> = (props) => {
+  if (!props.text) {
+    return <React.Fragment />;
+  }
   if (props.text.length <= props.length) {
     return <span>{props.text}</span>;
   }
