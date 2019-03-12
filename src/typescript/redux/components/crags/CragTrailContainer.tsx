@@ -42,7 +42,9 @@ const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
         ),
       )
       .then(() => {
-        fetchTrail(ownProps.crag.id);
+        return dispatch(
+          fetchTrail(ownProps.crag.id)
+        );
       })
       .then(() => {
         return dispatch(
