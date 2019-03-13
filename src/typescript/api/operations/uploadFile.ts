@@ -16,22 +16,32 @@ function hashData(data: Buffer) {
 function uploadFile(file: Express.Multer.File, directory: string): Promise<Upload> {
   const engine = getEngine();
 
-  const hash = hashData(file.buffer);
   const upload = new Upload();
+  const hash = hashData(file.buffer);
+  const key = `${hash}${path.extname(file.originalname)}`;
   upload.directory = directory;
   upload.engine = engine.getCode();
   upload.fileSize = file.size;
   // For now use hash as the filename
-  upload.key = `${hash}${path.extname(file.originalname)}`;
+  upload.key = key;
   upload.originalName = file.originalname;
   upload.sha1Hash = hash;
   upload.uploadedAt = new Date();
 
-  return getRepository(Upload).save(upload)
-  .then(() => {
-    return engine.upload(upload, new FileSource(file));
+  // Find upload with existing key, or save new one.
+  // Basically if someone uploads the same file, we can re-use
+  return getRepository(Upload).findOne({ where: { key } })
+  .then((existingUpload) => {
+    if (existingUpload) {
+      return existingUpload;
+    }
+    return getRepository(Upload).save(upload)
+    .then((upload) => {
+      return engine.upload(upload, new FileSource(file))
+      .then(() => upload);
+    });
   })
-  .then(() => upload);
+  .then((upload) => upload);
 }
 
 export default uploadFile;

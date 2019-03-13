@@ -17,7 +17,7 @@ export default class Upload {
   id: number;
 
   // A key to where the upload is stored
-  @Column()
+  @Column({ unique: true })
   key: string;
 
   // A directory namespace where the upload is stored

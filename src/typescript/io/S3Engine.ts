@@ -40,7 +40,7 @@ class S3Engine implements IOEngine {
     const buffer = await source.getBuffer();
     const resolvedOptions = {
       ...S3Engine.defaultOptions,
-      ContentType: mime.lookup(upload.key),
+      ContentType: mime.getType(upload.key),
       Bucket: this.bucket,
       Key: this.resolveKey(upload),
       Body: buffer

@@ -41,10 +41,10 @@ app.use(webpackHotMiddleware(compiler));
 // .then((apiRouter) => {
 getConnection()
 .then(() => {
-  getExpressApplication(app)
+  return getExpressApplication(app);
 })
-.then(() => {
-  app.listen(
+.then((finalApp) => {
+  finalApp.listen(
     parseInt(port.toString(), 10),
     host,
     (err: any) => {

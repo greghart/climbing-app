@@ -12,7 +12,6 @@ import * as cookieParser from 'cookie-parser';
 import connectFlash = require('connect-flash');
 import * as cors from 'cors';
 import * as path from 'path';
-import * as Promise from 'bluebird';
 import * as config from 'config';
 import * as _debug from 'debug';
 const debug = _debug('apollo-demand-app:getApp');
@@ -31,13 +30,14 @@ import getServerRenderMiddleware from './getServerRenderMiddleware';
 // other routers
 // import { UniversalErrorMiddleware } from './util/errors/UniversalErrorFactory';
 import api from '../api';
+import ioEngineRouter from './ioEngineRouter';
 
 // Application with express-state
 interface Application extends express.Express {
   expose: (data: any, key: string) => any;
 }
 
-function getExpressApplication(_app?: Application) {
+function getExpressApplication(_app?: express.Express) {
   const app = _app ? _app : (express() as Application);
 
   state.extend(app);
@@ -56,11 +56,13 @@ function getExpressApplication(_app?: Application) {
     app.use(helmet());
   }
   app.use(cors({ origin: '*' }));
+  // Body parse support
   app.use(bodyParser.json({
     limit: '100mb',
     strict: false,
   }));
   app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+  // Static files
   app.use('/build', serveStatic(
     path.join(__dirname, '../../../build'),
   ));
@@ -81,6 +83,8 @@ function getExpressApplication(_app?: Application) {
   );
   app.use(connectFlash());
 
+  // IO Engine
+  app.use('/uploads', ioEngineRouter);
   app.use('/api', api);
   // // Allow unauthorized access to API docs, and expose to all requests
   // app.get('/api-docs', (req, res, next) => {
@@ -114,4 +118,4 @@ function getExpressApplication(_app?: Application) {
   return app;
 }
 
-export default Promise.method(getExpressApplication);
+export default getExpressApplication;

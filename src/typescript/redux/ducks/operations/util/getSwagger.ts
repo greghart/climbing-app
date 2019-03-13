@@ -99,7 +99,8 @@ const declaredRoutes = {
  *
  * Each service/method pair maps to a swagger operation, which we delegate to our swagger API
  */
-const swaggerP = new ((window as any).SwaggerClient as any)('/api/swagger.json');
+const SwaggerClient = require('swagger-client');
+const swaggerP = new SwaggerClient('/api/swagger.json');
 
 function setupOp<
   Service extends keyof SwaggerAPI,
