@@ -6,8 +6,9 @@ import {
   OneToMany,
 } from 'typeorm';
 
-import { cascadeManyToOne, cascadeOneToMany } from '../db/cascadeOptions';
+import { cascadeOneToMany } from '../db/cascadeOptions';
 import Comment from './Comment';
+import Photo from './Photo';
 
 /**
  * Users
@@ -26,6 +27,9 @@ export default class User {
   name: string;
 
   @OneToMany(type => Comment, comment => comment.user, cascadeOneToMany)
-  comments: Comment[];
+  comments?: Comment[];
+
+  @OneToMany(type => Photo, photo => photo.user, cascadeOneToMany)
+  photos?: Photo[];
 
 }
