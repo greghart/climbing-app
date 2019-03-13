@@ -12,7 +12,7 @@ function getKeyPrefix(prefix: string) {
 }
 
 // Also export current app prefix
-const appKeyPrefix = getKeyPrefix(config.get<string>('server.sessions.prefix'));
+const appKeyPrefix = getKeyPrefix(config.get<string>('sessions.prefix'));
 
 export default getKeyPrefix;
 export { appKeyPrefix };

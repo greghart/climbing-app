@@ -44,7 +44,7 @@ function getExpressApplication(_app?: Application) {
 
   // Basic server setup
   app.set('trust proxy', 1);
-  app.set('port', config.get('server.port'));
+  app.set('port', config.get('port'));
   // Server favicon
   app.use(
     favicon(
@@ -71,7 +71,7 @@ function getExpressApplication(_app?: Application) {
   // Setup cookies and sessions
   app.use(
     cookieParser(
-      config.get<string>('server.cookies.secret'),
+      config.get<string>('cookies.secret'),
     ),
   );
   app.use(

@@ -1,25 +1,28 @@
-server:
-  port: 6001
-  cookies:
-    secret: 'temposecret8213408SFS@##$'
-  sessions:
-    secret: develsessionsecret
-    prefix: 'apollo|sid|{NODE_ENV}'
-  redis:
+port: 6001
+cookies:
+  secret: 'temposecret8213408SFS@##$'
+sessions:
+  secret: develsessionsecret
+  prefix: 'apollo|sid|{NODE_ENV}'
+redis:
+  host: localhost
+  port: 6379
+database:
+  sync: false
+  postgres:
     host: localhost
-    port: 6379
-  database:
-    sync: false
-    postgres:
-      host: localhost
-      port: 5432
-      username: greg
-      password: postgrespw
-      database: greg
-    sqlite:
-      database: ./scratch/dev_db.sqlite
-  swagger:
-    host: penguin.linux.test:3001
-    name: Climbing App OpenAPI Documentation
-    license: MIT
-    basePath: /api
+    port: 5432
+    username: greg
+    password: postgrespw
+    database: greg
+  sqlite:
+    database: ./scratch/dev_db.sqlite
+swagger:
+  host: penguin.linux.test:3001
+  name: Climbing App OpenAPI Documentation
+  license: MIT
+  basePath: /api
+io:
+  engine: 'local'
+  local:
+    rootDirectory: '/tmp'

@@ -5,7 +5,7 @@ import { MetadataGenerator } from 'typescript-rest-swagger/dist/metadata/metadat
 import { SpecGenerator } from 'typescript-rest-swagger/dist/swagger/generator';
 
 const swaggerConfig = {
-  ...config.get<object>('server.swagger'),
+  ...config.get<object>('swagger'),
   entryFile: path.join(`${__dirname}/../../../src/typescript/api/index.ts`),
 };
 

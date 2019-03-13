@@ -59,22 +59,22 @@ const loadFixtures = async (connection: Connection) => {
 function getConnection() {
   return createConnection({
     type: 'sqlite',
-    database: config.get<string>('server.database.sqlite.database'),
+    database: config.get<string>('database.sqlite.database'),
     // type: 'postgres',
-    // host: config.get<string>('server.database.postgres.host'),
-    // port: config.get<number>('server.database.postgres.port'),
-    // username: config.get<string>('server.database.postgres.username'),
-    // password: config.get<string>('server.database.postgres.password'),
-    // database: config.get<string>('server.database.postgres.database'),
+    // host: config.get<string>('database.postgres.host'),
+    // port: config.get<number>('database.postgres.port'),
+    // username: config.get<string>('database.postgres.username'),
+    // password: config.get<string>('database.postgres.password'),
+    // database: config.get<string>('database.postgres.database'),
     entities: [
       `${__dirname}/../models/*.ts`,
     ],
-    dropSchema: config.get<boolean>('server.database.sync'),
-    synchronize: config.get<boolean>('server.database.sync'),
+    dropSchema: config.get<boolean>('database.sync'),
+    synchronize: config.get<boolean>('database.sync'),
     logging: true,
   })
   .then(async (connection) => {
-    if (config.get<boolean>('server.database.sync')) {
+    if (config.get<boolean>('database.sync')) {
       await loadFixtures(connection);
     }
     return connection;
