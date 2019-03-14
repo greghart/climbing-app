@@ -8,6 +8,7 @@ import { BouldersServiceType } from '../../../../api/services/BouldersService';
 import { RoutesServiceType } from '../../../../api/services/RoutesService';
 import { ArgumentTypes } from '../../../../externals';
 import { CommentablesServiceType } from '../../../../api/services/CommentablesService';
+import { PhotoablesServiceType } from '../../../../api/services/PhotoablesService';
 
 /**
  * Setup a type-safe swagger client
@@ -48,6 +49,7 @@ interface SwaggerAPI {
   boulders: APIType<BouldersServiceType>;
   routes: APIType<RoutesServiceType>;
   commentables: APIType<CommentablesServiceType>;
+  photoables: APIType<PhotoablesServiceType>;
 }
 
 type DeclaredRoute<Service extends keyof SwaggerAPI, Op extends keyof SwaggerAPI[Service]> = (
@@ -92,6 +94,10 @@ const declaredRoutes = {
     commentableForArea: (id) => { return { id }; },
     commentableForCrag: (id) => { return { id }; },
   },
+  photoables: {
+    addPhoto: (id, photo, title, description) => { return { id, photo, title, description }; },
+    photoableForRoute: (id) => { return { id }; },
+  }
 };
 
 /**
@@ -154,5 +160,5 @@ const getSwagger = () => {
   return (swagger as DeclaredAPI);
 };
 
-export { SwaggerAPI };
+export { DeclaredAPI as SwaggerAPI };
 export default getSwagger;

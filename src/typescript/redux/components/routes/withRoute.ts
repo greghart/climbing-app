@@ -1,36 +1,40 @@
 import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
+import every = require('lodash/every');
 
 import { State, selectors } from '../../reducer';
 import { RouteSchema } from '../../normalizr';
 import fetchRoute from '../../ducks/operations/fetchRoute';
 import Route from '../../../models/Route';
 import asyncComponent from '../../decorators/asyncComponent';
-import selectNormalizr from '../../util/selectNormalizr';
+import selectNormalizr, { SchemaDescription } from '../../util/selectNormalizr';
 
 interface OwnProps {
   routeId: string;
 }
 
-const selectProps = (state: State, props: OwnProps) => props.routeId;
-const query = selectNormalizr(
-  RouteSchema,
-  { boulder: { polygon: true, area: { crag: 'empty' } }, commentable: true },
-);
-const selectRoute = (entities, routeId) => denormalize(
-  routeId,
-  query,
-  entities,
-);
-// Single route at a time, so just use a single selector for now
-const getRoute = createSelector<State, OwnProps, any, string, Route>(
-  selectors.selectEntities,
-  selectProps,
-  selectRoute,
-);
-const mapStateToProps = (state: State, ownProps: OwnProps) => {
-  return { route: getRoute(state, ownProps) };
-};
+function buildSelector(query: SchemaDescription) {
+
+  const querySelector = selectNormalizr(
+    RouteSchema,
+    query
+  );
+
+  const selectProps = (state: State, props: OwnProps) => props.routeId;
+  const selectRoute = (entities, routeId) => denormalize(
+    routeId,
+    querySelector,
+    entities,
+  );
+  const getRoute = createSelector<State, OwnProps, any, string, Route>(
+    selectors.selectEntities,
+    selectProps,
+    selectRoute,
+  );
+
+  return getRoute;
+
+}
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
@@ -40,9 +44,38 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   };
 };
 
-type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ReturnType<typeof mapDispatchToProps>;
-function withRoute<P>(component: React.ComponentType<P>) {
+function withRoute<P>(
+  component: React.ComponentType<P>,
+  query: SchemaDescription = {
+    boulder: { polygon: true, area: { crag: 'empty' } },
+    commentable: true
+  }
+) {
+  const getRoute = buildSelector(query);
+  const mapStateToProps = (state: State, ownProps: OwnProps) => {
+    return { route: getRoute(state, ownProps) };
+  };
+  type StateProps = ReturnType<typeof mapStateToProps>;
+  // const hasDependants = (props: StateProps) => {
+  //   console.log('hasDependants', props, Object.keys(query))
+  //   return props.route && every(
+  //     Object.keys(query),
+  //     (thisProperty) => {
+  //       console.log(!!props.route[thisProperty]);
+  //       return !!props.route[thisProperty];
+  //     }
+  //   );
+  // };
+  const hasDependants = (props: StateProps) => {
+    return !!(
+      props.route &&
+      props.route.boulder &&
+      props.route.boulder.area &&
+      props.route.boulder.area.crag
+    );
+  };
+
   return asyncComponent<
     StateProps,
     DispatchProps,
@@ -50,14 +83,7 @@ function withRoute<P>(component: React.ComponentType<P>) {
   >(
     mapStateToProps,
     mapDispatchToProps,
-    (props) => (
-      !!(
-        props.route &&
-        props.route.boulder &&
-        props.route.boulder.area &&
-        props.route.boulder.area.crag
-      )
-    ),
+    hasDependants
   )(component);
 }
 

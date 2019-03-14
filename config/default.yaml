@@ -25,4 +25,4 @@ swagger:
 io:
   engine: 'local'
   local:
-    rootDirectory: '/tmp'
+    rootDirectory: '/home/elchocolato/Checkouts/climbing-app/static/uploads'

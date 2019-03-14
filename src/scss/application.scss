@@ -71,6 +71,10 @@ html, body {
   height: 24px;
 }
 
+.invalid-feedback {
+  display: block!important;
+}
+
 @import './map';
 @import './animations';
 @import './users';

@@ -29,12 +29,12 @@ export default class Photo {
   title: string;
 
   @Column()
-  description: string;
+  description?: string;
 
   @ManyToOne(type => User, user => user.photos, cascadeManyToOne)
   user: User;
 
-  @OneToOne(type => Upload, { nullable: false, onDelete: 'CASCADE' })
+  @ManyToOne(type => Upload, { nullable: false, onDelete: 'CASCADE' })
   @JoinColumn()
   upload: Upload;
 

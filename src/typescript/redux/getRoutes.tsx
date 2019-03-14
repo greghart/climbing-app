@@ -28,11 +28,12 @@ import AreaLayoutOverview from './components/areas/AreaLayoutOverview';
 // Route
 import RouteRoute from './routes/RouteRoute';
 import RouteLayoutOverview from './components/routes/RouteLayoutOverview';
-import RouteLayoutPhotos from './components/routes/RouteLayoutPhotos';
+import RoutePhotosContainer from './components/routes/RoutePhotosContainer';
 import RouteCommentsContainer from './components/routes/RouteCommentsContainer';
 import RouteNewCommentContainer from './components/routes/RouteNewCommentContainer';
 import RouteEditContainer from './components/routes/RouteEditContainer';
 import RouteSun from './components/routes/RouteSun';
+import RouteNewPhotoContainer from './components/routes/RouteNewPhotoContainer';
 // Boulder
 import BoulderRoute from './routes/BoulderRoute';
 import BoulderCommentsContainer from './components/boulders/BoulderCommentsContainer';
@@ -96,11 +97,11 @@ export default function getRoutes(): MyRouteConfig[] {
               component: AreaNewCommentContainer,
               key: 'area_comments_new',
             },
-            {
-              path: '/areas/:area/photos',
-              component: RouteLayoutPhotos,
-              key: 'area_photos',
-            },
+            // {
+            //   path: '/areas/:area/photos',
+            //   component: RoutePhotosContainer,
+            //   key: 'area_photos',
+            // },
             {
               path: '/areas/:area/boulders/new',
               component: AreaNewBoulderContainer,
@@ -136,11 +137,11 @@ export default function getRoutes(): MyRouteConfig[] {
               component: BoulderNewCommentContainer,
               key: 'boulder_comments_new',
             },
-            {
-              path: '/boulders/:boulder/photos',
-              component: RouteLayoutPhotos,
-              key: 'boulder_photos',
-            },
+            // {
+            //   path: '/boulders/:boulder/photos',
+            //   component: RouteLayoutPhotos,
+            //   key: 'boulder_photos',
+            // },
             {
               path: '/boulders/:boulder/routes/new',
               component: BoulderNewRouteContainer,
@@ -182,8 +183,13 @@ export default function getRoutes(): MyRouteConfig[] {
               key: 'route_comments_new',
             },
             {
+              path: '/routes/:routes/photos/new',
+              component: RouteNewPhotoContainer,
+              key: 'route_photos_new',
+            },
+            {
               path: '/routes/:routes/photos',
-              component: RouteLayoutPhotos,
+              component: RoutePhotosContainer,
               key: 'route_photos',
             },
             {

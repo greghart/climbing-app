@@ -14,7 +14,10 @@ scripts:
     description: Various ways to run the climbing app components
     clientDashboard:
       description: Monitor your client code and run dev server. This does not reload server!
-      script: cross-env DEBUG=climbing-app* PORT=3001 webpack-dashboard -- ts-node ./dev-server.ts
+      script: cross-env DEBUG=climbing-app* PORT=3001 webpack-dashboard -- node -r ts-node/register --max-old-space-size=1024 ./dev-server.ts
+    devServer:
+      description: Run dev server. This does not reload server!
+      script: cross-env DEBUG=climbing-app* PORT=3001 ts-node ./dev-server.ts
     api:
       description: Run just the API
       script: cross-env DEBUG=climbing-app* PORT=3001 ts-node ./src/typescript/server.ts

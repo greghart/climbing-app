@@ -14,7 +14,7 @@ import buildSwagger from './buildSwagger';
 import CommentablesService from './services/CommentablesService';
 import AreasService from './services/AreasService';
 import PolygonsService from './services/PolygonsService';
-import PhotoablesService from './services/PhotosService';
+import PhotoablesService from './services/PhotoablesService';
 
 const router = express.Router();
 

@@ -20,7 +20,7 @@ ioEngineRouter.get('/:uploadId/download', (req, res, next) => {
     const filename = path.basename(upload.originalName);
     const mimetype = mime.getType(upload.key);
 
-    res.setHeader('Content-disposition', `attachment; filename=${filename}`);
+    res.setHeader('Content-disposition', `inline; filename=${filename}`);
     res.setHeader('Content-type', mimetype);
 
     ioEngine.downloadStream(upload).pipe(res);

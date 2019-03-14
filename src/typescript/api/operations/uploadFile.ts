@@ -35,13 +35,14 @@ function uploadFile(file: Express.Multer.File, directory: string): Promise<Uploa
     if (existingUpload) {
       return existingUpload;
     }
-    return getRepository(Upload).save(upload)
-    .then((upload) => {
-      return engine.upload(upload, new FileSource(file))
-      .then(() => upload);
-    });
+    return getRepository(Upload).save(upload);
   })
-  .then((upload) => upload);
+  // Always re-upload, just in case it's gone I guess
+  // TODO This is code smell because local stores in tmp -- fix that?
+  .then((upload) => {
+    return engine.upload(upload, new FileSource(file))
+    .then(() => upload);
+  });
 }
 
 export default uploadFile;

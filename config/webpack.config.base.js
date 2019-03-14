@@ -22,17 +22,19 @@ module.exports = {
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.json', '.scss', '.css', '.js']
   },
   plugins: [
-    new ForkTsCheckerWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({ memoryLimit: 1024 }),
     // Direct typescript to a browser compatible
+    new webpack.NormalModuleReplacementPlugin(/swagger-client$/, function (result) {
+      result.request = result.request.replace(/swagger-client/, "swagger-client/browser");
+    }),
     new webpack.NormalModuleReplacementPlugin(/typeorm$/, function (result) {
       result.request = result.request.replace(/typeorm/, "typeorm/browser");
     }),
     new webpack.NormalModuleReplacementPlugin(/react-native-sqlite-storage$/, function (result) {
       result.request = result.request.replace(/typeorm/, "typeorm/browser");
     }),
-    // Provide globals we setup
+    // Provide globals we expect/setup through HtmlComponent
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',

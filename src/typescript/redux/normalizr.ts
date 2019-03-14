@@ -11,6 +11,8 @@ export const BoulderSchema = new schema.Entity('boulders');
 export const RouteSchema = new schema.Entity('routes');
 export const CommentableSchema = new schema.Entity('commentables');
 export const CommentSchema = new schema.Entity('comments');
+export const PhotoableSchema = new schema.Entity('photoables');
+export const PhotoSchema = new schema.Entity('photos');
 export const PolygonSchema = new schema.Entity('polygons');
 export const TrailSchema = new schema.Entity('trails');
 export const TrailNodeSchema = new schema.Entity('trail_nodes');
@@ -47,6 +49,7 @@ BoulderSchema.define({
 RouteSchema.define({
   boulder: BoulderSchema,
   commentable: CommentableSchema,
+  photoable: PhotoableSchema
 });
 
 CommentableSchema.define({
@@ -55,4 +58,12 @@ CommentableSchema.define({
 
 CommentSchema.define({
   commentable: CommentableSchema,
+});
+
+PhotoableSchema.define({
+  photos: [PhotoSchema]
+});
+
+PhotoSchema.define({
+  photoable: PhotoableSchema,
 });

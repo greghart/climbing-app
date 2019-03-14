@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Field, InjectedFormProps, FormErrors } from 'redux-form';
+import { InjectedFormProps, FormErrors } from 'redux-form';
 import Comment from './Comment';
 import User from '../../../models/User';
 import CommentModel from '../../../models/Comment';

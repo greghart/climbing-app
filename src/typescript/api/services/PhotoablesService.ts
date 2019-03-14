@@ -14,7 +14,11 @@ import uploadFile from '../operations/uploadFile';
 
 const getPhotos = (id: string | number) => {
   return getRepository(Photoable).findOne(id, {
-    relations: ['photos', 'photos.user'],
+    relations: [
+      'photos',
+      'photos.upload',
+      'photos.user'
+    ],
   });
 };
 
@@ -107,7 +111,7 @@ export default class PhotoablesService {
     @Rest.PathParam('id') id: string,
     @Rest.FileParam('photo') file: Express.Multer.File,
     @Rest.FormParam('title') title: string,
-    @Rest.FormParam('description') description: string,
+    @Rest.FormParam('description') description?: string,
   ) {
     const user = await getRepository(User).findOne(1);
     const photoable = await getRepository(Photoable).findOne(id);
