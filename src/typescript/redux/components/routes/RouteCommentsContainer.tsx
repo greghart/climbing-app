@@ -8,7 +8,7 @@ interface OwnProps {
   myRoute: Route;
 }
 
-const Container = withCommentable()(ShowCommentable);
+const Container = withCommentable(ShowCommentable);
 
 const RouteCommentsContainer: React.SFC<OwnProps> = (props) => {
   return (

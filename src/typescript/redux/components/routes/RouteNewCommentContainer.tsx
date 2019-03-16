@@ -6,7 +6,7 @@ import withCommentable from './withCommentable';
 interface OwnProps {
   myRoute: Route;
 }
-const Container = withCommentable()(NewCommentContainer);
+const Container = withCommentable(NewCommentContainer);
 
 const RouteNewCommentContainer: React.SFC<OwnProps> = (props) => {
   return (
