@@ -12,6 +12,7 @@ import { setOpen } from '../../ducks/sidebar';
 import withMountAction from '../../decorators/withMountAction';
 import { compose } from 'redux';
 import withLoader from '../../decorators/withLoader';
+import asyncComponent from '../../decorators/asyncComponent';
 
 interface OwnProps {
   cragId: string;
@@ -61,35 +62,19 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   };
 };
 
-type Props = ReturnType<typeof mapStateToProps>;
+type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 
-const hasDependants = (props: Props) =>
+const hasDependants = (props: StateProps) =>
   (props.crag && props.crag.areas);
 
-type Composed<C, StateProps, DispatchProps, OwnProps> = ConnectedComponentClass<
-  C,
-  Omit<
-    GetProps<C>,
-    keyof Shared<StateProps & DispatchProps, GetProps<C>>
-  > & OwnProps
->;
-
-// Compose confuses things -- here is an alternative syntax if we're interested.
-// @todo Refactor to asyncComponent
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
-  withMountAction<GetProps<typeof Crag>>(
-    (props) => {
-      if (!hasDependants(props)) {
-        props.fetchCrag(props.cragId);
-      }
-    },
-  ),
-  withLoader<GetProps<typeof Crag>>(
-    (props) => !hasDependants(props),
-  ),
-)(Crag) as Composed<typeof Crag, Props, DispatchProps, OwnProps>;
+export default asyncComponent<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  mapStateToProps,
+  mapDispatchToProps,
+  hasDependants,
+  { fetchDispatch: 'fetchCrag' }
+)(Crag);

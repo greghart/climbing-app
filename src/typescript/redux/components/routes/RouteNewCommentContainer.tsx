@@ -12,7 +12,6 @@ const RouteNewCommentContainer: React.SFC<OwnProps> = (props) => {
   return (
     <Container
       {...props}
-      commentable={props.myRoute.commentable}
       redirect={`/routes/${props.myRoute.id}/comments`}
       // TODO user-feature
       user={{

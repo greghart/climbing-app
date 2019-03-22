@@ -15,7 +15,6 @@ const RouteCommentsContainer: React.SFC<OwnProps> = (props) => {
     <Container
       {...props}
       newRoute={`/routes/${props.myRoute.id}/comments/new`}
-      commentable={props.myRoute.commentable}
     />
   );
 };

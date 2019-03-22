@@ -17,6 +17,7 @@ export const PolygonSchema = new schema.Entity('polygons');
 export const TrailSchema = new schema.Entity('trails');
 export const TrailNodeSchema = new schema.Entity('trail_nodes');
 export const TrailEdgeSchema = new schema.Entity('trail_edges');
+export const BoundsSchema = new schema.Entity('bounds');
 
 // Setup all associations
 CragSchema.define({

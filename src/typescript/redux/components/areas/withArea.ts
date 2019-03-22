@@ -45,18 +45,16 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ReturnType<typeof mapDispatchToProps>;
-function withArea<P>(component: React.ComponentType<P>) {
-  return asyncComponent<
-    StateProps,
-    DispatchProps,
-    OwnProps
-  >(
-    mapStateToProps,
-    mapDispatchToProps,
-    (props) => {
-      return !!(props.area && props.area.boulders && props.area.crag);
-    },
-  )(component);
-}
+const withArea = asyncComponent<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  mapStateToProps,
+  mapDispatchToProps,
+  (props) => {
+    return !!(props.area && props.area.boulders && props.area.crag);
+  },
+);
 
 export default withArea;

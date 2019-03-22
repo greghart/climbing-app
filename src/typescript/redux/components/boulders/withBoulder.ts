@@ -42,18 +42,16 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ReturnType<typeof mapDispatchToProps>;
-function withBoulder<P>(component: React.ComponentType<P>) {
-  return asyncComponent<
-    StateProps,
-    DispatchProps,
-    OwnProps
-  >(
-    mapStateToProps,
-    mapDispatchToProps,
-    (props) => (
-      !!(props.boulder && props.boulder.area && props.boulder.area.crag && props.boulder.routes)
-    ),
-  )(component);
-}
+const withBoulder = asyncComponent<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  mapStateToProps,
+  mapDispatchToProps,
+  (props) => (
+    !!(props.boulder && props.boulder.area && props.boulder.area.crag && props.boulder.routes)
+  ),
+);
 
 export default withBoulder;

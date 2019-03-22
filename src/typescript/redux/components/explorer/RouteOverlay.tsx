@@ -40,6 +40,6 @@ RouteOverlay.defaultProps = {
   }
 };
 
-const ConnectedRouteOverlay = withRoute(RouteOverlay);
+const ConnectedRouteOverlay = withRoute()(RouteOverlay);
 export { ConnectedRouteOverlay };
 export default RouteOverlay;

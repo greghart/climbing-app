@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
-import { Map } from 'react-leaflet';
+import { Map, Polyline } from 'react-leaflet';
 import { renderRoutes } from 'react-router-config';
 import find = require('lodash/find');
 import lodashMap = require('lodash/map');
@@ -21,6 +21,13 @@ const CragMap: React.SFC<Props> = (props) => {
   const routeContext = React.useContext(RouteContext);
   const mapRef = React.createRef<Map>();
 
+  const bounds = props.crag.bounds ?
+    Leaflet.latLngBounds(
+      Leaflet.latLng(props.crag.bounds.topLeft),
+      Leaflet.latLng(props.crag.bounds.bottomRight)
+    ) :
+    Leaflet.latLng(props.crag.center).toBounds(400);
+  console.warn(bounds);
   return (
     // <AnimationContext.Consumer>
     //   {animation => (
@@ -29,13 +36,10 @@ const CragMap: React.SFC<Props> = (props) => {
             className="map"
             key="map"
             ref={mapRef}
-            center={props.crag.center}
-            zoom={props.crag.defaultZoom}
-            minZoom={17}
+            bounds={bounds}
+            minZoom={18}
             maxZoom={props.crag.maxZoom}
-            maxBounds={
-              Leaflet.latLng(props.crag.center).toBounds(450)
-            }
+            maxBounds={bounds}
             zoomControl={false}
             onzoomend={(e) => {
             }}
@@ -46,6 +50,15 @@ const CragMap: React.SFC<Props> = (props) => {
             }}
           >
             <BestTileLayer />
+            <Polyline
+              positions={[
+                bounds.getNorthEast(),
+                bounds.getNorthWest(),
+                bounds.getSouthWest(),
+                bounds.getSouthEast(),
+                bounds.getNorthEast()
+              ]}
+            />
             {renderRoutes(
               lodashMap(
                 routeContext.route.routes,

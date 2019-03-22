@@ -26,14 +26,7 @@ import AreaNewBoulderContainer from './components/areas/AreaNewBoulderContainer'
 import AreaEditContainer from './components/areas/AreaEditContainer';
 import AreaLayoutOverview from './components/areas/AreaLayoutOverview';
 // Route
-import RouteRoute from './routes/RouteRoute';
-import RouteLayoutOverview from './components/routes/RouteLayoutOverview';
-import RoutePhotosContainer from './components/routes/RoutePhotosContainer';
-import RouteCommentsContainer from './components/routes/RouteCommentsContainer';
-import RouteNewCommentContainer from './components/routes/RouteNewCommentContainer';
-import RouteEditContainer from './components/routes/RouteEditContainer';
-import RouteSun from './components/routes/RouteSun';
-import RouteNewPhotoContainer from './components/routes/RouteNewPhotoContainer';
+import routeRoutes from './components/routes/routes';
 // Boulder
 import BoulderRoute from './routes/BoulderRoute';
 import BoulderCommentsContainer from './components/boulders/BoulderCommentsContainer';
@@ -166,50 +159,7 @@ export default function getRoutes(): MyRouteConfig[] {
           ],
         },
         // Show a route
-        {
-          path: '/routes/:route',
-          component: RouteRoute,
-          key: 'route',
-          routes: [
-            {
-              path: '/routes/:routes/comments',
-              exact: true,
-              component: RouteCommentsContainer,
-              key: 'route_comments',
-            },
-            {
-              path: '/routes/:routes/comments/new',
-              component: RouteNewCommentContainer,
-              key: 'route_comments_new',
-            },
-            {
-              path: '/routes/:routes/photos/new',
-              component: RouteNewPhotoContainer,
-              key: 'route_photos_new',
-            },
-            {
-              path: '/routes/:routes/photos',
-              component: RoutePhotosContainer,
-              key: 'route_photos',
-            },
-            {
-              path: '/routes/:routes/edit',
-              component: RouteEditContainer,
-              key: 'route_edit',
-            },
-            {
-              path: '/routes/:routes/sun',
-              component: RouteSun,
-              key: 'route_sun',
-            },
-            // Default is overview
-            {
-              path: '/routes/:routes/(overview)?',
-              component: RouteLayoutOverview,
-              key: 'route_overview',
-            },
-          ],
-        },
+        ...routeRoutes,
       ],
     },
   ]);

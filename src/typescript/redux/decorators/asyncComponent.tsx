@@ -26,8 +26,6 @@ export default function asyncComponent<StateProps, DispatchProps, OwnProps>(
   hasDependants: (props: StateProps) => boolean,
   options: { fetchDispatch: string } = { fetchDispatch: 'fetch' },
 ) {
-  // type Props = ReturnType<typeof mapStateToProps>;
-  // type DispatchProps = ReturnType<typeof mapDispatchToProps>;
   return compose(
     connect<StateProps, DispatchProps, OwnProps>(
       mapStateToProps,

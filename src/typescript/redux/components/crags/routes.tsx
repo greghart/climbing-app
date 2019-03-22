@@ -1,6 +1,3 @@
-import * as React from 'react';
-import * as Leaflet from 'leaflet';
-
 import Crag from '../../../models/Crag';
 import CragRoute from '../../routes/CragRoute';
 import CragCommentsContainer from './CragCommentsContainer';
@@ -8,7 +5,6 @@ import CragNewCommentContainer from './CragNewCommentContainer';
 import CragEditContainer from './CragEditContainer';
 import CragLayoutOverview from './CragLayoutOverview';
 import CragNewAreaContainer from './CragNewAreaContainer';
-import CragTrail from './CragTrail';
 import CragTrailContainer from './CragTrailContainer';
 
 type SubProps = {

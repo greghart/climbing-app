@@ -45,8 +45,7 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
 };
 
 type DispatchProps = ReturnType<typeof mapDispatchToProps>;
-function withRoute<P>(
-  component: React.ComponentType<P>,
+function withRoute(
   query: SchemaDescription = {
     boulder: { polygon: true, area: { crag: 'empty' } },
     commentable: true
@@ -84,7 +83,7 @@ function withRoute<P>(
     mapStateToProps,
     mapDispatchToProps,
     hasDependants
-  )(component);
+  );
 }
 
 export default withRoute;
