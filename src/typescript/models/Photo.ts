@@ -28,7 +28,7 @@ export default class Photo {
   @Column()
   title: string;
 
-  @Column()
+  @Column({ nullable: true })
   description?: string;
 
   @ManyToOne(type => User, user => user.photos, cascadeManyToOne)

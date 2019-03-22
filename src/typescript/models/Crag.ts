@@ -12,6 +12,7 @@ import Area from './Area';
 import { cascadeOneToMany } from '../db/cascadeOptions';
 import Commentable from './Commentable';
 import Trail from './Trail';
+import Bounds from './Bounds';
 
 @Entity()
 export default class Crag {
@@ -27,6 +28,10 @@ export default class Crag {
 
   @Column(type => Coordinate)
   center: Coordinate;
+
+  @OneToOne(type => Bounds, { nullable: true, onDelete: 'SET NULL' })
+  @JoinColumn()
+  bounds?: Bounds;
 
   @Column('int')
   defaultZoom: number;

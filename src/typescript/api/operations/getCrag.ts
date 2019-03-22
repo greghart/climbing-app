@@ -10,6 +10,7 @@ const getCrags = (id: number | string) => {
       { id },
     ],
     relations: [
+      'bounds',
       'areas',
       'areas.polygon',
       'areas.polygon.coordinates',
