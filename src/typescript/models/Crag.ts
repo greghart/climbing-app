@@ -29,8 +29,14 @@ export default class Crag {
   @Column(type => Coordinate)
   center: Coordinate;
 
-  @OneToOne(type => Bounds, { nullable: true, onDelete: 'SET NULL' })
-  @JoinColumn()
+  @OneToOne(
+    type => Bounds,
+    bounds => bounds.crag,
+    {
+      nullable: true,
+      onDelete: 'SET NULL'
+    }
+  )
   bounds?: Bounds;
 
   @Column('int')

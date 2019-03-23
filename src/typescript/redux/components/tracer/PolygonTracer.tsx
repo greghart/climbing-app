@@ -1,5 +1,4 @@
 /**
- *
  * Top level view for PolygonTracer component
  *
  * PolygonTracer allows user to click points on a map and save them
@@ -7,7 +6,6 @@
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
 import { Map, Polyline } from 'react-leaflet';
-import Coordinate from '../../../models/Coordinate';
 import BestTileLayer from '../BestTileLayer';
 import FixedContainerOverMap from '../layouts/FixedContainerOverMap';
 import SearchGroup from '../search/SearchGroup';

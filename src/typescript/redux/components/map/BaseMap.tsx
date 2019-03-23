@@ -16,19 +16,19 @@ type Props = ExtractProps<typeof Map> & {
  * Also lets us set size in a more predictable fashion
  */
 const BaseMap = React.forwardRef<Map, Props>((props, ref) => {
+  const boundsToUse = props.boundsCoordinates ?
+    props.boundsCoordinates.map<[number, number]>((c) => [c.lat, c.lng]) :
+    props.bounds;
   return (
     <Map
       className={classNames('h-100 w-100', props.className)}
       zoomControl={false}
       zoom={18}
-      minZoom={15}
+      minZoom={17}
       maxZoom={22}
       ref={ref}
       {...props}
-      bounds={props.boundsCoordinates ?
-        props.boundsCoordinates.map<[number, number]>((c) => [c.lat, c.lng]) :
-        props.bounds
-      }
+      bounds={boundsToUse}
     >
       <BestTileLayer />
       {props.children}

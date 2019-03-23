@@ -50,15 +50,6 @@ const CragMap: React.SFC<Props> = (props) => {
             }}
           >
             <BestTileLayer />
-            <Polyline
-              positions={[
-                bounds.getNorthEast(),
-                bounds.getNorthWest(),
-                bounds.getSouthWest(),
-                bounds.getSouthEast(),
-                bounds.getNorthEast()
-              ]}
-            />
             {renderRoutes(
               lodashMap(
                 routeContext.route.routes,
