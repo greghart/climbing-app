@@ -14,6 +14,7 @@ import Route from './Route';
 import { cascadeManyToOne, cascadeOneToMany } from '../db/cascadeOptions';
 import Commentable from './Commentable';
 import Polygon from './Polygon';
+import Photoable from './Photoable';
 
 @Entity()
 class Boulder {
@@ -48,6 +49,10 @@ class Boulder {
   @OneToOne(type => Commentable, { nullable: true, onDelete: 'SET NULL' })
   @JoinColumn()
   commentable?: Commentable;
+
+  @OneToOne(type => Photoable, { nullable: true, onDelete: 'SET NULL' })
+  @JoinColumn()
+  photoable?: Photoable;
 
   // Serialization
   toJSON() {

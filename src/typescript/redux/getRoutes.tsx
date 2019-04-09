@@ -28,13 +28,7 @@ import AreaLayoutOverview from './components/areas/AreaLayoutOverview';
 // Route
 import routeRoutes from './components/routes/routes';
 // Boulder
-import BoulderRoute from './routes/BoulderRoute';
-import BoulderCommentsContainer from './components/boulders/BoulderCommentsContainer';
-import BoulderNewCommentContainer from './components/boulders/BoulderNewCommentContainer';
-import BoulderLayoutOverview from './components/boulders/BoulderLayoutOverview';
-import BoulderNewRouteContainer from './components/boulders/BoulderNewRouteContainer';
-import BoulderEditContainer from './components/boulders/BoulderEditContainer';
-import BoulderSun from './components/boulders/BoulderSun';
+import boulderRoutes from './components/boulders/routes';
 import provideRoute from './routes/provideRoute';
 
 type MyRouteConfig = Omit<RouteConfig, 'routes'> & {
@@ -114,50 +108,7 @@ export default function getRoutes(): MyRouteConfig[] {
           ],
         },
         // Show a boulder
-        {
-          path: '/boulders/:boulder',
-          component: BoulderRoute,
-          key: 'boulder',
-          routes: [
-            {
-              path: '/boulders/:boulder/comments',
-              exact: true,
-              component: BoulderCommentsContainer,
-              key: 'boulder_comments',
-            },
-            {
-              path: '/boulders/:boulder/comments/new',
-              component: BoulderNewCommentContainer,
-              key: 'boulder_comments_new',
-            },
-            // {
-            //   path: '/boulders/:boulder/photos',
-            //   component: RouteLayoutPhotos,
-            //   key: 'boulder_photos',
-            // },
-            {
-              path: '/boulders/:boulder/routes/new',
-              component: BoulderNewRouteContainer,
-              key: 'boulder_routes_new',
-            },
-            {
-              path: '/boulders/:boulder/edit',
-              component: BoulderEditContainer,
-              key: 'boulder_edit',
-            },
-            {
-              path: '/boulders/:boulder/sun',
-              component: BoulderSun,
-              key: 'boulder_sun',
-            },
-            // Default is overview
-            {
-              path: '/boulders/:boulder/(overview)?',
-              component: BoulderLayoutOverview,
-              key: 'boulder_overview',
-            },
-          ],
-        },
+        ...boulderRoutes,
         // Show a route
         ...routeRoutes,
       ],

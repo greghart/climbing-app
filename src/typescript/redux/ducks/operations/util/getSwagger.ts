@@ -97,6 +97,9 @@ const declaredRoutes = {
   photoables: {
     addPhoto: (id, photo, title, description) => { return { id, photo, title, description }; },
     photoableForRoute: (id) => { return { id }; },
+    photoableForBoulder: (id) => { return { id }; },
+    photoableForArea: (id) => { return { id }; },
+    photoableForCrag: (id) => { return { id }; },
   }
 };
 

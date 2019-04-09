@@ -28,14 +28,14 @@ const getFetchPhotoable = (schema: Schema, api: PhotoableFetchers) => {
   };
 };
 
-// const fetchPhotoableForCrag = getFetchPhotoable(CragSchema, 'photoableForCrag');
-// const fetchPhotoableForArea = getFetchPhotoable(AreaSchema, 'photoableForArea');
-// const fetchPhotoableForBoulder = getFetchPhotoable(BoulderSchema, 'photoableForBoulder');
+const fetchPhotoableForCrag = getFetchPhotoable(CragSchema, 'photoableForCrag');
+const fetchPhotoableForArea = getFetchPhotoable(AreaSchema, 'photoableForArea');
+const fetchPhotoableForBoulder = getFetchPhotoable(BoulderSchema, 'photoableForBoulder');
 const fetchPhotoableForRoute = getFetchPhotoable(RouteSchema, 'photoableForRoute');
 
 export {
-  // fetchPhotoableForCrag,
-  // fetchPhotoableForArea,
-  // fetchPhotoableForBoulder,
+  fetchPhotoableForCrag,
+  fetchPhotoableForArea,
+  fetchPhotoableForBoulder,
   fetchPhotoableForRoute,
 };
