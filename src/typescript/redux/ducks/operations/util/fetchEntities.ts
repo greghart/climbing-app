@@ -1,5 +1,5 @@
 import { normalize, schema } from 'normalizr';
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 
 import { receiveEntities } from '../../entities';
 import scopeThunker from '../../util/scopeThunker';

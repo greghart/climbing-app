@@ -1,6 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
 import Trail from '../Trail';
-import get = require('lodash/get');
+import get from 'lodash/get';
 
 // Base interface for a trail entity
 interface TrailEntity {

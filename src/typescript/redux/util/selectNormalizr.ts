@@ -1,4 +1,4 @@
-import isArray = require('lodash/isArray');
+import isArray from 'lodash/isArray';
 import { schema as NormalizrSchema } from 'normalizr';
 
 type SchemaDescription = {

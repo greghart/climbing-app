@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
-import get = require('lodash/get');
+import get from 'lodash/get';
 import { WrappedFieldsProps } from 'redux-form';
 
 import MyPolygon from '../map/MyPolygon';

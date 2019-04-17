@@ -3,7 +3,7 @@ import * as React from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 
 import AreaForm, { Props as FormProps } from '../areas/AreaForm';
 import { MapDispatchToPropsFunction } from '../types';

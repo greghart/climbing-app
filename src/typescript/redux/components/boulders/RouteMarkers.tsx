@@ -9,7 +9,7 @@ import * as React from 'react';
 import { Popup } from 'react-leaflet';
 import { Link } from 'react-router-dom';
 import * as Leaflet from 'leaflet';
-import reduce = require('lodash/reduce');
+import reduce from 'lodash/reduce';
 
 import Route from '../../../models/Route';
 import ConfirmedCircle from '../tracer/ConfirmedCircle';

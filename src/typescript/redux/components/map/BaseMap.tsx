@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Map } from 'react-leaflet';
-import classNames = require('classnames');
+import classNames from 'classnames';
 import { ExtractProps } from '../../../externals';
 import BestTileLayer from '../BestTileLayer';
 import Coordinate from '../../../models/Coordinate';

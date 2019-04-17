@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { denormalize } from 'normalizr';
 import { RouteConfigComponentProps, RouteConfig } from 'react-router-config';
 import { push } from 'connected-react-router';
-import get = require('lodash/get');
+import get from 'lodash/get';
 
 import { State } from '../reducer';
 import { CragSchema } from '../normalizr';

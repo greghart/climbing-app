@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
 import { WrappedFieldsProps } from 'redux-form';
-import get = require('lodash/get');
-import reduce = require('lodash/reduce');
+import get from 'lodash/get';
+import reduce from 'lodash/reduce';
 
 import TrailTracer from '../tracer/TrailTracer';
 import BaseMap from '../map/BaseMap';

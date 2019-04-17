@@ -1,5 +1,5 @@
 import * as t from 'io-ts';
-import defer = require('lodash/defer');
+import defer from 'lodash/defer';
 
 import getSubmissionError from './getSubmissionError';
 

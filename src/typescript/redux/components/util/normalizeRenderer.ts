@@ -1,5 +1,5 @@
 import * as React from 'react';
-import isFunction = require('lodash/isFunction');
+import isFunction from 'lodash/isFunction';
 
 /**
  * A "Renderer" is something that takes args and renders a react node

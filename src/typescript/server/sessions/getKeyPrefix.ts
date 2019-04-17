@@ -1,4 +1,4 @@
-import * as config from 'config';
+import config from 'config';
 
 /**
  * Get the Redis session prefix for current environment

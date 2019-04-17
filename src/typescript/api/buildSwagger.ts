@@ -1,5 +1,5 @@
 import * as path from 'path';
-import * as config from 'config';
+import config from 'config';
 import * as util from 'util';
 import { MetadataGenerator } from 'typescript-rest-swagger/dist/metadata/metadataGenerator';
 import { SpecGenerator } from 'typescript-rest-swagger/dist/swagger/generator';

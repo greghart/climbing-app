@@ -1,19 +1,19 @@
 /**
  * Get an Express application
  */
-import * as express from 'express';
-import * as session from 'express-session';
-import * as favicon from 'serve-favicon';
-import * as helmet from 'helmet';
+import express from 'express';
+import session from 'express-session';
+import favicon from 'serve-favicon';
+import helmet from 'helmet';
 const state = require('express-state');
-import * as bodyParser from 'body-parser';
-import * as serveStatic from 'serve-static';
-import * as cookieParser from 'cookie-parser';
-import connectFlash = require('connect-flash');
-import * as cors from 'cors';
+import bodyParser from 'body-parser';
+import serveStatic from 'serve-static';
+import cookieParser from 'cookie-parser';
+import connectFlash from 'connect-flash';
+import cors from 'cors';
 import * as path from 'path';
-import * as config from 'config';
-import * as _debug from 'debug';
+import config from 'config';
+import _debug from 'debug';
 const debug = _debug('apollo-demand-app:getApp');
 
 import isLocal from '../util/isLocal';

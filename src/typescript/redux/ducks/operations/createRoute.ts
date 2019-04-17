@@ -1,5 +1,5 @@
 import { normalize } from 'normalizr';
-import omit = require('lodash/omit');
+import omit from 'lodash/omit';
 
 import { receiveEntities } from '../entities';
 import { BoulderSchema } from '../../normalizr';

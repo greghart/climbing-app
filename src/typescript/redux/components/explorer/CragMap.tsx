@@ -2,11 +2,9 @@ import * as React from 'react';
 import * as Leaflet from 'leaflet';
 import { Map, Polyline } from 'react-leaflet';
 import { renderRoutes } from 'react-router-config';
-import find = require('lodash/find');
-import lodashMap = require('lodash/map');
+import lodashMap from 'lodash/map';
 
 import BestTileLayer from '../BestTileLayer';
-import AreasMap from './AreasMap';
 import Crag from '../../../models/Crag';
 import Area from '../../../models/Area';
 import RouteContext from '../../context/RouteContext';

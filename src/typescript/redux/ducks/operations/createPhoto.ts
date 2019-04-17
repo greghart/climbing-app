@@ -1,5 +1,5 @@
 import { normalize } from 'normalizr';
-import omit = require('lodash/omit');
+import omit from 'lodash/omit';
 import * as t from 'io-ts';
 
 import { receiveEntities } from '../entities';

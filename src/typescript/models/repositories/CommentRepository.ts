@@ -1,7 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm';
 import Comment from '../Comment';
 import Commentable from '../Commentable';
-import get = require('lodash/get');
+import get from 'lodash/get';
 
 // Base interface for a commentable entity
 interface CommentableEntity {

@@ -1,4 +1,4 @@
-import * as config from 'config';
+import config from 'config';
 import IOEngine from './IOEngine';
 import LocalEngine from './LocalEngine';
 import S3Engine from './S3Engine';

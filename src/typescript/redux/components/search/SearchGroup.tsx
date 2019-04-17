@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { props } from 'bluebird';
-import classNames = require('classnames');
+import classNames from 'classnames';
 
 interface Props {
   groupClass?: string;

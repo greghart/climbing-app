@@ -2,7 +2,7 @@ import * as React from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 
 import BoulderForm, { Props as FormProps } from '../boulders/BoulderForm';
 import { MapDispatchToPropsFunction } from '../types';

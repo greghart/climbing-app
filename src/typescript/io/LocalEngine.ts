@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 import IOEngine from './IOEngine';
 import Upload from '../models/Upload';
 import Source from './Source';

@@ -1,6 +1,6 @@
 import * as Promise from 'bluebird';
 import * as express from 'express';
-import * as _debug from 'debug';
+import _debug from 'debug';
 const debug = _debug('climbing-app:server');
 
 import getExpressApplication from './server/getExpressApplication';

@@ -1,7 +1,7 @@
-import * as _debug from 'debug';
+import _debug from 'debug';
 const debug = _debug('apollo-demand-app:client:util:scopedSelector');
 
-import mapValues = require('lodash/mapValues');
+import mapValues from 'lodash/mapValues';
 import { FreeScopeReducerState } from './freeScopeReducer';
 import { State as ReducerState } from '../../reducer';
 

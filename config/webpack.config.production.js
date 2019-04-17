@@ -3,14 +3,8 @@ const webpack = require('webpack');
 const config = require('./webpack.config.base');
 const path = require('path');
 
-
-const GLOBALS = {
-  'process.env': {
-    'NODE_ENV': JSON.stringify('production')
-  }
-};
-
 module.exports = merge(config, {
+  mode: 'production',
   cache: true,
   entry: {
     application: [
@@ -21,11 +15,9 @@ module.exports = merge(config, {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin(GLOBALS),
     new webpack.NormalModuleReplacementPlugin(/typeorm$/, function (result) {
       result.request = result.request.replace(/typeorm/, "typeorm/browser");
     }),
-    new webpack.optimize.UglifyJsPlugin()
   ],
   module: {
     rules: [

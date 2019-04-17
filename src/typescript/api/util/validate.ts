@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
 import { PathReporter } from 'io-ts/lib/PathReporter';
-import defer = require('lodash/defer');
+import defer from 'lodash/defer';
 import { BadRequestError } from 'typescript-rest/dist/server-errors';
 
 /**

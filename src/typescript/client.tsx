@@ -1,9 +1,7 @@
-import * as Promise from 'bluebird';
+import Bluebird from 'bluebird';
 import * as React from 'react';
 import { render } from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
 import { createBrowserHistory } from 'history';
-import Redbox from 'redbox-react';
 
 // Client-side only imports
 import 'leaflet/dist/leaflet.css';
@@ -31,7 +29,7 @@ declare global {
 //   })
 // )
 // .then((client: Swagger.SwaggerClient) => {
-Promise.resolve()
+Bluebird.resolve()
 .then(() => {
 
   const history = createBrowserHistory();
@@ -41,25 +39,8 @@ Promise.resolve()
   );
 
   render(
-    <AppContainer>
-      <Root store={store} history={history} />
-    </AppContainer>,
+    <Root store={store} history={history} />,
     rootEl,
   );
-
-  if (module.hot) {
-    module.hot.accept('./redux/Root', () => {
-      // If you use Webpack 2 in ES modules mode, you can
-      // use <App /> here rather than require() a <NextApp />.
-      const NextApp = require('./redux/Root').default;
-
-      render(
-        <AppContainer errorReporter={Redbox}>
-          <NextApp store={store} history={history} />
-        </AppContainer>,
-        rootEl,
-      );
-    });
-  }
 
 });

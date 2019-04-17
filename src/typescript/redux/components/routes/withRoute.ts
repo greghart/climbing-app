@@ -1,6 +1,6 @@
 import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
-import every = require('lodash/every');
+import every from 'lodash/every';
 
 import { State, selectors } from '../../reducer';
 import { RouteSchema } from '../../normalizr';

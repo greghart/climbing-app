@@ -1,4 +1,4 @@
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 import Upload from '../models/Upload';
 import Source from './Source';
 import { Readable } from 'stream';

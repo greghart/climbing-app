@@ -6,13 +6,13 @@
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
 import { Map, Polyline, Marker, CircleMarker } from 'react-leaflet';
-import find = require('lodash/find');
-import reduce = require('lodash/reduce');
+import find from 'lodash/find';
+import reduce from 'lodash/reduce';
 
 import BestTileLayer from '../BestTileLayer';
 import FixedContainerOverMap from '../layouts/FixedContainerOverMap';
 import SearchGroup from '../search/SearchGroup';
-import classNames = require('classnames');
+import classNames from 'classnames';
 import { ExtractProps } from '../../../externals';
 import { adjacencyGraph, GraphInterface, AdjacencyGraph } from '../util/graph';
 

@@ -7,12 +7,12 @@ import {
   MatchedRoute,
 } from 'react-router-config';
 import {
-  StaticRouter,
+StaticRouter,
 } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { Store } from 'redux';
-import * as Promise from 'bluebird';
-import * as _debug from 'debug';
+import Promise from 'bluebird';
+import _debug from 'debug';
 const debug = _debug('apollo-demand:util:getServerRenderMiddleware');
 
 import HtmlComponent from './HtmlComponent';

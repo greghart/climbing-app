@@ -1,5 +1,5 @@
-import reduce = require('lodash/reduce');
-import isArray = require('lodash/isArray');
+import reduce from 'lodash/reduce';
+import isArray from 'lodash/isArray';
 import Crag from '../../../models/Crag';
 import Area from '../../../models/Area';
 import Boulder from '../../../models/Boulder';

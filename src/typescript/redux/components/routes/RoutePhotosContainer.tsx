@@ -1,5 +1,4 @@
 import * as React from 'react';
-import omit = require('lodash/omit');
 
 import Route from '../../../models/Route';
 import withPhotoable from './withPhotoable';

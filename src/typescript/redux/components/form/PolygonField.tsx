@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
 import { WrappedFieldsProps } from 'redux-form';
-import get = require('lodash/get');
-import sortBy = require('lodash/sortBy');
+import get from 'lodash/get';
+import sortBy from 'lodash/sortBy';
 
 import PolygonTracer from '../tracer/PolygonTracer';
 import BaseMap from '../map/BaseMap';

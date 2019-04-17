@@ -1,4 +1,4 @@
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 import { normalize, Schema } from 'normalizr';
 
 import { BoulderSchema, RouteSchema, AreaSchema, CragSchema } from '../../normalizr';

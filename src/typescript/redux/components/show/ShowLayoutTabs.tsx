@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import { Location } from 'history';
 import { Omit } from 'utility-types/dist/mapped-types';
 

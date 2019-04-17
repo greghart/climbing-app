@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Omit } from 'utility-types';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import User from '../../../models/User';
 
 interface Props {

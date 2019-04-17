@@ -1,7 +1,7 @@
 import * as React from 'react';
-import classNames = require('classnames');
+import classNames from 'classnames';
 import { WrappedFieldProps, Field, BaseFieldProps, GenericFieldHTMLAttributes } from 'redux-form';
-import omit = require('lodash/omit');
+import omit from 'lodash/omit';
 
 /**
  * Climbing App field specific props

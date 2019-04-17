@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
 import { InjectedFormProps, FormErrors, Fields } from 'redux-form';
-import reject = require('lodash/reject');
+import reject from 'lodash/reject';
 import { Omit } from 'utility-types/dist/mapped-types';
 
 import Area from '../../../models/Area';

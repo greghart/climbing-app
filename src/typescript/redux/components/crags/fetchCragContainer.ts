@@ -1,7 +1,5 @@
 import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
-import intersection = require('lodash/intersection');
-import map = require('lodash/map');
 
 import { State, selectors } from '../../reducer';
 import { CragSchema } from '../../normalizr';
@@ -9,7 +7,6 @@ import fetchCrag from '../../ducks/operations/fetchCrag';
 import Crag from '../../../models/Crag';
 import asyncComponent from '../../decorators/asyncComponent';
 import selectNormalizr from '../../util/selectNormalizr';
-import { Omit } from 'utility-types/dist/mapped-types';
 
 /**
  * Decorator to fetch needed data for a crag

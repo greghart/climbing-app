@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { Map } from 'react-leaflet';
-import { connect } from 'react-redux';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import Area from '../../../models/Area';
 
-import partial = require('lodash/partial');
+import partial from 'lodash/partial';
 import { Link } from 'react-router-dom';
 
 type Props = {

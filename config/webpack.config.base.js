@@ -2,13 +2,13 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   output: {
     filename: 'js/[name].js',
     path: path.resolve(__dirname, '../build'),
+    chunkFilename: '[name].bundle.js',
     publicPath: '/build'
   },
   resolve: {
@@ -21,6 +21,11 @@ module.exports = {
     },
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.json', '.scss', '.css', '.js']
   },
+  // optimization: {
+  //   splitChunks: {
+
+  //   }
+  // },
   plugins: [
     new ForkTsCheckerWebpackPlugin({ memoryLimit: 1024 }),
     // Direct typescript to a browser compatible
@@ -39,12 +44,6 @@ module.exports = {
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default']
-    }),
-    // Shared code
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'js/vendor.bundle.js',
-      minChunks: Infinity
     })
   ],
   module: {

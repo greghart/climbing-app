@@ -1,8 +1,7 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
-import { renderRoutes, RouteConfig } from 'react-router-config';
-import { Location } from 'history';
-import omit = require('lodash/omit');
+import classNames from 'classnames';
+import { renderRoutes } from 'react-router-config';
+import omit from 'lodash/omit';
 
 import PageLayout from '../layouts/PageLayout';
 import ShowLayoutHeader from '../show/ShowLayoutHeader';
@@ -47,7 +46,9 @@ const ShowLayout: React.SFC<Props> = (props) => {
           {...props.tabsProps}
         >
           <React.Fragment key={routeContext.location.pathname}>
-            {renderRoutes(routeContext.route.routes, props.extraProps)}
+            <React.Suspense fallback={<div>Loading...</div>}>
+              {renderRoutes(routeContext.route.routes, props.extraProps)}
+            </React.Suspense>
           </React.Fragment>
         </ShowLayoutTabs>
       }

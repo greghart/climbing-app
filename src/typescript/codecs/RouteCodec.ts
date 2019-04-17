@@ -1,5 +1,5 @@
 import * as t from 'io-ts';
-import range = require('lodash/range');
+import range from 'lodash/range';
 import * as types from './util';
 
 const validGrades = ['VB'].concat(range(16).map((i) => `V${i}`));

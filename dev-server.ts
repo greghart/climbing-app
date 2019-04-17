@@ -2,7 +2,7 @@
 // Includes both server and webpack server in one go
 
 const path = require('path');
-import * as express from 'express';
+import express from 'express';
 import getExpressApplication from './src/typescript/server/getExpressApplication';
 import getConnection from './src/typescript/db/getConnection';
 const webpack = require('webpack');

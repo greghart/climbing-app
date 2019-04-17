@@ -1,10 +1,10 @@
 import { createConnection, Connection } from 'typeorm';
 import * as pg from 'pg';
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as config from 'config';
-import * as _debug from 'debug';
+import config from 'config';
+import _debug from 'debug';
 const debug = _debug('climbing-app:typeorm');
 
 Bluebird.promisifyAll(fs);

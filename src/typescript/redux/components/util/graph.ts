@@ -2,8 +2,8 @@
  * Some functional components for manipulating a graph
  */
 import * as Leaflet from 'leaflet';
-import without = require('lodash/without');
-import values = require('lodash/values');
+import without from 'lodash/without';
+import values from 'lodash/values';
 
 type Node = Leaflet.LatLngLiteral;
 

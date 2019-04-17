@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as request from 'request-promise';
 import * as path from 'path';
 import * as mkdirp from 'mkdirp';
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 import * as tilebelt from 'tilebelt';
 import * as _ from 'lodash';
 import { getRepository } from 'typeorm';

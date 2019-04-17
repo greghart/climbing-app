@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
 import { getConnection, getCustomRepository } from 'typeorm';
-import omit = require('lodash/omit');
+import omit from 'lodash/omit';
 
 import Area from '../../models/Area';
 import AreaCodec from '../../codecs/AreaCodec';

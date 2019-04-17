@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 
 const readFileAsync = Bluebird.promisify(fs.readFile);
 import Source from './Source';

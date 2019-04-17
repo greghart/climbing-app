@@ -1,7 +1,7 @@
 import { reduxForm, submit, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 
 import NewComment, { Props as FormProps } from './NewComment';
 import User from '../../../models/User';

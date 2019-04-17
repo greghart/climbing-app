@@ -1,5 +1,5 @@
 import * as React from 'react';
-import filter = require('lodash/filter');
+import filter from 'lodash/filter';
 import { Link } from 'react-router-dom';
 
 import Crag from '../../../models/Crag';

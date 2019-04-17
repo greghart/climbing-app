@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { LeafletMouseEvent } from 'leaflet';
-import partial = require('lodash/partial');
 
 import Area from '../../../models/Area';
 import Boulder from '../../../models/Boulder';

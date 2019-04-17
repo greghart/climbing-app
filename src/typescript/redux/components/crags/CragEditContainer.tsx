@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { replace } from 'connected-react-router';
 import { pick } from 'lodash';
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 
 import CragForm, { Props as FormProps } from './CragForm';
 import { MapDispatchToPropsFunction } from '../types';

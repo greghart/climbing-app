@@ -7,7 +7,7 @@
 import * as React from 'react';
 import { LatLngTuple, LatLng } from 'leaflet';
 import { Map, Circle } from 'react-leaflet';
-import minBy = require('lodash/minBy');
+import minBy from 'lodash/minBy';
 
 import * as mapLib from '../../../util/mapLib';
 import BestTileLayer from '../BestTileLayer';

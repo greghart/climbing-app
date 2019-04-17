@@ -1,6 +1,6 @@
-import * as session from 'express-session';
-import * as config from 'config';
-import * as connectRedis from 'connect-redis';
+import session from 'express-session';
+import config from 'config';
+import connectRedis from 'connect-redis';
 const RedisStore = connectRedis(session);
 
 import getCookieOptions from './getCookieOptions';

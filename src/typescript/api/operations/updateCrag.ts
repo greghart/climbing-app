@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
 import { getRepository, getConnection, getCustomRepository } from 'typeorm';
-import omit = require('lodash/omit');
+import omit from 'lodash/omit';
 
 import Crag from '../../models/Crag';
 import CragCodec from '../../codecs/CragCodec';

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import classNames = require('classnames');
-import isFunction = require('lodash/isFunction');
+import isFunction from 'lodash/isFunction';
 
 /**
  * A pure Accordion component

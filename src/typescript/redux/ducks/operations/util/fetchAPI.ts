@@ -8,12 +8,12 @@
 // import scopeThunker from './scopeThunker';
 // import getAPIOperation from './getAPIOperation';
 // import getScopedParamsFromState, { baseParamGetter } from './getScopedParamsFromState';
-// import defaults = require('lodash/defaults');
+// import defaults from 'lodash/defaults';
 
 // // Type imports
 // import * as ReduxActions from 'redux-actions';
 
-// import * as _debug from 'debug';
+// import _debug from 'debug';
 // const debug = _debug('apollo-demand-app:client:actions:util:fetchAPI');
 
 // interface ActionOptions {

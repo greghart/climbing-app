@@ -1,5 +1,5 @@
 import { denormalize } from 'normalizr';
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 import { connect } from 'react-redux';
 import { replace } from 'connected-react-router';
 

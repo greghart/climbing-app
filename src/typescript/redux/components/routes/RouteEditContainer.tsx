@@ -2,7 +2,7 @@ import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { replace } from 'connected-react-router';
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 
 import RouteForm, { Props as FormProps } from './RouteForm';
 import { MapDispatchToPropsFunction } from '../types';

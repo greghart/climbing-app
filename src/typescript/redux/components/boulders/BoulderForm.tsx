@@ -1,6 +1,6 @@
 import * as React from 'react';
-import sortBy = require('lodash/sortBy');
-import get = require('lodash/get');
+import sortBy from 'lodash/sortBy';
+import get from 'lodash/get';
 import { InjectedFormProps, FormErrors, Fields, Field, WrappedFieldsProps } from 'redux-form';
 
 import { OnSubmit } from '../types';

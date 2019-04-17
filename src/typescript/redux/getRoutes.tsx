@@ -24,7 +24,7 @@ import AreaCommentsContainer from './components/areas/AreaCommentsContainer';
 import AreaNewCommentContainer from './components/areas/AreaNewCommentContainer';
 import AreaNewBoulderContainer from './components/areas/AreaNewBoulderContainer';
 import AreaEditContainer from './components/areas/AreaEditContainer';
-import AreaLayoutOverview from './components/areas/AreaLayoutOverview';
+const AreaLayoutOverview = React.lazy(() => import('./components/areas/AreaLayoutOverview'));
 // Route
 import routeRoutes from './components/routes/routes';
 // Boulder

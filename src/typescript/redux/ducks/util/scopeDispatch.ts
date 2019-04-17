@@ -1,4 +1,4 @@
-import isFunction = require('lodash/isFunction');
+import isFunction from 'lodash/isFunction';
 import scopeObject from './scopeObject';
 
 import * as ReduxTypes from 'redux';

@@ -1,7 +1,5 @@
 import * as React from 'react';
-import classNames = require('classnames');
-import AnimationContext from '../animations/AnimationContext';
-import SlideUp from '../animations/SlideUp';
+import classNames from 'classnames';
 
 /**
  * A layout for a normal (non-map) page

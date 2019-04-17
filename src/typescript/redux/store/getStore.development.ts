@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
-import * as promiseMiddleware from 'redux-promise';
+import promiseMiddleware from 'redux-promise';
 import reduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { History } from 'history';

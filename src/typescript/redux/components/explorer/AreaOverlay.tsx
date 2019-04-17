@@ -1,5 +1,5 @@
 import * as React from 'react';
-import reduce = require('lodash/reduce');
+import reduce from 'lodash/reduce';
 
 import OverlayDetail from './OverlayDetail';
 import Area from '../../../models/Area';

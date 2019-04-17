@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Chart from 'react-google-charts';
 import { ReactGoogleChartProps } from 'react-google-charts/dist/types';
-import reduce = require('lodash/reduce');
+import reduce from 'lodash/reduce';
 
 import Route from '../../../models/Route';
 

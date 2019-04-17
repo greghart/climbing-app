@@ -1,7 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm';
 import Photo from '../Photo';
 import Photoable from '../Photoable';
-import get = require('lodash/get');
+import get from 'lodash/get';
 
 // Base interface for a photoable entity
 interface PhotoableEntity {

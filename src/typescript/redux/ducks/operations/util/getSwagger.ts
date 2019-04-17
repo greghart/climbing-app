@@ -1,5 +1,5 @@
 import * as inflection from 'inflection';
-import reduce = require('lodash/reduce');
+import reduce from 'lodash/reduce';
 import * as Return from 'typescript-rest/dist/server-return';
 
 import { CragsServiceType } from '../../../../api/services/CragsService';

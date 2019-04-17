@@ -1,5 +1,4 @@
 import * as React from 'react';
-import omit = require('lodash/omit');
 
 import Boulder from '../../../models/Boulder';
 import withPhotoable from './withPhotoable';

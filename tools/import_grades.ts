@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 import * as parse from 'csv-parse/lib/sync';
-import find = require('lodash/find');
+import find from 'lodash/find';
 import slugify from 'slugify';
 import getConnection from '../src/typescript/db';
 import Route from '../src/typescript/models/Route';

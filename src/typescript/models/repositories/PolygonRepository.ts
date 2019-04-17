@@ -1,7 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm';
 import PolygonCoordinate from '../PolygonCoordinate';
 import Polygon from '../Polygon';
-import get = require('lodash/get');
+import get from 'lodash/get';
 
 // Base interface for a polygon entity
 interface PolygonEntity {
