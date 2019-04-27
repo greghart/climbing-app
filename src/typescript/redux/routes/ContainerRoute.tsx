@@ -4,7 +4,7 @@ import { RouteConfigComponentProps, renderRoutes } from 'react-router-config';
 /**
  * The container route is a top level container to allow a single place to add global logic.
  *
- * Currently we don't have any such thing :shrug:
+ * Currently this just sets up a top level suspense.
  */
 const ContainerRoute: React.SFC<RouteConfigComponentProps<{}>> = (props) => {
   return (

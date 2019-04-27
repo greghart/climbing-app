@@ -12,6 +12,7 @@ interface CragParams {
 }
 
 const CragRoute: SFC<RouteConfigComponentProps<CragParams>> = (props) => {
+  console.warn('CragRoute', props);
   return (
     <CragLayoutContainer
       cragId={props.match.params.crag}

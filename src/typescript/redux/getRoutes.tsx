@@ -9,13 +9,16 @@ import { RouteConfig, RouteConfigComponentProps } from 'react-router-config';
  * Sub-pages can store their own routes in a `routes` file by convention.
  * @todo set up router objects akin to express routers on the client
  */
+// tslint:disable:space-in-parens
 
 import ContainerRoute from './routes/ContainerRoute';
 import AnimationContainerRoute from './routes/AnimationContainerRoute';
 // Explorer
 import explorerRoutes from './components/explorer/routes';
 // Crags
-import cragRoutes from './components/crags/routes';
+const CragContainer = React.lazy(() =>
+  import(/* webpackChunkName: "Crags" */'./components/crags/SplitRoute')
+);
 // Search
 import SearchLayout from './components/search/SearchLayout';
 // Area
@@ -64,9 +67,10 @@ export default function getRoutes(): MyRouteConfig[] {
           component: SearchLayout,
           key: 'search',
         },
-
-        // Show Pages
-        ...cragRoutes,
+        {
+          path: '/crags/:crag',
+          component: CragContainer
+        },
         // Show an area
         {
           path: '/areas/:area',

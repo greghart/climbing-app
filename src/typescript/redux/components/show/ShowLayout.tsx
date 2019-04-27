@@ -27,12 +27,13 @@ type Props = {
  */
 const ShowLayout: React.SFC<Props> = (props) => {
   const routeContext = React.useContext(RouteContext);
-  const test = renderRoutes(routeContext.route.routes, props.extraProps);
-  console.warn({
-    props,
-    routeContext,
-    test
-  },           'ShowLayout');
+  console.warn(
+    {
+      props,
+      routeContext
+    },
+    'ShowLayout'
+  );
   return (
     <PageLayout
       {...omit(props, 'headerProps', 'tabsProps', 'routerLocation')}
