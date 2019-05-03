@@ -23,3 +23,6 @@ dist/
 
 static/tiles
 static/uploads
+
+# Next
+.next/
