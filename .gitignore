@@ -10,6 +10,7 @@ scratch/
 ormconfig.json
 # Don't need persisted migrations for now
 migration/
+.next/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

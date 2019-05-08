@@ -1,5 +1,4 @@
 import * as Rest from 'typescript-rest';
-import * as t from 'io-ts';
 import { Tags, Response } from 'typescript-rest-swagger';
 
 import getArea from '../operations/getArea';
