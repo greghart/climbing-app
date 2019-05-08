@@ -4,7 +4,6 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "module": "esnext",
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "target": "es5",

@@ -28,7 +28,7 @@ module.exports = {
   // },
   plugins: [
     new ForkTsCheckerWebpackPlugin({ memoryLimit: 1024 }),
-    // Direct typescript to a browser compatible
+    // Browser compatible versions
     new webpack.NormalModuleReplacementPlugin(/swagger-client$/, function (result) {
       result.request = result.request.replace(/swagger-client/, "swagger-client/browser");
     }),
@@ -53,7 +53,12 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'ts-loader',
         options: {
-          transpileOnly: true
+          transpileOnly: true,
+          compilerOptions: {
+            module: 'esnext',
+            allowSyntheticDefaultImports: true,
+            esModuleInterop: true
+          }
         }
       },
       // Images
