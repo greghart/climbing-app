@@ -27,7 +27,7 @@ const middlewares = [
 // By default we try to read the key from ?debug_session=<key> in the address bar
 const getDebugSessionKey = function () {
   const matches = (
-    typeof window !== 'undefined' &&
+    window && window.location && window.location.href &&
     window.location.href.match(/[?&]debug_session=([^&]+)\b/)
   );
   return (matches && matches.length) ? matches[1] : null;

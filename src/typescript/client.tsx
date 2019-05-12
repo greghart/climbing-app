@@ -1,6 +1,6 @@
 import Bluebird from 'bluebird';
 import * as React from 'react';
-import { render } from 'react-dom';
+import * as ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 
 // Client-side only imports
@@ -9,6 +9,7 @@ import 'application.scss';
 import 'popper.js';
 import 'bootstrap/js/dist/util';
 import 'bootstrap/js/dist/dropdown';
+import 'rc-slider/assets/index.css';
 
 const getStore = require('./redux/store/getStore');
 import Root from './redux/Root';
@@ -38,7 +39,7 @@ Bluebird.resolve()
     history,
   );
 
-  render(
+  ReactDOM.render(
     <Root store={store} history={history} />,
     rootEl,
   );

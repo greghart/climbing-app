@@ -53,7 +53,12 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'ts-loader',
         options: {
-          transpileOnly: true
+          transpileOnly: true,
+          compilerOptions: {
+            module: 'esnext',
+            esModuleInterop: true,
+            allowSyntheticDefaultImports: true,
+          }
         }
       },
       // Images

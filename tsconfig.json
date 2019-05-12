@@ -3,15 +3,15 @@
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": false,
-    "module": "esnext",
-    "esModuleInterop": true,
+    "module": "commonjs",
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "target": "es5",
     "lib": ["dom", "es5", "scripthost", "es6"],
     "jsx": "react",
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
   },
   "include": [
     "./src/typescript/**/*",

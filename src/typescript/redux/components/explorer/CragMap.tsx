@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
-import { Map, Polyline } from 'react-leaflet';
+import { Map } from 'react-leaflet';
 import { renderRoutes } from 'react-router-config';
 import lodashMap from 'lodash/map';
 

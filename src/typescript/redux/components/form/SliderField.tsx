@@ -1,5 +1,4 @@
 import * as React from 'react';
-import 'rc-slider/assets/index.css';
 import { WrappedFieldProps } from 'redux-form';
 import * as Slider from 'rc-slider/lib/Slider';
 

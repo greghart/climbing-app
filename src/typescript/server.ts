@@ -1,4 +1,4 @@
-import * as Promise from 'bluebird';
+import Bluebird from 'bluebird';
 import * as express from 'express';
 import _debug from 'debug';
 const debug = _debug('climbing-app:server');
