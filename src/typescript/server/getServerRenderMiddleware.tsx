@@ -6,14 +6,14 @@ import {
 } from 'react-router-config';
 import { createMemoryHistory } from 'history';
 import { Store } from 'redux';
-import Promise from 'bluebird';
 import _debug from 'debug';
 const debug = _debug('apollo-demand:util:getServerRenderMiddleware');
 
 import HtmlComponent from './HtmlComponent';
 import getRoutes from '../redux/getRoutes';
 import renderApplication from './renderApplication';
-const getStore = require('../redux/store/getStore');
+import fetchDataForMatches from './fetchDataForMatches';
+import getStore from '../redux/store/getStore';
 
 interface ResponseWithExpose extends express.Response {
   expose?(value: any, key: string): any;
@@ -38,7 +38,7 @@ function renderWithStore(req: express.Request, res: ResponseWithExpose, store: S
   // Replace with HtmlComponent
   const html = ReactDOMServer.renderToStaticMarkup(
     <HtmlComponent
-      content=""
+      content={content}
       state={res.locals.state.toString()}
     />,
   );
@@ -50,7 +50,7 @@ function renderWithStore(req: express.Request, res: ResponseWithExpose, store: S
 /**
  * Render a request to the response
  */
-const renderRequest = Promise.method((req: express.Request, res: express.Response) => {
+const renderRequest = async (req: express.Request, res: express.Response) => {
   const matches = matchRoutes(
     getRoutes(),
     req.path
@@ -61,8 +61,9 @@ const renderRequest = Promise.method((req: express.Request, res: express.Respons
       initialEntries: [req.url],
     }),
   );
+  await fetchDataForMatches(matches, store, {});
   return renderWithStore(req, res, store);
-});
+};
 
 export default function getServerRenderMiddleware(): express.RequestHandler {
   return (req: express.Request, res, next) => {

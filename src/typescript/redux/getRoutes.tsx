@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as Leaflet from 'leaflet';
+import { lazy } from 'react-imported-component';
 import { Omit } from 'utility-types/dist/mapped-types';
 import { RouteConfig, RouteConfigComponentProps } from 'react-router-config';
 
@@ -16,8 +17,8 @@ import AnimationContainerRoute from './routes/AnimationContainerRoute';
 // Explorer
 import explorerRoutes from './components/explorer/routes';
 // Crags
-const CragContainer = React.lazy(() =>
-  import(/* webpackChunkName: "Crags" */'./components/crags/SplitRoute')
+const CragContainer = lazy(
+  () => import(/* webpackChunkName: "Crags" */'./components/crags/SplitRoute')
 );
 // Search
 import SearchLayout from './components/search/SearchLayout';
@@ -27,7 +28,7 @@ import AreaCommentsContainer from './components/areas/AreaCommentsContainer';
 import AreaNewCommentContainer from './components/areas/AreaNewCommentContainer';
 import AreaNewBoulderContainer from './components/areas/AreaNewBoulderContainer';
 import AreaEditContainer from './components/areas/AreaEditContainer';
-const AreaLayoutOverview = React.lazy(() => import('./components/areas/AreaLayoutOverview'));
+const AreaLayoutOverview = lazy(() => import('./components/areas/AreaLayoutOverview'));
 // Route
 import routeRoutes from './components/routes/routes';
 // Boulder

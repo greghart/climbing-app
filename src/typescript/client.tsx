@@ -11,7 +11,7 @@ import 'bootstrap/js/dist/util';
 import 'bootstrap/js/dist/dropdown';
 import 'rc-slider/assets/index.css';
 
-const getStore = require('./redux/store/getStore');
+import getStore from './redux/store/getStore';
 import Root from './redux/Root';
 
 // Get the DOM Element that will host our React application

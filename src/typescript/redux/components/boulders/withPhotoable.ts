@@ -6,7 +6,7 @@ interface OwnProps {
   boulder: Boulder;
 }
 const boulderWithPhotoable = withPhotoable<OwnProps>(
-  (props) => props.boulder,
+  (props) => (props.boulder as any),
   fetchPhotoableForBoulder
 );
 

@@ -20,8 +20,4 @@ function browserPolyfill() {
   };
 }
 
-// While we're at it, let's make React.Suspense not throw also!
-const React = require('react');
-React.Suspense = ({ children }) => children;
-
 export default browserPolyfill;

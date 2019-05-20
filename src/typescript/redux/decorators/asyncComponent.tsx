@@ -34,7 +34,7 @@ export default function asyncComponent<StateProps, DispatchProps, OwnProps>(
     withMountAction<StateProps & DispatchProps>(
       (props) => {
         if (!hasDependants(props)) {
-          props[options.fetchDispatch]();
+          props[options.fetchDispatch](props);
         }
       },
     ),

@@ -19,7 +19,7 @@ function fetchEntities<ArgTypes extends any[]>(
   return scopeThunker<ArgTypes>(
     (scope, ...args) => {
       return (dispatch) => {
-        Bluebird.resolve(get(getSwagger(), ...args))
+        return Bluebird.resolve(get(getSwagger(), ...args))
         .then((data) => {
           return dispatch(
             receiveEntities(

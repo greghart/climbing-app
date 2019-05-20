@@ -37,9 +37,10 @@ const runFetch = debounce((dispatch, areaId) => {
   return dispatch(fetchAreas('singleton-fetch')(areaId));
 });
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
-  console.log('withArea', ownProps.areaId);
   return {
-    fetch: () => runFetch(dispatch, ownProps.areaId)
+    fetch: (params: OwnProps) => {
+      runFetch(dispatch, params.areaId);
+    }
   };
 };
 

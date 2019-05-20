@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RouteConfigComponentProps } from 'react-router-config';
 import RouteContext from '../context/RouteContext';
+import { isFetchable } from '../../server/fetchDataForMatches';
 
 interface Props {
   children: React.ReactNode;
@@ -22,6 +23,9 @@ function provideRoute<P>(WrappedComponent: React.ComponentType<RouteConfigCompon
       </RouteConfigProvider>
     );
   };
+  if (isFetchable(WrappedComponent)) {
+    (RouteProvider as any).fetch = WrappedComponent.fetch;
+  }
   return RouteProvider;
 }
 

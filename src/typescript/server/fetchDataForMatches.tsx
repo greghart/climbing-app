@@ -3,17 +3,20 @@ import { Store } from 'redux';
 import Bluebird from 'bluebird';
 import isFunction from 'lodash/isFunction';
 
-type Fetcher = (
-  store: Store<any>,
-  options: {
-    params?: { [index: string]: unknown },
-    query?: { [index: string]: unknown }
-  }
+type FetchContext<Params> = {
+  store: Store<any>;
+  params: Params;
+  query: { [index: string]: unknown };
+};
+type Fetcher<Params> = (
+  context: FetchContext<Params>
 ) => Promise<unknown>;
 
-type Fetchable = React.ComponentType & { fetch: Fetcher };
-function isFetchable(component?: React.ComponentType | Fetchable): component is Fetchable {
-  return !!component && isFunction((component as Fetchable).fetch);
+type Fetchable<Params> = React.ComponentType & { fetch: Fetcher<Params> };
+function isFetchable(
+  component?: React.ComponentType | Fetchable<unknown>
+): component is Fetchable<unknown> {
+  return !!component && isFunction((component as Fetchable<unknown>).fetch);
 }
 /**
  * For a list of matched routes, fetch all data that follows our universal fetch API.
@@ -27,20 +30,15 @@ function fetchDataForMatches(
   store: Store<any>,
   query: { [index: string]: any }
 ) {
-  matches.forEach((thisMatch) => {
-    console.log({ thisMatch });
-  });
   return Bluebird.map(matches, ({ route, match }) => {
     let result;
     if (isFetchable(route.component)) {
       result = Promise.resolve(
-        route.component.fetch(
+        route.component.fetch({
           store,
-          {
-            query,
-            params: match.params,
-          }
-        )
+          query,
+          params: match.params,
+        })
       );
     } else {
       result = Promise.resolve();
@@ -59,4 +57,5 @@ function fetchDataForMatches(
   });
 }
 
+export { isFetchable, Fetchable, FetchContext };
 export default fetchDataForMatches;

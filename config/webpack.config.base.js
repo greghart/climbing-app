@@ -38,6 +38,12 @@ module.exports = {
     new webpack.NormalModuleReplacementPlugin(/react-native-sqlite-storage$/, function (result) {
       result.request = result.request.replace(/typeorm/, "typeorm/browser");
     }),
+    new webpack.NormalModuleReplacementPlugin(/getClient/, function(resource) {
+      resource.request = resource.request.replace(
+        /getServiceClient/, 
+        'getSwaggerClient'
+      );
+    }),
     // Provide globals we expect/setup through HtmlComponent
     new webpack.ProvidePlugin({
       $: 'jquery',

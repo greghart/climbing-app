@@ -1,12 +1,12 @@
 import * as Rest from 'typescript-rest';
 import isFunction from 'lodash/isFunction';
 import { APIClientInterface } from './getSwaggerClient';
-// import CragsService from '../services/CragsService';
-// import AreasService from '../services/AreasService';
-// import BouldersService from '../services/BouldersService';
+import CragsService from '../services/CragsService';
+import AreasService from '../services/AreasService';
+import BouldersService from '../services/BouldersService';
 import RoutesService from '../services/RoutesService';
-// import CommentablesService from '../services/CommentablesService';
-// import PhotoablesService from '../services/PhotoablesService';
+import CommentablesService from '../services/CommentablesService';
+import PhotoablesService from '../services/PhotoablesService';
 
 function isNewResource<T>(
   result: T | Rest.Return.NewResource<T>
@@ -50,12 +50,12 @@ function getServiceClient(): APIClientInterface {
     return _singleton;
   }
   _singleton = {
-    // crags: unwrapNewResourceObject(new CragsService()),
-    // areas: unwrapNewResourceObject(new AreasService()),
-    // boulders: unwrapNewResourceObject(new BouldersService()),
+    crags: unwrapNewResourceObject(new CragsService()),
+    areas: unwrapNewResourceObject(new AreasService()),
+    boulders: unwrapNewResourceObject(new BouldersService()),
     routes: unwrapNewResourceObject(new RoutesService()),
-    // commentables: unwrapNewResourceObject(new CommentablesService()),
-    // photoables: unwrapNewResourceObject(new PhotoablesService()),
+    commentables: unwrapNewResourceObject(new CommentablesService()),
+    photoables: unwrapNewResourceObject(new PhotoablesService()),
   } as APIClientInterface;
   return _singleton;
 }
