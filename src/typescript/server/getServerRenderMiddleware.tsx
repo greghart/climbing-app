@@ -6,6 +6,7 @@ import {
 } from 'react-router-config';
 import { createMemoryHistory } from 'history';
 import { Store } from 'redux';
+import Bluebird from 'bluebird';
 import _debug from 'debug';
 const debug = _debug('apollo-demand:util:getServerRenderMiddleware');
 
@@ -55,13 +56,23 @@ const renderRequest = async (req: express.Request, res: express.Response) => {
     getRoutes(),
     req.path
   );
+  const openPromises = [];
   const store = getStore(
     {},
     createMemoryHistory({
       initialEntries: [req.url],
     }),
+    (promise) => openPromises.push(promise)
   );
-  await fetchDataForMatches(matches, store, {});
+
+  // First, render the app and let all the fetches go out
+  // Wait for promises, and then we can render synchronously
+  renderApplication(req.url, store);
+  // Wait a tick for fetches to kick in
+  await Bluebird.delay(0);
+  await Promise.all(openPromises);
+
+  // await fetchDataForMatches(matches, store, {});
   return renderWithStore(req, res, store);
 };
 

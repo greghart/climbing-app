@@ -1,13 +1,12 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, Dispatch } from 'redux';
 import { persistState } from 'redux-devtools';
-import promiseMiddleware from 'redux-promise';
-import reduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { History } from 'history';
 import { routerMiddleware } from 'connected-react-router';
 
 import reducer from '../reducer';
 import DevTools from '../DevTools';
+import thunkBundler from './thunkBundler';
 
 /**
  * Entirely optional.
@@ -17,13 +16,6 @@ import DevTools from '../DevTools';
  */
 const logger = createLogger();
 
-const middlewares = [
-  promiseMiddleware,
-  reduxThunk,
-  logger,
-  // require('redux-immutable-state-invariant')()
-];
-
 // By default we try to read the key from ?debug_session=<key> in the address bar
 const getDebugSessionKey = function () {
   const matches = (
@@ -32,11 +24,18 @@ const getDebugSessionKey = function () {
   );
   return (matches && matches.length) ? matches[1] : null;
 };
-export default function getStore(initialState: any, history: History) {
+export default function getStore(
+  initialState: any,
+  history: History,
+  onPromise?: (promise: Promise<unknown>) => unknown
+) {
   // Enhancer is a function of router middleware, which is a function of history
-  middlewares.push(routerMiddleware(history));
   const enhancer = compose<any>(
-    applyMiddleware(...middlewares),
+    applyMiddleware(
+      thunkBundler(onPromise),
+      logger,
+      routerMiddleware(history)
+    ),
     DevTools.instrument(),
     // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
     persistState(getDebugSessionKey()),

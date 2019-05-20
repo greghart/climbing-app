@@ -1,20 +1,21 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import promiseMiddleware from 'redux-promise';
-import reduxThunk from 'redux-thunk';
 
 import reducer from '../reducer';
 import { routerMiddleware } from 'connected-react-router';
 import { History } from 'history';
+import thunkBundler from './thunkBundler';
 
-const middlewares = [
-  promiseMiddleware,
-  reduxThunk,
-];
-export default function getStore(initialState: any, history: History) {
+export default function getStore(
+  initialState: any,
+  history: History,
+  onPromise?: (promise: Promise<unknown>) => unknown
+) {
   // Enhancer is a function of router middleware, which is a function of history
-  middlewares.push(routerMiddleware(history));
   const enhancer = compose<any>(
-    applyMiddleware(...middlewares),
+    applyMiddleware(
+      thunkBundler(onPromise),
+      routerMiddleware(history)
+    ),
   );
   const store = createStore<any>(
     reducer(history),

@@ -3,7 +3,8 @@ import Bluebird from 'bluebird';
 
 import { receiveEntities } from '../../entities';
 import scopeThunker from '../../util/scopeThunker';
-import getSwagger, { SwaggerAPI } from '../util/getSwagger';
+import getSwagger from '../util/getSwagger';
+import { APIClientInterface } from '../../../../api/clients/getSwaggerClient';
 
 /**
  * Default workflow for fetching some entity or entities from our API
@@ -13,7 +14,7 @@ import getSwagger, { SwaggerAPI } from '../util/getSwagger';
  *  * Receiving entities based on a schema
  */
 function fetchEntities<ArgTypes extends any[]>(
-  get: (swagger: SwaggerAPI, ...args: ArgTypes) => any,
+  get: (swagger: APIClientInterface, ...args: ArgTypes) => any,
   schema: schema.Entity | [schema.Entity],
 ) {
   return scopeThunker<ArgTypes>(

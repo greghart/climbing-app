@@ -6,7 +6,7 @@ function withMountAction<P>(action: (props: P) => any) {
 
     return class WithMount extends React.Component<P> {
 
-      componentDidMount() {
+      componentWillMount() {
         return action(this.props);
       }
 

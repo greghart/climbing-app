@@ -1,7 +1,11 @@
 import { History } from 'history';
 import { Store } from 'redux';
 
-type GetStore = (state: any, history: History) => Store<any>;
+type GetStore = (
+  state: any,
+  history: History,
+  onPromise?: (promise: Promise<unknown>) => unknown
+) => Store<any>;
 
 let getStore: GetStore;
 if (process.env.NODE_ENV === 'production') {
