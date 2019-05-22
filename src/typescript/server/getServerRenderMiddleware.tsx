@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as React from 'react';
 import * as ReactDOMServer from 'react-dom/server';
+import { printDrainHydrateMarks, drainHydrateMarks } from 'react-imported-component';
 import {
   matchRoutes,
 } from 'react-router-config';
@@ -13,7 +14,6 @@ const debug = _debug('apollo-demand:util:getServerRenderMiddleware');
 import HtmlComponent from './HtmlComponent';
 import getRoutes from '../redux/getRoutes';
 import renderApplication from './renderApplication';
-import fetchDataForMatches from './fetchDataForMatches';
 import getStore from '../redux/store/getStore';
 
 interface ResponseWithExpose extends express.Response {
@@ -24,7 +24,11 @@ function renderWithStore(req: express.Request, res: ResponseWithExpose, store: S
   // Context is used by router to seed redirect data by side effects
   const context: { url?: string } = {};
 
-  const content = renderApplication(req.url, store);
+  const { content, streamId } = renderApplication(req.url, store);
+  console.log(streamId);
+  const marksTwo = drainHydrateMarks(streamId);
+  console.log('marksTwo!');
+  console.log(marksTwo);
 
   // Expose necessary data to client
   if (!!res.expose) {
@@ -68,6 +72,9 @@ const renderRequest = async (req: express.Request, res: express.Response) => {
   // First, render the app and let all the fetches go out
   // Wait for promises, and then we can render synchronously
   renderApplication(req.url, store);
+  const marksOne = drainHydrateMarks();
+  console.log('marksOne!');
+  console.log(marksOne);
   // Wait a tick for fetches to kick in
   await Bluebird.delay(0);
   await Promise.all(openPromises);

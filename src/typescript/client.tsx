@@ -3,6 +3,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 
+import importedComponents from '../imported';
 // Client-side only imports
 import 'leaflet/dist/leaflet.css';
 import 'application.scss';

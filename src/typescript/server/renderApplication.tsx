@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
 
 import getRoutes from '../redux/getRoutes';
+import { ImportedStream } from 'react-imported-component';
 
 /**
  * Render our application for a given path
@@ -17,6 +18,7 @@ function renderApplication(url: string, store: Store<any>) {
   // Context is used by router to seed redirect data by side effects
   const context: { url?: string } = {};
 
+  let streamId = 0;
   const content = ReactDOMServer.renderToString(
     <StaticRouter
       location={url}
@@ -25,11 +27,17 @@ function renderApplication(url: string, store: Store<any>) {
       <Provider
         store={store}
       >
+        <ImportedStream
+          takeUID={uid => {
+            streamId = uid;
+            console.log('stream set to ', uid);
+          }}
+        ></ImportedStream>
         {renderRoutes(getRoutes())}
       </Provider>
     </StaticRouter>
   );
-  return content;
+  return { content, streamId };
 }
 
 export default renderApplication;
