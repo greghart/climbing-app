@@ -10,9 +10,6 @@ scripts:
     prod:
       description: Build your client code production style
       script: cross-env DEBUG=climbing-app* PORT=3001 NODE_ENV=production webpack --config=./config/webpack.config.production.js
-    generate-imported-component: 
-      description: Build out the code-split components we'll use. This sets up a cache for SSR
-      script: imported-components src src/imported.js
   run:
     description: Various ways to run the climbing app components
     clientDashboard:
@@ -23,7 +20,7 @@ scripts:
       script: "cross-env DEBUG=climbing-app* PORT=3001 TS_NODE_COMPILER_OPTIONS='{ \"module\": \"commonjs\" }' ts-node ./dev-server.ts"
     api:
       description: Run just the API
-      script: cross-env DEBUG=climbing-app* PORT=3001 tsnd ./src/typescript/server.ts
+      script: cross-env DEBUG=climbing-app* PORT=3001 ts-node ./src/typescript/server.ts
     apiWatch:
       description: Watch just the API
       script: cross-env DEBUG=climbing-app* PORT=3001 tsnd --respawn ./src/typescript/server.ts

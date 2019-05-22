@@ -3,7 +3,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const isNode = (typeof process !== 'undefined') && (process.release.name === 'node');
 
 module.exports = {
   output: {
@@ -58,18 +57,15 @@ module.exports = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: 'ts-loader',
         options: {
+          transpileOnly: true,
+          compilerOptions: {
+            module: 'esnext',
+            esModuleInterop: true,
+            allowSyntheticDefaultImports: true,
+          }
         }
-        // loader: 'ts-loader',
-        // options: {
-        //   transpileOnly: true,
-        //   compilerOptions: {
-        //     module: 'esnext',
-        //     esModuleInterop: true,
-        //     allowSyntheticDefaultImports: true,
-        //   }
-        // }
       },
       // Images
       // Inline base64 URLs for <=8k images, direct URLs for the rest
