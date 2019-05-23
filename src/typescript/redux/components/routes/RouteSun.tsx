@@ -52,7 +52,7 @@ const RouteSun: React.SFC<Props> = (props) => {
   return (
     <React.Fragment>
       <SunForm
-        onSubmit={(...args) => console.log(args) }
+        onSubmit={(...args) => {}}
         coordinate={props.myRoute.coordinate}
       />
       <p className="text-info">

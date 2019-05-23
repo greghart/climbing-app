@@ -5,6 +5,8 @@ import Boulder from '../models/Boulder';
 import Route from '../models/Route';
 import Polygon from '../models/Polygon';
 import PolygonCoordinate from '../models/PolygonCoordinate';
+import _debug from '../debug';
+const debug = _debug.extend('db/parseCrag');
 
 function parseCrag(obj: any) {
   const crag = new Crag();
@@ -46,7 +48,7 @@ function parseCrag(obj: any) {
     return area;
   });
 
-  console.log(crag, 'crag time');
+  debug(crag, 'crag time');
   return crag;
 }
 

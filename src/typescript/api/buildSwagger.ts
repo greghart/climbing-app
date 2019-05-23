@@ -4,6 +4,9 @@ import * as util from 'util';
 import { MetadataGenerator } from 'typescript-rest-swagger/dist/metadata/metadataGenerator';
 import { SpecGenerator } from 'typescript-rest-swagger/dist/swagger/generator';
 
+import _debug from '../debug';
+const debug = _debug.extend('api:buildSwagger');
+
 const swaggerConfig = {
   ...config.get<object>('swagger'),
   entryFile: path.join(`${__dirname}/../../../src/typescript/api/index.ts`),
@@ -15,9 +18,9 @@ const swaggerConfig = {
 export default () => {
   const metadata = new MetadataGenerator(swaggerConfig.entryFile).generate();
   const spec = new SpecGenerator(metadata, swaggerConfig as any).getSpec();
-  console.log({
+  debug({
     swaggerConfig,
   });
-  console.log(util.inspect(spec, { depth: null }));
+  debug(util.inspect(spec, { depth: null }));
   return spec;
 };

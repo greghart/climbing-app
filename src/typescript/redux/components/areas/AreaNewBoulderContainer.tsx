@@ -3,13 +3,15 @@ import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Bluebird from 'bluebird';
+import { replace } from 'connected-react-router';
 
 import BoulderForm, { Props as FormProps } from '../boulders/BoulderForm';
 import { MapDispatchToPropsFunction } from '../types';
 import createBoulder from '../../ducks/operations/createBoulder';
 import handleReduxFormErrors from '../util/handleReduxFormErrors';
-import { replace } from 'connected-react-router';
 import Area from '../../../models/Area';
+import _debug from '../../../debug';
+const debug = _debug.extend('redux/components/areas/AreaNewBoulderContainer');
 
 interface OwnProps {
   area: Area;
@@ -22,7 +24,7 @@ type MapDispatchToProps = MapDispatchToPropsFunction<Partial<FormProps>, OwnProp
 const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
-      console.log(data, 'submitted');
+      debug(data, 'submitted');
       return Bluebird.resolve(
         dispatch(
           createBoulder(ownProps.area, data),

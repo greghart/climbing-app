@@ -2,8 +2,9 @@ import { createAction } from 'redux-actions';
 import { normalize, Schema } from 'normalizr';
 import mergeWith from 'lodash/mergeWith';
 import isArray from 'lodash/isArray';
-import _debug from 'debug';
-const debug = _debug('climbing-app:redux:ducks:entities');
+
+import _debug from '../../debug';
+const debug = _debug.extend('redux:ducks:entities');
 
 const initialState = {
   crags: {},

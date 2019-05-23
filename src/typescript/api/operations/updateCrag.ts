@@ -8,6 +8,8 @@ import setTrail from './setTrail';
 import TrailRepository from '../../models/repositories/TrailRepository';
 import Coordinate from '../../models/Coordinate';
 import Bounds from '../../models/Bounds';
+import _debug from '../../debug';
+const debug = _debug.extend('api:operations:updateCrag');
 
 const updateCrag = async (crag: Crag, data: t.TypeOf<typeof CragCodec>) => {
   console.warn({ data }, 'updateCrag');
@@ -44,7 +46,7 @@ const updateCrag = async (crag: Crag, data: t.TypeOf<typeof CragCodec>) => {
     })
     .then(() => {
       Object.assign(crag, omit(data, 'trail', 'bounds'));
-      console.log({ crag }, 'save');
+      debug({ crag }, 'save');
       return transactionalEntityManager.save(crag);
     });
   });

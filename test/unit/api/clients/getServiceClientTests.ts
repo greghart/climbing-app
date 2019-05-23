@@ -14,7 +14,6 @@ describe('getServiceClientTests', () => {
 
   it('should return a client that delegates to services properly', () => {
     const client = getServiceClient();
-    console.log(client);
     return client.crags.addArea(
       '1',
       {

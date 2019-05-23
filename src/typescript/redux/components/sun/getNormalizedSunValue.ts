@@ -2,6 +2,8 @@ import * as SunCalc from 'suncalc';
 
 import * as mapLib from '../../../util/mapLib';
 import Coordinate from '../../../models/Coordinate';
+import _debug from '../../../debug';
+const debug = _debug.extend('redux/components/sun/getNormalizedSunValue');
 
 /**
  * How much sun does some vector get
@@ -40,7 +42,7 @@ function getNormalizedSunValue(
     .4 * altitudeValue +
     .6 * angleValue
   );
-  console.log({
+  debug({
     normalizedSun,
     altitudeValue,
     angleValue,

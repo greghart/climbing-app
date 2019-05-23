@@ -45,7 +45,7 @@ const BoulderSun: React.SFC<Props> = (props) => {
   return (
     <React.Fragment>
       <SunForm
-        onSubmit={(...args) => console.log(args) }
+        onSubmit={(...args) => {}}
         coordinate={props.boulder.coordinate}
       />
       <InlineMap

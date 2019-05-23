@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Tooltip } from 'react-leaflet';
+import { LeafletEvent } from 'leaflet';
 
 import { ExtractProps } from '../../../externals';
-import { LeafletMouseEvent, LeafletEvent } from 'leaflet';
+import _debug from '../../../debug';
+const debug = _debug.extend('redux/components/map/ClickableTooltip');
 
 type Props = ExtractProps<typeof Tooltip> & {
   onClick: (e: LeafletEvent | MouseEvent) => unknown;
@@ -33,19 +35,19 @@ class ClickableTooltip extends React.Component<Props> {
 
   componentDidMount() {
     this.ref.current.leafletElement.on('tooltipopen', () => {
-      console.log('tooltipopen');
+      debug('tooltipopen');
     });
     this.ref.current.leafletElement.on('click', () => {
-      console.log('click');
+      debug('click');
     });
     // this.ref.current.leafletElement.getElement().addEventListener('click', () => {
-    //   console.log('click 2');
+    //   debug('click 2');
     // });
     this.ref.current.onTooltipClose  = this.onTooltipClose;
   }
 
   onTooltipOpen() {
-    console.log('setting up', {
+    debug('setting up', {
       this: this,
       el: this.ref.current.leafletElement.getElement(),
     });

@@ -13,8 +13,6 @@ import connectFlash from 'connect-flash';
 import cors from 'cors';
 import * as path from 'path';
 import config from 'config';
-import _debug from 'debug';
-const debug = _debug('apollo-demand-app:getApp');
 import browserPolyfill from '../util/browserPolyfill';
 browserPolyfill();
 

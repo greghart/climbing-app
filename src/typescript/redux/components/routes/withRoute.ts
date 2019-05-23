@@ -56,16 +56,6 @@ function withRoute(
     return { route: getRoute(state, ownProps) };
   };
   type StateProps = ReturnType<typeof mapStateToProps>;
-  // const hasDependants = (props: StateProps) => {
-  //   console.log('hasDependants', props, Object.keys(query))
-  //   return props.route && every(
-  //     Object.keys(query),
-  //     (thisProperty) => {
-  //       console.log(!!props.route[thisProperty]);
-  //       return !!props.route[thisProperty];
-  //     }
-  //   );
-  // };
   const hasDependants = (props: StateProps) => {
     return !!(
       props.route &&

@@ -14,7 +14,6 @@ const FileInput: React.ComponentType<WrappedFieldProps> = (props) => {
     meta: omitMeta,
     ...rest
   } = props;
-  console.log(props, 'FIleInput');
   return (
     <React.Fragment>
       {props.meta.error && (

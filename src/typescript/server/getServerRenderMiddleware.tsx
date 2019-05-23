@@ -7,8 +7,6 @@ import {
 import { createMemoryHistory } from 'history';
 import { Store } from 'redux';
 import Bluebird from 'bluebird';
-import _debug from 'debug';
-const debug = _debug('apollo-demand:util:getServerRenderMiddleware');
 
 import HtmlComponent from './HtmlComponent';
 import getRoutes from '../redux/getRoutes';

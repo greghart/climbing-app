@@ -4,14 +4,15 @@ import Bluebird from 'bluebird';
 import * as fs from 'fs';
 import * as path from 'path';
 import config from 'config';
-import _debug from 'debug';
-const debug = _debug('climbing-app:typeorm');
 
 Bluebird.promisifyAll(fs);
 import GradingSystem from '../models/GradingSystem';
 import Grade from '../models/Grade';
 import parseCrag from './parseCrag';
 import User from '../models/User';
+
+import _debug from '../debug';
+const debug = _debug.extend('db:getConnection');
 
 // Abstraction leak
 // Make sure underlying db driver parses our decimals as a float
@@ -53,7 +54,7 @@ const loadFixtures = async (connection: Connection) => {
   await loadStaticCrag('TramData.json');
   await loadStaticCrag('Santee.json');
 
-  console.log('Database connection successfully setup');
+  debug('Database connection successfully setup');
 };
 
 function getConnection() {

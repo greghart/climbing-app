@@ -21,7 +21,6 @@ interface BoundsProps {
 }
 
 const BoundsField: React.ComponentType<WrappedFieldsProps & BoundsProps> = (props) => {
-  console.log({ props }, 'BoundsField');
   const bounds = get(props, props.names[0]);
   const isUpdating = get(props, props.names[1]);
 

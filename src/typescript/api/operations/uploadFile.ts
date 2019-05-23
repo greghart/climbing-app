@@ -1,4 +1,4 @@
-import * as crypto from 'crypto';
+import crypto from 'crypto';
 import * as path from 'path';
 
 import Upload from '../../models/Upload';

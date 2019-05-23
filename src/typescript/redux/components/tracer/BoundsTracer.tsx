@@ -50,8 +50,8 @@ class BoundsTracer extends React.Component<BoundsTracerProps, BoundsTracerState>
   }
 
   onDragStart(e) {
-    // console.log('onDragStart');
-    // console.log(e);
+    // debug('onDragStart');
+    // debug(e);
     // this.setState({
     //   start: e.target._lastCenter
     // });
@@ -65,8 +65,8 @@ class BoundsTracer extends React.Component<BoundsTracerProps, BoundsTracerState>
   onDrag(e) {
     // e.originalEvent.preventDefault();
     // e.originalEvent.stopPropagation();
-    // console.log(e);
-    // console.log('onDrag');
+    // debug(e);
+    // debug('onDrag');
     // return false;
   }
 

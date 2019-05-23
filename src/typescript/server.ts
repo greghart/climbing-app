@@ -1,13 +1,14 @@
 import Bluebird from 'bluebird';
 import * as express from 'express';
-import _debug from 'debug';
-const debug = _debug('climbing-app:server');
 
 import getExpressApplication from './server/getExpressApplication';
 // import getAPIRouter from './api/getRouter';
 // import rollbar from './util/getRollbar';
 // import { serverOptions as rollbarServerOptions } from './util/getRollbar';
 import getConnection from './db';
+
+import _debug from './debug';
+const debug = _debug.extend('server');
 
 // rollbar.handleUncaughtExceptionsAndRejections(
 //   rollbarServerOptions.token,

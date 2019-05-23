@@ -9,11 +9,13 @@ import { getRepository } from 'typeorm';
 
 import getConnection from '../src/typescript/db';
 import Crag from '../src/typescript/models/Crag';
+import _debug from '../src/typescript/debug';
+const debug = _debug.extend('/home/elchocolato/Checkouts/climbing-app/tools/download_crag_tiles');
 
 function download(uri, filename, callback) {
   request.head(uri, (err, res, body) => {
-    console.log('content-type:', res.headers['content-type']);
-    console.log('content-length:', res.headers['content-length']);
+    debug('content-type:', res.headers['content-type']);
+    debug('content-length:', res.headers['content-length']);
 
     request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
   });
@@ -113,7 +115,7 @@ async function downloadCragTiles(cragId: number) {
     }
   );
 
-  console.log({
+  debug({
     tile,
     zoom18: getTilesForZoom(18),
     bounds: crag.bounds,
@@ -160,7 +162,7 @@ getConnection()
   return downloadCragTiles(2);
 })
 .then(() => {
-  console.log('Success!');
+  debug('Success!');
 })
 .catch((err) => {
   console.error(err);

@@ -2,13 +2,15 @@ import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Bluebird from 'bluebird';
+import { replace } from 'connected-react-router';
 
 import RouteForm, { Props as FormProps } from '../routes/RouteForm';
 import { MapDispatchToPropsFunction } from '../types';
 import createRoute from '../../ducks/operations/createRoute';
 import handleReduxFormErrors from '../util/handleReduxFormErrors';
-import { replace } from 'connected-react-router';
 import Boulder from '../../../models/Boulder';
+import _debug from '../../../debug';
+const debug = _debug.extend('redux/components/boulders/BoulderNewRouteContainer');
 
 interface OwnProps {
   boulder: Boulder;
@@ -21,7 +23,7 @@ type MapDispatchToProps = MapDispatchToPropsFunction<Partial<FormProps>, OwnProp
 const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
-      console.log(data, 'submitted');
+      debug(data, 'submitted');
       return Bluebird.resolve(
         dispatch(
           createRoute(ownProps.boulder, data),

@@ -1,5 +1,6 @@
 import * as Rest from 'typescript-rest';
 import isFunction from 'lodash/isFunction';
+
 import { APIClientInterface } from './getSwaggerClient';
 import CragsService from '../services/CragsService';
 import AreasService from '../services/AreasService';
