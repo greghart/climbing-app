@@ -1,12 +1,4 @@
 port: 6001
-cookies:
-  secret: 'temposecret8213408SFS@##$'
-sessions:
-  secret: develsessionsecret
-  prefix: 'apollo|sid|{NODE_ENV}'
-redis:
-  host: localhost
-  port: 6379
 database:
   sync: false
   postgres:
@@ -22,7 +14,19 @@ swagger:
   name: Climbing App OpenAPI Documentation
   license: MIT
   basePath: /api
-io:
+power-putty-server: 
+  cookies:
+    secret: 'temposecret8213408SFS@##$'
+    domain: 'localhost'
+  sessions:
+    secret: develsessionsecret
+    prefix: 'apollo|sid|{NODE_ENV}'
+    redis:
+      host: localhost
+      port: 6379
+  serving:
+    favicon: '/home/elchocolato/Checkouts/climbing-app/static/ico/favicon.ico'
+power-putty-io:
   engine: 'local'
   local:
     rootDirectory: '/home/elchocolato/Checkouts/climbing-app/static/uploads'

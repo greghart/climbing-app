@@ -2,8 +2,7 @@ import * as Express from 'express';
 import * as path from 'path';
 import * as mime from 'mime';
 import { getRepository } from 'typeorm';
-
-import getEngine from '../io/getEngine';
+import { getEngine } from 'power-putty-io';
 import Upload from '../models/Upload';
 
 const ioEngineRouter = Express.Router();

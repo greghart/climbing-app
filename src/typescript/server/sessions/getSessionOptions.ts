@@ -43,7 +43,7 @@ function getSessionOptions(
 
 const appSessionOptions = getSessionOptions(
   isLocal(),
-  config.get<string>('cookies.secret'),
+  config.get<string>('sessions.secret'),
   config.get<string>('redis.host'),
   config.get<number>('redis.port'),
 );

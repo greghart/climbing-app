@@ -4,7 +4,6 @@ import config from 'config';
  * Get the Redis session prefix for current environment
  *
  * Note: Supports {NODE_ENV} macro replacement
- * Also note -- acts as API between Org Service and client that sets up session.
  * @memberof util/sessions
  */
 function getKeyPrefix(prefix: string) {
