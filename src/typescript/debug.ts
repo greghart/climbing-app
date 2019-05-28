@@ -7,6 +7,10 @@ import originalDebug from 'debug';
  * and it makes it easier to import.
  * Replaces slashes with colons. This is so we can use our VS Code snippet
  * (which will include slashes as part of path) but still get proper output
+ * @example
+ * import _debug from './debug';
+ * const debug = _debug.extend('server/foo/bar');
+ * debug('this is a test'); // Write will under `climbing-app:server:foo:bar`
  */
 const _debug = originalDebug('climbing-app');
 const originalExtend = _debug.extend;

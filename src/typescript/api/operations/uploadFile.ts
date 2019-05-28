@@ -1,11 +1,9 @@
+import { getRepository } from 'typeorm';
 import crypto from 'crypto';
 import * as path from 'path';
+import { getEngine, MulterFileSource } from 'power-putty-io';
 
 import Upload from '../../models/Upload';
-import getEngine from '../../io/getEngine';
-import FileSource from '../../io/FileSource';
-import { getRepository } from 'typeorm';
-import DataSource from '../../io/DataSource';
 
 function hashData(data: Buffer) {
   return crypto.createHash('sha1')
@@ -37,10 +35,9 @@ function uploadFile(file: Express.Multer.File, directory: string): Promise<Uploa
     }
     return getRepository(Upload).save(upload);
   })
-  // Always re-upload, just in case it's gone I guess
-  // TODO This is code smell because local stores in tmp -- fix that?
+  // Persist in file store
   .then((upload) => {
-    return engine.upload(upload, new FileSource(file))
+    return engine.upload(upload, new MulterFileSource(file))
     .then(() => upload);
   });
 }

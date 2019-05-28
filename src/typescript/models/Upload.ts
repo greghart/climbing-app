@@ -3,15 +3,16 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Upload as IOUpload } from 'power-putty-io';
 
 /**
  * Uploads
  *
  * Uploads in the system.
- * @todo The storage engine should be dynamic (S3 vs local for example)
+ * Conventiently this has the same interface as power-putty-io `Upload`
  */
 @Entity()
-export default class Upload {
+export default class Upload implements IOUpload {
 
   @PrimaryGeneratedColumn()
   id: number;
