@@ -17,7 +17,7 @@ export default function getStore(
       routerMiddleware(history)
     ),
   );
-  const store = createStore<any>(
+  const store = createStore(
     reducer(history),
     initialState,
     enhancer,

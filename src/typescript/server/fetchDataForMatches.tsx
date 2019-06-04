@@ -1,10 +1,18 @@
 import { MatchedRoute } from 'react-router-config';
-import { Store } from 'redux';
+import { Action, Store } from 'redux';
+import * as ThunkTypes from 'redux-thunk';
 import Bluebird from 'bluebird';
 import isFunction from 'lodash/isFunction';
 
+interface ThunkDispatch<S, E, A extends Action<any>, R> {
+  (asyncAction: ThunkTypes.ThunkAction<R, S, E, A>): R;
+}
+type DispatchyStore = Omit<Store, 'dispatch'> & {
+  dispatch: ThunkDispatch<any, any, any, Promise<any>>;
+};
+
 type FetchContext<Params> = {
-  store: Store<any>;
+  store: DispatchyStore;
   params: Params;
   query: { [index: string]: unknown };
 };
@@ -12,9 +20,9 @@ type Fetcher<Params> = (
   context: FetchContext<Params>
 ) => Promise<unknown>;
 
-type Fetchable<Params> = React.ComponentType & { fetch: Fetcher<Params> };
+type Fetchable<Params> = React.ComponentType<unknown> & { fetch: Fetcher<Params> };
 function isFetchable(
-  component?: React.ComponentType | Fetchable<unknown>
+  component?: React.ComponentType<any> | Fetchable<unknown>
 ): component is Fetchable<unknown> {
   return !!component && isFunction((component as Fetchable<unknown>).fetch);
 }
@@ -26,7 +34,7 @@ function isFetchable(
  * the store at all.
  */
 function fetchDataForMatches(
-  matches: MatchedRoute<{}>[],
+  matches: MatchedRoute<unknown>[],
   store: Store<any>,
   query: { [index: string]: any }
 ) {
@@ -35,8 +43,8 @@ function fetchDataForMatches(
     if (isFetchable(route.component)) {
       result = Promise.resolve(
         route.component.fetch({
-          store,
           query,
+          store: (store as any),
           params: match.params,
         })
       );

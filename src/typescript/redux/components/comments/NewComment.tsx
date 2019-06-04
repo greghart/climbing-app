@@ -34,7 +34,7 @@ const NewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
             name="text"
             inputComponent="textarea"
             rows={3}
-            onKeyPress={(e: KeyboardEvent) => {
+            onKeyPress={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
               if (e.key === 'Enter' && e.metaKey) {
                 props.handleCustomSubmit(e);
               }

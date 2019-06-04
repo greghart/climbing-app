@@ -7,7 +7,7 @@ import omit from 'lodash/omit';
  * Climbing App field specific props
  */
 interface AppProps {
-  label: string;
+  label?: string;
   placeholder?: string;
   id?: string;
   help?: React.ReactNode;

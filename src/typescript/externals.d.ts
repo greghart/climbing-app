@@ -28,18 +28,8 @@ type ExtractProps<TComponentOrTProps> = TComponentOrTProps extends React.Compone
  */
 type ActionOrThunk<Payload> = (
   ReduxActions.Action<Payload> |
-  ThunkTypes.ThunkAction<any, any, any>
+  ThunkTypes.ThunkAction<any, any, any, any>
 );
-
-declare module 'redux' {
-  /* tslint:disable:callable-types */
-  export interface Dispatch<S> {
-    <Payload>(
-      action: ActionOrThunk<Payload>
-    ): Payload & { scope: string };
-  }
-  /* tslint:enable:callable-types */
-}
 
 /**
  * MONKEY PATCHES AND FIXES
@@ -73,11 +63,6 @@ type MissingProps = {
 }
 
 declare module "react-leaflet" {
-  export interface TooltipProps extends Leaflet.TooltipOptions {
-    children?: Children;
-    onOpen?(): unknown;
-    onClose?(): unknown;
-  }
   // export class Tooltip<P extends TooltipProps = TooltipProps, E extends Leaflet.Tooltip = Leaflet.Tooltip> extends MapComponent<P, E> {
   //     onTooltipOpen(arg: { tooltip: E }): void;
   //     onTooltipClose(arg: { tooltip: E }): void;

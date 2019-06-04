@@ -61,7 +61,7 @@ const BoulderForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
         name="description"
         label="Description"
         inputComponent="textarea"
-        rows="3"
+        rows={3}
         normalize={(v) => v === '' ? null : v }
       />
       <div className="form-group">

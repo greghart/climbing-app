@@ -14,7 +14,8 @@ export type State = {
   sidebar: FreeScopeReducerState<SidebarState>;
   search: SearchState;
   accordion: FreeScopeReducerState<AccordionState>;
-  form: FormStateMap
+  form: FormStateMap;
+  router: any
 };
 
 const reducer = (history) => combineReducers<State>({

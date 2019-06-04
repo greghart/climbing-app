@@ -30,37 +30,37 @@ const CragMap: React.SFC<Props> = (props) => {
     // <AnimationContext.Consumer>
     //   {animation => (
     //     <SlideUp {...animation} appear>
-          <Map
-            className="map"
-            key="map"
-            ref={mapRef}
-            bounds={bounds}
-            minZoom={18}
-            maxZoom={props.crag.maxZoom}
-            maxBounds={bounds}
-            zoomControl={false}
-            onzoomend={(e) => {
-            }}
-            onclick={(e) => {
-              if (!e.originalEvent.defaultPrevented) {
-                props.onAreaClick(null);
-              }
-            }}
-          >
-            <BestTileLayer />
-            {renderRoutes(
-              lodashMap(
-                routeContext.route.routes,
-                (r: MyRouteConfig) => {
-                  return {
-                    ...r,
-                    component: r.mapComponent || ((props) => <span />)
-                  };
-                }
-              ),
-              { mapRef, crag: props.crag },
-            )}
-            {/* <LayersControl position="topright">
+    <Map
+      className="map"
+      key="map"
+      ref={mapRef}
+      bounds={bounds}
+      minZoom={18}
+      maxZoom={props.crag.maxZoom}
+      maxBounds={bounds}
+      zoomControl={false}
+      onzoomend={(e) => {
+      }}
+      onclick={(e) => {
+        if (!e.originalEvent.defaultPrevented) {
+          props.onAreaClick(null);
+        }
+      }}
+    >
+      <BestTileLayer />
+      {renderRoutes(
+        lodashMap<MyRouteConfig, MyRouteConfig>(
+          routeContext.route.routes,
+          (r: MyRouteConfig) => {
+            return {
+              ...r,
+              component: r.mapComponent || ((props: any) => <span />)
+            };
+          }
+        ),
+        { mapRef, crag: props.crag },
+      )}
+      {/* <LayersControl position="topright">
               <LayersControl.Overlay name="Areas" checked={true}>
                 <LayerGroup>
                   <AreasMap
@@ -72,7 +72,7 @@ const CragMap: React.SFC<Props> = (props) => {
                 </LayerGroup>
               </LayersControl.Overlay>
             </LayersControl> */}
-          </Map>
+    </Map>
     //     </SlideUp>
     //   )}
     // </AnimationContext.Consumer>

@@ -7,7 +7,7 @@ import routes from './routes';
  * A component to code split on
  */
 const SplitRoute: React.FunctionComponent<{}> = (props) => {
-  return renderRoutes(routes);
+  return renderRoutes(routes as any);
 };
 
 export default SplitRoute;

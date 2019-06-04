@@ -41,7 +41,7 @@ export default function getStore(
     persistState(getDebugSessionKey()),
   );
 
-  const store = createStore<any>(
+  const store = createStore(
     reducer(history),
     initialState,
     enhancer,

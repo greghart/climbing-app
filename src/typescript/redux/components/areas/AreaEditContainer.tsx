@@ -46,7 +46,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
   };
 };
 
-export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
+export default compose(
   connect(
     mapStateToProps,
     mapDispatchToProps,

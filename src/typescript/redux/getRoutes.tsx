@@ -35,7 +35,8 @@ import routeRoutes from './components/routes/routes';
 import boulderRoutes from './components/boulders/routes';
 import provideRoute from './routes/provideRoute';
 
-type MyRouteConfig = Omit<RouteConfig, 'routes'> & {
+type MyRouteConfig<SubProps = any> = Omit<RouteConfig, 'routes' | 'component'> & {
+  component?: React.ComponentType<RouteConfigComponentProps<any> & SubProps> | React.ComponentType;
   // We can key a route for animation purposes
   key?: string;
   routes?: MyRouteConfig[];

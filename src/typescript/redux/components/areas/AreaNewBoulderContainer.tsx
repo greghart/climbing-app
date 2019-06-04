@@ -40,7 +40,7 @@ const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-export default compose<React.ComponentType, React.ComponentType, React.ComponentType>(
+export default compose(
   connect(
     undefined,
     mapDispatchToProps,

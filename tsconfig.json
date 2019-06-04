@@ -12,9 +12,20 @@
     "jsx": "react",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+          "node_modules/*",
+          "src/types/*"
+      ]
+    }
   },
   "include": [
     "./src/typescript/**/*",
     "./test/**/*"
+  ],
+  "exclude": [
+    "./node_modules/*"
   ]
 }

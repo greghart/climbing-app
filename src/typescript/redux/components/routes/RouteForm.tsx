@@ -43,7 +43,7 @@ const RouteForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
         name="description"
         label="Description"
         inputComponent="textarea"
-        rows="3"
+        rows={3}
       />
       {/* TODO Add grades dropdown */}
       <MyField

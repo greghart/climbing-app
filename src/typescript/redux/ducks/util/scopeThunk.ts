@@ -11,11 +11,11 @@ import * as ReduxTypes from 'redux';
  * @returns {function} a new thunk which wraps dispatch in given scope
  */
  // TODO - Does exposing these generics create a helpful interface?  Or should we just use 'any'?
-function scopeThunk<R, S, E>(
-  thunk: ThunkTypes.ThunkAction<R, S, E>,
+function scopeThunk<R, S, E, A extends ReduxTypes.Action<any>>(
+  thunk: ThunkTypes.ThunkAction<R, S, E, A>,
   scope: string,
 ) {
-  return (dispatch: ReduxTypes.Dispatch<S>, getState: () => S, extra: E): R => {
+  return (dispatch: ThunkTypes.ThunkDispatch<S, E, A>, getState: () => S, extra: E): R => {
     return thunk(scopeDispatch(dispatch, scope), getState, extra);
   };
 }

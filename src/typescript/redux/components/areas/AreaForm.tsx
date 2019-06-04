@@ -58,7 +58,7 @@ const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
         name="description"
         label="Description"
         inputComponent="textarea"
-        rows="3"
+        rows={3}
       />
       <div className="form-group">
         <label>

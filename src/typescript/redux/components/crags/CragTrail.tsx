@@ -23,7 +23,7 @@ interface FormData {
   };
 }
 
-const CragTrail: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
+const CragTrail: React.SFC<InjectedFormProps<FormData, Props> & Props> = (props) => {
   return (
     <form onSubmit={props.handleSubmit} className="m-3">
       {props.error &&
@@ -50,7 +50,7 @@ const CragTrail: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   );
 };
 
-export default reduxForm({
+export default reduxForm<FormData, Props>({
   form: 'crag-trail-form',
 })(CragTrail);
 export { FormData, Props };

@@ -32,9 +32,9 @@ const RouteNewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) 
           }
           <MyField
             name="text"
-            inputComponent="textarea2"
+            inputComponent="textarea"
             rows={3}
-            onKeyPress={(e: KeyboardEvent) => {
+            onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
               if (e.key === 'Enter' && e.metaKey) {
                 props.handleCustomSubmit(e);
               }
