@@ -21,6 +21,7 @@ migration/
 lib/
 build/
 dist/
+tsconfig.tsbuildinfo
 
 static/tiles
 static/uploads

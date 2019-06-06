@@ -7,12 +7,12 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 
-const config = require('./config/webpack.config.development.js');
+const config = require('../../config/webpack.config.development.js');
 
 import express from 'express';
-import getExpressApplication from './src/typescript/server/getExpressApplication';
-import getConnection from './src/typescript/db/getConnection';
-import _debug from './src/typescript/debug';
+import getExpressApplication from './server/getExpressApplication';
+import getConnection from './db/getConnection';
+import _debug from './debug';
 const debug = _debug.extend('dev-server');
 
 const app = express();
@@ -50,11 +50,7 @@ getConnection()
   finalApp.listen(
     parseInt(port.toString(), 10),
     host,
-    (err: any) => {
-      if (err) {
-        log(err);
-        return;
-      }
+    () => {
       log('🚧  App is listening at http://%s:%s', host, port);
     }
   );

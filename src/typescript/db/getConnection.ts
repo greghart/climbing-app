@@ -68,7 +68,7 @@ function getConnection() {
     // password: config.get<string>('database.postgres.password'),
     // database: config.get<string>('database.postgres.database'),
     entities: [
-      `${__dirname}/../models/*.ts`,
+      `${__dirname}/../models/*`,
     ],
     dropSchema: config.get<boolean>('database.sync'),
     synchronize: config.get<boolean>('database.sync'),

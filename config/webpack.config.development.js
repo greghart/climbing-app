@@ -19,7 +19,7 @@ module.exports = merge(config, {
       'webpack-hot-middleware/client',
       'whatwg-fetch',
       // App entry point
-      path.join(__dirname, '/../src/typescript/client.tsx')
+      path.join(__dirname, '/../dist/typescript/client.js')
     ]
   },
   plugins: [

@@ -13,9 +13,9 @@ module.exports = {
   },
   resolve: {
     modules: [
-      path.join(__dirname, '../src/typescript'),
+      'node_modules',
+      path.join(__dirname, '../dist/typescript'),
       path.join(__dirname, '../src/scss'),
-      'node_modules'
     ],
     alias: {
     },
@@ -27,7 +27,6 @@ module.exports = {
   //   }
   // },
   plugins: [
-    new ForkTsCheckerWebpackPlugin({ memoryLimit: 1024 }),
     // Direct typescript to a browser compatible
     new webpack.NormalModuleReplacementPlugin(/swagger-client$/, function (result) {
       result.request = result.request.replace(/swagger-client/, "swagger-client/browser");
@@ -38,7 +37,7 @@ module.exports = {
     new webpack.NormalModuleReplacementPlugin(/react-native-sqlite-storage$/, function (result) {
       result.request = result.request.replace(/typeorm/, "typeorm/browser");
     }),
-    new webpack.NormalModuleReplacementPlugin(/getClient/, function(resource) {
+    new webpack.NormalModuleReplacementPlugin(/getServiceClient/, function(resource) {
       resource.request = resource.request.replace(
         /getServiceClient/, 
         'getSwaggerClient'

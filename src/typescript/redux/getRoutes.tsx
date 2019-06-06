@@ -1,8 +1,5 @@
 import * as React from 'react';
-import * as Leaflet from 'leaflet';
 import { lazy } from 'react-imported-component';
-import { Omit } from 'utility-types/dist/mapped-types';
-import { RouteConfig, RouteConfigComponentProps } from 'react-router-config';
 
 /**
  * Top-level config based routing
@@ -33,28 +30,8 @@ const AreaLayoutOverview = lazy(() => import('./components/areas/AreaLayoutOverv
 import routeRoutes from './components/routes/routes';
 // Boulder
 import boulderRoutes from './components/boulders/routes';
-import provideRoute from './routes/provideRoute';
-
-type MyRouteConfig<SubProps = any> = Omit<RouteConfig, 'routes' | 'component'> & {
-  component?: React.ComponentType<RouteConfigComponentProps<any> & SubProps> | React.ComponentType;
-  // We can key a route for animation purposes
-  key?: string;
-  routes?: MyRouteConfig[];
-  // Explorer components can setup a map component and a detail component
-  mapComponent?: React.ComponentType<RouteConfigComponentProps<any> & { map: Leaflet.Map }>;
-};
-export { MyRouteConfig };
-
-function wrapAllRoutes(routeConfig: MyRouteConfig[]) {
-  return routeConfig.map((thisConfig) => {
-    // We know that every component will be passed the route info by react-router
-    thisConfig.component = provideRoute(thisConfig.component as any);
-    if (thisConfig.routes) {
-      thisConfig.routes = wrapAllRoutes(thisConfig.routes);
-    }
-    return thisConfig;
-  });
-}
+import MyRouteConfig from './routes/MyRouteConfig';
+import wrapAllRoutes from './routes/wrapAllRoutes';
 
 export default function getRoutes(): MyRouteConfig[] {
   return wrapAllRoutes([

@@ -8,7 +8,7 @@ import BestTileLayer from '../BestTileLayer';
 import Crag from '../../../models/Crag';
 import Area from '../../../models/Area';
 import RouteContext from '../../context/RouteContext';
-import { MyRouteConfig } from '../../getRoutes';
+import MyRouteConfig from '../../routes/MyRouteConfig';
 
 interface Props {
   crag: Crag;

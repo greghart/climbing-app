@@ -1,3 +1,4 @@
+const test = require('debug');
 import originalDebug from 'debug';
 
 /**
