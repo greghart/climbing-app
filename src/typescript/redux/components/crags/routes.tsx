@@ -9,24 +9,6 @@ import CragEditContainer from './CragEditContainer';
 import CragLayoutOverview from './CragLayoutOverview';
 import CragNewAreaContainer from './CragNewAreaContainer';
 import CragTrailContainer from './CragTrailContainer';
-// const CragCommentsContainer = React.lazy(() =>
-//   import(/* webpackChunkName: "CragComment" */'./CragCommentsContainer')
-// );
-// const CragNewCommentContainer = React.lazy(() =>
-//   import(/* webpackChunkName: "CragComment" */'./CragNewCommentContainer')
-// );
-// const CragEditContainer = React.lazy(() =>
-//   import(/* webpackChunkName: "CragComment" */'./CragEditContainer')
-// );
-// const CragLayoutOverview = React.lazy(() =>
-//   import(/* webpackChunkName: "CragComment" */'./CragLayoutOverview')
-// );
-// const CragNewAreaContainer = React.lazy(() =>
-//   import(/* webpackChunkName: "CragComment" */'./CragNewAreaContainer')
-// );
-// const CragTrailContainer = React.lazy(() =>
-//   import(/* webpackChunkName: "CragComment" */'./CragTrailContainer')
-// );
 
 type SubProps = {
   crag: Crag;

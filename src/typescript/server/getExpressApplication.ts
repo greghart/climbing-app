@@ -5,7 +5,6 @@ import express from 'express';
 import path from 'path';
 import {
   getExpressApplication as getBaseApplication,
-  favicon,
   serveStatic
 } from 'power-putty-server';
 import browserPolyfill from '../util/browserPolyfill';
