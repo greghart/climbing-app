@@ -32,12 +32,10 @@ const CragTrail: React.SFC<InjectedFormProps<FormData, Props> & Props> = (props)
       <Fields<TrailFieldProps>
         names={['trail.nodes', 'trail_is_updating']}
         bounds={
-          props.crag.bounds ?
-            Leaflet.latLngBounds(
-              Leaflet.latLng(props.crag.bounds.topLeft),
-              Leaflet.latLng(props.crag.bounds.bottomRight)
-            ) :
-            Leaflet.latLng(props.crag.center).toBounds(400)
+          props.crag.bounds && Leaflet.latLngBounds(
+            Leaflet.latLng(props.crag.bounds.topLeft),
+            Leaflet.latLng(props.crag.bounds.bottomRight)
+          )
         }
         component={TrailField}
       />

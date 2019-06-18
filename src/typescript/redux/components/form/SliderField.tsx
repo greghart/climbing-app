@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { WrappedFieldProps } from 'redux-form';
-import * as Slider from 'rc-slider/lib/Slider';
+import Slider from 'rc-slider/lib/Slider';
 
 interface Props {
   label: string;

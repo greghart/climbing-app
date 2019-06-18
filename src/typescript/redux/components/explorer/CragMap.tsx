@@ -19,12 +19,10 @@ const CragMap: React.SFC<Props> = (props) => {
   const routeContext = React.useContext(RouteContext);
   const mapRef = React.createRef<Map>();
 
-  const bounds = props.crag.bounds ?
-    Leaflet.latLngBounds(
-      Leaflet.latLng(props.crag.bounds.topLeft),
-      Leaflet.latLng(props.crag.bounds.bottomRight)
-    ) :
-    Leaflet.latLng(props.crag.center).toBounds(400);
+  const bounds = props.crag.bounds && Leaflet.latLngBounds(
+    Leaflet.latLng(props.crag.bounds.topLeft),
+    Leaflet.latLng(props.crag.bounds.bottomRight)
+  );
   console.warn(bounds);
   return (
     // <AnimationContext.Consumer>

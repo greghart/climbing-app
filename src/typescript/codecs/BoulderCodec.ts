@@ -13,7 +13,10 @@ const BoulderCodec = t.type({
     lat: t.number,
     lng: t.number,
   }),
-  polygon: PolygonCodec,
+  polygon: t.union([
+    PolygonCodec,
+    t.undefined
+  ])
 });
 
 export default BoulderCodec;

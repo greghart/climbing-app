@@ -34,4 +34,11 @@ export default class Bounds {
   @JoinColumn()
   crag: Crag;
 
+  get center(): Coordinate {
+    return new Coordinate(
+      (this.topLeft.lat + this.bottomRight.lat) / 2,
+      (this.topLeft.lng + this.bottomRight.lng) / 2,
+    );
+  }
+
 }

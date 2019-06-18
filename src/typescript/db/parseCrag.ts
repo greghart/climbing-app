@@ -11,10 +11,6 @@ const debug = _debug.extend('db/parseCrag');
 function parseCrag(obj: any) {
   const crag = new Crag();
   crag.name = obj.name;
-  crag.center = new Coordinate(
-    obj.center[0],
-    obj.center[1],
-  );
   crag.defaultZoom = obj.zoom;
   crag.minZoom = obj.minZoom;
   crag.maxZoom = obj.maxZoom;

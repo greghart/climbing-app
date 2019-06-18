@@ -56,7 +56,7 @@ const BoulderSun: React.SFC<Props> = (props) => {
         bounds={new Leaflet.LatLng(
           props.boulder.coordinate.lat,
           props.boulder.coordinate.lng
-        ).toBounds(3)}
+        ).toBounds(5)}
         ref={mapRef}
       >
         <BoulderMap

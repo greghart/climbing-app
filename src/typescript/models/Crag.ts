@@ -26,9 +26,6 @@ export default class Crag {
   @Column({ nullable: true })
   description?: string;
 
-  @Column(type => Coordinate)
-  center: Coordinate;
-
   @OneToOne(
     type => Bounds,
     bounds => bounds.crag,

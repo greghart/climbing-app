@@ -62,19 +62,17 @@ const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
       />
       <div className="form-group">
         <label>
-          Location
+          Location 2
         </label>
         <div>
           <Fields<PolygonFieldProps>
             names={['polygon', 'polygon_is_updating']}
             component={PolygonField}
             bounds={
-              props.area.crag.bounds ?
-                Leaflet.latLngBounds(
-                  Leaflet.latLng(props.area.crag.bounds.topLeft),
-                  Leaflet.latLng(props.area.crag.bounds.bottomRight)
-                ) :
-                Leaflet.latLng(props.area.crag.center).toBounds(400)
+              props.area.crag.bounds && Leaflet.latLngBounds(
+                Leaflet.latLng(props.area.crag.bounds.topLeft),
+                Leaflet.latLng(props.area.crag.bounds.bottomRight)
+              )
             }
             otherLayers={(sortedCoordinates) => (
               <React.Fragment>

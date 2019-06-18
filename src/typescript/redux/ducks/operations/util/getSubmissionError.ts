@@ -51,7 +51,7 @@ function normalizeError<A, I, O>(err: t.ValidationError) {
   const message = (
     err.message ||
     (
-      (actualType instanceof t.InterfaceType && 'undefined')
+      (actualType instanceof t.InterfaceType && 'required')
     ) ||
     actualType.name
   );
