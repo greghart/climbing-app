@@ -14,6 +14,8 @@ swagger:
   name: Climbing App OpenAPI Documentation
   license: MIT
   basePath: /api
+ssr: 
+  hydrate: false
 power-putty-server: 
   cookies:
     secret: 'temposecret8213408SFS@##$'

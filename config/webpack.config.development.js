@@ -40,24 +40,6 @@ module.exports = merge(config, {
           { loader: 'sass-loader', query: { outputStyle: 'expanded' } }
         ]
       },
-      // Sass + CSS Modules
-      // {
-      //   test: /\.scss$/,
-      //   include: /src\/client\/assets\/javascripts/,
-      //   loaders: [
-      //     'style',
-      //     {
-      //       loader: 'css',
-      //       query: {
-      //         modules: true,
-      //         importLoaders: 1,
-      //         localIdentName: '[path][name]__[local]--[hash:base64:5]'
-      //       }
-      //     },
-      //     'postcss',
-      //     { loader: 'sass', query: { outputStyle: 'expanded' } }
-      //   ]
-      // },
       // CSS
       {
         test: /\.css$/,

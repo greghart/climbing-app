@@ -7,6 +7,7 @@ import {
 import { createMemoryHistory } from 'history';
 import { Store } from 'redux';
 import Bluebird from 'bluebird';
+import config from 'config';
 
 import HtmlComponent from './HtmlComponent';
 import getRoutes from '../redux/getRoutes';
@@ -63,12 +64,14 @@ const renderRequest = async (req: express.Request, res: express.Response) => {
     (promise) => openPromises.push(promise)
   );
 
-  // First, render the app and let all the fetches go out
-  // Wait for promises, and then we can render synchronously
-  renderApplication(req.url, store);
-  // Wait a tick for fetches to kick in
-  await Bluebird.delay(0);
-  await Promise.all(openPromises);
+  if (config.get<boolean>('ssr.hydrate')) {
+    // First, render the app and let all the fetches go out
+    // Wait for promises, and then we can render synchronously
+    renderApplication(req.url, store);
+    // Wait a tick for fetches to kick in
+    await Bluebird.delay(0);
+    await Promise.all(openPromises);
+  }
 
   // await fetchDataForMatches(matches, store, {});
   return renderWithStore(req, res, store);

@@ -54,6 +54,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /dist.*\.js$/,
+        use: ["source-map-loader"],
+        enforce: "pre"
+      },
+      {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: 'ts-loader',
