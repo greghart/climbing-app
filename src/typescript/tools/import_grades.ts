@@ -1,13 +1,13 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import Bluebird from 'bluebird';
-import * as parse from 'csv-parse/lib/sync';
+import parse from 'csv-parse/lib/sync';
 import find from 'lodash/find';
 import slugify from 'slugify';
 
-import getConnection from '../src/typescript/db';
-import Route from '../src/typescript/models/Route';
-import _debug from '../src/typescript/debug';
+import getConnection from '../db';
+import Route from '../models/Route';
+import _debug from '../debug';
 const debug = _debug.extend('/home/elchocolato/Checkouts/climbing-app/tools/import_grades');
 
 const standardize = (str: string) => slugify(str, { lower: true, remove: /[*+~.()'"!:@]/g });

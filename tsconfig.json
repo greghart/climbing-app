@@ -19,12 +19,13 @@
       "*": [
           "node_modules/*",
           "src/types/*",
-          "./test/*"
+          "./test/*",
+          "./tools/*"
       ]
     }
   },
   "include": [
-    "./src/typescript/**/*",
+    "./src/typescript/**/*"
   ],
   "exclude": [
     "./node_modules/*"

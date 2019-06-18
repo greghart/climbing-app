@@ -29,7 +29,7 @@ const BestTileLayer: React.SFC<Partial<TileLayerProps>> = (props) => {
       {...props}
       subdomains={['server', 'wi']}
       url={Mine}
-      maxNativeZoom={18}
+      maxNativeZoom={19}
       minNativeZoom={14}
     />
   );

@@ -1,15 +1,15 @@
 import * as fs from 'fs';
-import * as request from 'request-promise';
+import request from 'request-promise';
 import * as path from 'path';
-import * as mkdirp from 'mkdirp';
+import mkdirp from 'mkdirp';
 import Bluebird from 'bluebird';
 import * as tilebelt from 'tilebelt';
 import * as _ from 'lodash';
 import { getRepository } from 'typeorm';
 
-import getConnection from '../src/typescript/db';
-import Crag from '../src/typescript/models/Crag';
-import _debug from '../src/typescript/debug';
+import getConnection from '../db';
+import Crag from '../models/Crag';
+import _debug from '../debug';
 const debug = _debug.extend('/home/elchocolato/Checkouts/climbing-app/tools/download_crag_tiles');
 
 function download(uri, filename, callback) {
@@ -102,14 +102,20 @@ async function downloadCragTiles(cragId: number) {
     );
     return [tileTopLeft, tileBottomRight];
   }
+  debug(
+    {
+      tile
+    },
+    'Getting tiles to cover'
+  );
   const tilesToDownload = _.filter(
     getAllTiles(tile, 19, tile[2]),
     (thisTile) => {
       const [tileTopLeft, tileBottomRight] = getTilesForZoom(thisTile[2]);
       return (
-        thisTile[0] <= tileTopLeft[0] &&
+        thisTile[0] >= tileTopLeft[0] &&
         thisTile[1] >= tileTopLeft[1] &&
-        thisTile[0] >= tileBottomRight[0] &&
+        thisTile[0] <= tileBottomRight[0] &&
         thisTile[1] <= tileBottomRight[1]
       );
     }
@@ -124,19 +130,19 @@ async function downloadCragTiles(cragId: number) {
     tilesToDownload: tilesToDownload.length,
     tilesToDownload2: _.uniqBy(tilesToDownload, ([x, y, z]) => `${x}|${y}|${z}`).length
   });
-  // return;
+  return;
   return Bluebird.map(
     tilesToDownload,
     // [tile],
     ([x, y, z]) => {
       console.warn('Downloading', tileDownload(x, y, z));
       return (Bluebird.promisify(mkdirp) as any)(
-        path.resolve(__dirname, `../static/tiles/${x}/${y}/`)
+        path.resolve(__dirname, `../../../static/tiles/${x}/${y}/`)
       )
       .then(() => {
         return downloadAsync(
           tileDownload(x, y, z),
-          path.resolve(__dirname, `../static/tiles/${x}/${y}/${z}.png`),
+          path.resolve(__dirname, `../../../static/tiles/${x}/${y}/${z}.png`),
         );
       });
       // .then(() => {
