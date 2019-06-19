@@ -44,12 +44,12 @@ const PolygonField: React.ComponentType<WrappedFieldsProps & PolygonProps> = (pr
           <small>
             Edit <i className="fa fa-edit ml-2"/>
           </small>
-          {polygon.meta.touched && polygon.meta.error && (
-            <div className="invalid-feedback">
-              {polygon.meta.error}
-            </div>
-          )}
         </div>
+        {polygon.meta.touched && polygon.meta.error && (
+          <div className="invalid-feedback">
+            {polygon.meta.error.coordinates}
+          </div>
+        )}
       </div>
     );
   }

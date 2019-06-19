@@ -6,7 +6,7 @@ import get from 'lodash/get';
 // Base interface for a photoable entity
 interface PhotoableEntity {
   id: any;
-  photoable?: Photoable;
+  photoable: Photoable | null;
 }
 
 /**

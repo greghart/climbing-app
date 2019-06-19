@@ -80,7 +80,7 @@ const RenderField: React.ComponentType<WrappedFieldProps & AppProps> = (props) =
         )}
         {meta.touched && meta.error && (
           <div className="invalid-feedback">
-            {meta.error}
+            {meta.error.toString()}
           </div>
         )}
       </div>

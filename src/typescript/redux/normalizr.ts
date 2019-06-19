@@ -45,6 +45,7 @@ BoulderSchema.define({
   area: AreaSchema,
   routes: [RouteSchema],
   commentable: CommentableSchema,
+  photoable: PhotoableSchema
 });
 
 RouteSchema.define({

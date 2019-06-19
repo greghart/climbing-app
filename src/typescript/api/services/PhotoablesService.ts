@@ -71,37 +71,37 @@ export default class PhotoablesService {
     });
   }
 
-  @Rest.GET
-  @Rest.Path('/area/:id')
-  @Swagger.Tags('photoables')
-  @Swagger.Response<object>(302, 'Get the photoable for a area')
-  public async photoableForArea(
-    @Rest.PathParam('id') id: string,
-  ) {
-    return getArea(id)
-    .then((area) => {
-      return getCustomRepository(PhotoRepository).findOrGetPhotoable(area);
-    })
-    .then((photoable) => {
-      return getPhotos(photoable.id);
-    });
-  }
+  // @Rest.GET
+  // @Rest.Path('/area/:id')
+  // @Swagger.Tags('photoables')
+  // @Swagger.Response<object>(302, 'Get the photoable for a area')
+  // public async photoableForArea(
+  //   @Rest.PathParam('id') id: string,
+  // ) {
+  //   return getArea(id)
+  //   .then((area) => {
+  //     return getCustomRepository(PhotoRepository).findOrGetPhotoable(area);
+  //   })
+  //   .then((photoable) => {
+  //     return getPhotos(photoable.id);
+  //   });
+  // }
 
-  @Rest.GET
-  @Rest.Path('/crag/:id')
-  @Swagger.Tags('photoables')
-  @Swagger.Response<object>(302, 'Get the photoable for a crag')
-  public async photoableForCrag(
-    @Rest.PathParam('id') id: string,
-  ) {
-    return getRepository(Crag).findOne(id)
-    .then((crag) => {
-      return getCustomRepository(PhotoRepository).findOrGetPhotoable(crag);
-    })
-    .then((photoable) => {
-      return getPhotos(photoable.id);
-    });
-  }
+  // @Rest.GET
+  // @Rest.Path('/crag/:id')
+  // @Swagger.Tags('photoables')
+  // @Swagger.Response<object>(302, 'Get the photoable for a crag')
+  // public async photoableForCrag(
+  //   @Rest.PathParam('id') id: string,
+  // ) {
+  //   return getRepository(Crag).findOne(id)
+  //   .then((crag) => {
+  //     return getCustomRepository(PhotoRepository).findOrGetPhotoable(crag);
+  //   })
+  //   .then((photoable) => {
+  //     return getPhotos(photoable.id);
+  //   });
+  // }
 
   @Rest.POST
   @Rest.Path(':id/photos')

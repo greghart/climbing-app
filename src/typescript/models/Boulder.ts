@@ -50,9 +50,9 @@ class Boulder {
   @JoinColumn()
   commentable?: Commentable;
 
-  // @OneToOne(type => Photoable, { nullable: true, onDelete: 'SET NULL' })
-  // @JoinColumn()
-  // photoable?: Photoable;
+  @OneToOne(type => Photoable, { nullable: true, onDelete: 'SET NULL' })
+  @JoinColumn()
+  photoable: Photoable | null;
 
   // Serialization
   toJSON() {

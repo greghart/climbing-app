@@ -45,9 +45,6 @@ scripts:
     migration:
       description: Proxies to TypeORM Migrations, but make sure we compile first
       generate:
-        script: nps compile && ts-node ./node_modules/typeorm/cli.js migration:generate
-      _generate:
-        description: Sub-Generate command, run if you want to skip compile step
         script: ts-node ./node_modules/typeorm/cli.js migration:generate
       run:
         script: ts-node ./node_modules/typeorm/cli.js migration:run

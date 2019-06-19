@@ -50,7 +50,7 @@ export default class Route {
 
   @OneToOne(type => Photoable, { nullable: true, onDelete: 'SET NULL' })
   @JoinColumn()
-  photoable?: Photoable;
+  photoable: Photoable | null;
 
   // Location of the route -- this will be setup on a polygon of the boulder
   @Column(type => Coordinate)

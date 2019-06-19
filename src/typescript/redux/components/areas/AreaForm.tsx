@@ -62,7 +62,7 @@ const AreaForm: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
       />
       <div className="form-group">
         <label>
-          Location 2
+          Location
         </label>
         <div>
           <Fields<PolygonFieldProps>
