@@ -124,7 +124,7 @@
     "mkdirp": "^0.5.1",
     "mocha": "^5.2.0",
     "nodemon": "^1.19.1",
-    "node-sass": "^4.9.3",
+    "node-sass": "^4.13.1",
     "nps": "^5.9.3",
     "nps-utils": "^1.7.0",
     "postcss-loader": "^3.0.0",
