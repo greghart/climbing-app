@@ -106,7 +106,7 @@
     "suncalc": "^1.8.0",
     "swagger-client": "^3.8.25",
     "swagger-ui-express": "^4.0.2",
-    "typeorm": "^0.2.12",
+    "typeorm": "^0.2.25",
     "typescript-rest": "^1.8.1",
     "typescript-rest-swagger": "0.0.22",
     "utility-types": "^3.2.1"
