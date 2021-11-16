@@ -54,7 +54,7 @@
     "@types/serve-static": "^1.7.31",
     "@types/suncalc": "^1.8.0",
     "@types/tilebelt": "^1.0.2",
-    "aws-sdk": "^2.420.0",
+    "aws-sdk": "^2.814.0",
     "bluebird": "^3.5.0",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
