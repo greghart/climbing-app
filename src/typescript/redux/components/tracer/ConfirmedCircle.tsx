@@ -5,8 +5,8 @@ import { Omit } from 'utility-types/dist/mapped-types';
 
 type KnownProps = 'color' | 'fillColor' | 'radius';
 type ExpectedProps = (
-  Omit<ExtractProps<typeof Circle>, KnownProps> &
-  Partial<Pick<ExtractProps<typeof Circle>, KnownProps>>
+  Omit<ExtractProps<Circle>, KnownProps> &
+  Partial<Pick<ExtractProps<Circle>, KnownProps>>
 );
 
 const ConfirmedCircle = React.forwardRef<Circle, ExpectedProps>((props, ref) => {

@@ -9,7 +9,7 @@ import * as mapLib from '../../../util/mapLib';
 /**
  * A polyline with a little arrow head at the top
  */
-type Props = Omit<ExtractProps<typeof Polyline>, 'positions'> & {
+type Props = Omit<ExtractProps<Polyline>, 'positions'> & {
   // The angle of the arrow to make with the vector
   arrowAngle?: number,
   // The size of the arrow as a ratio of the last line

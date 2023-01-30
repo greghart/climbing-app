@@ -1,11 +1,11 @@
-import * as Return from 'typescript-rest/dist/server-return';
-import { ArgumentTypes } from '../../externals';
-import { CragsServiceType } from '../services/CragsService';
-import { AreasServiceType } from '../services/AreasService';
-import { BouldersServiceType } from '../services/BouldersService';
-import { RoutesServiceType } from '../services/RoutesService';
-import { CommentablesServiceType } from '../services/CommentablesService';
-import { PhotoablesServiceType } from '../services/PhotoablesService';
+import { Return } from "typescript-rest";
+import { ArgumentTypes } from "../../externals";
+import { CragsServiceType } from "../services/CragsService";
+import { AreasServiceType } from "../services/AreasService";
+import { BouldersServiceType } from "../services/BouldersService";
+import { RoutesServiceType } from "../services/RoutesService";
+import { CommentablesServiceType } from "../services/CommentablesService";
+import { PhotoablesServiceType } from "../services/PhotoablesService";
 
 /**
  * Setup a type-safe API client interface
@@ -15,20 +15,20 @@ import { PhotoablesServiceType } from '../services/PhotoablesService';
 // https://medium.com/dailyjs/typescript-create-a-condition-based-subset-types-9d902cea5b8c
 type BasicFunction = (...args: any[]) => any;
 type FilterFlags<Base, Condition> = {
-  [Key in keyof Base]:
-      Base[Key] extends Condition ? Key : never
+  [Key in keyof Base]: Base[Key] extends Condition ? Key : never;
 };
-type AllowedNames<Base, Condition> =
-        FilterFlags<Base, Condition>[keyof Base];
-type SubType<Base, Condition> =
-        Pick<Base, AllowedNames<Base, Condition>>;
+type AllowedNames<Base, Condition> = FilterFlags<Base, Condition>[keyof Base];
+type SubType<Base, Condition> = Pick<Base, AllowedNames<Base, Condition>>;
 // Extract wrapped return types
-type ExtractNewResource<T> = T extends Promise<Return.NewResource<infer X>> ? Promise<X> : T;
+type ExtractNewResource<T> = T extends Promise<Return.NewResource<infer X>>
+  ? Promise<X>
+  : T;
 type Extracted<Base> = {
-  [Key in keyof Base]:
-    Base[Key] extends BasicFunction ?
-      (...args: ArgumentTypes<Base[Key]>) => ExtractNewResource<ReturnType<Base[Key]>> :
-      Base[Key]
+  [Key in keyof Base]: Base[Key] extends BasicFunction
+    ? (
+        ...args: ArgumentTypes<Base[Key]>
+      ) => ExtractNewResource<ReturnType<Base[Key]>>
+    : Base[Key];
 };
 type APIType<Type> = Extracted<SubType<Type, BasicFunction>>;
 

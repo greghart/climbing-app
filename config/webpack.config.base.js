@@ -2,7 +2,6 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   output: {
@@ -34,12 +33,13 @@ module.exports = {
     new webpack.NormalModuleReplacementPlugin(/typeorm$/, function (result) {
       result.request = result.request.replace(/typeorm/, "typeorm/browser");
     }),
-    new webpack.NormalModuleReplacementPlugin(/react-native-sqlite-storage$/, function (result) {
-      result.request = result.request.replace(/typeorm/, "typeorm/browser");
-    }),
-    new webpack.NormalModuleReplacementPlugin(/getServiceClient/, function(resource) {
+    new webpack.IgnorePlugin({ resourceRegExp: /react-native-sqlite-storage$/ }),
+    // new webpack.ProvidePlugin({
+    //   'window.SQL': '{}' // 'sql.js/dist/sql-wasm.js'
+    // }),
+    new webpack.NormalModuleReplacementPlugin(/getServiceClient/, function (resource) {
       resource.request = resource.request.replace(
-        /getServiceClient/, 
+        /getServiceClient/,
         'getSwaggerClient'
       );
     }),
@@ -61,34 +61,48 @@ module.exports = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: 'ts-loader',
-        options: {
-          transpileOnly: true,
-          compilerOptions: {
-            module: 'esnext',
-            esModuleInterop: true,
-            allowSyntheticDefaultImports: true,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              compilerOptions: {
+                module: 'esnext',
+                esModuleInterop: true,
+                allowSyntheticDefaultImports: true,
+              }
+            }
           }
-        }
+        ]
       },
       // Images
       // Inline base64 URLs for <=8k images, direct URLs for the rest
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
-        loader: 'url-loader',
-        query: {
-          limit: 8192,
-          name: 'images/[name].[ext]?[hash]'
-        }
+        type: 'asset/inline',
+        // use: [
+        //   {
+        //     loader: 'url-loader',
+        //     options: {
+        //       limit: 8192,
+        //       name: 'images/[name].[ext]?[hash]'
+        //     }
+        //   }
+        // ]
       },
       // Fonts
       {
         test: /\.(woff|woff2|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 8192,
-          name: 'fonts/[name].[ext]?[hash]'
-        }
+        type: 'asset/inline',
+        // use: [
+        //   {
+        //     loader: 'url-loader',
+        //     options: {
+        //       limit: 8192,
+        //       name: 'fonts/[name].[ext]?[hash]'
+        //     }
+        //   }
+        // ]
       }
     ]
   }

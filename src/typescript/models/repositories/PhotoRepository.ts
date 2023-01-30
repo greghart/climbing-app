@@ -1,7 +1,7 @@
-import { EntityRepository, Repository } from 'typeorm';
-import Photo from '../Photo';
-import Photoable from '../Photoable';
-import get from 'lodash/get';
+import myDataSource from "../../db/myDataSource";
+import Photo from "../Photo";
+import Photoable from "../Photoable";
+import get from "lodash/get";
 
 // Base interface for a photoable entity
 interface PhotoableEntity {
@@ -13,9 +13,7 @@ interface PhotoableEntity {
  * A custom photo repository repository to help us abstract away the
  * polymorphic associations
  */
-@EntityRepository(Photo)
-export default class PhotoRepository extends Repository<Photo> {
-
+const PhotoRepository = myDataSource.getRepository(Photo).extend({
   /**
    * Find or get the photoable instance for an entity
    *
@@ -23,15 +21,17 @@ export default class PhotoRepository extends Repository<Photo> {
    */
   async findOrGetPhotoable(entity: PhotoableEntity) {
     // Find an existing photoable, if any
-    let photoable = entity.photoable ?
-      entity.photoable :
-      get(await
-        this.manager.getRepository(entity.constructor)
-        .createQueryBuilder('entity')
-        .innerJoinAndSelect('entity.photoable', 'photoable')
-        .whereInIds(entity.id)
-        .getOne()
-      ,   'photoable');
+    let photoable = entity.photoable
+      ? entity.photoable
+      : get(
+          await this.manager
+            .getRepository(entity.constructor)
+            .createQueryBuilder("entity")
+            .innerJoinAndSelect("entity.photoable", "photoable")
+            .whereInIds(entity.id)
+            .getOne(),
+          "photoable"
+        );
     if (!photoable) {
       photoable = new Photoable();
       photoable.descriptor = `${entity.constructor.name}-${entity.id}`;
@@ -40,6 +40,7 @@ export default class PhotoRepository extends Repository<Photo> {
       await this.manager.save(entity);
     }
     return photoable;
-  }
+  },
+});
 
-}
+export default PhotoRepository;

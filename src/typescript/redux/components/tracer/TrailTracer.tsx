@@ -14,7 +14,7 @@ import FixedContainerOverMap from '../layouts/FixedContainerOverMap';
 import SearchGroup from '../search/SearchGroup';
 import classNames from 'classnames';
 import { ExtractProps } from '../../../externals';
-import { adjacencyGraph, GraphInterface, AdjacencyGraph } from '../util/graph';
+import { adjacencyGraph, AdjacencyGraph } from '../util/graph';
 
 const mapIcon = '<span><i class="fa fa-circle"/></span>';
 const selectedIcon = Leaflet.divIcon({
@@ -28,7 +28,6 @@ const normalIcon = Leaflet.divIcon({
 
 // We store our trail graph with lat lng literals as nodes and an adjacency list
 type Node = Leaflet.LatLngLiteral;
-type AdjacencyMap = { [index: number]: number[] };
 
 interface TrailTracerProps {
   title?: string;
@@ -72,7 +71,7 @@ interface TrailTracerState {
   current: Leaflet.LatLng;
 }
 
-type DraggableMarkerProps = ExtractProps<typeof Marker> & {
+type DraggableMarkerProps = ExtractProps<Marker> & {
   onUpdate?: (node: Node) => unknown;
   color?: string;
   radius?: number;

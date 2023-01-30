@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose, Dispatch } from 'redux';
-import { persistState } from 'redux-devtools';
+// import { persistState } from 'redux-devtools';
 import { createLogger } from 'redux-logger';
 import { History } from 'history';
 import { routerMiddleware } from 'connected-react-router';
@@ -36,9 +36,9 @@ export default function getStore(
       logger,
       routerMiddleware(history)
     ),
-    DevTools.instrument(),
+    // DevTools.instrument(),
     // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
-    persistState(getDebugSessionKey()),
+    // persistState(getDebugSessionKey()),
   );
 
   const store = createStore(

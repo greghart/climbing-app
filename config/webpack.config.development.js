@@ -1,4 +1,4 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const webpack = require('webpack');
 const config = require('./webpack.config.base');
 const path = require('path');
@@ -13,7 +13,10 @@ const GLOBALS = {
 module.exports = merge(config, {
   mode: 'development',
   cache: true,
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-cheap-module-source-map',
+  output: {
+    publicPath: "/build",
+  },
   entry: {
     application: [
       'webpack-hot-middleware/client',
@@ -31,23 +34,23 @@ module.exports = merge(config, {
   ],
   module: {
     rules: [
-      // Sass
-      {
-        test: /\.scss$/,
-        loaders: [
-          'style-loader',
-          'css-loader',
-          { loader: 'sass-loader', query: { outputStyle: 'expanded' } }
-        ]
-      },
       // CSS
       {
         test: /\.css$/,
-        loaders: [
+        use: [
           'style-loader',
           'css-loader'
         ]
-      }
+      },
+      // Sass
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ]
+      },
     ]
   }
 });

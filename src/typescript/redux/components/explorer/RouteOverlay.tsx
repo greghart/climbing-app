@@ -1,12 +1,13 @@
-import * as React from 'react';
+import * as React from "react";
 
-import OverlayDetail from './OverlayDetail';
-import Route from '../../../models/Route';
-import Crag from '../../../models/Crag';
-import withRoute from '../routes/withRoute';
-import Truncate from '../Truncate';
+import OverlayDetail from "./OverlayDetail";
+import Route from "../../../models/Route";
+import Crag from "../../../models/Crag";
+import withRoute from "../routes/withRoute";
+import Truncate from "../Truncate";
+import Coordinate from "../../../models/Coordinate";
 
-type NeededProps = 'id' | 'name' | 'gradeRaw' | 'description' | 'coordinate';
+type NeededProps = "id" | "name" | "gradeRaw" | "description" | "coordinate";
 interface Props {
   crag: Crag;
   route: Pick<Route, NeededProps>;
@@ -35,9 +36,10 @@ const RouteOverlay: React.FunctionComponent<Props> = (props) => {
 RouteOverlay.defaultProps = {
   route: {
     id: 1,
-    name: 'Sample Route',
-    gradeRaw: 'V7'
-  }
+    name: "Sample Route",
+    gradeRaw: "V7",
+    coordinate: new Coordinate(1, 2),
+  },
 };
 
 const ConnectedRouteOverlay = withRoute()(RouteOverlay);

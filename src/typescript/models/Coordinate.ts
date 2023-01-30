@@ -1,27 +1,28 @@
-import { Column } from 'typeorm';
-import { LatLngLiteral, LatLngTuple } from 'leaflet';
-import isNumber from 'lodash/isNumber';
+import { Column } from "typeorm";
+import { LatLng, LatLngLiteral, LatLngTuple } from "leaflet";
+import isNumber from "lodash/isNumber";
 
 interface Serialized {
   lat: number;
   lng: number;
 }
 
-function isValidCoordinate(coordinate: Partial<Coordinate>): coordinate is Coordinate {
+function isValidCoordinate(
+  coordinate: Partial<Coordinate>
+): coordinate is Coordinate {
   return isNumber(coordinate.lat) && isNumber(coordinate.lng);
 }
 
 export default class Coordinate {
-
   constructor(lat: number, lng: number) {
     this.lat = lat;
     this.lng = lng;
   }
 
-  @Column('decimal')
+  @Column("decimal")
   lat: number;
 
-  @Column('decimal')
+  @Column("decimal")
   lng: number;
 
   get literal(): LatLngLiteral {
@@ -48,7 +49,14 @@ export default class Coordinate {
   static fromJSON(json: Serialized) {
     return new this(json.lat, json.lng);
   }
+}
 
+export class CoordinateOptional {
+  @Column("decimal", { nullable: true })
+  lat?: number;
+
+  @Column("decimal", { nullable: true })
+  lng?: number;
 }
 
 export { isValidCoordinate };

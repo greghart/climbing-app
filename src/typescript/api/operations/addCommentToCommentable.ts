@@ -1,15 +1,18 @@
-import { getRepository } from 'typeorm';
+import myDataSource from "../../db/myDataSource";
+import Comment from "../../models/Comment";
+import User from "../../models/User";
+import Commentable from "../../models/Commentable";
 
-import Comment from '../../models/Comment';
-import User from '../../models/User';
-import Commentable from '../../models/Commentable';
-
-const addCommentToCommentable = (commentable: Commentable, text: string, user: User) => {
+const addCommentToCommentable = (
+  commentable: Commentable,
+  text: string,
+  user: User
+) => {
   const comment = new Comment();
   comment.text = text;
   comment.user = user;
   comment.commentable = commentable;
-  return getRepository(Comment).save(comment);
+  return myDataSource.getRepository(Comment).save(comment);
 };
 
 export default addCommentToCommentable;

@@ -1,17 +1,18 @@
-import { getRepository } from 'typeorm';
-import crypto from 'crypto';
-import * as path from 'path';
-import { getEngine, MulterFileSource } from 'power-putty-io';
+import crypto from "crypto";
+import * as path from "path";
+import { getEngine, MulterFileSource } from "power-putty-io";
 
-import Upload from '../../models/Upload';
+import myDataSource from "../../db/myDataSource";
+import Upload from "../../models/Upload";
 
 function hashData(data: Buffer) {
-  return crypto.createHash('sha1')
-  .update(data)
-  .digest('hex');
+  return crypto.createHash("sha1").update(data).digest("hex");
 }
 
-function uploadFile(file: Express.Multer.File, directory: string): Promise<Upload> {
+function uploadFile(
+  file: Express.Multer.File,
+  directory: string
+): Promise<Upload> {
   const engine = getEngine();
 
   const upload = new Upload();
@@ -28,18 +29,23 @@ function uploadFile(file: Express.Multer.File, directory: string): Promise<Uploa
 
   // Find upload with existing key, or save new one.
   // Basically if someone uploads the same file, we can re-use
-  return getRepository(Upload).findOne({ where: { key } })
-  .then((existingUpload) => {
-    if (existingUpload) {
-      return existingUpload;
-    }
-    return getRepository(Upload).save(upload);
-  })
-  // Persist in file store
-  .then((upload) => {
-    return engine.upload(upload, new MulterFileSource(file))
-    .then(() => upload);
-  });
+  return (
+    myDataSource
+      .getRepository(Upload)
+      .findOne({ where: { key } })
+      .then((existingUpload) => {
+        if (existingUpload) {
+          return existingUpload;
+        }
+        return myDataSource.getRepository(Upload).save(upload);
+      })
+      // Persist in file store
+      .then((upload) => {
+        return engine
+          .upload(upload, new MulterFileSource(file))
+          .then(() => upload);
+      })
+  );
 }
 
 export default uploadFile;

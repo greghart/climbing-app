@@ -24,16 +24,16 @@ module.exports = merge(config, {
       // Sass
       {
         test: /\.scss$/,
-        loaders: [
+        use: [
           'style-loader',
           'css-loader',
-          { loader: 'sass-loader', query: { outputStyle: 'expanded' } }
+          'sass-loader',
         ]
       },
       // CSS
       {
         test: /\.css$/,
-        loaders: [
+        use: [
           'style-loader',
           'css-loader'
         ]

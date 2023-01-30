@@ -51,10 +51,6 @@ function renderWithStore(req: express.Request, res: ResponseWithExpose, store: S
  * Render a request to the response
  */
 const renderRequest = async (req: express.Request, res: express.Response) => {
-  const matches = matchRoutes(
-    getRoutes(),
-    req.path
-  );
   const openPromises = [];
   const store = getStore(
     {},

@@ -1,10 +1,11 @@
-import * as React from 'react';
-import { InjectedFormProps, FormErrors } from 'redux-form';
-import Comment from './Comment';
-import User from '../../../models/User';
-import CommentModel from '../../../models/Comment';
-import { OnSubmit } from '../types';
-import MyField from '../form/MyField';
+import * as React from "react";
+import { InjectedFormProps, FormErrors } from "redux-form";
+import Comment from "./Comment";
+import User from "../../../models/User";
+import CommentModel from "../../../models/Comment";
+import { OnSubmit } from "../types";
+import MyField from "../form/MyField";
+import Submit from "../form/Submit";
 
 interface Props {
   user: User;
@@ -27,20 +28,30 @@ const NewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
       comment={new CommentModel()}
       body={
         <form className="p-0">
-          {props.error &&
-            <span className="text-danger">{props.error}</span>
-          }
+          {props.error && <span className="text-danger">{props.error}</span>}
           <MyField
             name="text"
             inputComponent="textarea"
             rows={3}
             onKeyPress={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-              if (e.key === 'Enter' && e.metaKey) {
+              if (e.key === "Enter" && e.metaKey) {
                 props.handleCustomSubmit(e);
               }
             }}
             help={<span>Press Meta+Enter to save</span>}
           />
+          <button
+            className="btn btn-primary"
+            type="submit"
+            disabled={props.submitting}
+            onClick={(e) => {
+              props.handleCustomSubmit(e);
+              e.preventDefault();
+              return false;
+            }}
+          >
+            Submit
+          </button>
         </form>
       }
       user={props.user}
@@ -51,8 +62,8 @@ const NewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
 NewComment.defaultProps = {
   user: {
     id: 1,
-    email: 'greghartnewcomment',
-    name: 'Greg',
+    email: "greghartnewcomment",
+    name: "Greg",
     comments: [],
   },
 };

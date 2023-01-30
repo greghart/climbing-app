@@ -1,7 +1,7 @@
-import { getConnection, getRepository } from 'typeorm';
+import myDataSource from "../../db/myDataSource";
 
-import PolygonCoordinate from '../../models/PolygonCoordinate';
-import Polygon from '../../models/Polygon';
+import PolygonCoordinate from "../../models/PolygonCoordinate";
+import Polygon from "../../models/Polygon";
 
 /**
  *
@@ -9,28 +9,28 @@ import Polygon from '../../models/Polygon';
  */
 const setPolygon = async (
   polygon: Polygon,
-  coordinates: { lat: number, lng: number, order?: number }[]
+  coordinates: { lat: number; lng: number; order?: number }[]
 ) => {
   const polygonCoordinates = coordinates.map((thisCoordinate, i) => {
     const pc = new PolygonCoordinate(thisCoordinate.lat, thisCoordinate.lng);
     pc.order = thisCoordinate.order || i;
     return pc;
   });
-  const queryRunner = getConnection().createQueryRunner();
+  const queryRunner = myDataSource.createQueryRunner();
   // await queryRunner.startTransaction();
   // Remove old coordinates, if any, and add new ones
   if (polygon.id) {
-    await queryRunner.manager.createQueryBuilder()
+    await queryRunner.manager
+      .createQueryBuilder()
       .delete()
       .from(PolygonCoordinate)
-      .where('polygon = :id', { id: polygon.id })
+      .where("polygon = :id", { id: polygon.id })
       .execute();
   }
   polygon.coordinates = polygonCoordinates;
-  return getRepository(Polygon).save(polygon);
+  return myDataSource.getRepository(Polygon).save(polygon);
   // commit transaction now:
   // await queryRunner.commitTransaction();
-
 };
 
 export default setPolygon;

@@ -1,11 +1,11 @@
-import * as t from 'io-ts';
-import { getRepository } from 'typeorm';
+import * as t from "io-ts";
 
-import Crag from '../../models/Crag';
-import Area from '../../models/Area';
-import setPolygon from './setPolygon';
-import Polygon from '../../models/Polygon';
-import AreaCodec from '../../codecs/AreaCodec';
+import myDataSource from "../../db/myDataSource";
+import Crag from "../../models/Crag";
+import Area from "../../models/Area";
+import setPolygon from "./setPolygon";
+import Polygon from "../../models/Polygon";
+import AreaCodec from "../../codecs/AreaCodec";
 
 const addArea = async (crag: Crag, data: t.TypeOf<typeof AreaCodec>) => {
   // Setup area
@@ -16,14 +16,14 @@ const addArea = async (crag: Crag, data: t.TypeOf<typeof AreaCodec>) => {
   // Setup a saved polygon first
   if (data.polygon) {
     const polygon = new Polygon();
-    polygon.descriptor = 'area-new';
+    polygon.descriptor = "area-new";
     await setPolygon(polygon, data.polygon.coordinates);
     area.polygon = polygon;
   }
-  const savedArea = await getRepository(Area).save(area);
+  const savedArea = await myDataSource.getRepository(Area).save(area);
   if (data.polygon) {
     area.polygon.descriptor = `area-${savedArea.id}`;
-    await getRepository(Polygon).save(area.polygon);
+    await myDataSource.getRepository(Polygon).save(area.polygon);
   }
   return savedArea;
 };

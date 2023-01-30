@@ -2,7 +2,7 @@ scripts:
   default: nps dev
   dev:
     description: Shortcut to a basic client dev environment. Note current workflow is to run watch from VS Code.
-    script: nps run.devServer
+    script: nps run.dev
   prod:
     description: Shortcut to a production run workflow
     script: nps run.prod
@@ -13,13 +13,14 @@ scripts:
     description: Watch all typescript resources to javascript.
     script: tsc --project . --watch
   build:
-    description: Build our source files into client distributions
     prod:
       description: Build your client code production style
       script: cross-env DEBUG=climbing-app* PORT=3001 NODE_ENV=production webpack --config=./config/webpack.config.production.js
     dev:
       description: Build your client code dev style
-      script: cross-env DEBUG=climbing-app* PORT=3001 NODE_ENV=development webpack --config=./config/webpack.config.development.js
+      default: cross-env DEBUG=climbing-app* PORT=3001 NODE_ENV=development webpack --config=./config/webpack.config.development.js
+      watch:
+        script: nps "b.d --watch"
   run:
     description: Various ways to run the climbing app components. These expect code to be transpiled already. 
     clientDashboard:
@@ -34,6 +35,9 @@ scripts:
     apiWatch:
       description: Watch just the API
       script: cross-env DEBUG=climbing-app* PORT=3001 nodemon ./dist/typescript/server.js
+    dev:
+      description: Run all dev processes needed, webpack + server
+      script: concurrent "nps build.dev.watch" "nps run.apiWatch"
     prod:
       description: Build and run code like in production
       script: cross-env-shell DEBUG=climbing-app* NODE_ENV=production PORT=3001 "nps run.prod.sub"
@@ -45,9 +49,9 @@ scripts:
     migration:
       description: Proxies to TypeORM Migrations, but make sure we compile first
       generate:
-        script: ts-node ./node_modules/typeorm/cli.js migration:generate
+        script: typeorm migration:generate -d ./src/typescript/db/myDataSource.ts
       run:
-        script: ts-node ./node_modules/typeorm/cli.js migration:run
+        script: typeorm migration:run -d ./src/typescript/db/myDataSource.ts
       just_do_it:
         script: nps db.migration.generate && nps db.migration.run
   lint:

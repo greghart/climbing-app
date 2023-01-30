@@ -43,7 +43,7 @@ const PointOnPolygonField: FieldType = (props) => {
             {isValidCoordinate(coordinate) ?
               <BaseMap bounds={props.positions} style={{ paddingBottom: '50%' }}>
                 <MyPolygon positions={props.positions} />
-                <ConfirmedCircle center={[coordinate.lat, coordinate.lng]} />}
+                <ConfirmedCircle center={[coordinate.lat, coordinate.lng]} />
               </BaseMap> :
               'None Provided'
             }
@@ -51,7 +51,7 @@ const PointOnPolygonField: FieldType = (props) => {
         </div>
         <div className="btn btn-link" onClick={() => isUpdating.input.onChange(true)}>
           <small>
-            Edit <i className="fa fa-edit ml-2"/>
+            Edit <i className="fa fa-edit ml-2" />
           </small>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { ExtractProps } from '../../../externals';
 import BestTileLayer from '../BestTileLayer';
 import Coordinate from '../../../models/Coordinate';
 
-type Props = ExtractProps<typeof Map> & {
+type Props = ExtractProps<Map> & {
   // Support supplying coordinates since that's what we work with a lot
   boundsCoordinates?: Coordinate[];
 };

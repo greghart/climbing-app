@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { Store } from 'redux';
-import ReactDOMServer from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { renderRoutes } from 'react-router-config';
+import * as React from "react";
+import { Store } from "redux";
+import ReactDOMServer from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { renderRoutes } from "react-router-config";
 
-import getRoutes from '../redux/getRoutes';
+import getRoutes from "../redux/getRoutes";
 
 /**
  * Render our application for a given path
@@ -18,15 +18,8 @@ function renderApplication(url: string, store: Store<any>) {
   const context: { url?: string } = {};
 
   const content = ReactDOMServer.renderToString(
-    <StaticRouter
-      location={url}
-      context={context}
-    >
-      <Provider
-        store={store}
-      >
-        {renderRoutes(getRoutes())}
-      </Provider>
+    <StaticRouter location={url} context={context}>
+      <Provider store={store}>{renderRoutes(getRoutes())}</Provider>
     </StaticRouter>
   );
   return content;

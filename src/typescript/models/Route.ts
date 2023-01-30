@@ -5,15 +5,14 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
-  OneToMany,
-} from 'typeorm';
+} from "typeorm";
 
-import Boulder from './Boulder';
-import Grade from './Grade';
-import { cascadeManyToOne } from '../db/cascadeOptions';
-import Commentable from './Commentable';
-import Coordinate from './Coordinate';
-import Photoable from './Photoable';
+import Boulder from "./Boulder";
+import Grade from "./Grade";
+import { cascadeManyToOne } from "../db/cascadeOptions";
+import Commentable from "./Commentable";
+import Coordinate, { CoordinateOptional } from "./Coordinate";
+import Photoable from "./Photoable";
 
 @Entity()
 export default class Route {
@@ -37,23 +36,29 @@ export default class Route {
 
   // TODO Formalize route type, and decide normalized safe way to constrain
   // boulders to only have bouldering grades
-  @ManyToOne(type => Grade, grade => grade.routes)
+  @ManyToOne((type) => Grade, (grade) => grade.routes)
   grade: Grade;
 
   // Relationships
-  @ManyToOne(type => Boulder, boulder => boulder.routes, cascadeManyToOne)
+  @ManyToOne((type) => Boulder, (boulder) => boulder.routes, cascadeManyToOne)
   boulder: Boulder;
 
-  @OneToOne(type => Commentable, { nullable: true, onDelete: 'SET NULL' })
+  @OneToOne((type) => Commentable, { nullable: true, onDelete: "SET NULL" })
   @JoinColumn()
   commentable?: Commentable;
 
-  @OneToOne(type => Photoable, { nullable: true, onDelete: 'SET NULL' })
+  @OneToOne((type) => Photoable, { nullable: true, onDelete: "SET NULL" })
   @JoinColumn()
   photoable: Photoable | null;
 
   // Location of the route -- this will be setup on a polygon of the boulder
-  @Column(type => Coordinate)
-  coordinate?: Coordinate;
+  // Optional embedded columns
+  @Column((type) => CoordinateOptional)
+  _coordinate: CoordinateOptional;
 
+  get coordinate(): Coordinate | undefined {
+    if (this._coordinate.lat && this._coordinate.lng) {
+      return new Coordinate(this._coordinate.lat, this._coordinate.lng);
+    }
+  }
 }

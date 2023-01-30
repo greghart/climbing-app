@@ -4,32 +4,35 @@
  * There has been some experimentation with utilizing OpenAPI and Swagger to build out
  * documented APIs (and alongside TypeScript that'd be neat), but it's not quite there yet
  */
-import * as express from 'express';
-import * as swaggerUi from 'swagger-ui-express';
-import { Server } from 'typescript-rest';
-import RoutesService from './services/RoutesService';
-import CragsService from './services/CragsService';
-import BouldersService from './services/BouldersService';
-import buildSwagger from './buildSwagger';
-import CommentablesService from './services/CommentablesService';
-import AreasService from './services/AreasService';
-import PolygonsService from './services/PolygonsService';
-import PhotoablesService from './services/PhotoablesService';
+import * as express from "express";
+import * as swaggerUi from "swagger-ui-express";
+import { Server } from "typescript-rest";
+import RoutesService from "./services/RoutesService";
+import CragsService from "./services/CragsService";
+import BouldersService from "./services/BouldersService";
+import buildSwagger from "./buildSwagger";
+import CommentablesService from "./services/CommentablesService";
+import AreasService from "./services/AreasService";
+import PolygonsService from "./services/PolygonsService";
+import PhotoablesService from "./services/PhotoablesService";
 
 const router = express.Router();
 
 const swagger = buildSwagger();
-router.get('/swagger.json', (req, res, next) => {
+router.get("/swagger.json", (req, res, next) => {
   res.json(swagger);
 });
-router.use('/docs', swaggerUi.serve);
-router.get('/docs', swaggerUi.setup(swagger, {
-  swaggerOptions: {
-    docExpansion: 'none',
-  },
-}));
+router.use("/docs", swaggerUi.serve);
+router.get(
+  "/docs",
+  swaggerUi.setup(swagger, {
+    swaggerOptions: {
+      docExpansion: "none",
+    },
+  })
+);
 Server.buildServices(
-  router,
+  router as any,
   RoutesService,
   CragsService,
   AreasService,
@@ -47,7 +50,7 @@ router.use((err, req, res, next) => {
 
 router.use((req, res, next) => {
   if (!res.headersSent) {
-    res.status(404).send('API endpoint not found');
+    res.status(404).send("API endpoint not found");
   }
 });
 

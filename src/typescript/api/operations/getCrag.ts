@@ -1,25 +1,24 @@
-import { getRepository } from 'typeorm';
-import Crag from '../../models/Crag';
+import myDataSource from "../../db/myDataSource";
+import Crag from "../../models/Crag";
 
-const getCrags = (id: number | string) => {
+const getCrag = (id: number | string) => {
   // Crag IDs for client can also be name
-  return getRepository(Crag)
-  .findOne({
-    where: [
-      { name: id },
-      { id },
-    ],
-    relations: [
-      'bounds',
-      'areas',
-      'areas.polygon',
-      'areas.polygon.coordinates',
-    ],
-  })
-  .then((crag) => {
-    crag._isLoaded = true;
-    return crag;
-  });
+  return myDataSource
+    .getRepository(Crag)
+    .findOne({
+      where: [{ name: id as string }, { id: id as number }],
+      relations: [
+        "bounds",
+        "areas",
+        "areas.polygon",
+        "areas.polygon.coordinates",
+      ],
+    })
+    .then((crag) => {
+      if (!crag) return;
+      crag._isLoaded = true;
+      return crag;
+    });
 };
 
-export default getCrags;
+export default getCrag;

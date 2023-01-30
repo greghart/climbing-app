@@ -20,7 +20,7 @@ const RouteConfigProvider: React.FunctionComponent<RouteConfigComponentProps & P
   );
 };
 
-function provideRoute<P>(WrappedComponent: React.ComponentType<RouteConfigComponentProps<P>>) {
+function provideRoute<P extends { [K in keyof P]?: string; }>(WrappedComponent: React.ComponentType<RouteConfigComponentProps<P>>) {
   const RouteProvider: React.ComponentType<RouteConfigComponentProps<P>> = (props) => {
     return (
       <RouteConfigProvider {...props}>

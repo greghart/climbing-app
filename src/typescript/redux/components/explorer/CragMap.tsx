@@ -1,14 +1,14 @@
-import * as React from 'react';
-import * as Leaflet from 'leaflet';
-import { Map } from 'react-leaflet';
-import { renderRoutes } from 'react-router-config';
-import lodashMap from 'lodash/map';
+import * as React from "react";
+import * as Leaflet from "leaflet";
+import { Map } from "react-leaflet";
+import { renderRoutes } from "react-router-config";
+import lodashMap from "lodash/map";
 
-import BestTileLayer from '../BestTileLayer';
-import Crag from '../../../models/Crag';
-import Area from '../../../models/Area';
-import RouteContext from '../../context/RouteContext';
-import MyRouteConfig from '../../routes/MyRouteConfig';
+import BestTileLayer from "../BestTileLayer";
+import Crag from "../../../models/Crag";
+import Area from "../../../models/Area";
+import RouteContext from "../../context/RouteContext";
+import MyRouteConfig from "../../routes/MyRouteConfig";
 
 interface Props {
   crag: Crag;
@@ -19,10 +19,19 @@ const CragMap: React.SFC<Props> = (props) => {
   const routeContext = React.useContext(RouteContext);
   const mapRef = React.createRef<Map>();
 
-  const bounds = props.crag.bounds && Leaflet.latLngBounds(
-    Leaflet.latLng(props.crag.bounds.topLeft),
-    Leaflet.latLng(props.crag.bounds.bottomRight)
-  );
+  let bounds: Leaflet.LatLngBounds;
+  if (props.crag.bounds) {
+    bounds = Leaflet.latLngBounds(
+      Leaflet.latLng(props.crag.bounds.topLeft),
+      Leaflet.latLng(props.crag.bounds.bottomRight)
+    );
+  } else {
+    bounds = new Leaflet.LatLng(
+      props.crag.center.lat,
+      props.crag.center.lng
+    ).toBounds(450);
+  }
+
   console.warn(bounds);
   return (
     // <AnimationContext.Consumer>
@@ -37,8 +46,7 @@ const CragMap: React.SFC<Props> = (props) => {
       maxZoom={props.crag.maxZoom}
       maxBounds={bounds}
       zoomControl={false}
-      onzoomend={(e) => {
-      }}
+      onzoomend={(e) => {}}
       onclick={(e) => {
         if (!e.originalEvent.defaultPrevented) {
           props.onAreaClick(null);
@@ -52,11 +60,11 @@ const CragMap: React.SFC<Props> = (props) => {
           (r: MyRouteConfig) => {
             return {
               ...r,
-              component: r.mapComponent || ((props: any) => <span />)
+              component: r.mapComponent || ((props: any) => <span />),
             };
           }
         ),
-        { mapRef, crag: props.crag },
+        { mapRef, crag: props.crag }
       )}
       {/* <LayersControl position="topright">
               <LayersControl.Overlay name="Areas" checked={true}>

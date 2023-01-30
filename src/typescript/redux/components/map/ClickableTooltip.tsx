@@ -6,7 +6,7 @@ import { ExtractProps } from '../../../externals';
 import _debug from '../../../debug';
 const debug = _debug.extend('redux/components/map/ClickableTooltip');
 
-type Props = ExtractProps<typeof Tooltip> & {
+type Props = ExtractProps<Tooltip> & {
   onClick: (e: LeafletEvent | MouseEvent) => unknown;
 };
 

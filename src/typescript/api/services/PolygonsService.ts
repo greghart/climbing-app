@@ -1,36 +1,29 @@
-import * as Rest from 'typescript-rest';
-import * as Swagger from 'typescript-rest-swagger';
-import { getRepository, getCustomRepository } from 'typeorm';
+import * as Rest from "typescript-rest";
+import * as Swagger from "typescript-rest-swagger";
 
-import Polygon from '../../models/Polygon';
-import PolygonRepository from '../../models/repositories/PolygonRepository';
-import getArea from '../operations/getArea';
-import setPolygon from '../operations/setPolygon';
+import myDataSource from "../../db/myDataSource";
+import Polygon from "../../models/Polygon";
+import PolygonRepository from "../../models/repositories/PolygonRepository";
+import getArea from "../operations/getArea";
 
-const getPolygon = (id: string | number) => {
-  return getRepository(Polygon).findOne(id, {
-    relations: ['coordinates'],
+const getPolygon = (id: number) => {
+  return myDataSource.getRepository(Polygon).findOne({
+    where: { id: id as number },
+    relations: ["coordinates"],
   });
 };
-
-interface PolygonPayload {
-  coordinates: { lat: number, lng: number, order: number }[];
-}
 
 /**
  * Polygons service
  */
-@Rest.Path('/polygons')
+@Rest.Path("/polygons")
 export default class PolygonsService {
-
   @Rest.GET
-  @Rest.Path(':id')
-  @Swagger.Tags('polygons')
-  @Swagger.Response<object>(200, 'Get data for a polygon')
-  public async getPolygon(
-    @Rest.PathParam('id') id: string,
-  ) {
-    return getPolygon(id);
+  @Rest.Path(":id")
+  @Swagger.Tags("polygons")
+  @Swagger.Response<object>(200, "Get data for a polygon")
+  public async getPolygon(@Rest.PathParam("id") id: string) {
+    return getPolygon(parseInt(id));
   }
 
   // @Rest.GET
@@ -50,19 +43,19 @@ export default class PolygonsService {
   // }
 
   @Rest.GET
-  @Rest.Path('/area/:id')
-  @Swagger.Tags('polygons')
-  @Swagger.Response<object>(302, 'Get the polygon for a area')
-  public async polygonForArea(
-    @Rest.PathParam('id') id: string,
-  ) {
+  @Rest.Path("/area/:id")
+  @Swagger.Tags("polygons")
+  @Swagger.Response<object>(302, "Get the polygon for a area")
+  public async polygonForArea(@Rest.PathParam("id") id: string) {
     return getArea(id)
-    .then((area) => {
-      return getCustomRepository(PolygonRepository).findOrGetPolygon(area);
-    })
-    .then((polygon) => {
-      return getPolygon(polygon.id);
-    });
+      .then((area) => {
+        return myDataSource.manager
+          .withRepository(PolygonRepository)
+          .findOrGetPolygon(area);
+      })
+      .then((polygon) => {
+        return getPolygon(polygon.id);
+      });
   }
 
   // @Rest.GET
@@ -99,7 +92,6 @@ export default class PolygonsService {
   //     return new Rest.Return.NewResource(`/polygons/${polygon.id}`, polygon)
   //   })
   // }
-
 }
 
 type PolygonsServiceType = typeof PolygonsService.prototype;

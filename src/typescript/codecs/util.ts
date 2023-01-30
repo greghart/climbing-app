@@ -1,4 +1,7 @@
 import * as t from 'io-ts';
+import { chain } from 'fp-ts/lib/Either'
+import { fold } from 'fp-ts/lib/Either'
+import { pipe } from 'fp-ts/function'
 
 /**
  * Utility types
@@ -17,13 +20,21 @@ export const minLength = t.refinement(t.string, text => text.length > 2, 'text.m
 export const numberFromString = new t.Type<number, string, unknown>(
   'numberFromString',
   (u): u is number => { return !isNaN(Number(u)); },
-  (u, c) =>
-    t.string.validate(u, c).chain(s => {
+  (u, c) => {
+    const v = t.string.validate(u, c);
+    return fold(() => v as any, (s) => {
       if (isNaN(Number(s))) {
         return t.failure(u, c);
       }
       return t.success(Number(s));
-    }),
+    })(v)
+  },
+    // t.string.validate(u, c).chain(s => {
+    //   if (isNaN(Number(s))) {
+    //     return t.failure(u, c);
+    //   }
+    //   return t.success(Number(s));
+    // }),
   a => a.toString(),
 );
 

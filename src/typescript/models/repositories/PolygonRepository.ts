@@ -1,7 +1,7 @@
-import { EntityRepository, Repository } from 'typeorm';
-import PolygonCoordinate from '../PolygonCoordinate';
-import Polygon from '../Polygon';
-import get from 'lodash/get';
+import PolygonCoordinate from "../PolygonCoordinate";
+import Polygon from "../Polygon";
+import get from "lodash/get";
+import myDataSource from "../../db/myDataSource";
 
 // Base interface for a polygon entity
 interface PolygonEntity {
@@ -13,9 +13,7 @@ interface PolygonEntity {
  * A custom polygon repository repository to help us abstract away the
  * polymorphic associations
  */
-@EntityRepository(PolygonCoordinate)
-export default class PolygonRepository extends Repository<PolygonCoordinate> {
-
+const PolygonRepository = myDataSource.getRepository(PolygonCoordinate).extend({
   /**
    * Find or get the polygon instance for an entity
    *
@@ -23,15 +21,17 @@ export default class PolygonRepository extends Repository<PolygonCoordinate> {
    */
   async findOrGetPolygon(entity: PolygonEntity) {
     // Find an existing polygon, if any
-    let polygon = entity.polygon ?
-      entity.polygon :
-      get(await
-        this.manager.getRepository(entity.constructor)
-        .createQueryBuilder('entity')
-        .innerJoinAndSelect('entity.polygon', 'polygon')
-        .whereInIds(entity.id)
-        .getOne()
-      ,   'polygon');
+    let polygon = entity.polygon
+      ? entity.polygon
+      : get(
+          await this.manager
+            .getRepository(entity.constructor)
+            .createQueryBuilder("entity")
+            .innerJoinAndSelect("entity.polygon", "polygon")
+            .whereInIds(entity.id)
+            .getOne(),
+          "polygon"
+        );
     if (!polygon) {
       polygon = new Polygon();
       polygon.descriptor = `${entity.constructor.name}-${entity.id}`;
@@ -40,6 +40,7 @@ export default class PolygonRepository extends Repository<PolygonCoordinate> {
       await this.manager.save(entity);
     }
     return polygon;
-  }
+  },
+});
 
-}
+export default PolygonRepository;

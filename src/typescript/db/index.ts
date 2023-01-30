@@ -1,21 +1,26 @@
-import Bluebird from 'bluebird';
-import { Connection } from 'typeorm';
-import getConnection from './getConnection';
+import config from "config";
+import loadFixtures from "./loadFixtures";
+import dataSource from "./myDataSource";
 
 /**
- * Just maintain a single connection pool
- *
- * Actually, typeorm manages active connection internally, so as long as we
- * create a connection, we can directly use typeorm API...neat!
+ * Singleton initialized
  */
-let connection: Bluebird<Connection>;
-
-const getSingleConnection = () => {
-  if (connection) {
-    return connection;
-  }
-  connection = Bluebird.resolve(getConnection());
-  return connection;
+const memoizedDataSource = () => {
+  return dataSource
+    .initialize()
+    .then(async (ds) => {
+      if (config.get<boolean>("database.sync")) {
+        await loadFixtures(ds);
+      }
+      return ds;
+    })
+    .catch((err) => {
+      console.error("Error on TypeORM database setup");
+      console.error(err.message);
+      console.error(err.stack);
+      process.exit(1);
+      throw err;
+    });
 };
 
-export default getSingleConnection;
+export default memoizedDataSource;

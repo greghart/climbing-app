@@ -1,6 +1,6 @@
 port: 6001
 database:
-  sync: false
+  sync: true
   postgres:
     host: localhost
     port: 5432
@@ -10,7 +10,7 @@ database:
   sqlite:
     database: ./scratch/dev_db.sqlite
 swagger:
-  host: penguin.linux.test:3001
+  host: localhost:3001
   name: Climbing App OpenAPI Documentation
   license: MIT
   basePath: /api
@@ -27,8 +27,8 @@ power-putty-server:
       host: localhost
       port: 6379
   serving:
-    favicon: '/home/elchocolato/Checkouts/climbing-app/static/ico/favicon.ico'
+    favicon: '/home/greg/Checkouts/climbing-app/static/ico/favicon.ico'
 power-putty-io:
   engine: 'local'
   local:
-    rootDirectory: '/home/elchocolato/Checkouts/climbing-app/static/uploads'
+    rootDirectory: '/home/greg/Checkouts/climbing-app/static/uploads'
