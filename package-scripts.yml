@@ -8,10 +8,10 @@ scripts:
     script: nps run.prod
   tsc:
     description: Compile all typescript resources to javascript.
-    script: tsc --project .
+    script: tsc
   tscw:
     description: Watch all typescript resources to javascript.
-    script: tsc --project . --watch
+    script: tsc --watch
   build:
     prod:
       description: Build your client code production style
@@ -62,4 +62,4 @@ scripts:
       script: tslint --project . --fix && echo 'Lint problems fixed'
   test:
     description: Run test suite
-    script: mocha ./test/**/*.ts
+    script: mocha --require tsx/cjs ./test/**/*.ts

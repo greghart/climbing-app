@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "incremental": true, // fast
+    "noEmit": true, // type check only
+
     "skipLibCheck": true,
     "rootDir": "./src",
     "outDir": "./dist/",
@@ -14,7 +17,6 @@
     "jsx": "react",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "incremental": true,
     "baseUrl": ".",
     "paths": {
       "*": [
@@ -29,6 +31,6 @@
     "./src/typescript/**/*"
   ],
   "exclude": [
-    "./node_modules/*"
+    "node_modules"
   ]
 }

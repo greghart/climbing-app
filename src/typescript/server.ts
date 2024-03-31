@@ -1,14 +1,13 @@
-import Bluebird from 'bluebird';
-import * as express from 'express';
+import * as express from "express";
 
-import getExpressApplication from './server/getExpressApplication';
+import getExpressApplication from "./server/getExpressApplication";
 // import getAPIRouter from './api/getRouter';
 // import rollbar from './util/getRollbar';
 // import { serverOptions as rollbarServerOptions } from './util/getRollbar';
-import getConnection from './db';
+import getConnection from "./db";
 
-import _debug from './debug';
-const debug = _debug.extend('server');
+import _debug from "./debug";
+const debug = _debug.extend("server");
 
 // rollbar.handleUncaughtExceptionsAndRejections(
 //   rollbarServerOptions.token,
@@ -21,22 +20,19 @@ const debug = _debug.extend('server');
 // getAPIRouter()
 // .then((apiRouter) => {
 getConnection()
-.then(() => {
-  return getExpressApplication();
-})
-.then((app: express.Express) => {
-  const port = process.env.PORT || 5001;
-  app.listen(
-    port,
-    () => {
+  .then(() => {
+    return getExpressApplication();
+  })
+  .then((app: express.Express) => {
+    const port = process.env.PORT || 5001;
+    app.listen(port, () => {
       debug(`Server started listening on port ${port}`);
-    },
-  );
-})
-// Catch errors during app startup
-.catch((error: Error) => {
-  debug('Error during startup');
-  debug(error.message);
-  debug(error.stack);
-  process.exit(1);
-});
+    });
+  })
+  // Catch errors during app startup
+  .catch((error: Error) => {
+    debug("Error during startup");
+    debug(error.message);
+    debug(error.stack);
+    process.exit(1);
+  });
