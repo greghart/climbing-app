@@ -10,7 +10,7 @@
     }
   ],
   "engines": {
-    "node": "18.x"
+    "node": "20.x"
   },
   "scripts": {
     "start": "nps",
@@ -156,6 +156,5 @@
     "webpack-dev-middleware": "^6.0.1",
     "webpack-hot-middleware": "^2.25.3",
     "webpack-merge": "latest"
-  },
-  "packageManager": "yarn@3.3.0"
+  }
 }
