@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { Field, InjectedFormProps, FormErrors } from 'redux-form';
-import Comment from './Comment';
-import User from '../../../models/User';
-import CommentModel from '../../../models/Comment';
-import { OnSubmit } from '../types';
-import MyField from '../form/MyField';
+import * as React from "react";
+import type { InjectedFormProps, FormErrors } from "redux-form";
+import Comment from "./Comment";
+import User from "../../../models/User";
+import CommentModel from "../../../models/Comment";
+import type { OnSubmit } from "../types";
+import MyField from "../form/MyField";
 
 interface Props {
   user: User;
@@ -21,21 +21,21 @@ interface FormData {
   text?: string;
 }
 
-const RouteNewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
+const RouteNewComment: React.SFC<InjectedFormProps<FormData> & Props> = (
+  props
+) => {
   return (
     <Comment
       comment={new CommentModel()}
       body={
         <form className="p-0">
-          {props.error &&
-            <span className="text-danger">{props.error}</span>
-          }
+          {props.error && <span className="text-danger">{props.error}</span>}
           <MyField
             name="text"
             inputComponent="textarea"
             rows={3}
             onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
-              if (e.key === 'Enter' && e.metaKey) {
+              if (e.key === "Enter" && e.metaKey) {
                 props.handleCustomSubmit(e);
               }
             }}
@@ -51,11 +51,11 @@ const RouteNewComment: React.SFC<InjectedFormProps<FormData> & Props> = (props) 
 RouteNewComment.defaultProps = {
   user: {
     id: 1,
-    email: 'greghartnewcomment',
-    name: 'Greg',
+    email: "greghartnewcomment",
+    name: "Greg",
     comments: [],
   },
 };
 
 export default RouteNewComment;
-export { FormData, Props };
+export type { FormData, Props };

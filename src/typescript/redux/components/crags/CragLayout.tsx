@@ -1,15 +1,15 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Crag from '../../../models/Crag';
-import ShowLayout, { RouterProps } from '../show/ShowLayout';
-import ShowBreadcrumbs from '../show/ShowBreadcrumbs';
+import Crag from "../../../models/Crag";
+import ShowLayout, { type RouterProps } from "../show/ShowLayout";
+import ShowBreadcrumbs from "../show/ShowBreadcrumbs";
 
 type Props = RouterProps & {
   crag: Crag;
 };
 
 const CragLayout: React.SFC<Props> = (props) => {
-  console.warn({ props }, 'CragLayout');
+  console.warn({ props }, "CragLayout");
   return (
     <ShowLayout
       {...props}
@@ -18,7 +18,7 @@ const CragLayout: React.SFC<Props> = (props) => {
         linkTo: `/explorer/${props.crag.id}`,
       }}
       tabsProps={{
-        routeBase: 'crags',
+        routeBase: "crags",
         entity: props.crag,
       }}
       extraProps={{
@@ -29,7 +29,7 @@ const CragLayout: React.SFC<Props> = (props) => {
 };
 CragLayout.defaultProps = {
   crag: {
-    name: 'Test Crag',
+    name: "Test Crag",
   } as any,
 };
 

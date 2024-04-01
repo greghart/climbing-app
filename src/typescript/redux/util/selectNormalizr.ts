@@ -1,5 +1,5 @@
-import isArray from 'lodash/isArray';
-import { schema as NormalizrSchema } from 'normalizr';
+import isArray from "lodash/isArray";
+import { schema as NormalizrSchema } from "normalizr";
 
 type SchemaDescription = {
   // True will include the full sub-schema
@@ -7,9 +7,9 @@ type SchemaDescription = {
   // 'empty' will include it but without any sub-schemas of the sub-schema
   // an extra schmea description will recurse down
   // Defaults to false
-  [index: string]: true | false | 'empty' | SchemaDescription;
+  [index: string]: true | false | "empty" | SchemaDescription;
 };
-export { SchemaDescription };
+export type { SchemaDescription };
 
 /**
  * Trim given normalizr schema to just certain sub-schemas.
@@ -21,9 +21,9 @@ export { SchemaDescription };
  */
 export default function selectNormalizr(
   schema: NormalizrSchema.Entity | [NormalizrSchema.Entity],
-  query: SchemaDescription,
+  query: SchemaDescription
 ) {
-  const selectedSchemas : { [index: string]: any } = {};
+  const selectedSchemas: { [index: string]: any } = {};
   const resolvedSchema = isArray(schema) ? schema[0] : schema;
   Object.keys(resolvedSchema.schema).forEach((thisKey) => {
     const thisQuery = query[thisKey] || false;
@@ -31,15 +31,15 @@ export default function selectNormalizr(
       selectedSchemas[thisKey] = resolvedSchema.schema[thisKey];
     } else if (thisQuery === false) {
       // No-op
-    } else if (thisQuery === 'empty') {
+    } else if (thisQuery === "empty") {
       selectedSchemas[thisKey] = selectNormalizr(
         resolvedSchema.schema[thisKey],
-        {},
+        {}
       );
     } else {
       selectedSchemas[thisKey] = selectNormalizr(
         resolvedSchema.schema[thisKey],
-        thisQuery,
+        thisQuery
       );
     }
   });
@@ -48,7 +48,7 @@ export default function selectNormalizr(
     selectedSchemas,
     {
       idAttribute: resolvedSchema.idAttribute,
-    },
+    }
   );
 
   return isArray(schema) ? [newSchema] : newSchema;

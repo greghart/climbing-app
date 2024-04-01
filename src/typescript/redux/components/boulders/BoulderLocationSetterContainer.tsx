@@ -1,8 +1,8 @@
-import * as React from 'react';
-import * as Leaflet from 'leaflet';
-import BoulderLocationSetter from './BoulderLocationSetter';
-import Coordinate from '../../../models/Coordinate';
-import { ExtractProps } from '../../../externals';
+import * as React from "react";
+import * as Leaflet from "leaflet";
+import BoulderLocationSetter from "./BoulderLocationSetter";
+import Coordinate from "../../../models/Coordinate";
+import type { ExtractProps } from "../../../externals";
 
 interface ContainerProps {
   defaultCurrent?: Coordinate;
@@ -15,7 +15,6 @@ class BoulderLocationSetterContainer extends React.Component<
   ContainerProps & ExtractProps<typeof BoulderLocationSetter>,
   ContainerState
 > {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -40,7 +39,6 @@ class BoulderLocationSetterContainer extends React.Component<
       />
     );
   }
-
 }
 
 export default BoulderLocationSetterContainer;

@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Boulder from '../../../models/Boulder';
-import BoulderBreadcrumbs from './BoulderBreadcrumbs';
-import ShowLayout, { RouterProps } from '../show/ShowLayout';
+import Boulder from "../../../models/Boulder";
+import BoulderBreadcrumbs from "./BoulderBreadcrumbs";
+import ShowLayout, { type RouterProps } from "../show/ShowLayout";
 
 type Props = RouterProps & {
   boulder: Boulder;
@@ -13,16 +13,16 @@ const exploreBoulder = (boulder: Boulder) => {
   return `/explorer/${boulder.area.crag.id}/${boulder.area.id}/${boulder.id}`;
 };
 const BoulderLayout: React.SFC<Props> = (props) => {
-  console.warn({ props }, 'BoulderLayout');
+  console.warn({ props }, "BoulderLayout");
   return (
     <ShowLayout
       {...props}
       headerProps={{
         title: <BoulderBreadcrumbs boulder={props.boulder} />,
-        linkTo: exploreBoulder(props.boulder)
+        linkTo: exploreBoulder(props.boulder),
       }}
       tabsProps={{
-        routeBase: 'boulders',
+        routeBase: "boulders",
         entity: props.boulder,
       }}
       extraProps={{
@@ -34,18 +34,18 @@ const BoulderLayout: React.SFC<Props> = (props) => {
 BoulderLayout.defaultProps = {
   boulder: {
     id: 1,
-    name: 'Test Boulder',
+    name: "Test Boulder",
     routes: [
       {
         id: 1,
-        name: 'Test Route',
-        gradeRaw: 'v12',
+        name: "Test Route",
+        gradeRaw: "v12",
       },
     ],
     area: {
-      name: 'Test Area',
+      name: "Test Area",
       crag: {
-        name: 'Test Crag',
+        name: "Test Crag",
       },
     },
   } as any,

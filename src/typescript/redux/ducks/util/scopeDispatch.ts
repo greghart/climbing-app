@@ -1,14 +1,12 @@
-import isFunction from 'lodash/isFunction';
-import scopeObject from './scopeObject';
+import isFunction from "lodash/isFunction";
+import scopeObject from "./scopeObject";
 
-import * as ReduxTypes from 'redux';
-import * as ReduxActions from 'redux-actions';
-import * as ThunkTypes from 'redux-thunk';
-import { ActionOrThunk } from '../../../externals';
+import * as ThunkTypes from "redux-thunk";
+import type { ActionOrThunk } from "../../../externals";
 
 // Type guard for Thunks
 const isThunk = (
-  action: ActionOrThunk<any>,
+  action: ActionOrThunk<any>
 ): action is ThunkTypes.ThunkAction<any, any, any, any> => {
   return isFunction(action);
 };
@@ -21,17 +19,18 @@ const isThunk = (
  * @param {Scope} - Scope to dispatch actions under
  * @returns {function} new dispatcher which dispatches action under given scope
  */
-export default (dispatch: ThunkTypes.ThunkDispatch<any, any, any>, scope: string) => {
+export default (
+  dispatch: ThunkTypes.ThunkDispatch<any, any, any>,
+  scope: string
+) => {
   const newDispatcher: ThunkTypes.ThunkDispatch<any, any, any> = <Payload>(
-    action: ActionOrThunk<Payload>,
+    action: ActionOrThunk<Payload>
   ) => {
     // We dont support nested scoping dispatches, so dont try to.
     if (isThunk(action)) {
       return dispatch(action);
     }
-    return dispatch(
-      scopeObject(action, scope),
-    );
+    return dispatch(scopeObject(action, scope));
   };
   return newDispatcher;
 };

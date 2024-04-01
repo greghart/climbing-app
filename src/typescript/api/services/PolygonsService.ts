@@ -95,4 +95,4 @@ export default class PolygonsService {
 }
 
 type PolygonsServiceType = typeof PolygonsService.prototype;
-export { PolygonsServiceType };
+export type { PolygonsServiceType };

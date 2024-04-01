@@ -1,15 +1,15 @@
-import { reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { replace } from 'connected-react-router';
-import { pick } from 'lodash';
-import Bluebird from 'bluebird';
+import { reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { replace } from "connected-react-router";
+import { pick } from "lodash";
+import Bluebird from "bluebird";
 
-import CragForm, { Props as FormProps } from './CragForm';
-import { MapDispatchToPropsFunction } from '../types';
-import updateCrag from '../../ducks/operations/updateCrag';
-import handleReduxFormErrors from '../util/handleReduxFormErrors';
-import Crag from '../../../models/Crag';
+import CragForm, { type Props as FormProps } from "./CragForm";
+import type { MapDispatchToPropsFunction } from "../types";
+import updateCrag from "../../ducks/operations/updateCrag";
+import handleReduxFormErrors from "../util/handleReduxFormErrors";
+import Crag from "../../../models/Crag";
 
 interface OwnProps {
   // Crag to edit
@@ -17,41 +17,35 @@ interface OwnProps {
 }
 
 // Use one form for all routes -- for now we assume one at a time.
-const form = 'crag-form-edit';
+const form = "crag-form-edit";
 
 const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
   return {
-    initialValues: pick(ownProps.crag, 'name', 'description'),
+    initialValues: pick(ownProps.crag, "name", "description"),
     crag: ownProps.crag,
   };
 };
 
-type MapDispatchToProps = MapDispatchToPropsFunction<Partial<FormProps>, OwnProps>;
+type MapDispatchToProps = MapDispatchToPropsFunction<
+  Partial<FormProps>,
+  OwnProps
+>;
 const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
-      return Bluebird.resolve(
-        dispatch(
-          updateCrag(ownProps.crag, data),
-        ),
-      )
-      .then(() => {
-        return dispatch(
-          replace(`/crags/${ownProps.crag.id}`),
-        );
-      })
-      .catch(handleReduxFormErrors);
+      return Bluebird.resolve(dispatch(updateCrag(ownProps.crag, data)))
+        .then(() => {
+          return dispatch(replace(`/crags/${ownProps.crag.id}`));
+        })
+        .catch(handleReduxFormErrors);
     },
   };
 };
 
 export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
   reduxForm({
     form,
     enableReinitialize: false,
-  }),
+  })
 )(CragForm) as React.ComponentType<OwnProps>;

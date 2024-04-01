@@ -8,7 +8,7 @@ import updateCrag from "../operations/updateCrag";
 import addArea from "../operations/addArea";
 import validate from "../util/validate";
 import CragCodec from "../../codecs/CragCodec";
-import { AreaPayload } from "./AreasService";
+import type { AreaPayload } from "./AreasService";
 import AreaCodec from "../../codecs/AreaCodec";
 import exportCrag from "../operations/exportCrag";
 import getCragTrail from "../operations/getCragTrail";
@@ -79,4 +79,4 @@ export default class CragsService {
 }
 
 type CragsServiceType = typeof CragsService.prototype;
-export { CragsServiceType };
+export type { CragsServiceType };

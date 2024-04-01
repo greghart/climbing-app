@@ -1,9 +1,9 @@
-import * as React from 'react';
-import partial from 'lodash/partial';
+import * as React from "react";
+import partial from "lodash/partial";
 
-import AreaMap from './AreaMap';
-import Area from '../../../models/Area';
-import { LeafletMouseEvent } from 'leaflet';
+import AreaMap from "./AreaMap";
+import Area from "../../../models/Area";
+import type { LeafletMouseEvent } from "leaflet";
 
 interface Props {
   areas: Area[];
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const AreasMap: React.SFC<Props> = (props) => {
-  console.warn(props, 'AreasMap');
+  console.warn(props, "AreasMap");
   return (
     <div>
       {props.areas.map((area) => {

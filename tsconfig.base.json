@@ -1,0 +1,44 @@
+{
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext", // less opinionated, let things support both as ESM and CJS when needed 
+    "moduleResolution": "Bundler",
+    "noEmit": true, // type check only for base
+    "outDir": "./dist/",
+    "rootDir": "./src/",
+
+    // Misc
+    "strict": false, // TODO: Set to true and fix hundreds of things
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "incremental": true, // fast
+    "strictPropertyInitialization": false,
+
+    // Experimental, required for typeorm
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    // Browser options I think
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+
+    // "baseUrl": ".",
+    // "paths": {
+    //   "*": [
+    //       "node_modules/*",
+    //       "src/types/*",
+    //       "./test/*",
+    //       "./tools/*"
+    //   ]
+    // }
+  },
+  "include": [
+    "./src/typescript/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+

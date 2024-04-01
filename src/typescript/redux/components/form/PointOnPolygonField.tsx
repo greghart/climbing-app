@@ -1,17 +1,17 @@
-import * as React from 'react';
-import { WrappedFieldsProps } from 'redux-form';
-import get from 'lodash/get';
+import * as React from "react";
+import type { WrappedFieldsProps } from "redux-form";
+import get from "lodash/get";
 
-import PointOnPolygon from '../tracer/PointOnPolygon';
-import { ExtractProps } from '../../../externals';
-import BaseMap from '../map/BaseMap';
-import MyPolygon from '../map/MyPolygon';
-import ConfirmedCircle from '../tracer/ConfirmedCircle';
-import Coordinate, { isValidCoordinate } from '../../../models/Coordinate';
+import PointOnPolygon from "../tracer/PointOnPolygon";
+import type { ExtractProps } from "../../../externals";
+import BaseMap from "../map/BaseMap";
+import MyPolygon from "../map/MyPolygon";
+import ConfirmedCircle from "../tracer/ConfirmedCircle";
+import Coordinate, { isValidCoordinate } from "../../../models/Coordinate";
 
 interface PointOnPolygonFieldProps {
   // Polygon
-  positions: ExtractProps<typeof PointOnPolygon>['positions'];
+  positions: ExtractProps<typeof PointOnPolygon>["positions"];
   // We will use the first two names as lat and lng properties respectively
   // The third name should be a flag to say we're updating or not
   names: [string, string, string];
@@ -21,7 +21,9 @@ interface PointOnPolygonFieldProps {
   pointOnPolygonProps?: Partial<ExtractProps<typeof PointOnPolygon>>;
 }
 
-type FieldType = React.ComponentType<WrappedFieldsProps & PointOnPolygonFieldProps>;
+type FieldType = React.ComponentType<
+  WrappedFieldsProps & PointOnPolygonFieldProps
+>;
 const PointOnPolygonField: FieldType = (props) => {
   const lat = get(props, props.names[0]);
   const lng = get(props, props.names[1]);
@@ -40,16 +42,23 @@ const PointOnPolygonField: FieldType = (props) => {
         <div className="row">
           <div className="col-8">
             {/** Show a boulder with current route position on it */}
-            {isValidCoordinate(coordinate) ?
-              <BaseMap bounds={props.positions} style={{ paddingBottom: '50%' }}>
+            {isValidCoordinate(coordinate) ? (
+              <BaseMap
+                bounds={props.positions}
+                style={{ paddingBottom: "50%" }}
+              >
                 <MyPolygon positions={props.positions} />
                 <ConfirmedCircle center={[coordinate.lat, coordinate.lng]} />
-              </BaseMap> :
-              'None Provided'
-            }
+              </BaseMap>
+            ) : (
+              "None Provided"
+            )}
           </div>
         </div>
-        <div className="btn btn-link" onClick={() => isUpdating.input.onChange(true)}>
+        <div
+          className="btn btn-link"
+          onClick={() => isUpdating.input.onChange(true)}
+        >
           <small>
             Edit <i className="fa fa-edit ml-2" />
           </small>
@@ -74,5 +83,5 @@ const PointOnPolygonField: FieldType = (props) => {
   );
 };
 
-export { PointOnPolygonFieldProps };
+export type { PointOnPolygonFieldProps };
 export default PointOnPolygonField;

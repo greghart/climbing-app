@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { Omit } from 'utility-types';
+import * as React from "react";
+import type { Omit } from "utility-types";
 
-import PhotoModel from '../../../models/Photo';
-import User from '../../../models/User';
+import PhotoModel from "../../../models/Photo";
+import User from "../../../models/User";
 
-type Base = Omit<PhotoModel, 'photoable'>;
+type Base = Omit<PhotoModel, "photoable">;
 
 interface Props {
   photo: Base;
@@ -18,13 +18,17 @@ interface Props {
 const PhotoImage: React.SFC<Props> = (props) => {
   return (
     <img
-      style={{ objectFit: 'cover', width: '100%', maxWidth: '100%', maxHeight: '150px' }}
+      style={{
+        objectFit: "cover",
+        width: "100%",
+        maxWidth: "100%",
+        maxHeight: "150px",
+      }}
       src={`/uploads/${props.photo.upload.id}/download`}
     />
   );
 };
 
-PhotoImage.defaultProps = {
-};
+PhotoImage.defaultProps = {};
 
 export default PhotoImage;

@@ -1,15 +1,15 @@
-import { reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { replace } from 'connected-react-router';
-import { pick } from 'lodash';
-import Bluebird from 'bluebird';
+import { reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { replace } from "connected-react-router";
+import { pick } from "lodash";
+import Bluebird from "bluebird";
 
-import AreaForm, { Props as FormProps } from './AreaForm';
-import { MapDispatchToPropsFunction } from '../types';
-import updateArea from '../../ducks/operations/updateArea';
-import handleReduxFormErrors from '../util/handleReduxFormErrors';
-import Area from '../../../models/Area';
+import AreaForm, { type Props as FormProps } from "./AreaForm";
+import type { MapDispatchToPropsFunction } from "../types";
+import updateArea from "../../ducks/operations/updateArea";
+import handleReduxFormErrors from "../util/handleReduxFormErrors";
+import Area from "../../../models/Area";
 
 interface OwnProps {
   // Area to edit
@@ -17,42 +17,34 @@ interface OwnProps {
 }
 
 // Use one form for all routes -- for now we assume one at a time.
-const form = 'area-form-edit';
+const form = "area-form-edit";
 
 const mapStateToProps = (_: unknown, ownProps: OwnProps) => {
   return {
-    initialValues: pick(ownProps.area, 'name', 'description', 'polygon'),
+    initialValues: pick(ownProps.area, "name", "description", "polygon"),
     area: ownProps.area,
   };
 };
 
 const mapDispatchToProps: MapDispatchToPropsFunction<
-  Partial<FormProps>, OwnProps
+  Partial<FormProps>,
+  OwnProps
 > = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
-      return Bluebird.resolve(
-        dispatch(
-          updateArea(ownProps.area, data),
-        ),
-      )
-      .then(() => {
-        return dispatch(
-          replace(`/areas/${ownProps.area.id}`),
-        );
-      })
-      .catch(handleReduxFormErrors);
+      return Bluebird.resolve(dispatch(updateArea(ownProps.area, data)))
+        .then(() => {
+          return dispatch(replace(`/areas/${ownProps.area.id}`));
+        })
+        .catch(handleReduxFormErrors);
     },
   };
 };
 
 export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
   reduxForm({
     form,
     enableReinitialize: false,
-  }),
+  })
 )(AreaForm) as React.ComponentType<OwnProps>;

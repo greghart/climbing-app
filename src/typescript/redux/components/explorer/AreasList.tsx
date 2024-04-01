@@ -1,9 +1,9 @@
-import * as React from 'react';
-import classNames from 'classnames';
-import Area from '../../../models/Area';
+import * as React from "react";
+import classNames from "classnames";
+import Area from "../../../models/Area";
 
-import partial from 'lodash/partial';
-import { Link } from 'react-router-dom';
+import partial from "lodash/partial";
+import { Link } from "react-router-dom";
 
 type Props = {
   areas: Area[];
@@ -24,12 +24,9 @@ const AreaListing: React.SFC<AreaListingProps> = (props) => {
   return (
     <button
       role="button"
-      className={classNames(
-        'list-group-item', 'list-group-item-action',
-        {
-          active: props.selected,
-        },
-      )}
+      className={classNames("list-group-item", "list-group-item-action", {
+        active: props.selected,
+      })}
     >
       <span onClick={props.onClick}>{props.area.name}</span>
       <Link to={`/areas/${props.area.id}`} className="ml-2">
@@ -71,7 +68,7 @@ const AreaOpenListing: React.SFC<any> = (props) => {
 };
 
 const AreasList: React.SFC<Props> = (props) => {
-  console.warn(props, 'AreasList');
+  console.warn(props, "AreasList");
   return (
     <div>
       <ul className="list-group">
@@ -90,5 +87,5 @@ const AreasList: React.SFC<Props> = (props) => {
   );
 };
 
-export { Props as Props };
+export type { Props as Props };
 export default AreasList;

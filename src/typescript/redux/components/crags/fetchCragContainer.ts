@@ -1,12 +1,12 @@
-import { denormalize } from 'normalizr';
-import { createSelector } from 'reselect';
+import { denormalize } from "normalizr";
+import { createSelector } from "reselect";
 
-import { State, selectors } from '../../reducer';
-import { CragSchema } from '../../normalizr';
-import fetchCrag from '../../ducks/operations/fetchCrag';
-import Crag from '../../../models/Crag';
-import asyncComponent from '../../decorators/asyncComponent';
-import selectNormalizr from '../../util/selectNormalizr';
+import { type State, selectors } from "../../reducer";
+import { CragSchema } from "../../normalizr";
+import fetchCrag from "../../ducks/operations/fetchCrag";
+import Crag from "../../../models/Crag";
+import asyncComponent from "../../decorators/asyncComponent";
+import selectNormalizr from "../../util/selectNormalizr";
 
 /**
  * Decorator to fetch needed data for a crag
@@ -19,19 +19,17 @@ interface OwnProps {
 }
 
 const selectProps = (state: State, props: OwnProps) => props.cragId;
-const selectCrag = (entities: State['entities'], cragId: Id) => denormalize(
-  cragId,
-  selectNormalizr(
-    CragSchema,
-    { areas: 'empty', commentable: true },
-  ),
-  entities,
-);
+const selectCrag = (entities: State["entities"], cragId: Id) =>
+  denormalize(
+    cragId,
+    selectNormalizr(CragSchema, { areas: "empty", commentable: true }),
+    entities
+  );
 
 const getCrag = createSelector<State, OwnProps, any, Id, Crag>(
   selectors.selectEntities,
   selectProps,
-  selectCrag,
+  selectCrag
 );
 
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
@@ -48,9 +46,7 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
-    fetch: () => dispatch(
-      fetchCrag('singleton-fetch-crag')(ownProps.cragId),
-    ),
+    fetch: () => dispatch(fetchCrag("singleton-fetch-crag")(ownProps.cragId)),
   };
 };
 
@@ -59,12 +55,6 @@ const fetchCragContainer = asyncComponent<
   StateProps,
   ReturnType<typeof mapDispatchToProps>,
   OwnProps
->(
-  mapStateToProps,
-  mapDispatchToProps,
-  (props) => (
-    !props.isLoading
-  ),
-);
+>(mapStateToProps, mapDispatchToProps, (props) => !props.isLoading);
 
 export default fetchCragContainer;

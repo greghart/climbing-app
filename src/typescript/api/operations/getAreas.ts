@@ -45,5 +45,5 @@ const getAreas = (
   });
 };
 
-export { Options };
+export type { Options };
 export default getAreas;

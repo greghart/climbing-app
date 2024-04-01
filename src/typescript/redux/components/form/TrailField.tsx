@@ -1,16 +1,16 @@
-import * as React from 'react';
-import * as Leaflet from 'leaflet';
-import { WrappedFieldsProps } from 'redux-form';
-import get from 'lodash/get';
-import reduce from 'lodash/reduce';
+import * as React from "react";
+import * as Leaflet from "leaflet";
+import type { WrappedFieldsProps } from "redux-form";
+import get from "lodash/get";
+import reduce from "lodash/reduce";
 
-import TrailTracer from '../tracer/TrailTracer';
-import BaseMap from '../map/BaseMap';
-import { ExtractProps } from '../../../externals';
-import { AdjacencyGraph, adjacencyGraph } from '../util/graph';
-import TrailNode from '../../../models/TrailNode';
-import TrailEdge from '../../../models/TrailEdge';
-import { Polyline } from 'react-leaflet';
+import TrailTracer from "../tracer/TrailTracer";
+import BaseMap from "../map/BaseMap";
+import type { ExtractProps } from "../../../externals";
+import { type AdjacencyGraph, adjacencyGraph } from "../util/graph";
+import TrailNode from "../../../models/TrailNode";
+import TrailEdge from "../../../models/TrailEdge";
+import { Polyline } from "react-leaflet";
 
 interface TrailProps {
   // We will use:
@@ -48,9 +48,9 @@ function adaptGraphToRaw(graph: AdjacencyGraph) {
         edges: adjacencyGraph.getEdges(graph, key).map((target) => {
           return {
             a: key,
-            b: target
+            b: target,
           };
-        })
+        }),
       });
       return memo;
     },
@@ -58,7 +58,9 @@ function adaptGraphToRaw(graph: AdjacencyGraph) {
   );
 }
 
-const TrailField: React.ComponentType<WrappedFieldsProps & TrailProps> = (props) => {
+const TrailField: React.ComponentType<WrappedFieldsProps & TrailProps> = (
+  props
+) => {
   const nodes = get(props, props.names[0]);
   const isUpdating = get(props, props.names[1]);
 
@@ -68,24 +70,25 @@ const TrailField: React.ComponentType<WrappedFieldsProps & TrailProps> = (props)
       <div>
         <div className="row">
           <div className="col">
-            <BaseMap bounds={props.bounds} style={{ paddingBottom: '50%' }}>
+            <BaseMap bounds={props.bounds} style={{ paddingBottom: "50%" }}>
               {...reduce(
                 adjacencyGraph.getNodeKeys(graph),
                 (memo, index) => {
                   const thisNode = adjacencyGraph.getNode(graph, index);
                   return memo.concat(
-                    adjacencyGraph.getEdges(graph, index)
-                    .map((targetNodeIndex) => (
-                      <Polyline
-                        key={`${index}-${targetNodeIndex}`}
-                        weight={2}
-                        positions={[
-                          thisNode,
-                          adjacencyGraph.getNode(graph, targetNodeIndex)
-                        ]}
-                        color="blue"
-                      />
-                    ))
+                    adjacencyGraph
+                      .getEdges(graph, index)
+                      .map((targetNodeIndex) => (
+                        <Polyline
+                          key={`${index}-${targetNodeIndex}`}
+                          weight={2}
+                          positions={[
+                            thisNode,
+                            adjacencyGraph.getNode(graph, targetNodeIndex),
+                          ]}
+                          color="blue"
+                        />
+                      ))
                   );
                 },
                 []
@@ -93,14 +96,15 @@ const TrailField: React.ComponentType<WrappedFieldsProps & TrailProps> = (props)
             </BaseMap>
           </div>
         </div>
-        <div className="btn btn-link" onClick={() => isUpdating.input.onChange(true)}>
+        <div
+          className="btn btn-link"
+          onClick={() => isUpdating.input.onChange(true)}
+        >
           <small>
-            Edit <i className="fa fa-edit ml-2"/>
+            Edit <i className="fa fa-edit ml-2" />
           </small>
           {nodes.meta.touched && nodes.meta.error && (
-            <div className="invalid-feedback">
-              {nodes.meta.error}
-            </div>
+            <div className="invalid-feedback">{nodes.meta.error}</div>
           )}
         </div>
       </div>
@@ -135,5 +139,5 @@ const TrailField: React.ComponentType<WrappedFieldsProps & TrailProps> = (props)
   );
 };
 
-export { TrailProps as TrailFieldProps };
+export type { TrailProps as TrailFieldProps };
 export default TrailField;

@@ -1,10 +1,10 @@
-import { compose } from 'redux';
+import { compose } from "redux";
 
-import { fetchCommentableForCrag } from '../../ducks/operations/fetchCommentable';
-import withMountDispatch from '../../decorators/withMountDispatch';
-import withLoader from '../../decorators/withLoader';
-import Crag from '../../../models/Crag';
-import { InferableComponentEnhancerWithProps } from 'react-redux';
+import { fetchCommentableForCrag } from "../../ducks/operations/fetchCommentable";
+import withMountDispatch from "../../decorators/withMountDispatch";
+import withLoader from "../../decorators/withLoader";
+import Crag from "../../../models/Crag";
+import type { InferableComponentEnhancerWithProps } from "react-redux";
 
 interface OwnProps {
   crag: Crag;
@@ -17,11 +17,9 @@ function withCommentable<InputProps extends OwnProps>() {
   return compose(
     withMountDispatch<InputProps>(
       (props) => fetchCommentableForCrag(props.crag),
-      (props) => !props.crag.commentable,
+      (props) => !props.crag.commentable
     ),
-    withLoader<InputProps>(
-      (props) => !props.crag.commentable,
-    ),
+    withLoader<InputProps>((props) => !props.crag.commentable)
   ) as InferableComponentEnhancerWithProps<{}, InputProps>;
 }
 

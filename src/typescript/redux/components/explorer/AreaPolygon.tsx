@@ -1,9 +1,9 @@
-import * as React from 'react';
-import sortBy from 'lodash/sortBy';
+import * as React from "react";
+import sortBy from "lodash/sortBy";
 
-import Area from '../../../models/Area';
-import MyPolygon from '../map/MyPolygon';
-import { ExtractProps } from '../../../externals';
+import Area from "../../../models/Area";
+import MyPolygon from "../map/MyPolygon";
+import type { ExtractProps } from "../../../externals";
 
 type Props = Partial<ExtractProps<typeof MyPolygon>> & {
   area: Area;
@@ -13,7 +13,7 @@ const AreaPolygon: React.SFC<Props> = (props) => {
   return (
     <MyPolygon
       {...props}
-      positions={sortBy(props.area.polygon.coordinates, 'order')}
+      positions={sortBy(props.area.polygon.coordinates, "order")}
     />
   );
 };

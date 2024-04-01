@@ -32,7 +32,11 @@ const getBoulder = (
 
   return query.getOne().then((boulder) => {
     // Signal client that we've not found comments
-    if (options.includeComments && boulder.commentable === undefined) {
+    if (
+      options.includeComments &&
+      boulder &&
+      boulder.commentable === undefined
+    ) {
       boulder.commentable = null;
     }
     return boulder;

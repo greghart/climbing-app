@@ -1,6 +1,9 @@
-import * as React from 'react';
-import { RouteConfigComponentProps, renderRoutes } from 'react-router-config';
-import { LazyBoundary } from 'react-imported-component';
+import * as React from "react";
+import {
+  type RouteConfigComponentProps,
+  renderRoutes,
+} from "react-router-config";
+import { LazyBoundary } from "react-imported-component";
 
 /**
  * The container route is a top level container to allow a single place to add global logic.

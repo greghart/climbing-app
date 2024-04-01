@@ -1,10 +1,10 @@
-import { createAction } from 'redux-actions';
-import { normalize, Schema } from 'normalizr';
-import mergeWith from 'lodash/mergeWith';
-import isArray from 'lodash/isArray';
+import { createAction } from "redux-actions";
+import { normalize, type Schema } from "normalizr";
+import mergeWith from "lodash/mergeWith";
+import isArray from "lodash/isArray";
 
-import _debug from '../../debug';
-const debug = _debug.extend('redux:ducks:entities');
+import _debug from "../../debug";
+const debug = _debug.extend("redux:ducks:entities");
 
 const initialState = {
   crags: {},
@@ -30,11 +30,14 @@ export interface EntitiesActionPayload {
   };
 }
 // Load entities for given schema
-export const addEntities = createAction<Payload>('climbing-app/entities/ADD_ENTITIES');
+export const addEntities = createAction<Payload>(
+  "climbing-app/entities/ADD_ENTITIES"
+);
 // Request entities called with any options
-export const requestEntities = createAction<any>('ENTITIES_REQUEST');
-export const receiveEntities = createAction<EntitiesActionPayload>('ENTITIES_SUCCESS');
-export const failedEntities = createAction<null | Error>('ENTITIES_FAILURE');
+export const requestEntities = createAction<any>("ENTITIES_REQUEST");
+export const receiveEntities =
+  createAction<EntitiesActionPayload>("ENTITIES_SUCCESS");
+export const failedEntities = createAction<null | Error>("ENTITIES_FAILURE");
 
 /** Reducer */
 /**
@@ -54,26 +57,24 @@ const customizer = (objValue: any, srcValue: any) => {
  *
  * We also allow specific actions to more directly load entities into state.
  **/
-export default (state: any = initialState, { type, payload }: ReduxActions.Action<any>) => {
+export default (
+  state: any = initialState,
+  { type, payload }: ReduxActions.Action<any>
+) => {
   if (type === addEntities.toString()) {
-    const { entities, schema } = (payload as Payload);
+    const { entities, schema } = payload as Payload;
     return mergeWith(
       {},
       state,
       normalize(entities, schema).entities,
-      customizer,
+      customizer
     );
   }
   // Any action with payload.entities gets handled here.
   // Assumes normalization has occurred on the 'entities' collection
   if (payload && payload.entities) {
-    debug(payload.entities, 'merging with entities');
-    return mergeWith(
-      {},
-      state,
-      payload.entities,
-      customizer,
-    );
+    debug(payload.entities, "merging with entities");
+    return mergeWith({}, state, payload.entities, customizer);
   }
 
   return state;

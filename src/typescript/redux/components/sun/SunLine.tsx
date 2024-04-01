@@ -1,15 +1,15 @@
 /**
  * Line of the sun
  */
-import * as React from 'react';
-import * as SunCalc from 'suncalc';
+import * as React from "react";
+import * as SunCalc from "suncalc";
 
-import Arrow from '../map/Arrow';
-import { latLngToMeters } from '../../../util/mapLib';
-import Coordinate from '../../../models/Coordinate';
-import { formValueSelector } from 'redux-form';
-import { connect } from 'react-redux';
-import { State } from '../../reducer';
+import Arrow from "../map/Arrow";
+import { latLngToMeters } from "../../../util/mapLib";
+import Coordinate from "../../../models/Coordinate";
+import { formValueSelector } from "redux-form";
+import { connect } from "react-redux";
+import type { State } from "../../reducer";
 
 interface Props {
   // The coordinate to point at
@@ -23,7 +23,7 @@ const _SunLine: React.ComponentType<Props> = (props) => {
   const sunPosition = SunCalc.getPosition(
     d,
     props.coordinate.lat,
-    props.coordinate.lng,
+    props.coordinate.lng
   );
   // Suncalc gives azimuth based on 0 radians at the unit vector (0, -1) (ie. south)
   const unitVector = [
@@ -35,10 +35,7 @@ const _SunLine: React.ComponentType<Props> = (props) => {
     props.coordinate.lat + latLngToMeters(unitVector[0]) * 1,
     props.coordinate.lng + latLngToMeters(unitVector[1]) * 1,
   ];
-  const size = Math.max(
-    6 * (sunPosition.altitude / 1.1),
-    1.5,
-  );
+  const size = Math.max(6 * (sunPosition.altitude / 1.1), 1.5);
   const point: [number, number] = [
     base[0] + latLngToMeters(unitVector[0]) * size,
     base[1] + latLngToMeters(unitVector[1]) * size,
@@ -51,24 +48,19 @@ const _SunLine: React.ComponentType<Props> = (props) => {
       //   }
       //   const pixelCenter = mapRef.current.leafletElement.getPixelBounds().getCenter();
       // }}
-      positions={[
-        base,
-        point,
-      ]}
+      positions={[base, point]}
       color="yellow"
     />
   );
 };
 
 // Currently this component is mostly made to connect to sun form, so hook it up now
-const selector = formValueSelector('sun-form');
+const selector = formValueSelector("sun-form");
 const mapStateToProps = (state: State) => {
   return {
-    hour: selector(state, 'givenHour') / 4,
+    hour: selector(state, "givenHour") / 4,
   };
 };
-const SunLine = connect(
-  mapStateToProps,
-)(_SunLine);
+const SunLine = connect(mapStateToProps)(_SunLine);
 
 export default SunLine;

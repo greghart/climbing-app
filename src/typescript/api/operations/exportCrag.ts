@@ -21,7 +21,7 @@ const exportCrag = (id: number | string) => {
       ],
     })
     .then((crag) => {
-      crag._isLoaded = true;
+      if (crag) crag._isLoaded = true;
       return crag;
     });
 };

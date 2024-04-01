@@ -1,12 +1,11 @@
-import * as React from 'react';
-import SearchGroup from './SearchGroup';
-import SearchInputContainer from './SearchInputContainer';
-import SearchResultsContainer from './SearchResultsContainer';
-import PageLayout from '../layouts/PageLayout';
-import GoBackHeader from '../layouts/GoBackHeader';
-import { ExtractProps } from '../../../externals';
-import AccordionContainer from '../layouts/AccordionContainer';
-import SearchFilters from './SearchFilters';
+import * as React from "react";
+import SearchGroup from "./SearchGroup";
+import SearchInputContainer from "./SearchInputContainer";
+import SearchResultsContainer from "./SearchResultsContainer";
+import PageLayout from "../layouts/PageLayout";
+import GoBackHeader from "../layouts/GoBackHeader";
+import AccordionContainer from "../layouts/AccordionContainer";
+import SearchFilters from "./SearchFilters";
 
 interface Props {
   onClickBack?: () => any;
@@ -18,13 +17,7 @@ const SearchLayout: React.SFC<Props> = (props) => {
   return (
     <PageLayout
       key="search"
-      header={
-        <GoBackHeader
-          input={
-            <SearchInputContainer />
-          }
-        />
-      }
+      header={<GoBackHeader input={<SearchInputContainer />} />}
       content={
         <div className="row mt-2 h-100">
           <div className="col mh-100 mb-2">
@@ -36,11 +29,7 @@ const SearchLayout: React.SFC<Props> = (props) => {
                     <span>Open Search Filters {defaultChevron}</span>
                   )}
                   defaultOpen={false}
-                  content={() => (
-                    <SearchFilters
-                      onSubmit={() => {}}
-                    />
-                  )}
+                  content={() => <SearchFilters onSubmit={() => {}} />}
                 />
               </div>
             </div>

@@ -125,4 +125,4 @@ export default class PhotoablesService {
 }
 
 type PhotoablesServiceType = typeof PhotoablesService.prototype;
-export { PhotoablesServiceType };
+export type { PhotoablesServiceType };

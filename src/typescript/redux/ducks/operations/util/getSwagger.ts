@@ -1,5 +1,5 @@
-import getSwagger from '../../../../api/clients/getServiceClient';
-import APIClientInterface from '../../../../api/clients/APIClientInterface';
+import getSwagger from "../../../../api/clients/getServiceClient";
+import type { APIClientInterface } from "../../../../api/clients/APIClientInterface";
 
-export { APIClientInterface as SwaggerAPI };
+export type { APIClientInterface as SwaggerAPI };
 export default getSwagger;

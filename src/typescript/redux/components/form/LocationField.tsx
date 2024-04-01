@@ -1,13 +1,13 @@
-import * as React from 'react';
-import * as Leaflet from 'leaflet';
-import get from 'lodash/get';
-import { WrappedFieldsProps } from 'redux-form';
+import * as React from "react";
+import * as Leaflet from "leaflet";
+import get from "lodash/get";
+import type { WrappedFieldsProps } from "redux-form";
 
-import MyPolygon from '../map/MyPolygon';
-import Coordinate, { isValidCoordinate } from '../../../models/Coordinate';
-import BoulderLocationSetterContainer from '../boulders/BoulderLocationSetterContainer';
-import BoulderIcon from '../map/BoulderIcon';
-import BaseMap from '../map/BaseMap';
+import MyPolygon from "../map/MyPolygon";
+import Coordinate, { isValidCoordinate } from "../../../models/Coordinate";
+import BoulderLocationSetterContainer from "../boulders/BoulderLocationSetterContainer";
+import BoulderIcon from "../map/BoulderIcon";
+import BaseMap from "../map/BaseMap";
 
 interface LocationProps {
   // We will use the first two names as lat and lng properties respectively
@@ -19,7 +19,9 @@ interface LocationProps {
   positions?: Leaflet.LatLngExpression[];
 }
 
-const LocationField: React.ComponentType<WrappedFieldsProps & LocationProps> = (props) => {
+const LocationField: React.ComponentType<WrappedFieldsProps & LocationProps> = (
+  props
+) => {
   const lat = get(props, props.names[0]);
   const lng = get(props, props.names[1]);
   const isUpdating = get(props, props.names[2]);
@@ -33,19 +35,21 @@ const LocationField: React.ComponentType<WrappedFieldsProps & LocationProps> = (
       <div>
         <div className="row">
           <div className="col-8">
-            {isValidCoordinate(coordinate) ?
-              <BaseMap center={coordinate} style={{ paddingBottom: '50%' }}>
-                <BoulderIcon
-                  position={coordinate}
-                />
-              </BaseMap> :
+            {isValidCoordinate(coordinate) ? (
+              <BaseMap center={coordinate} style={{ paddingBottom: "50%" }}>
+                <BoulderIcon position={coordinate} />
+              </BaseMap>
+            ) : (
               <span>None provided</span>
-            }
+            )}
           </div>
         </div>
-        <div className="btn btn-link" onClick={() => isUpdating.input.onChange(true)}>
+        <div
+          className="btn btn-link"
+          onClick={() => isUpdating.input.onChange(true)}
+        >
           <small>
-            Edit <i className="fa fa-edit ml-2"/>
+            Edit <i className="fa fa-edit ml-2" />
           </small>
         </div>
       </div>
@@ -63,9 +67,7 @@ const LocationField: React.ComponentType<WrappedFieldsProps & LocationProps> = (
           isUpdating.input.onChange(false);
         }}
       >
-        {props.positions &&
-          <MyPolygon positions={props.positions} />
-        }
+        {props.positions && <MyPolygon positions={props.positions} />}
       </BoulderLocationSetterContainer>
     </div>
   );

@@ -3,26 +3,26 @@
  *
  * TrailTracer allows user to click points on a map and save them
  */
-import * as React from 'react';
-import * as Leaflet from 'leaflet';
-import { Map, Polyline, Marker, CircleMarker } from 'react-leaflet';
-import find from 'lodash/find';
-import reduce from 'lodash/reduce';
+import * as React from "react";
+import * as Leaflet from "leaflet";
+import { Map, Polyline, Marker, CircleMarker } from "react-leaflet";
+import find from "lodash/find";
+import reduce from "lodash/reduce";
 
-import BestTileLayer from '../BestTileLayer';
-import FixedContainerOverMap from '../layouts/FixedContainerOverMap';
-import SearchGroup from '../search/SearchGroup';
-import classNames from 'classnames';
-import { ExtractProps } from '../../../externals';
-import { adjacencyGraph, AdjacencyGraph } from '../util/graph';
+import BestTileLayer from "../BestTileLayer";
+import FixedContainerOverMap from "../layouts/FixedContainerOverMap";
+import SearchGroup from "../search/SearchGroup";
+import classNames from "classnames";
+import type { ExtractProps } from "../../../externals";
+import { adjacencyGraph, type AdjacencyGraph } from "../util/graph";
 
 const mapIcon = '<span><i class="fa fa-circle"/></span>';
 const selectedIcon = Leaflet.divIcon({
-  className: 'text-primary',
+  className: "text-primary",
   html: mapIcon,
 });
 const normalIcon = Leaflet.divIcon({
-  className: 'text-success',
+  className: "text-success",
   html: mapIcon,
 });
 
@@ -38,21 +38,21 @@ interface TrailTracerProps {
   defaultGraph?: AdjacencyGraph;
 }
 
-type Mode = 'insert' | 'manipulate';
+type Mode = "insert" | "manipulate";
 type NodeSelection = {
-  type: 'node';
+  type: "node";
   key: number;
 };
 type EdgeSelection = {
-  type: 'edge';
+  type: "edge";
   key: [number, number];
 };
 type CurrentSelection = NodeSelection | EdgeSelection;
 function isNode(selection: CurrentSelection): selection is NodeSelection {
-  return selection && selection.type === 'node';
+  return selection && selection.type === "node";
 }
 function isEdge(selection: CurrentSelection): selection is EdgeSelection {
-  return selection && selection.type === 'edge';
+  return selection && selection.type === "edge";
 }
 function isEdgeSelected(selection: CurrentSelection, u: number, v: number) {
   return isEdge(selection) && selection.key[0] === u && selection.key[1] === v;
@@ -65,7 +65,7 @@ interface TrailTracerState {
   // Currently selected node
   currentlySelected?: CurrentSelection;
   // Current mode of tracer.
-  mode: 'insert' | 'manipulate';
+  mode: "insert" | "manipulate";
   isDragging: boolean;
   // Current mouse position
   current: Leaflet.LatLng;
@@ -82,17 +82,19 @@ type DraggableMarkerProps = ExtractProps<Marker> & {
  * This allows us to re-render the parent container, but not interrupt Leaflet's drag
  * workflow.
  */
-class DraggableMarker extends React.Component<DraggableMarkerProps, { isDragging: boolean }> {
-
+class DraggableMarker extends React.Component<
+  DraggableMarkerProps,
+  { isDragging: boolean }
+> {
   static defaultProps = {
     onUpdate: (node) => false,
-    radius: 4
+    radius: 4,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      isDragging: false
+      isDragging: false,
     };
     this.onDragStart = this.onDragStart.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
@@ -140,9 +142,8 @@ class DraggableMarker extends React.Component<DraggableMarkerProps, { isDragging
  *  allow non-connected graphs and we don't handle that yet.
  */
 class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
-
   static defaultProps = {
-    title: 'Trace',
+    title: "Trace",
     magnetSizeMeters: 4,
   };
 
@@ -151,9 +152,9 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
     this.state = {
       graph: props.defaultGraph || adjacencyGraph.initialize(),
       currentlySelected: undefined,
-      mode: 'insert',
+      mode: "insert",
       current: undefined,
-      isDragging: false
+      isDragging: false,
     };
     this.onClick = this.onClick.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -169,7 +170,7 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
    */
   getMode(e: Leaflet.LeafletMouseEvent): Mode {
     if (e.originalEvent.metaKey || e.originalEvent.ctrlKey) {
-      return 'manipulate';
+      return "manipulate";
     }
     return this.state.mode;
   }
@@ -179,21 +180,27 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
       return;
     }
     if (isNode(this.state.currentlySelected)) {
-      adjacencyGraph.removeNode(this.state.graph, this.state.currentlySelected.key);
+      adjacencyGraph.removeNode(
+        this.state.graph,
+        this.state.currentlySelected.key
+      );
     }
     if (isEdge(this.state.currentlySelected)) {
-      adjacencyGraph.removeEdge(this.state.graph, ...this.state.currentlySelected.key);
+      adjacencyGraph.removeEdge(
+        this.state.graph,
+        ...this.state.currentlySelected.key
+      );
     }
     this.setState({
-      currentlySelected: undefined
+      currentlySelected: undefined,
     });
   }
 
   onClick(e) {
     const mode = this.getMode(e);
-    if (mode === 'insert') {
+    if (mode === "insert") {
       this.onClickInsert(e);
-    } else if (mode === 'manipulate') {
+    } else if (mode === "manipulate") {
       this.onClickManipulate(e);
     }
   }
@@ -203,7 +210,7 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
     // If we get to the top level handler, just select none
     if (!e.originalEvent.defaultPrevented) {
       this.setState({
-        currentlySelected: undefined
+        currentlySelected: undefined,
       });
     }
   }
@@ -232,17 +239,17 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
         this.setState({
           currentlySelected: {
             key: existingNodeIndex,
-            type: 'node'
-          }
+            type: "node",
+          },
         });
-      // otherwise, just add a new node and select that one
+        // otherwise, just add a new node and select that one
       } else {
         const key = adjacencyGraph.addNode(this.state.graph, e.latlng);
         this.setState({
           currentlySelected: {
             key,
-            type: 'node'
-          }
+            type: "node",
+          },
         });
       }
       return;
@@ -251,7 +258,7 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
     // If it's an existing node, just add a new edge
     if (existingNodeIndex !== undefined) {
       targetNodeIndex = existingNodeIndex;
-    // Otherwise, add a new vertex and a new edge
+      // Otherwise, add a new vertex and a new edge
     } else {
       targetNodeIndex = adjacencyGraph.addNode(this.state.graph, e.latlng);
     }
@@ -265,9 +272,9 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
     this.setState({
       graph: this.state.graph,
       currentlySelected: {
-        type: 'node',
+        type: "node",
         key: targetNodeIndex,
-      }
+      },
     });
     return;
   }
@@ -284,35 +291,38 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
 
     // Setup adjacency and add (if not already)
     const existingAdjacency = adjacency[base] || [];
-    const newAdjacency = existingAdjacency.indexOf(target) === -1 ?
-      existingAdjacency.concat([target]) :
-      existingAdjacency;
+    const newAdjacency =
+      existingAdjacency.indexOf(target) === -1
+        ? existingAdjacency.concat([target])
+        : existingAdjacency;
     return {
       ...adjacency,
-      [base]: newAdjacency
+      [base]: newAdjacency,
     };
   }
 
   onMouseMove(e: Leaflet.LeafletMouseEvent) {
-    if (this.getMode(e) === 'manipulate') {
+    if (this.getMode(e) === "manipulate") {
     } else {
       this.setState({ current: e.latlng });
     }
   }
 
   onKeyPress(e: React.KeyboardEvent<any>) {
-    if (e.key === ' ') {
+    if (e.key === " ") {
       this.setState({
-        mode: this.state.mode === 'insert' ? 'manipulate' : 'insert'
+        mode: this.state.mode === "insert" ? "manipulate" : "insert",
       });
     }
-    if (this.state.mode === 'manipulate' && (e.key === 'Delete' || e.key === 'd')) {
+    if (
+      this.state.mode === "manipulate" &&
+      (e.key === "Delete" || e.key === "d")
+    ) {
       this.trashCurrent();
     }
   }
 
-  removeNode(nodeIndex: number) {
-  }
+  removeNode(nodeIndex: number) {}
 
   getPoints() {
     // Polyline of all existing edges, plus one to cursor
@@ -321,95 +331,123 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
         adjacencyGraph.getNodeKeys(this.state.graph),
         (memo, index) => {
           const thisNode = adjacencyGraph.getNode(this.state.graph, index);
-          return memo
-          // Add edges
-          .concat(adjacencyGraph.getEdges(this.state.graph, index).map((targetNodeIndex) => (
-            <Polyline
-              key={`line-${index}-${targetNodeIndex}`}
-              positions={[
-                thisNode,
-                adjacencyGraph.getNode(this.state.graph, targetNodeIndex)
-              ]}
-              color={isEdgeSelected(this.state.currentlySelected, index, targetNodeIndex) ?
-                'blue' : 'red'
-              }
-              onclick={this.state.mode !== 'manipulate' ? undefined : (e) => {
-                e.originalEvent.preventDefault();
-                e.originalEvent.stopPropagation();
-                this.setState({
-                  currentlySelected: {
-                    type: 'edge',
-                    key: [index, targetNodeIndex]
-                  }
-                });
-                return false;
-              }}
-            />
-          )));
+          return (
+            memo
+              // Add edges
+              .concat(
+                adjacencyGraph
+                  .getEdges(this.state.graph, index)
+                  .map((targetNodeIndex) => (
+                    <Polyline
+                      key={`line-${index}-${targetNodeIndex}`}
+                      positions={[
+                        thisNode,
+                        adjacencyGraph.getNode(
+                          this.state.graph,
+                          targetNodeIndex
+                        ),
+                      ]}
+                      color={
+                        isEdgeSelected(
+                          this.state.currentlySelected,
+                          index,
+                          targetNodeIndex
+                        )
+                          ? "blue"
+                          : "red"
+                      }
+                      onclick={
+                        this.state.mode !== "manipulate"
+                          ? undefined
+                          : (e) => {
+                              e.originalEvent.preventDefault();
+                              e.originalEvent.stopPropagation();
+                              this.setState({
+                                currentlySelected: {
+                                  type: "edge",
+                                  key: [index, targetNodeIndex],
+                                },
+                              });
+                              return false;
+                            }
+                      }
+                    />
+                  ))
+              )
+          );
         },
         []
       ),
-      (
-        (
-          this.state.mode === 'insert' &&
-          this.state.current &&
-          isNode(this.state.currentlySelected)
-        ) &&
-        <Polyline
-          key="current-line-pending"
-          positions={[
-            adjacencyGraph.getNode(this.state.graph, this.state.currentlySelected.key),
-            this.state.current,
-          ]}
-        />
-      ),
+      this.state.mode === "insert" &&
+        this.state.current &&
+        isNode(this.state.currentlySelected) && (
+          <Polyline
+            key="current-line-pending"
+            positions={[
+              adjacencyGraph.getNode(
+                this.state.graph,
+                this.state.currentlySelected.key
+              ),
+              this.state.current,
+            ]}
+          />
+        ),
       // Add non selected node markers
       ...adjacencyGraph.getNodeKeys(this.state.graph).map((index) => {
         const thisNode = adjacencyGraph.getNode(this.state.graph, index);
         return (
           <DraggableMarker
             key={`marker-${index}`}
-            icon={isNodeSelected(this.state.currentlySelected, index) ? selectedIcon : normalIcon}
+            icon={
+              isNodeSelected(this.state.currentlySelected, index)
+                ? selectedIcon
+                : normalIcon
+            }
             position={thisNode}
-            color={isNodeSelected(this.state.currentlySelected, index) ? 'green' : 'red'}
-            draggable={this.state.mode === 'manipulate'}
+            color={
+              isNodeSelected(this.state.currentlySelected, index)
+                ? "green"
+                : "red"
+            }
+            draggable={this.state.mode === "manipulate"}
             onUpdate={(latlng) => {
               const point = adjacencyGraph.getNode(this.state.graph, index);
               point.lat = latlng.lat;
               point.lng = latlng.lng;
               this.forceUpdate();
             }}
-            onclick={this.state.mode !== 'manipulate' ? undefined : (e) => {
-              this.setState({
-                currentlySelected: {
-                  type: 'node',
-                  key: index
-                }
-              });
-              return false;
-            }}
+            onclick={
+              this.state.mode !== "manipulate"
+                ? undefined
+                : (e) => {
+                    this.setState({
+                      currentlySelected: {
+                        type: "node",
+                        key: index,
+                      },
+                    });
+                    return false;
+                  }
+            }
           />
         );
-      })
+      }),
     ];
   }
 
   getInput() {
     return (
       <div className="input-group-append flex-grow-up bg-light align-items-center text-center">
-        <div className="col">
-          {this.props.title}
-        </div>
+        <div className="col">{this.props.title}</div>
         <div className="col-auto">
           <a
             role="button"
             className="btn btn-link"
-            onClick={() => (
-              this.props.onSubmit &&
-              this.props.onSubmit(this.state.graph)
-            )}
+            onClick={() =>
+              this.props.onSubmit && this.props.onSubmit(this.state.graph)
+            }
           >
-            <i className="fa fa-check pull-right"/>
+            <i className="fa fa-check pull-right" />
           </a>
         </div>
       </div>
@@ -425,43 +463,43 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
         <div className="col-auto">
           <div className="btn-group btn-group-toggle" data-toggle="buttons">
             <label
-              className={classNames(
-                'btn btn-secondary',
-                { active: this.state.mode === 'insert' }
-              )}
+              className={classNames("btn btn-secondary", {
+                active: this.state.mode === "insert",
+              })}
             >
               <input
                 type="radio"
                 name="options"
                 autoComplete="off"
-                checked={this.state.mode === 'insert'}
-                onChange={(e) => this.setState({ mode: 'insert' })}
-              /> Insert
+                checked={this.state.mode === "insert"}
+                onChange={(e) => this.setState({ mode: "insert" })}
+              />{" "}
+              Insert
             </label>
             <label
-              className={classNames(
-                'btn btn-secondary',
-                { active: this.state.mode === 'manipulate' }
-              )}
+              className={classNames("btn btn-secondary", {
+                active: this.state.mode === "manipulate",
+              })}
             >
               <input
                 type="radio"
                 name="options"
                 autoComplete="off"
-                defaultChecked={this.state.mode === 'manipulate'}
-                onChange={(e) => this.setState({ mode: 'manipulate' })}
-              /> Select
+                defaultChecked={this.state.mode === "manipulate"}
+                onChange={(e) => this.setState({ mode: "manipulate" })}
+              />{" "}
+              Select
             </label>
           </div>
-          {this.state.mode === 'manipulate' && (
+          {this.state.mode === "manipulate" && (
             <i className="fa fa-trash ml-2" onClick={this.trashCurrent} />
           )}
         </div>
         <div className="col-12 col-sm-auto text-left">
           <p className="text-info small">
-            Hit Space to toggle "Select" mode (or press on mobile).
-            This allows you to select your base node to start a new trail branch,
-            move existing nodes, or delete nodes.
+            Hit Space to toggle "Select" mode (or press on mobile). This allows
+            you to select your base node to start a new trail branch, move
+            existing nodes, or delete nodes.
           </p>
         </div>
       </div>
@@ -471,36 +509,29 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
   render() {
     return (
       /** Fill up whatever space is given to the tracer */
-      <div
-        className="w-100 h-100"
-        onKeyPress={this.onKeyPress}
-      >
+      <div className="w-100 h-100" onKeyPress={this.onKeyPress}>
         <FixedContainerOverMap>
           <SearchGroup
             onClickPrepend={this.props.onCancel}
             groupClass="flex-no-wrap"
-            prepend={
-              <i className="fa fa-times-circle" />
-            }
+            prepend={<i className="fa fa-times-circle" />}
             input={this.getInput()}
           />
           <div className="card bg-light">
-            <div className="card-body p-2">
-              {this.getControls()}
-            </div>
+            <div className="card-body p-2">{this.getControls()}</div>
           </div>
         </FixedContainerOverMap>
         <div
           className="row no-gutters"
           style={{
-            width: '100%',
-            height: '100%',
+            width: "100%",
+            height: "100%",
           }}
         >
           <Map
             style={{
-              width: '100%',
-              height: '100%',
+              width: "100%",
+              height: "100%",
             }}
             bounds={this.props.bounds}
             zoom={18}
@@ -518,7 +549,6 @@ class TrailTracer extends React.Component<TrailTracerProps, TrailTracerState> {
       </div>
     );
   }
-
 }
 
 export default TrailTracer;

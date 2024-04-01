@@ -1,17 +1,17 @@
-import { denormalize } from 'normalizr';
-import Bluebird from 'bluebird';
-import { connect } from 'react-redux';
-import { replace } from 'connected-react-router';
+import { denormalize } from "normalizr";
+import Bluebird from "bluebird";
+import { connect } from "react-redux";
+import { replace } from "connected-react-router";
 
-import withTrail from './withTrail';
-import CragTrail, { Props as FormProps } from './CragTrail';
-import { State } from '../../reducer';
-import Crag from '../../../models/Crag';
-import { TrailSchema } from '../../normalizr';
-import handleReduxFormErrors from '../util/handleReduxFormErrors';
-import updateCrag from '../../ducks/operations/updateCrag';
-import { MapDispatchToPropsFunction } from '../types';
-import fetchTrail from '../../ducks/operations/fetchTrail';
+import withTrail from "./withTrail";
+import CragTrail, { type Props as FormProps } from "./CragTrail";
+import type { State } from "../../reducer";
+import Crag from "../../../models/Crag";
+import { TrailSchema } from "../../normalizr";
+import handleReduxFormErrors from "../util/handleReduxFormErrors";
+import updateCrag from "../../ducks/operations/updateCrag";
+import type { MapDispatchToPropsFunction } from "../types";
+import fetchTrail from "../../ducks/operations/fetchTrail";
 
 interface OwnProps {
   crag: Crag;
@@ -20,16 +20,15 @@ interface OwnProps {
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
   return {
     initialValues: {
-      trail: denormalize(
-        ownProps.crag.trail,
-        TrailSchema,
-        state.entities
-      ),
-    }
+      trail: denormalize(ownProps.crag.trail, TrailSchema, state.entities),
+    },
   };
 };
 
-type MapDispatchToProps = MapDispatchToPropsFunction<Partial<FormProps>, OwnProps>;
+type MapDispatchToProps = MapDispatchToPropsFunction<
+  Partial<FormProps>,
+  OwnProps
+>;
 const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
@@ -37,21 +36,17 @@ const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
         dispatch(
           updateCrag(ownProps.crag, {
             ...ownProps.crag,
-            trail: data.trail
-          }),
-        ),
+            trail: data.trail,
+          })
+        )
       )
-      .then(() => {
-        return dispatch(
-          fetchTrail(ownProps.crag.id)
-        );
-      })
-      .then(() => {
-        return dispatch(
-          replace(`/crags/${ownProps.crag.id}`),
-        );
-      })
-      .catch(handleReduxFormErrors);
+        .then(() => {
+          return dispatch(fetchTrail(ownProps.crag.id));
+        })
+        .then(() => {
+          return dispatch(replace(`/crags/${ownProps.crag.id}`));
+        })
+        .catch(handleReduxFormErrors);
     },
   };
 };

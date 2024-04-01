@@ -1,9 +1,8 @@
-import * as React from 'react';
-import SFC = React.SFC;
-import isLocal from '../util/isLocal';
+import * as React from "react";
+import type { SFC } from "react";
 
 const isHot = !!module.hot;
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === "production";
 
 type HtmlComponentProps = {
   content: string;
@@ -36,10 +35,7 @@ const HtmlComponent: SFC<HtmlComponentProps> = (props) => {
         />
       </head>
       <body className="body--sidebar">
-        <div
-          id="app"
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
+        <div id="app" dangerouslySetInnerHTML={{ __html: content }} />
         <script dangerouslySetInnerHTML={{ __html: state }} />
         <script src="/build/js/application.js" />
       </body>
@@ -48,7 +44,7 @@ const HtmlComponent: SFC<HtmlComponentProps> = (props) => {
 };
 
 HtmlComponent.defaultProps = {
-  state: '',
+  state: "",
 };
 
 export default HtmlComponent;

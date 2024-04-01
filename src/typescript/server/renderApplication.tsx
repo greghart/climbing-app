@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Store } from "redux";
+import type { Store } from "redux";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";

@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as Leaflet from "leaflet";
-import { WrappedFieldsProps } from "redux-form";
+import type { WrappedFieldsProps } from "redux-form";
 import get from "lodash/get";
 import sortBy from "lodash/sortBy";
 
 // import BoundsTracer from '../tracer/BoundsTracer';
 import BaseMap from "../map/BaseMap";
 // import MyBounds from '../map/MyBounds';
-import { ExtractProps } from "../../../externals";
+import type { ExtractProps } from "../../../externals";
 import BoundsTracer from "../tracer/BoundsTracer";
 
 interface BoundsProps {
@@ -79,5 +79,5 @@ const BoundsField: React.ComponentType<WrappedFieldsProps & BoundsProps> = (
   );
 };
 
-export { BoundsProps as BoundsFieldProps };
+export type { BoundsProps as BoundsFieldProps };
 export default BoundsField;

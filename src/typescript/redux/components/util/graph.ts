@@ -1,9 +1,9 @@
 /**
  * Some functional components for manipulating a graph
  */
-import * as Leaflet from 'leaflet';
-import without from 'lodash/without';
-import values from 'lodash/values';
+import * as Leaflet from "leaflet";
+import without from "lodash/without";
+import values from "lodash/values";
 
 type Node = Leaflet.LatLngLiteral;
 
@@ -26,7 +26,7 @@ interface GraphInterface<Graph, Key = number> {
 
 type AdjacencyMap = { [index: number]: number[] };
 interface AdjacencyGraph {
-  nodes: { [key: number]: Node; };
+  nodes: { [key: number]: Node };
   _counter: number;
   adjacency: AdjacencyMap;
 }
@@ -35,7 +35,7 @@ const adjacencyGraph: GraphInterface<AdjacencyGraph> = {
     return {
       nodes: {},
       adjacency: {},
-      _counter: 0
+      _counter: 0,
     };
   },
 
@@ -94,16 +94,18 @@ const adjacencyGraph: GraphInterface<AdjacencyGraph> = {
 
     // Setup adjacency and add (if not already)
     const existingAdjacency = graph.adjacency[base] || [];
-    const newAdjacency = existingAdjacency.indexOf(target) === -1 ?
-      existingAdjacency.concat([target]) :
-      existingAdjacency;
+    const newAdjacency =
+      existingAdjacency.indexOf(target) === -1
+        ? existingAdjacency.concat([target])
+        : existingAdjacency;
     graph.adjacency = {
       ...graph.adjacency,
-      [base]: newAdjacency
+      [base]: newAdjacency,
     };
     return graph;
   },
 };
 
-export { Node, GraphInterface };
-export { adjacencyGraph, AdjacencyMap, AdjacencyGraph };
+export type { Node, GraphInterface };
+export { adjacencyGraph };
+export type { AdjacencyMap, AdjacencyGraph };

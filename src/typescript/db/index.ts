@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import config from "config";
 import loadFixtures from "./loadFixtures";
 import dataSource from "./myDataSource";

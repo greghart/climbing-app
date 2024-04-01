@@ -124,4 +124,4 @@ export default class CommentablesService {
 }
 
 type CommentablesServiceType = typeof CommentablesService.prototype;
-export { CommentablesServiceType };
+export type { CommentablesServiceType };

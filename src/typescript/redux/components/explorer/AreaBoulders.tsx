@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { LeafletMouseEvent } from 'leaflet';
+import * as React from "react";
+import type { LeafletMouseEvent } from "leaflet";
 
-import Area from '../../../models/Area';
-import Boulder from '../../../models/Boulder';
-import BoulderIcon from '../map/BoulderIcon';
+import Area from "../../../models/Area";
+import Boulder from "../../../models/Boulder";
+import BoulderIcon from "../map/BoulderIcon";
 
 interface Props {
   area: Area;
@@ -31,7 +31,7 @@ const AreaBoulders: React.SFC<Props> = (props) => {
 AreaBoulders.defaultProps = {
   onBoulderClick: (b, e) => {
     console.warn(`AreaBoulders.onBoulderClick ${b.id} clicked`);
-  }
+  },
 };
 
 export default AreaBoulders;

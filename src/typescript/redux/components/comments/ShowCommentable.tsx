@@ -1,18 +1,20 @@
-import * as React from 'react';
-import { Omit } from 'utility-types';
-import { Link } from 'react-router-dom';
-import Commentable from '../../../models/Commentable';
-import CommentModel from '../../../models/Comment';
-import Comment from './Comment';
+import * as React from "react";
+import type { Omit } from "utility-types";
+import { Link } from "react-router-dom";
+import Commentable from "../../../models/Commentable";
+import CommentModel from "../../../models/Comment";
+import Comment from "./Comment";
 
 interface Props {
   // A path to creating a new comment for this entity
   newRoute: string;
-  commentable: Omit<Commentable, 'comments'> & { comments: Omit<CommentModel, 'commentable'>[]};
+  commentable: Omit<Commentable, "comments"> & {
+    comments: Omit<CommentModel, "commentable">[];
+  };
 }
 
 const ShowComments: React.SFC<Props> = (props) => {
-  console.warn({ props }, 'ShowComments');
+  console.warn({ props }, "ShowComments");
   return (
     <div>
       <ul className="list-group list-group-flush">
@@ -22,15 +24,17 @@ const ShowComments: React.SFC<Props> = (props) => {
           </li>
         )}
         <li className="list-group-item">
-          <Link
-            to={props.newRoute}
-            className="btn btn-primary">
+          <Link to={props.newRoute} className="btn btn-primary">
             Add Comment
           </Link>
         </li>
         {props.commentable.comments.map((thisComment) => {
           return (
-            <Comment key={thisComment.id} comment={thisComment} user={thisComment.user}/>
+            <Comment
+              key={thisComment.id}
+              comment={thisComment}
+              user={thisComment.user}
+            />
           );
         })}
       </ul>
@@ -41,15 +45,15 @@ const ShowComments: React.SFC<Props> = (props) => {
 ShowComments.defaultProps = {
   commentable: {
     id: 1,
-    descriptor: 'test',
+    descriptor: "test",
     comments: [
       {
         id: 1,
-        text: 'Wow, what a great route this was',
+        text: "Wow, what a great route this was",
         user: {
           id: 1,
-          email: 'greghartemail@gmail.com',
-          name: 'Greg Hart',
+          email: "greghartemail@gmail.com",
+          name: "Greg Hart",
           comments: [],
         },
         timestamps: {
@@ -59,11 +63,11 @@ ShowComments.defaultProps = {
       },
       {
         id: 2,
-        text: 'It really really was',
+        text: "It really really was",
         user: {
           id: 1,
-          email: 'greghartemail@gmail.com',
-          name: 'Greg Hart',
+          email: "greghartemail@gmail.com",
+          name: "Greg Hart",
           comments: [],
         },
         timestamps: {

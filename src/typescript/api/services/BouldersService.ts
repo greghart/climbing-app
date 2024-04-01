@@ -3,7 +3,7 @@ import { Tags, Response } from "typescript-rest-swagger";
 
 import getBoulder from "../operations/getBoulder";
 import addRoute from "../operations/addRoute";
-import { RoutePayload } from "./RoutesService";
+import type { RoutePayload } from "./RoutesService";
 import validate from "../util/validate";
 import BoulderCodec from "../../codecs/BoulderCodec";
 import updateBoulder from "../operations/updateBoulder";
@@ -60,5 +60,5 @@ export default class BouldersService {
 }
 
 type BouldersServiceType = typeof BouldersService.prototype;
-export { BouldersServiceType };
-export { BoulderPayload };
+export type { BouldersServiceType };
+export type { BoulderPayload };

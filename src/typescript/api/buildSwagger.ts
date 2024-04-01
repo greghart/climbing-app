@@ -1,14 +1,14 @@
-import * as path from 'path';
-import config from 'config';
-import * as util from 'util';
-import { MetadataGenerator } from 'typescript-rest-swagger/dist/metadata/metadataGenerator';
-import { SpecGenerator } from 'typescript-rest-swagger/dist/swagger/generator';
+import * as path from "path";
+import config from "config";
+import * as util from "util";
+import { MetadataGenerator } from "typescript-rest-swagger/dist/metadata/metadataGenerator";
+import { SpecGenerator } from "typescript-rest-swagger/dist/swagger/generator";
 
-import _debug from '../debug';
-const debug = _debug.extend('api:buildSwagger');
+import _debug from "../debug";
+const debug = _debug.extend("api:buildSwagger");
 
 const swaggerConfig = {
-  ...config.get<object>('swagger'),
+  ...config.get<object>("swagger"),
   entryFile: path.join(`${__dirname}/../../../src/typescript/api/index.ts`),
 };
 

@@ -1,13 +1,11 @@
-import * as React from 'react';
-import { Store } from 'redux';
-import { Provider } from 'react-redux';
-import {
-  renderRoutes,
-} from 'react-router-config';
-import { ConnectedRouter } from 'connected-react-router';
-import { History } from 'history';
+import * as React from "react";
+import type { Store } from "redux";
+import { Provider } from "react-redux";
+import { renderRoutes } from "react-router-config";
+import { ConnectedRouter } from "connected-react-router";
+import type { History } from "history";
 
-import getRoutes from './getRoutes';
+import getRoutes from "./getRoutes";
 
 type Props = {
   store: Store<any>;
@@ -23,13 +21,13 @@ const Root: React.SFC<Props> = ({ store, history }) => {
     </Provider>
   );
 
-  if (process.env.NODE_ENV !== 'production') {
-    const DevTools = require('./DevTools').default;
+  if (process.env.NODE_ENV !== "production") {
+    const DevTools = require("./DevTools").default;
 
     ComponentEl = (
       <Provider store={store}>
-        <div style={{ height: '100%', width: '100%' }}>
-          <div style={{ width: '100%', height: 'auto' }}>
+        <div style={{ height: "100%", width: "100%" }}>
+          <div style={{ width: "100%", height: "auto" }}>
             <ConnectedRouter history={history}>
               {renderRoutes(getRoutes())}
             </ConnectedRouter>

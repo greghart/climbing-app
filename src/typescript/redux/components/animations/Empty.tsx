@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { CSSTransition } from 'react-transition-group';
-import { ANIMATION_LENGTH_MS } from '.';
-import { TransitionProps } from 'react-transition-group/Transition';
+import * as React from "react";
+import { CSSTransition } from "react-transition-group";
+import { ANIMATION_LENGTH_MS } from ".";
+import type { TransitionProps } from "react-transition-group/Transition";
 
 /**
  * An empty animation

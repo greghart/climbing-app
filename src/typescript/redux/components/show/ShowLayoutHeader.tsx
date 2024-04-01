@@ -1,6 +1,6 @@
-import * as React from 'react';
-import GoBackHeader from '../layouts/GoBackHeader';
-import { Link } from 'react-router-dom';
+import * as React from "react";
+import GoBackHeader from "../layouts/GoBackHeader";
+import { Link } from "react-router-dom";
 
 interface Props {
   title: React.ReactNode;
@@ -21,12 +21,10 @@ const ShowLayoutHeader: React.SFC<Props> = (props) => {
         buttonClass="btn-link text-dark"
         input={
           <div className="input-group-append flex-grow-up row">
-            <div className="col">
-              {props.title}
-            </div>
+            <div className="col">{props.title}</div>
             <Link to={props.linkTo}>
               <div className="col-auto pt-2">
-                  <i className="fa fa-globe" />
+                <i className="fa fa-globe" />
               </div>
             </Link>
           </div>
@@ -37,5 +35,5 @@ const ShowLayoutHeader: React.SFC<Props> = (props) => {
   );
 };
 
-export { Props };
+export type { Props };
 export default ShowLayoutHeader;

@@ -62,4 +62,7 @@ scripts:
       script: tslint --project . --fix && echo 'Lint problems fixed'
   test:
     description: Run test suite
-    script: mocha --require tsx/cjs ./test/**/*.ts
+    # https://github.com/TypeStrong/ts-node/issues/1997
+    # For now we will always compile javascript and then run tests to avoid this issue
+    # script: cross-env NODE_OPTIONS=\"--loader=ts-node/esm\" TS_NODE_PROJECT=\"./tsconfig.test.json\" mocha --require ts-node/esm ./test/**/*.ts
+    script: nps tsc && mocha ./dist/typescript/**/*.spec.js

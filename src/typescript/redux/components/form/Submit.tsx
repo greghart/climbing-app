@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedFormProps } from "redux-form";
+import type { InjectedFormProps } from "redux-form";
 
 const Submit: React.SFC<InjectedFormProps<unknown>> = (props) => {
   return (

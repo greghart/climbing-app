@@ -1,8 +1,9 @@
-import { createAction } from 'redux-actions';
+import { createAction } from "redux-actions";
 // Type imports
-import { Reducer } from 'redux';
+// Type imports
+import type { Reducer } from "redux";
 
-const initialize = createAction('INITIALIZE');
+const initialize = createAction("INITIALIZE");
 interface ScopedReduxAction<Payload> extends ReduxActions.Action<Payload> {
   scope?: string;
 }
@@ -45,5 +46,5 @@ const freeScopeReducer = <S, P>(reducer: Reducer<S>) => {
   };
 };
 
-export { FreeScopeReducerState };
+export type { FreeScopeReducerState };
 export default freeScopeReducer;

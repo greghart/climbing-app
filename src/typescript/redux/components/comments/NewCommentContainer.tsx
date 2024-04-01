@@ -1,15 +1,15 @@
-import { reduxForm, submit, SubmissionError } from 'redux-form';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import Bluebird from 'bluebird';
+import { reduxForm, submit, SubmissionError } from "redux-form";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import Bluebird from "bluebird";
 
-import NewComment, { Props as FormProps } from './NewComment';
-import User from '../../../models/User';
-import { MapDispatchToPropsFunction } from '../types';
-import Commentable from '../../../models/Commentable';
-import createComment from '../../ducks/operations/createComment';
-import handleReduxFormErrors from '../util/handleReduxFormErrors';
-import { replace } from 'connected-react-router';
+import NewComment, { type Props as FormProps } from "./NewComment";
+import User from "../../../models/User";
+import type { MapDispatchToPropsFunction } from "../types";
+import Commentable from "../../../models/Commentable";
+import createComment from "../../ducks/operations/createComment";
+import handleReduxFormErrors from "../util/handleReduxFormErrors";
+import { replace } from "connected-react-router";
 
 interface OwnProps {
   commentable: Commentable;
@@ -19,23 +19,22 @@ interface OwnProps {
 }
 
 // Use one form for all "commentable" -- for now we assume one at a time.
-const form = 'commentable-form';
+const form = "commentable-form";
 
-type MapDispatchToProps = MapDispatchToPropsFunction<Partial<FormProps>, OwnProps>;
+type MapDispatchToProps = MapDispatchToPropsFunction<
+  Partial<FormProps>,
+  OwnProps
+>;
 const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (data) => {
       return Bluebird.resolve(
-        dispatch(
-          createComment(ownProps.commentable, data.text),
-        ),
+        dispatch(createComment(ownProps.commentable, data.text))
       )
-      .then(() => {
-        return dispatch(
-          replace(ownProps.redirect),
-        );
-      })
-      .catch(handleReduxFormErrors);
+        .then(() => {
+          return dispatch(replace(ownProps.redirect));
+        })
+        .catch(handleReduxFormErrors);
     },
     handleCustomSubmit: () => {
       dispatch(submit(form));
@@ -44,11 +43,8 @@ const mapDispatchToProps: MapDispatchToProps = (dispatch, ownProps) => {
 };
 
 export default compose(
-  connect(
-    undefined,
-    mapDispatchToProps,
-  ),
+  connect(undefined, mapDispatchToProps),
   reduxForm({
     form,
-  }),
+  })
 )(NewComment) as React.ComponentType<OwnProps>;

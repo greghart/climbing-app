@@ -1,9 +1,9 @@
-import { createSelector } from 'reselect';
-import { denormalize, schema } from 'normalizr';
-import isObject from 'lodash/isObject';
+import { createSelector } from "reselect";
+import { denormalize, schema } from "normalizr";
+import isObject from "lodash/isObject";
 
-import asyncComponent from '../../decorators/asyncComponent';
-import { State, selectors } from '../../reducer';
+import asyncComponent from "../../decorators/asyncComponent";
+import { type State, selectors } from "../../reducer";
 
 /**
  * `buildWithChild` is a tool to help setup decorators for loading children
@@ -11,11 +11,14 @@ import { State, selectors } from '../../reducer';
  * Oftentimes we'll have a child relationship that needs to load data
  * separately, especially with polymorphic relationships (ie. photos comments).
  **/
-function buildWithChild<Child, ChildOwner>(property: keyof ChildOwner, schema: schema.Entity) {
+function buildWithChild<Child, ChildOwner>(
+  property: keyof ChildOwner,
+  schema: schema.Entity
+) {
   // type ChildOwner = { [K in S]?: Child; };
 
   return <OwnProps>(
-    getChildOwner: ((props: OwnProps) => ChildOwner),
+    getChildOwner: (props: OwnProps) => ChildOwner,
     fetchChild: (owner: ChildOwner) => unknown
   ) => {
     const mapStateToProps = (state: State, ownProps: OwnProps) => {
@@ -29,26 +32,21 @@ function buildWithChild<Child, ChildOwner>(property: keyof ChildOwner, schema: s
       const selectChildOwner = (state: State, ownProps: OwnProps) => {
         return getChildOwner(ownProps);
       };
-      const selectChild = (entities, owner) => denormalize(
-        owner[property],
-        schema,
-        entities,
-      );
+      const selectChild = (entities, owner) =>
+        denormalize(owner[property], schema, entities);
       const getChild = createSelector<State, OwnProps, any, ChildOwner, Child>(
         selectors.selectEntities,
         selectChildOwner,
-        selectChild,
+        selectChild
       );
       return {
-        [property]: getChild(state, ownProps)
+        [property]: getChild(state, ownProps),
       } as unknown as ChildOwner;
     };
 
     const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
       return {
-        fetch: () => dispatch(
-          fetchChild(getChildOwner(ownProps))
-        ),
+        fetch: () => dispatch(fetchChild(getChildOwner(ownProps))),
       };
     };
 
@@ -57,15 +55,10 @@ function buildWithChild<Child, ChildOwner>(property: keyof ChildOwner, schema: s
       ReturnType<typeof mapStateToProps>,
       ReturnType<typeof mapDispatchToProps>,
       OwnProps
-    >(
-      mapStateToProps,
-      mapDispatchToProps,
-      (props: ChildOwner) => {
-        return isObject(props[property]);
-      }
-    );
+    >(mapStateToProps, mapDispatchToProps, (props: ChildOwner) => {
+      return isObject(props[property]);
+    });
   };
-
 }
 
 export default buildWithChild;

@@ -1,24 +1,24 @@
-import * as React from 'react';
-import { push } from 'connected-react-router';
-import { connect } from 'react-redux';
-import { RouteConfigComponentProps } from 'react-router-config';
-import { Map } from 'react-leaflet';
+import * as React from "react";
+import { push } from "connected-react-router";
+import { connect } from "react-redux";
+import type { RouteConfigComponentProps } from "react-router-config";
+import { Map } from "react-leaflet";
 
-import Crag from '../../../models/Crag';
-import Area from '../../../models/Area';
-import Boulder from '../../../models/Boulder';
-import CragExplorerRoute from '../../routes/CragExplorerRoute';
-import AreasMap from './AreasMap';
-import { ConnectedAreaMap } from './AreaMap';
-import { ConnectedAreaOverlay } from './AreaOverlay';
-import { ConnectedBoulderOverlay } from './BoulderOverlay';
-import BoulderMap from '../boulders/BoulderMap';
-import withBoulder from '../boulders/withBoulder';
-import withArea from '../areas/withArea';
-import useAreaMapNavigator from './useAreaMapNavigator';
-import useBoulderMapNavigator from './useBoulderMapNavigator';
-import { LeafletMouseEvent } from 'leaflet';
-import { ConnectedRouteOverlay } from './RouteOverlay';
+import Crag from "../../../models/Crag";
+import Area from "../../../models/Area";
+import Boulder from "../../../models/Boulder";
+import CragExplorerRoute from "../../routes/CragExplorerRoute";
+import AreasMap from "./AreasMap";
+import { ConnectedAreaMap } from "./AreaMap";
+import { ConnectedAreaOverlay } from "./AreaOverlay";
+import { ConnectedBoulderOverlay } from "./BoulderOverlay";
+import BoulderMap from "../boulders/BoulderMap";
+import withBoulder from "../boulders/withBoulder";
+import withArea from "../areas/withArea";
+import useAreaMapNavigator from "./useAreaMapNavigator";
+import useBoulderMapNavigator from "./useBoulderMapNavigator";
+import type { LeafletMouseEvent } from "leaflet";
+import { ConnectedRouteOverlay } from "./RouteOverlay";
 
 /**
  * @todo When we render sub routes, we know we can pass optional props...
@@ -54,17 +54,18 @@ function blockClicks(e: LeafletMouseEvent) {
  *  * Navigate to explorer route on route click
  */
 type BoulderMapProps = RouteConfigComponentProps<{
-  crag: string,
-  area: string,
-  boulder: string }
-> & SubProps;
+  crag: string;
+  area: string;
+  boulder: string;
+}> &
+  SubProps;
 const WithBoulderMap = withBoulder(BoulderMap);
 const BoulderMapRoute: React.ComponentType<BoulderMapProps> = (props) => {
   const root = `/explorer/${[
     props.match.params.crag,
     props.match.params.area,
-    props.match.params.boulder
-  ].join('/')}`;
+    props.match.params.boulder,
+  ].join("/")}`;
   return (
     <WithBoulderMap
       {...props}
@@ -73,11 +74,13 @@ const BoulderMapRoute: React.ComponentType<BoulderMapProps> = (props) => {
     />
   );
 };
-const BoulderNavigator = withBoulder((props: { boulder: Boulder } & SubProps) => {
-  // TODO Integrate react-redux hooks so we can make this super sleek
-  useBoulderMapNavigator(props.mapRef, props.boulder);
-  return <React.Fragment />;
-});
+const BoulderNavigator = withBoulder(
+  (props: { boulder: Boulder } & SubProps) => {
+    // TODO Integrate react-redux hooks so we can make this super sleek
+    useBoulderMapNavigator(props.mapRef, props.boulder);
+    return <React.Fragment />;
+  }
+);
 
 /**
  * Glue area map to explorer workflow
@@ -102,7 +105,10 @@ const AreaNavigator = withArea((props: { area: Area } & SubProps) => {
   useAreaMapNavigator(props.mapRef, props.area);
   return <React.Fragment />;
 });
-const ClickableAreaMap = connect(undefined, areaMapMapDispatchToProps)(ConnectedAreaMap);
+const ClickableAreaMap = connect(
+  undefined,
+  areaMapMapDispatchToProps
+)(ConnectedAreaMap);
 const AreaMapRoute: React.ComponentType<AreaMapProps> = (props) => {
   return (
     <ClickableAreaMap
@@ -134,7 +140,10 @@ const cragMapMapDispatchToProps = (dispatch, ownProps: CragMapProps) => {
     },
   };
 };
-const ClickableAreasMap = connect(undefined, cragMapMapDispatchToProps)(AreasMap);
+const ClickableAreasMap = connect(
+  undefined,
+  cragMapMapDispatchToProps
+)(AreasMap);
 
 /**
  * Routes for the explorer
@@ -144,12 +153,12 @@ const ClickableAreasMap = connect(undefined, cragMapMapDispatchToProps)(AreasMap
  */
 const routes = [
   {
-    path: '/explorer/:crag/:area?',
+    path: "/explorer/:crag/:area?",
     component: CragExplorerRoute,
-    key: 'explorer',
+    key: "explorer",
     routes: [
       {
-        path: '/explorer/:crag/:area/:boulder/:route',
+        path: "/explorer/:crag/:area/:boulder/:route",
         component: (props) => (
           <ConnectedRouteOverlay
             key={props.match.params.route}
@@ -177,10 +186,10 @@ const routes = [
               boulderId={props.match.params.boulder}
             />
           </React.Fragment>
-        )
+        ),
       },
       {
-        path: '/explorer/:crag/:area/:boulder',
+        path: "/explorer/:crag/:area/:boulder",
         component: (props) => (
           <ConnectedBoulderOverlay
             key={props.match.params.boulder}
@@ -205,10 +214,10 @@ const routes = [
               boulderId={props.match.params.boulder}
             />
           </React.Fragment>
-        )
+        ),
       },
       {
-        path: '/explorer/:crag/:area',
+        path: "/explorer/:crag/:area",
         component: (props) => (
           <ConnectedAreaOverlay
             key={props.match.params.area}
@@ -219,26 +228,20 @@ const routes = [
         mapComponent: (props) => (
           <React.Fragment>
             <AreaMapRoute {...props} />
-            <AreaNavigator
-              {...props}
-              areaId={props.match.params.area}
-            />
+            <AreaNavigator {...props} areaId={props.match.params.area} />
           </React.Fragment>
         ),
-        key: 'explorer_area',
+        key: "explorer_area",
       },
       {
-        path: '/explorer/:crag',
+        path: "/explorer/:crag",
         component: () => <span />,
         mapComponent: (props) => (
-          <ClickableAreasMap
-            {...props}
-            areas={props.crag.areas}
-          />
-        )
+          <ClickableAreasMap {...props} areas={props.crag.areas} />
+        ),
       },
     ],
-  }
+  },
 ];
 
 export default routes;

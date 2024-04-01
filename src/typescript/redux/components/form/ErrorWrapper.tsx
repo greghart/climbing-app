@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { WrappedFieldProps, Field, BaseFieldProps, GenericFieldHTMLAttributes } from 'redux-form';
+import * as React from "react";
+import type { WrappedFieldProps } from "redux-form";
 
 interface AdditionalProps {
   renderBody?: (err: WrappedFieldProps) => React.ReactNode;
@@ -12,22 +12,20 @@ interface AdditionalProps {
  * though our existing fields only handle the sub keys.
  * Ie. `parent.child1` vs `parent`, for `coordinate.lat`, vs `coordinate
  */
-const ErrorWrapper: React.ComponentType<WrappedFieldProps & AdditionalProps> = (props) => {
+const ErrorWrapper: React.ComponentType<WrappedFieldProps & AdditionalProps> = (
+  props
+) => {
   return (
     <React.Fragment>
       {props.meta.error && (
-        <div className="invalid-feedback show">
-          {props.renderBody(props)}
-        </div>
+        <div className="invalid-feedback show">{props.renderBody(props)}</div>
       )}
     </React.Fragment>
   );
 };
 
 ErrorWrapper.defaultProps = {
-  renderBody: (props) => (
-    `${props.input.name} - ${props.meta.error}`
-  ),
+  renderBody: (props) => `${props.input.name} - ${props.meta.error}`,
 };
 
 export default ErrorWrapper;

@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { renderRoutes } from 'react-router-config';
+import * as React from "react";
+import { renderRoutes } from "react-router-config";
 
-import Area from '../../../models/Area';
-import CragModel from '../../../models/Crag';
-import CragMap from './CragMap';
-import SidebarContainer from '../layouts/SidebarContainer';
-import SearchGroup from '../search/SearchGroup';
-import SearchInputContainer from '../search/SearchInputContainer';
-import RouteContext from '../../context/RouteContext';
+import Area from "../../../models/Area";
+import CragModel from "../../../models/Crag";
+import CragMap from "./CragMap";
+import SidebarContainer from "../layouts/SidebarContainer";
+import SearchGroup from "../search/SearchGroup";
+import SearchInputContainer from "../search/SearchInputContainer";
+import RouteContext from "../../context/RouteContext";
 
 interface Props {
   crag: CragModel;
@@ -36,22 +36,20 @@ const Crag: React.SFC<Props> = (props) => {
     <SidebarContainer
       styles={{
         sidebar: {
-          zIndex: '10000',
+          zIndex: "10000",
         },
         content: {
-          overflowY: 'none'
+          overflowY: "none",
         },
         overlay: {
-          zIndex: '10000'
-        }
+          zIndex: "10000",
+        },
       }}
       sidebar={
         <div className="h-100 bg-light">
           <SearchGroup
             onClickPrepend={props.onCloseSidebar}
-            prepend={
-              <i className="fa fa-bars" />
-            }
+            prepend={<i className="fa fa-bars" />}
             input={
               <div className="input-group-append flex-grow-up align-items-center text-center">
                 {props.crag.name}
@@ -69,14 +67,8 @@ const Crag: React.SFC<Props> = (props) => {
               <div className="col">
                 <SearchGroup
                   onClickPrepend={props.onOpenSidebar}
-                  prepend={
-                    <i className="fa fa-bars" />
-                  }
-                  input={
-                    <SearchInputContainer
-                      onClick={props.onOpenSearch}
-                    />
-                  }
+                  prepend={<i className="fa fa-bars" />}
+                  input={<SearchInputContainer onClick={props.onOpenSearch} />}
                 />
               </div>
             </div>
@@ -105,5 +97,5 @@ const Crag: React.SFC<Props> = (props) => {
   );
 };
 
-export { Props };
+export type { Props };
 export default Crag;

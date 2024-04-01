@@ -1,13 +1,13 @@
-import { MatchedRoute } from 'react-router-config';
-import { Action, Store } from 'redux';
-import * as ThunkTypes from 'redux-thunk';
-import Bluebird from 'bluebird';
-import isFunction from 'lodash/isFunction';
+import type { MatchedRoute } from "react-router-config";
+import type { Action, Store } from "redux";
+import * as ThunkTypes from "redux-thunk";
+import Bluebird from "bluebird";
+import isFunction from "lodash/isFunction";
 
 interface ThunkDispatch<S, E, A extends Action<any>, R> {
   (asyncAction: ThunkTypes.ThunkAction<R, S, E, A>): R;
 }
-type DispatchyStore = Omit<Store, 'dispatch'> & {
+type DispatchyStore = Omit<Store, "dispatch"> & {
   dispatch: ThunkDispatch<any, any, any, Promise<any>>;
 };
 
@@ -16,11 +16,11 @@ type FetchContext<Params> = {
   params: Params;
   query: { [index: string]: unknown };
 };
-type Fetcher<Params> = (
-  context: FetchContext<Params>
-) => Promise<unknown>;
+type Fetcher<Params> = (context: FetchContext<Params>) => Promise<unknown>;
 
-type Fetchable<Params> = React.ComponentType<unknown> & { fetch: Fetcher<Params> };
+type Fetchable<Params> = React.ComponentType<unknown> & {
+  fetch: Fetcher<Params>;
+};
 function isFetchable(
   component?: React.ComponentType<any> | Fetchable<unknown>
 ): component is Fetchable<unknown> {
@@ -44,15 +44,14 @@ function fetchDataForMatches(
       result = Promise.resolve(
         route.component.fetch({
           query,
-          store: (store as any),
+          store: store as any,
           params: match.params,
         })
       );
     } else {
       result = Promise.resolve();
     }
-    return result
-    .catch((_err: Error) => {
+    return result.catch((_err: Error) => {
       // const err = UniversalErrorFactory.wrap(_err);
       // // Error codes handled in server render workflow
       // const handledCodes = [302];
@@ -60,10 +59,13 @@ function fetchDataForMatches(
       //   throw err;
       // }
       // // Ignore other errors while fetching data for now
-      console.error(`fetchDataForRoute error -- ${_err.message} for route ${route.path}`);
+      console.error(
+        `fetchDataForRoute error -- ${_err.message} for route ${route.path}`
+      );
     });
   });
 }
 
-export { isFetchable, Fetchable, FetchContext };
+export { isFetchable };
+export type { Fetchable, FetchContext };
 export default fetchDataForMatches;

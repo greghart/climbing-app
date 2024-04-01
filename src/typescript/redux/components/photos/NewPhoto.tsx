@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { InjectedFormProps, FormErrors, Field } from 'redux-form';
-import User from '../../../models/User';
-import { OnSubmit } from '../types';
-import MyField from '../form/MyField';
-import FileInput from '../form/FileInput';
-import Submit from '../form/Submit';
-import Cancel from '../form/Cancel';
+import * as React from "react";
+import { type InjectedFormProps, type FormErrors, Field } from "redux-form";
+import User from "../../../models/User";
+import type { OnSubmit } from "../types";
+import MyField from "../form/MyField";
+import FileInput from "../form/FileInput";
+import Submit from "../form/Submit";
+import Cancel from "../form/Cancel";
 
 interface Props {
   user: User;
@@ -23,26 +23,13 @@ interface FormData {
 const NewPhoto: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
   return (
     <form onSubmit={props.handleSubmit} className="m-3">
-      {props.error &&
-        <span className="text-danger">{props.error}</span>
-      }
-      <MyField
-        name="title"
-        label="Title"
-      />
-      <MyField
-        name="description"
-        label="Description"
-      />
+      {props.error && <span className="text-danger">{props.error}</span>}
+      <MyField name="title" label="Title" />
+      <MyField name="description" label="Description" />
       <div className="form-group">
-        <label>
-          Upload File
-        </label>
+        <label>Upload File</label>
         <div>
-          <Field
-            name="file"
-            component={FileInput}
-          />
+          <Field name="file" component={FileInput} />
         </div>
       </div>
       <div>
@@ -56,11 +43,11 @@ const NewPhoto: React.SFC<InjectedFormProps<FormData> & Props> = (props) => {
 NewPhoto.defaultProps = {
   user: {
     id: 1,
-    email: 'greghartnewphoto',
-    name: 'Greg',
+    email: "greghartnewphoto",
+    name: "Greg",
     photos: [],
   },
 };
 
 export default NewPhoto;
-export { FormData, Props };
+export type { FormData, Props };

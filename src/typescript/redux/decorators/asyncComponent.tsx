@@ -1,8 +1,8 @@
-import { compose } from 'redux';
-import { connect, InferableComponentEnhancerWithProps } from 'react-redux';
-import withMountAction from './withMountAction';
-import withLoader from './withLoader';
-import { State } from '../reducer';
+import { compose } from "redux";
+import { connect, type InferableComponentEnhancerWithProps } from "react-redux";
+import withMountAction from "./withMountAction";
+import withLoader from "./withLoader";
+import type { State } from "../reducer";
 
 /**
  * Shortcut to getting a normal composed decorator for an async component.
@@ -24,22 +24,21 @@ export default function asyncComponent<StateProps, DispatchProps, OwnProps>(
   mapStateToProps: (state: State, ownProps: OwnProps) => StateProps,
   mapDispatchToProps: (dispatch, ownProps: OwnProps) => DispatchProps,
   hasDependants: (props: StateProps) => boolean,
-  options: { fetchDispatch: string } = { fetchDispatch: 'fetch' },
+  options: { fetchDispatch: string } = { fetchDispatch: "fetch" }
 ) {
   return compose(
     connect<StateProps, DispatchProps, OwnProps>(
       mapStateToProps,
-      mapDispatchToProps,
+      mapDispatchToProps
     ),
-    withMountAction<StateProps & DispatchProps>(
-      (props) => {
-        if (!hasDependants(props)) {
-          props[options.fetchDispatch](props);
-        }
-      },
-    ),
-    withLoader<StateProps>(
-      (props) => !hasDependants(props),
-    ),
-  ) as InferableComponentEnhancerWithProps<StateProps & DispatchProps, OwnProps>;
+    withMountAction<StateProps & DispatchProps>((props) => {
+      if (!hasDependants(props)) {
+        props[options.fetchDispatch](props);
+      }
+    }),
+    withLoader<StateProps>((props) => !hasDependants(props))
+  ) as InferableComponentEnhancerWithProps<
+    StateProps & DispatchProps,
+    OwnProps
+  >;
 }

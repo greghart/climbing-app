@@ -1,5 +1,5 @@
-import { History } from 'history';
-import { Store } from 'redux';
+import type { History } from "history";
+import type { Store } from "redux";
 
 type GetStore = (
   state: any,
@@ -8,10 +8,10 @@ type GetStore = (
 ) => Store<any>;
 
 let getStore: GetStore;
-if (process.env.NODE_ENV === 'production') {
-  getStore = require('./getStore.production').default as GetStore;
+if (process.env.NODE_ENV === "production") {
+  getStore = require("./getStore.production").default as GetStore;
 } else {
-  getStore = require('./getStore.development').default as GetStore;
+  getStore = require("./getStore.development").default as GetStore;
 }
 
 export default getStore;

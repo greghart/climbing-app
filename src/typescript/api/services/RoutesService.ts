@@ -46,5 +46,4 @@ export default class RoutesService {
 }
 
 type RoutesServiceType = typeof RoutesService.prototype;
-export { RoutesServiceType };
-export { RoutePayload };
+export type { RoutesServiceType, RoutePayload };

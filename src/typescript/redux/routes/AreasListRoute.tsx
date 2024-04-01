@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { denormalize } from 'normalizr';
-import { RouteConfigComponentProps, RouteConfig } from 'react-router-config';
-import { push } from 'connected-react-router';
-import get from 'lodash/get';
+import * as React from "react";
+import { connect } from "react-redux";
+import { denormalize } from "normalizr";
+import type { RouteConfigComponentProps } from "react-router-config";
+import { push } from "connected-react-router";
+import get from "lodash/get";
 
-import { State } from '../reducer';
-import { CragSchema } from '../normalizr';
-import Area from '../../models/Area';
-import AreasList from '../components/explorer/AreasList';
+import type { State } from "../reducer";
+import { CragSchema } from "../normalizr";
+import Area from "../../models/Area";
+import AreasList from "../components/explorer/AreasList";
 
 interface AreasListParams {
   crag: string;
@@ -23,13 +23,9 @@ const mapStateToProps = (state: State, ownProps: OwnProps): StateProps => {
   return {
     selectedAreaId: ownProps.match.params.area,
     areas: get(
-      denormalize(
-        ownProps.match.params.crag,
-        CragSchema,
-        state.entities,
-      ),
-      'areas',
-      [],
+      denormalize(ownProps.match.params.crag, CragSchema, state.entities),
+      "areas",
+      []
     ),
   };
 };
@@ -45,5 +41,5 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
 
 export default connect<StateProps, typeof mapDispatchToProps, any>(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(AreasList);

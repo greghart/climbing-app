@@ -1,10 +1,10 @@
-import { compose } from 'redux';
+import { compose } from "redux";
 
-import fetchTrail from '../../ducks/operations/fetchTrail';
-import withMountDispatch from '../../decorators/withMountDispatch';
-import withLoader from '../../decorators/withLoader';
-import Crag from '../../../models/Crag';
-import { InferableComponentEnhancerWithProps } from 'react-redux';
+import fetchTrail from "../../ducks/operations/fetchTrail";
+import withMountDispatch from "../../decorators/withMountDispatch";
+import withLoader from "../../decorators/withLoader";
+import Crag from "../../../models/Crag";
+import type { InferableComponentEnhancerWithProps } from "react-redux";
 
 interface OwnProps {
   crag: Crag;
@@ -17,11 +17,9 @@ function withTrail<InputProps extends OwnProps>() {
   return compose(
     withMountDispatch<InputProps>(
       (props) => fetchTrail(props.crag.id),
-      (props) => props.crag.trail === undefined,
+      (props) => props.crag.trail === undefined
     ),
-    withLoader<InputProps>(
-      (props) => props.crag.trail === undefined,
-    ),
+    withLoader<InputProps>((props) => props.crag.trail === undefined)
   ) as InferableComponentEnhancerWithProps<{}, InputProps>;
 }
 

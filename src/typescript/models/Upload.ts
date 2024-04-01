@@ -1,9 +1,5 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Upload as IOUpload } from 'power-putty-io';
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import type { Upload as IOUpload } from "power-putty-io";
 
 /**
  * Uploads
@@ -13,7 +9,6 @@ import { Upload as IOUpload } from 'power-putty-io';
  */
 @Entity()
 export default class Upload implements IOUpload {
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -43,5 +38,4 @@ export default class Upload implements IOUpload {
 
   @Column()
   uploadedAt: Date;
-
 }

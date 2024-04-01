@@ -1,9 +1,9 @@
 import * as React from "react";
-import { InjectedFormProps, FormErrors } from "redux-form";
+import type { InjectedFormProps, FormErrors } from "redux-form";
 import Comment from "./Comment";
 import User from "../../../models/User";
 import CommentModel from "../../../models/Comment";
-import { OnSubmit } from "../types";
+import type { OnSubmit } from "../types";
 import MyField from "../form/MyField";
 import Submit from "../form/Submit";
 
@@ -69,4 +69,4 @@ NewComment.defaultProps = {
 };
 
 export default NewComment;
-export { FormData, Props };
+export type { FormData, Props };

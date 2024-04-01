@@ -1,14 +1,14 @@
-import * as React from 'react';
-import classNames from 'classnames';
-import { renderRoutes } from 'react-router-config';
-import omit from 'lodash/omit';
-import { LazyBoundary } from 'react-imported-component';
+import * as React from "react";
+import classNames from "classnames";
+import { renderRoutes } from "react-router-config";
+import omit from "lodash/omit";
+import { LazyBoundary } from "react-imported-component";
 
-import PageLayout from '../layouts/PageLayout';
-import ShowLayoutHeader from '../show/ShowLayoutHeader';
-import ShowLayoutTabs from '../show/ShowLayoutTabs';
-import { ExtractProps } from '../../../externals';
-import RouteContext from '../../context/RouteContext';
+import PageLayout from "../layouts/PageLayout";
+import ShowLayoutHeader from "../show/ShowLayoutHeader";
+import ShowLayoutTabs from "../show/ShowLayoutTabs";
+import type { ExtractProps } from "../../../externals";
+import RouteContext from "../../context/RouteContext";
 
 interface RouterProps {}
 
@@ -31,22 +31,16 @@ const ShowLayout: React.SFC<Props> = (props) => {
   console.warn(
     {
       props,
-      routeContext
+      routeContext,
     },
-    'ShowLayout'
+    "ShowLayout"
   );
   return (
     <PageLayout
-      {...omit(props, 'headerProps', 'tabsProps', 'routerLocation')}
-      header={
-        <ShowLayoutHeader
-          {...props.headerProps}
-        />
-      }
+      {...omit(props, "headerProps", "tabsProps", "routerLocation")}
+      header={<ShowLayoutHeader {...props.headerProps} />}
       content={
-        <ShowLayoutTabs
-          {...props.tabsProps}
-        >
+        <ShowLayoutTabs {...props.tabsProps}>
           <React.Fragment key={routeContext.location.pathname}>
             <LazyBoundary fallback={<div>Loading...</div>}>
               {renderRoutes(routeContext.route.routes, props.extraProps)}
@@ -54,10 +48,14 @@ const ShowLayout: React.SFC<Props> = (props) => {
           </React.Fragment>
         </ShowLayoutTabs>
       }
-      className={classNames({ 'p-0': true, 'bg-secondary': false, 'bg-white': true })}
+      className={classNames({
+        "p-0": true,
+        "bg-secondary": false,
+        "bg-white": true,
+      })}
     />
   );
 };
 
-export { RouterProps };
+export type { RouterProps };
 export default ShowLayout;

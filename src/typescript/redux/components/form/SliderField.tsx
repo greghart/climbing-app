@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { WrappedFieldProps } from 'redux-form';
-import Slider from 'rc-slider/lib/Slider';
+import * as React from "react";
+import type { WrappedFieldProps } from "redux-form";
+import Slider from "rc-slider/lib/Slider";
 
 interface Props {
   label: string;
@@ -13,24 +13,20 @@ interface Props {
  */
 const SliderField: React.ComponentType<WrappedFieldProps & Props> = (props) => {
   const { input, meta, label, ...rest } = props;
-  console.warn({
-    props,
-    Slider,
-  },           'SliderField');
+  console.warn(
+    {
+      props,
+      Slider,
+    },
+    "SliderField"
+  );
   return (
     <div className="form-group">
-      {props.label &&
-        <label>{props.label}</label>
-      }
+      {props.label && <label>{props.label}</label>}
       <div>
-        <Slider
-          {...input}
-          {...rest}
-        />
+        <Slider {...input} {...rest} />
         {meta.touched && meta.error && (
-          <div className="invalid-feedback">
-            {meta.error}
-          </div>
+          <div className="invalid-feedback">{meta.error}</div>
         )}
       </div>
     </div>

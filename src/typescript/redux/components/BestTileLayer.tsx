@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TileLayer, TileLayerProps } from "react-leaflet";
+import { TileLayer, type TileLayerProps } from "react-leaflet";
 
 // Newer tiles
 // tslint:disable-next-line:max-line-length

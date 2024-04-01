@@ -1,7 +1,7 @@
-import { compose, Dispatch } from 'redux';
-import { connect, InferableComponentEnhancerWithProps } from 'react-redux';
+import { compose, type Dispatch } from "redux";
+import { connect, type InferableComponentEnhancerWithProps } from "react-redux";
 
-import withMountAction from './withMountAction';
+import withMountAction from "./withMountAction";
 
 /**
  * Simple decorate that just composes `withMountAction` and `connect`
@@ -14,15 +14,11 @@ function withMountDispatch<P>(
 ) {
   return compose(
     connect(),
-    withMountAction<P & { dispatch: Dispatch<any> }>(
-      (props) => {
-        if (shouldRun(props)) {
-          return props.dispatch(
-            action(props),
-          );
-        }
-      },
-    ),
+    withMountAction<P & { dispatch: Dispatch<any> }>((props) => {
+      if (shouldRun(props)) {
+        return props.dispatch(action(props));
+      }
+    })
   ) as InferableComponentEnhancerWithProps<{ dispatch: Dispatch<any> }, P>;
 }
 

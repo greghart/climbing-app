@@ -1,11 +1,11 @@
 import { Return } from "typescript-rest";
-import { ArgumentTypes } from "../../externals";
-import { CragsServiceType } from "../services/CragsService";
-import { AreasServiceType } from "../services/AreasService";
-import { BouldersServiceType } from "../services/BouldersService";
-import { RoutesServiceType } from "../services/RoutesService";
-import { CommentablesServiceType } from "../services/CommentablesService";
-import { PhotoablesServiceType } from "../services/PhotoablesService";
+import type { ArgumentTypes } from "../../externals";
+import type { CragsServiceType } from "../services/CragsService";
+import type { AreasServiceType } from "../services/AreasService";
+import type { BouldersServiceType } from "../services/BouldersService";
+import type { RoutesServiceType } from "../services/RoutesService";
+import type { CommentablesServiceType } from "../services/CommentablesService";
+import type { PhotoablesServiceType } from "../services/PhotoablesService";
 
 /**
  * Setup a type-safe API client interface
@@ -50,4 +50,4 @@ interface APIClientInterface {
   photoables: APIType<PhotoablesServiceType>;
 }
 
-export default APIClientInterface;
+export { type APIClientInterface };

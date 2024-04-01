@@ -1,6 +1,6 @@
-import mapValues from 'lodash/mapValues';
-import { FreeScopeReducerState } from './freeScopeReducer';
-import { State as ReducerState } from '../../reducer';
+import mapValues from "lodash/mapValues";
+import type { FreeScopeReducerState } from "./freeScopeReducer";
+import type { State as ReducerState } from "../../reducer";
 
 /**
  * Get a selector that resolves scoped state
@@ -29,21 +29,21 @@ type ReducerKey = keyof ReducerState;
 type InputMap<K extends string> = {
   [P in K]: ReducerKey;
 };
-function scopedMapSelector<K extends string>(scope: string, reducerMap: InputMap<K>) {
+function scopedMapSelector<K extends string>(
+  scope: string,
+  reducerMap: InputMap<K>
+) {
   type GivenMap = typeof reducerMap;
   const selector = scopedSelector(scope);
 
   return (state: ReducerState) => {
-    return (mapValues(
-      reducerMap,
-      (reducer: ReducerKey) => {
-        const target = state[reducer];
-        if (isScopedState(target)) {
-          return selector(target);
-        }
-        throw new Error(`Reducer ${reducer} is not scoped state`);
-      },
-    ));
+    return mapValues(reducerMap, (reducer: ReducerKey) => {
+      const target = state[reducer];
+      if (isScopedState(target)) {
+        return selector(target);
+      }
+      throw new Error(`Reducer ${reducer} is not scoped state`);
+    });
   };
 }
 export { scopedMapSelector };

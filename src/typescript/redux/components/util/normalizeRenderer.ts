@@ -1,5 +1,5 @@
-import * as React from 'react';
-import isFunction from 'lodash/isFunction';
+import * as React from "react";
+import isFunction from "lodash/isFunction";
 
 /**
  * A "Renderer" is something that takes args and renders a react node
@@ -9,11 +9,15 @@ import isFunction from 'lodash/isFunction';
 type Renderer<P> = (input: P) => React.ReactNode;
 type Renderable<P> = React.ReactNode | Renderer<P>;
 
-function isRenderer<P>(renderer: React.ReactNode | Renderer<P>): renderer is Renderer<P> {
+function isRenderer<P>(
+  renderer: React.ReactNode | Renderer<P>
+): renderer is Renderer<P> {
   return isFunction(renderer);
 }
 
-function normalizeRenderer<P>(potential: React.ReactNode | Renderer<P>): Renderer<P> {
+function normalizeRenderer<P>(
+  potential: React.ReactNode | Renderer<P>
+): Renderer<P> {
   if (isRenderer(potential)) {
     return potential;
   }
@@ -22,5 +26,5 @@ function normalizeRenderer<P>(potential: React.ReactNode | Renderer<P>): Rendere
   };
 }
 
-export { Renderable, Renderer };
+export type { Renderable, Renderer };
 export default normalizeRenderer;

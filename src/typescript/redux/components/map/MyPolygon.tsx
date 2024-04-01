@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Polygon, PolygonProps } from 'react-leaflet';
+import * as React from "react";
+import { Polygon, type PolygonProps } from "react-leaflet";
 
-import { pick, omit } from 'lodash';
+import { pick, omit } from "lodash";
 
 /**
  * A nice looking polygon for displaying
@@ -10,10 +10,10 @@ import { pick, omit } from 'lodash';
  */
 type Style = Pick<
   PolygonProps,
-  'weight' | 'opacity' | 'color' | 'dashArray' | 'fillOpacity' | 'fillColor'
+  "weight" | "opacity" | "color" | "dashArray" | "fillOpacity" | "fillColor"
 >;
 type Props = PolygonProps & {
-  normalStyle?: Style
+  normalStyle?: Style;
   overStyle?: Style;
   // Whether to show the polygon
   // It can be useful to use a polygon for tooltip positioning,
@@ -24,16 +24,16 @@ type Props = PolygonProps & {
 const normalStyle = {
   weight: 1.0,
   opacity: 1,
-  color: 'white',
-  dashArray: '3',
+  color: "white",
+  dashArray: "3",
   fillOpacity: 0.2,
-  fillColor: '#088da5',
+  fillColor: "#088da5",
 };
 
 const overStyle = {
   weight: 5,
-  color: '#666',
-  dashArray: '',
+  color: "#666",
+  dashArray: "",
   fillOpacity: 0.2,
 };
 
@@ -41,7 +41,12 @@ const MyPolygon: React.SFC<Props> = (props) => {
   // Direct styles should override objects
   const directStyles = pick(
     props,
-    'weight', 'opacity', 'color', 'dashArray', 'fillOpacity', 'fillColor'
+    "weight",
+    "opacity",
+    "color",
+    "dashArray",
+    "fillOpacity",
+    "fillColor"
   );
   const myNormalStyle = omit(normalStyle, Object.keys(directStyles));
   const myOverStyle = omit(overStyle, Object.keys(directStyles));
@@ -72,7 +77,7 @@ const MyPolygon: React.SFC<Props> = (props) => {
 MyPolygon.defaultProps = {
   normalStyle,
   overStyle,
-  show: true
+  show: true,
 };
 
 export default MyPolygon;

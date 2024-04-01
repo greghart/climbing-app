@@ -46,7 +46,7 @@ const setTrail = async (
             return newEdge;
           })
         );
-      }, []);
+      }, [] as TrailEdge[]);
       return myDataSource.getRepository(TrailEdge).save(trailEdges);
     });
   // commit transaction now:
