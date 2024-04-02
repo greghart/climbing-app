@@ -1,13 +1,13 @@
 import * as React from "react";
 import type { WrappedFieldsProps } from "redux-form";
-import get from "lodash/get";
+import { get } from "lodash";
 
-import PointOnPolygon from "../tracer/PointOnPolygon";
-import type { ExtractProps } from "../../../externals";
-import BaseMap from "../map/BaseMap";
-import MyPolygon from "../map/MyPolygon";
-import ConfirmedCircle from "../tracer/ConfirmedCircle";
-import Coordinate, { isValidCoordinate } from "../../../models/Coordinate";
+import PointOnPolygon from "../tracer/PointOnPolygon.js";
+import type { ExtractProps } from "../../../externals.js";
+import BaseMap from "../map/BaseMap.js";
+import MyPolygon from "../map/MyPolygon.js";
+import ConfirmedCircle from "../tracer/ConfirmedCircle.js";
+import Coordinate, { isValidCoordinate } from "../../../models/Coordinate.js";
 
 interface PointOnPolygonFieldProps {
   // Polygon

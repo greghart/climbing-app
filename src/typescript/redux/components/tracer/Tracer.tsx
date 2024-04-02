@@ -4,12 +4,12 @@
  *
  * Tracer allows user to click points on a map and save them
  */
-import * as React from 'react';
-import * as Leaflet from 'leaflet';
-import { Map, Polyline, Polygon } from 'react-leaflet';
-import BestTileLayer from '../BestTileLayer';
-import FixedContainerOverMap from '../layouts/FixedContainerOverMap';
-import SearchGroup from '../search/SearchGroup';
+import * as React from "react";
+import * as Leaflet from "leaflet";
+import { Map, Polyline, Polygon } from "react-leaflet";
+import BestTileLayer from "../BestTileLayer.js";
+import FixedContainerOverMap from "../layouts/FixedContainerOverMap.js";
+import SearchGroup from "../search/SearchGroup.js";
 
 interface TracerProps {
   bounds: Leaflet.LatLngBoundsExpression;
@@ -22,7 +22,6 @@ interface TracerState {
 }
 
 class Tracer extends React.Component<TracerProps, TracerState> {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -66,7 +65,7 @@ class Tracer extends React.Component<TracerProps, TracerState> {
 
   onControlKeys(e: React.KeyboardEvent<any>) {
     e.persist();
-    if (e.key === 'z') {
+    if (e.key === "z") {
       this.undo();
     }
   }
@@ -81,13 +80,8 @@ class Tracer extends React.Component<TracerProps, TracerState> {
     // Polyline of all existing points, plus one to cursor
     // We keep them separate for efficiency (base doesn't have to re-render )
     return [
-      <Polyline
-        key="current-line"
-        positions={this.state.points}
-        color="red"
-      />,
-      (
-        this.state.current && this.state.points.length > 0 &&
+      <Polyline key="current-line" positions={this.state.points} color="red" />,
+      this.state.current && this.state.points.length > 0 && (
         <Polyline
           key="current-line-pending"
           positions={[
@@ -98,11 +92,7 @@ class Tracer extends React.Component<TracerProps, TracerState> {
       ),
       this.state.built.map((thisBuilt, i) => {
         return (
-          <Polygon
-            key={`built-${i}`}
-            positions={thisBuilt}
-            color="green"
-          />
+          <Polygon key={`built-${i}`} positions={thisBuilt} color="green" />
         );
       }),
     ];
@@ -116,9 +106,7 @@ class Tracer extends React.Component<TracerProps, TracerState> {
           <SearchGroup
             onClickPrepend={() => {}}
             groupClass="flex-no-wrap"
-            prepend={
-              <i className="fa fa-check" />
-            }
+            prepend={<i className="fa fa-check" />}
             input={
               <div className="input-group-append flex-grow-up bg-light align-items-center">
                 Trace the boulder's location
@@ -129,15 +117,15 @@ class Tracer extends React.Component<TracerProps, TracerState> {
         <div
           className="row no-gutters"
           style={{
-            width: '100%',
-            height: '100%',
+            width: "100%",
+            height: "100%",
           }}
         >
           <Map
             ref="map"
             style={{
-              width: '100%',
-              height: '100%',
+              width: "100%",
+              height: "100%",
             }}
             center={[32.85052, -117.02223]}
             bounds={this.props.bounds}
@@ -156,7 +144,6 @@ class Tracer extends React.Component<TracerProps, TracerState> {
       </div>
     );
   }
-
 }
 
 export default Tracer;

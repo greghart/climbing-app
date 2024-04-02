@@ -1,12 +1,12 @@
 import * as t from "io-ts";
-import omit from "lodash/omit";
+import { omit } from "lodash-es";
 
-import myDataSource from "../../db/myDataSource";
-import Area from "../../models/Area";
-import Boulder from "../../models/Boulder";
-import BoulderCodec from "../../codecs/BoulderCodec";
-import Polygon from "../../models/Polygon";
-import setPolygon from "./setPolygon";
+import myDataSource from "../../db/myDataSource.js";
+import Area from "../../models/Area.js";
+import Boulder from "../../models/Boulder.js";
+import BoulderCodec from "../../codecs/BoulderCodec.js";
+import Polygon from "../../models/Polygon.js";
+import setPolygon from "./setPolygon.js";
 
 const addBoulder = async (area: Area, data: t.TypeOf<typeof BoulderCodec>) => {
   // Setup boulder

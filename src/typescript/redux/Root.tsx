@@ -5,7 +5,7 @@ import { renderRoutes } from "react-router-config";
 import { ConnectedRouter } from "connected-react-router";
 import type { History } from "history";
 
-import getRoutes from "./getRoutes";
+import getRoutes from "./getRoutes.js";
 
 type Props = {
   store: Store<any>;

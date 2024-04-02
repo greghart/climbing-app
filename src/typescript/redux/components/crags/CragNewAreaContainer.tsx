@@ -1,16 +1,16 @@
-import { pick } from "lodash";
+import { pick } from "lodash-es";
 import * as React from "react";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Bluebird from "bluebird";
 
-import AreaForm, { type Props as FormProps } from "../areas/AreaForm";
-import type { MapDispatchToPropsFunction } from "../types";
-import createArea from "../../ducks/operations/createArea";
-import handleReduxFormErrors from "../util/handleReduxFormErrors";
+import AreaForm, { type Props as FormProps } from "../areas/AreaForm.js";
+import type { MapDispatchToPropsFunction } from "../types.js";
+import createArea from "../../ducks/operations/createArea.js";
+import handleReduxFormErrors from "../util/handleReduxFormErrors.js";
 import { replace } from "connected-react-router";
-import Crag from "../../../models/Crag";
+import Crag from "../../../models/Crag.js";
 
 interface OwnProps {
   crag: Crag;

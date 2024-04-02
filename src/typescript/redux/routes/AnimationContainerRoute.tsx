@@ -2,8 +2,8 @@ import * as React from "react";
 import type { RouteConfigComponentProps } from "react-router-config";
 import { Switch, Route } from "react-router";
 import { TransitionGroup } from "react-transition-group";
-import Empty from "../components/animations/Empty";
-import AnimationContext from "../components/animations/AnimationContext";
+import Empty from "../components/animations/Empty.js";
+import AnimationContext from "../components/animations/AnimationContext.js";
 
 /**
  * AnimationContainerRoute allows sub-routes to hook into an animation context

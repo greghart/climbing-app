@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Route from '../../../models/Route';
-import withCommentable from './withCommentable';
-import ShowCommentable from '../comments/ShowCommentable';
+import Route from "../../../models/Route.js";
+import withCommentable from "./withCommentable.js";
+import ShowCommentable from "../comments/ShowCommentable.js";
 
 interface OwnProps {
   myRoute: Route;

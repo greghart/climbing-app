@@ -2,14 +2,14 @@ import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { replace } from "connected-react-router";
-import { pick } from "lodash";
+import { pick } from "lodash-es";
 import Bluebird from "bluebird";
 
-import AreaForm, { type Props as FormProps } from "./AreaForm";
-import type { MapDispatchToPropsFunction } from "../types";
-import updateArea from "../../ducks/operations/updateArea";
-import handleReduxFormErrors from "../util/handleReduxFormErrors";
-import Area from "../../../models/Area";
+import AreaForm, { type Props as FormProps } from "./AreaForm.js";
+import type { MapDispatchToPropsFunction } from "../types.js";
+import updateArea from "../../ducks/operations/updateArea.js";
+import handleReduxFormErrors from "../util/handleReduxFormErrors.js";
+import Area from "../../../models/Area.js";
 
 interface OwnProps {
   // Area to edit

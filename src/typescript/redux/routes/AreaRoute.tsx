@@ -2,10 +2,10 @@ import * as React from "react";
 import type { SFC } from "react";
 import type { RouteConfigComponentProps } from "react-router-config";
 
-import AreaLayout from "../components/areas/AreaLayout";
-import withArea from "../components/areas/withArea";
-import type { Fetchable } from "../../server/fetchDataForMatches";
-import fetchAreas from "../ducks/operations/fetchAreas";
+import AreaLayout from "../components/areas/AreaLayout.js";
+import withArea from "../components/areas/withArea.js";
+import type { Fetchable } from "../../server/fetchDataForMatches.js";
+import fetchAreas from "../ducks/operations/fetchAreas.js";
 const AreaLayoutContainer = withArea(AreaLayout);
 
 interface AreaParams {

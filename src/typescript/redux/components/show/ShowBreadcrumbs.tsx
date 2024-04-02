@@ -1,6 +1,6 @@
-import * as React from 'react';
-import Truncate from '../Truncate';
-import { Link } from 'react-router-dom';
+import * as React from "react";
+import Truncate from "../Truncate.js";
+import { Link } from "react-router-dom";
 
 interface LinkDatum {
   to?: string;
@@ -25,29 +25,30 @@ const ShowBreadcrumbs: React.SFC<Props> = (props) => {
         aria-expanded="false"
       >
         {props.title}
-        {props.links.length > 0 &&
-          <i className="fa fa-caret-down ml-2" />
-        }
+        {props.links.length > 0 && <i className="fa fa-caret-down ml-2" />}
       </a>
-      {props.links.length > 0 &&
+      {props.links.length > 0 && (
         <div className="dropdown-menu" aria-labelledby="breadcrumbsLink">
           {props.links.map((thisLink, i) => {
             if (!thisLink.to) {
-              return(
+              return (
                 <a key={thisLink.to || i} className="dropdown-item">
                   {thisLink.content}
                 </a>
               );
             }
             return (
-              <Link key={thisLink.to} to={thisLink.to} className="dropdown-item">
+              <Link
+                key={thisLink.to}
+                to={thisLink.to}
+                className="dropdown-item"
+              >
                 {thisLink.content}
               </Link>
             );
           })}
         </div>
-      }
-
+      )}
     </div>
   );
 };

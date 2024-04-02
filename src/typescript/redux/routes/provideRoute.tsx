@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { RouteConfigComponentProps } from "react-router-config";
-import RouteContext from "../context/RouteContext";
-import { isFetchable } from "../../server/fetchDataForMatches";
+import RouteContext from "../context/RouteContext.js";
+import { isFetchable } from "../../server/fetchDataForMatches.js";
 
 interface Props {
   children: React.ReactNode;

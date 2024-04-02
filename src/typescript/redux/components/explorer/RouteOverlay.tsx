@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import OverlayDetail from "./OverlayDetail";
-import Route from "../../../models/Route";
-import Crag from "../../../models/Crag";
-import withRoute from "../routes/withRoute";
-import Truncate from "../Truncate";
-import Coordinate from "../../../models/Coordinate";
+import OverlayDetail from "./OverlayDetail.js";
+import Route from "../../../models/Route.js";
+import Crag from "../../../models/Crag.js";
+import withRoute from "../routes/withRoute.js";
+import Truncate from "../Truncate.js";
+import Coordinate from "../../../models/Coordinate.js";
 
 type NeededProps = "id" | "name" | "gradeRaw" | "description" | "coordinate";
 interface Props {

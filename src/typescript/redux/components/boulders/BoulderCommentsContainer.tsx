@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Boulder from '../../../models/Boulder';
-import withCommentable from './withCommentable';
-import ShowCommentable from '../comments/ShowCommentable';
+import Boulder from "../../../models/Boulder.js";
+import withCommentable from "./withCommentable.js";
+import ShowCommentable from "../comments/ShowCommentable.js";
 
 interface OwnProps {
   boulder: Boulder;

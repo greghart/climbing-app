@@ -1,9 +1,9 @@
-import { PhotoableSchema } from '../../normalizr';
-import Photoable from '../../../models/Photoable';
-import buildWithChild from '../util/buildWithChild';
+import { PhotoableSchema } from "../../normalizr.js";
+import Photoable from "../../../models/Photoable.js";
+import buildWithChild from "../util/buildWithChild.js";
 
 const withPhotoable = buildWithChild<Photoable, { photoable?: Photoable }>(
-  'photoable',
+  "photoable",
   PhotoableSchema
 );
 

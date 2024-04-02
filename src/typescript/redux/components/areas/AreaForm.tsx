@@ -1,21 +1,21 @@
 import * as React from "react";
 import * as Leaflet from "leaflet";
 import { type InjectedFormProps, type FormErrors, Fields } from "redux-form";
-import reject from "lodash/reject";
-import type { Omit } from "utility-types/dist/mapped-types";
+import { reject } from "lodash";
+import type { Omit } from "utility-types";
 
-import Area from "../../../models/Area";
-import type { OnSubmit } from "../types";
-import MyField from "../form/MyField";
-import Cancel from "../form/Cancel";
-import Submit from "../form/Submit";
-import PolygonField, { type PolygonFieldProps } from "../form/PolygonField";
-import AreasMap from "../explorer/AreasMap";
-import AreaBoulders from "../explorer/AreaBoulders";
-import fetchCragContainer from "../crags/fetchCragContainer";
-import Crag from "../../../models/Crag";
-import type { ExtractProps } from "../../../externals";
-import MyPolygon from "../map/MyPolygon";
+import Area from "../../../models/Area.js";
+import type { OnSubmit } from "../types.js";
+import MyField from "../form/MyField.js";
+import Cancel from "../form/Cancel.js";
+import Submit from "../form/Submit.js";
+import PolygonField, { type PolygonFieldProps } from "../form/PolygonField.js";
+import AreasMap from "../explorer/AreasMap.js";
+import AreaBoulders from "../explorer/AreaBoulders.js";
+import fetchCragContainer from "../crags/fetchCragContainer.js";
+import Crag from "../../../models/Crag.js";
+import type { ExtractProps } from "../../../externals.js";
+import MyPolygon from "../map/MyPolygon.js";
 
 interface Props {
   // Crag needed to constrain map bounds for example

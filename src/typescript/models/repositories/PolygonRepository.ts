@@ -1,7 +1,7 @@
-import PolygonCoordinate from "../PolygonCoordinate";
-import Polygon from "../Polygon";
-import get from "lodash/get";
-import myDataSource from "../../db/myDataSource";
+import PolygonCoordinate from "../PolygonCoordinate.js";
+import Polygon from "../Polygon.js";
+import { get } from "lodash";
+import myDataSource from "../../db/myDataSource.js";
 
 // Base interface for a polygon entity
 interface PolygonEntity {

@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Map } from "react-leaflet";
 import classNames from "classnames";
-import type { ExtractProps } from "../../../externals";
-import BestTileLayer from "../BestTileLayer";
-import Coordinate from "../../../models/Coordinate";
+import type { ExtractProps } from "../../../externals.js";
+import BestTileLayer from "../BestTileLayer.js";
+import Coordinate from "../../../models/Coordinate.js";
 
 type Props = ExtractProps<Map> & {
   // Support supplying coordinates since that's what we work with a lot

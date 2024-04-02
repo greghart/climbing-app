@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import Crag from "../../../models/Crag";
-import ShowLayout, { type RouterProps } from "../show/ShowLayout";
-import ShowBreadcrumbs from "../show/ShowBreadcrumbs";
+import Crag from "../../../models/Crag.js";
+import ShowLayout, { type RouterProps } from "../show/ShowLayout.js";
+import ShowBreadcrumbs from "../show/ShowBreadcrumbs.js";
 
 type Props = RouterProps & {
   crag: Crag;

@@ -2,8 +2,8 @@ import crypto from "crypto";
 import * as path from "path";
 import { getEngine, MulterFileSource } from "power-putty-io";
 
-import myDataSource from "../../db/myDataSource";
-import Upload from "../../models/Upload";
+import myDataSource from "../../db/myDataSource.js";
+import Upload from "../../models/Upload.js";
 
 function hashData(data: Buffer) {
   return crypto.createHash("sha1").update(data).digest("hex");

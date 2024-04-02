@@ -1,8 +1,8 @@
-import reduce from "lodash/reduce";
+import { reduce } from "lodash-es";
 import * as inflection from "inflection";
 
-import type { APIClientInterface } from "./APIClientInterface";
-import type { ArgumentTypes } from "../../externals";
+import type { APIClientInterface } from "./APIClientInterface.js";
+import type { ArgumentTypes } from "../../externals.js";
 
 /**
  * For our swagger client, we need to map our method signatures to the object

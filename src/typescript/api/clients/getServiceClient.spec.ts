@@ -1,5 +1,5 @@
-import getConnection from "../../db";
-import getServiceClient from "./getServiceClient";
+import getConnection from "../../db/index.js";
+import getServiceClient from "./getServiceClient.js";
 
 describe("getServiceClientTests", () => {
   before(() => {

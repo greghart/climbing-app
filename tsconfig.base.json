@@ -1,8 +1,7 @@
 {
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
-    "module": "esnext", // less opinionated, let things support both as ESM and CJS when needed 
-    "moduleResolution": "Bundler",
+    "module": "node16", // most strict for best compatibility across all platforms
     "noEmit": true, // type check only for base
     "outDir": "./dist/",
     "rootDir": "./src/",

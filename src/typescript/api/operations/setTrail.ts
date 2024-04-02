@@ -1,7 +1,7 @@
-import myDataSource from "../../db/myDataSource";
-import Trail from "../../models/Trail";
-import TrailNode from "../../models/TrailNode";
-import TrailEdge from "../../models/TrailEdge";
+import myDataSource from "../../db/myDataSource.js";
+import Trail from "../../models/Trail.js";
+import TrailNode from "../../models/TrailNode.js";
+import TrailEdge from "../../models/TrailEdge.js";
 
 const setTrail = async (
   trail: Trail,

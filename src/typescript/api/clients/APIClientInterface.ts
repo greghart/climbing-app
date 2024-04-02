@@ -1,11 +1,11 @@
 import { Return } from "typescript-rest";
-import type { ArgumentTypes } from "../../externals";
-import type { CragsServiceType } from "../services/CragsService";
-import type { AreasServiceType } from "../services/AreasService";
-import type { BouldersServiceType } from "../services/BouldersService";
-import type { RoutesServiceType } from "../services/RoutesService";
-import type { CommentablesServiceType } from "../services/CommentablesService";
-import type { PhotoablesServiceType } from "../services/PhotoablesService";
+import type { ArgumentTypes } from "../../externals.js";
+import type { CragsServiceType } from "../services/CragsService.js";
+import type { AreasServiceType } from "../services/AreasService.js";
+import type { BouldersServiceType } from "../services/BouldersService.js";
+import type { RoutesServiceType } from "../services/RoutesService.js";
+import type { CommentablesServiceType } from "../services/CommentablesService.js";
+import type { PhotoablesServiceType } from "../services/PhotoablesService.js";
 
 /**
  * Setup a type-safe API client interface

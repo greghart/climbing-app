@@ -1,9 +1,9 @@
 import * as React from "react";
-import sortBy from "lodash/sortBy";
+import { sortBy } from "lodash";
 
-import Area from "../../../models/Area";
-import MyPolygon from "../map/MyPolygon";
-import type { ExtractProps } from "../../../externals";
+import Area from "../../../models/Area.js";
+import MyPolygon from "../map/MyPolygon.js";
+import type { ExtractProps } from "../../../externals.js";
 
 type Props = Partial<ExtractProps<typeof MyPolygon>> & {
   area: Area;

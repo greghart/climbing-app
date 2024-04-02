@@ -1,8 +1,8 @@
-import isFunction from "lodash/isFunction";
-import scopeObject from "./scopeObject";
+import { isFunction } from "lodash";
+import scopeObject from "./scopeObject.js";
 
 import * as ThunkTypes from "redux-thunk";
-import type { ActionOrThunk } from "../../../externals";
+import type { ActionOrThunk } from "../../../externals.js";
 
 // Type guard for Thunks
 const isThunk = (

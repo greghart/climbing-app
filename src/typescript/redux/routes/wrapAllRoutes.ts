@@ -1,5 +1,5 @@
-import type { MyRouteConfig } from "./MyRouteConfig";
-import provideRoute from "./provideRoute";
+import type { MyRouteConfig } from "./MyRouteConfig.js";
+import provideRoute from "./provideRoute.js";
 
 /**
  * Helper to wrap a list of routes in route providers

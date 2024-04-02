@@ -1,6 +1,6 @@
-import myDataSource from "../../db/myDataSource";
+import myDataSource from "../../db/myDataSource.js";
 
-import Boulder from "../../models/Boulder";
+import Boulder from "../../models/Boulder.js";
 
 interface Options {
   includeComments: boolean;

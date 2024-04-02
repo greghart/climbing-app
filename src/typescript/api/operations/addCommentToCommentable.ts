@@ -1,7 +1,7 @@
-import myDataSource from "../../db/myDataSource";
-import Comment from "../../models/Comment";
-import User from "../../models/User";
-import Commentable from "../../models/Commentable";
+import myDataSource from "../../db/myDataSource.js";
+import Comment from "../../models/Comment.js";
+import User from "../../models/User.js";
+import Commentable from "../../models/Commentable.js";
 
 const addCommentToCommentable = (
   commentable: Commentable,

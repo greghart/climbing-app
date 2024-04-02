@@ -1,5 +1,5 @@
 import { getRepository } from "typeorm";
-import Crag from "../../models/Crag";
+import Crag from "../../models/Crag.js";
 
 const getCragTrail = (id: number | string) => {
   return getRepository(Crag)

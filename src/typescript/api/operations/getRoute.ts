@@ -1,5 +1,5 @@
-import myDataSource from "../../db/myDataSource";
-import Route from "../../models/Route";
+import myDataSource from "../../db/myDataSource.js";
+import Route from "../../models/Route.js";
 
 interface Options {
   includeComments: boolean;

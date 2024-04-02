@@ -4,11 +4,11 @@ import {
   OneToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
-} from 'typeorm';
+} from "typeorm";
 
-import Route from './Route';
-import GradingSystem from './GradingSystem';
-import { cascadeManyToOne } from '../db/cascadeOptions';
+import Route from "./Route.js";
+import GradingSystem from "./GradingSystem.js";
+import { cascadeManyToOne } from "../db/cascadeOptions.js";
 
 @Entity()
 export default class Grade {
@@ -16,7 +16,7 @@ export default class Grade {
   id: number;
 
   // Order difficulties within a grade type
-  @Column('int')
+  @Column("int")
   order: number;
 
   @Column()
@@ -30,10 +30,13 @@ export default class Grade {
   isMinus: boolean;
 
   // Relationships
-  @OneToMany(type => Route, route => route.grade)
+  @OneToMany((type) => Route, (route) => route.grade)
   routes: Route;
 
-  @ManyToOne(type => GradingSystem, system => system.grades, cascadeManyToOne)
+  @ManyToOne(
+    (type) => GradingSystem,
+    (system) => system.grades,
+    cascadeManyToOne
+  )
   gradingSystem: GradingSystem;
-
 }

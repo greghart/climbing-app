@@ -4,11 +4,11 @@ import {
   PrimaryGeneratedColumn,
   Index,
   OneToMany,
-} from 'typeorm';
-import Coordinate from './Coordinate';
-import { cascadeManyToOne, cascadeOneToMany } from '../db/cascadeOptions';
-import Trail from './Trail';
-import TrailEdge from './TrailEdge';
+} from "typeorm";
+import Coordinate from "./Coordinate.js";
+import { cascadeManyToOne, cascadeOneToMany } from "../db/cascadeOptions.js";
+import Trail from "./Trail.js";
+import TrailEdge from "./TrailEdge.js";
 
 /**
  * A node of a trail.
@@ -20,12 +20,12 @@ export default class TrailNode extends Coordinate {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @ManyToOne(type => Trail, trail => trail.nodes, cascadeManyToOne)
+  @ManyToOne((type) => Trail, (trail) => trail.nodes, cascadeManyToOne)
   trail: Trail;
 
   // All edges are bi-directional.
   // By convention, for nodes A and B, we only store the edge s.t. source is min and dest is max
-  @OneToMany(type => TrailEdge, edge => edge.a, cascadeOneToMany)
+  @OneToMany((type) => TrailEdge, (edge) => edge.a, cascadeOneToMany)
   edges: TrailEdge[];
 
   toJSON() {

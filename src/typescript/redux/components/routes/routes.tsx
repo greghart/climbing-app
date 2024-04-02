@@ -1,15 +1,15 @@
 import * as React from "react";
 import type { RouteConfigComponentProps } from "react-router-config";
 
-import Route from "../../../models/Route";
-import RouteLayoutOverview from "./RouteLayoutOverview";
-import RoutePhotosContainer from "./RoutePhotosContainer";
-import RouteCommentsContainer from "./RouteCommentsContainer";
-import RouteNewCommentContainer from "./RouteNewCommentContainer";
-import RouteEditContainer from "./RouteEditContainer";
-import RouteSun from "./RouteSun";
-import RouteNewPhotoContainer from "./RouteNewPhotoContainer";
-import RouteLayoutContainer from "./RouteLayoutContainer";
+import Route from "../../../models/Route.js";
+import RouteLayoutOverview from "./RouteLayoutOverview.js";
+import RoutePhotosContainer from "./RoutePhotosContainer.js";
+import RouteCommentsContainer from "./RouteCommentsContainer.js";
+import RouteNewCommentContainer from "./RouteNewCommentContainer.js";
+import RouteEditContainer from "./RouteEditContainer.js";
+import RouteSun from "./RouteSun.js";
+import RouteNewPhotoContainer from "./RouteNewPhotoContainer.js";
+import RouteLayoutContainer from "./RouteLayoutContainer.js";
 
 interface RouteParams {
   route: string;

@@ -1,7 +1,7 @@
-import * as React from 'react';
-import Boulder from '../../../models/Boulder';
-import NewPhotoContainer from '../photos/NewPhotoContainer';
-import withPhotoable from './withPhotoable';
+import * as React from "react";
+import Boulder from "../../../models/Boulder.js";
+import NewPhotoContainer from "../photos/NewPhotoContainer.js";
+import withPhotoable from "./withPhotoable.js";
 
 interface OwnProps {
   boulder: Boulder;
@@ -16,8 +16,8 @@ const BoulderNewPhotoContainer: React.SFC<OwnProps> = (props) => {
       // TODO user-feature
       user={{
         id: 1,
-        name: 'Greg Hart',
-        email: 'greghartemail@gmail.com',
+        name: "Greg Hart",
+        email: "greghartemail@gmail.com",
         photos: [],
       }}
     />

@@ -2,7 +2,7 @@ import type { MatchedRoute } from "react-router-config";
 import type { Action, Store } from "redux";
 import * as ThunkTypes from "redux-thunk";
 import Bluebird from "bluebird";
-import isFunction from "lodash/isFunction";
+import { isFunction } from "lodash";
 
 interface ThunkDispatch<S, E, A extends Action<any>, R> {
   (asyncAction: ThunkTypes.ThunkAction<R, S, E, A>): R;

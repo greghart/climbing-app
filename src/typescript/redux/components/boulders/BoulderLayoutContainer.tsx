@@ -1,5 +1,5 @@
-import BoulderLayout from './BoulderLayout';
-import withBoulder from './withBoulder';
+import BoulderLayout from "./BoulderLayout.js";
+import withBoulder from "./withBoulder.js";
 
 const BoulderLayoutContainer = withBoulder(BoulderLayout);
 

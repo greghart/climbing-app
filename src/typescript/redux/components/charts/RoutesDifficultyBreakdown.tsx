@@ -1,11 +1,11 @@
 import * as React from "react";
-import Chart from "react-google-charts";
-import type { ReactGoogleChartProps } from "react-google-charts/dist/types";
-import reduce from "lodash/reduce";
+import { Chart } from "react-google-charts";
+import { reduce } from "lodash";
 
-import Route from "../../../models/Route";
+import Route from "../../../models/Route.js";
+import type { ExtractProps } from "../../../externals.js";
 
-type Props = Partial<ReactGoogleChartProps> & {
+type Props = Partial<ExtractProps<typeof Chart>> & {
   routes: Route[];
 };
 

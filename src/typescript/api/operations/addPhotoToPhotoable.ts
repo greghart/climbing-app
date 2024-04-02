@@ -1,8 +1,8 @@
-import myDataSource from "../../db/myDataSource";
-import Photo from "../../models/Photo";
-import User from "../../models/User";
-import Photoable from "../../models/Photoable";
-import Upload from "../../models/Upload";
+import myDataSource from "../../db/myDataSource.js";
+import Photo from "../../models/Photo.js";
+import User from "../../models/User.js";
+import Photoable from "../../models/Photoable.js";
+import Upload from "../../models/Upload.js";
 
 const addPhotoToPhotoable = (
   photoable: Photoable,

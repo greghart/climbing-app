@@ -1,14 +1,14 @@
 import * as React from "react";
-import Boulder from "../../../models/Boulder";
-import BoulderRoute from "../../routes/BoulderRoute";
-import BoulderCommentsContainer from "./BoulderCommentsContainer";
-import BoulderNewCommentContainer from "./BoulderNewCommentContainer";
-import BoulderNewRouteContainer from "./BoulderNewRouteContainer";
-import BoulderEditContainer from "./BoulderEditContainer";
-import BoulderSun from "./BoulderSun";
-import BoulderLayoutOverview from "./BoulderLayoutOverview";
-import BoulderPhotosContainer from "./BoulderPhotosContainer";
-import BoulderNewPhotoContainer from "./BoulderNewPhotoContainer";
+import Boulder from "../../../models/Boulder.js";
+import BoulderRoute from "../../routes/BoulderRoute.js";
+import BoulderCommentsContainer from "./BoulderCommentsContainer.js";
+import BoulderNewCommentContainer from "./BoulderNewCommentContainer.js";
+import BoulderNewRouteContainer from "./BoulderNewRouteContainer.js";
+import BoulderEditContainer from "./BoulderEditContainer.js";
+import BoulderSun from "./BoulderSun.js";
+import BoulderLayoutOverview from "./BoulderLayoutOverview.js";
+import BoulderPhotosContainer from "./BoulderPhotosContainer.js";
+import BoulderNewPhotoContainer from "./BoulderNewPhotoContainer.js";
 
 interface BoulderParams {
   boulder: string;

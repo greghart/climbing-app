@@ -3,7 +3,7 @@ import * as path from "path";
 import * as mime from "mime";
 import { getRepository } from "typeorm";
 import { getEngine } from "power-putty-io";
-import Upload from "../models/Upload";
+import Upload from "../models/Upload.js";
 
 const ioEngineRouter = Express.Router();
 const ioEngine = getEngine();

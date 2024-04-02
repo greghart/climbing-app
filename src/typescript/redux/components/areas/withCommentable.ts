@@ -1,9 +1,9 @@
 import { compose } from "redux";
 
-import { fetchCommentableForArea } from "../../ducks/operations/fetchCommentable";
-import withMountDispatch from "../../decorators/withMountDispatch";
-import withLoader from "../../decorators/withLoader";
-import Area from "../../../models/Area";
+import { fetchCommentableForArea } from "../../ducks/operations/fetchCommentable.js";
+import withMountDispatch from "../../decorators/withMountDispatch.js";
+import withLoader from "../../decorators/withLoader.js";
+import Area from "../../../models/Area.js";
 import { type InferableComponentEnhancerWithProps } from "react-redux";
 
 interface OwnProps {

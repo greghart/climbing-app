@@ -3,15 +3,15 @@ import Bluebird from "bluebird";
 import { connect } from "react-redux";
 import { replace } from "connected-react-router";
 
-import withTrail from "./withTrail";
-import CragTrail, { type Props as FormProps } from "./CragTrail";
-import type { State } from "../../reducer";
-import Crag from "../../../models/Crag";
-import { TrailSchema } from "../../normalizr";
-import handleReduxFormErrors from "../util/handleReduxFormErrors";
-import updateCrag from "../../ducks/operations/updateCrag";
-import type { MapDispatchToPropsFunction } from "../types";
-import fetchTrail from "../../ducks/operations/fetchTrail";
+import withTrail from "./withTrail.js";
+import CragTrail, { type Props as FormProps } from "./CragTrail.js";
+import type { State } from "../../reducer.js";
+import Crag from "../../../models/Crag.js";
+import { TrailSchema } from "../../normalizr.js";
+import handleReduxFormErrors from "../util/handleReduxFormErrors.js";
+import updateCrag from "../../ducks/operations/updateCrag.js";
+import type { MapDispatchToPropsFunction } from "../types.js";
+import fetchTrail from "../../ducks/operations/fetchTrail.js";
 
 interface OwnProps {
   crag: Crag;

@@ -2,7 +2,7 @@ import * as React from "react";
 import type { SFC } from "react";
 import type { RouteConfigComponentProps } from "react-router-config";
 
-import BoulderLayoutContainer from "../components/boulders/BoulderLayoutContainer";
+import BoulderLayoutContainer from "../components/boulders/BoulderLayoutContainer.js";
 
 interface BoulderParams {
   boulder: string;

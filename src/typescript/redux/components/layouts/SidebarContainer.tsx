@@ -1,11 +1,12 @@
 import * as React from "react";
-import Sidebar, { type SidebarProps } from "react-sidebar";
+import { type SidebarProps } from "react-sidebar";
+import Sidebar from "react-sidebar";
 import { connect } from "react-redux";
 
-import { setOpen } from "../../ducks/sidebar";
-import scopeObject from "../../ducks/util/scopeObject";
-import scopedSelector from "../../ducks/util/scopedSelector";
-import type { State } from "../../reducer";
+import { setOpen } from "../../ducks/sidebar.js";
+import scopeObject from "../../ducks/util/scopeObject.js";
+import scopedSelector from "../../ducks/util/scopedSelector.js";
+import type { State } from "../../reducer.js";
 
 type Props = SidebarProps & {
   children: React.ReactNode;
@@ -13,7 +14,8 @@ type Props = SidebarProps & {
 
 const MySidebar = (props: Props) => {
   console.warn({ props }, "MySidebar");
-  return <Sidebar {...props}>{props.children}</Sidebar>;
+  const _Sidebar = Sidebar as any;
+  return <_Sidebar {...props}>{props.children}</_Sidebar>;
 };
 
 /**

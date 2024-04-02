@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import Bluebird from "bluebird";
 
-import NewComment, { type Props as FormProps } from "./NewComment";
-import User from "../../../models/User";
-import type { MapDispatchToPropsFunction } from "../types";
-import Commentable from "../../../models/Commentable";
-import createComment from "../../ducks/operations/createComment";
-import handleReduxFormErrors from "../util/handleReduxFormErrors";
+import NewComment, { type Props as FormProps } from "./NewComment.js";
+import User from "../../../models/User.js";
+import type { MapDispatchToPropsFunction } from "../types.js";
+import Commentable from "../../../models/Commentable.js";
+import createComment from "../../ducks/operations/createComment.js";
+import handleReduxFormErrors from "../util/handleReduxFormErrors.js";
 import { replace } from "connected-react-router";
 
 interface OwnProps {

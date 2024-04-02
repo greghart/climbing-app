@@ -4,11 +4,11 @@ import { compose } from "redux";
 import { replace } from "connected-react-router";
 import Bluebird from "bluebird";
 
-import BoulderForm, { type Props as FormProps } from "./BoulderForm";
-import type { MapDispatchToPropsFunction } from "../types";
-import updateBoulder from "../../ducks/operations/updateBoulder";
-import handleReduxFormErrors from "../util/handleReduxFormErrors";
-import Boulder from "../../../models/Boulder";
+import BoulderForm, { type Props as FormProps } from "./BoulderForm.js";
+import type { MapDispatchToPropsFunction } from "../types.js";
+import updateBoulder from "../../ducks/operations/updateBoulder.js";
+import handleReduxFormErrors from "../util/handleReduxFormErrors.js";
+import Boulder from "../../../models/Boulder.js";
 
 interface OwnProps {
   // Boulder to edit

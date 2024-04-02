@@ -1,17 +1,17 @@
 import * as Rest from "typescript-rest";
 import { Tags, Response } from "typescript-rest-swagger";
 
-import myDataSource from "../../db/myDataSource";
-import Crag from "../../models/Crag";
-import getCrag from "../operations/getCrag";
-import updateCrag from "../operations/updateCrag";
-import addArea from "../operations/addArea";
-import validate from "../util/validate";
-import CragCodec from "../../codecs/CragCodec";
-import type { AreaPayload } from "./AreasService";
-import AreaCodec from "../../codecs/AreaCodec";
-import exportCrag from "../operations/exportCrag";
-import getCragTrail from "../operations/getCragTrail";
+import myDataSource from "../../db/myDataSource.js";
+import Crag from "../../models/Crag.js";
+import getCrag from "../operations/getCrag.js";
+import updateCrag from "../operations/updateCrag.js";
+import addArea from "../operations/addArea.js";
+import validate from "../util/validate.js";
+import CragCodec from "../../codecs/CragCodec.js";
+import type { AreaPayload } from "./AreasService.js";
+import AreaCodec from "../../codecs/AreaCodec.js";
+import exportCrag from "../operations/exportCrag.js";
+import getCragTrail from "../operations/getCragTrail.js";
 
 // For swagger generation we need dead simple types
 interface CragPayload {

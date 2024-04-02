@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { Omit } from "utility-types";
 import classNames from "classnames";
-import User from "../../../models/User";
+import User from "../../../models/User.js";
 
 interface Props {
   user: Omit<User, "comments">;

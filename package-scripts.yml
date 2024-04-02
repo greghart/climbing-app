@@ -12,6 +12,8 @@ scripts:
   tscw:
     description: Watch all typescript resources to javascript.
     script: tsc --watch
+  clean:
+    script: rm tsconfig.tsbuildinfo
   build:
     prod:
       description: Build your client code production style

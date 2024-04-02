@@ -1,20 +1,20 @@
 import * as React from "react";
-import filter from "lodash/filter";
+import { filter } from "lodash";
 import { Link } from "react-router-dom";
 
-import Crag from "../../../models/Crag";
-import Area from "../../../models/Area";
-import Boulder from "../../../models/Boulder";
-import Route from "../../../models/Route";
-import type { FormData as SearchFilterFormData } from "./SearchFilters";
+import Crag from "../../../models/Crag.js";
+import Area from "../../../models/Area.js";
+import Boulder from "../../../models/Boulder.js";
+import Route from "../../../models/Route.js";
+import type { FormData as SearchFilterFormData } from "./SearchFilters.js";
 import getSearchableEntitiesForCrag, {
   isArea,
   isBoulder,
   isRoute,
   type Tag,
   type Searchable,
-} from "./getSearchableEntitiesForCrag";
-import getNormalizedSunValueForRoute from "../sun/getNormalizedSunValueForRoute";
+} from "./getSearchableEntitiesForCrag.js";
+import getNormalizedSunValueForRoute from "../sun/getNormalizedSunValueForRoute.js";
 
 type GetMatcher = (...args: any[]) => (s: Searchable) => boolean;
 const searchMatcher: GetMatcher = (search = "") => {

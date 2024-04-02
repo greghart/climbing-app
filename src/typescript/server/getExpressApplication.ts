@@ -7,22 +7,22 @@ import {
   getExpressApplication as getBaseApplication,
   serveStatic,
 } from "power-putty-server";
-import browserPolyfill from "../util/browserPolyfill";
+import browserPolyfill from "../util/browserPolyfill.js";
 browserPolyfill();
 
-import getServerRenderMiddleware from "./getServerRenderMiddleware";
-// import { APIRouter } from './api/getRouter';
-// import getAuthRouter from './util/authentication/getRouter';
+import getServerRenderMiddleware from "./getServerRenderMiddleware.js";
+// import { APIRouter } from './api/getRouter.js';
+// import getAuthRouter from './util/authentication/getRouter.js';
 
-// import getServerRenderMiddleware from './util/getServerRenderMiddleware';
-// import getValidateMiddleware from './util/getValidateMiddleware';
-// import getAuthorizeMiddleware from './util/getAuthorizeMiddleware';
-// import getServerErrorMiddleware from './util/errors/getServerErrorMiddleware';
+// import getServerRenderMiddleware from './util/getServerRenderMiddleware.js';
+// import getValidateMiddleware from './util/getValidateMiddleware.js';
+// import getAuthorizeMiddleware from './util/getAuthorizeMiddleware.js';
+// import getServerErrorMiddleware from './util/errors/getServerErrorMiddleware.js';
 
 // other routers
-// import { UniversalErrorMiddleware } from './util/errors/UniversalErrorFactory';
-import api from "../api";
-import ioEngineRouter from "./ioEngineRouter";
+// import { UniversalErrorMiddleware } from './util/errors/UniversalErrorFactory.js';
+import api from "../api/index.js";
+import ioEngineRouter from "./ioEngineRouter.js";
 
 function getExpressApplication(_app?: express.Express) {
   const app = getBaseApplication(_app);

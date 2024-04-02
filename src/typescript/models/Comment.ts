@@ -1,14 +1,9 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 
-import Commentable from './Commentable';
-import User from './User';
-import Timestamps from './Timestamps';
-import { cascadeManyToOne } from '../db/cascadeOptions';
+import Commentable from "./Commentable.js";
+import User from "./User.js";
+import Timestamps from "./Timestamps.js";
+import { cascadeManyToOne } from "../db/cascadeOptions.js";
 
 /**
  * Comment subtable
@@ -17,7 +12,6 @@ import { cascadeManyToOne } from '../db/cascadeOptions';
  */
 @Entity()
 export default class Comment {
-
   constructor() {
     this.timestamps = new Timestamps();
     this.timestamps.createdAt = new Date();
@@ -30,13 +24,16 @@ export default class Comment {
   @Column()
   text: string;
 
-  @ManyToOne(type => Commentable, commentable => commentable.comments, cascadeManyToOne)
+  @ManyToOne(
+    (type) => Commentable,
+    (commentable) => commentable.comments,
+    cascadeManyToOne
+  )
   commentable: Commentable;
 
-  @ManyToOne(type => User, user => user.comments, cascadeManyToOne)
+  @ManyToOne((type) => User, (user) => user.comments, cascadeManyToOne)
   user: User;
 
-  @Column(type => Timestamps)
+  @Column((type) => Timestamps)
   timestamps: Timestamps;
-
 }

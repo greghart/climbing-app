@@ -1,12 +1,12 @@
 import * as React from "react";
 import * as Leaflet from "leaflet";
 import { type InjectedFormProps, type FormErrors, Fields } from "redux-form";
-import type { OnSubmit } from "../types";
-import MyField from "../form/MyField";
-import Cancel from "../form/Cancel";
-import Submit from "../form/Submit";
-import BoundsField, { type BoundsFieldProps } from "../form/BoundsField";
-import Crag from "../../../models/Crag";
+import type { OnSubmit } from "../types.js";
+import MyField from "../form/MyField.js";
+import Cancel from "../form/Cancel.js";
+import Submit from "../form/Submit.js";
+import BoundsField, { type BoundsFieldProps } from "../form/BoundsField.js";
+import Crag from "../../../models/Crag.js";
 
 interface Props {
   crag: Crag;

@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import Boulder from "../../../models/Boulder";
-import BoulderBreadcrumbs from "./BoulderBreadcrumbs";
-import ShowLayout, { type RouterProps } from "../show/ShowLayout";
+import Boulder from "../../../models/Boulder.js";
+import BoulderBreadcrumbs from "./BoulderBreadcrumbs.js";
+import ShowLayout, { type RouterProps } from "../show/ShowLayout.js";
 
 type Props = RouterProps & {
   boulder: Boulder;

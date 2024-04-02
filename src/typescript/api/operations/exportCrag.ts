@@ -1,5 +1,5 @@
-import myDataSource from "../../db/myDataSource";
-import Crag from "../../models/Crag";
+import myDataSource from "../../db/myDataSource.js";
+import Crag from "../../models/Crag.js";
 
 /**
  * Export all of a crag's information

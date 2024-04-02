@@ -1,9 +1,9 @@
 import { compose } from "redux";
 
-import fetchTrail from "../../ducks/operations/fetchTrail";
-import withMountDispatch from "../../decorators/withMountDispatch";
-import withLoader from "../../decorators/withLoader";
-import Crag from "../../../models/Crag";
+import fetchTrail from "../../ducks/operations/fetchTrail.js";
+import withMountDispatch from "../../decorators/withMountDispatch.js";
+import withLoader from "../../decorators/withLoader.js";
+import Crag from "../../../models/Crag.js";
 import type { InferableComponentEnhancerWithProps } from "react-redux";
 
 interface OwnProps {

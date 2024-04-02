@@ -1,14 +1,13 @@
-import * as React from "react";
 import { connect } from "react-redux";
 import { denormalize } from "normalizr";
 import type { RouteConfigComponentProps } from "react-router-config";
 import { push } from "connected-react-router";
-import get from "lodash/get";
+import { get } from "lodash";
 
-import type { State } from "../reducer";
-import { CragSchema } from "../normalizr";
-import Area from "../../models/Area";
-import AreasList from "../components/explorer/AreasList";
+import type { State } from "../reducer.js";
+import { CragSchema } from "../normalizr.js";
+import Area from "../../models/Area.js";
+import AreasList from "../components/explorer/AreasList.js";
 
 interface AreasListParams {
   crag: string;

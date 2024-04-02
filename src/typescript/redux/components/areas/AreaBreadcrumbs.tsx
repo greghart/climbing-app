@@ -1,6 +1,6 @@
-import * as React from 'react';
-import Area from '../../../models/Area';
-import ShowBreadcrumbs from '../show/ShowBreadcrumbs';
+import * as React from "react";
+import Area from "../../../models/Area.js";
+import ShowBreadcrumbs from "../show/ShowBreadcrumbs.js";
 
 interface Props {
   area?: Area;

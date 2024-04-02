@@ -1,12 +1,12 @@
 import { denormalize } from "normalizr";
 import { createSelector } from "reselect";
 
-import { type State, selectors } from "../../reducer";
-import { BoulderSchema } from "../../normalizr";
-import fetchBoulder from "../../ducks/operations/fetchBoulder";
-import Boulder from "../../../models/Boulder";
-import asyncComponent from "../../decorators/asyncComponent";
-import selectNormalizr from "../../util/selectNormalizr";
+import { type State, selectors } from "../../reducer.js";
+import { BoulderSchema } from "../../normalizr.js";
+import fetchBoulder from "../../ducks/operations/fetchBoulder.js";
+import Boulder from "../../../models/Boulder.js";
+import asyncComponent from "../../decorators/asyncComponent.js";
+import selectNormalizr from "../../util/selectNormalizr.js";
 
 interface OwnProps {
   boulderId: string;

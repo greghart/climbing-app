@@ -1,6 +1,5 @@
 import * as React from "react";
-import sortBy from "lodash/sortBy";
-import get from "lodash/get";
+import { sortBy, get } from "lodash";
 import {
   Fields,
   Field,
@@ -9,17 +8,17 @@ import {
   type WrappedFieldsProps,
 } from "redux-form";
 
-import type { OnSubmit } from "../types";
-import Area from "../../../models/Area";
-import Coordinate, { isValidCoordinate } from "../../../models/Coordinate";
-import MyField from "../form/MyField";
-import Cancel from "../form/Cancel";
-import Submit from "../form/Submit";
-import LocationField from "../form/LocationField";
-import ErrorWrapper from "../form/ErrorWrapper";
-import PolygonField, { type PolygonFieldProps } from "../form/PolygonField";
-import MyPolygon from "../map/MyPolygon";
-import BoulderIcon from "../map/BoulderIcon";
+import type { OnSubmit } from "../types.js";
+import Area from "../../../models/Area.js";
+import Coordinate, { isValidCoordinate } from "../../../models/Coordinate.js";
+import MyField from "../form/MyField.js";
+import Cancel from "../form/Cancel.js";
+import Submit from "../form/Submit.js";
+import LocationField from "../form/LocationField.js";
+import ErrorWrapper from "../form/ErrorWrapper.js";
+import PolygonField, { type PolygonFieldProps } from "../form/PolygonField.js";
+import MyPolygon from "../map/MyPolygon.js";
+import BoulderIcon from "../map/BoulderIcon.js";
 
 interface Props {
   onSubmit: OnSubmit<FormData, Props>;

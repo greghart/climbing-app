@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Polyline } from "react-leaflet";
 import type { LatLngExpression } from "leaflet";
-import type { Omit } from "utility-types/dist/mapped-types";
+import type { Omit } from "utility-types";
 
-import type { ExtractProps } from "../../../externals";
-import * as mapLib from "../../../util/mapLib";
+import type { ExtractProps } from "../../../externals.js";
+import * as mapLib from "../../../util/mapLib.js";
 
 /**
  * A polyline with a little arrow head at the top

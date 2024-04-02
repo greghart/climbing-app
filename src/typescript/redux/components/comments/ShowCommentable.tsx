@@ -1,9 +1,9 @@
 import * as React from "react";
 import type { Omit } from "utility-types";
 import { Link } from "react-router-dom";
-import Commentable from "../../../models/Commentable";
-import CommentModel from "../../../models/Comment";
-import Comment from "./Comment";
+import Commentable from "../../../models/Commentable.js";
+import CommentModel from "../../../models/Comment.js";
+import Comment from "./Comment.js";
 
 interface Props {
   // A path to creating a new comment for this entity

@@ -1,10 +1,10 @@
 import * as path from "path";
 import config from "config";
 import * as util from "util";
-import { MetadataGenerator } from "typescript-rest-swagger/dist/metadata/metadataGenerator";
-import { SpecGenerator } from "typescript-rest-swagger/dist/swagger/generator";
+// import { MetadataGenerator } from "typescript-rest-swagger/dist/metadata/metadataGenerator";
+// import { SpecGenerator } from "typescript-rest-swagger/dist/swagger/generator";
 
-import _debug from "../debug";
+import _debug from "../debug.js";
 const debug = _debug.extend("api:buildSwagger");
 
 const swaggerConfig = {
@@ -16,11 +16,11 @@ const swaggerConfig = {
  * Builds a swagger file of our API
  */
 export default () => {
-  const metadata = new MetadataGenerator(swaggerConfig.entryFile).generate();
-  const spec = new SpecGenerator(metadata, swaggerConfig as any).getSpec();
+  // const metadata = new MetadataGenerator(swaggerConfig.entryFile).generate();
+  // const spec = new SpecGenerator(metadata, swaggerConfig as any).getSpec();
   debug({
     swaggerConfig,
   });
-  debug(util.inspect(spec, { depth: null }));
-  return spec;
+  // debug(util.inspect(spec, { depth: null }));
+  return null;
 };

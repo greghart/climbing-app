@@ -5,11 +5,11 @@ import {
   ManyToOne,
   OneToOne,
   JoinColumn,
-} from 'typeorm';
-import Upload from './Upload';
-import Photoable from './Photoable';
-import { cascadeManyToOne } from '../db/cascadeOptions';
-import User from './User';
+} from "typeorm";
+import Upload from "./Upload.js";
+import Photoable from "./Photoable.js";
+import { cascadeManyToOne } from "../db/cascadeOptions.js";
+import User from "./User.js";
 
 /**
  * Photos
@@ -18,11 +18,14 @@ import User from './User';
  */
 @Entity()
 export default class Photo {
-
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(type => Photoable, photoable => photoable.photos, cascadeManyToOne)
+  @ManyToOne(
+    (type) => Photoable,
+    (photoable) => photoable.photos,
+    cascadeManyToOne
+  )
   photoable: Photoable;
 
   @Column()
@@ -31,11 +34,10 @@ export default class Photo {
   @Column({ nullable: true })
   description?: string;
 
-  @ManyToOne(type => User, user => user.photos, cascadeManyToOne)
+  @ManyToOne((type) => User, (user) => user.photos, cascadeManyToOne)
   user: User;
 
-  @ManyToOne(type => Upload, { nullable: false, onDelete: 'CASCADE' })
+  @ManyToOne((type) => Upload, { nullable: false, onDelete: "CASCADE" })
   @JoinColumn()
   upload: Upload;
-
 }

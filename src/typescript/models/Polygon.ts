@@ -1,12 +1,7 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToMany,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
-import { cascadeOneToMany } from '../db/cascadeOptions';
-import PolygonCoordinate from './PolygonCoordinate';
+import { cascadeOneToMany } from "../db/cascadeOptions.js";
+import PolygonCoordinate from "./PolygonCoordinate.js";
 
 /**
  * Polygon supertable to model polymorphic polygon associations
@@ -21,7 +16,6 @@ export default class Polygon {
   @Column()
   descriptor: string;
 
-  @OneToMany(type => PolygonCoordinate, c => c.polygon, cascadeOneToMany)
+  @OneToMany((type) => PolygonCoordinate, (c) => c.polygon, cascadeOneToMany)
   coordinates: PolygonCoordinate[];
-
 }

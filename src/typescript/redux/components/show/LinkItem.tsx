@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import ActionItem from './ActionItem';
-import InfoItem from './InfoItem';
+import * as React from "react";
+import { Link } from "react-router-dom";
+import ActionItem from "./ActionItem.js";
+import InfoItem from "./InfoItem.js";
 
 /**
  * A skeleton for an item action link entry

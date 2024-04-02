@@ -1,13 +1,13 @@
 import * as React from "react";
 import { renderRoutes } from "react-router-config";
 
-import Area from "../../../models/Area";
-import CragModel from "../../../models/Crag";
-import CragMap from "./CragMap";
-import SidebarContainer from "../layouts/SidebarContainer";
-import SearchGroup from "../search/SearchGroup";
-import SearchInputContainer from "../search/SearchInputContainer";
-import RouteContext from "../../context/RouteContext";
+import Area from "../../../models/Area.js";
+import CragModel from "../../../models/Crag.js";
+import CragMap from "./CragMap.js";
+import SidebarContainer from "../layouts/SidebarContainer.js";
+import SearchGroup from "../search/SearchGroup.js";
+import SearchInputContainer from "../search/SearchInputContainer.js";
+import RouteContext from "../../context/RouteContext.js";
 
 interface Props {
   crag: CragModel;

@@ -5,16 +5,15 @@
  */
 import * as React from "react";
 import * as Leaflet from "leaflet";
-import { Map, Polyline, Marker, CircleMarker } from "react-leaflet";
-import find from "lodash/find";
-import reduce from "lodash/reduce";
+import { Map, Polyline, Marker } from "react-leaflet";
+import { find, reduce } from "lodash";
 
-import BestTileLayer from "../BestTileLayer";
-import FixedContainerOverMap from "../layouts/FixedContainerOverMap";
-import SearchGroup from "../search/SearchGroup";
+import BestTileLayer from "../BestTileLayer.js";
+import FixedContainerOverMap from "../layouts/FixedContainerOverMap.js";
+import SearchGroup from "../search/SearchGroup.js";
 import classNames from "classnames";
-import type { ExtractProps } from "../../../externals";
-import { adjacencyGraph, type AdjacencyGraph } from "../util/graph";
+import type { ExtractProps } from "../../../externals.js";
+import { adjacencyGraph, type AdjacencyGraph } from "../util/graph.js";
 
 const mapIcon = '<span><i class="fa fa-circle"/></span>';
 const selectedIcon = Leaflet.divIcon({

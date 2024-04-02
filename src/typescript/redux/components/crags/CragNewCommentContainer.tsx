@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Crag from '../../../models/Crag';
-import NewCommentContainer from '../comments/NewCommentContainer';
-import withCommentable from './withCommentable';
+import Crag from "../../../models/Crag.js";
+import NewCommentContainer from "../comments/NewCommentContainer.js";
+import withCommentable from "./withCommentable.js";
 
 interface OwnProps {
   crag: Crag;
@@ -18,8 +18,8 @@ const CragNewCommentContainer: React.SFC<OwnProps> = (props) => {
       // TODO user-feature
       user={{
         id: 1,
-        name: 'Greg Hart',
-        email: 'greghartemail@gmail.com',
+        name: "Greg Hart",
+        email: "greghartemail@gmail.com",
         comments: [],
       }}
     />

@@ -6,8 +6,8 @@ import {
   type BaseFieldProps,
 } from "redux-form";
 
-import Coordinate from "../../../models/Coordinate";
-import SliderField from "../form/SliderField";
+import Coordinate from "../../../models/Coordinate.js";
+import SliderField from "../form/SliderField.js";
 
 interface Props {
   coordinate: Coordinate;

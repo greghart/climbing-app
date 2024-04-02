@@ -1,8 +1,8 @@
 import * as React from "react";
 import type { Omit } from "utility-types";
 
-import PhotoModel from "../../../models/Photo";
-import User from "../../../models/User";
+import PhotoModel from "../../../models/Photo.js";
+import User from "../../../models/User.js";
 
 type Base = Omit<PhotoModel, "photoable">;
 

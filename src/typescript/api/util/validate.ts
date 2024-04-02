@@ -1,8 +1,8 @@
 import * as t from "io-ts";
-import { fold } from "fp-ts/lib/Either";
+import { fold } from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
-import { PathReporter } from "io-ts/lib/PathReporter";
-import defer from "lodash/defer";
+import { PathReporter } from "io-ts/PathReporter";
+import { defer } from "lodash";
 import { Errors } from "typescript-rest";
 
 /**

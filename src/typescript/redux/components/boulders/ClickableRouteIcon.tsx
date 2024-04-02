@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { Popup } from 'react-leaflet';
-import { Link } from 'react-router-dom';
+import * as React from "react";
+import { Popup } from "react-leaflet";
+import { Link } from "react-router-dom";
 
-import Route from '../../../models/Route';
-import ConfirmedCircle from '../tracer/ConfirmedCircle';
+import Route from "../../../models/Route.js";
+import ConfirmedCircle from "../tracer/ConfirmedCircle.js";
 
 /**
  * Assumes we have a route with a coordinate, otherwise renders nothing
@@ -18,17 +18,13 @@ const ClickableRouteIcon: React.ComponentType<Props> = (props) => {
     return;
   }
   return (
-    <ConfirmedCircle
-      center={[r.coordinate.lat, r.coordinate.lng]}
-      radius={.2}
-    >
+    <ConfirmedCircle center={[r.coordinate.lat, r.coordinate.lng]} radius={0.2}>
       <Popup direction="center" closeButton={false}>
-        <Link to={`/routes/${r.id}`} >
+        <Link to={`/routes/${r.id}`}>
           {r.name} ({r.gradeRaw})
         </Link>
       </Popup>
     </ConfirmedCircle>
   );
-
 };
 export default ClickableRouteIcon;

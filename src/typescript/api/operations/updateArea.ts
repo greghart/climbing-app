@@ -1,11 +1,11 @@
 import * as t from "io-ts";
-import omit from "lodash/omit";
+import { omit } from "lodash";
 
-import myDataSource from "../../db/myDataSource";
-import Area from "../../models/Area";
-import AreaCodec from "../../codecs/AreaCodec";
-import setPolygon from "./setPolygon";
-import PolygonRepository from "../../models/repositories/PolygonRepository";
+import myDataSource from "../../db/myDataSource.js";
+import Area from "../../models/Area.js";
+import AreaCodec from "../../codecs/AreaCodec.js";
+import setPolygon from "./setPolygon.js";
+import PolygonRepository from "../../models/repositories/PolygonRepository.js";
 
 const updateArea = async (area: Area, data: t.TypeOf<typeof AreaCodec>) => {
   return myDataSource.transaction((transactionalEntityManager) => {

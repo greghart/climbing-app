@@ -1,9 +1,8 @@
 import { createAction } from "redux-actions";
 import { normalize, type Schema } from "normalizr";
-import mergeWith from "lodash/mergeWith";
-import isArray from "lodash/isArray";
+import { mergeWith, isArray } from "lodash";
 
-import _debug from "../../debug";
+import _debug from "../../debug.js";
 const debug = _debug.extend("redux:ducks:entities");
 
 const initialState = {

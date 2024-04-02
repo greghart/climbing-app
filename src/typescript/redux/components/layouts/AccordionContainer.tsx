@@ -1,12 +1,12 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import Accordion from "./Accordion";
-import { setOpen } from "../../ducks/accordion";
-import scopeObject from "../../ducks/util/scopeObject";
-import scopedSelector from "../../ducks/util/scopedSelector";
-import type { State } from "../../reducer";
-import type { ExtractProps } from "../../../externals";
+import Accordion from "./Accordion.js";
+import { setOpen } from "../../ducks/accordion.js";
+import scopeObject from "../../ducks/util/scopeObject.js";
+import scopedSelector from "../../ducks/util/scopedSelector.js";
+import type { State } from "../../reducer.js";
+import type { ExtractProps } from "../../../externals.js";
 
 type Props = Pick<ExtractProps<typeof Accordion>, "header" | "content"> & {
   scope: string;

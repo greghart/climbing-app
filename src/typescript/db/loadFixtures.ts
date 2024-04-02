@@ -4,12 +4,12 @@ import * as fs from "fs";
 Bluebird.promisifyAll(fs);
 import * as path from "path";
 
-import GradingSystem from "../models/GradingSystem";
-import Grade from "../models/Grade";
-import parseCrag from "./parseCrag";
-import User from "../models/User";
+import GradingSystem from "../models/GradingSystem.js";
+import Grade from "../models/Grade.js";
+import parseCrag from "./parseCrag.js";
+import User from "../models/User.js";
 
-import _debug from "../debug";
+import _debug from "../debug.js";
 const debug = _debug.extend("db:loadFixtures");
 
 // Application level fixtures

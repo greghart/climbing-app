@@ -4,14 +4,14 @@ import * as path from "path";
 import mkdirp from "mkdirp";
 import Bluebird from "bluebird";
 import * as tilebelt from "tilebelt";
-import * as _ from "lodash";
+import * as _ from "lodash-es";
 
-import getDataSource from "../db";
-import myDataSource from "../db/myDataSource";
-import Crag from "../models/Crag";
-import _debug from "../debug";
-import Bounds from "../models/Bounds";
-import Coordinate from "../models/Coordinate";
+import getDataSource from "../db/index.js";
+import myDataSource from "../db/myDataSource.js";
+import Crag from "../models/Crag.js";
+import _debug from "../debug.js";
+import Bounds from "../models/Bounds.js";
+import Coordinate from "../models/Coordinate.js";
 const debug = _debug.extend(
   "/home/greg/Checkouts/climbing-app/tools/download_crag_tiles"
 );

@@ -4,12 +4,12 @@ import { compose } from "redux";
 import { replace } from "connected-react-router";
 import Bluebird from "bluebird";
 
-import RouteForm, { type Props as FormProps } from "./RouteForm";
-import type { MapDispatchToPropsFunction } from "../types";
-// import updateRoute from '../../ducks/operations/updateRoute';
-import handleReduxFormErrors from "../util/handleReduxFormErrors";
-import Route from "../../../models/Route";
-import updateRoute from "../../ducks/operations/updateRoute";
+import RouteForm, { type Props as FormProps } from "./RouteForm.js";
+import type { MapDispatchToPropsFunction } from "../types.js";
+// import updateRoute from '../../ducks/operations/updateRoute.js';
+import handleReduxFormErrors from "../util/handleReduxFormErrors.js";
+import Route from "../../../models/Route.js";
+import updateRoute from "../../ducks/operations/updateRoute.js";
 
 interface OwnProps {
   // Route to edit

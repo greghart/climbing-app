@@ -1,12 +1,7 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToMany,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
-import Photo from './Photo';
-import { cascadeOneToMany } from '../db/cascadeOptions';
+import Photo from "./Photo.js";
+import { cascadeOneToMany } from "../db/cascadeOptions.js";
 
 /**
  * Photoable supertable to model polymorphic photo associations
@@ -21,7 +16,6 @@ export default class Photoable {
   @Column()
   descriptor: string;
 
-  @OneToMany(type => Photo, photo => photo.photoable, cascadeOneToMany)
+  @OneToMany((type) => Photo, (photo) => photo.photoable, cascadeOneToMany)
   photos: Photo[];
-
 }

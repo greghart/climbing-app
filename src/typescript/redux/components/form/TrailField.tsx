@@ -1,15 +1,13 @@
 import * as React from "react";
 import * as Leaflet from "leaflet";
 import type { WrappedFieldsProps } from "redux-form";
-import get from "lodash/get";
-import reduce from "lodash/reduce";
+import { get, reduce } from "lodash";
 
-import TrailTracer from "../tracer/TrailTracer";
-import BaseMap from "../map/BaseMap";
-import type { ExtractProps } from "../../../externals";
-import { type AdjacencyGraph, adjacencyGraph } from "../util/graph";
-import TrailNode from "../../../models/TrailNode";
-import TrailEdge from "../../../models/TrailEdge";
+import TrailTracer from "../tracer/TrailTracer.js";
+import BaseMap from "../map/BaseMap.js";
+import type { ExtractProps } from "../../../externals.js";
+import { type AdjacencyGraph, adjacencyGraph } from "../util/graph.js";
+import TrailNode from "../../../models/TrailNode.js";
 import { Polyline } from "react-leaflet";
 
 interface TrailProps {

@@ -1,9 +1,9 @@
 import * as React from "react";
 import type { LeafletMouseEvent } from "leaflet";
 
-import Area from "../../../models/Area";
-import Boulder from "../../../models/Boulder";
-import BoulderIcon from "../map/BoulderIcon";
+import Area from "../../../models/Area.js";
+import Boulder from "../../../models/Boulder.js";
+import BoulderIcon from "../map/BoulderIcon.js";
 
 interface Props {
   area: Area;

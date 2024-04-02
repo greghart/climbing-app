@@ -1,5 +1,5 @@
-import getNormalizedSunValue from './getNormalizedSunValue';
-import Route from '../../../models/Route';
+import getNormalizedSunValue from "./getNormalizedSunValue.js";
+import Route from "../../../models/Route.js";
 
 /**
  * @returns -1 if the route doesn't have enough info

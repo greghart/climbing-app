@@ -5,12 +5,14 @@ import { compose } from "redux";
 import Bluebird from "bluebird";
 import { replace } from "connected-react-router";
 
-import BoulderForm, { type Props as FormProps } from "../boulders/BoulderForm";
-import type { MapDispatchToPropsFunction } from "../types";
-import createBoulder from "../../ducks/operations/createBoulder";
-import handleReduxFormErrors from "../util/handleReduxFormErrors";
-import Area from "../../../models/Area";
-import _debug from "../../../debug";
+import BoulderForm, {
+  type Props as FormProps,
+} from "../boulders/BoulderForm.js";
+import type { MapDispatchToPropsFunction } from "../types.js";
+import createBoulder from "../../ducks/operations/createBoulder.js";
+import handleReduxFormErrors from "../util/handleReduxFormErrors.js";
+import Area from "../../../models/Area.js";
+import _debug from "../../../debug.js";
 const debug = _debug.extend("redux/components/areas/AreaNewBoulderContainer");
 
 interface OwnProps {

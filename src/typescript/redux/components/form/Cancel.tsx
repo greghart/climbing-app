@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { InjectedFormProps } from "redux-form";
 
-import withGoBack from "../../decorators/withGoBack";
+import withGoBack from "../../decorators/withGoBack.js";
 
 const _Cancel: React.SFC<
   InjectedFormProps<unknown> & { goBack: () => unknown }

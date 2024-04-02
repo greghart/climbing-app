@@ -4,11 +4,11 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   OneToMany,
-} from 'typeorm';
+} from "typeorm";
 
-import { cascadeOneToMany } from '../db/cascadeOptions';
-import Comment from './Comment';
-import Photo from './Photo';
+import { cascadeOneToMany } from "../db/cascadeOptions.js";
+import Comment from "./Comment.js";
+import Photo from "./Photo.js";
 
 /**
  * Users
@@ -26,10 +26,9 @@ export default class User {
   @Column()
   name: string;
 
-  @OneToMany(type => Comment, comment => comment.user, cascadeOneToMany)
+  @OneToMany((type) => Comment, (comment) => comment.user, cascadeOneToMany)
   comments?: Comment[];
 
-  @OneToMany(type => Photo, photo => photo.user, cascadeOneToMany)
+  @OneToMany((type) => Photo, (photo) => photo.user, cascadeOneToMany)
   photos?: Photo[];
-
 }

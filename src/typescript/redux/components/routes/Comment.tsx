@@ -1,11 +1,13 @@
 import * as React from "react";
 import type { Omit } from "utility-types";
 
-import ProfileIcon from "../users/ProfileIcon";
-import Timestamp from "../Timestamp";
-import CommentModel from "../../../models/Comment";
-import User from "../../../models/User";
-import normalizeRenderer, { type Renderable } from "../util/normalizeRenderer";
+import ProfileIcon from "../users/ProfileIcon.js";
+import Timestamp from "../Timestamp.js";
+import CommentModel from "../../../models/Comment.js";
+import User from "../../../models/User.js";
+import normalizeRenderer, {
+  type Renderable,
+} from "../util/normalizeRenderer.js";
 
 type Base = Omit<CommentModel, "commentable">;
 

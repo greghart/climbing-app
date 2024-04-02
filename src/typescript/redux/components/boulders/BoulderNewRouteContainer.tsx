@@ -4,12 +4,12 @@ import { compose } from "redux";
 import Bluebird from "bluebird";
 import { replace } from "connected-react-router";
 
-import RouteForm, { type Props as FormProps } from "../routes/RouteForm";
-import type { MapDispatchToPropsFunction } from "../types";
-import createRoute from "../../ducks/operations/createRoute";
-import handleReduxFormErrors from "../util/handleReduxFormErrors";
-import Boulder from "../../../models/Boulder";
-import _debug from "../../../debug";
+import RouteForm, { type Props as FormProps } from "../routes/RouteForm.js";
+import type { MapDispatchToPropsFunction } from "../types.js";
+import createRoute from "../../ducks/operations/createRoute.js";
+import handleReduxFormErrors from "../util/handleReduxFormErrors.js";
+import Boulder from "../../../models/Boulder.js";
+import _debug from "../../../debug.js";
 const debug = _debug.extend(
   "redux/components/boulders/BoulderNewRouteContainer"
 );

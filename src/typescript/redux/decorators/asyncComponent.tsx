@@ -1,8 +1,8 @@
 import { compose } from "redux";
 import { connect, type InferableComponentEnhancerWithProps } from "react-redux";
-import withMountAction from "./withMountAction";
-import withLoader from "./withLoader";
-import type { State } from "../reducer";
+import withMountAction from "./withMountAction.js";
+import withLoader from "./withLoader.js";
+import type { State } from "../reducer.js";
 
 /**
  * Shortcut to getting a normal composed decorator for an async component.

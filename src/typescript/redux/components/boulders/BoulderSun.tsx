@@ -1,20 +1,20 @@
-import * as React from 'react';
-import * as SunCalc from 'suncalc';
-import * as Leaflet from 'leaflet';
-import { Map } from 'react-leaflet';
-import { Link } from 'react-router-dom';
+import * as React from "react";
+import * as SunCalc from "suncalc";
+import * as Leaflet from "leaflet";
+import { Map } from "react-leaflet";
+import { Link } from "react-router-dom";
 
-import Boulder from '../../../models/Boulder';
-import InlineMap from '../map/InlineMap';
-import BoulderMap from './BoulderMap';
-import SunForm from '../sun/SunForm';
-import SunLine from '../sun/SunLine';
+import Boulder from "../../../models/Boulder.js";
+import InlineMap from "../map/InlineMap.js";
+import BoulderMap from "./BoulderMap.js";
+import SunForm from "../sun/SunForm.js";
+import SunLine from "../sun/SunLine.js";
 
 interface Props {
   boulder: Boulder;
 }
 
-const TimeEntry: React.SFC<{ label: string, value: Date }> = (props) => {
+const TimeEntry: React.SFC<{ label: string; value: Date }> = (props) => {
   return (
     <tr>
       <th>{props.label}</th>
@@ -27,16 +27,14 @@ const BoulderSun: React.SFC<Props> = (props) => {
     return (
       <p className="text-warning">
         This boulder doesn't have location data.
-        <Link to={`/boulders/${props.boulder.id}/edit`}>
-          Set it now!
-        </Link>
+        <Link to={`/boulders/${props.boulder.id}/edit`}>Set it now!</Link>
       </p>
     );
   }
   const times = SunCalc.getTimes(
     new Date(),
     props.boulder.coordinate.lat,
-    props.boulder.coordinate.lng,
+    props.boulder.coordinate.lng
   );
 
   // Need refs to do some x/y conversions
@@ -50,8 +48,8 @@ const BoulderSun: React.SFC<Props> = (props) => {
       />
       <InlineMap
         className="m-1"
-        boundsCoordinates={props.boulder.polygon &&
-          props.boulder.polygon.coordinates
+        boundsCoordinates={
+          props.boulder.polygon && props.boulder.polygon.coordinates
         }
         bounds={new Leaflet.LatLng(
           props.boulder.coordinate.lat,
@@ -59,9 +57,7 @@ const BoulderSun: React.SFC<Props> = (props) => {
         ).toBounds(5)}
         ref={mapRef}
       >
-        <BoulderMap
-          boulder={props.boulder}
-        />
+        <BoulderMap boulder={props.boulder} />
         <SunLine coordinate={props.boulder.coordinate} />
       </InlineMap>
       <h5>Important times</h5>

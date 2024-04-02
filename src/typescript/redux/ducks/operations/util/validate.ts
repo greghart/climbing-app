@@ -1,9 +1,9 @@
-import * as t from 'io-ts';
-import { fold } from 'fp-ts/lib/Either'
-import { pipe } from 'fp-ts/function'
-import defer from 'lodash/defer';
+import * as t from "io-ts";
+import { fold } from "fp-ts/Either";
+import { pipe } from "fp-ts/function";
+import { defer } from "lodash";
 
-import getSubmissionError from './getSubmissionError';
+import getSubmissionError from "./getSubmissionError.js";
 
 /**
  * Validate some input form data and attempt to decode it through some typing
@@ -12,7 +12,10 @@ import getSubmissionError from './getSubmissionError';
  * That is, we don't know the data we get back necessarily.
  * It also acts as additional client-side validations
  */
-const validate = <A, O, I>(data: I, type: t.Type<A, O, I>): Promise<t.TypeOf<typeof type>> => {
+const validate = <A, O, I>(
+  data: I,
+  type: t.Type<A, O, I>
+): Promise<t.TypeOf<typeof type>> => {
   const result = type.decode(data);
   return new Promise((resolve, reject) => {
     pipe(
@@ -20,15 +23,13 @@ const validate = <A, O, I>(data: I, type: t.Type<A, O, I>): Promise<t.TypeOf<typ
       fold(
         (errors) => {
           // Defer rejection to workaround devtools catching this
-          defer(
-            () => reject(getSubmissionError(errors)),
-          );
+          defer(() => reject(getSubmissionError(errors)));
         },
         (data) => {
           resolve(data);
-        },
+        }
       )
-    )
+    );
   });
 };
 

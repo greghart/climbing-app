@@ -1,11 +1,11 @@
 import * as React from "react";
-import SearchGroup from "./SearchGroup";
-import SearchInputContainer from "./SearchInputContainer";
-import SearchResultsContainer from "./SearchResultsContainer";
-import PageLayout from "../layouts/PageLayout";
-import GoBackHeader from "../layouts/GoBackHeader";
-import AccordionContainer from "../layouts/AccordionContainer";
-import SearchFilters from "./SearchFilters";
+import SearchGroup from "./SearchGroup.js";
+import SearchInputContainer from "./SearchInputContainer.js";
+import SearchResultsContainer from "./SearchResultsContainer.js";
+import PageLayout from "../layouts/PageLayout.js";
+import GoBackHeader from "../layouts/GoBackHeader.js";
+import AccordionContainer from "../layouts/AccordionContainer.js";
+import SearchFilters from "./SearchFilters.js";
 
 interface Props {
   onClickBack?: () => any;

@@ -9,31 +9,32 @@ import { lazy } from "react-imported-component";
  */
 // tslint:disable:space-in-parens
 
-import ContainerRoute from "./routes/ContainerRoute";
-import AnimationContainerRoute from "./routes/AnimationContainerRoute";
+import ContainerRoute from "./routes/ContainerRoute.js";
+import AnimationContainerRoute from "./routes/AnimationContainerRoute.js";
 // Explorer
-import explorerRoutes from "./components/explorer/routes";
+import explorerRoutes from "./components/explorer/routes.js";
 // Crags
 const CragContainer = lazy(
-  () => import(/* webpackChunkName: "Crags" */ "./components/crags/SplitRoute")
+  () =>
+    import(/* webpackChunkName: "Crags" */ "./components/crags/SplitRoute.js")
 );
 // Search
-import SearchLayout from "./components/search/SearchLayout";
+import SearchLayout from "./components/search/SearchLayout.js";
 // Area
-import AreaRoute from "./routes/AreaRoute";
-import AreaCommentsContainer from "./components/areas/AreaCommentsContainer";
-import AreaNewCommentContainer from "./components/areas/AreaNewCommentContainer";
-import AreaNewBoulderContainer from "./components/areas/AreaNewBoulderContainer";
-import AreaEditContainer from "./components/areas/AreaEditContainer";
+import AreaRoute from "./routes/AreaRoute.js";
+import AreaCommentsContainer from "./components/areas/AreaCommentsContainer.js";
+import AreaNewCommentContainer from "./components/areas/AreaNewCommentContainer.js";
+import AreaNewBoulderContainer from "./components/areas/AreaNewBoulderContainer.js";
+import AreaEditContainer from "./components/areas/AreaEditContainer.js";
 const AreaLayoutOverview = lazy(
-  () => import("./components/areas/AreaLayoutOverview")
+  () => import("./components/areas/AreaLayoutOverview.js")
 );
 // Route
-import routeRoutes from "./components/routes/routes";
+import routeRoutes from "./components/routes/routes.js";
 // Boulder
-import boulderRoutes from "./components/boulders/routes";
-import type { MyRouteConfig } from "./routes/MyRouteConfig";
-import wrapAllRoutes from "./routes/wrapAllRoutes";
+import boulderRoutes from "./components/boulders/routes.js";
+import type { MyRouteConfig } from "./routes/MyRouteConfig.js";
+import wrapAllRoutes from "./routes/wrapAllRoutes.js";
 
 export default function getRoutes(): MyRouteConfig[] {
   return wrapAllRoutes([

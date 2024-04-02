@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, compose } from "redux";
 
-import reducer from "../reducer";
+import reducer from "../reducer.js";
 import { routerMiddleware } from "connected-react-router";
 import type { History } from "history";
-import thunkBundler from "./thunkBundler";
+import thunkBundler from "./thunkBundler.js";
 
 export default function getStore(
   initialState: any,

@@ -1,7 +1,7 @@
-import myDataSource from "../../db/myDataSource";
-import Boulder from "../../models/Boulder";
-import Route from "../../models/Route";
-import type { RoutePayload } from "../services/RoutesService";
+import myDataSource from "../../db/myDataSource.js";
+import Boulder from "../../models/Boulder.js";
+import Route from "../../models/Route.js";
+import type { RoutePayload } from "../services/RoutesService.js";
 
 const addRoute = (boulder: Boulder, data: RoutePayload) => {
   const route = new Route();

@@ -1,13 +1,12 @@
 import * as React from "react";
 import * as Leaflet from "leaflet";
 import type { WrappedFieldsProps } from "redux-form";
-import get from "lodash/get";
-import sortBy from "lodash/sortBy";
+import { get, sortBy } from "lodash";
 
-import PolygonTracer from "../tracer/PolygonTracer";
-import BaseMap from "../map/BaseMap";
-import MyPolygon from "../map/MyPolygon";
-import type { ExtractProps } from "../../../externals";
+import PolygonTracer from "../tracer/PolygonTracer.js";
+import BaseMap from "../map/BaseMap.js";
+import MyPolygon from "../map/MyPolygon.js";
+import type { ExtractProps } from "../../../externals.js";
 
 interface PolygonProps {
   // We will use the first name as the coordinates to polygon

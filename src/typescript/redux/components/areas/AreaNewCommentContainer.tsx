@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Area from '../../../models/Area';
-import NewCommentContainer from '../comments/NewCommentContainer';
-import withCommentable from './withCommentable';
+import Area from "../../../models/Area.js";
+import NewCommentContainer from "../comments/NewCommentContainer.js";
+import withCommentable from "./withCommentable.js";
 
 interface OwnProps {
   area: Area;
@@ -18,8 +18,8 @@ const AreaNewCommentContainer: React.SFC<OwnProps> = (props) => {
       // TODO user-feature
       user={{
         id: 1,
-        name: 'Greg Hart',
-        email: 'greghartemail@gmail.com',
+        name: "Greg Hart",
+        email: "greghartemail@gmail.com",
         comments: [],
       }}
     />

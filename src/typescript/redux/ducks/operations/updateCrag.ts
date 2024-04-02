@@ -1,31 +1,21 @@
-import { normalize } from 'normalizr';
+import { normalize } from "normalizr";
 
-import { receiveEntities } from '../entities';
-import { CragSchema } from '../../normalizr';
-import validate from './util/validate';
-import getSwagger from './util/getSwagger';
-import Crag from '../../../models/Crag';
-import CragCodec from '../../../codecs/CragCodec';
+import { receiveEntities } from "../entities.js";
+import { CragSchema } from "../../normalizr.js";
+import validate from "./util/validate.js";
+import getSwagger from "./util/getSwagger.js";
+import Crag from "../../../models/Crag.js";
+import CragCodec from "../../../codecs/CragCodec.js";
 
 export default (crag: Crag, data: { [index: string]: any }) => {
   return (dispatch) => {
     return validate(data, CragCodec)
-    .then((cragData) => {
-      return getSwagger().crags.updateCrag(
-        crag.id.toString(),
-        cragData,
-      );
-    })
-    .then((crag) => {
-      // Receive the updated crag
-      return dispatch(
-        receiveEntities(
-          normalize(
-            crag,
-            CragSchema,
-          ),
-        ),
-      );
-    });
+      .then((cragData) => {
+        return getSwagger().crags.updateCrag(crag.id.toString(), cragData);
+      })
+      .then((crag) => {
+        // Receive the updated crag
+        return dispatch(receiveEntities(normalize(crag, CragSchema)));
+      });
   };
 };

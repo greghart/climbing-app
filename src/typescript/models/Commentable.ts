@@ -1,12 +1,7 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToMany,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
-import Comment from './Comment';
-import { cascadeOneToMany } from '../db/cascadeOptions';
+import Comment from "./Comment.js";
+import { cascadeOneToMany } from "../db/cascadeOptions.js";
 
 /**
  * Commentable supertable to model polymorphic comment associations
@@ -21,7 +16,10 @@ export default class Commentable {
   @Column()
   descriptor: string;
 
-  @OneToMany(type => Comment, comment => comment.commentable, cascadeOneToMany)
+  @OneToMany(
+    (type) => Comment,
+    (comment) => comment.commentable,
+    cascadeOneToMany
+  )
   comments: Comment[];
-
 }

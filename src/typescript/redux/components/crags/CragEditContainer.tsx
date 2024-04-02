@@ -2,14 +2,14 @@ import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { replace } from "connected-react-router";
-import { pick } from "lodash";
+import { pick } from "lodash-es";
 import Bluebird from "bluebird";
 
-import CragForm, { type Props as FormProps } from "./CragForm";
-import type { MapDispatchToPropsFunction } from "../types";
-import updateCrag from "../../ducks/operations/updateCrag";
-import handleReduxFormErrors from "../util/handleReduxFormErrors";
-import Crag from "../../../models/Crag";
+import CragForm, { type Props as FormProps } from "./CragForm.js";
+import type { MapDispatchToPropsFunction } from "../types.js";
+import updateCrag from "../../ducks/operations/updateCrag.js";
+import handleReduxFormErrors from "../util/handleReduxFormErrors.js";
+import Crag from "../../../models/Crag.js";
 
 interface OwnProps {
   // Crag to edit

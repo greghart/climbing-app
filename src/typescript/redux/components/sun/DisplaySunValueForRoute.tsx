@@ -1,10 +1,10 @@
 import * as React from "react";
-import Route from "../../../models/Route";
-import DisplaySunValue from "./DisplaySunValue";
+import Route from "../../../models/Route.js";
+import DisplaySunValue from "./DisplaySunValue.js";
 import { formValueSelector } from "redux-form";
-import type { State } from "../../reducer";
+import type { State } from "../../reducer.js";
 import { connect } from "react-redux";
-import getNormalizedSunValueForRoute from "./getNormalizedSunValueForRoute";
+import getNormalizedSunValueForRoute from "./getNormalizedSunValueForRoute.js";
 
 interface Props {
   route: Route;

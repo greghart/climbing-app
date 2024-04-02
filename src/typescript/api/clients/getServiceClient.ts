@@ -1,13 +1,13 @@
 import * as Rest from "typescript-rest";
-import isFunction from "lodash/isFunction";
+import { isFunction } from "lodash-es";
 
-import type { APIClientInterface } from "./getSwaggerClient";
-import CragsService from "../services/CragsService";
-import AreasService from "../services/AreasService";
-import BouldersService from "../services/BouldersService";
-import RoutesService from "../services/RoutesService";
-import CommentablesService from "../services/CommentablesService";
-import PhotoablesService from "../services/PhotoablesService";
+import type { APIClientInterface } from "./getSwaggerClient.js";
+import CragsService from "../services/CragsService.js";
+import AreasService from "../services/AreasService.js";
+import BouldersService from "../services/BouldersService.js";
+import RoutesService from "../services/RoutesService.js";
+import CommentablesService from "../services/CommentablesService.js";
+import PhotoablesService from "../services/PhotoablesService.js";
 
 function isNewResource<T>(
   result: T | Rest.Return.NewResource<T>

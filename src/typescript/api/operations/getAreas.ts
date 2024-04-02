@@ -1,5 +1,5 @@
-import myDataSource from "../../db/myDataSource";
-import Area from "../../models/Area";
+import myDataSource from "../../db/myDataSource.js";
+import Area from "../../models/Area.js";
 
 interface Options {
   includeComments: boolean;

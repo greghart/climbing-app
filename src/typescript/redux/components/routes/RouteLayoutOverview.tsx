@@ -1,36 +1,29 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import RouteActions from './RouteActions';
-import Route from '../../../models/Route';
-import InfoItem from '../show/InfoItem';
-import ActionItem from '../show/ActionItem';
-import LinkItem from '../show/LinkItem';
+import * as React from "react";
+import { Link } from "react-router-dom";
+import RouteActions from "./RouteActions.js";
+import Route from "../../../models/Route.js";
+import InfoItem from "../show/InfoItem.js";
+import ActionItem from "../show/ActionItem.js";
+import LinkItem from "../show/LinkItem.js";
 
 interface Props {
   myRoute: Route;
 }
 
 const RouteLayoutOverview: React.SFC<Props> = (props) => {
-  console.warn({ props }, 'RouteLayoutOverview');
+  console.warn({ props }, "RouteLayoutOverview");
   const route = props.myRoute;
   return (
     <React.Fragment>
       <RouteActions />
-      <p>
-        {props.myRoute.description}
-      </p>
+      <p>{props.myRoute.description}</p>
       <ul className="list-group">
         <li className="list-group-item list-group-item-action">
           <Link to={`/routes/${props.myRoute.id}/edit`}>
-            <ActionItem includeLi={false}>
-              Edit this route
-            </ActionItem>
+            <ActionItem includeLi={false}>Edit this route</ActionItem>
           </Link>
         </li>
-        <LinkItem
-          to={`/routes/${props.myRoute.id}/sun`}
-          icon="sun"
-        >
+        <LinkItem to={`/routes/${props.myRoute.id}/sun`} icon="sun">
           View sun angles for route
         </LinkItem>
         <InfoItem icon="hand-rock">
@@ -43,9 +36,7 @@ const RouteLayoutOverview: React.SFC<Props> = (props) => {
         <InfoItem icon="check-double">
           (TODO) You climbed this 1 year ago
         </InfoItem>
-        <InfoItem icon="list">
-          (TODO) 8 people have climbed this
-        </InfoItem>
+        <InfoItem icon="list">(TODO) 8 people have climbed this</InfoItem>
         <InfoItem icon="history">
           (TODO) First Ascent by John Long and John Bachar, around 1973
         </InfoItem>

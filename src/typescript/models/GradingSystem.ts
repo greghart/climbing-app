@@ -1,13 +1,8 @@
-import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-import Route from './Route';
-import Grade from './Grade';
-import { cascadeOneToMany } from '../db/cascadeOptions';
+import Route from "./Route.js";
+import Grade from "./Grade.js";
+import { cascadeOneToMany } from "../db/cascadeOptions.js";
 
 @Entity()
 export default class GradingSystem {
@@ -22,11 +17,6 @@ export default class GradingSystem {
   type: string;
 
   // Relationships
-  @OneToMany(
-    type => Grade,
-    grade => grade.gradingSystem,
-    cascadeOneToMany,
-  )
+  @OneToMany((type) => Grade, (grade) => grade.gradingSystem, cascadeOneToMany)
   grades: Grade[];
-
 }

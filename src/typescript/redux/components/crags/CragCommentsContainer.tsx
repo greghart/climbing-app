@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Crag from '../../../models/Crag';
-import withCommentable from './withCommentable';
-import ShowCommentable from '../comments/ShowCommentable';
+import Crag from "../../../models/Crag.js";
+import withCommentable from "./withCommentable.js";
+import ShowCommentable from "../comments/ShowCommentable.js";
 
 interface OwnProps {
   crag: Crag;

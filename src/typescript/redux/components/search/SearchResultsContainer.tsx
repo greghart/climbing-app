@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import type { RouteConfigComponentProps } from "react-router-config";
 
-import SearchResults from "./SearchResults";
-import type { State } from "../../reducer";
+import SearchResults from "./SearchResults.js";
+import type { State } from "../../reducer.js";
 import { denormalize } from "normalizr";
-import { CragSchema } from "../../normalizr";
-import withLoader from "../../decorators/withLoader";
-import withMountAction from "../../decorators/withMountAction";
-import exportCrag from "../../ducks/operations/exportCrag";
+import { CragSchema } from "../../normalizr.js";
+import withLoader from "../../decorators/withLoader.js";
+import withMountAction from "../../decorators/withMountAction.js";
+import exportCrag from "../../ducks/operations/exportCrag.js";
 import { formValueSelector } from "redux-form";
 
 type OwnProps = RouteConfigComponentProps<{ crag: string }>;

@@ -4,9 +4,9 @@ import { createLogger } from "redux-logger";
 import type { History } from "history";
 import { routerMiddleware } from "connected-react-router";
 
-import reducer from "../reducer";
-import DevTools from "../DevTools";
-import thunkBundler from "./thunkBundler";
+import reducer from "../reducer.js";
+import DevTools from "../DevTools.js";
+import thunkBundler from "./thunkBundler.js";
 
 /**
  * Entirely optional.

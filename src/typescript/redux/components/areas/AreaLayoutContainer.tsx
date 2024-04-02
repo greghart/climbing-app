@@ -1,13 +1,13 @@
 import { denormalize } from "normalizr";
 import { createSelector } from "reselect";
 
-import AreaLayout from "./AreaLayout";
-import { type State, selectors } from "../../reducer";
-import { AreaSchema } from "../../normalizr";
-import fetchAreas from "../../ducks/operations/fetchAreas";
-import Area from "../../../models/Area";
-import asyncComponent from "../../decorators/asyncComponent";
-import selectNormalizr from "../../util/selectNormalizr";
+import AreaLayout from "./AreaLayout.js";
+import { type State, selectors } from "../../reducer.js";
+import { AreaSchema } from "../../normalizr.js";
+import fetchAreas from "../../ducks/operations/fetchAreas.js";
+import Area from "../../../models/Area.js";
+import asyncComponent from "../../decorators/asyncComponent.js";
+import selectNormalizr from "../../util/selectNormalizr.js";
 
 interface OwnProps {
   areaId: string;

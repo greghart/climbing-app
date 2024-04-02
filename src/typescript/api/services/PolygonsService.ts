@@ -1,10 +1,10 @@
 import * as Rest from "typescript-rest";
 import * as Swagger from "typescript-rest-swagger";
 
-import myDataSource from "../../db/myDataSource";
-import Polygon from "../../models/Polygon";
-import PolygonRepository from "../../models/repositories/PolygonRepository";
-import getArea from "../operations/getArea";
+import myDataSource from "../../db/myDataSource.js";
+import Polygon from "../../models/Polygon.js";
+import PolygonRepository from "../../models/repositories/PolygonRepository.js";
+import getArea from "../operations/getArea.js";
 
 const getPolygon = (id: number) => {
   return myDataSource.getRepository(Polygon).findOne({

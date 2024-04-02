@@ -7,12 +7,12 @@ import {
   reduxForm,
 } from "redux-form";
 
-import type { OnSubmit } from "../types";
-import Cancel from "../form/Cancel";
-import Submit from "../form/Submit";
-import TrailField, { type TrailFieldProps } from "../form/TrailField";
-import TrailNode from "../../../models/TrailNode";
-import Crag from "../../../models/Crag";
+import type { OnSubmit } from "../types.js";
+import Cancel from "../form/Cancel.js";
+import Submit from "../form/Submit.js";
+import TrailField, { type TrailFieldProps } from "../form/TrailField.js";
+import TrailNode from "../../../models/TrailNode.js";
+import Crag from "../../../models/Crag.js";
 
 interface Props {
   crag: Crag;

@@ -1,14 +1,14 @@
 import * as Rest from "typescript-rest";
 import * as Swagger from "typescript-rest-swagger";
 
-import myDataSource from "../../db/myDataSource";
-import addPhotoToPhotoable from "../operations/addPhotoToPhotoable";
-import User from "../../models/User";
-import Photoable from "../../models/Photoable";
-import PhotoRepository from "../../models/repositories/PhotoRepository";
-import getRoute from "../operations/getRoute";
-import getBoulder from "../operations/getBoulder";
-import uploadFile from "../operations/uploadFile";
+import myDataSource from "../../db/myDataSource.js";
+import addPhotoToPhotoable from "../operations/addPhotoToPhotoable.js";
+import User from "../../models/User.js";
+import Photoable from "../../models/Photoable.js";
+import PhotoRepository from "../../models/repositories/PhotoRepository.js";
+import getRoute from "../operations/getRoute.js";
+import getBoulder from "../operations/getBoulder.js";
+import uploadFile from "../operations/uploadFile.js";
 
 const getPhotos = (id: number) => {
   return myDataSource.getRepository(Photoable).findOne({

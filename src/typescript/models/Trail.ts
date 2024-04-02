@@ -1,13 +1,8 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToMany,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
-import { cascadeOneToMany } from '../db/cascadeOptions';
-import TrailNode from './TrailNode';
-import TrailEdge from './TrailEdge';
+import { cascadeOneToMany } from "../db/cascadeOptions.js";
+import TrailNode from "./TrailNode.js";
+import TrailEdge from "./TrailEdge.js";
 
 /**
  * Entity that represents the trails within a given crag.
@@ -21,7 +16,6 @@ export default class Trail {
   @Column()
   name: string;
 
-  @OneToMany(type => TrailNode, node => node.trail, cascadeOneToMany)
+  @OneToMany((type) => TrailNode, (node) => node.trail, cascadeOneToMany)
   nodes: TrailNode[];
-
 }

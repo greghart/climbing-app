@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as Leaflet from "leaflet";
-import get from "lodash/get";
+import { get } from "lodash";
 import type { WrappedFieldsProps } from "redux-form";
 
-import MyPolygon from "../map/MyPolygon";
-import Coordinate, { isValidCoordinate } from "../../../models/Coordinate";
-import BoulderLocationSetterContainer from "../boulders/BoulderLocationSetterContainer";
-import BoulderIcon from "../map/BoulderIcon";
-import BaseMap from "../map/BaseMap";
+import MyPolygon from "../map/MyPolygon.js";
+import Coordinate, { isValidCoordinate } from "../../../models/Coordinate.js";
+import BoulderLocationSetterContainer from "../boulders/BoulderLocationSetterContainer.js";
+import BoulderIcon from "../map/BoulderIcon.js";
+import BaseMap from "../map/BaseMap.js";
 
 interface LocationProps {
   // We will use the first two names as lat and lng properties respectively

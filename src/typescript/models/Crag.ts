@@ -7,12 +7,12 @@ import {
   JoinColumn,
 } from "typeorm";
 
-import Coordinate, { CoordinateOptional } from "./Coordinate";
-import Area from "./Area";
-import { cascadeOneToMany } from "../db/cascadeOptions";
-import Commentable from "./Commentable";
-import Trail from "./Trail";
-import Bounds from "./Bounds";
+import Coordinate, { CoordinateOptional } from "./Coordinate.js";
+import Area from "./Area.js";
+import { cascadeOneToMany } from "../db/cascadeOptions.js";
+import Commentable from "./Commentable.js";
+import Trail from "./Trail.js";
+import Bounds from "./Bounds.js";
 
 @Entity()
 export default class Crag {

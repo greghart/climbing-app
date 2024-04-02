@@ -2,8 +2,7 @@
  * Some functional components for manipulating a graph
  */
 import * as Leaflet from "leaflet";
-import without from "lodash/without";
-import values from "lodash/values";
+import { without, values } from "lodash";
 
 type Node = Leaflet.LatLngLiteral;
 

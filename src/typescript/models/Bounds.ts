@@ -4,10 +4,10 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
-} from 'typeorm';
+} from "typeorm";
 
-import Coordinate from './Coordinate';
-import Crag from './Crag';
+import Coordinate from "./Coordinate.js";
+import Crag from "./Crag.js";
 
 /**
  * Rectangle bounds entity for crags
@@ -17,28 +17,23 @@ export default class Bounds {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column(type => Coordinate)
+  @Column((type) => Coordinate)
   topLeft: Coordinate;
 
-  @Column(type => Coordinate)
+  @Column((type) => Coordinate)
   bottomRight: Coordinate;
 
-  @OneToOne(
-    type => Crag,
-    crag => crag.bounds,
-    {
-      nullable: false,
-      onDelete: 'CASCADE'
-    }
-  )
+  @OneToOne((type) => Crag, (crag) => crag.bounds, {
+    nullable: false,
+    onDelete: "CASCADE",
+  })
   @JoinColumn()
   crag: Crag;
 
   get center(): Coordinate {
     return new Coordinate(
       (this.topLeft.lat + this.bottomRight.lat) / 2,
-      (this.topLeft.lng + this.bottomRight.lng) / 2,
+      (this.topLeft.lng + this.bottomRight.lng) / 2
     );
   }
-
 }

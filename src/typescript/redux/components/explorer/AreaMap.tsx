@@ -2,12 +2,12 @@ import * as React from "react";
 import * as Leaflet from "leaflet";
 import { Map, LayerGroup, Tooltip } from "react-leaflet";
 
-import AreaPolygon from "./AreaPolygon";
-import AreaBoulders from "./AreaBoulders";
-import Area from "../../../models/Area";
-import withArea from "../areas/withArea";
-import type { ExtractProps } from "../../../externals";
-import useAreaMapNavigator from "./useAreaMapNavigator";
+import AreaPolygon from "./AreaPolygon.js";
+import AreaBoulders from "./AreaBoulders.js";
+import Area from "../../../models/Area.js";
+import withArea from "../areas/withArea.js";
+import type { ExtractProps } from "../../../externals.js";
+import useAreaMapNavigator from "./useAreaMapNavigator.js";
 
 interface Props {
   area: Area;

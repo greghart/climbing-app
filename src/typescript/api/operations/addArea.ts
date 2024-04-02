@@ -1,11 +1,11 @@
 import * as t from "io-ts";
 
-import myDataSource from "../../db/myDataSource";
-import Crag from "../../models/Crag";
-import Area from "../../models/Area";
-import setPolygon from "./setPolygon";
-import Polygon from "../../models/Polygon";
-import AreaCodec from "../../codecs/AreaCodec";
+import myDataSource from "../../db/myDataSource.js";
+import Crag from "../../models/Crag.js";
+import Area from "../../models/Area.js";
+import setPolygon from "./setPolygon.js";
+import Polygon from "../../models/Polygon.js";
+import AreaCodec from "../../codecs/AreaCodec.js";
 
 const addArea = async (crag: Crag, data: t.TypeOf<typeof AreaCodec>) => {
   // Setup area

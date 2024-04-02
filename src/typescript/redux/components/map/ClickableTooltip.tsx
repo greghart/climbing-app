@@ -2,8 +2,8 @@ import * as React from "react";
 import { Tooltip } from "react-leaflet";
 import type { LeafletEvent } from "leaflet";
 
-import type { ExtractProps } from "../../../externals";
-import _debug from "../../../debug";
+import type { ExtractProps } from "../../../externals.js";
+import _debug from "../../../debug.js";
 const debug = _debug.extend("redux/components/map/ClickableTooltip");
 
 type Props = ExtractProps<Tooltip> & {

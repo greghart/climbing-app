@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Boulder from '../../../models/Boulder';
-import withPhotoable from './withPhotoable';
-import ShowPhotoable from '../photos/ShowPhotoable';
+import Boulder from "../../../models/Boulder.js";
+import withPhotoable from "./withPhotoable.js";
+import ShowPhotoable from "../photos/ShowPhotoable.js";
 
 interface OwnProps {
   boulder: Boulder;

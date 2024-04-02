@@ -2,13 +2,13 @@ import * as React from "react";
 import * as Leaflet from "leaflet";
 import { Map } from "react-leaflet";
 import { renderRoutes } from "react-router-config";
-import lodashMap from "lodash/map";
+import { map as lodashMap } from "lodash";
 
-import BestTileLayer from "../BestTileLayer";
-import Crag from "../../../models/Crag";
-import Area from "../../../models/Area";
-import RouteContext from "../../context/RouteContext";
-import type { MyRouteConfig } from "../../routes/MyRouteConfig";
+import BestTileLayer from "../BestTileLayer.js";
+import Crag from "../../../models/Crag.js";
+import Area from "../../../models/Area.js";
+import RouteContext from "../../context/RouteContext.js";
+import type { MyRouteConfig } from "../../routes/MyRouteConfig.js";
 
 interface Props {
   crag: Crag;

@@ -1,11 +1,11 @@
-import * as t from 'io-ts';
-import GraphEdgeCodec from './GraphEdgeCodec';
+import * as t from "io-ts";
+import GraphEdgeCodec from "./GraphEdgeCodec.js";
 
 const GraphNodeCodec = t.type({
   id: t.any,
   lat: t.number,
   lng: t.number,
-  edges: t.array(GraphEdgeCodec)
+  edges: t.array(GraphEdgeCodec),
 });
 
 export default GraphNodeCodec;

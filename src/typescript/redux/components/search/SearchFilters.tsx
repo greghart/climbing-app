@@ -4,12 +4,12 @@
 import * as React from "react";
 import { type InjectedFormProps, reduxForm } from "redux-form";
 
-import type { OnSubmit } from "../types";
-import type { Tag } from "./getSearchableEntitiesForCrag";
-import MyField from "../form/MyField";
-import SunHoursField from "../sun/SunHoursField";
-import Crag from "../../../models/Crag";
-import Coordinate from "../../../models/Coordinate";
+import type { OnSubmit } from "../types.js";
+import type { Tag } from "./getSearchableEntitiesForCrag.js";
+import MyField from "../form/MyField.js";
+import SunHoursField from "../sun/SunHoursField.js";
+import Crag from "../../../models/Crag.js";
+import Coordinate from "../../../models/Coordinate.js";
 
 interface Props {
   crag?: Crag;

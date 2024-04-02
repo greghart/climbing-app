@@ -7,14 +7,14 @@
 import * as React from "react";
 import type { LatLngTuple, LatLng } from "leaflet";
 import { Map, Circle } from "react-leaflet";
-import minBy from "lodash/minBy";
+import { minBy } from "lodash";
 
-import * as mapLib from "../../../util/mapLib";
-import BestTileLayer from "../BestTileLayer";
-import FixedContainerOverMap from "../layouts/FixedContainerOverMap";
-import SearchGroup from "../search/SearchGroup";
-import MyPolygon from "../map/MyPolygon";
-import ConfirmedCircle from "./ConfirmedCircle";
+import * as mapLib from "../../../util/mapLib.js";
+import BestTileLayer from "../BestTileLayer.js";
+import FixedContainerOverMap from "../layouts/FixedContainerOverMap.js";
+import SearchGroup from "../search/SearchGroup.js";
+import MyPolygon from "../map/MyPolygon.js";
+import ConfirmedCircle from "./ConfirmedCircle.js";
 
 /**
  * Compute some data about lines between positions.

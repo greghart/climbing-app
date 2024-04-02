@@ -1,9 +1,9 @@
-import * as React from 'react';
-import Area from '../../../models/Area';
-import InfoItem from '../show/InfoItem';
-import { Link } from 'react-router-dom';
-import ActionItem from '../show/ActionItem';
-import AccordionContainer from '../layouts/AccordionContainer';
+import * as React from "react";
+import Area from "../../../models/Area.js";
+import InfoItem from "../show/InfoItem.js";
+import { Link } from "react-router-dom";
+import ActionItem from "../show/ActionItem.js";
+import AccordionContainer from "../layouts/AccordionContainer.js";
 
 interface Props {
   area: Area;
@@ -12,9 +12,7 @@ interface Props {
 const AreaLayoutOverview: React.SFC<Props> = (props) => {
   return (
     <React.Fragment>
-      <p>
-        {props.area.description}
-      </p>
+      <p>{props.area.description}</p>
       <ul className="list-group">
         <li className="list-group-item list-group-item-action">
           <Link to={`/areas/${props.area.id}/boulders/new`}>
@@ -25,9 +23,7 @@ const AreaLayoutOverview: React.SFC<Props> = (props) => {
         </li>
         <li className="list-group-item list-group-item-action">
           <Link to={`/areas/${props.area.id}/edit`}>
-            <ActionItem includeLi={false}>
-              Edit this area
-            </ActionItem>
+            <ActionItem includeLi={false}>Edit this area</ActionItem>
           </Link>
         </li>
 
@@ -37,13 +33,11 @@ const AreaLayoutOverview: React.SFC<Props> = (props) => {
             header={(defaultChevron) => (
               <div className="row align-items-center">
                 <div className="col-1">
-                  <i className="fa fa-list text-primary"/>
+                  <i className="fa fa-list text-primary" />
                 </div>
                 <div className="col">
                   {props.area.boulders.length} boulders in this area
-                  <span className="ml-2">
-                    {defaultChevron}
-                  </span>
+                  <span className="ml-2">{defaultChevron}</span>
                 </div>
               </div>
             )}
@@ -51,8 +45,14 @@ const AreaLayoutOverview: React.SFC<Props> = (props) => {
               <ul className="list-group list-group-flush mt-2">
                 {props.area.boulders.map((thisBoulder) => {
                   return (
-                    <Link to={`/boulders/${thisBoulder.id}`} key={thisBoulder.id}>
-                      <InfoItem icon="map-marked" key={`thisBoulder-${thisBoulder.id}`} >
+                    <Link
+                      to={`/boulders/${thisBoulder.id}`}
+                      key={thisBoulder.id}
+                    >
+                      <InfoItem
+                        icon="map-marked"
+                        key={`thisBoulder-${thisBoulder.id}`}
+                      >
                         {thisBoulder.name}
                       </InfoItem>
                     </Link>

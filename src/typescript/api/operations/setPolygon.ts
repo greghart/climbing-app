@@ -1,7 +1,7 @@
-import myDataSource from "../../db/myDataSource";
+import myDataSource from "../../db/myDataSource.js";
 
-import PolygonCoordinate from "../../models/PolygonCoordinate";
-import Polygon from "../../models/Polygon";
+import PolygonCoordinate from "../../models/PolygonCoordinate.js";
+import Polygon from "../../models/Polygon.js";
 
 /**
  *

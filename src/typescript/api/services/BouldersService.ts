@@ -1,12 +1,12 @@
 import * as Rest from "typescript-rest";
 import { Tags, Response } from "typescript-rest-swagger";
 
-import getBoulder from "../operations/getBoulder";
-import addRoute from "../operations/addRoute";
-import type { RoutePayload } from "./RoutesService";
-import validate from "../util/validate";
-import BoulderCodec from "../../codecs/BoulderCodec";
-import updateBoulder from "../operations/updateBoulder";
+import getBoulder from "../operations/getBoulder.js";
+import addRoute from "../operations/addRoute.js";
+import type { RoutePayload } from "./RoutesService.js";
+import validate from "../util/validate.js";
+import BoulderCodec from "../../codecs/BoulderCodec.js";
+import updateBoulder from "../operations/updateBoulder.js";
 
 // Payload for boulder data
 interface BoulderPayload {

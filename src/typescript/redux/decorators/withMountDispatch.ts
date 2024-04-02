@@ -1,7 +1,7 @@
 import { compose, type Dispatch } from "redux";
 import { connect, type InferableComponentEnhancerWithProps } from "react-redux";
 
-import withMountAction from "./withMountAction";
+import withMountAction from "./withMountAction.js";
 
 /**
  * Simple decorate that just composes `withMountAction` and `connect`

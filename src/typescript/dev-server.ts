@@ -8,9 +8,9 @@ const webpackHotMiddleware = require("webpack-hot-middleware");
 const config = require("../../config/webpack.config.development.js");
 
 import express from "express";
-import getExpressApplication from "./server/getExpressApplication";
-import getDataSource from "./db";
-import _debug from "./debug";
+import getExpressApplication from "./server/getExpressApplication.js";
+import getDataSource from "./db/index.js";
+import _debug from "./debug.js";
 const debug = _debug.extend("dev-server");
 
 const app = express();

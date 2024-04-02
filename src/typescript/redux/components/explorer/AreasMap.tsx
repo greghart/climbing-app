@@ -1,8 +1,8 @@
 import * as React from "react";
-import partial from "lodash/partial";
+import { partial } from "lodash";
 
-import AreaMap from "./AreaMap";
-import Area from "../../../models/Area";
+import AreaMap from "./AreaMap.js";
+import Area from "../../../models/Area.js";
 import type { LeafletMouseEvent } from "leaflet";
 
 interface Props {

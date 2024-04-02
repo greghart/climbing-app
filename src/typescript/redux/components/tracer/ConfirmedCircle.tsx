@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Circle } from "react-leaflet";
-import type { ExtractProps } from "../../../externals";
-import type { Omit } from "utility-types/dist/mapped-types";
+import type { ExtractProps } from "../../../externals.js";
+import type { Omit } from "utility-types";
 
 type KnownProps = "color" | "fillColor" | "radius";
 type ExpectedProps = Omit<ExtractProps<Circle>, KnownProps> &

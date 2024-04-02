@@ -8,13 +8,13 @@ import {
   JoinColumn,
 } from "typeorm";
 
-import Area from "./Area";
-import Coordinate from "./Coordinate";
-import Route from "./Route";
-import { cascadeManyToOne, cascadeOneToMany } from "../db/cascadeOptions";
-import Commentable from "./Commentable";
-import Polygon from "./Polygon";
-import Photoable from "./Photoable";
+import Area from "./Area.js";
+import Coordinate from "./Coordinate.js";
+import Route from "./Route.js";
+import { cascadeManyToOne, cascadeOneToMany } from "../db/cascadeOptions.js";
+import Commentable from "./Commentable.js";
+import Polygon from "./Polygon.js";
+import Photoable from "./Photoable.js";
 
 @Entity()
 class Boulder {

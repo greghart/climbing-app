@@ -1,7 +1,7 @@
-import { BoulderSchema } from "../../normalizr";
-import type { SwaggerAPI } from "./util/getSwagger";
-import type { ArgumentTypes } from "../../../externals";
-import fetchEntities from "./util/fetchEntities";
+import { BoulderSchema } from "../../normalizr.js";
+import type { SwaggerAPI } from "./util/getSwagger.js";
+import type { ArgumentTypes } from "../../../externals.js";
+import fetchEntities from "./util/fetchEntities.js";
 
 export default fetchEntities<
   ArgumentTypes<SwaggerAPI["boulders"]["getBoulder"]>

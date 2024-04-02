@@ -1,17 +1,17 @@
 import { denormalize } from "normalizr";
 import { push } from "connected-react-router";
 
-import Crag from "./Crag";
-import type { State } from "../../reducer";
-import fetchCrag from "../../ducks/operations/fetchCrag";
-import { CragSchema } from "../../normalizr";
-import Area from "../../../models/Area";
-import scopeObject from "../../ducks/util/scopeObject";
-import { setOpen } from "../../ducks/sidebar";
-import withMountAction from "../../decorators/withMountAction";
+import Crag from "./Crag.js";
+import type { State } from "../../reducer.js";
+import fetchCrag from "../../ducks/operations/fetchCrag.js";
+import { CragSchema } from "../../normalizr.js";
+import Area from "../../../models/Area.js";
+import scopeObject from "../../ducks/util/scopeObject.js";
+import { setOpen } from "../../ducks/sidebar.js";
+import withMountAction from "../../decorators/withMountAction.js";
 import { compose } from "redux";
-import withLoader from "../../decorators/withLoader";
-import asyncComponent from "../../decorators/asyncComponent";
+import withLoader from "../../decorators/withLoader.js";
+import asyncComponent from "../../decorators/asyncComponent.js";
 
 interface OwnProps {
   cragId: string;

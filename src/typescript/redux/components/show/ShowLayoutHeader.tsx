@@ -1,5 +1,5 @@
 import * as React from "react";
-import GoBackHeader from "../layouts/GoBackHeader";
+import GoBackHeader from "../layouts/GoBackHeader.js";
 import { Link } from "react-router-dom";
 
 interface Props {

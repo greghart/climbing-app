@@ -5,10 +5,10 @@ import * as React from "react";
 import * as SunCalc from "suncalc";
 import { type InjectedFormProps, reduxForm, Field } from "redux-form";
 
-import type { OnSubmit } from "../types";
-import SliderField from "../form/SliderField";
-import Coordinate from "../../../models/Coordinate";
-import SunHoursField from "./SunHoursField";
+import type { OnSubmit } from "../types.js";
+import SliderField from "../form/SliderField.js";
+import Coordinate from "../../../models/Coordinate.js";
+import SunHoursField from "./SunHoursField.js";
 
 interface Props {
   onSubmit: OnSubmit<FormData, Props>;

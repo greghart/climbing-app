@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Area from '../../../models/Area';
-import withCommentable from './withCommentable';
-import ShowCommentable from '../comments/ShowCommentable';
+import Area from "../../../models/Area.js";
+import withCommentable from "./withCommentable.js";
+import ShowCommentable from "../comments/ShowCommentable.js";
 
 interface OwnProps {
   area: Area;

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { CSSTransition } from "react-transition-group";
-import { ANIMATION_LENGTH_MS } from ".";
-import type { TransitionProps } from "react-transition-group/Transition";
+import { ANIMATION_LENGTH_MS } from "./index.js";
 
 /**
  * An empty animation
@@ -9,7 +8,7 @@ import type { TransitionProps } from "react-transition-group/Transition";
  * Useful if you need to animate a sub-component, so need to live some parent alive for
  * the duration.
  */
-const Empty: React.SFC<Partial<TransitionProps>> = (props) => {
+const Empty: React.SFC<Partial<CSSTransition.CSSTransitionProps>> = (props) => {
   return (
     <CSSTransition
       {...props}

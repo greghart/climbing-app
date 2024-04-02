@@ -1,7 +1,7 @@
-import Comment from "../Comment";
-import Commentable from "../Commentable";
-import get from "lodash/get";
-import myDataSource from "../../db/myDataSource";
+import Comment from "../Comment.js";
+import Commentable from "../Commentable.js";
+import { get } from "lodash";
+import myDataSource from "../../db/myDataSource.js";
 
 // Base interface for a commentable entity
 interface CommentableEntity {

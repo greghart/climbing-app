@@ -1,11 +1,11 @@
 import * as React from "react";
 import type { InjectedFormProps, FormErrors } from "redux-form";
-import Comment from "./Comment";
-import User from "../../../models/User";
-import CommentModel from "../../../models/Comment";
-import type { OnSubmit } from "../types";
-import MyField from "../form/MyField";
-import Submit from "../form/Submit";
+import Comment from "./Comment.js";
+import User from "../../../models/User.js";
+import CommentModel from "../../../models/Comment.js";
+import type { OnSubmit } from "../types.js";
+import MyField from "../form/MyField.js";
+import Submit from "../form/Submit.js";
 
 interface Props {
   user: User;

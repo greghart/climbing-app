@@ -1,14 +1,13 @@
 import * as React from "react";
 import * as Leaflet from "leaflet";
 import type { WrappedFieldsProps } from "redux-form";
-import get from "lodash/get";
-import sortBy from "lodash/sortBy";
+import { get } from "lodash";
 
-// import BoundsTracer from '../tracer/BoundsTracer';
-import BaseMap from "../map/BaseMap";
-// import MyBounds from '../map/MyBounds';
-import type { ExtractProps } from "../../../externals";
-import BoundsTracer from "../tracer/BoundsTracer";
+// import BoundsTracer from '../tracer/BoundsTracer.js';
+import BaseMap from "../map/BaseMap.js";
+// import MyBounds from '../map/MyBounds.js';
+import type { ExtractProps } from "../../../externals.js";
+import BoundsTracer from "../tracer/BoundsTracer.js";
 
 interface BoundsProps {
   // We will use the first name as the bounds

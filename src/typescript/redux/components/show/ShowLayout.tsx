@@ -1,14 +1,14 @@
 import * as React from "react";
 import classNames from "classnames";
 import { renderRoutes } from "react-router-config";
-import omit from "lodash/omit";
+import { omit } from "lodash";
 import { LazyBoundary } from "react-imported-component";
 
-import PageLayout from "../layouts/PageLayout";
-import ShowLayoutHeader from "../show/ShowLayoutHeader";
-import ShowLayoutTabs from "../show/ShowLayoutTabs";
-import type { ExtractProps } from "../../../externals";
-import RouteContext from "../../context/RouteContext";
+import PageLayout from "../layouts/PageLayout.js";
+import ShowLayoutHeader from "../show/ShowLayoutHeader.js";
+import ShowLayoutTabs from "../show/ShowLayoutTabs.js";
+import type { ExtractProps } from "../../../externals.js";
+import RouteContext from "../../context/RouteContext.js";
 
 interface RouterProps {}
 

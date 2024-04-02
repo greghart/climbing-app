@@ -1,12 +1,12 @@
 import * as express from "express";
 
-import getExpressApplication from "./server/getExpressApplication";
-// import getAPIRouter from './api/getRouter';
-// import rollbar from './util/getRollbar';
-// import { serverOptions as rollbarServerOptions } from './util/getRollbar';
-import getConnection from "./db";
+import getExpressApplication from "./server/getExpressApplication.js";
+// import getAPIRouter from './api/getRouter.js';
+// import rollbar from './util/getRollbar.js';
+// import { serverOptions as rollbarServerOptions } from './util/getRollbar.js';
+import getConnection from "./db/index.js";
 
-import _debug from "./debug";
+import _debug from "./debug.js";
 const debug = _debug.extend("server");
 
 // rollbar.handleUncaughtExceptionsAndRejections(

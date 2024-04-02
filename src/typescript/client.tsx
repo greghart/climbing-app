@@ -11,8 +11,8 @@ import "bootstrap/js/dist/util";
 import "bootstrap/js/dist/dropdown";
 import "rc-slider/assets/index.css";
 
-import getStore from "./redux/store/getStore";
-import Root from "./redux/Root";
+import getStore from "./redux/store/getStore.js";
+import Root from "./redux/Root.js";
 
 // Get the DOM Element that will host our React application
 const rootEl = document.getElementById("app");

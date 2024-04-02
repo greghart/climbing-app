@@ -1,12 +1,12 @@
 import * as t from "io-ts";
-import { getConnection, getCustomRepository } from "typeorm";
-import omit from "lodash/omit";
+import { getConnection } from "typeorm";
+import { omit } from "lodash";
 
-import Boulder from "../../models/Boulder";
-import BoulderCodec from "../../codecs/BoulderCodec";
-import setPolygon from "./setPolygon";
-import PolygonRepository from "../../models/repositories/PolygonRepository";
-import myDataSource from "../../db/myDataSource";
+import Boulder from "../../models/Boulder.js";
+import BoulderCodec from "../../codecs/BoulderCodec.js";
+import setPolygon from "./setPolygon.js";
+import PolygonRepository from "../../models/repositories/PolygonRepository.js";
+import myDataSource from "../../db/myDataSource.js";
 
 const updateBoulder = async (
   boulder: Boulder,

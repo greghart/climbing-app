@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import Area from "../../../models/Area";
-import AreaBreadcrumbs from "./AreaBreadcrumbs";
-import ShowLayout, { type RouterProps } from "../show/ShowLayout";
+import Area from "../../../models/Area.js";
+import AreaBreadcrumbs from "./AreaBreadcrumbs.js";
+import ShowLayout, { type RouterProps } from "../show/ShowLayout.js";
 
 type Props = RouterProps & {
   area: Area;

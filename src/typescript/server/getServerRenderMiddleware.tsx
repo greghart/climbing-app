@@ -7,11 +7,11 @@ import type { Store } from "redux";
 import Bluebird from "bluebird";
 import config from "config";
 
-import HtmlComponent from "./HtmlComponent";
-import getRoutes from "../redux/getRoutes";
-import renderApplication from "./renderApplication";
-import fetchDataForMatches from "./fetchDataForMatches";
-import getStore from "../redux/store/getStore";
+import HtmlComponent from "./HtmlComponent.js";
+import getRoutes from "../redux/getRoutes.js";
+import renderApplication from "./renderApplication.js";
+import fetchDataForMatches from "./fetchDataForMatches.js";
+import getStore from "../redux/store/getStore.js";
 
 interface ResponseWithExpose extends express.Response {
   expose?(value: any, key: string): any;

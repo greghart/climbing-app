@@ -1,6 +1,6 @@
-import mapValues from "lodash/mapValues";
-import type { FreeScopeReducerState } from "./freeScopeReducer";
-import type { State as ReducerState } from "../../reducer";
+import { mapValues } from "lodash";
+import type { FreeScopeReducerState } from "./freeScopeReducer.js";
+import type { State as ReducerState } from "../../reducer.js";
 
 /**
  * Get a selector that resolves scoped state

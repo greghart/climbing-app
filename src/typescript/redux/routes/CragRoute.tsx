@@ -2,8 +2,8 @@ import * as React from "react";
 import type { SFC } from "react";
 import type { RouteConfigComponentProps } from "react-router-config";
 
-import CragLayout from "../components/crags/CragLayout";
-import fetchCragContainer from "../components/crags/fetchCragContainer";
+import CragLayout from "../components/crags/CragLayout.js";
+import fetchCragContainer from "../components/crags/fetchCragContainer.js";
 
 const CragLayoutContainer = fetchCragContainer(CragLayout);
 

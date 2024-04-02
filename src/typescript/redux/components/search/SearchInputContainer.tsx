@@ -1,9 +1,9 @@
 import type { ChangeEvent } from "react";
 import { connect } from "react-redux";
 
-import SearchInput from "./SearchInput";
-import { search } from "../../ducks/search";
-import type { State } from "../../reducer";
+import SearchInput from "./SearchInput.js";
+import { search } from "../../ducks/search.js";
+import type { State } from "../../reducer.js";
 
 /**
  * Container around search input.

@@ -6,7 +6,7 @@ import {
   type BaseFieldProps,
   type GenericFieldHTMLAttributes,
 } from "redux-form";
-import omit from "lodash/omit";
+import { omit } from "lodash";
 
 /**
  * Climbing App field specific props

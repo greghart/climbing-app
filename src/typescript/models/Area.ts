@@ -8,11 +8,11 @@ import {
   JoinColumn,
 } from "typeorm";
 
-import Crag from "./Crag";
-import Boulder from "./Boulder";
-import Commentable from "./Commentable";
-import Polygon from "./Polygon";
-import { cascadeManyToOne, cascadeOneToMany } from "../db/cascadeOptions";
+import Crag from "./Crag.js";
+import Boulder from "./Boulder.js";
+import Commentable from "./Commentable.js";
+import Polygon from "./Polygon.js";
+import { cascadeManyToOne, cascadeOneToMany } from "../db/cascadeOptions.js";
 
 @Entity()
 export default class Area {

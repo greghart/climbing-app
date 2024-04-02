@@ -1,17 +1,17 @@
 import * as React from "react";
 import { type InjectedFormProps, type FormErrors, Fields } from "redux-form";
-import get from "lodash/get";
+import { get } from "lodash";
 
-import type { OnSubmit } from "../types";
-import MyField from "../form/MyField";
-import Cancel from "../form/Cancel";
-import Submit from "../form/Submit";
-import Route from "../../../models/Route";
-import Boulder from "../../../models/Boulder";
-import { isValidCoordinate } from "../../../models/Coordinate";
-import PointOnPolygonField from "../form/PointOnPolygonField";
-import ConfirmedCircle from "../tracer/ConfirmedCircle";
-import BoulderMap from "../boulders/BoulderMap";
+import type { OnSubmit } from "../types.js";
+import MyField from "../form/MyField.js";
+import Cancel from "../form/Cancel.js";
+import Submit from "../form/Submit.js";
+import Route from "../../../models/Route.js";
+import Boulder from "../../../models/Boulder.js";
+import { isValidCoordinate } from "../../../models/Coordinate.js";
+import PointOnPolygonField from "../form/PointOnPolygonField.js";
+import ConfirmedCircle from "../tracer/ConfirmedCircle.js";
+import BoulderMap from "../boulders/BoulderMap.js";
 
 interface Props {
   onSubmit: OnSubmit<FormData, Props>;

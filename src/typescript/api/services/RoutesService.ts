@@ -1,9 +1,9 @@
 import * as Rest from "typescript-rest";
 import { Tags, Response } from "typescript-rest-swagger";
 
-import myDataSource from "../../db/myDataSource";
-import getRoute from "../operations/getRoute";
-import Route from "../../models/Route";
+import myDataSource from "../../db/myDataSource.js";
+import getRoute from "../operations/getRoute.js";
+import Route from "../../models/Route.js";
 
 // Payload for route data
 interface RoutePayload {

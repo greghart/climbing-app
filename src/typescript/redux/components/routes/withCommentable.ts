@@ -1,6 +1,6 @@
-import { fetchCommentableForRoute } from '../../ducks/operations/fetchCommentable';
-import Route from '../../../models/Route';
-import withCommentable from '../comments/withCommentable';
+import { fetchCommentableForRoute } from "../../ducks/operations/fetchCommentable.js";
+import Route from "../../../models/Route.js";
+import withCommentable from "../comments/withCommentable.js";
 
 interface OwnProps {
   myRoute: Route;

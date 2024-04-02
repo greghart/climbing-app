@@ -5,7 +5,7 @@ import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { renderRoutes } from "react-router-config";
 
-import getRoutes from "../redux/getRoutes";
+import getRoutes from "../redux/getRoutes.js";
 
 /**
  * Render our application for a given path

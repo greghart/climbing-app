@@ -1,7 +1,7 @@
-import myDataSource from "../../db/myDataSource";
-import Photo from "../Photo";
-import Photoable from "../Photoable";
-import get from "lodash/get";
+import myDataSource from "../../db/myDataSource.js";
+import Photo from "../Photo.js";
+import Photoable from "../Photoable.js";
+import { get } from "lodash";
 
 // Base interface for a photoable entity
 interface PhotoableEntity {

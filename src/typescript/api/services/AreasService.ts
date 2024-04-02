@@ -1,14 +1,14 @@
 import * as Rest from "typescript-rest";
 import { Tags, Response } from "typescript-rest-swagger";
 
-import getArea from "../operations/getArea";
-import getAreas from "../operations/getAreas";
-import addBoulder from "../operations/addBoulder";
-import type { BoulderPayload } from "./BouldersService";
-import updateArea from "../operations/updateArea";
-import validate from "../util/validate";
-import AreaCodec from "../../codecs/AreaCodec";
-import BoulderCodec from "../../codecs/BoulderCodec";
+import getArea from "../operations/getArea.js";
+import getAreas from "../operations/getAreas.js";
+import addBoulder from "../operations/addBoulder.js";
+import type { BoulderPayload } from "./BouldersService.js";
+import updateArea from "../operations/updateArea.js";
+import validate from "../util/validate.js";
+import AreaCodec from "../../codecs/AreaCodec.js";
+import BoulderCodec from "../../codecs/BoulderCodec.js";
 
 // For swagger generation we need dead simple types
 interface AreaPayload {

@@ -1,15 +1,14 @@
 import { denormalize } from "normalizr";
 import { createSelector } from "reselect";
-import every from "lodash/every";
 
-import { type State, selectors } from "../../reducer";
-import { RouteSchema } from "../../normalizr";
-import fetchRoute from "../../ducks/operations/fetchRoute";
-import Route from "../../../models/Route";
-import asyncComponent from "../../decorators/asyncComponent";
+import { type State, selectors } from "../../reducer.js";
+import { RouteSchema } from "../../normalizr.js";
+import fetchRoute from "../../ducks/operations/fetchRoute.js";
+import Route from "../../../models/Route.js";
+import asyncComponent from "../../decorators/asyncComponent.js";
 import selectNormalizr, {
   type SchemaDescription,
-} from "../../util/selectNormalizr";
+} from "../../util/selectNormalizr.js";
 
 interface OwnProps {
   routeId: string;

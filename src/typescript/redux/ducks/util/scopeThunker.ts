@@ -1,6 +1,6 @@
-import scopeThunk from './scopeThunk';
+import scopeThunk from "./scopeThunk.js";
 
-import * as ThunkTypes from 'redux-thunk';
+import * as ThunkTypes from "redux-thunk";
 
 /**
  * Scope the given thunk creator
@@ -9,7 +9,10 @@ import * as ThunkTypes from 'redux-thunk';
  * @returns {function} A new action creator that first curries scope.
  */
 export default <T extends any[]>(
-  thunker: (scope: string, ...args: T) => ThunkTypes.ThunkAction<any, any, any, any>
+  thunker: (
+    scope: string,
+    ...args: T
+  ) => ThunkTypes.ThunkAction<any, any, any, any>
 ) => {
   return (scope: string) => {
     return (...args: T) => {

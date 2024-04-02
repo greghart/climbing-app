@@ -1,14 +1,14 @@
 import { denormalize } from "normalizr";
 import { createSelector } from "reselect";
 
-import { type State, selectors } from "../../reducer";
-import { AreaSchema } from "../../normalizr";
-import fetchAreas from "../../ducks/operations/fetchAreas";
-import Area from "../../../models/Area";
-import asyncComponent from "../../decorators/asyncComponent";
-import selectNormalizr from "../../util/selectNormalizr";
+import { type State, selectors } from "../../reducer.js";
+import { AreaSchema } from "../../normalizr.js";
+import fetchAreas from "../../ducks/operations/fetchAreas.js";
+import Area from "../../../models/Area.js";
+import asyncComponent from "../../decorators/asyncComponent.js";
+import selectNormalizr from "../../util/selectNormalizr.js";
 import type { Matching } from "react-redux";
-import { debounce } from "lodash";
+import { debounce } from "lodash-es";
 
 interface OwnProps {
   areaId: string;

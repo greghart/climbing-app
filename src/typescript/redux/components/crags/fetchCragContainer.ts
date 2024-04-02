@@ -1,12 +1,12 @@
 import { denormalize } from "normalizr";
 import { createSelector } from "reselect";
 
-import { type State, selectors } from "../../reducer";
-import { CragSchema } from "../../normalizr";
-import fetchCrag from "../../ducks/operations/fetchCrag";
-import Crag from "../../../models/Crag";
-import asyncComponent from "../../decorators/asyncComponent";
-import selectNormalizr from "../../util/selectNormalizr";
+import { type State, selectors } from "../../reducer.js";
+import { CragSchema } from "../../normalizr.js";
+import fetchCrag from "../../ducks/operations/fetchCrag.js";
+import Crag from "../../../models/Crag.js";
+import asyncComponent from "../../decorators/asyncComponent.js";
+import selectNormalizr from "../../util/selectNormalizr.js";
 
 /**
  * Decorator to fetch needed data for a crag

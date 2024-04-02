@@ -1,5 +1,5 @@
-import myDataSource from "../../db/myDataSource";
-import Crag from "../../models/Crag";
+import myDataSource from "../../db/myDataSource.js";
+import Crag from "../../models/Crag.js";
 
 const getCrag = (id: number | string) => {
   // Crag IDs for client can also be name

@@ -1,15 +1,15 @@
 import * as Rest from "typescript-rest";
 import * as Swagger from "typescript-rest-swagger";
 
-import myDataSource from "../../db/myDataSource";
-import addCommentToCommentable from "../operations/addCommentToCommentable";
-import User from "../../models/User";
-import Commentable from "../../models/Commentable";
-import CommentRepository from "../../models/repositories/CommentRepository";
-import getRoute from "../operations/getRoute";
-import getBoulder from "../operations/getBoulder";
-import getArea from "../operations/getArea";
-import Crag from "../../models/Crag";
+import myDataSource from "../../db/myDataSource.js";
+import addCommentToCommentable from "../operations/addCommentToCommentable.js";
+import User from "../../models/User.js";
+import Commentable from "../../models/Commentable.js";
+import CommentRepository from "../../models/repositories/CommentRepository.js";
+import getRoute from "../operations/getRoute.js";
+import getBoulder from "../operations/getBoulder.js";
+import getArea from "../operations/getArea.js";
+import Crag from "../../models/Crag.js";
 
 const getComments = (id: number) => {
   return myDataSource.getRepository(Commentable).findOne({

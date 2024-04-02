@@ -1,9 +1,9 @@
 import { createSelector } from "reselect";
 import { denormalize, schema } from "normalizr";
-import isObject from "lodash/isObject";
+import { isObject } from "lodash";
 
-import asyncComponent from "../../decorators/asyncComponent";
-import { type State, selectors } from "../../reducer";
+import asyncComponent from "../../decorators/asyncComponent.js";
+import { type State, selectors } from "../../reducer.js";
 
 /**
  * `buildWithChild` is a tool to help setup decorators for loading children

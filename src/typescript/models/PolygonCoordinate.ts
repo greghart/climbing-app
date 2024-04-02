@@ -4,10 +4,10 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   Index,
-} from 'typeorm';
-import Polygon from './Polygon';
-import Coordinate from './Coordinate';
-import { cascadeManyToOne } from '../db/cascadeOptions';
+} from "typeorm";
+import Polygon from "./Polygon.js";
+import Coordinate from "./Coordinate.js";
+import { cascadeManyToOne } from "../db/cascadeOptions.js";
 
 /**
  * A coordinate of a polygon
@@ -16,12 +16,16 @@ import { cascadeManyToOne } from '../db/cascadeOptions';
  * a polygon
  */
 @Entity()
-@Index(['polygon', 'order'], { unique: true })
+@Index(["polygon", "order"], { unique: true })
 export default class PolygonCoordinate extends Coordinate {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @ManyToOne(type => Polygon, polygon => polygon.coordinates, cascadeManyToOne)
+  @ManyToOne(
+    (type) => Polygon,
+    (polygon) => polygon.coordinates,
+    cascadeManyToOne
+  )
   polygon: Polygon;
 
   // Order of the coordinates (per polygon)

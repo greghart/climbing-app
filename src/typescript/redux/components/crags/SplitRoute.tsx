@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { renderRoutes } from 'react-router-config';
+import * as React from "react";
+import { renderRoutes } from "react-router-config";
 
-import _routes from './routes';
-import wrapAllRoutes from '../../routes/wrapAllRoutes';
+import _routes from "./routes.js";
+import wrapAllRoutes from "../../routes/wrapAllRoutes.js";
 
 const routes = wrapAllRoutes(_routes);
 

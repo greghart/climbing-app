@@ -4,21 +4,21 @@ import { connect } from "react-redux";
 import type { RouteConfigComponentProps } from "react-router-config";
 import { Map } from "react-leaflet";
 
-import Crag from "../../../models/Crag";
-import Area from "../../../models/Area";
-import Boulder from "../../../models/Boulder";
-import CragExplorerRoute from "../../routes/CragExplorerRoute";
-import AreasMap from "./AreasMap";
-import { ConnectedAreaMap } from "./AreaMap";
-import { ConnectedAreaOverlay } from "./AreaOverlay";
-import { ConnectedBoulderOverlay } from "./BoulderOverlay";
-import BoulderMap from "../boulders/BoulderMap";
-import withBoulder from "../boulders/withBoulder";
-import withArea from "../areas/withArea";
-import useAreaMapNavigator from "./useAreaMapNavigator";
-import useBoulderMapNavigator from "./useBoulderMapNavigator";
+import Crag from "../../../models/Crag.js";
+import Area from "../../../models/Area.js";
+import Boulder from "../../../models/Boulder.js";
+import CragExplorerRoute from "../../routes/CragExplorerRoute.js";
+import AreasMap from "./AreasMap.js";
+import { ConnectedAreaMap } from "./AreaMap.js";
+import { ConnectedAreaOverlay } from "./AreaOverlay.js";
+import { ConnectedBoulderOverlay } from "./BoulderOverlay.js";
+import BoulderMap from "../boulders/BoulderMap.js";
+import withBoulder from "../boulders/withBoulder.js";
+import withArea from "../areas/withArea.js";
+import useAreaMapNavigator from "./useAreaMapNavigator.js";
+import useBoulderMapNavigator from "./useBoulderMapNavigator.js";
 import type { LeafletMouseEvent } from "leaflet";
-import { ConnectedRouteOverlay } from "./RouteOverlay";
+import { ConnectedRouteOverlay } from "./RouteOverlay.js";
 
 /**
  * @todo When we render sub routes, we know we can pass optional props...

@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as Leaflet from "leaflet";
-import BoulderLocationSetter from "./BoulderLocationSetter";
-import Coordinate from "../../../models/Coordinate";
-import type { ExtractProps } from "../../../externals";
+import BoulderLocationSetter from "./BoulderLocationSetter.js";
+import Coordinate from "../../../models/Coordinate.js";
+import type { ExtractProps } from "../../../externals.js";
 
 interface ContainerProps {
   defaultCurrent?: Coordinate;

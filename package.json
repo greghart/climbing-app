@@ -67,6 +67,7 @@
     "connected-react-router": "6.x.x",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.3",
+    "csv": "^6.3.8",
     "debug": "^4.1.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
@@ -79,6 +80,7 @@
     "jquery": "^3.4.1",
     "leaflet": "^1.4.0",
     "lodash": "^4.17.11",
+    "lodash-es": "^4.17.21",
     "mime": "^2.4.0",
     "normalizr": "^3.2.3",
     "pg": "8.5.x",
@@ -128,7 +130,6 @@
     "chai": "^4.2.0",
     "cross-env": "^5.0.1",
     "css-loader": "^6.7.3",
-    "csv-parse": "^4.3.0",
     "fork-ts-checker-webpack-plugin": "^1.0.2",
     "mkdirp": "^0.5.1",
     "mocha": "10.x",
@@ -156,5 +157,6 @@
     "webpack-dev-middleware": "^6.0.1",
     "webpack-hot-middleware": "^2.25.3",
     "webpack-merge": "latest"
-  }
+  },
+  "packageManager": "pnpm@9.0.0-beta.2+sha256.013b34133be0fd7f97d8739bd1a64a2b2c4b15af936ef77a14f5db26efb6bef4"
 }

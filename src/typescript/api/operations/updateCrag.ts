@@ -1,14 +1,14 @@
 import * as t from "io-ts";
-import omit from "lodash/omit";
+import { omit } from "lodash";
 
-import myDataSource from "../../db/myDataSource";
-import Crag from "../../models/Crag";
-import CragCodec from "../../codecs/CragCodec";
-import setTrail from "./setTrail";
-import TrailRepository from "../../models/repositories/TrailRepository";
-import Coordinate from "../../models/Coordinate";
-import Bounds from "../../models/Bounds";
-import _debug from "../../debug";
+import myDataSource from "../../db/myDataSource.js";
+import Crag from "../../models/Crag.js";
+import CragCodec from "../../codecs/CragCodec.js";
+import setTrail from "./setTrail.js";
+import TrailRepository from "../../models/repositories/TrailRepository.js";
+import Coordinate from "../../models/Coordinate.js";
+import Bounds from "../../models/Bounds.js";
+import _debug from "../../debug.js";
 const debug = _debug.extend("api:operations:updateCrag");
 
 const updateCrag = async (crag: Crag, data: t.TypeOf<typeof CragCodec>) => {

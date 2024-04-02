@@ -1,10 +1,10 @@
 import { normalize, schema } from "normalizr";
 import Bluebird from "bluebird";
 
-import { receiveEntities } from "../../entities";
-import scopeThunker from "../../util/scopeThunker";
-import getSwagger from "../util/getSwagger";
-import type { APIClientInterface } from "../../../../api/clients/getSwaggerClient";
+import { receiveEntities } from "../../entities.js";
+import scopeThunker from "../../util/scopeThunker.js";
+import getSwagger from "../util/getSwagger.js";
+import type { APIClientInterface } from "../../../../api/clients/getSwaggerClient.js";
 
 /**
  * Default workflow for fetching some entity or entities from our API

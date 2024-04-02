@@ -1,9 +1,9 @@
 import { compose } from "redux";
 
-import { fetchCommentableForCrag } from "../../ducks/operations/fetchCommentable";
-import withMountDispatch from "../../decorators/withMountDispatch";
-import withLoader from "../../decorators/withLoader";
-import Crag from "../../../models/Crag";
+import { fetchCommentableForCrag } from "../../ducks/operations/fetchCommentable.js";
+import withMountDispatch from "../../decorators/withMountDispatch.js";
+import withLoader from "../../decorators/withLoader.js";
+import Crag from "../../../models/Crag.js";
 import type { InferableComponentEnhancerWithProps } from "react-redux";
 
 interface OwnProps {

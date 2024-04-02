@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Route from '../../../models/Route';
-import RouteBreadcrumbs from './RouteBreadcrumbs';
-import ShowLayout from '../show/ShowLayout';
+import Route from "../../../models/Route.js";
+import RouteBreadcrumbs from "./RouteBreadcrumbs.js";
+import ShowLayout from "../show/ShowLayout.js";
 
 type Props = {
   route: Route;
@@ -14,8 +14,8 @@ const exploreRoute = (route: Route) => {
     route.boulder.area.crag.id,
     route.boulder.area.id,
     route.boulder.id,
-    route.id
-  ].join('/')}`;
+    route.id,
+  ].join("/")}`;
 };
 const RouteLayout: React.SFC<Props> = (props) => {
   console.warn({ props });
@@ -24,10 +24,10 @@ const RouteLayout: React.SFC<Props> = (props) => {
       {...props}
       headerProps={{
         title: <RouteBreadcrumbs route={props.route} />,
-        linkTo: exploreRoute(props.route)
+        linkTo: exploreRoute(props.route),
       }}
       tabsProps={{
-        routeBase: 'routes',
+        routeBase: "routes",
         entity: props.route,
       }}
       extraProps={{
@@ -39,12 +39,12 @@ const RouteLayout: React.SFC<Props> = (props) => {
 RouteLayout.defaultProps = {
   route: {
     id: 1,
-    name: 'Test Route',
-    gradeRaw: 'v12',
+    name: "Test Route",
+    gradeRaw: "v12",
     boulder: {
-      name: 'EZ Boulder',
+      name: "EZ Boulder",
       area: {
-        name: 'TramWay',
+        name: "TramWay",
       },
     },
   } as any,

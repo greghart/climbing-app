@@ -7,12 +7,12 @@ import {
   JoinColumn,
 } from "typeorm";
 
-import Boulder from "./Boulder";
-import Grade from "./Grade";
-import { cascadeManyToOne } from "../db/cascadeOptions";
-import Commentable from "./Commentable";
-import Coordinate, { CoordinateOptional } from "./Coordinate";
-import Photoable from "./Photoable";
+import Boulder from "./Boulder.js";
+import Grade from "./Grade.js";
+import { cascadeManyToOne } from "../db/cascadeOptions.js";
+import Commentable from "./Commentable.js";
+import Coordinate, { CoordinateOptional } from "./Coordinate.js";
+import Photoable from "./Photoable.js";
 
 @Entity()
 export default class Route {

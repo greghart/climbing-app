@@ -8,10 +8,10 @@
 import * as React from "react";
 import * as Leaflet from "leaflet";
 
-import Boulder from "../../../models/Boulder";
-import MyPolygon from "../map/MyPolygon";
-import RouteMarkers from "./RouteMarkers";
-import type { ExtractProps } from "../../../externals";
+import Boulder from "../../../models/Boulder.js";
+import MyPolygon from "../map/MyPolygon.js";
+import RouteMarkers from "./RouteMarkers.js";
+import type { ExtractProps } from "../../../externals.js";
 
 interface Props {
   boulder: Boulder;

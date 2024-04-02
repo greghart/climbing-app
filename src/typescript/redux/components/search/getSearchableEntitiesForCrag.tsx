@@ -1,9 +1,8 @@
-import reduce from "lodash/reduce";
-import isArray from "lodash/isArray";
-import Crag from "../../../models/Crag";
-import Area from "../../../models/Area";
-import Boulder from "../../../models/Boulder";
-import Route from "../../../models/Route";
+import { reduce, isArray } from "lodash";
+import Crag from "../../../models/Crag.js";
+import Area from "../../../models/Area.js";
+import Boulder from "../../../models/Boulder.js";
+import Route from "../../../models/Route.js";
 
 type Tag = "area" | "boulder" | "route";
 type Tagged = { _type?: Tag };

@@ -5,8 +5,8 @@
  */
 import * as React from "react";
 import { Map } from "react-leaflet";
-import BaseMap from "./BaseMap";
-import type { ExtractProps } from "../../../externals";
+import BaseMap from "./BaseMap.js";
+import type { ExtractProps } from "../../../externals.js";
 import classNames from "classnames";
 
 type Props = ExtractProps<typeof BaseMap>;

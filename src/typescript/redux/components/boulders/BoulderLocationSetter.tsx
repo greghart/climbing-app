@@ -1,11 +1,11 @@
-import * as React from 'react';
-import * as Leaflet from 'leaflet';
-import { Map } from 'react-leaflet';
-import FixedContainerOverMap from '../layouts/FixedContainerOverMap';
-import SearchGroup from '../search/SearchGroup';
-import BestTileLayer from '../BestTileLayer';
-import Coordinate from '../../../models/Coordinate';
-import BoulderIcon from '../map/BoulderIcon';
+import * as React from "react";
+import * as Leaflet from "leaflet";
+import { Map } from "react-leaflet";
+import FixedContainerOverMap from "../layouts/FixedContainerOverMap.js";
+import SearchGroup from "../search/SearchGroup.js";
+import BestTileLayer from "../BestTileLayer.js";
+import Coordinate from "../../../models/Coordinate.js";
+import BoulderIcon from "../map/BoulderIcon.js";
 
 interface Props {
   current?: Coordinate;
@@ -18,15 +18,17 @@ interface Props {
 const BoulderLocationSetter: React.ComponentType<Props> = (props) => {
   const input = (
     <div className="input-group-append flex-grow-up bg-light align-items-center text-center">
-      <div className="col">
-        Set the boulder's location
-      </div>
+      <div className="col">Set the boulder's location</div>
       <div className="col-auto">
-        {props.current &&
-          <a role="button" className="btn btn-link" onClick={() => props.onSubmit(props.current)}>
-            <i className="fa fa-check pull-right"/>
+        {props.current && (
+          <a
+            role="button"
+            className="btn btn-link"
+            onClick={() => props.onSubmit(props.current)}
+          >
+            <i className="fa fa-check pull-right" />
           </a>
-        }
+        )}
       </div>
     </div>
   );
@@ -47,14 +49,14 @@ const BoulderLocationSetter: React.ComponentType<Props> = (props) => {
       <div
         className="row no-gutters"
         style={{
-          width: '100%',
-          height: '100%',
+          width: "100%",
+          height: "100%",
         }}
       >
         <Map
           style={{
-            width: '100%',
-            height: '100%',
+            width: "100%",
+            height: "100%",
           }}
           bounds={props.bounds}
           zoom={18}
@@ -64,11 +66,7 @@ const BoulderLocationSetter: React.ComponentType<Props> = (props) => {
           onclick={props.onClick}
         >
           <BestTileLayer />
-          {props.current &&
-            <BoulderIcon
-              position={props.current}
-            />
-          }
+          {props.current && <BoulderIcon position={props.current} />}
           {props.children}
         </Map>
       </div>

@@ -6,10 +6,10 @@ import {
   RouteSchema,
   AreaSchema,
   CragSchema,
-} from "../../normalizr";
-import getSwagger, { type SwaggerAPI } from "./util/getSwagger";
-import Photoable from "../../../models/Photoable";
-import { receiveEntities } from "../entities";
+} from "../../normalizr.js";
+import getSwagger, { type SwaggerAPI } from "./util/getSwagger.js";
+import Photoable from "../../../models/Photoable.js";
+import { receiveEntities } from "../entities.js";
 
 type PhotoableFetchers = keyof SwaggerAPI["photoables"];
 const getFetchPhotoable = (schema: Schema, api: PhotoableFetchers) => {

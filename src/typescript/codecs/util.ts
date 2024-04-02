@@ -1,7 +1,7 @@
-import * as t from 'io-ts';
-import { chain } from 'fp-ts/lib/Either'
-import { fold } from 'fp-ts/lib/Either'
-import { pipe } from 'fp-ts/function'
+import * as t from "io-ts";
+import { chain } from "fp-ts/Either";
+import { fold } from "fp-ts/Either";
+import { pipe } from "fp-ts/function";
 
 /**
  * Utility types
@@ -15,31 +15,40 @@ import { pipe } from 'fp-ts/function'
  *   Eg. DateString: <Date, string, string>. Decode ISOString -> Date. Encode Date -> ISOString
  */
 
-export const minLength = t.refinement(t.string, text => text.length > 2, 'text.minLength');
+export const minLength = t.refinement(
+  t.string,
+  (text) => text.length > 2,
+  "text.minLength"
+);
 
 export const numberFromString = new t.Type<number, string, unknown>(
-  'numberFromString',
-  (u): u is number => { return !isNaN(Number(u)); },
+  "numberFromString",
+  (u): u is number => {
+    return !isNaN(Number(u));
+  },
   (u, c) => {
     const v = t.string.validate(u, c);
-    return fold(() => v as any, (s) => {
-      if (isNaN(Number(s))) {
-        return t.failure(u, c);
+    return fold(
+      () => v as any,
+      (s) => {
+        if (isNaN(Number(s))) {
+          return t.failure(u, c);
+        }
+        return t.success(Number(s));
       }
-      return t.success(Number(s));
-    })(v)
+    )(v);
   },
-    // t.string.validate(u, c).chain(s => {
-    //   if (isNaN(Number(s))) {
-    //     return t.failure(u, c);
-    //   }
-    //   return t.success(Number(s));
-    // }),
-  a => a.toString(),
+  // t.string.validate(u, c).chain(s => {
+  //   if (isNaN(Number(s))) {
+  //     return t.failure(u, c);
+  //   }
+  //   return t.success(Number(s));
+  // }),
+  (a) => a.toString()
 );
 
 export const integerFromString = t.refinement(
   numberFromString,
   t.Integer.predicate,
-  'integerFromString',
+  "integerFromString"
 );

@@ -1,9 +1,9 @@
 import * as React from "react";
 import type { Omit } from "utility-types";
 import { Link } from "react-router-dom";
-import Photoable from "../../../models/Photoable";
-import PhotoModel from "../../../models/Photo";
-import PhotoImage from "./PhotoImage";
+import Photoable from "../../../models/Photoable.js";
+import PhotoModel from "../../../models/Photo.js";
+import PhotoImage from "./PhotoImage.js";
 
 interface Props {
   // A path to creating a new photo for this entity

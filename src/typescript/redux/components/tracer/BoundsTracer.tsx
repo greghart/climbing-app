@@ -3,13 +3,13 @@
  *
  * BoundsTracer allows user to click points on a map and save them
  */
-import * as React from 'react';
-import * as Leaflet from 'leaflet';
-import { Map, Polyline, Circle } from 'react-leaflet';
-import BestTileLayer from '../BestTileLayer';
-import FixedContainerOverMap from '../layouts/FixedContainerOverMap';
-import SearchGroup from '../search/SearchGroup';
-import BaseMap from '../map/BaseMap';
+import * as React from "react";
+import * as Leaflet from "leaflet";
+import { Map, Polyline, Circle } from "react-leaflet";
+import BestTileLayer from "../BestTileLayer.js";
+import FixedContainerOverMap from "../layouts/FixedContainerOverMap.js";
+import SearchGroup from "../search/SearchGroup.js";
+import BaseMap from "../map/BaseMap.js";
 
 // To model a bounds we just need two points. We normalize this to the
 // upper left and bottom right for consistency with backend and libs.
@@ -17,7 +17,10 @@ interface BoundsTracerProps {
   title?: string;
   bounds: Leaflet.LatLngBoundsExpression;
   onCancel: React.MouseEventHandler;
-  onSubmit?: (upperLeft: Leaflet.LatLngLiteral, bottomRight: Leaflet.LatLngLiteral) => unknown;
+  onSubmit?: (
+    upperLeft: Leaflet.LatLngLiteral,
+    bottomRight: Leaflet.LatLngLiteral
+  ) => unknown;
 }
 
 interface BoundsTracerState {
@@ -29,10 +32,12 @@ interface BoundsTracerState {
   end?: Leaflet.LatLngLiteral;
 }
 
-class BoundsTracer extends React.Component<BoundsTracerProps, BoundsTracerState> {
-
+class BoundsTracer extends React.Component<
+  BoundsTracerProps,
+  BoundsTracerState
+> {
   static defaultProps = {
-    title: 'Draw Rectangle For Bounds'
+    title: "Draw Rectangle For Bounds",
   };
 
   constructor(props) {
@@ -40,7 +45,7 @@ class BoundsTracer extends React.Component<BoundsTracerProps, BoundsTracerState>
     this.state = {
       pending: null,
       start: null,
-      end: null
+      end: null,
     };
     this.onDragStart = this.onDragStart.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
@@ -59,8 +64,7 @@ class BoundsTracer extends React.Component<BoundsTracerProps, BoundsTracerState>
     // return false;
   }
 
-  onDragEnd(e) {
-  }
+  onDragEnd(e) {}
 
   onDrag(e) {
     // e.originalEvent.preventDefault();
@@ -74,14 +78,14 @@ class BoundsTracer extends React.Component<BoundsTracerProps, BoundsTracerState>
     // First point
     if (this.state.start === null) {
       this.setState({
-        start: e.latlng
+        start: e.latlng,
       });
-    // Second point
+      // Second point
     } else if (this.state.start !== null) {
       this.setState({
         start: null,
         end: null,
-        pending: [this.state.start, e.latlng]
+        pending: [this.state.start, e.latlng],
       });
     }
   }
@@ -89,7 +93,7 @@ class BoundsTracer extends React.Component<BoundsTracerProps, BoundsTracerState>
   onMouseMove(e: Leaflet.LeafletMouseEvent) {
     if (this.state.start !== null) {
       this.setState({
-        end: e.latlng
+        end: e.latlng,
       });
     }
   }
@@ -97,19 +101,20 @@ class BoundsTracer extends React.Component<BoundsTracerProps, BoundsTracerState>
   getInput() {
     return (
       <div className="input-group-append flex-grow-up bg-light align-items-center text-center">
-        <div className="col">
-          {this.props.title} (z to undo)
-        </div>
+        <div className="col">{this.props.title} (z to undo)</div>
         <div className="col-auto">
-          {this.state.pending &&
+          {this.state.pending && (
             <a
               role="button"
               className="btn btn-link"
-              onClick={() => this.props.onSubmit && this.props.onSubmit(...this.state.pending)}
+              onClick={() =>
+                this.props.onSubmit &&
+                this.props.onSubmit(...this.state.pending)
+              }
             >
-              <i className="fa fa-check pull-right"/>
+              <i className="fa fa-check pull-right" />
             </a>
-          }
+          )}
         </div>
       </div>
     );
@@ -121,7 +126,7 @@ class BoundsTracer extends React.Component<BoundsTracerProps, BoundsTracerState>
       [pointA.lat, pointB.lng],
       pointB,
       [pointB.lat, pointA.lng],
-      pointA
+      pointA,
     ] as [number, number][];
   }
 
@@ -143,8 +148,8 @@ class BoundsTracer extends React.Component<BoundsTracerProps, BoundsTracerState>
           <Circle
             color="green"
             fillColor="green"
-            fillOpacity={.5}
-            radius={.1}
+            fillOpacity={0.5}
+            radius={0.1}
             center={this.state.start}
           />
         )}
@@ -167,17 +172,15 @@ class BoundsTracer extends React.Component<BoundsTracerProps, BoundsTracerState>
           <SearchGroup
             onClickPrepend={this.props.onCancel}
             groupClass="flex-no-wrap"
-            prepend={
-              <i className="fa fa-times-circle" />
-            }
+            prepend={<i className="fa fa-times-circle" />}
             input={this.getInput()}
           />
         </FixedContainerOverMap>
         <div
           className="row no-gutters"
           style={{
-            width: '100%',
-            height: '100%',
+            width: "100%",
+            height: "100%",
           }}
         >
           <BaseMap
@@ -197,7 +200,6 @@ class BoundsTracer extends React.Component<BoundsTracerProps, BoundsTracerState>
       </div>
     );
   }
-
 }
 
 export default BoundsTracer;

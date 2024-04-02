@@ -1,7 +1,7 @@
-import * as React from 'react';
-import Route from '../../../models/Route';
-import NewPhotoContainer from '../photos/NewPhotoContainer';
-import withPhotoable from './withPhotoable';
+import * as React from "react";
+import Route from "../../../models/Route.js";
+import NewPhotoContainer from "../photos/NewPhotoContainer.js";
+import withPhotoable from "./withPhotoable.js";
 
 interface OwnProps {
   myRoute: Route;
@@ -16,8 +16,8 @@ const RouteNewPhotoContainer: React.SFC<OwnProps> = (props) => {
       // TODO user-feature
       user={{
         id: 1,
-        name: 'Greg Hart',
-        email: 'greghartemail@gmail.com',
+        name: "Greg Hart",
+        email: "greghartemail@gmail.com",
         photos: [],
       }}
     />

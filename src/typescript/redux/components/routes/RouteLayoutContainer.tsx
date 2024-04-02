@@ -1,5 +1,5 @@
-import withRoute from './withRoute';
-import RouteLayout from './RouteLayout';
+import withRoute from "./withRoute.js";
+import RouteLayout from "./RouteLayout.js";
 
 const RouteLayoutContainer = withRoute()(RouteLayout);
 

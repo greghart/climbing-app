@@ -3,13 +3,13 @@
  *
  * PolygonTracer allows user to click points on a map and save them
  */
-import * as React from 'react';
-import * as Leaflet from 'leaflet';
-import { Map, Polyline } from 'react-leaflet';
-import BestTileLayer from '../BestTileLayer';
-import FixedContainerOverMap from '../layouts/FixedContainerOverMap';
-import SearchGroup from '../search/SearchGroup';
-import MyPolygon from '../map/MyPolygon';
+import * as React from "react";
+import * as Leaflet from "leaflet";
+import { Map, Polyline } from "react-leaflet";
+import BestTileLayer from "../BestTileLayer.js";
+import FixedContainerOverMap from "../layouts/FixedContainerOverMap.js";
+import SearchGroup from "../search/SearchGroup.js";
+import MyPolygon from "../map/MyPolygon.js";
 
 interface PolygonTracerProps {
   title?: string;
@@ -26,10 +26,12 @@ interface PolygonTracerState {
   isDone: boolean;
 }
 
-class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerState> {
-
+class PolygonTracer extends React.Component<
+  PolygonTracerProps,
+  PolygonTracerState
+> {
   static defaultProps = {
-    title: 'Trace',
+    title: "Trace",
     magnetSizeMeters: 16,
   };
 
@@ -75,7 +77,7 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
 
   onControlKeys(e: React.KeyboardEvent<any>) {
     e.persist();
-    if (e.key === 'z') {
+    if (e.key === "z") {
       this.undo();
     }
   }
@@ -91,45 +93,48 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
 
   getPoints() {
     if (this.state.isDone) {
-      return <MyPolygon positions={this.state.points} fillColor="#00d103" dashArray="" />;
+      return (
+        <MyPolygon
+          positions={this.state.points}
+          fillColor="#00d103"
+          dashArray=""
+        />
+      );
     }
     // Polyline of all existing points, plus one to cursor
     // We keep them separate for efficiency (base doesn't have to re-render )
     return [
-      <Polyline
-        key="current-line"
-        positions={this.state.points}
-        color="red"
-      />,
-      (
-        this.state.current && this.state.points.length > 0 && !this.state.isDone &&
-        <Polyline
-          key="current-line-pending"
-          positions={[
-            this.state.points[this.state.points.length - 1],
-            this.state.current,
-          ]}
-        />
-      ),
+      <Polyline key="current-line" positions={this.state.points} color="red" />,
+      this.state.current &&
+        this.state.points.length > 0 &&
+        !this.state.isDone && (
+          <Polyline
+            key="current-line-pending"
+            positions={[
+              this.state.points[this.state.points.length - 1],
+              this.state.current,
+            ]}
+          />
+        ),
     ];
   }
 
   getInput() {
     return (
       <div className="input-group-append flex-grow-up bg-light align-items-center text-center">
-        <div className="col">
-          {this.props.title} (z to undo)
-        </div>
+        <div className="col">{this.props.title} (z to undo)</div>
         <div className="col-auto">
-          {this.state.isDone &&
+          {this.state.isDone && (
             <a
               role="button"
               className="btn btn-link"
-              onClick={() => this.props.onSubmit && this.props.onSubmit(this.state.points)}
+              onClick={() =>
+                this.props.onSubmit && this.props.onSubmit(this.state.points)
+              }
             >
-              <i className="fa fa-check pull-right"/>
+              <i className="fa fa-check pull-right" />
             </a>
-          }
+          )}
         </div>
       </div>
     );
@@ -143,23 +148,21 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
           <SearchGroup
             onClickPrepend={this.props.onCancel}
             groupClass="flex-no-wrap"
-            prepend={
-              <i className="fa fa-times-circle" />
-            }
+            prepend={<i className="fa fa-times-circle" />}
             input={this.getInput()}
           />
         </FixedContainerOverMap>
         <div
           className="row no-gutters"
           style={{
-            width: '100%',
-            height: '100%',
+            width: "100%",
+            height: "100%",
           }}
         >
           <Map
             style={{
-              width: '100%',
-              height: '100%',
+              width: "100%",
+              height: "100%",
             }}
             bounds={this.props.bounds}
             zoom={18}
@@ -177,7 +180,6 @@ class PolygonTracer extends React.Component<PolygonTracerProps, PolygonTracerSta
       </div>
     );
   }
-
 }
 
 export default PolygonTracer;

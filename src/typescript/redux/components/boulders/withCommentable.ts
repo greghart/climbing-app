@@ -1,9 +1,9 @@
 import { compose } from "redux";
 
-import { fetchCommentableForBoulder } from "../../ducks/operations/fetchCommentable";
-import withMountDispatch from "../../decorators/withMountDispatch";
-import withLoader from "../../decorators/withLoader";
-import Boulder from "../../../models/Boulder";
+import { fetchCommentableForBoulder } from "../../ducks/operations/fetchCommentable.js";
+import withMountDispatch from "../../decorators/withMountDispatch.js";
+import withLoader from "../../decorators/withLoader.js";
+import Boulder from "../../../models/Boulder.js";
 import type { InferableComponentEnhancerWithProps } from "react-redux";
 
 interface OwnProps {

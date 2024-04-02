@@ -4,12 +4,12 @@
 import * as React from "react";
 import * as SunCalc from "suncalc";
 
-import Arrow from "../map/Arrow";
-import { latLngToMeters } from "../../../util/mapLib";
-import Coordinate from "../../../models/Coordinate";
+import Arrow from "../map/Arrow.js";
+import { latLngToMeters } from "../../../util/mapLib.js";
+import Coordinate from "../../../models/Coordinate.js";
 import { formValueSelector } from "redux-form";
 import { connect } from "react-redux";
-import type { State } from "../../reducer";
+import type { State } from "../../reducer.js";
 
 interface Props {
   // The coordinate to point at

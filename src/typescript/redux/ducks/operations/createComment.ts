@@ -1,12 +1,12 @@
 import { normalize } from "normalizr";
-import omit from "lodash/omit";
+import { omit } from "lodash";
 import * as t from "io-ts";
 
-import { receiveEntities } from "../entities";
-import { CommentableSchema } from "../../normalizr";
-import validate from "./util/validate";
-import getSwagger from "./util/getSwagger";
-import Commentable from "../../../models/Commentable";
+import { receiveEntities } from "../entities.js";
+import { CommentableSchema } from "../../normalizr.js";
+import validate from "./util/validate.js";
+import getSwagger from "./util/getSwagger.js";
+import Commentable from "../../../models/Commentable.js";
 
 /**
  * Run-time boundary validation:

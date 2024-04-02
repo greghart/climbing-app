@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import Bluebird from "bluebird";
 
-import NewPhoto, { type Props as FormProps } from "./NewPhoto";
-import User from "../../../models/User";
-import type { MapDispatchToPropsFunction } from "../types";
-import Photoable from "../../../models/Photoable";
-import createPhoto from "../../ducks/operations/createPhoto";
-import handleReduxFormErrors from "../util/handleReduxFormErrors";
+import NewPhoto, { type Props as FormProps } from "./NewPhoto.js";
+import User from "../../../models/User.js";
+import type { MapDispatchToPropsFunction } from "../types.js";
+import Photoable from "../../../models/Photoable.js";
+import createPhoto from "../../ducks/operations/createPhoto.js";
+import handleReduxFormErrors from "../util/handleReduxFormErrors.js";
 import { replace } from "connected-react-router";
 
 interface OwnProps {

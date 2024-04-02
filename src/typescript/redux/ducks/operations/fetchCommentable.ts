@@ -6,10 +6,10 @@ import {
   RouteSchema,
   AreaSchema,
   CragSchema,
-} from "../../normalizr";
-import getSwagger from "./util/getSwagger";
-import Commentable from "../../../models/Commentable";
-import { receiveEntities } from "../entities";
+} from "../../normalizr.js";
+import getSwagger from "./util/getSwagger.js";
+import Commentable from "../../../models/Commentable.js";
+import { receiveEntities } from "../entities.js";
 
 type CommentableFetchers =
   | "commentableForCrag"

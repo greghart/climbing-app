@@ -7,30 +7,30 @@
 import * as express from "express";
 import * as swaggerUi from "swagger-ui-express";
 import { Server } from "typescript-rest";
-import RoutesService from "./services/RoutesService";
-import CragsService from "./services/CragsService";
-import BouldersService from "./services/BouldersService";
-import buildSwagger from "./buildSwagger";
-import CommentablesService from "./services/CommentablesService";
-import AreasService from "./services/AreasService";
-import PolygonsService from "./services/PolygonsService";
-import PhotoablesService from "./services/PhotoablesService";
+import RoutesService from "./services/RoutesService.js";
+import CragsService from "./services/CragsService.js";
+import BouldersService from "./services/BouldersService.js";
+// import buildSwagger from "./buildSwagger.js";
+import CommentablesService from "./services/CommentablesService.js";
+import AreasService from "./services/AreasService.js";
+import PolygonsService from "./services/PolygonsService.js";
+import PhotoablesService from "./services/PhotoablesService.js";
 
 const router = express.Router();
 
-const swagger = buildSwagger();
-router.get("/swagger.json", (req, res, next) => {
-  res.json(swagger);
-});
+// const swagger = buildSwagger();
+// router.get("/swagger.json", (req, res, next) => {
+//   res.json(swagger);
+// });
 router.use("/docs", swaggerUi.serve);
-router.get(
-  "/docs",
-  swaggerUi.setup(swagger, {
-    swaggerOptions: {
-      docExpansion: "none",
-    },
-  })
-);
+// router.get(
+//   "/docs",
+//   swaggerUi.setup(swagger, {
+//     swaggerOptions: {
+//       docExpansion: "none",
+//     },
+//   })
+// );
 Server.buildServices(
   router as any,
   RoutesService,

@@ -1,14 +1,14 @@
-import * as React from 'react';
-import Crag from '../../../models/Crag';
-import CragRoute from '../../routes/CragRoute';
-// import CragCommentsContainer from './CragCommentsContainer';
+import * as React from "react";
+import Crag from "../../../models/Crag.js";
+import CragRoute from "../../routes/CragRoute.js";
+// import CragCommentsContainer from './CragCommentsContainer.js';
 // tslint:disable:space-in-parens
-import CragCommentsContainer from './CragCommentsContainer';
-import CragNewCommentContainer from './CragNewCommentContainer';
-import CragEditContainer from './CragEditContainer';
-import CragLayoutOverview from './CragLayoutOverview';
-import CragNewAreaContainer from './CragNewAreaContainer';
-import CragTrailContainer from './CragTrailContainer';
+import CragCommentsContainer from "./CragCommentsContainer.js";
+import CragNewCommentContainer from "./CragNewCommentContainer.js";
+import CragEditContainer from "./CragEditContainer.js";
+import CragLayoutOverview from "./CragLayoutOverview.js";
+import CragNewAreaContainer from "./CragNewAreaContainer.js";
+import CragTrailContainer from "./CragTrailContainer.js";
 
 type SubProps = {
   crag: Crag;
@@ -17,20 +17,20 @@ type SubProps = {
 const routes = [
   // Show a crag
   {
-    path: '/crags/:crag',
+    path: "/crags/:crag",
     component: CragRoute,
-    key: 'crag_show',
+    key: "crag_show",
     routes: [
       {
-        path: '/crags/:crag/comments',
+        path: "/crags/:crag/comments",
         exact: true,
         component: CragCommentsContainer,
-        key: 'crag_comments',
+        key: "crag_comments",
       },
       {
-        path: '/crags/:crag/comments/new',
+        path: "/crags/:crag/comments/new",
         component: CragNewCommentContainer,
-        key: 'crag_comments_new',
+        key: "crag_comments_new",
       },
       // {
       //   path: '/crags/:crag/photos',
@@ -38,28 +38,28 @@ const routes = [
       //   key: 'crag_photos'
       // },
       {
-        path: '/crags/:crag/areas/new',
+        path: "/crags/:crag/areas/new",
         component: CragNewAreaContainer,
-        key: 'crag_areas_new',
+        key: "crag_areas_new",
       },
       {
-        path: '/crags/:crag/trail/new',
+        path: "/crags/:crag/trail/new",
         component: CragTrailContainer,
-        key: 'crag_trail_new',
+        key: "crag_trail_new",
       },
       {
-        path: '/crags/:crag/edit',
+        path: "/crags/:crag/edit",
         component: CragEditContainer,
-        key: 'crag_edit',
+        key: "crag_edit",
       },
       // Default is overview
       {
-        path: '/crags/:crag/(overview)?',
+        path: "/crags/:crag/(overview)?",
         component: CragLayoutOverview,
-        key: 'crag_overview',
+        key: "crag_overview",
       },
     ],
-  }
+  },
 ];
 
 export default routes;
