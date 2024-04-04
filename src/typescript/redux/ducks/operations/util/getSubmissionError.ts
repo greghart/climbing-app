@@ -1,6 +1,6 @@
-import * as t from 'io-ts';
-import { SubmissionError } from 'redux-form';
-import { find, filter, map, set } from 'lodash';
+import * as t from "io-ts";
+import { SubmissionError } from "redux-form";
+import { filter, map, set } from "lodash-es";
 
 /**
  * Normalize a ValidationError to a submission error
@@ -17,12 +17,9 @@ function normalizeError<A, I, O>(err: t.ValidationError) {
   // Current heuristic is filter out number keys, but that may affect
   // array validation if we ever get into that.
   const key = map(
-    filter(
-      contextWeCareAbout,
-      (thisContext) => isNaN(Number(thisContext.key)),
-    ),
-    'key',
-  ).join('.');
+    filter(contextWeCareAbout, (thisContext) => isNaN(Number(thisContext.key))),
+    "key"
+  ).join(".");
 
   // Get the actual type that failed, so we can show the right description
   // Generally this is the final type, but we need to break out the refinement
@@ -48,13 +45,10 @@ function normalizeError<A, I, O>(err: t.ValidationError) {
   //
   // Re #2 for example, an interface being the actual type implies it was left
   //  undefined. We don't want the name, which is the object descriptor.
-  const message = (
+  const message =
     err.message ||
-    (
-      (actualType instanceof t.InterfaceType && 'required')
-    ) ||
-    actualType.name
-  );
+    (actualType instanceof t.InterfaceType && "required") ||
+    actualType.name;
 
   return {
     key,
@@ -67,7 +61,7 @@ function normalizeError<A, I, O>(err: t.ValidationError) {
  * Get a redux-form SubmissionError from an io-ts validation errors array
  */
 function getSubmissionError<A, O, I>(errs: t.Errors): SubmissionError {
-  console.warn('========================================');
+  console.warn("========================================");
   console.warn(errs);
   return new SubmissionError(
     errs.reduce(
@@ -77,8 +71,8 @@ function getSubmissionError<A, O, I>(errs: t.Errors): SubmissionError {
         set(memo, key, message);
         return memo;
       },
-      { _error: 'Client-side validations failed' },
-    ),
+      { _error: "Client-side validations failed" }
+    )
   );
 }
 

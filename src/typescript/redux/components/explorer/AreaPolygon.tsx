@@ -1,5 +1,5 @@
 import * as React from "react";
-import { sortBy } from "lodash";
+import { sortBy } from "lodash-es";
 
 import Area from "../../../models/Area.js";
 import MyPolygon from "../map/MyPolygon.js";

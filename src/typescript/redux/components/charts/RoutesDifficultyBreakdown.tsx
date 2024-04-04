@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Chart } from "react-google-charts";
-import { reduce } from "lodash";
+import { reduce } from "lodash-es";
 
 import Route from "../../../models/Route.js";
 import type { ExtractProps } from "../../../externals.js";

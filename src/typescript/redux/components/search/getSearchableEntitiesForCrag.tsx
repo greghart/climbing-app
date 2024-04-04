@@ -1,4 +1,4 @@
-import { reduce, isArray } from "lodash";
+import { reduce, isArray } from "lodash-es";
 import Crag from "../../../models/Crag.js";
 import Area from "../../../models/Area.js";
 import Boulder from "../../../models/Boulder.js";

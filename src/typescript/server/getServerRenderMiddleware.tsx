@@ -1,16 +1,13 @@
 import * as express from "express";
 import * as React from "react";
-import * as ReactDOMServer from "react-dom/server";
-import { matchRoutes } from "react-router-config";
+import ReactDOMServer from "react-dom/server.js";
 import { createMemoryHistory } from "history";
 import type { Store } from "redux";
 import Bluebird from "bluebird";
 import config from "config";
 
 import HtmlComponent from "./HtmlComponent.js";
-import getRoutes from "../redux/getRoutes.js";
 import renderApplication from "./renderApplication.js";
-import fetchDataForMatches from "./fetchDataForMatches.js";
 import getStore from "../redux/store/getStore.js";
 
 interface ResponseWithExpose extends express.Response {

@@ -1,8 +1,6 @@
 import * as React from "react";
 import type { RouteConfigComponentProps } from "react-router-config";
 import { Switch, Route } from "react-router";
-import { TransitionGroup } from "react-transition-group";
-import Empty from "../components/animations/Empty.js";
 import AnimationContext from "../components/animations/AnimationContext.js";
 
 /**

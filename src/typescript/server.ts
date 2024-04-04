@@ -1,5 +1,6 @@
 import * as express from "express";
 
+import("./externals.js");
 import getExpressApplication from "./server/getExpressApplication.js";
 // import getAPIRouter from './api/getRouter.js';
 // import rollbar from './util/getRollbar.js';

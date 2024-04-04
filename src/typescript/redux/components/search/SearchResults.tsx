@@ -1,5 +1,5 @@
 import * as React from "react";
-import { filter } from "lodash";
+import { filter } from "lodash-es";
 import { Link } from "react-router-dom";
 
 import Crag from "../../../models/Crag.js";

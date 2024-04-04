@@ -1,7 +1,7 @@
 import * as t from "io-ts";
-import { fold } from "fp-ts/Either";
-import { pipe } from "fp-ts/function";
-import { defer } from "lodash";
+import { fold } from "fp-ts/lib/Either.js";
+import { pipe } from "fp-ts/lib/function.js";
+import { defer } from "lodash-es";
 
 import getSubmissionError from "./getSubmissionError.js";
 

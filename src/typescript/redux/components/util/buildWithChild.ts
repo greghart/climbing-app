@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 import { denormalize, schema } from "normalizr";
-import { isObject } from "lodash";
+import { isObject } from "lodash-es";
 
 import asyncComponent from "../../decorators/asyncComponent.js";
 import { type State, selectors } from "../../reducer.js";

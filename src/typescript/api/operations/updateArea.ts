@@ -1,5 +1,5 @@
 import * as t from "io-ts";
-import { omit } from "lodash";
+import { omit } from "lodash-es";
 
 import myDataSource from "../../db/myDataSource.js";
 import Area from "../../models/Area.js";

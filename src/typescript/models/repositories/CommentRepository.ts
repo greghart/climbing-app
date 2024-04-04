@@ -1,6 +1,6 @@
 import Comment from "../Comment.js";
 import Commentable from "../Commentable.js";
-import { get } from "lodash";
+import { get } from "lodash-es";
 import myDataSource from "../../db/myDataSource.js";
 
 // Base interface for a commentable entity

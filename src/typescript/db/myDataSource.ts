@@ -1,6 +1,8 @@
 import { DataSource } from "typeorm";
-import * as pg from "pg";
+import pg from "pg";
 import config from "config";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 // Abstraction leak
 // Make sure underlying db driver parses our decimals as a float
@@ -16,7 +18,7 @@ const myDataSource = new DataSource({
   // username: config.get<string>('database.postgres.username'),
   // password: config.get<string>('database.postgres.password'),
   // database: config.get<string>('database.postgres.database'),
-  entities: [`${__dirname}/../models/*`],
+  entities: [`${dirname(fileURLToPath(import.meta.url))}/../models/*`],
   dropSchema: config.get<boolean>("database.sync"),
   synchronize: config.get<boolean>("database.sync"),
   logging: true,

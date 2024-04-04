@@ -6,7 +6,7 @@
 import * as React from "react";
 import * as Leaflet from "leaflet";
 import { Map, Polyline, Marker } from "react-leaflet";
-import { find, reduce } from "lodash";
+import { find, reduce } from "lodash-es";
 
 import BestTileLayer from "../BestTileLayer.js";
 import FixedContainerOverMap from "../layouts/FixedContainerOverMap.js";

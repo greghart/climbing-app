@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { denormalize } from "normalizr";
 import type { RouteConfigComponentProps } from "react-router-config";
 import { push } from "connected-react-router";
-import { get } from "lodash";
+import { get } from "lodash-es";
 
 import type { State } from "../reducer.js";
 import { CragSchema } from "../normalizr.js";

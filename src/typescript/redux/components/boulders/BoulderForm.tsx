@@ -1,5 +1,5 @@
 import * as React from "react";
-import { sortBy, get } from "lodash";
+import { sortBy, get } from "lodash-es";
 import {
   Fields,
   Field,

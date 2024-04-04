@@ -1,9 +1,6 @@
 import * as React from "react";
 import type { SFC } from "react";
 
-const isHot = !!module.hot;
-const isProduction = process.env.NODE_ENV === "production";
-
 type HtmlComponentProps = {
   content: string;
   state: string;

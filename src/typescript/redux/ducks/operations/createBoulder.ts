@@ -1,5 +1,5 @@
 import { normalize } from "normalizr";
-import { omit } from "lodash";
+import { omit } from "lodash-es";
 
 import { receiveEntities } from "../entities.js";
 import { AreaSchema } from "../../normalizr.js";

@@ -1,4 +1,4 @@
-import { isArray } from "lodash";
+import { isArray } from "lodash-es";
 import { schema as NormalizrSchema } from "normalizr";
 
 type SchemaDescription = {

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CSSTransition } from "react-transition-group";
+import ReactTransitionGroup from "react-transition-group";
 import { ANIMATION_LENGTH_MS } from "./index.js";
 
 /**
@@ -7,9 +7,9 @@ import { ANIMATION_LENGTH_MS } from "./index.js";
  *
  * On enter it slides up, on exit it just keeps on sliding up!
  */
-const SlideUp: React.SFC<Partial<CSSTransition.CSSTransitionProps>> = (
-  props
-) => {
+const SlideUp: React.SFC<
+  Partial<ReactTransitionGroup.CSSTransition.CSSTransitionProps>
+> = (props) => {
   console.warn(
     {
       props,
@@ -17,13 +17,13 @@ const SlideUp: React.SFC<Partial<CSSTransition.CSSTransitionProps>> = (
     "SlideUp"
   );
   return (
-    <CSSTransition
+    <ReactTransitionGroup.CSSTransition
       {...props}
       classNames="slide-up"
       timeout={ANIMATION_LENGTH_MS}
     >
       {(state) => props.children}
-    </CSSTransition>
+    </ReactTransitionGroup.CSSTransition>
   );
 };
 

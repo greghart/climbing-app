@@ -1,6 +1,6 @@
 import { Column } from "typeorm";
 import type { LatLngLiteral, LatLngTuple } from "leaflet";
-import { isNumber } from "lodash";
+import { isNumber } from "lodash-es";
 
 interface Serialized {
   lat: number;

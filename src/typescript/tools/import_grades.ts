@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import Bluebird from "bluebird";
 import { parse } from "csv/sync";
-import { find } from "lodash";
+import { find } from "lodash-es";
 import slugify from "slugify";
 
 import getConnection from "../db/index.js";

@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { WrappedFieldsProps } from "redux-form";
-import { get } from "lodash";
+import { get } from "lodash-es";
 
 import PointOnPolygon from "../tracer/PointOnPolygon.js";
 import type { ExtractProps } from "../../../externals.js";

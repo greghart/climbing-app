@@ -1,4 +1,4 @@
-import { isFunction } from "lodash";
+import { isFunction } from "lodash-es";
 import scopeObject from "./scopeObject.js";
 
 import * as ThunkTypes from "redux-thunk";

@@ -1,6 +1,6 @@
 import { createAction } from "redux-actions";
 import { normalize, type Schema } from "normalizr";
-import { mergeWith, isArray } from "lodash";
+import { mergeWith, isArray } from "lodash-es";
 
 import _debug from "../../debug.js";
 const debug = _debug.extend("redux:ducks:entities");

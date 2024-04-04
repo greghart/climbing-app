@@ -1,5 +1,5 @@
 import { normalize } from "normalizr";
-import { omit } from "lodash";
+import { omit } from "lodash-es";
 import * as t from "io-ts";
 
 import { receiveEntities } from "../entities.js";

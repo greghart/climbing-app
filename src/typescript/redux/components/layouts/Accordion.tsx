@@ -1,5 +1,5 @@
 import * as React from "react";
-import { isFunction } from "lodash";
+import { isFunction } from "lodash-es";
 
 /**
  * A pure Accordion component

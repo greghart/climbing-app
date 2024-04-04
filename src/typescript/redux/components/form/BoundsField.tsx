@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Leaflet from "leaflet";
 import type { WrappedFieldsProps } from "redux-form";
-import { get } from "lodash";
+import { get } from "lodash-es";
 
 // import BoundsTracer from '../tracer/BoundsTracer.js';
 import BaseMap from "../map/BaseMap.js";

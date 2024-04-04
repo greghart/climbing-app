@@ -1,6 +1,6 @@
 import * as t from "io-ts";
 import { getConnection } from "typeorm";
-import { omit } from "lodash";
+import { omit } from "lodash-es";
 
 import Boulder from "../../models/Boulder.js";
 import BoulderCodec from "../../codecs/BoulderCodec.js";

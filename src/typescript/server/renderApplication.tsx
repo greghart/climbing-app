@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Store } from "redux";
-import ReactDOMServer from "react-dom/server";
+import ReactDOMServer from "react-dom/server.js";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { renderRoutes } from "react-router-config";

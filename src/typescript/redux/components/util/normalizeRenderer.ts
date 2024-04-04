@@ -1,5 +1,5 @@
 import * as React from "react";
-import { isFunction } from "lodash";
+import { isFunction } from "lodash-es";
 
 /**
  * A "Renderer" is something that takes args and renders a react node

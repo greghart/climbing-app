@@ -1,5 +1,5 @@
 import Trail from "../Trail.js";
-import { get } from "lodash";
+import { get } from "lodash-es";
 import myDataSource from "../../db/myDataSource.js";
 
 // Base interface for a trail entity

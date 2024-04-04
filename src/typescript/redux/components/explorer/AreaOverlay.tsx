@@ -1,5 +1,5 @@
 import * as React from "react";
-import { reduce } from "lodash";
+import { reduce } from "lodash-es";
 
 import OverlayDetail from "./OverlayDetail.js";
 import Area from "../../../models/Area.js";

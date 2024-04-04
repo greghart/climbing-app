@@ -1,6 +1,10 @@
-import * as React from 'react';
-import * as ThunkTypes from 'redux-thunk';
-import * as Leaflet from 'leaflet';
+import * as React from "react";
+import * as ThunkTypes from "redux-thunk";
+import * as Leaflet from "leaflet";
+
+interface ImportMeta {
+  dirname: string;
+}
 
 /**
  * WINDOW
@@ -18,18 +22,23 @@ declare interface Window {
  * UTILS
  */
 type UnPromisify<T> = T extends Promise<infer U> ? U : T;
-type UnPromisifiedObject<T> = {[k in keyof T]: UnPromisify<T[k]>}
-type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never;
-type ExtractProps<TComponentOrTProps> = TComponentOrTProps extends React.ComponentType<infer TProps> ? TProps :
-  TComponentOrTProps extends React.Component<infer TProps> ? TProps : TComponentOrTProps;
+type UnPromisifiedObject<T> = { [k in keyof T]: UnPromisify<T[k]> };
+type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any
+  ? A
+  : never;
+type ExtractProps<TComponentOrTProps> =
+  TComponentOrTProps extends React.ComponentType<infer TProps>
+    ? TProps
+    : TComponentOrTProps extends React.Component<infer TProps>
+    ? TProps
+    : TComponentOrTProps;
 
 /**
  * REDUX
  */
-type ActionOrThunk<Payload> = (
-  ReduxActions.Action<Payload> |
-  ThunkTypes.ThunkAction<any, any, any, any>
-);
+type ActionOrThunk<Payload> =
+  | ReduxActions.Action<Payload>
+  | ThunkTypes.ThunkAction<any, any, any, any>;
 
 /**
  * MONKEY PATCHES AND FIXES
@@ -42,14 +51,16 @@ type ActionOrThunk<Payload> = (
  */
 
 // Fix normalizr to reflect actual schema objects
-declare module 'normalizr' {
+declare module "normalizr" {
   namespace schema {
     interface Entity {
       idAttribute: string;
       key: string;
-      schema: {
-        [index: string]: Entity
-      } | [Entity]
+      schema:
+        | {
+            [index: string]: Entity;
+          }
+        | [Entity];
     }
   }
 }
@@ -60,7 +71,7 @@ declare module 'normalizr' {
 type MissingProps = {
   onOpen?: () => unknown;
   onClose?: () => unknown;
-}
+};
 
 declare module "react-leaflet" {
   // export class Tooltip<P extends TooltipProps = TooltipProps, E extends Leaflet.Tooltip = Leaflet.Tooltip> extends MapComponent<P, E> {

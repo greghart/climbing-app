@@ -1,5 +1,5 @@
 import * as t from "io-ts";
-import { range } from "lodash";
+import { range } from "lodash-es";
 import * as types from "./util.js";
 
 const validGrades = ["VB"].concat(range(16).map((i) => `V${i}`));

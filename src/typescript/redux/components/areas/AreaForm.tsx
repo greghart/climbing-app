@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Leaflet from "leaflet";
 import { type InjectedFormProps, type FormErrors, Fields } from "redux-form";
-import { reject } from "lodash";
+import { reject } from "lodash-es";
 import type { Omit } from "utility-types";
 
 import Area from "../../../models/Area.js";

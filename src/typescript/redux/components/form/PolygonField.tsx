@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Leaflet from "leaflet";
 import type { WrappedFieldsProps } from "redux-form";
-import { get, sortBy } from "lodash";
+import { get, sortBy } from "lodash-es";
 
 import PolygonTracer from "../tracer/PolygonTracer.js";
 import BaseMap from "../map/BaseMap.js";

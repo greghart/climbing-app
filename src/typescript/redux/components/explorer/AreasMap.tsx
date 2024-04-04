@@ -1,5 +1,5 @@
 import * as React from "react";
-import { partial } from "lodash";
+import { partial } from "lodash-es";
 
 import AreaMap from "./AreaMap.js";
 import Area from "../../../models/Area.js";

@@ -1,7 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 import { renderRoutes } from "react-router-config";
-import { omit } from "lodash";
+import { omit } from "lodash-es";
 import { LazyBoundary } from "react-imported-component";
 
 import PageLayout from "../layouts/PageLayout.js";

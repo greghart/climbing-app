@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Leaflet from "leaflet";
 import { Map } from "react-leaflet";
 import { renderRoutes } from "react-router-config";
-import { map as lodashMap } from "lodash";
+import { map as lodashMap } from "lodash-es";
 
 import BestTileLayer from "../BestTileLayer.js";
 import Crag from "../../../models/Crag.js";

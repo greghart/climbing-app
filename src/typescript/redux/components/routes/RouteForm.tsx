@@ -1,6 +1,6 @@
 import * as React from "react";
 import { type InjectedFormProps, type FormErrors, Fields } from "redux-form";
-import { get } from "lodash";
+import { get } from "lodash-es";
 
 import type { OnSubmit } from "../types.js";
 import MyField from "../form/MyField.js";

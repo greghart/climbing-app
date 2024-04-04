@@ -3,7 +3,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   ManyToOne,
-  OneToOne,
   JoinColumn,
 } from "typeorm";
 import Upload from "./Upload.js";
@@ -34,7 +33,7 @@ export default class Photo {
   @Column({ nullable: true })
   description?: string;
 
-  @ManyToOne((type) => User, (user) => user.photos, cascadeManyToOne)
+  @ManyToOne("User", "photos", cascadeManyToOne)
   user: User;
 
   @ManyToOne((type) => Upload, { nullable: false, onDelete: "CASCADE" })

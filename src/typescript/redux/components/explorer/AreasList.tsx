@@ -2,7 +2,7 @@ import * as React from "react";
 import classNames from "classnames";
 import Area from "../../../models/Area.js";
 
-import { partial } from "lodash";
+import { partial } from "lodash-es";
 import { Link } from "react-router-dom";
 
 type Props = {

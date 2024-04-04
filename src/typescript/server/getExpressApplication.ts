@@ -10,11 +10,10 @@ import {
 import browserPolyfill from "../util/browserPolyfill.js";
 browserPolyfill();
 
-import getServerRenderMiddleware from "./getServerRenderMiddleware.js";
+// import getServerRenderMiddleware from "./getServerRenderMiddleware.js";
 // import { APIRouter } from './api/getRouter.js';
 // import getAuthRouter from './util/authentication/getRouter.js';
 
-// import getServerRenderMiddleware from './util/getServerRenderMiddleware.js';
 // import getValidateMiddleware from './util/getValidateMiddleware.js';
 // import getAuthorizeMiddleware from './util/getAuthorizeMiddleware.js';
 // import getServerErrorMiddleware from './util/errors/getServerErrorMiddleware.js';
@@ -45,7 +44,7 @@ function getExpressApplication(_app?: express.Express) {
   // TODO Re-implement or module validate middleware, authorize middleware
   // app.use(apiRouter);
 
-  app.use(getServerRenderMiddleware() as any);
+  // app.use(getServerRenderMiddleware() as any);
 
   // app.use(UniversalErrorMiddleware);
   // app.use(getServerErrorMiddleware());
