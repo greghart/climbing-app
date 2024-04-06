@@ -11,6 +11,7 @@ interface Props {
 }
 /**
  * Our searcher is always part of a basic group
+ * Also used as a template for titles on non search pages
  */
 export default function SearchGroup(props: Props) {
   return (

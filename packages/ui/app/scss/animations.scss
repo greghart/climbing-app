@@ -1,0 +1,33 @@
+
+.slide-up {
+
+  $time: 500ms;
+
+  &-enter {
+    transform: translateY(100%);
+  }
+
+  &-enter.slide-up-enter-active {
+    transform: translateY(0%);
+    transition: transform $time ease-in-out;
+  }
+
+  &-appear {
+    transform: translateY(100%);
+  }
+
+  &-appear.slide-up-appear-active {
+    transform: translateY(0%);
+    transition: transform $time ease-in-out;
+  }
+
+  &-exit {
+    transform: translateY(0%);
+  }
+
+  &-exit.slide-up-exit-active {
+    transform: translateY(-100%);
+    transition: transform $time ease-in-out;
+  }
+
+}

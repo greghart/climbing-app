@@ -1,0 +1,80 @@
+@import "bootstrap";
+
+html, body {
+  height: 100vh;
+}
+
+.over-map {
+  z-index: 9999;
+}
+
+// Custom CSS to get under the leaflet zoom for other HTML
+.left-actions {
+  position: fixed;
+  left: 11px;
+  top: 80px;
+}
+
+// We need a fixed container for showing up over the map.
+.fixed-container {
+  position: absolute;
+  width: 100%;
+  background-color: 'transparent';
+  // left: 15px;
+  // top: 2vh;
+  // width: calc(100vw - 30px);
+}
+
+.below-fixed {
+  padding-top: calc(2vh + 3rem);
+}
+
+.fullscreen {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.truncated {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Flex helpers
+.flex {
+  // Grow up like a column would (but without all the other stuff)
+  &-grow-up {
+    flex-grow: 1;
+    max-width: 100%;
+  }
+  &-no-wrap {
+    flex-wrap: nowrap;
+  }
+}
+
+.show-tabs {
+  border-bottom-style: groove;
+
+  .active .highlight-tab {
+    border-bottom: .2rem solid;
+    border-bottom-left-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+  }
+}
+
+.my-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.invalid-feedback {
+  display: block!important;
+}
+
+@import './map';
+@import './animations';
+@import './users';

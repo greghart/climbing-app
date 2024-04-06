@@ -1,4 +1,6 @@
+"use client";
 import Crag from "@/app/_components/explorer/Crag";
+import "../scss/application.scss";
 
 export default function Explorer() {
   return (
