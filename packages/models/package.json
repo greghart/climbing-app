@@ -1,0 +1,19 @@
+{
+  "name": "models",
+  "version": "1.0.0",
+  "description": "The climbing app basic models layer (distinct from persistence layer)",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prepublish": "build"
+  },
+  "keywords": [],
+  "author": "Greg Hart",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "5.x.x"
+  }
+}

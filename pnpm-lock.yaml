@@ -8,6 +8,12 @@ importers:
 
   .: {}
 
+  packages/models:
+    dependencies:
+      typescript:
+        specifier: 5.x.x
+        version: 5.4.3
+
   packages/ui:
     dependencies:
       '@emotion/react':
@@ -53,6 +59,9 @@ importers:
       eslint-config-next:
         specifier: 14.1.4
         version: 14.1.4(eslint@8.57.0)(typescript@5.4.3)
+      models:
+        specifier: workspace:*
+        version: link:../models
       postcss:
         specifier: ^8.4.38
         version: 8.4.38

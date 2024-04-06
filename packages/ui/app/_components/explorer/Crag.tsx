@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { Crag as CragModel } from "models";
 import Drawer from "./Drawer";
 import SearchInput from "@/app/_components/search/SearchInput";
 import SearchGroup from "@/app/_components/search/SearchGroup";
@@ -15,7 +16,7 @@ import SearchGroup from "@/app/_components/search/SearchGroup";
  *   - Details view
  */
 interface Props {
-  // crag: CragModel;
+  crag: CragModel;
   cragId: string;
   // onAreaClick: (area: Area) => any;
   onCloseSidebar: () => unknown;
@@ -30,7 +31,7 @@ export default function Crag(props: Partial<Props>) {
   return (
     <>
       <Drawer
-        title="TODO Crag placehodler"
+        title={props.crag?.name || "Unknown crag"}
         sidebarChildren={props.sidebarChildren}
       >
         {(setOpen) => (

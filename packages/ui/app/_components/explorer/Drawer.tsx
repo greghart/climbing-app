@@ -37,7 +37,7 @@ export default function Drawer(props: Props) {
         onClose={toggleDrawer(false)}
         className="over-map"
       >
-        <Box m={4} className="h-100 bg-light">
+        <Box p={2} className="h-100 bg-light" width="80vw">
           <SearchGroup
             onClickPrepend={toggleDrawer(false)}
             prepend={<i className="fa fa-bars" />}
