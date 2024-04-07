@@ -1,14 +1,10 @@
-import type { Metadata } from "next";
+"use client";
+import type { Metadata, Viewport } from "next";
 import clsx from "clsx";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Craggy",
-  description: "An interactive guide for your crag",
-};
 
 export default function RootLayout({
   children,

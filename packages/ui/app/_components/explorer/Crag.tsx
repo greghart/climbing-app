@@ -1,9 +1,11 @@
 "use client";
-import React from "react";
-import { Crag as CragModel } from "models";
-import Drawer from "./Drawer";
-import SearchInput from "@/app/_components/search/SearchInput";
 import SearchGroup from "@/app/_components/search/SearchGroup";
+import SearchInput from "@/app/_components/search/SearchInput";
+import Box from "@mui/material/Box";
+import { Crag as CragModel } from "models";
+import dynamic from "next/dynamic";
+import React, { useMemo } from "react";
+import Drawer from "./Drawer";
 
 /**
  * Main component for exploring a crag.
@@ -13,21 +15,29 @@ import SearchGroup from "@/app/_components/search/SearchGroup";
  * - Main crag map
  *   - Search bar
  *   - Action to open sidebar
- *   - Details view
+ *   - Overlaid detail
  */
 interface Props {
   crag: CragModel;
-  cragId: string;
+  cragId?: string;
   // onAreaClick: (area: Area) => any;
-  onCloseSidebar: () => unknown;
-  onOpenSidebar: () => unknown;
-  onOpenSearch: () => any;
-  fetchCrag: (id: any) => unknown;
-  sidebarChildren: React.ReactNode;
-  children: React.ReactNode;
+  onCloseSidebar?: () => unknown;
+  onOpenSidebar?: () => unknown;
+  onOpenSearch?: () => any;
+  fetchCrag?: (id: any) => unknown;
+  sidebarChildren?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-export default function Crag(props: Partial<Props>) {
+export default function Crag(props: Props) {
+  const CragMap = useMemo(
+    () =>
+      dynamic(() => import("@/app/_components/explorer/CragMap"), {
+        loading: () => <p>A map is loading</p>,
+        ssr: false,
+      }),
+    []
+  );
   return (
     <>
       <Drawer
@@ -58,11 +68,11 @@ export default function Crag(props: Partial<Props>) {
                 </div>
               </div>
             </div>
-            <div className="container px-0">
-              <div className="row no-gutters">
-                <div className="col">{/* <CragMap {...props} /> */}</div>
-              </div>
-            </div>
+            <Box sx={{ height: "100vh" }}>
+              {/** TODO: On the map itself is a parallel routing mechanism I think */}
+              {/** A lot of this is layout, can be refactored to MUI, and moved to `layout`s */}
+              <CragMap crag={props.crag}>{null}</CragMap>
+            </Box>
           </div>
         )}
       </Drawer>

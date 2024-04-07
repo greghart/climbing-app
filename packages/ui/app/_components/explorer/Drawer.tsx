@@ -11,6 +11,8 @@ interface Props {
 /**
  * Crag explorer sidebar
  * Attaches a MUI drawer with a closable hamburger menu and a search group title
+ * TODO: Ok I had actually refactored this to overlay cards so there was nothing left in the drawer
+ * Going to optionally keep it for now just in case, but should be able to be removed
  */
 export default function Drawer(props: Props) {
   const [open, setOpen] = React.useState(false);

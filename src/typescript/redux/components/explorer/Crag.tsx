@@ -28,7 +28,7 @@ interface Props {
  * - Main crag map
  *   - Search bar
  *   - Action to open sidebar
- *   - Details view
+ *   - Other details as an overlay
  */
 const Crag: React.SFC<Props> = (props) => {
   const routeContext = React.useContext(RouteContext);
