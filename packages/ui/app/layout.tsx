@@ -2,6 +2,8 @@
 import type { Metadata, Viewport } from "next";
 import clsx from "clsx";
 import { Inter } from "next/font/google";
+import "bootstrap/dist/css/bootstrap.css";
+import "./scss/application.scss";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });

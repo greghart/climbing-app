@@ -1,19 +1,27 @@
 {
   "compilerOptions": {
     "outDir": "./lib",
-    "module": "node16",
+    "lib": [
+        "es2021"
+    ],
+    "module": "ES2022",
     "target": "es2020",
     "strict": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "verbatimModuleSyntax": true,
     "declaration": true,
     "sourceMap": true,
     "declarationMap": true,
     "noImplicitAny": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
   },
   "exclude": [
     "node_modules",
   ],
   "include": [
     "./src"
-  ]
+  ],
 }

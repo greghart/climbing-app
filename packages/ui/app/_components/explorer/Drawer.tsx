@@ -1,11 +1,12 @@
-import React, { Children, PropsWithChildren, ReactNode } from "react";
+"use client";
+import React, { ReactNode } from "react";
 import SearchGroup from "@/app/_components/search/SearchGroup";
 import Box from "@mui/material/Box";
 import MUIDrawer from "@mui/material/Drawer";
 
 interface Props {
   title: ReactNode;
-  sidebarChildren: ReactNode;
+  sidebarChildren?: ReactNode;
   children: (setOpen: (open: boolean) => void) => ReactNode;
 }
 /**

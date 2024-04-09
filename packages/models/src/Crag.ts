@@ -4,16 +4,19 @@
 // import Trail from "./Trail.js";
 // import Bounds from "./Bounds.js";
 
+import Bounds from "./Bounds.js";
 import type { IBounds } from "./Bounds.js";
-import type { ICoordinate } from "./Coordinate.js";
+import CoordinateOptional, {
+  type ICoordinateOptional,
+} from "./CoordinateOptional.js";
 
 export interface ICrag {
-  id: number;
+  id?: number; // IDs are tricky -- schema wise they always exist, but not till we save
   name: string;
   description?: string;
 
   bounds?: IBounds;
-  center?: ICoordinate;
+  center: ICoordinateOptional;
 
   defaultZoom: number;
   minZoom: number;
@@ -25,15 +28,22 @@ export interface ICrag {
   // trail?: Trail;
 }
 
-interface Crag extends ICrag {}
+interface Crag extends Omit<ICrag, "center"> {}
 class Crag {
+  bounds?: Bounds;
+  center?: CoordinateOptional; // We map embedded entities with nullable columns to a nullable property.
+
   constructor(data: ICrag) {
     this.id = data.id;
     this.name = data.name;
     this.description = data.description;
 
-    this.bounds = data.bounds;
-    this.center = data.center;
+    if (data.bounds) {
+      this.bounds = new Bounds(data.bounds);
+    }
+    if (data.center.lat && data.center.lng) {
+      this.center = new CoordinateOptional(data.center.lat, data.center.lng);
+    }
     this.defaultZoom = data.defaultZoom;
     this.minZoom = data.minZoom;
     this.maxZoom = data.maxZoom;

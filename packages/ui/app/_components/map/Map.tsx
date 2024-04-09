@@ -43,7 +43,7 @@ export default function Map(props: Props) {
       {...props}
       bounds={bounds}
     >
-      <BestTileLayer />
+      {/* <BestTileLayer /> */}
     </MapContainer>
   );
 }
