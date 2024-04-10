@@ -1,3 +1,3 @@
 export default function Page() {
-  return "OH";
+  return "MAP COMPONENTS";
 }

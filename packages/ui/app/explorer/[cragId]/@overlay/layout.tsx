@@ -11,6 +11,9 @@ export default function Explorer({
   children: React.ReactNode;
   params: { crag: string };
 }) {
-  // TODO In reality there is no overlay while in crag explorer, not till you click some things
-  return <Card>Hello!</Card>;
+  if (!children) return;
+
+  // TODO: Make the card nicer and more interactive/etc.
+  // Ideally it's a google maps style bottom slider
+  return <Card>{children}</Card>;
 }

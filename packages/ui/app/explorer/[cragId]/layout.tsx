@@ -2,13 +2,16 @@
 import SearchGroup from "@/app/_components/search/SearchGroup";
 import SearchInput from "@/app/_components/search/SearchInput";
 import Box from "@mui/material/Box";
-import React, { useMemo } from "react";
+import React from "react";
 import Drawer from "@/app/_components/explorer/Drawer";
 
 interface Props {
   children: React.ReactNode;
   map: React.ReactNode;
   overlay: React.ReactNode;
+  params: {
+    cragId: string;
+  };
 }
 
 /**
@@ -21,9 +24,10 @@ export default function RootLayout(props: Props) {
   const navigateToSearch = React.useCallback(() => {
     console.warn("TODO: Navigate to search here");
   }, []);
+  console.warn("PARAMS: ", props.params);
   return (
     <>
-      <Drawer title={"TODO crag"} sidebarChildren={null}>
+      <Drawer title={"TODO crag"} sidebarChildren={props.children}>
         {(setOpen) => (
           <div className="h-100">
             <div className="fixed-container over-map">
