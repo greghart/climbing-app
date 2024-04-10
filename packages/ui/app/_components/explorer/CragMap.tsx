@@ -1,5 +1,5 @@
 import { useMapEvent } from "react-leaflet/hooks";
-import { Crag as CragModel } from "models";
+import { Crag } from "models";
 import Map from "../map/Map";
 
 // import BestTileLayer from "../BestTileLayer.js";
@@ -9,7 +9,7 @@ import Map from "../map/Map";
 // import type { MyRouteConfig } from "../../routes/MyRouteConfig.js";
 
 interface Props {
-  crag: CragModel;
+  crag: Crag;
   children: React.ReactNode;
 }
 

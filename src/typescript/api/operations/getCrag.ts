@@ -3,6 +3,7 @@ import Crag from "../../models/Crag.js";
 
 const getCrag = (id: number | string) => {
   // Crag IDs for client can also be name
+  console.log("getCrag", id);
   return myDataSource
     .getRepository(Crag)
     .findOne({

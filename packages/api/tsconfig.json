@@ -23,5 +23,5 @@
   ],
   "include": [
     "./src"
-  ],
+, "../ui/api/entity", "../ui/api/db"  ],
 }

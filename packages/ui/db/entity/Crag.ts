@@ -1,6 +1,6 @@
 import { EntitySchema } from "typeorm";
 import { type ICrag } from "models";
-import CoordinateOptional from "./CoordinateOptional";
+import Coordinate from "./Coordinate";
 
 const Crag = new EntitySchema<ICrag>({
   name: "crag",
@@ -26,7 +26,7 @@ const Crag = new EntitySchema<ICrag>({
   },
   embeddeds: {
     center: {
-      schema: CoordinateOptional,
+      schema: Coordinate,
       prefix: "center_",
     },
   },

@@ -1,7 +1,4 @@
-"use client";
-import React, { useMemo } from "react";
-import dynamic from "next/dynamic";
-import { Crag as CragModel } from "models";
+import React from "react";
 import { Card } from "@mui/material";
 
 export default function Explorer({
@@ -9,11 +6,11 @@ export default function Explorer({
   params,
 }: {
   children: React.ReactNode;
-  params: { crag: string };
+  params: { cragId: string };
 }) {
   if (!children) return;
 
   // TODO: Make the card nicer and more interactive/etc.
   // Ideally it's a google maps style bottom slider
-  return <Card>{children}</Card>;
+  return <Card>OK {children}</Card>;
 }

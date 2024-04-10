@@ -1,4 +1,3 @@
-"use client";
 import type { Metadata, Viewport } from "next";
 import clsx from "clsx";
 import { Inter } from "next/font/google";
@@ -23,11 +22,11 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <meta property="og:title" content="Climbing App" />
         <script
-          src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Symbol"
+          src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"
           async
         />
         {/** TODO: Replace fontawesome? */}
-        <script src="https://use.fontawesome.com/470e7e519a.js" />
+        <script src="https://use.fontawesome.com/470e7e519a.js" async />
         <link
           rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
