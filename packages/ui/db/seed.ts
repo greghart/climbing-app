@@ -2,36 +2,53 @@ import "reflect-metadata";
 import { Crag } from "models";
 import { Crag as CragEntity } from "./entity";
 import getDataSource from "./getDataSource";
+import tramJson from "./fixtures/TramData.json";
+import santeeJson from "./fixtures/Santee.json";
+import { Tram } from "@mui/icons-material";
 
 getDataSource()
   .then(async (ds) => {
     console.log("Inserting a new crag into the database...");
     const repo = ds.getRepository(CragEntity);
-    const getSantee = async () => {
-      const crag = await repo.findOneBy({ name: "Santee" });
-      if (crag) {
-        return crag;
-      }
-      return new Crag({
-        name: "Santee",
-        center: {
-          lat: 32.85052,
-          lng: -117.02223,
-        },
-        defaultZoom: 18,
-        minZoom: 15,
-        maxZoom: 22,
-      });
-    };
-    const crag = await getSantee();
-    console.log("Loaded santee with id: " + crag.id);
 
+    let tram = new Crag(tramJson as any); // any to let arrays pass as tuples
+    await repo.clear();
+    await repo.save(santeeJson);
+    await repo.save({
+      ...tram,
+      areas: tram.areas.map((area) => ({
+        ...area,
+        polygon:
+          area.polygon === undefined
+            ? undefined
+            : {
+                ...area.polygon,
+                coordinates: area.polygon.coordinates.map((coord, i) => ({
+                  ...coord,
+                  order: i,
+                })),
+              },
+      })),
+    });
     console.log("Loading crags from the database...");
-    const crags = (await repo.find()).map((crag) => new Crag(crag));
-    console.log("Loaded crags: ", crags);
-    if (crags[0].center) {
-      console.log("Center: ", crags[0].center.tuple);
+    const tramData = await repo.findOne({
+      where: {
+        name: "TramWay",
+      },
+      relations: ["areas", "areas.polygon", "areas.polygon.coordinates"],
+    });
+    console.warn("Tram:\n", JSON.stringify(tramData, null, 2));
+    if (tramData == null) {
+      return;
     }
+    console.log(tramData.areas?.[0]?.polygon?.coordinates);
+
+    tram = new Crag(tramData);
+
+    if (tram.center) {
+      console.log("Center: ", tram.center.tuple);
+    }
+    console.log("Area 1:\n", tram.areas[0].polygon);
 
     console.log(
       "Here you can setup and run express / fastify / any other framework."

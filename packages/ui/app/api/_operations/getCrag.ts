@@ -3,7 +3,6 @@ import { getDataSource, Crag } from "@/db";
 import "server-only";
 
 const getCrag = cache(async (id: number | string) => {
-  console.log("getCrag", id);
   const ds = await getDataSource();
   // Crag IDs for client can also be name
   return ds.getRepository(Crag).findOne({

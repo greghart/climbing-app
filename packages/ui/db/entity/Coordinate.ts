@@ -1,8 +1,10 @@
 import { EntitySchema } from "typeorm";
-import { type ICoordinate } from "models";
+import { type ICoordinateLiteral } from "models";
 
 // Embeddable Coordinate columns
-const Coordinate = new EntitySchema<ICoordinate>({
+export type CoordinateSchema = ICoordinateLiteral;
+
+const Coordinate = new EntitySchema<CoordinateSchema>({
   name: "coordinate",
   columns: {
     lat: {

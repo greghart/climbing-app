@@ -1,7 +1,9 @@
 import React from "react";
-import { Card } from "@mui/material";
+import getCrag from "@/app/api/_operations/getCrag";
+import { notFound } from "next/navigation";
+import ClientLayout from "@/app/explorer/[cragId]/@overlay/ClientLayout";
 
-export default function Explorer({
+export default async function Layout({
   children,
   params,
 }: {
@@ -10,7 +12,8 @@ export default function Explorer({
 }) {
   if (!children) return;
 
-  // TODO: Make the card nicer and more interactive/etc.
-  // Ideally it's a google maps style bottom slider
-  return <Card>OK {children}</Card>;
+  const crag = await getCrag(params.cragId);
+  if (!crag) notFound();
+
+  return <ClientLayout crag={crag}>HELLO {children}</ClientLayout>;
 }

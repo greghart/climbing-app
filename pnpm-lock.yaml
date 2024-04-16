@@ -35,6 +35,12 @@ importers:
 
   packages/models:
     dependencies:
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
       typescript:
         specifier: 5.x.x
         version: 5.4.3
@@ -47,6 +53,9 @@ importers:
       '@emotion/styled':
         specifier: ^11.11.5
         version: 11.11.5(@emotion/react@11.11.4(@types/react@18.2.74)(react@18.2.0))(@types/react@18.2.74)(react@18.2.0)
+      '@mui/icons-material':
+        specifier: ^5.15.15
+        version: 5.15.15(@mui/material@5.15.15(@emotion/react@11.11.4(@types/react@18.2.74)(react@18.2.0))(@emotion/styled@11.11.5(@emotion/react@11.11.4(@types/react@18.2.74)(react@18.2.0))(@types/react@18.2.74)(react@18.2.0))(@types/react@18.2.74)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@types/react@18.2.74)(react@18.2.0)
       '@mui/material':
         specifier: ^5.15.15
         version: 5.15.15(@emotion/react@11.11.4(@types/react@18.2.74)(react@18.2.0))(@emotion/styled@11.11.5(@emotion/react@11.11.4(@types/react@18.2.74)(react@18.2.0))(@types/react@18.2.74)(react@18.2.0))(@types/react@18.2.74)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -433,6 +442,17 @@ packages:
   '@mui/core-downloads-tracker@5.15.15':
     resolution: {integrity: sha512-aXnw29OWQ6I5A47iuWEI6qSSUfH6G/aCsW9KmW3LiFqr7uXZBK4Ks+z8G+qeIub8k0T5CMqlT2q0L+ZJTMrqpg==}
 
+  '@mui/icons-material@5.15.15':
+    resolution: {integrity: sha512-kkeU/pe+hABcYDH6Uqy8RmIsr2S/y5bP2rp+Gat4CcRjCcVne6KudS1NrZQhUCRysrTDCAhcbcf9gt+/+pGO2g==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@mui/material': ^5.0.0
+      '@types/react': ^17.0.0 || ^18.0.0
+      react: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
   '@mui/material@5.15.15':
     resolution: {integrity: sha512-3zvWayJ+E1kzoIsvwyEvkTUKVKt1AjchFFns+JtluHCuvxgKcLSRJTADw37k0doaRtVAsyh8bz9Afqzv+KYrIA==}
     engines: {node: '>=12.0.0'}
@@ -634,6 +654,12 @@ packages:
 
   '@types/leaflet@1.9.9':
     resolution: {integrity: sha512-o0qD9ReJzWpGNIAY0O32NkpfM6rhV4sxnwVkz7x7Ah4Zy9sP+2T9Q3byccL5la1ZX416k+qiyvt8ksBavPPY7A==}
+
+  '@types/lodash-es@4.17.12':
+    resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
+
+  '@types/lodash@4.17.0':
+    resolution: {integrity: sha512-t7dhREVv6dbNj0q17X12j7yDG4bD/DHYX7o5/DbDxobP0HnGPgpRz2Ej77aL7TZT3DSw13fqUTj8J4mMnqa7WA==}
 
   '@types/node@20.12.4':
     resolution: {integrity: sha512-E+Fa9z3wSQpzgYQdYmme5X3OTuejnnTx88A6p6vkkJosR3KBz+HpE3kqNm98VE6cfLFcISx7zW7MsJkH6KwbTw==}
@@ -1708,6 +1734,9 @@ packages:
   locate-path@6.0.0:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
     engines: {node: '>=10'}
+
+  lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
 
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
@@ -2915,6 +2944,13 @@ snapshots:
 
   '@mui/core-downloads-tracker@5.15.15': {}
 
+  '@mui/icons-material@5.15.15(@mui/material@5.15.15(@emotion/react@11.11.4(@types/react@18.2.74)(react@18.2.0))(@emotion/styled@11.11.5(@emotion/react@11.11.4(@types/react@18.2.74)(react@18.2.0))(@types/react@18.2.74)(react@18.2.0))(@types/react@18.2.74)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@types/react@18.2.74)(react@18.2.0)':
+    dependencies:
+      '@babel/runtime': 7.24.1
+      '@mui/material': 5.15.15(@emotion/react@11.11.4(@types/react@18.2.74)(react@18.2.0))(@emotion/styled@11.11.5(@emotion/react@11.11.4(@types/react@18.2.74)(react@18.2.0))(@types/react@18.2.74)(react@18.2.0))(@types/react@18.2.74)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@types/react': 18.2.74
+      react: 18.2.0
+
   '@mui/material@5.15.15(@emotion/react@11.11.4(@types/react@18.2.74)(react@18.2.0))(@emotion/styled@11.11.5(@emotion/react@11.11.4(@types/react@18.2.74)(react@18.2.0))(@types/react@18.2.74)(react@18.2.0))(@types/react@18.2.74)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@babel/runtime': 7.24.1
@@ -3075,6 +3111,12 @@ snapshots:
   '@types/leaflet@1.9.9':
     dependencies:
       '@types/geojson': 7946.0.14
+
+  '@types/lodash-es@4.17.12':
+    dependencies:
+      '@types/lodash': 4.17.0
+
+  '@types/lodash@4.17.0': {}
 
   '@types/node@20.12.4':
     dependencies:
@@ -4393,6 +4435,8 @@ snapshots:
   locate-path@6.0.0:
     dependencies:
       p-locate: 5.0.0
+
+  lodash-es@4.17.21: {}
 
   lodash.merge@4.6.2: {}
 

@@ -1,8 +1,15 @@
-import { EntitySchema } from "typeorm";
+import { cascadeOneToMany } from "@/db/cascadeOptions";
+import { AreaSchema } from "@/db/entity/Area";
 import { type ICrag } from "models";
-import Coordinate from "./Coordinate";
+import { EntitySchema } from "typeorm";
+import Coordinate, { CoordinateSchema } from "./Coordinate";
 
-const Crag = new EntitySchema<ICrag>({
+export interface CragSchema extends Omit<ICrag, "areas"> {
+  areas?: AreaSchema[];
+  center: CoordinateSchema;
+}
+
+const Crag = new EntitySchema<CragSchema>({
   name: "crag",
   columns: {
     id: {
@@ -22,6 +29,19 @@ const Crag = new EntitySchema<ICrag>({
     },
     minZoom: {
       type: "int",
+      nullable: true,
+    },
+    maxZoom: {
+      type: "int",
+      nullable: true,
+    },
+  },
+  relations: {
+    areas: {
+      type: "one-to-many",
+      inverseSide: "crag",
+      target: "area",
+      ...cascadeOneToMany,
     },
   },
   embeddeds: {

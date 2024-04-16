@@ -30,15 +30,7 @@ export default function ClientLayout(props: ClientProps) {
               </div>
             </div>
           </div>
-          {/** Sub-routes are injected as a fixed container over the map */}
-          {/** Position them rooted at the bottom of the screen */}
-          <div className="fixed-container h-100">
-            <div className="container h-100">
-              <div className="row h-100 no-gutters align-items-end">
-                <div className="col mb-3 over-map">{props.overlay}</div>
-              </div>
-            </div>
-          </div>
+          {props.overlay}
           <Box sx={{ height: "100vh" }}>{props.map}</Box>
         </div>
       )}

@@ -8,7 +8,7 @@ export default function ClientLayout({
   crag,
 }: {
   children: React.ReactNode;
-  crag: ICrag | null;
+  crag: ICrag;
 }) {
   const CragMap = useMemo(
     () =>

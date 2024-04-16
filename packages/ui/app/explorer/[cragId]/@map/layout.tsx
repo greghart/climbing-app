@@ -1,5 +1,4 @@
 import React from "react";
-import { Card } from "@mui/material";
 import getCrag from "@/app/api/_operations/getCrag";
 import { notFound } from "next/navigation";
 import ClientLayout from "@/app/explorer/[cragId]/@map/ClientLayout";

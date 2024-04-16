@@ -5,7 +5,7 @@ import { type ICrag } from "./Crag.js";
  * Rectangle bounds entity for crags
  */
 export interface IBounds {
-  id: number;
+  id?: number;
   topLeft: ICoordinate;
   bottomRight: ICoordinate;
   crag: ICrag;
@@ -13,10 +13,13 @@ export interface IBounds {
 
 interface Bounds extends IBounds {}
 class Bounds {
+  topLeft: Coordinate;
+  bottomRight: Coordinate;
+
   constructor(data: IBounds) {
     this.id = data.id;
-    this.topLeft = data.topLeft;
-    this.bottomRight = data.bottomRight;
+    this.topLeft = Coordinate.build(data.topLeft);
+    this.bottomRight = Coordinate.build(data.bottomRight);
     this.crag = data.crag;
   }
 

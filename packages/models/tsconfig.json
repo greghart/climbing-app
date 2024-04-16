@@ -9,6 +9,7 @@
     "sourceMap": true,
     "declarationMap": true,
     "noImplicitAny": true,
+    "strictPropertyInitialization": true,
   },
   "exclude": [
     "node_modules",

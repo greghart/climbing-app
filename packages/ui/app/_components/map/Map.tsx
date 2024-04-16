@@ -2,14 +2,14 @@ import "leaflet/dist/leaflet.css";
 
 import * as Leaflet from "leaflet";
 import { MapContainer } from "react-leaflet";
-import { IBounds, ICoordinate } from "models";
+import { IBounds, Coordinate } from "models";
 import React from "react";
 import BestTileLayer from "./BestTilerLayer";
 
 interface Props
   extends Omit<React.ComponentProps<typeof MapContainer>, "bounds" | "center"> {
   bounds?: IBounds;
-  center?: ICoordinate;
+  center?: Coordinate;
 }
 
 /**
@@ -28,7 +28,7 @@ export default function Map(props: Props) {
     );
   } else if (props.center) {
     bounds = new Leaflet.LatLng(props.center.lat, props.center.lng).toBounds(
-      800
+      8000
     );
   } else {
     return <>No center or bounds supplied</>;
