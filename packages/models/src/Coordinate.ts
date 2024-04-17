@@ -1,10 +1,9 @@
-import { isNumber, isObject } from "lodash-es";
-
 export interface ICoordinateLiteral {
   lat: number;
   lng: number;
 }
 
+// Note, expected is lng, lat to be consistent with Leaflet and other related libs
 export type ICoordinateTuple = [number, number];
 
 export type ICoordinate = ICoordinateLiteral | ICoordinateTuple;

@@ -23,7 +23,7 @@ async function getDataSource(options = null) {
   });
   await ds.initialize();
   singleton = ds;
-  await import("./seed");
+  // await import("./seed");
   return ds;
 }
 

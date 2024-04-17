@@ -1,8 +1,6 @@
-import * as React from "react";
-
-import AreaMap from "./AreaMap.js";
-// import { IArea } from "models";
-import type { LeafletMouseEvent } from "leaflet";
+import { Area } from "models";
+// import type { LeafletMouseEvent } from "leaflet";
+import AreaMap from "@/app/_components/explorer/AreaMap";
 
 interface Props {
   areas: Area[];
@@ -10,18 +8,15 @@ interface Props {
 }
 
 export default function AreasMap(props: Props) {
-  return (
-    <div>
-      {props.areas.map((area) => {
-        return (
-          <AreaMap
-            key={area.name}
-            {...props}
-            area={area}
-            onClick={props.onAreaClick && partial(props.onAreaClick, area)}
-          />
-        );
-      })}
-    </div>
-  );
+  console.warn("Areas", props);
+  return props.areas.map((area) => {
+    return (
+      <AreaMap
+        key={area.name}
+        {...props}
+        area={area}
+        // onClick={props.onAreaClick && partial(props.onAreaClick, area)}
+      />
+    );
+  });
 }

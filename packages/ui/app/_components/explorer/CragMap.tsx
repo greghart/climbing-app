@@ -14,11 +14,18 @@ interface Props {
 }
 
 export default function CragMap(props: Props) {
+  console.log("CragMap @ ", props.crag.name, props.crag.center);
   return (
     // <AnimationContext.Consumer>
     //   {animation => (
     //     <SlideUp {...animation} appear>
-    <Map bounds={props.crag.bounds} center={props.crag.center}>
+    <Map
+      bounds={props.crag.bounds}
+      center={props.crag.center}
+      zoom={props.crag.defaultZoom}
+      minZoom={props.crag.minZoom}
+      maxZoom={props.crag.maxZoom}
+    >
       <ClickHandler />
       {props.children}
     </Map>

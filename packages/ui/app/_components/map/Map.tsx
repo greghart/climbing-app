@@ -39,11 +39,12 @@ export default function Map(props: Props) {
       style={{ height: "100%" }}
       minZoom={18}
       maxBounds={bounds}
-      zoomControl={false}
+      zoomControl={true}
       {...props}
       bounds={bounds}
     >
-      {/* <BestTileLayer /> */}
+      <BestTileLayer />
+      {props.children}
     </MapContainer>
   );
 }
