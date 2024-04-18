@@ -4,10 +4,10 @@ import { type ICrag } from "models";
 import { EntitySchema } from "typeorm";
 import Coordinate, { CoordinateSchema } from "./Coordinate";
 
-export interface CragSchema extends Omit<ICrag, "areas"> {
+export type CragSchema = ICrag & {
   areas?: AreaSchema[];
   center: CoordinateSchema;
-}
+};
 
 const Crag = new EntitySchema<CragSchema>({
   name: "crag",

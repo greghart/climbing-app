@@ -10,7 +10,6 @@ const getCrag = cache(async (id: number | string) => {
     where: [{ name: id as string }, { id: id as number }],
     relations: ["areas", "areas.polygon", "areas.polygon.coordinates"],
     order: {
-      // TODO: How do we easily ensure coordinates are ordered correctly?
       areas: {
         polygon: {
           coordinates: {

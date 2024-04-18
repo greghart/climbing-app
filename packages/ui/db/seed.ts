@@ -35,13 +35,18 @@ getDataSource()
       where: {
         name: "TramWay",
       },
-      relations: ["areas", "areas.polygon", "areas.polygon.coordinates"],
+      relations: [
+        "areas",
+        "areas.polygon",
+        "areas.polygon.coordinates",
+        "areas.boulders",
+      ],
     });
     console.warn("Tram:\n", JSON.stringify(tramData, null, 2));
     if (tramData == null) {
       return;
     }
-    console.log(tramData.areas?.[0]?.polygon?.coordinates);
+    console.log(tramData.areas?.[0]?.boulders?.[0]?.coordinates);
 
     tram = new Crag(tramData);
 

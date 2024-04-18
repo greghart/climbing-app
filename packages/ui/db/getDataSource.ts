@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { Area, Crag, Polygon, PolygonCoordinate } from "./entity";
+import { Area, Boulder, Crag, Polygon, PolygonCoordinate } from "./entity";
 
 // Gets a singleton initialized data source
 let singleton: DataSource;
@@ -16,7 +16,7 @@ async function getDataSource(options = null) {
     database: "database.sqlite",
     synchronize: true,
     logging: true,
-    entities: [Crag, Area, Polygon, PolygonCoordinate],
+    entities: [Crag, Area, Boulder, Polygon, PolygonCoordinate],
     migrations: [],
     subscribers: [],
     ...(options || {}),

@@ -1,18 +1,17 @@
-import { cascadeManyToOne, cascadeOneToMany } from "@/db/cascadeOptions";
-import { BoulderSchema } from "@/db/entity/Boulder";
-import { type CragSchema } from "@/db/entity/Crag";
+import { cascadeManyToOne } from "@/db/cascadeOptions";
+import { type AreaSchema } from "@/db/entity/Area";
+import Coordinate from "@/db/entity/Coordinate";
 import { type PolygonSchema } from "@/db/entity/Polygon";
-import { type IArea } from "models";
+import { type IBoulder } from "models";
 import { EntitySchema } from "typeorm";
 
-export type AreaSchema = IArea & {
+export type BoulderSchema = IBoulder & {
   polygon?: PolygonSchema;
-  crag?: CragSchema;
-  boulders?: BoulderSchema[];
+  area?: AreaSchema;
 };
 
-const Area = new EntitySchema<AreaSchema>({
-  name: "area",
+const Boulder = new EntitySchema<BoulderSchema>({
+  name: "boulder",
   columns: {
     id: {
       type: Number,
@@ -28,16 +27,10 @@ const Area = new EntitySchema<AreaSchema>({
     },
   },
   relations: {
-    crag: {
+    area: {
       type: "many-to-one",
-      target: "crag",
+      target: "area",
       ...cascadeManyToOne,
-    },
-    boulders: {
-      type: "one-to-many",
-      inverseSide: "area",
-      target: "boulder",
-      ...cascadeOneToMany,
     },
     polygon: {
       type: "one-to-one",
@@ -47,6 +40,12 @@ const Area = new EntitySchema<AreaSchema>({
       cascade: ["insert", "update"],
     },
   },
+  embeddeds: {
+    coordinates: {
+      schema: Coordinate,
+      prefix: "coordinates_",
+    },
+  },
 });
 
-export default Area;
+export default Boulder;

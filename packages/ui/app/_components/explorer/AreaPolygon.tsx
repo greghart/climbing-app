@@ -11,11 +11,5 @@ export default function AreaPolygon(props: Props) {
   if (!props.area.polygon || props.area.polygon.coordinates.length === 0) {
     return false;
   }
-  console.log("AreaPolygon", props.area.name, props.area.polygon.coordinates);
-  return (
-    <MyPolygon
-      {...props}
-      positions={sortBy(props.area.polygon.coordinates, "order")}
-    />
-  );
+  return <MyPolygon {...props} positions={props.area.polygon.coordinates} />;
 }

@@ -45,38 +45,34 @@
         {
           "name": "Hubble",
           "coordinates": [
-            "33.8785",
-            "-116.598"
+            33.8785,
+            -116.598
           ],
-          "routes": [],
-          "id": "c423"
+          "routes": []
         },
         {
           "name": "Amphitheater",
           "coordinates": [
-            "33.8771",
-            "-116.599"
+            33.8771,
+            -116.599
           ],
-          "routes": [],
-          "id": "c426"
+          "routes": []
         },
         {
           "name": "Turtleback Boulder",
           "coordinates": [
-            "33.8771",
-            "-116.6005"
+            33.8771,
+            -116.6005
           ],
-          "routes": [],
-          "id": "c429"
+          "routes": []
         },
         {
           "name": "Europa Boulder",
           "coordinates": [
-            "33.8765",
-            "-116.5997"
+            33.8765,
+            -116.5997
           ],
-          "routes": [],
-          "id": "c432"
+          "routes": []
         }
       ],
       "parentArea": null
@@ -109,83 +105,74 @@
         {
           "name": "Creek Boulder",
           "coordinates": [
-            "33.8113",
-            "-116.6454"
+            33.8113,
+            -116.6454
           ],
-          "routes": [],
-          "id": "c218"
+          "routes": []
         },
         {
           "name": "Wonder Bug Boulder",
           "coordinates": [
-            "33.8112",
-            "-116.6465"
+            33.8112,
+            -116.6465
           ],
-          "routes": [],
-          "id": "c221"
+          "routes": []
         },
         {
           "name": "The Green Room",
           "coordinates": [
-            "33.8109",
-            "-116.647"
+            33.8109,
+            -116.647
           ],
-          "routes": [],
-          "id": "c224"
+          "routes": []
         },
         {
           "name": "Cassieopeia Boulder",
           "coordinates": [
-            "33.811",
-            "-116.6469"
+            33.811,
+            -116.6469
           ],
-          "routes": [],
-          "id": "c227"
+          "routes": []
         },
         {
           "name": "Black Cauldron Boulder",
           "coordinates": [
-            "33.8107",
-            "-116.6472"
+            33.8107,
+            -116.6472
           ],
-          "routes": [],
-          "id": "c230"
+          "routes": []
         },
         {
           "name": "Picasso's Prison Palace",
           "coordinates": [
-            "33.8102",
-            "-116.6468"
+            33.8102,
+            -116.6468
           ],
-          "routes": [],
-          "id": "c233"
+          "routes": []
         },
         {
           "name": "Fish Boulder",
           "coordinates": [
-            "33.8099",
-            "-116.6482"
+            33.8099,
+            -116.6482
           ],
-          "routes": [],
-          "id": "c236"
+          "routes": []
         },
         {
           "name": "Ebonic Woman",
           "coordinates": [
-            "33.8091",
-            "-116.6474"
+            33.8091,
+            -116.6474
           ],
-          "routes": [],
-          "id": "c239"
+          "routes": []
         },
         {
           "name": "My Infested Destiny Boulder",
           "coordinates": [
-            "33.8076",
-            "-116.6483"
+            33.8076,
+            -116.6483
           ],
-          "routes": [],
-          "id": "c242"
+          "routes": []
         }
       ],
       "parentArea": null
@@ -214,47 +201,42 @@
         {
           "name": "House Boulder",
           "coordinates": [
-            "33.8113",
-            "-116.6482"
+            33.8113,
+            -116.6482
           ],
-          "routes": [],
-          "id": "c203"
+          "routes": []
         },
         {
           "name": "The All Day Boulder",
           "coordinates": [
-            "33.8115",
-            "-116.6484"
+            33.8115,
+            -116.6484
           ],
-          "routes": [],
-          "id": "c206"
+          "routes": []
         },
         {
           "name": "Demon Keeper Boulder",
           "coordinates": [
-            "33.8117",
-            "-116.6485"
+            33.8117,
+            -116.6485
           ],
-          "routes": [],
-          "id": "c209"
+          "routes": []
         },
         {
           "name": "Fists of Fury Boulder",
           "coordinates": [
-            "33.8125",
-            "-116.6492"
+            33.8125,
+            -116.6492
           ],
-          "routes": [],
-          "id": "c212"
+          "routes": []
         },
         {
           "name": "Roll the Bones Boulder",
           "coordinates": [
-            "33.8129",
-            "-116.6492"
+            33.8129,
+            -116.6492
           ],
-          "routes": [],
-          "id": "c215"
+          "routes": []
         }
       ],
       "parentArea": null
@@ -299,216 +281,185 @@
         {
           "name": "EZ Boulder",
           "coordinates": [
-            "33.8124",
-            "-116.6454"
+            33.8124,
+            -116.6454
           ],
           "routes": [
             {
               "name": "Unnamed Mantel",
               "grade": ".9",
-              "boulder": "c156",
-              "id": "c159"
+              "boulder": "c156"
             },
             {
               "name": "One Handed Mantel",
               "grade": "V5",
-              "boulder": "c156",
-              "id": "c160"
+              "boulder": "c156"
             },
             {
               "name": "EZ Left",
               "grade": "V1",
-              "boulder": "c156",
-              "id": "c161"
+              "boulder": "c156"
             },
             {
               "name": "EZ Right",
               "grade": "V2",
-              "boulder": "c156",
-              "id": "c162"
+              "boulder": "c156"
             },
             {
               "name": "Unnamed",
               "grade": "V.8",
-              "boulder": "c156",
-              "id": "c163"
+              "boulder": "c156"
             }
-          ],
-          "id": "c156"
+          ]
         },
         {
           "name": "Mandala of Tram",
           "coordinates": [
-            "33.8126",
-            "-116.6454"
+            33.8126,
+            -116.6454
           ],
           "routes": [
             {
               "name": "Sling Blade",
               "grade": "V3",
-              "boulder": "c164",
-              "id": "c167"
+              "boulder": "c164"
             },
             {
               "name": "Green Hornet",
               "grade": "V5",
-              "boulder": "c164",
-              "id": "c168"
+              "boulder": "c164"
             },
             {
               "name": "Unnamed",
               "grade": "V3",
-              "boulder": "c164",
-              "id": "c169"
+              "boulder": "c164"
             },
             {
               "name": "Unnamed",
               "grade": "V2",
-              "boulder": "c164",
-              "id": "c170"
+              "boulder": "c164"
             },
             {
               "name": "Unnamed",
               "grade": "V1",
-              "boulder": "c164",
-              "id": "c171"
+              "boulder": "c164"
             },
             {
               "name": "Ian's Problem",
               "grade": "V5",
-              "boulder": "c164",
-              "id": "c172"
+              "boulder": "c164"
             }
-          ],
-          "id": "c164"
+          ]
         },
         {
           "name": "Frank's Boulder ",
           "coordinates": [
-            "33.8124",
-            "-116.6461"
+            33.8124,
+            -116.6461
           ],
           "routes": [
             {
               "name": "Sloper Traverse",
               "grade": "V6/7",
-              "boulder": "c173",
-              "id": "c176"
+              "boulder": "c173"
             },
             {
               "name": "Frank's Direct",
               "grade": "V3",
-              "boulder": "c173",
-              "id": "c177"
+              "boulder": "c173"
             },
             {
               "name": "Frank's Problem",
               "grade": "V4/5",
-              "boulder": "c173",
-              "id": "c178"
+              "boulder": "c173"
             },
             {
               "name": "Short Sloper Traverse",
               "grade": "V4/5",
-              "boulder": "c173",
-              "id": "c179"
+              "boulder": "c173"
             },
             {
               "name": "Posse aka: Hesitation Factor",
               "grade": "V7",
-              "boulder": "c173",
-              "id": "c180"
+              "boulder": "c173"
             },
             {
               "name": "The Terminator",
               "grade": "V2",
-              "boulder": "c173",
-              "id": "c181"
+              "boulder": "c173"
             },
             {
               "name": "Frank's Roof",
               "grade": "V3",
-              "boulder": "c173",
-              "id": "c182"
+              "boulder": "c173"
             }
-          ],
-          "id": "c173"
+          ]
         },
         {
           "name": "Angus Boulder",
           "coordinates": [
-            "33.8122",
-            "-116.6463"
+            33.8122,
+            -116.6463
           ],
           "routes": [
             {
               "name": "The Bonn Scott Memorial Face Problem",
               "grade": "V4",
-              "boulder": "c183",
-              "id": "c186"
+              "boulder": "c183"
             },
             {
               "name": "Angus",
               "grade": "V9",
-              "boulder": "c183",
-              "id": "c187"
+              "boulder": "c183"
             },
             {
               "name": "Malcomb",
               "grade": "V6",
-              "boulder": "c183",
-              "id": "c188"
+              "boulder": "c183"
             },
             {
               "name": "Big Ballz",
               "grade": "V3",
-              "boulder": "c183",
-              "id": "c189"
+              "boulder": "c183"
             },
             {
               "name": "For Those About to Rock",
               "grade": "V4",
-              "boulder": "c183",
-              "id": "c190"
+              "boulder": "c183"
             }
-          ],
-          "id": "c183"
+          ]
         },
         {
           "name": "Gluttony Boulderz",
           "coordinates": [
-            "33.8123",
-            "-116.647"
+            33.8123,
+            -116.647
           ],
-          "routes": [],
-          "id": "c191"
+          "routes": []
         },
         {
           "name": "Blacktop Boulder",
           "coordinates": [
-            "33.8128",
-            "-116.6469"
+            33.8128,
+            -116.6469
           ],
-          "routes": [],
-          "id": "c194"
+          "routes": []
         },
         {
           "name": "Seven Boulder",
           "coordinates": [
-            "33.8129",
-            "-116.6467"
+            33.8129,
+            -116.6467
           ],
-          "routes": [],
-          "id": "c197"
+          "routes": []
         },
         {
           "name": "The Pit & Pendulum Cove",
           "coordinates": [
-            "33.8128",
-            "-116.6472"
+            33.8128,
+            -116.6472
           ],
-          "routes": [],
-          "id": "c200"
+          "routes": []
         }
       ],
       "parentArea": null
@@ -541,65 +492,58 @@
         {
           "name": "Lone Boulder",
           "coordinates": [
-            "33.8135",
-            "-116.649"
+            33.8135,
+            -116.649
           ],
-          "routes": [],
-          "id": "c368"
+          "routes": []
         },
         {
           "name": "Green Tea Boulder",
           "coordinates": [
-            "33.8138",
-            "-116.6492"
+            33.8138,
+            -116.6492
           ],
-          "routes": [],
-          "id": "c371"
+          "routes": []
         },
         {
           "name": "Boulder",
           "coordinates": [
-            "33.8137",
-            "-116.6496"
+            33.8137,
+            -116.6496
           ],
-          "routes": [],
-          "id": "c374"
+          "routes": []
         },
         {
           "name": "Boulder",
           "coordinates": [
-            "33.813",
-            "-116.6499"
+            33.813,
+            -116.6499
           ],
-          "routes": [],
-          "id": "c377"
+          "routes": []
         },
         {
           "name": "Crouching Tiger Boulder",
           "coordinates": [
-            "33.8127",
-            "-116.6334"
+            33.8127,
+            -116.6334
           ],
-          "routes": [],
-          "id": "c380"
+          "routes": []
         },
         {
           "name": "Tribe Called Conquest",
           "coordinates": [
-            "33.8135",
-            "-116.65"
+            33.8135,
+            -116.65
           ],
-          "routes": [],
-          "id": "c383"
+          "routes": []
         },
         {
           "name": "Dragon's Head",
           "coordinates": [
-            "33.8136",
-            "-116.6507"
+            33.8136,
+            -116.6507
           ],
-          "routes": [],
-          "id": "c386"
+          "routes": []
         }
       ],
       "parentArea": null
@@ -648,83 +592,74 @@
         {
           "name": "Boulder",
           "coordinates": [
-            "33.8127",
-            "-116.6478"
+            33.8127,
+            -116.6478
           ],
-          "routes": [],
-          "id": "c245"
+          "routes": []
         },
         {
           "name": "Boulder",
           "coordinates": [
-            "33.8137",
-            "-116.6482"
+            33.8137,
+            -116.6482
           ],
-          "routes": [],
-          "id": "c248"
+          "routes": []
         },
         {
           "name": "Oblivion",
           "coordinates": [
-            "33.8132",
-            "-116.6472"
+            33.8132,
+            -116.6472
           ],
-          "routes": [],
-          "id": "c251"
+          "routes": []
         },
         {
           "name": "South Warm-up Boulder",
           "coordinates": [
-            "33.8136",
-            "-116.6473"
+            33.8136,
+            -116.6473
           ],
-          "routes": [],
-          "id": "c254"
+          "routes": []
         },
         {
           "name": "Boulder Cluster",
           "coordinates": [
-            "33.8144",
-            "-116.6476"
+            33.8144,
+            -116.6476
           ],
-          "routes": [],
-          "id": "c257"
+          "routes": []
         },
         {
           "name": "Pebble Beach",
           "coordinates": [
-            "33.8145",
-            "-116.6472"
+            33.8145,
+            -116.6472
           ],
-          "routes": [],
-          "id": "c260"
+          "routes": []
         },
         {
           "name": "Butterscotch Rock",
           "coordinates": [
-            "33.815",
-            "-116.6471"
+            33.815,
+            -116.6471
           ],
-          "routes": [],
-          "id": "c263"
+          "routes": []
         },
         {
           "name": "Abba Boulder",
           "coordinates": [
-            "33.8147",
-            "-116.6494"
+            33.8147,
+            -116.6494
           ],
-          "routes": [],
-          "id": "c266"
+          "routes": []
         },
         {
           "name": "Gold Wall",
           "coordinates": [
-            "33.8144",
-            "-116.6498"
+            33.8144,
+            -116.6498
           ],
-          "routes": [],
-          "id": "c269"
+          "routes": []
         }
       ],
       "parentArea": null
@@ -761,195 +696,166 @@
         {
           "name": "Warm-Up Boulder",
           "coordinates": [
-            "33.8132",
-            "-116.6451"
+            33.8132,
+            -116.6451
           ],
           "routes": [
             {
               "name": "Unnamed",
               "grade": "V0",
-              "boulder": "c105",
-              "id": "c108"
+              "boulder": "c105"
             },
             {
               "name": "The Ledge",
               "grade": "V1",
-              "boulder": "c105",
-              "id": "c109"
+              "boulder": "c105"
             },
             {
               "name": "The Ledge Traverse",
               "grade": "V2",
-              "boulder": "c105",
-              "id": "c110"
+              "boulder": "c105"
             },
             {
               "name": "Tree Problem",
               "grade": "V0-",
-              "boulder": "c105",
-              "id": "c111"
+              "boulder": "c105"
             },
             {
               "name": "Another Tree Problem",
               "grade": "V0+",
-              "boulder": "c105",
-              "id": "c112"
+              "boulder": "c105"
             },
             {
               "name": "Gumby Traverse",
               "grade": "V2",
-              "boulder": "c105",
-              "id": "c113"
+              "boulder": "c105"
             },
             {
               "name": "Unnamed",
               "grade": "V0",
-              "boulder": "c105",
-              "id": "c114"
+              "boulder": "c105"
             },
             {
               "name": "Theatre of the Absurd",
               "grade": "V3",
-              "boulder": "c105",
-              "id": "c115"
+              "boulder": "c105"
             },
             {
               "name": "The Uninspired",
               "grade": "V3",
-              "boulder": "c105",
-              "id": "c116"
+              "boulder": "c105"
             }
-          ],
-          "id": "c105"
+          ]
         },
         {
           "name": "Flash Gordon Boulder",
           "coordinates": [
-            "33.8134",
-            "-116.6451"
+            33.8134,
+            -116.6451
           ],
           "routes": [
             {
               "name": "The Groveler",
               "grade": "V5",
-              "boulder": "c117",
-              "id": "c120"
+              "boulder": "c117"
             },
             {
               "name": "Chadinator",
               "grade": "V7",
-              "boulder": "c117",
-              "id": "c121"
+              "boulder": "c117"
             },
             {
               "name": "Flash Gordon",
               "grade": "V3",
-              "boulder": "c117",
-              "id": "c122"
+              "boulder": "c117"
             },
             {
               "name": "Buck Rodgers",
               "grade": "V2",
-              "boulder": "c117",
-              "id": "c123"
+              "boulder": "c117"
             },
             {
               "name": "Buck Rodgers Var.",
               "grade": "V3",
-              "boulder": "c117",
-              "id": "c124"
+              "boulder": "c117"
             },
             {
               "name": "Space Crack",
               "grade": "V0",
-              "boulder": "c117",
-              "id": "c125"
+              "boulder": "c117"
             }
-          ],
-          "id": "c117"
+          ]
         },
         {
           "name": "Moon Boulder",
           "coordinates": [
-            "33.8136",
-            "-116.6451"
+            33.8136,
+            -116.6451
           ],
           "routes": [
             {
               "name": "Mare Serenitatis",
               "grade": ".7",
-              "boulder": "c126",
-              "id": "c129"
+              "boulder": "c126"
             },
             {
               "name": "Oceanus",
               "grade": ".8",
-              "boulder": "c126",
-              "id": "c130"
+              "boulder": "c126"
             },
             {
               "name": "Sepentine Ridge",
               "grade": "V0-",
-              "boulder": "c126",
-              "id": "c131"
+              "boulder": "c126"
             },
             {
               "name": "Sea of Tranquility",
               "grade": "V1",
-              "boulder": "c126",
-              "id": "c132"
+              "boulder": "c126"
             },
             {
               "name": "Mare Vaporum",
               "grade": "V4",
-              "boulder": "c126",
-              "id": "c133"
+              "boulder": "c126"
             },
             {
               "name": "Dark Side of the Moon",
               "grade": "V5",
-              "boulder": "c126",
-              "id": "c134"
+              "boulder": "c126"
             }
-          ],
-          "id": "c126"
+          ]
         },
         {
           "name": "Boulder",
           "coordinates": [
-            "33.8136",
-            "-116.6446"
+            33.8136,
+            -116.6446
           ],
-          "routes": [],
-          "id": "c135"
+          "routes": []
         },
         {
           "name": "Dead Tree Boulder",
           "coordinates": [
-            "33.8185",
-            "-116.633"
+            33.8185,
+            -116.633
           ],
           "routes": [
             {
               "name": "George of the Jungle",
               "grade": "V7",
-              "boulder": "c138",
-              "id": "c141"
+              "boulder": "c138"
             },
             {
               "name": "Super Chicken",
               "grade": "V1",
-              "boulder": "c138",
-              "id": "c142"
+              "boulder": "c138"
             },
             {
               "name": "Tom Slick",
               "grade": "V2",
-              "boulder": "c138",
-              "id": "c143"
+              "boulder": "c138"
             }
-          ],
-          "id": "c138"
+          ]
         },
         {
           "name": "Boulder",
@@ -957,54 +863,46 @@
             "33",
             "-116"
           ],
-          "routes": [],
-          "id": "c144"
+          "routes": []
         },
         {
           "name": "Excavation Boulder",
           "coordinates": [
-            "33.8146",
-            "-116.6457"
+            33.8146,
+            -116.6457
           ],
           "routes": [
             {
               "name": "Demolition Man",
               "grade": "V7",
-              "boulder": "c147",
-              "id": "c150"
+              "boulder": "c147"
             },
             {
               "name": "Mr. Smiley Traverse",
               "grade": "V10",
-              "boulder": "c147",
-              "id": "c151"
+              "boulder": "c147"
             },
             {
               "name": "The Elf",
               "grade": "V8",
-              "boulder": "c147",
-              "id": "c152"
+              "boulder": "c147"
             },
             {
               "name": "The Elf (sit)",
               "grade": "V9",
-              "boulder": "c147",
-              "id": "c153"
+              "boulder": "c147"
             },
             {
               "name": "The Cavity",
               "grade": "V7",
-              "boulder": "c147",
-              "id": "c154"
+              "boulder": "c147"
             },
             {
               "name": "Carlton's Var.",
               "grade": "V6",
-              "boulder": "c147",
-              "id": "c155"
+              "boulder": "c147"
             }
-          ],
-          "id": "c147"
+          ]
         }
       ],
       "parentArea": null
@@ -1040,61 +938,53 @@
         {
           "name": "Pleiades",
           "coordinates": [
-            "33.8126",
-            "-116.6439"
+            33.8126,
+            -116.6439
           ],
-          "routes": [],
-          "id": "c91"
+          "routes": []
         },
         {
           "name": "Tuna Juice Boulders",
           "coordinates": [
-            "33.8133",
-            "-116.6444"
+            33.8133,
+            -116.6444
           ],
           "routes": [
             {
               "name": "Tuna Juice",
               "grade": "V6",
-              "boulder": "c94",
-              "id": "c97"
+              "boulder": "c94"
             },
             {
               "name": "Starkist",
               "grade": "V6",
-              "boulder": "c94",
-              "id": "c98"
+              "boulder": "c94"
             },
             {
               "name": "Slam Dunk",
               "grade": "V3",
-              "boulder": "c94",
-              "id": "c99"
+              "boulder": "c94"
             }
-          ],
-          "id": "c94"
+          ]
         },
         {
           "name": "Bambi Corridor",
           "coordinates": [
-            "33.8131",
-            "-116.6446"
+            33.8131,
+            -116.6446
           ],
           "routes": [
             {
               "name": "Bambi Traverse",
               "grade": "V2",
-              "boulder": "c100",
-              "id": "c103"
+              "boulder": "c100"
             },
             {
               "name": "Unnamed",
               "grade": "V4",
-              "boulder": "c100",
-              "id": "c104"
+              "boulder": "c100"
             }
-          ],
-          "id": "c100"
+          ]
         }
       ],
       "parentArea": null
@@ -1134,367 +1024,312 @@
         {
           "name": "Wesco Boulder",
           "coordinates": [
-            "33.8113",
-            "-116.642"
+            33.8113,
+            -116.642
           ],
           "routes": [
             {
               "name": "Wesco Dildo Arete",
               "grade": "V7",
-              "boulder": "c18",
-              "id": "c21"
+              "boulder": "c18"
             }
-          ],
-          "id": "c18"
+          ]
         },
         {
           "name": "Satellite Boulder",
           "coordinates": [
-            "33.8107",
-            "-116.6422"
+            33.8107,
+            -116.6422
           ],
           "routes": [
             {
               "name": "Whitey the Clown",
               "grade": "V5",
-              "boulder": "c22",
-              "id": "c25"
+              "boulder": "c22"
             },
             {
               "name": "Unnamed",
               "grade": "V0",
-              "boulder": "c22",
-              "id": "c26"
+              "boulder": "c22"
             },
             {
               "name": "Short Traverse",
               "grade": "V3",
-              "boulder": "c22",
-              "id": "c27"
+              "boulder": "c22"
             },
             {
               "name": "Long Traverse",
               "grade": "V4",
-              "boulder": "c22",
-              "id": "c28"
+              "boulder": "c22"
             },
             {
               "name": "Ultra Long Traverse",
               "grade": "V5",
-              "boulder": "c22",
-              "id": "c29"
+              "boulder": "c22"
             },
             {
               "name": "Unnamed",
               "grade": "V1",
-              "boulder": "c22",
-              "id": "c30"
+              "boulder": "c22"
             },
             {
               "name": "Drifting",
               "grade": "V3",
-              "boulder": "c22",
-              "id": "c31"
+              "boulder": "c22"
             },
             {
               "name": "Unnamed",
               "grade": "V3",
-              "boulder": "c22",
-              "id": "c32"
+              "boulder": "c22"
             }
-          ],
-          "id": "c22"
+          ]
         },
         {
           "name": "Long Valley Ranger Station",
           "coordinates": [
-            "33.8125",
-            "-116.6422"
+            33.8125,
+            -116.6422
           ],
-          "routes": [],
-          "id": "c33"
+          "routes": []
         },
         {
           "name": "Chimney Rock",
           "coordinates": [
-            "33.8136",
-            "-116.6423"
+            33.8136,
+            -116.6423
           ],
           "routes": [
             {
               "name": "Right Arete",
               "grade": "V1",
-              "boulder": "c36",
-              "id": "c39"
+              "boulder": "c36"
             },
             {
               "name": "Center Crack",
               "grade": "V0",
-              "boulder": "c36",
-              "id": "c40"
+              "boulder": "c36"
             },
             {
               "name": "Dyno Problem",
               "grade": "V2",
-              "boulder": "c36",
-              "id": "c41"
+              "boulder": "c36"
             },
             {
               "name": "Traverse",
               "grade": "V3",
-              "boulder": "c36",
-              "id": "c42"
+              "boulder": "c36"
             },
             {
               "name": "Highball Jugs",
               "grade": "V0",
-              "boulder": "c36",
-              "id": "c43"
+              "boulder": "c36"
             }
-          ],
-          "id": "c36"
+          ]
         },
         {
           "name": "Vanishing Point Boulder",
           "coordinates": [
-            "33.8138",
-            "-116.6439"
+            33.8138,
+            -116.6439
           ],
           "routes": [
             {
               "name": "The Honey Pots",
               "grade": "V2",
-              "boulder": "c44",
-              "id": "c47"
+              "boulder": "c44"
             },
             {
               "name": "Snowblind",
               "grade": "V8",
-              "boulder": "c44",
-              "id": "c48"
+              "boulder": "c44"
             },
             {
               "name": "Vanishing Point",
               "grade": "V9",
-              "boulder": "c44",
-              "id": "c49"
+              "boulder": "c44"
             },
             {
               "name": "Flight of Osirus",
               "grade": "V6",
-              "boulder": "c44",
-              "id": "c50"
+              "boulder": "c44"
             }
-          ],
-          "id": "c44"
+          ]
         },
         {
           "name": "Ranger Station Rock 1",
           "coordinates": [
-            "33.8126",
-            "-116.6422"
+            33.8126,
+            -116.6422
           ],
           "routes": [
             {
               "name": "Ranger Rick's Big Send",
               "grade": "V6",
-              "boulder": "c51",
-              "id": "c54"
+              "boulder": "c51"
             },
             {
               "name": "Blind Hog",
               "grade": "V1",
-              "boulder": "c51",
-              "id": "c55"
+              "boulder": "c51"
             },
             {
               "name": "Fire Farts",
               "grade": "V0+",
-              "boulder": "c51",
-              "id": "c56"
+              "boulder": "c51"
             },
             {
               "name": "It's Another Route",
               "grade": "V0",
-              "boulder": "c51",
-              "id": "c57"
+              "boulder": "c51"
             },
             {
               "name": "Inside Moves",
               "grade": ".8",
-              "boulder": "c51",
-              "id": "c58"
+              "boulder": "c51"
             },
             {
               "name": "Dynamo Hum",
               "grade": "V0",
-              "boulder": "c51",
-              "id": "c59"
+              "boulder": "c51"
             },
             {
               "name": "The 19th Hole",
               "grade": "V4",
-              "boulder": "c51",
-              "id": "c60"
+              "boulder": "c51"
             },
             {
               "name": "The Crumby Route",
               "grade": ".7",
-              "boulder": "c51",
-              "id": "c61"
+              "boulder": "c51"
             },
             {
               "name": "Floyd E. Queeb",
               "grade": "V0",
-              "boulder": "c51",
-              "id": "c62"
+              "boulder": "c51"
             }
-          ],
-          "id": "c51"
+          ]
         },
         {
           "name": "Boulder Cluster",
           "coordinates": [
-            "33.8132",
-            "-116.6481"
+            33.8132,
+            -116.6481
           ],
           "routes": [
             {
               "name": "Electric Dimension",
               "grade": "V1",
-              "boulder": "c63",
-              "id": "c66"
+              "boulder": "c63"
             },
             {
               "name": "Between Dimentions",
               "grade": "V3",
-              "boulder": "c63",
-              "id": "c67"
+              "boulder": "c63"
             },
             {
               "name": "Rising Force",
               "grade": "V4",
-              "boulder": "c63",
-              "id": "c68"
+              "boulder": "c63"
             },
             {
               "name": "Trilogy",
               "grade": "V3",
-              "boulder": "c63",
-              "id": "c69"
+              "boulder": "c63"
             },
             {
               "name": "Funky Toe'n",
               "grade": "V0",
-              "boulder": "c63",
-              "id": "c70"
+              "boulder": "c63"
             },
             {
               "name": "Don't Rock the Boat",
               "grade": ".8",
-              "boulder": "c63",
-              "id": "c71"
+              "boulder": "c63"
             },
             {
               "name": "Wandering Star",
               "grade": "V4",
-              "boulder": "c63",
-              "id": "c72"
+              "boulder": "c63"
             },
             {
               "name": "Irritable Bowel Syndrome",
               "grade": "V4",
-              "boulder": "c63",
-              "id": "c73"
+              "boulder": "c63"
             },
             {
               "name": "Yardarm of the Tram",
               "grade": "V1",
-              "boulder": "c63",
-              "id": "c74"
+              "boulder": "c63"
             }
-          ],
-          "id": "c63"
+          ]
         },
         {
           "name": "Re-Animator Boulder",
           "coordinates": [
-            "33.8122",
-            "-116.6431"
+            33.8122,
+            -116.6431
           ],
           "routes": [
             {
               "name": "Unnamed",
               "grade": "V3/4",
-              "boulder": "c75",
-              "id": "c78"
+              "boulder": "c75"
             },
             {
               "name": "The Real Man's Problem",
               "grade": "V9",
-              "boulder": "c75",
-              "id": "c79"
+              "boulder": "c75"
             },
             {
               "name": "Slot Machine aka: Re-Animator",
               "grade": "V6",
-              "boulder": "c75",
-              "id": "c80"
+              "boulder": "c75"
             },
             {
               "name": "Nipple Shredder",
               "grade": "V5",
-              "boulder": "c75",
-              "id": "c81"
+              "boulder": "c75"
             },
             {
               "name": "\"Unitizing the \"\"G\"\"",
               "grade": "V8\"",
-              "boulder": "c75",
-              "id": "c82"
+              "boulder": "c75"
             }
-          ],
-          "id": "c75"
+          ]
         },
         {
           "name": "Ranger Station Rock 3",
           "coordinates": [
-            "33.8128",
-            "-116.6434"
+            33.8128,
+            -116.6434
           ],
           "routes": [
             {
               "name": "Unnamed",
               "grade": "V0",
-              "boulder": "c83",
-              "id": "c86"
+              "boulder": "c83"
             },
             {
               "name": "Unnamed",
               "grade": "V3",
-              "boulder": "c83",
-              "id": "c87"
+              "boulder": "c83"
             },
             {
               "name": "Trailside Tango",
               "grade": "V4",
-              "boulder": "c83",
-              "id": "c88"
+              "boulder": "c83"
             },
             {
               "name": "Just Another Trailside Attraction",
               "grade": "V4",
-              "boulder": "c83",
-              "id": "c89"
+              "boulder": "c83"
             },
             {
               "name": "Unnamed",
               "grade": "V1",
-              "boulder": "c83",
-              "id": "c90"
+              "boulder": "c83"
             }
-          ],
-          "id": "c83"
+          ]
         }
       ],
       "parentArea": null
@@ -1530,56 +1365,50 @@
         {
           "name": "Tetrys Boulder",
           "coordinates": [
-            "33.8147",
-            "-116.6518"
+            33.8147,
+            -116.6518
           ],
-          "routes": [],
-          "id": "c393"
+          "routes": []
         },
         {
           "name": "Titanic Boulder",
           "coordinates": [
-            "33.814",
-            "-116.6527"
+            33.814,
+            -116.6527
           ],
-          "routes": [],
-          "id": "c396"
+          "routes": []
         },
         {
           "name": "Iceberg I",
           "coordinates": [
-            "33.8146",
-            "-116.653"
+            33.8146,
+            -116.653
           ],
-          "routes": [],
-          "id": "c399"
+          "routes": []
         },
         {
           "name": "Iceberg II",
           "coordinates": [
-            "33.8145",
-            "-116.653"
+            33.8145,
+            -116.653
           ],
-          "routes": [],
-          "id": "c402"
+          "routes": []
         },
         {
           "name": "Iceberg III",
           "coordinates": [
-            "33.8145",
-            "-116.6532"
+            33.8145,
+            -116.6532
           ],
-          "routes": [],
-          "id": "c405"
+          "routes": []
         },
         {
           "name": "The Accordian Boulder",
           "coordinates": [
-            "33.8136",
-            "-116.6539"
+            33.8136,
+            -116.6539
           ],
-          "routes": [],
-          "id": "c408"
+          "routes": []
         }
       ],
       "parentArea": null
@@ -1619,38 +1448,34 @@
         {
           "name": "Sunshine Daydream Boulder",
           "coordinates": [
-            "33.8155",
-            "-116.6334"
+            33.8155,
+            -116.6334
           ],
-          "routes": [],
-          "id": "c411"
+          "routes": []
         },
         {
           "name": "Boulder",
           "coordinates": [
-            "33.8152",
-            "-116.6511"
+            33.8152,
+            -116.6511
           ],
-          "routes": [],
-          "id": "c414"
+          "routes": []
         },
         {
           "name": "Boulder",
           "coordinates": [
-            "33.8151",
-            "-116.6508"
+            33.8151,
+            -116.6508
           ],
-          "routes": [],
-          "id": "c417"
+          "routes": []
         },
         {
           "name": "Greasefire Boulder",
           "coordinates": [
-            "33.8146",
-            "-116.6505"
+            33.8146,
+            -116.6505
           ],
-          "routes": [],
-          "id": "c420"
+          "routes": []
         }
       ],
       "parentArea": null
@@ -1682,20 +1507,18 @@
         {
           "name": "Beaver Boulder",
           "coordinates": [
-            "33.8158",
-            "-116.6488"
+            33.8158,
+            -116.6488
           ],
-          "routes": [],
-          "id": "c272"
+          "routes": []
         },
         {
           "name": "Swing Dance Boulder",
           "coordinates": [
-            "33.8157",
-            "-116.6492"
+            33.8157,
+            -116.6492
           ],
-          "routes": [],
-          "id": "c275"
+          "routes": []
         }
       ],
       "parentArea": null
@@ -1743,92 +1566,82 @@
         {
           "name": "Dead Tree Boulder",
           "coordinates": [
-            "33.8162",
-            "-116.648"
+            33.8162,
+            -116.648
           ],
-          "routes": [],
-          "id": "c278"
+          "routes": []
         },
         {
           "name": "The Alcove",
           "coordinates": [
-            "33.8161",
-            "-116.6478"
+            33.8161,
+            -116.6478
           ],
-          "routes": [],
-          "id": "c281"
+          "routes": []
         },
         {
           "name": "Blue Flame Boulder",
           "coordinates": [
-            "33.8164",
-            "-116.6489"
+            33.8164,
+            -116.6489
           ],
-          "routes": [],
-          "id": "c284"
+          "routes": []
         },
         {
           "name": "Sharma Boulder",
           "coordinates": [
-            "33.8168",
-            "-116.6486"
+            33.8168,
+            -116.6486
           ],
-          "routes": [],
-          "id": "c287"
+          "routes": []
         },
         {
           "name": "Methane Boulder",
           "coordinates": [
-            "33.8168",
-            "-116.6483"
+            33.8168,
+            -116.6483
           ],
-          "routes": [],
-          "id": "c290"
+          "routes": []
         },
         {
           "name": "Tram Boulder",
           "coordinates": [
-            "33.8168",
-            "-116.6479"
+            33.8168,
+            -116.6479
           ],
-          "routes": [],
-          "id": "c293"
+          "routes": []
         },
         {
           "name": "Swiss Cheese Boulder",
           "coordinates": [
-            "33.8169",
-            "-116.6479"
+            33.8169,
+            -116.6479
           ],
-          "routes": [],
-          "id": "c296"
+          "routes": []
         },
         {
           "name": "Pirates Boulder",
           "coordinates": [
-            "33.817",
-            "-116.6478"
+            33.817,
+            -116.6478
           ],
-          "routes": [],
-          "id": "c299"
+          "routes": []
         },
         {
           "name": "Obe Boulder",
           "coordinates": [
-            "33.8173",
-            "-116.6481"
+            33.8173,
+            -116.6481
           ],
-          "routes": [],
-          "id": "c302"
+          "routes": []
         },
         {
           "name": "The Conspiracy Boulder",
           "coordinates": [
-            "33.818",
-            "-116.6464"
+            33.818,
+            -116.6464
           ],
-          "routes": [],
-          "id": "c305"
+          "routes": []
         }
       ],
       "parentArea": null
@@ -1870,146 +1683,130 @@
         {
           "name": "Aquaman Boulder",
           "coordinates": [
-            "33.8171",
-            "-116.6487"
+            33.8171,
+            -116.6487
           ],
-          "routes": [],
-          "id": "c308"
+          "routes": []
         },
         {
           "name": "Unison Rock",
           "coordinates": [
-            "33.8005",
-            "-116.6487"
+            33.8005,
+            -116.6487
           ],
-          "routes": [],
-          "id": "c311"
+          "routes": []
         },
         {
           "name": "Glass Boulder",
           "coordinates": [
-            "33.8172",
-            "-116.6485"
+            33.8172,
+            -116.6485
           ],
-          "routes": [],
-          "id": "c314"
+          "routes": []
         },
         {
           "name": "Boardwalk Boulder",
           "coordinates": [
-            "33.8174",
-            "-116.6487"
+            33.8174,
+            -116.6487
           ],
-          "routes": [],
-          "id": "c317"
+          "routes": []
         },
         {
           "name": "Teflon Boulder",
           "coordinates": [
-            "33.818",
-            "-116.6488"
+            33.818,
+            -116.6488
           ],
-          "routes": [],
-          "id": "c320"
+          "routes": []
         },
         {
           "name": "Roof Boulder",
           "coordinates": [
-            "33.8179",
-            "-116.6492"
+            33.8179,
+            -116.6492
           ],
-          "routes": [],
-          "id": "c323"
+          "routes": []
         },
         {
           "name": "Young Boulder",
           "coordinates": [
-            "33.8182",
-            "-116.6491"
+            33.8182,
+            -116.6491
           ],
-          "routes": [],
-          "id": "c326"
+          "routes": []
         },
         {
           "name": "Emerald City",
           "coordinates": [
-            "33.8176",
-            "-116.6494"
+            33.8176,
+            -116.6494
           ],
-          "routes": [],
-          "id": "c329"
+          "routes": []
         },
         {
           "name": "Quartz Boulder",
           "coordinates": [
-            "33.8175",
-            "-116.6498"
+            33.8175,
+            -116.6498
           ],
-          "routes": [],
-          "id": "c332"
+          "routes": []
         },
         {
           "name": "The Bermuda Triangle",
           "coordinates": [
-            "33.8172",
-            "-116.6499"
+            33.8172,
+            -116.6499
           ],
-          "routes": [],
-          "id": "c335"
+          "routes": []
         },
         {
           "name": "Butterbean Boulder",
           "coordinates": [
-            "33.8171",
-            "-116.6501"
+            33.8171,
+            -116.6501
           ],
-          "routes": [],
-          "id": "c338"
+          "routes": []
         },
         {
           "name": "The Barefoot Sharma Boulder",
           "coordinates": [
-            "33.8179",
-            "-116.6481"
+            33.8179,
+            -116.6481
           ],
-          "routes": [],
-          "id": "c341"
+          "routes": []
         },
         {
           "name": "Dark Star",
           "coordinates": [
-            "33.818",
-            "-116.6484"
+            33.818,
+            -116.6484
           ],
-          "routes": [],
-          "id": "c344"
+          "routes": []
         },
         {
           "name": "Bloodstone",
           "coordinates": [
-            "33.818",
-            "-116.6483"
+            33.818,
+            -116.6483
           ],
-          "routes": [],
-          "id": "c347"
+          "routes": []
         },
         {
           "name": "Boulder",
           "coordinates": [
-            "33.8181",
-            "-116.6487"
+            33.8181,
+            -116.6487
           ],
-          "routes": [],
-          "id": "c350"
+          "routes": []
         },
         {
           "name": "Summit Boulderz",
           "coordinates": [
-            "33.8181",
-            "-116.6482"
+            33.8181,
+            -116.6482
           ],
-          "routes": [],
-          "id": "c353"
+          "routes": []
         }
       ],
       "parentArea": null
@@ -2043,38 +1840,34 @@
         {
           "name": "Medusa Boulder",
           "coordinates": [
-            "33.8183",
-            "-116.6506"
+            33.8183,
+            -116.6506
           ],
-          "routes": [],
-          "id": "c356"
+          "routes": []
         },
         {
           "name": "Pancake House",
           "coordinates": [
-            "33.8188",
-            "-116.6502"
+            33.8188,
+            -116.6502
           ],
-          "routes": [],
-          "id": "c359"
+          "routes": []
         },
         {
           "name": "Boulder",
           "coordinates": [
-            "33.819",
-            "-116.6503"
+            33.819,
+            -116.6503
           ],
-          "routes": [],
-          "id": "c362"
+          "routes": []
         },
         {
           "name": "Boulder",
           "coordinates": [
-            "33.8191",
-            "-116.6495"
+            33.8191,
+            -116.6495
           ],
-          "routes": [],
-          "id": "c365"
+          "routes": []
         }
       ],
       "parentArea": null
@@ -2087,11 +1880,10 @@
         {
           "name": "Year of the Cat Boulder",
           "coordinates": [
-            "33.8142",
-            "-116.6342"
+            33.8142,
+            -116.6342
           ],
-          "routes": [],
-          "id": "c390"
+          "routes": []
         }
       ],
       "parentArea": null

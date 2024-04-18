@@ -29,7 +29,7 @@ const CragMap: React.SFC<Props> = (props) => {
     bounds = new Leaflet.LatLng(
       props.crag.center.lat,
       props.crag.center.lng
-    ).toBounds(450);
+    ).toBounds(8000);
   }
 
   console.warn(bounds);

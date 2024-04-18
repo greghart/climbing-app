@@ -69,6 +69,7 @@ export default function MyPolygon({ show = true, ...props }: Props) {
       eventHandlers={{
         mouseover: () => show && polygonRef.setStyle(myOverStyle),
         mouseout: () => show && polygonRef.setStyle(myNormalStyle),
+        ...props.eventHandlers,
       }}
     >
       {props.children}

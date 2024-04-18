@@ -3,9 +3,9 @@ import { PolygonCoordinateSchema } from "@/db/entity/PolygonCoordinate";
 import { type IPolygon } from "models";
 import { EntitySchema } from "typeorm";
 
-export interface PolygonSchema extends Omit<IPolygon, "coordinates"> {
+export type PolygonSchema = IPolygon & {
   coordinates: PolygonCoordinateSchema[];
-}
+};
 
 const Polygon = new EntitySchema<PolygonSchema>({
   name: "polygon",

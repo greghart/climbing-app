@@ -1,7 +1,7 @@
 import React from "react";
 import getCrag from "@/app/api/_operations/getCrag";
 import { notFound } from "next/navigation";
-import ClientPage from "@/app/explorer/[cragId]/@map/ClientPage";
+import ClientPage from "./ClientPage";
 
 export default async function Page({ params }: { params: { cragId: string } }) {
   const crag = await getCrag(params.cragId);
