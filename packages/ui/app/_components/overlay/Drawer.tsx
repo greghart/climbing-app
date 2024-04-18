@@ -1,31 +1,19 @@
 "use client";
-import * as React from "react";
-import { ICrag } from "models";
-import { styled } from "@mui/material/styles";
-import { grey } from "@mui/material/colors";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { Grid, IconButton, useMediaQuery } from "@mui/material";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import { grey } from "@mui/material/colors";
+import { styled } from "@mui/material/styles";
+import { useSelectedLayoutSegments } from "next/navigation";
+import * as React from "react";
 
 interface Props {
+  title: React.ReactNode;
   children: React.ReactNode;
-  crag: ICrag;
 }
 
 const drawerBleeding = 70;
-
-const Puller = styled("div")(({ theme }) => ({
-  width: 30,
-  height: 6,
-  backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[900],
-  borderRadius: 3,
-  // position: "absolute",
-  top: 8,
-  margin: theme.spacing(1),
-  // left: "calc(50% - 15px)",
-  cursor: "grab",
-}));
 
 const StyledBox = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
@@ -93,14 +81,23 @@ export default function ClientLayout(props: Props) {
             minHeight: `${drawerBleeding}px`,
           }}
         >
-          <Grid container alignItems="center" direction="column">
-            <Grid item xs>
-              <IconButton aria-label="expand" onClick={toggleDrawer(!open)}>
+          <Grid
+            container
+            alignItems="center"
+            direction="column"
+            sx={{ height: drawerBleeding }}
+          >
+            <Grid item>
+              <IconButton
+                aria-label="expand"
+                onClick={toggleDrawer(!open)}
+                size="small"
+              >
                 {open ? <ExpandMoreIcon /> : <ExpandLessIcon />}
               </IconButton>
             </Grid>
             <Grid item xs>
-              {props.crag.name || "..."}
+              {props.title}
             </Grid>
           </Grid>
         </StyledBox>
