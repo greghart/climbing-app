@@ -5,3 +5,6 @@ export { default as CoordinateOptional } from "./CoordinateOptional";
 export { default as Crag } from "./Crag";
 export { default as Polygon } from "./Polygon";
 export { default as PolygonCoordinate } from "./PolygonCoordinate";
+export { default as Route } from "./Route";
+export { default as Grade } from "./Grade";
+export { default as GradingSystem } from "./GradingSystem";

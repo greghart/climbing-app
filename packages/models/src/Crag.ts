@@ -1,8 +1,6 @@
 // import Coordinate, { CoordinateOptional } from "./Coordinate.js";
 // import Commentable from "./Commentable.js";
 // import Trail from "./Trail.js";
-// import Bounds from "./Bounds.js";
-
 import Area, { type IArea } from "./Area.js";
 import Bounds, { type IBounds } from "./Bounds.js";
 import Coordinate, { type ICoordinate } from "./Coordinate.js";
@@ -29,7 +27,7 @@ interface Crag extends Omit<ICrag, "center"> {}
 class Crag {
   bounds?: Bounds;
   center: Coordinate; // We map embedded entities with nullable columns to a nullable property.
-  areas: Area[];
+  areas?: Area[];
 
   constructor(data: ICrag) {
     this.id = data.id;
@@ -40,7 +38,9 @@ class Crag {
       this.bounds = new Bounds(data.bounds);
     }
     this.center = Coordinate.build(data.center);
-    this.areas = (data.areas || []).map((area) => new Area(area));
+    if (data.areas) {
+      this.areas = data.areas.map((area) => new Area(area));
+    }
 
     this.defaultZoom = data.defaultZoom;
     this.minZoom = data.minZoom;

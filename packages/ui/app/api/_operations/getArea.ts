@@ -8,6 +8,7 @@ const getArea = cache(async (id: number | string) => {
   return ds.getRepository(Area).findOne({
     where: [{ name: id as string }, { id: id as number }],
     relations: [
+      "crag",
       "polygon",
       "polygon.coordinates",
       "boulders",

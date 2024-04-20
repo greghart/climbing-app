@@ -287,28 +287,23 @@
           "routes": [
             {
               "name": "Unnamed Mantel",
-              "grade": ".9",
-              "boulder": "c156"
+              "gradeRaw": ".9"
             },
             {
               "name": "One Handed Mantel",
-              "grade": "V5",
-              "boulder": "c156"
+              "gradeRaw": "V5"
             },
             {
               "name": "EZ Left",
-              "grade": "V1",
-              "boulder": "c156"
+              "gradeRaw": "V1"
             },
             {
               "name": "EZ Right",
-              "grade": "V2",
-              "boulder": "c156"
+              "gradeRaw": "V2"
             },
             {
               "name": "Unnamed",
-              "grade": "V.8",
-              "boulder": "c156"
+              "gradeRaw": "V.8"
             }
           ]
         },
@@ -321,33 +316,27 @@
           "routes": [
             {
               "name": "Sling Blade",
-              "grade": "V3",
-              "boulder": "c164"
+              "gradeRaw": "V3"
             },
             {
               "name": "Green Hornet",
-              "grade": "V5",
-              "boulder": "c164"
+              "gradeRaw": "V5"
             },
             {
               "name": "Unnamed",
-              "grade": "V3",
-              "boulder": "c164"
+              "gradeRaw": "V3"
             },
             {
               "name": "Unnamed",
-              "grade": "V2",
-              "boulder": "c164"
+              "gradeRaw": "V2"
             },
             {
               "name": "Unnamed",
-              "grade": "V1",
-              "boulder": "c164"
+              "gradeRaw": "V1"
             },
             {
               "name": "Ian's Problem",
-              "grade": "V5",
-              "boulder": "c164"
+              "gradeRaw": "V5"
             }
           ]
         },
@@ -360,38 +349,31 @@
           "routes": [
             {
               "name": "Sloper Traverse",
-              "grade": "V6/7",
-              "boulder": "c173"
+              "gradeRaw": "V6/7"
             },
             {
               "name": "Frank's Direct",
-              "grade": "V3",
-              "boulder": "c173"
+              "gradeRaw": "V3"
             },
             {
               "name": "Frank's Problem",
-              "grade": "V4/5",
-              "boulder": "c173"
+              "gradeRaw": "V4/5"
             },
             {
               "name": "Short Sloper Traverse",
-              "grade": "V4/5",
-              "boulder": "c173"
+              "gradeRaw": "V4/5"
             },
             {
               "name": "Posse aka: Hesitation Factor",
-              "grade": "V7",
-              "boulder": "c173"
+              "gradeRaw": "V7"
             },
             {
               "name": "The Terminator",
-              "grade": "V2",
-              "boulder": "c173"
+              "gradeRaw": "V2"
             },
             {
               "name": "Frank's Roof",
-              "grade": "V3",
-              "boulder": "c173"
+              "gradeRaw": "V3"
             }
           ]
         },
@@ -404,28 +386,23 @@
           "routes": [
             {
               "name": "The Bonn Scott Memorial Face Problem",
-              "grade": "V4",
-              "boulder": "c183"
+              "gradeRaw": "V4"
             },
             {
               "name": "Angus",
-              "grade": "V9",
-              "boulder": "c183"
+              "gradeRaw": "V9"
             },
             {
               "name": "Malcomb",
-              "grade": "V6",
-              "boulder": "c183"
+              "gradeRaw": "V6"
             },
             {
               "name": "Big Ballz",
-              "grade": "V3",
-              "boulder": "c183"
+              "gradeRaw": "V3"
             },
             {
               "name": "For Those About to Rock",
-              "grade": "V4",
-              "boulder": "c183"
+              "gradeRaw": "V4"
             }
           ]
         },
@@ -702,48 +679,39 @@
           "routes": [
             {
               "name": "Unnamed",
-              "grade": "V0",
-              "boulder": "c105"
+              "gradeRaw": "V0"
             },
             {
               "name": "The Ledge",
-              "grade": "V1",
-              "boulder": "c105"
+              "gradeRaw": "V1"
             },
             {
               "name": "The Ledge Traverse",
-              "grade": "V2",
-              "boulder": "c105"
+              "gradeRaw": "V2"
             },
             {
               "name": "Tree Problem",
-              "grade": "V0-",
-              "boulder": "c105"
+              "gradeRaw": "V0-"
             },
             {
               "name": "Another Tree Problem",
-              "grade": "V0+",
-              "boulder": "c105"
+              "gradeRaw": "V0+"
             },
             {
               "name": "Gumby Traverse",
-              "grade": "V2",
-              "boulder": "c105"
+              "gradeRaw": "V2"
             },
             {
               "name": "Unnamed",
-              "grade": "V0",
-              "boulder": "c105"
+              "gradeRaw": "V0"
             },
             {
               "name": "Theatre of the Absurd",
-              "grade": "V3",
-              "boulder": "c105"
+              "gradeRaw": "V3"
             },
             {
               "name": "The Uninspired",
-              "grade": "V3",
-              "boulder": "c105"
+              "gradeRaw": "V3"
             }
           ]
         },
@@ -756,33 +724,27 @@
           "routes": [
             {
               "name": "The Groveler",
-              "grade": "V5",
-              "boulder": "c117"
+              "gradeRaw": "V5"
             },
             {
               "name": "Chadinator",
-              "grade": "V7",
-              "boulder": "c117"
+              "gradeRaw": "V7"
             },
             {
               "name": "Flash Gordon",
-              "grade": "V3",
-              "boulder": "c117"
+              "gradeRaw": "V3"
             },
             {
               "name": "Buck Rodgers",
-              "grade": "V2",
-              "boulder": "c117"
+              "gradeRaw": "V2"
             },
             {
               "name": "Buck Rodgers Var.",
-              "grade": "V3",
-              "boulder": "c117"
+              "gradeRaw": "V3"
             },
             {
               "name": "Space Crack",
-              "grade": "V0",
-              "boulder": "c117"
+              "gradeRaw": "V0"
             }
           ]
         },
@@ -795,33 +757,27 @@
           "routes": [
             {
               "name": "Mare Serenitatis",
-              "grade": ".7",
-              "boulder": "c126"
+              "gradeRaw": ".7"
             },
             {
               "name": "Oceanus",
-              "grade": ".8",
-              "boulder": "c126"
+              "gradeRaw": ".8"
             },
             {
               "name": "Sepentine Ridge",
-              "grade": "V0-",
-              "boulder": "c126"
+              "gradeRaw": "V0-"
             },
             {
               "name": "Sea of Tranquility",
-              "grade": "V1",
-              "boulder": "c126"
+              "gradeRaw": "V1"
             },
             {
               "name": "Mare Vaporum",
-              "grade": "V4",
-              "boulder": "c126"
+              "gradeRaw": "V4"
             },
             {
               "name": "Dark Side of the Moon",
-              "grade": "V5",
-              "boulder": "c126"
+              "gradeRaw": "V5"
             }
           ]
         },
@@ -842,28 +798,17 @@
           "routes": [
             {
               "name": "George of the Jungle",
-              "grade": "V7",
-              "boulder": "c138"
+              "gradeRaw": "V7"
             },
             {
               "name": "Super Chicken",
-              "grade": "V1",
-              "boulder": "c138"
+              "gradeRaw": "V1"
             },
             {
               "name": "Tom Slick",
-              "grade": "V2",
-              "boulder": "c138"
+              "gradeRaw": "V2"
             }
           ]
-        },
-        {
-          "name": "Boulder",
-          "coordinates": [
-            "33",
-            "-116"
-          ],
-          "routes": []
         },
         {
           "name": "Excavation Boulder",
@@ -874,33 +819,27 @@
           "routes": [
             {
               "name": "Demolition Man",
-              "grade": "V7",
-              "boulder": "c147"
+              "gradeRaw": "V7"
             },
             {
               "name": "Mr. Smiley Traverse",
-              "grade": "V10",
-              "boulder": "c147"
+              "gradeRaw": "V10"
             },
             {
               "name": "The Elf",
-              "grade": "V8",
-              "boulder": "c147"
+              "gradeRaw": "V8"
             },
             {
               "name": "The Elf (sit)",
-              "grade": "V9",
-              "boulder": "c147"
+              "gradeRaw": "V9"
             },
             {
               "name": "The Cavity",
-              "grade": "V7",
-              "boulder": "c147"
+              "gradeRaw": "V7"
             },
             {
               "name": "Carlton's Var.",
-              "grade": "V6",
-              "boulder": "c147"
+              "gradeRaw": "V6"
             }
           ]
         }
@@ -952,18 +891,15 @@
           "routes": [
             {
               "name": "Tuna Juice",
-              "grade": "V6",
-              "boulder": "c94"
+              "gradeRaw": "V6"
             },
             {
               "name": "Starkist",
-              "grade": "V6",
-              "boulder": "c94"
+              "gradeRaw": "V6"
             },
             {
               "name": "Slam Dunk",
-              "grade": "V3",
-              "boulder": "c94"
+              "gradeRaw": "V3"
             }
           ]
         },
@@ -976,13 +912,11 @@
           "routes": [
             {
               "name": "Bambi Traverse",
-              "grade": "V2",
-              "boulder": "c100"
+              "gradeRaw": "V2"
             },
             {
               "name": "Unnamed",
-              "grade": "V4",
-              "boulder": "c100"
+              "gradeRaw": "V4"
             }
           ]
         }
@@ -1030,8 +964,7 @@
           "routes": [
             {
               "name": "Wesco Dildo Arete",
-              "grade": "V7",
-              "boulder": "c18"
+              "gradeRaw": "V7"
             }
           ]
         },
@@ -1044,43 +977,35 @@
           "routes": [
             {
               "name": "Whitey the Clown",
-              "grade": "V5",
-              "boulder": "c22"
+              "gradeRaw": "V5"
             },
             {
               "name": "Unnamed",
-              "grade": "V0",
-              "boulder": "c22"
+              "gradeRaw": "V0"
             },
             {
               "name": "Short Traverse",
-              "grade": "V3",
-              "boulder": "c22"
+              "gradeRaw": "V3"
             },
             {
               "name": "Long Traverse",
-              "grade": "V4",
-              "boulder": "c22"
+              "gradeRaw": "V4"
             },
             {
               "name": "Ultra Long Traverse",
-              "grade": "V5",
-              "boulder": "c22"
+              "gradeRaw": "V5"
             },
             {
               "name": "Unnamed",
-              "grade": "V1",
-              "boulder": "c22"
+              "gradeRaw": "V1"
             },
             {
               "name": "Drifting",
-              "grade": "V3",
-              "boulder": "c22"
+              "gradeRaw": "V3"
             },
             {
               "name": "Unnamed",
-              "grade": "V3",
-              "boulder": "c22"
+              "gradeRaw": "V3"
             }
           ]
         },
@@ -1101,28 +1026,23 @@
           "routes": [
             {
               "name": "Right Arete",
-              "grade": "V1",
-              "boulder": "c36"
+              "gradeRaw": "V1"
             },
             {
               "name": "Center Crack",
-              "grade": "V0",
-              "boulder": "c36"
+              "gradeRaw": "V0"
             },
             {
               "name": "Dyno Problem",
-              "grade": "V2",
-              "boulder": "c36"
+              "gradeRaw": "V2"
             },
             {
               "name": "Traverse",
-              "grade": "V3",
-              "boulder": "c36"
+              "gradeRaw": "V3"
             },
             {
               "name": "Highball Jugs",
-              "grade": "V0",
-              "boulder": "c36"
+              "gradeRaw": "V0"
             }
           ]
         },
@@ -1135,23 +1055,19 @@
           "routes": [
             {
               "name": "The Honey Pots",
-              "grade": "V2",
-              "boulder": "c44"
+              "gradeRaw": "V2"
             },
             {
               "name": "Snowblind",
-              "grade": "V8",
-              "boulder": "c44"
+              "gradeRaw": "V8"
             },
             {
               "name": "Vanishing Point",
-              "grade": "V9",
-              "boulder": "c44"
+              "gradeRaw": "V9"
             },
             {
               "name": "Flight of Osirus",
-              "grade": "V6",
-              "boulder": "c44"
+              "gradeRaw": "V6"
             }
           ]
         },
@@ -1164,48 +1080,39 @@
           "routes": [
             {
               "name": "Ranger Rick's Big Send",
-              "grade": "V6",
-              "boulder": "c51"
+              "gradeRaw": "V6"
             },
             {
               "name": "Blind Hog",
-              "grade": "V1",
-              "boulder": "c51"
+              "gradeRaw": "V1"
             },
             {
               "name": "Fire Farts",
-              "grade": "V0+",
-              "boulder": "c51"
+              "gradeRaw": "V0+"
             },
             {
               "name": "It's Another Route",
-              "grade": "V0",
-              "boulder": "c51"
+              "gradeRaw": "V0"
             },
             {
               "name": "Inside Moves",
-              "grade": ".8",
-              "boulder": "c51"
+              "gradeRaw": ".8"
             },
             {
               "name": "Dynamo Hum",
-              "grade": "V0",
-              "boulder": "c51"
+              "gradeRaw": "V0"
             },
             {
               "name": "The 19th Hole",
-              "grade": "V4",
-              "boulder": "c51"
+              "gradeRaw": "V4"
             },
             {
               "name": "The Crumby Route",
-              "grade": ".7",
-              "boulder": "c51"
+              "gradeRaw": ".7"
             },
             {
               "name": "Floyd E. Queeb",
-              "grade": "V0",
-              "boulder": "c51"
+              "gradeRaw": "V0"
             }
           ]
         },
@@ -1218,48 +1125,39 @@
           "routes": [
             {
               "name": "Electric Dimension",
-              "grade": "V1",
-              "boulder": "c63"
+              "gradeRaw": "V1"
             },
             {
               "name": "Between Dimentions",
-              "grade": "V3",
-              "boulder": "c63"
+              "gradeRaw": "V3"
             },
             {
               "name": "Rising Force",
-              "grade": "V4",
-              "boulder": "c63"
+              "gradeRaw": "V4"
             },
             {
               "name": "Trilogy",
-              "grade": "V3",
-              "boulder": "c63"
+              "gradeRaw": "V3"
             },
             {
               "name": "Funky Toe'n",
-              "grade": "V0",
-              "boulder": "c63"
+              "gradeRaw": "V0"
             },
             {
               "name": "Don't Rock the Boat",
-              "grade": ".8",
-              "boulder": "c63"
+              "gradeRaw": ".8"
             },
             {
               "name": "Wandering Star",
-              "grade": "V4",
-              "boulder": "c63"
+              "gradeRaw": "V4"
             },
             {
               "name": "Irritable Bowel Syndrome",
-              "grade": "V4",
-              "boulder": "c63"
+              "gradeRaw": "V4"
             },
             {
               "name": "Yardarm of the Tram",
-              "grade": "V1",
-              "boulder": "c63"
+              "gradeRaw": "V1"
             }
           ]
         },
@@ -1272,28 +1170,23 @@
           "routes": [
             {
               "name": "Unnamed",
-              "grade": "V3/4",
-              "boulder": "c75"
+              "gradeRaw": "V3/4"
             },
             {
               "name": "The Real Man's Problem",
-              "grade": "V9",
-              "boulder": "c75"
+              "gradeRaw": "V9"
             },
             {
               "name": "Slot Machine aka: Re-Animator",
-              "grade": "V6",
-              "boulder": "c75"
+              "gradeRaw": "V6"
             },
             {
               "name": "Nipple Shredder",
-              "grade": "V5",
-              "boulder": "c75"
+              "gradeRaw": "V5"
             },
             {
               "name": "\"Unitizing the \"\"G\"\"",
-              "grade": "V8\"",
-              "boulder": "c75"
+              "gradeRaw": "V8\""
             }
           ]
         },
@@ -1306,28 +1199,23 @@
           "routes": [
             {
               "name": "Unnamed",
-              "grade": "V0",
-              "boulder": "c83"
+              "gradeRaw": "V0"
             },
             {
               "name": "Unnamed",
-              "grade": "V3",
-              "boulder": "c83"
+              "gradeRaw": "V3"
             },
             {
               "name": "Trailside Tango",
-              "grade": "V4",
-              "boulder": "c83"
+              "gradeRaw": "V4"
             },
             {
               "name": "Just Another Trailside Attraction",
-              "grade": "V4",
-              "boulder": "c83"
+              "gradeRaw": "V4"
             },
             {
               "name": "Unnamed",
-              "grade": "V1",
-              "boulder": "c83"
+              "gradeRaw": "V1"
             }
           ]
         }

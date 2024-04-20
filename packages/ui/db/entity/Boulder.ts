@@ -1,6 +1,6 @@
 import { cascadeManyToOne } from "@/db/cascadeOptions";
 import { type AreaSchema } from "@/db/entity/Area";
-import Coordinate from "@/db/entity/Coordinate";
+import Coordinate, { CoordinateSchema } from "@/db/entity/Coordinate";
 import { type PolygonSchema } from "@/db/entity/Polygon";
 import { type IBoulder } from "models";
 import { EntitySchema } from "typeorm";
@@ -8,6 +8,7 @@ import { EntitySchema } from "typeorm";
 export type BoulderSchema = IBoulder & {
   polygon?: PolygonSchema;
   area?: AreaSchema;
+  coordinates: CoordinateSchema;
 };
 
 const Boulder = new EntitySchema<BoulderSchema>({

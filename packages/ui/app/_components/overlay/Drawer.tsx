@@ -1,11 +1,10 @@
 "use client";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Grid, IconButton, useMediaQuery } from "@mui/material";
+import { Box, Grid, IconButton, useMediaQuery } from "@mui/material";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { grey } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
-import { useSelectedLayoutSegments } from "next/navigation";
 import * as React from "react";
 
 interface Props {
@@ -61,7 +60,6 @@ export default function ClientLayout(props: Props) {
         }}
         PaperProps={{
           sx: {
-            height: `calc(50% - ${drawerBleeding}px)`,
             overflow: "visible",
             p: 2,
           },
@@ -81,12 +79,7 @@ export default function ClientLayout(props: Props) {
             minHeight: `${drawerBleeding}px`,
           }}
         >
-          <Grid
-            container
-            alignItems="center"
-            direction="column"
-            sx={{ height: drawerBleeding }}
-          >
+          <Grid container justifyContent="center">
             <Grid item>
               <IconButton
                 aria-label="expand"
@@ -96,12 +89,10 @@ export default function ClientLayout(props: Props) {
                 {open ? <ExpandMoreIcon /> : <ExpandLessIcon />}
               </IconButton>
             </Grid>
-            <Grid item xs>
-              {props.title}
-            </Grid>
           </Grid>
+          <Box sx={{ px: 2 }}>{props.title}</Box>
         </StyledBox>
-        {props.children}
+        <Box sx={{ p: 2 }}>{props.children}</Box>
       </SwipeableDrawer>
     </div>
   );

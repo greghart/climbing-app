@@ -15,7 +15,7 @@ interface Area extends Omit<IArea, "center"> {}
 class Area {
   crag?: Crag;
   polygon?: Polygon;
-  boulders: Boulder[];
+  boulders?: Boulder[];
 
   constructor(data: IArea) {
     this.id = data.id;
@@ -28,9 +28,9 @@ class Area {
     if (data.polygon) {
       this.polygon = new Polygon(data.polygon);
     }
-    this.boulders = (data.boulders || []).map(
-      (boulder) => new Boulder(boulder)
-    );
+    if (data.boulders) {
+      this.boulders = data.boulders.map((boulder) => new Boulder(boulder));
+    }
   }
 }
 

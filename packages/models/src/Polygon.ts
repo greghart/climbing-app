@@ -17,12 +17,14 @@ export interface IPolygon {
 interface Polygon extends IPolygon {}
 
 class Polygon {
-  coordinates: Coordinate[];
+  coordinates?: Coordinate[];
 
   constructor(data: IPolygon) {
     this.id = data.id;
     this.descriptor = data.descriptor;
-    this.coordinates = (data.coordinates || []).map(Coordinate.build);
+    if (data.coordinates) {
+      this.coordinates = data.coordinates.map(Coordinate.build);
+    }
   }
 }
 

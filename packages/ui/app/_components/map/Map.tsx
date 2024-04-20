@@ -22,7 +22,7 @@ interface Props
  *  * handles our domain bounds and coordinate
  *  * sane defaults
  *  * best tile layer
- *  * No zooming! Helps us keep map drift to a minimum
+ * TODO: Persist map state in URL so transitions keep things in place
  */
 export default function Map({ bounds, center, ...props }: Props) {
   let resolvedBounds: Leaflet.LatLngBounds;

@@ -14,3 +14,10 @@ export {
 export { default as Crag, type ICrag } from "./Crag.js";
 export { default as Boulder, type IBoulder } from "./Boulder.js";
 export { default as Polygon, type IPolygon } from "./Polygon.js";
+export { default as Route, type IRoute } from "./Route.js";
+export { default as Grade, type IGrade } from "./Grade.js";
+export {
+  default as GradingSystem,
+  type IGradingSystem,
+  GradingSystemType,
+} from "./GradingSystem.js";
