@@ -1,19 +1,20 @@
 "use client";
+import { usePathname, useRouter } from "next/navigation";
 import { IBoulder } from "models";
-
-interface Props {
-  boulders?: IBoulder[];
-}
-
 import * as React from "react";
-import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { Collapse, IconButton, ListItem, Typography } from "@mui/material";
 import { AssistantDirection } from "@mui/icons-material";
 
+interface Props {
+  boulders?: IBoulder[];
+}
+
 export default function BouldersList({ boulders = [] }: Props) {
+  const router = useRouter();
+  const pathname = usePathname();
   const [expandedBoulderId, setExpandedBoulderId] = React.useState<
     number | undefined
   >(undefined);
@@ -40,7 +41,13 @@ export default function BouldersList({ boulders = [] }: Props) {
               key={boulder.id}
               disablePadding
               secondaryAction={
-                <IconButton edge="end" aria-label="go">
+                <IconButton
+                  edge="end"
+                  aria-label="go"
+                  onClick={(e) => {
+                    router.push(`${pathname}/boulder/${boulder.id}`);
+                  }}
+                >
                   <AssistantDirection />
                 </IconButton>
               }

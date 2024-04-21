@@ -2,8 +2,7 @@ import { type LeafletMouseEvent } from "leaflet";
 import { Area } from "models";
 import { LayerGroup, Tooltip } from "react-leaflet";
 import AreaPolygon from "./AreaPolygon";
-import AreaBoulders from "./AreaBoulders";
-// import useAreaMapNavigator from "./useAreaMapNavigator.js";
+import Boulders from "./Boulders";
 
 interface Props {
   area: Area;
@@ -13,8 +12,8 @@ interface Props {
   // Show the name tooltip of the area
   tooltip?: boolean;
   // Show boulders of this area
-  boulders?: boolean;
-  onBoulderClick?: React.ComponentProps<typeof AreaBoulders>["onBoulderClick"];
+  showBoulders?: boolean;
+  onBoulderClick?: React.ComponentProps<typeof Boulders>["onBoulderClick"];
 }
 
 export default function AreaMap({ tooltip = true, ...props }: Props) {
@@ -38,9 +37,9 @@ export default function AreaMap({ tooltip = true, ...props }: Props) {
           </Tooltip>
         )}
       </AreaPolygon>
-      <AreaBoulders
+      <Boulders
         key={`area-${props.area.id}-boulders`}
-        area={props.area}
+        boulders={props.area.boulders || []}
         onBoulderClick={props.onBoulderClick}
       />
     </LayerGroup>

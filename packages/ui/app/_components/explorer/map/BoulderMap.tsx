@@ -7,11 +7,12 @@
  */
 import * as React from "react";
 import * as Leaflet from "leaflet";
-import { IBoulder } from "models";
+import { Boulder } from "models";
 import MyPolygon from "@/app/_components/explorer/map/MyPolygon";
+import Boulders from "@/app/_components/explorer/map/Boulders";
 
 interface Props {
-  boulder: IBoulder;
+  boulder: Boulder;
   onClick?: (e: Leaflet.LeafletMouseEvent) => unknown;
   showRoutes?: boolean;
   // formulateUrl?: React.ComponentProps<typeof RouteMarkers>["formulateUrl"];
@@ -20,7 +21,7 @@ interface Props {
 const BoulderMap: React.ComponentType<Props> = (props) => {
   return (
     <React.Fragment>
-      {props.boulder.polygon?.coordinates && (
+      {props.boulder.polygon?.coordinates ? (
         <MyPolygon
           positions={props.boulder.polygon.coordinates}
           eventHandlers={{
@@ -28,7 +29,10 @@ const BoulderMap: React.ComponentType<Props> = (props) => {
           }}
           fillOpacity={0.1}
         />
+      ) : (
+        <Boulders boulders={[props.boulder]} />
       )}
+      {/* TODO Add these back */}
       {/* {props.showRoutes && (
         <RouteMarkers
           routes={props.boulder.routes}

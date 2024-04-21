@@ -29,6 +29,17 @@ export default function Breadcrumbs(props: Props) {
           </Link>
         </NextLink>
       )}
+      {props.area && props.boulder && (
+        <NextLink
+          href={`/explorer/${props.crag.id}/area/${props.area.id}/boulder/${props.boulder.id}`}
+          passHref
+          legacyBehavior
+        >
+          <Link underline="hover" color="inherit">
+            {props.boulder.name}
+          </Link>
+        </NextLink>
+      )}
     </MUIBreadcrumbs>
   );
 }

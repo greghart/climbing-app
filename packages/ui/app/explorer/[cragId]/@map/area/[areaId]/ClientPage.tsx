@@ -19,5 +19,7 @@ export default function ClientPage({ area: _area }: { area: IArea }) {
     );
   }, [area.id]);
 
-  return <AreaMap area={area} boulders tooltip={false} onClick={blockClicks} />;
+  return (
+    <AreaMap area={area} showBoulders tooltip={false} onClick={blockClicks} />
+  );
 }
