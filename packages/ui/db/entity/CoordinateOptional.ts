@@ -5,7 +5,7 @@ import { type ICoordinateOptional } from "models";
 export type CoordinateOptionalSchema = ICoordinateOptional;
 
 const CoordinateOptional = new EntitySchema<CoordinateOptionalSchema>({
-  name: "coordinate",
+  name: "coordinate_optional",
   columns: {
     lat: {
       type: "decimal",

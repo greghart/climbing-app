@@ -9,7 +9,7 @@ import * as React from "react";
 
 interface Props {
   title: React.ReactNode;
-  children: React.ReactNode;
+  children: React.ReactElement;
 }
 
 const drawerBleeding = 70;
@@ -24,6 +24,22 @@ const StyledBox = styled("div")(({ theme }) => ({
  * Toggle button for desktop
  */
 export default function ClientLayout(props: Props) {
+  // TODO: Refactor to a re-usable hook and a prop to enable
+  // Problem is components like google charts defer height calculation till they're actually
+  // showing, so hard to figure out height now
+  const children = props.children;
+  // const [height, setHeight] = React.useState(0);
+  // const childRef = React.useCallback(
+  //   (node: any) => {
+  //     // Give node some time for any asynchronous renders
+  //     setTimeout(() => {
+  //       if (node !== null) {
+  //         setHeight(node.getBoundingClientRect().height);
+  //       }
+  //     }, 1500);
+  //   },
+  //   [props.children]
+  // );
   const [open, setOpen] = React.useState(false);
   const [variant, setVariant] = React.useState<"temporary" | "persistent">(
     "temporary"
@@ -60,6 +76,8 @@ export default function ClientLayout(props: Props) {
         }}
         PaperProps={{
           sx: {
+            // minHeight: `calc(${height}px - 32px - ${drawerBleeding}px)`,
+            height: `calc(50% - ${drawerBleeding}px)`,
             overflow: "visible",
             p: 2,
           },
@@ -92,7 +110,7 @@ export default function ClientLayout(props: Props) {
           </Grid>
           <Box sx={{ px: 2 }}>{props.title}</Box>
         </StyledBox>
-        <Box sx={{ p: 2 }}>{props.children}</Box>
+        <Box sx={{ p: 2 }}>{children}</Box>
       </SwipeableDrawer>
     </div>
   );

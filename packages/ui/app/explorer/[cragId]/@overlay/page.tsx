@@ -9,5 +9,9 @@ export default async function page({ params }: { params: { cragId: string } }) {
   const crag = await getCrag(params.cragId);
   if (!crag) notFound();
 
-  return <Drawer title={<Breadcrumbs crag={new Crag(crag)} />}>...</Drawer>;
+  return (
+    <Drawer title={<Breadcrumbs crag={new Crag(crag)} />}>
+      <div>...</div>
+    </Drawer>
+  );
 }

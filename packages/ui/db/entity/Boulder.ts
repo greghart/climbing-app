@@ -1,13 +1,15 @@
-import { cascadeManyToOne } from "@/db/cascadeOptions";
+import { cascadeManyToOne, cascadeOneToMany } from "@/db/cascadeOptions";
 import { type AreaSchema } from "@/db/entity/Area";
 import Coordinate, { CoordinateSchema } from "@/db/entity/Coordinate";
 import { type PolygonSchema } from "@/db/entity/Polygon";
+import { type RouteSchema } from "@/db/entity/Route";
 import { type IBoulder } from "models";
 import { EntitySchema } from "typeorm";
 
 export type BoulderSchema = IBoulder & {
   polygon?: PolygonSchema;
   area?: AreaSchema;
+  routes?: RouteSchema[];
   coordinates: CoordinateSchema;
 };
 
@@ -32,6 +34,12 @@ const Boulder = new EntitySchema<BoulderSchema>({
       type: "many-to-one",
       target: "area",
       ...cascadeManyToOne,
+    },
+    routes: {
+      type: "one-to-many",
+      inverseSide: "boulder",
+      target: "route",
+      ...cascadeOneToMany,
     },
     polygon: {
       type: "one-to-one",

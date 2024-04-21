@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import clsx from "clsx";
 import { Inter } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.css";
@@ -35,7 +35,9 @@ export default function RootLayout({
         />
       </head>
       <body className={clsx(inter.className, "body--sidebar")}>
-        <div id="app">{children}</div>
+        <AppRouterCacheProvider>
+          <div id="app">{children}</div>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

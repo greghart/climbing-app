@@ -6,7 +6,9 @@
 // import Photoable from "./Photoable.js";
 
 import Boulder, { type IBoulder } from "./Boulder.js";
-import Coordinate, { type ICoordinate } from "./Coordinate.js";
+import CoordinateOptional, {
+  type ICoordinateOptional,
+} from "./CoordinateOptional.js";
 import Grade from "./Grade.js";
 import type { IGrade } from "./Grade.js";
 
@@ -18,11 +20,11 @@ export interface IRoute {
   firstAscent?: string;
   // TODO Formalize route type, and decide normalized safe way to constrain
   // boulders to only have bouldering grades
-  gradeRaw: string;
+  gradeRaw?: string;
   grade?: IGrade;
   boulder?: IBoulder;
   // Location of the route if any, this will be setup on a polygon of the boulder
-  coordinates?: ICoordinate;
+  coordinates?: ICoordinateOptional;
   // commentable?: Commentable;
   // photoable?: Photoable;
 }
@@ -30,7 +32,7 @@ export interface IRoute {
 interface Route extends IRoute {}
 class Route {
   boulder?: Boulder;
-  coordinates?: Coordinate;
+  coordinates?: CoordinateOptional;
   grade?: Grade;
 
   constructor(data: IRoute) {
@@ -47,7 +49,7 @@ class Route {
       this.boulder = new Boulder(data.boulder);
     }
     this.coordinates = data.coordinates
-      ? Coordinate.build(data.coordinates)
+      ? new CoordinateOptional(data.coordinates.lat, data.coordinates.lng)
       : undefined;
   }
 }

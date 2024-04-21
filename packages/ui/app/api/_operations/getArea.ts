@@ -14,6 +14,7 @@ const getArea = cache(async (id: number | string) => {
       "boulders",
       "boulders.polygon",
       "boulders.polygon.coordinates",
+      "boulders.routes",
     ],
     order: {
       polygon: {

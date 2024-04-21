@@ -1,6 +1,9 @@
+"use client";
+import RoutesDifficultyBreakdown from "@/app/_components/charts/RoutesDifficultyBreakdown";
+import { reduce } from "lodash-es";
+import { IArea, ICrag, IRoute } from "models";
+import React from "react";
 import Truncate from "../Truncate";
-// import RoutesDifficultyBreakdown from "../charts/RoutesDifficultyBreakdown.js";
-import { IArea, ICrag } from "models";
 
 type NeededProps = "id" | "name" | "description" | "boulders";
 interface Props {
@@ -8,25 +11,27 @@ interface Props {
   area: Pick<IArea, NeededProps>;
 }
 
-export default function Area(props: Props) {
+const Area = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
   return (
-    <>
+    <div ref={ref}>
       <p>
         <Truncate
           length={80}
           text={props.area.description || "Beautiful boulders"}
         />
       </p>
-      {/* <RoutesDifficultyBreakdown
+      <RoutesDifficultyBreakdown
         routes={reduce(
           props.area.boulders,
           (memo, thisBoulder) => {
             return memo.concat(thisBoulder.routes || []);
           },
-          []
+          [] as IRoute[]
         )}
         height="135px"
-      /> */}
-    </>
+      />
+    </div>
   );
-}
+});
+
+export default Area;

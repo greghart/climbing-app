@@ -1,6 +1,6 @@
 import { cascadeManyToOne } from "@/db/cascadeOptions";
 import { type BoulderSchema } from "@/db/entity/Boulder";
-import Coordinate from "@/db/entity/Coordinate";
+import CoordinateOptional from "@/db/entity/CoordinateOptional";
 import { type GradeSchema } from "@/db/entity/Grade";
 import { type IRoute } from "models";
 import { EntitySchema } from "typeorm";
@@ -33,6 +33,10 @@ const Route = new EntitySchema<RouteSchema>({
       type: String,
       nullable: true,
     },
+    gradeRaw: {
+      type: String,
+      nullable: true,
+    },
   },
   relations: {
     boulder: {
@@ -50,7 +54,7 @@ const Route = new EntitySchema<RouteSchema>({
   },
   embeddeds: {
     coordinates: {
-      schema: Coordinate,
+      schema: CoordinateOptional,
       prefix: "coordinates_",
     },
   },

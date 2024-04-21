@@ -63,7 +63,7 @@ getDataSource()
             boulder: undefined,
             grade:
               gradesByName[
-                route.gradeRaw.replaceAll("-", "").replaceAll("+", "")
+                (route.gradeRaw || "").replaceAll("-", "").replaceAll("+", "")
               ],
           })),
         })),
@@ -81,20 +81,20 @@ getDataSource()
         "areas.polygon",
         "areas.polygon.coordinates",
         "areas.boulders",
+        "areas.boulders.routes",
       ],
     });
     console.warn("Tram:\n", JSON.stringify(tramData, null, 2));
     if (tramData == null) {
       return;
     }
-    console.log(tramData.areas?.[0]?.boulders?.[0]?.coordinates);
 
     const loadedTram = new Crag(tramData);
 
     if (loadedTram.center) {
       console.log("Center: ", loadedTram.center.tuple);
     }
-    console.log("Area 1:\n", (loadedTram.areas || [])[0].polygon);
+    console.log("Boulder 1:\n", loadedTram.areas![0].polygon);
 
     console.log(
       "Here you can setup and run express / fastify / any other framework."
