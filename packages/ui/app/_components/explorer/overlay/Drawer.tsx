@@ -5,6 +5,7 @@ import { Box, Grid, IconButton, useMediaQuery } from "@mui/material";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { grey } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
+import { parseAsBoolean, useQueryState } from "nuqs";
 import * as React from "react";
 
 interface Props {
@@ -40,7 +41,10 @@ export default function ClientLayout(props: Props) {
   //   },
   //   [props.children]
   // );
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useQueryState(
+    "overlay",
+    parseAsBoolean.withDefault(false)
+  );
   const [variant, setVariant] = React.useState<"temporary" | "persistent">(
     "temporary"
   );

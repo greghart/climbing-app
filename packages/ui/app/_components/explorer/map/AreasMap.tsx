@@ -1,7 +1,7 @@
 import { Area } from "models";
-import { usePathname, useRouter } from "next/navigation";
 import AreaMap from "@/app/_components/explorer/map/AreaMap";
 import blockClicks from "@/app/_components/blockClicks";
+import useRouteTo from "@/app/_components/useRouteTo";
 
 interface Props {
   areas: Area[];
@@ -9,8 +9,7 @@ interface Props {
 }
 
 export default function AreasMap(props: Props) {
-  const router = useRouter();
-  const pathname = usePathname();
+  const route = useRouteTo({ includeSearchParams: true });
   return props.areas.map((area) => {
     return (
       <AreaMap
@@ -18,7 +17,7 @@ export default function AreasMap(props: Props) {
         {...props}
         area={area}
         onClick={(e) => {
-          router.push(`${pathname}/area/${area.id}`);
+          route(`/area/${area.id}`);
           return blockClicks(e);
         }}
       />

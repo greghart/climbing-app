@@ -1,5 +1,4 @@
 "use client";
-import { usePathname, useRouter } from "next/navigation";
 import { IBoulder } from "models";
 import * as React from "react";
 import List from "@mui/material/List";
@@ -7,14 +6,14 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { Collapse, IconButton, ListItem, Typography } from "@mui/material";
 import { AssistantDirection } from "@mui/icons-material";
+import useRouteTo from "@/app/_components/useRouteTo";
 
 interface Props {
   boulders?: IBoulder[];
 }
 
 export default function BouldersList({ boulders = [] }: Props) {
-  const router = useRouter();
-  const pathname = usePathname();
+  const route = useRouteTo({ includeSearchParams: true });
   const [expandedBoulderId, setExpandedBoulderId] = React.useState<
     number | undefined
   >(undefined);
@@ -35,17 +34,16 @@ export default function BouldersList({ boulders = [] }: Props) {
         aria-labelledby="area-boulder-list-subheader"
       >
         {(boulders || []).map((boulder) => (
-          <>
+          <React.Fragment key={boulder.id}>
             <ListItem
               dense
-              key={boulder.id}
               disablePadding
               secondaryAction={
                 <IconButton
                   edge="end"
                   aria-label="go"
                   onClick={(e) => {
-                    router.push(`${pathname}/boulder/${boulder.id}`);
+                    route(`/boulder/${boulder.id}`);
                   }}
                 >
                   <AssistantDirection />
@@ -67,7 +65,7 @@ export default function BouldersList({ boulders = [] }: Props) {
             >
               <List component="div" disablePadding dense>
                 {boulder.routes?.map((route) => (
-                  <ListItemButton sx={{ pl: 4 }} dense>
+                  <ListItemButton sx={{ pl: 4 }} dense key={route.id}>
                     <ListItemText
                       primary={route.name}
                       secondary={route.gradeRaw}
@@ -76,7 +74,7 @@ export default function BouldersList({ boulders = [] }: Props) {
                 ))}
               </List>
             </Collapse>
-          </>
+          </React.Fragment>
         ))}
       </List>
     </>

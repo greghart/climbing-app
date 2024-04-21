@@ -6,13 +6,19 @@ interface Props {
   crag: Crag;
   area?: Area;
   boulder?: Boulder;
+  overlay: boolean;
 }
 
+// TODO: Query param updates to overlay don't make it to server (of course)
 export default function Breadcrumbs(props: Props) {
   return (
     <MUIBreadcrumbs>
       {props.crag && (
-        <NextLink href={`/explorer/${props.crag.id}`} passHref legacyBehavior>
+        <NextLink
+          href={`/explorer/${props.crag.id}?overlay=${props.overlay}`}
+          passHref
+          legacyBehavior
+        >
           <Link underline="hover" color="inherit">
             {props.crag.name}
           </Link>
@@ -20,7 +26,7 @@ export default function Breadcrumbs(props: Props) {
       )}
       {props.area && (
         <NextLink
-          href={`/explorer/${props.crag.id}/area/${props.area.id}`}
+          href={`/explorer/${props.crag.id}/area/${props.area.id}?overlay=${props.overlay}`}
           passHref
           legacyBehavior
         >
@@ -31,7 +37,7 @@ export default function Breadcrumbs(props: Props) {
       )}
       {props.area && props.boulder && (
         <NextLink
-          href={`/explorer/${props.crag.id}/area/${props.area.id}/boulder/${props.boulder.id}`}
+          href={`/explorer/${props.crag.id}/area/${props.area.id}/boulder/${props.boulder.id}?overlay=${props.overlay}`}
           passHref
           legacyBehavior
         >

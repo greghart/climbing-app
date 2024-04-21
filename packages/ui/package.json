@@ -26,6 +26,7 @@
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "lodash-es": "^4.17.21",
     "next": "14.1.4",
+    "nuqs": "^1.17.1",
     "react": "^18",
     "react-dom": "^18",
     "react-google-charts": "^4.0.1",
