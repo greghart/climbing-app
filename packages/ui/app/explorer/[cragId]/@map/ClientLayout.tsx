@@ -4,7 +4,7 @@ import { Crag, ICrag } from "models";
 import dynamic from "next/dynamic";
 
 const DynamicCragMap = dynamic(
-  () => import("@/app/_components/explorer/CragMap"),
+  () => import("@/app/_components/explorer/map/CragMap"),
   {
     ssr: false,
   }

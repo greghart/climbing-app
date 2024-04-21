@@ -1,9 +1,9 @@
 import React from "react";
 import getArea from "@/app/api/_operations/getArea";
 import { notFound } from "next/navigation";
-import Drawer from "@/app/_components/overlay/Drawer";
-import Area from "@/app/_components/overlay/Area";
-import Breadcrumbs from "@/app/_components/overlay/Breadcrumbs";
+import Drawer from "@/app/_components/explorer/overlay/Drawer";
+import Area from "@/app/_components/explorer/overlay/Area";
+import Breadcrumbs from "@/app/_components/explorer/overlay/Breadcrumbs";
 import * as models from "models";
 
 export default async function page({ params }: { params: { areaId: string } }) {

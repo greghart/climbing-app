@@ -1,7 +1,7 @@
 import { useMapEvent } from "react-leaflet/hooks";
 import { usePathname, useRouter } from "next/navigation";
 import { Crag } from "models";
-import Map from "../map/Map";
+import Map from "./Map";
 
 interface Props {
   crag: Crag;
@@ -29,7 +29,6 @@ export default function CragMap(props: Props) {
           if (pathName !== targetUrl) {
             router.back();
           }
-          // router.push(`/explorer/${props.crag.name}`);
         }}
       />
       {props.children}

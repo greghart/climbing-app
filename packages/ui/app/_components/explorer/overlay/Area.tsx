@@ -1,10 +1,10 @@
 "use client";
+import Truncate from "@/app/_components/Truncate";
 import RoutesDifficultyBreakdown from "@/app/_components/charts/RoutesDifficultyBreakdown";
-import Truncate from "../Truncate";
-import { IArea, IRoute } from "models";
-import { reduce } from "lodash-es";
-import BouldersList from "@/app/_components/overlay/BouldersList";
+import BouldersList from "@/app/_components/explorer/overlay/BouldersList";
 import { Stack, Typography } from "@mui/material";
+import { reduce } from "lodash-es";
+import { IArea, IRoute } from "models";
 
 type NeededProps = "id" | "name" | "description" | "boulders";
 interface Props {

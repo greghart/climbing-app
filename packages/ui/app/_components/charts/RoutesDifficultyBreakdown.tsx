@@ -16,6 +16,8 @@ const buckets = {
 };
 const RoutesDifficultyBreakdown: React.FunctionComponent<Props> = (props) => {
   console.warn("RoutesDifficultyBreakdown", props);
+  // TODO Make a better more robust grade system
+  // Handle 5.10, .9, VB, etc.
   const routesByBucket = reduce(
     props.routes,
     (memo, thisRoute) => {

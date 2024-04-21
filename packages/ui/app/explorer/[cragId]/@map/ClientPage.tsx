@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Crag, ICrag } from "models";
-import AreasMap from "@/app/_components/explorer/AreasMap";
+import AreasMap from "@/app/_components/explorer/map/AreasMap";
 
 export default function ClientPage({ crag }: { crag: ICrag }) {
   if (!crag) return null;

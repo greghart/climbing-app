@@ -18,7 +18,7 @@ export default function ClientPage({ area }: { area: IArea }) {
   const area2 = new Area(area);
   const map = useMap();
   React.useEffect(() => {
-    if (!area2.polygon || area2.polygon?.coordinates.length <= 0) {
+    if (!area2?.polygon?.coordinates) {
       return;
     }
     map.fitBounds(

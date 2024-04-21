@@ -1,6 +1,6 @@
 import { Area } from "models";
 import { usePathname, useRouter } from "next/navigation";
-import AreaMap from "@/app/_components/explorer/AreaMap";
+import AreaMap from "@/app/_components/explorer/map/AreaMap";
 import blockClicks from "@/app/_components/blockClicks";
 
 interface Props {
