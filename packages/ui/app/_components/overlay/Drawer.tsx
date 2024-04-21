@@ -110,7 +110,7 @@ export default function ClientLayout(props: Props) {
           </Grid>
           <Box sx={{ px: 2 }}>{props.title}</Box>
         </StyledBox>
-        <Box sx={{ p: 2 }}>{children}</Box>
+        <Box sx={{ p: 2, overflowY: "scroll" }}>{children}</Box>
       </SwipeableDrawer>
     </div>
   );

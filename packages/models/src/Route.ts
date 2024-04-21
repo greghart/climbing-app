@@ -20,7 +20,7 @@ export interface IRoute {
   firstAscent?: string;
   // TODO Formalize route type, and decide normalized safe way to constrain
   // boulders to only have bouldering grades
-  gradeRaw?: string;
+  gradeRaw: string;
   grade?: IGrade;
   boulder?: IBoulder;
   // Location of the route if any, this will be setup on a polygon of the boulder

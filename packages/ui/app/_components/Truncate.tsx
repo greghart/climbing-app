@@ -30,8 +30,3 @@ export default function Truncate({
     </span>
   );
 }
-Truncate.defaultProps = {
-  length: 40,
-  placeholder: "...",
-  reverse: false,
-};

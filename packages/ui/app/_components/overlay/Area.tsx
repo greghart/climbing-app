@@ -1,26 +1,27 @@
 "use client";
 import RoutesDifficultyBreakdown from "@/app/_components/charts/RoutesDifficultyBreakdown";
-import { reduce } from "lodash-es";
-import { IArea, ICrag, IRoute } from "models";
-import React from "react";
 import Truncate from "../Truncate";
+import { IArea, IRoute } from "models";
+import { reduce } from "lodash-es";
+import BouldersList from "@/app/_components/overlay/BouldersList";
+import { Stack, Typography } from "@mui/material";
 
 type NeededProps = "id" | "name" | "description" | "boulders";
 interface Props {
-  crag: ICrag;
   area: Pick<IArea, NeededProps>;
 }
 
-const Area = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
+export default function Area(props: Props) {
   return (
-    <div ref={ref}>
-      <p>
+    <Stack spacing={1} alignItems="center">
+      <Typography variant="body1" key="description">
         <Truncate
           length={80}
           text={props.area.description || "Beautiful boulders"}
         />
-      </p>
+      </Typography>
       <RoutesDifficultyBreakdown
+        key="chart"
         routes={reduce(
           props.area.boulders,
           (memo, thisBoulder) => {
@@ -30,8 +31,7 @@ const Area = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
         )}
         height="135px"
       />
-    </div>
+      <BouldersList boulders={props.area.boulders} key="boulders-list" />
+    </Stack>
   );
-});
-
-export default Area;
+}

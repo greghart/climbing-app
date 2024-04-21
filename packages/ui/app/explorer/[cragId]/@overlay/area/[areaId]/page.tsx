@@ -13,7 +13,7 @@ export default async function page({ params }: { params: { areaId: string } }) {
   const crag = new models.Area(area).crag!;
   return (
     <Drawer title={<Breadcrumbs crag={crag} area={new models.Area(area)} />}>
-      <Area area={area} crag={area.crag!} />
+      <Area area={area} />
     </Drawer>
   );
 }

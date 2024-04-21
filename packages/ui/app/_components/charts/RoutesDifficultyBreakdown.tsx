@@ -15,20 +15,32 @@ const buckets = {
   3: ["V11+"],
 };
 const RoutesDifficultyBreakdown: React.FunctionComponent<Props> = (props) => {
-  console.warn({ props }, "RoutesDifficultyBreakdown");
+  console.warn("RoutesDifficultyBreakdown", props);
   const routesByBucket = reduce(
     props.routes,
     (memo, thisRoute) => {
-      Object.keys(buckets).forEach((thisBucket: unknown) => {
+      for (const key in buckets) {
         if (
-          buckets[thisBucket as keyof typeof buckets].indexOf(
+          buckets[key as unknown as keyof typeof buckets].indexOf(
             thisRoute.gradeRaw.replaceAll("+", "").replaceAll("-", "")
           ) > -1
         ) {
-          memo[thisBucket as keyof typeof buckets] += 1;
+          memo[key as unknown as keyof typeof buckets] += 1;
+          return memo;
         }
-      });
+      }
+      memo[3] += 1;
       return memo;
+      // Object.keys(buckets).forEach((thisBucket: unknown) => {
+      //   if (
+      //     buckets[thisBucket as keyof typeof buckets].indexOf(
+      //       thisRoute.gradeRaw.replaceAll("+", "").replaceAll("-", "")
+      //     ) > -1
+      //   ) {
+      //     memo[thisBucket as keyof typeof buckets] += 1;
+      //   }
+      // });
+      // return memo;
     },
     { 0: 0, 1: 0, 2: 0, 3: 0 }
   );
@@ -46,7 +58,6 @@ const RoutesDifficultyBreakdown: React.FunctionComponent<Props> = (props) => {
         ["V11+", routesByBucket[3]],
       ]}
       options={{
-        title: "Difficulty Breakdown",
         chartArea: { width: "50%" },
         hAxis: {
           title: "Grade Buckets",
