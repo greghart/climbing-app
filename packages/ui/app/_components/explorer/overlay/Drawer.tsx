@@ -1,4 +1,5 @@
 "use client";
+import { searchParamsParsers } from "@/app/_components/explorer/searchParams";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box, Grid, IconButton, useMediaQuery } from "@mui/material";
@@ -41,10 +42,7 @@ export default function ClientLayout(props: Props) {
   //   },
   //   [props.children]
   // );
-  const [open, setOpen] = useQueryState(
-    "overlay",
-    parseAsBoolean.withDefault(false)
-  );
+  const [open, setOpen] = useQueryState("overlay", searchParamsParsers.overlay);
   const [variant, setVariant] = React.useState<"temporary" | "persistent">(
     "temporary"
   );

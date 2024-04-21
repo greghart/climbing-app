@@ -17,7 +17,7 @@ interface Props {
   boulder: Boulder;
   onClick?: (e: Leaflet.LeafletMouseEvent) => unknown;
   showRoutes?: boolean;
-  formulateUrl?: ExtractProps<typeof RouteMarkers>["formulateUrl"];
+  // formulateUrl?: ExtractProps<typeof RouteMarkers>["formulateUrl"];
 }
 
 const BoulderMap: React.ComponentType<Props> = (props) => {

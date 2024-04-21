@@ -1,21 +1,22 @@
-import { Area, Boulder, Crag } from "models";
+"use client";
+import { IArea, IBoulder, ICrag } from "models";
 import { Link, Breadcrumbs as MUIBreadcrumbs } from "@mui/material";
 import NextLink from "next/link";
+import useSearchParamsPath from "@/app/_components/useSearchParamsPath";
 
 interface Props {
-  crag: Crag;
-  area?: Area;
-  boulder?: Boulder;
-  overlay: boolean;
+  crag: ICrag;
+  area?: IArea;
+  boulder?: IBoulder;
 }
 
-// TODO: Query param updates to overlay don't make it to server (of course)
 export default function Breadcrumbs(props: Props) {
+  const searchParamsPath = useSearchParamsPath();
   return (
     <MUIBreadcrumbs>
       {props.crag && (
         <NextLink
-          href={`/explorer/${props.crag.id}?overlay=${props.overlay}`}
+          href={searchParamsPath(`/explorer/${props.crag.id}`)}
           passHref
           legacyBehavior
         >
@@ -26,7 +27,9 @@ export default function Breadcrumbs(props: Props) {
       )}
       {props.area && (
         <NextLink
-          href={`/explorer/${props.crag.id}/area/${props.area.id}?overlay=${props.overlay}`}
+          href={searchParamsPath(
+            `/explorer/${props.crag.id}/area/${props.area.id}`
+          )}
           passHref
           legacyBehavior
         >
@@ -37,7 +40,9 @@ export default function Breadcrumbs(props: Props) {
       )}
       {props.area && props.boulder && (
         <NextLink
-          href={`/explorer/${props.crag.id}/area/${props.area.id}/boulder/${props.boulder.id}?overlay=${props.overlay}`}
+          href={searchParamsPath(
+            `/explorer/${props.crag.id}/area/${props.area.id}/boulder/${props.boulder.id}`
+          )}
           passHref
           legacyBehavior
         >
