@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function AreasMap(props: Props) {
-  const route = useRouteTo({ includeSearchParams: true });
+  const routeTo = useRouteTo({ includeSearchParams: true });
   return props.areas.map((area) => {
     return (
       <AreaMap
@@ -17,7 +17,7 @@ export default function AreasMap(props: Props) {
         {...props}
         area={area}
         onClick={(e) => {
-          route(`/area/${area.id}`);
+          routeTo(`/area/${area.id}`);
           return blockClicks(e);
         }}
       />

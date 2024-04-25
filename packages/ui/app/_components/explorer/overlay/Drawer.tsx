@@ -11,7 +11,7 @@ import * as React from "react";
 
 interface Props {
   title: React.ReactNode;
-  children: React.ReactElement;
+  children?: React.ReactNode;
 }
 
 const drawerBleeding = 70;

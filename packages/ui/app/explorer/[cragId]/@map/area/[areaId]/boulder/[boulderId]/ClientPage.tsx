@@ -13,7 +13,12 @@ export default function ClientPage({
   const boulder = new Boulder(_boulder);
   const map = useMap();
   React.useEffect(() => {
-    map.setView(boulder.coordinates.literal, 20, { animate: true });
+    map.setView(
+      // Keep boulder in top half to account for overlay
+      [boulder.coordinates.lat - 0.0002, boulder.coordinates.lng],
+      20,
+      { animate: true }
+    );
   }, [boulder.id]);
 
   return <BoulderMap boulder={boulder} onClick={blockClicks} />;

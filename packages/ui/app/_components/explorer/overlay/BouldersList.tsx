@@ -1,5 +1,5 @@
 "use client";
-import { IBoulder } from "models";
+import { IBoulder, IRoute } from "models";
 import * as React from "react";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -7,13 +7,14 @@ import ListItemText from "@mui/material/ListItemText";
 import { Collapse, IconButton, ListItem, Typography } from "@mui/material";
 import { AssistantDirection } from "@mui/icons-material";
 import useRouteTo from "@/app/_components/useRouteTo";
+import RoutesList from "@/app/_components/explorer/overlay/RoutesList";
 
 interface Props {
   boulders?: IBoulder[];
 }
 
 export default function BouldersList({ boulders = [] }: Props) {
-  const route = useRouteTo({ includeSearchParams: true });
+  const routeTo = useRouteTo({ includeSearchParams: true });
   const [expandedBoulderId, setExpandedBoulderId] = React.useState<
     number | undefined
   >(undefined);
@@ -43,7 +44,7 @@ export default function BouldersList({ boulders = [] }: Props) {
                   edge="end"
                   aria-label="go"
                   onClick={(e) => {
-                    route(`/boulder/${boulder.id}`);
+                    routeTo(`boulder/${boulder.id}`);
                   }}
                 >
                   <AssistantDirection />
@@ -63,16 +64,13 @@ export default function BouldersList({ boulders = [] }: Props) {
               timeout="auto"
               unmountOnExit
             >
-              <List component="div" disablePadding dense>
-                {boulder.routes?.map((route) => (
-                  <ListItemButton sx={{ pl: 4 }} dense key={route.id}>
-                    <ListItemText
-                      primary={route.name}
-                      secondary={route.gradeRaw}
-                    />
-                  </ListItemButton>
-                ))}
-              </List>
+              <RoutesList
+                routes={boulder.routes}
+                ButtonProps={{ sx: { pl: 4 } }}
+                onClick={(r: IRoute) =>
+                  routeTo(`boulder/${boulder.id}/route/${r.id}`)
+                }
+              />
             </Collapse>
           </React.Fragment>
         ))}

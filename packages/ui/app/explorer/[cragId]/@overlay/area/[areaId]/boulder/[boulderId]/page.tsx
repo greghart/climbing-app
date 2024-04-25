@@ -5,12 +5,8 @@ import getBoulder from "@/app/api/_operations/getBoulder";
 import { notFound } from "next/navigation";
 import React from "react";
 
-export default async function page({
-  params,
-}: {
-  params: { boulderId: string };
-}) {
-  const boulder = await getBoulder(params.boulderId);
+async function Load({ boulderId }: { boulderId: string }) {
+  const boulder = await getBoulder(boulderId);
   if (!boulder) notFound();
 
   return (
@@ -25,5 +21,16 @@ export default async function page({
     >
       <Boulder boulder={boulder} />
     </Drawer>
+  );
+}
+export default async function page({
+  params,
+}: {
+  params: { boulderId: string };
+}) {
+  return (
+    <React.Suspense fallback={<Drawer title="Loading...">Hello</Drawer>}>
+      <Load boulderId={params.boulderId} />
+    </React.Suspense>
   );
 }

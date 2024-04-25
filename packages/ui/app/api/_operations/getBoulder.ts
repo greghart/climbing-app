@@ -2,6 +2,9 @@ import { cache } from "react";
 import { getDataSource, Boulder } from "@/db";
 import "server-only";
 
+const wait = async (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
 const getBoulder = cache(async (id: number | string) => {
   console.log("Getting boulder", id);
   const ds = await getDataSource();

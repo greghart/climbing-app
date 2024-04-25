@@ -1,6 +1,6 @@
 import * as Leaflet from "leaflet";
 import { Coordinate, IBounds } from "models";
-import React, { Suspense, useMemo } from "react";
+import React from "react";
 import { MapContainer } from "react-leaflet";
 import BestTileLayer from "./BestTilerLayer";
 
