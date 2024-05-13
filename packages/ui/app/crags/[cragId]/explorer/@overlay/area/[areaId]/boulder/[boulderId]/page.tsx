@@ -11,6 +11,7 @@ async function Load({ boulderId }: { boulderId: string }) {
 
   return (
     <Drawer
+      crag={boulder.area!.crag!}
       title={
         <Breadcrumbs
           crag={boulder.area!.crag!}

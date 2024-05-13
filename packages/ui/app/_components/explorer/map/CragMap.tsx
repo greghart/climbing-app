@@ -1,8 +1,8 @@
-import { useMapEvent } from "react-leaflet/hooks";
-import { usePathname, useRouter } from "next/navigation";
-import { Crag } from "models";
-import Map from "./Map";
 import useRouteTo from "@/app/_components/useRouteTo";
+import { Crag } from "models";
+import { usePathname } from "next/navigation";
+import { useMapEvent } from "react-leaflet/hooks";
+import Map from "./Map";
 
 interface Props {
   crag: Crag;
@@ -12,7 +12,10 @@ interface Props {
 export default function CragMap(props: Props) {
   const routeTo = useRouteTo({ includeSearchParams: true });
   const pathName = usePathname();
-  const targetUrl = `/explorer/${props.crag.id}`;
+  const targetUrls = [
+    `/crags/${props.crag.id}/explorer`,
+    `/crags/${props.crag.name}/explorer`,
+  ];
 
   return (
     // <AnimationContext.Consumer>
@@ -27,7 +30,7 @@ export default function CragMap(props: Props) {
     >
       <ClickHandler
         onClick={() => {
-          if (pathName !== targetUrl) {
+          if (!targetUrls.includes(pathName)) {
             routeTo("../..");
           }
         }}

@@ -9,7 +9,7 @@ async function Load(props: { cragId: string }) {
   if (!crag) notFound();
 
   return (
-    <Drawer title={<Breadcrumbs crag={crag} />}>
+    <Drawer crag={crag} title={<Breadcrumbs crag={crag} />}>
       <div>...</div>
     </Drawer>
   );

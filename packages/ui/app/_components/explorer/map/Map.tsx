@@ -1,7 +1,7 @@
 import * as Leaflet from "leaflet";
 import { Coordinate, IBounds } from "models";
 import React from "react";
-import { MapContainer } from "react-leaflet";
+import { MapContainer, ZoomControl } from "react-leaflet";
 import BestTileLayer from "./BestTilerLayer";
 
 // Spaces to avoid auto sort, order here matters
@@ -44,11 +44,12 @@ export default function Map({ bounds, center, ...props }: Props) {
       style={{ height: "100%" }}
       minZoom={15}
       maxBounds={resolvedBounds}
-      zoomControl={true}
+      zoomControl={false}
       {...props}
       bounds={resolvedBounds}
     >
       <BestTileLayer />
+      <ZoomControl position="topright" />
       {props.children}
     </MapContainer>
   );

@@ -1,17 +1,22 @@
 "use client";
 import { searchParamsParsers } from "@/app/_components/explorer/searchParams";
+import PageLayout from "@/app/_components/layouts/PageLayout";
+import SearchInput from "@/app/_components/search/SearchInput";
+import useRouteTo from "@/app/_components/useRouteTo";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box, Grid, IconButton, useMediaQuery } from "@mui/material";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { grey } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
-import { parseAsBoolean, useQueryState } from "nuqs";
+import { ICrag } from "models";
+import { useQueryState } from "nuqs";
 import * as React from "react";
 
 interface Props {
   title: React.ReactNode;
   children?: React.ReactNode;
+  crag?: ICrag;
 }
 
 const drawerBleeding = 70;
@@ -25,7 +30,7 @@ const StyledBox = styled("div")(({ theme }) => ({
  * A la google maps
  * Toggle button for desktop
  */
-export default function ClientLayout(props: Props) {
+export default function Drawer(props: Props) {
   // TODO: Refactor to a re-usable hook and a prop to enable
   // Problem is components like google charts defer height calculation till they're actually
   // showing, so hard to figure out height now
@@ -58,6 +63,7 @@ export default function ClientLayout(props: Props) {
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
+  const routeTo = useRouteTo({ relative: false });
 
   const iOS =
     typeof navigator !== "undefined" &&
@@ -65,6 +71,17 @@ export default function ClientLayout(props: Props) {
 
   return (
     <div>
+      <Box sx={{ zIndex: 1000, position: "absolute", top: 0, width: "100vw" }}>
+        <PageLayout
+          header={
+            <SearchInput
+              onClick={() =>
+                props.crag && routeTo(`/crags/${props.crag.id}/search`)
+              }
+            />
+          }
+        ></PageLayout>
+      </Box>
       <SwipeableDrawer
         anchor="bottom"
         open={open}

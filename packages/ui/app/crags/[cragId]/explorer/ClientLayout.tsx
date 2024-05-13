@@ -1,11 +1,9 @@
 "use client";
-import React from "react";
-import { ICrag } from "models";
-import { Box } from "@mui/material";
-import SearchGroup from "@/app/_components/search/SearchGroup";
-import SearchInput from "@/app/_components/search/SearchInput";
-import { type Props } from "./layout";
 import Drawer from "@/app/_components/explorer/overlay/Drawer";
+import { Box } from "@mui/material";
+import { ICrag } from "models";
+import React from "react";
+import { type Props } from "./layout";
 
 type ClientProps = Omit<Props, "params"> & { crag: ICrag };
 

@@ -6,6 +6,7 @@
 // import Photoable from "./Photoable.js";
 
 import Boulder, { type IBoulder } from "./Boulder.js";
+import type Coordinate from "./Coordinate.js";
 import CoordinateOptional, {
   type ICoordinateOptional,
 } from "./CoordinateOptional.js";
@@ -32,7 +33,7 @@ export interface IRoute {
 interface Route extends IRoute {}
 class Route {
   boulder?: Boulder;
-  coordinates?: CoordinateOptional;
+  coordinates?: Coordinate;
   grade?: Grade;
 
   constructor(data: IRoute) {
@@ -48,9 +49,7 @@ class Route {
     if (data.boulder) {
       this.boulder = new Boulder(data.boulder);
     }
-    this.coordinates = data.coordinates
-      ? new CoordinateOptional(data.coordinates.lat, data.coordinates.lng)
-      : undefined;
+    this.coordinates = CoordinateOptional.build(data.coordinates);
   }
 }
 

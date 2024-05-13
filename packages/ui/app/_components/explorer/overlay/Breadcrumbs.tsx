@@ -1,8 +1,8 @@
 "use client";
-import { IArea, IBoulder, ICrag, IRoute } from "models";
-import { Link, Breadcrumbs as MUIBreadcrumbs } from "@mui/material";
-import NextLink from "next/link";
 import useSearchParamsPath from "@/app/_components/useSearchParamsPath";
+import { Link, Breadcrumbs as MUIBreadcrumbs } from "@mui/material";
+import { IArea, IBoulder, ICrag, IRoute } from "models";
+import NextLink from "next/link";
 
 interface Props {
   crag: ICrag;
@@ -17,7 +17,7 @@ export default function Breadcrumbs(props: Props) {
     <MUIBreadcrumbs>
       {props.crag && (
         <NextLink
-          href={searchParamsPath(`/explorer/${props.crag.id}`)}
+          href={searchParamsPath(`/crags/${props.crag.id}/explorer`)}
           passHref
           legacyBehavior
         >
@@ -29,7 +29,7 @@ export default function Breadcrumbs(props: Props) {
       {props.area && (
         <NextLink
           href={searchParamsPath(
-            `/explorer/${props.crag.id}/area/${props.area.id}`
+            `/crags/${props.crag.id}/explorer/area/${props.area.id}`
           )}
           passHref
           legacyBehavior
@@ -42,7 +42,7 @@ export default function Breadcrumbs(props: Props) {
       {props.area && props.boulder && (
         <NextLink
           href={searchParamsPath(
-            `/explorer/${props.crag.id}/area/${props.area.id}/boulder/${props.boulder.id}`
+            `/crags/${props.crag.id}/explorer/area/${props.area.id}/boulder/${props.boulder.id}`
           )}
           passHref
           legacyBehavior
@@ -55,7 +55,7 @@ export default function Breadcrumbs(props: Props) {
       {props.area && props.boulder && props.route && (
         <NextLink
           href={searchParamsPath(
-            `/explorer/${props.crag.id}/area/${props.area.id}/boulder/${props.boulder.id}/route/${props.route.id}`
+            `/crags/${props.crag.id}/explorer/area/${props.area.id}/boulder/${props.boulder.id}/route/${props.route.id}`
           )}
           passHref
           legacyBehavior

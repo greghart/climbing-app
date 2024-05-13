@@ -18,14 +18,16 @@ export default function useRouteTo({
   const handleRelative = (path: string) => {
     return relative ? join(pathname, path) : path;
   };
-  const handleSearchParams = includeSearchParams
-    ? useSearchParamsPath()
-    : (path: string) => path;
+  const handleSearchParams = useSearchParamsPath();
 
-  return (path: string) => {
-    console.warn("OH NO");
+  return (path: string, newSearchParams?: URLSearchParams) => {
     (replace ? router.replace : router.push)(
-      handleRelative(handleSearchParams(path))
+      handleRelative(
+        handleSearchParams(
+          path,
+          includeSearchParams ? newSearchParams : undefined
+        )
+      )
     );
   };
 }

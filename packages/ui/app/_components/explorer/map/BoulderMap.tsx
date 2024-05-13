@@ -10,6 +10,7 @@ import * as Leaflet from "leaflet";
 import { Boulder } from "models";
 import MyPolygon from "@/app/_components/explorer/map/MyPolygon";
 import Boulders from "@/app/_components/explorer/map/Boulders";
+import RouteMarkers from "@/app/_components/explorer/map/RouteMarkers";
 
 interface Props {
   boulder: Boulder;
@@ -33,12 +34,7 @@ const BoulderMap: React.ComponentType<Props> = (props) => {
         <Boulders boulders={[props.boulder]} />
       )}
       {/* TODO Add these back */}
-      {/* {props.showRoutes && (
-        <RouteMarkers
-          routes={props.boulder.routes}
-          formulateUrl={props.formulateUrl}
-        />
-      )} */}
+      {props.showRoutes && <RouteMarkers routes={props.boulder.routes || []} />}
     </React.Fragment>
   );
 };
