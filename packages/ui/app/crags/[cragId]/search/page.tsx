@@ -1,6 +1,10 @@
 import SearchLayout from "@/app/_components/search/SearchLayout";
+import { searchParamsCache } from "@/app/_components/search/searchParams";
 import getCrag from "@/app/api/_operations/getCrag";
-import { default as search } from "@/app/api/_operations/search";
+import {
+  asSearchResultType,
+  default as search,
+} from "@/app/api/_operations/search";
 import { notFound } from "next/navigation";
 
 export default async function page({
@@ -8,16 +12,17 @@ export default async function page({
   searchParams,
 }: {
   params: { cragId: string };
-  searchParams?: {
-    query?: string;
-  };
+  searchParams: Record<string, string | string[] | undefined>;
 }) {
   const crag = await getCrag(params.cragId);
   if (!crag) notFound();
 
+  const searchCache = searchParamsCache.parse(searchParams);
+
   const results = await search({
     cragId: crag.id!,
-    query: searchParams?.query,
+    search: searchCache.search,
+    type: asSearchResultType(searchCache.type),
   });
 
   return <SearchLayout crag={crag} results={results} />;

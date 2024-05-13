@@ -1,27 +1,17 @@
 "use client";
 
-import useRouteTo from "@/app/_components/useRouteTo";
+import { searchParamsParsers } from "@/app/_components/search/searchParams";
 import { debounce } from "lodash-es";
-import { useSearchParams } from "next/navigation";
+import { useQueryState } from "nuqs";
 import * as React from "react";
 
 const SearchInput = (props: React.ComponentProps<"input">) => {
-  const searchParams = useSearchParams();
-  const routeTo = useRouteTo({ includeSearchParams: true, replace: true });
-
-  // Debounce search
-  function handleSearch(term: string) {
-    const params = new URLSearchParams(searchParams);
-    if (term) {
-      params.set("query", term);
-    } else {
-      params.delete("query");
-    }
-    routeTo("", params);
-  }
-  const debouncedSearch = React.useCallback(debounce(handleSearch, 350), [
-    searchParams,
-    routeTo,
+  const [search, setSearch] = useQueryState(
+    "search",
+    searchParamsParsers.search
+  );
+  const debouncedSearch = React.useCallback(debounce(setSearch, 350), [
+    setSearch,
   ]);
   return (
     <input
@@ -33,7 +23,7 @@ const SearchInput = (props: React.ComponentProps<"input">) => {
       onChange={(e) => {
         debouncedSearch(e.target.value);
       }}
-      defaultValue={searchParams.get("query")?.toString()}
+      defaultValue={search}
     />
   );
 };

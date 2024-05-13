@@ -1,8 +1,8 @@
 "use client";
-import React, { ReactNode } from "react";
 import SearchGroup from "@/app/_components/search/SearchGroup";
 import Box from "@mui/material/Box";
 import MUIDrawer from "@mui/material/Drawer";
+import React, { ReactNode } from "react";
 
 interface Props {
   title: ReactNode;
@@ -43,7 +43,7 @@ export default function Drawer(props: Props) {
         <Box p={2} className="h-100 bg-light" width="80vw">
           <SearchGroup
             onClickPrepend={toggleDrawer(false)}
-            prepend={<i className="fa fa-bars" />}
+            prepend={<i aria-hidden className="fa fa-bars" />}
             input={
               <div className="input-group-append flex-grow-up align-items-center text-center">
                 {props.title}

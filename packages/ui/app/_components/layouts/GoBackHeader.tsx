@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { useRouter } from "next/navigation";
+import * as React from "react";
 import SearchGroup from "../search/SearchGroup";
 
 interface Props {
@@ -27,7 +27,7 @@ export default function GoBackHeader(props: Props) {
   return (
     <SearchGroup
       {...props}
-      prepend={<i className="fa fa-arrow-left" />}
+      prepend={<i aria-hidden className="fa fa-arrow-left" />}
       onClickPrepend={handleClickPrepend}
     />
   );

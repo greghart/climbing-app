@@ -6,14 +6,23 @@ import "server-only";
 
 export interface SearchParams {
   cragId: number;
-  query?: string;
+  search?: string;
+  type: SearchResultType;
 }
 
 interface Searchable {
   name: string;
   id?: number;
 }
-type SearchResultType = "area" | "boulder" | "route";
+
+type SearchResultType = "any" | "area" | "boulder" | "route";
+export function asSearchResultType(s: string): SearchResultType {
+  if (["any", "area", "boulder", "route"].includes(s)) {
+    return s as SearchResultType;
+  }
+  return "any";
+}
+
 export type SearchResult = Searchable & {
   type: SearchResultType;
   parent?: SearchResult;
@@ -46,11 +55,11 @@ const search = cache(async (params: SearchParams) => {
   });
   if (!crag) return [];
 
-  const filterSearch = searchMatcher(params.query);
+  const filterSearch = searchMatcher(params.search);
+  const filterType = typeMatcher(params.type);
   return getSearchableEntitiesForCrag(crag).filter((thisEntity) => {
     return (
-      // filterType(thisEntity) &&
-      filterSearch(thisEntity)
+      filterType(thisEntity) && filterSearch(thisEntity)
       // filterSun(thisEntity)
     );
   });
@@ -99,22 +108,25 @@ function getSearchableEntitiesForCrag(crag: ICrag) {
   );
 }
 
-type GetMatcher = (...args: any[]) => (s: Searchable) => boolean;
+type GetMatcher = (...args: any[]) => (s: SearchResult) => boolean;
+
 // TODO: Fuse.js or similar
 const searchMatcher: GetMatcher = (search = "") => {
   const _search = search.toLowerCase().trim();
-  return (s: Searchable) => {
+  return (s) => {
     return s.name.toLowerCase().trim().indexOf(_search) !== -1;
   };
 };
-// const typeMatcher: GetMatcher = (type: Tag | "any") => {
-//   if (!type || type === "any") {
-//     return (s) => true;
-//   }
-//   return (s) => {
-//     return s._type === type;
-//   };
-// };
+
+const typeMatcher: GetMatcher = (type: SearchResultType) => {
+  if (!type || type === "any") {
+    return () => true;
+  }
+  return (s) => {
+    return s.type === type;
+  };
+};
+
 // const sunMatcher: GetMatcher = (apply: boolean = false, givenHour: number) => {
 //   if (!apply) {
 //     return (s) => true;

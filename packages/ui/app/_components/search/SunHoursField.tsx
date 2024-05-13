@@ -1,7 +1,6 @@
 "use client";
 import { Slider } from "@mui/material";
 import { ICoordinateLiteral } from "models";
-import React from "react";
 import * as SunCalc from "suncalc";
 
 interface Props {
@@ -38,7 +37,6 @@ export default function SunHoursField(props: Props) {
         label: `${value % 12}${showAmPm ? amPm : ""}`,
       };
     });
-  console.warn("MARKS", marks);
   return (
     <Slider
       aria-label="hour of day"

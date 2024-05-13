@@ -12,6 +12,7 @@ interface Props {
 /**
  * Our searcher is always part of a basic group
  * Also used as a template for titles on non search pages
+ * TODO: Convert to MUI
  */
 export default function SearchGroup(props: Props) {
   return (
