@@ -6,6 +6,7 @@ import SearchGroup from "../search/SearchGroup";
 
 interface Props {
   input: React.ReactNode;
+  href?: string;
   onClickPrepend?: React.MouseEventHandler<any>;
 }
 
@@ -18,6 +19,8 @@ export default function GoBackHeader(props: Props) {
     (e: any) => {
       if (props.onClickPrepend) {
         props.onClickPrepend(e);
+      } else if (props.href) {
+        router.push(props.href);
       } else {
         router.back();
       }

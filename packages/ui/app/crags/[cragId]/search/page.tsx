@@ -23,6 +23,8 @@ export default async function page({
     cragId: crag.id!,
     search: searchCache.search,
     type: asSearchResultType(searchCache.type),
+    shade: searchCache.shade,
+    shadeHour: searchCache.shadeHour,
   });
 
   return <SearchLayout crag={crag} results={results} />;

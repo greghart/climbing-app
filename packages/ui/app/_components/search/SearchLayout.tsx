@@ -26,7 +26,7 @@ function SearchLayout(props: Props) {
       key="search"
       header={
         <Stack spacing={1}>
-          <GoBackHeader input={<SearchInput />} />
+          <GoBackHeader input={<SearchInput />} href={`./explorer`} />
           <SearchFilters shadeLocation={crag.center.literal} />
         </Stack>
       }

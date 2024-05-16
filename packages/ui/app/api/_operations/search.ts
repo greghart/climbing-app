@@ -1,6 +1,7 @@
+import getNormalizedSunValueForRoute from "@/app/_components/sun/getNormalizedSunValueForRoute";
 import { Crag, getDataSource } from "@/db";
 import { reduce } from "lodash-es";
-import { ICrag } from "models";
+import { ICrag, Route } from "models";
 import { cache } from "react";
 import "server-only";
 
@@ -8,11 +9,14 @@ export interface SearchParams {
   cragId: number;
   search?: string;
   type: SearchResultType;
+  shade: boolean;
+  shadeHour: number | null;
 }
 
 interface Searchable {
   name: string;
   id?: number;
+  gradeRaw?: string;
 }
 
 type SearchResultType = "any" | "area" | "boulder" | "route";
@@ -48,6 +52,7 @@ const search = cache(async (params: SearchParams) => {
           routes: {
             id: true,
             name: true,
+            gradeRaw: true,
           },
         },
       },
@@ -57,10 +62,12 @@ const search = cache(async (params: SearchParams) => {
 
   const filterSearch = searchMatcher(params.search);
   const filterType = typeMatcher(params.type);
+  const filterSun = sunMatcher(params.shade, params.shadeHour);
   return getSearchableEntitiesForCrag(crag).filter((thisEntity) => {
     return (
-      filterType(thisEntity) && filterSearch(thisEntity)
-      // filterSun(thisEntity)
+      filterType(thisEntity) &&
+      filterSearch(thisEntity) &&
+      filterSun(thisEntity)
     );
   });
 });
@@ -127,20 +134,20 @@ const typeMatcher: GetMatcher = (type: SearchResultType) => {
   };
 };
 
-// const sunMatcher: GetMatcher = (apply: boolean = false, givenHour: number) => {
-//   if (!apply) {
-//     return (s) => true;
-//   }
-//   const time = new Date();
-//   if (givenHour) {
-//     time.setHours(givenHour);
-//   }
-//   return (s) => {
-//     if (!isRoute(s)) {
-//       return false;
-//     }
-//     const sunValue = getNormalizedSunValueForRoute(s, time);
-//     // Totally arbitrary :o
-//     return sunValue < 0.6 && sunValue > 0;
-//   };
-// };
+const sunMatcher: GetMatcher = (apply: boolean = false, givenHour?: number) => {
+  if (!apply) {
+    return (s) => true;
+  }
+  const time = new Date();
+  if (givenHour) {
+    time.setHours(givenHour);
+  }
+  return (s) => {
+    if (s.type !== "route") {
+      return false;
+    }
+    const sunValue = getNormalizedSunValueForRoute(s as Route, time);
+    // Totally arbitrary :o
+    return sunValue < 0.6 && sunValue > 0;
+  };
+};

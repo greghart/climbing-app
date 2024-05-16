@@ -1,3 +1,4 @@
+import SearchShadeCheck from "@/app/_components/search/SearchShadeCheck";
 import SearchTypeSelect from "@/app/_components/search/SearchTypeSelect";
 import SunHoursField from "@/app/_components/search/SunHoursField";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -6,9 +7,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Card,
-  Checkbox,
   FormControl,
-  FormControlLabel,
   FormGroup,
   Stack,
 } from "@mui/material";
@@ -28,11 +27,8 @@ export default function SearchFilters(props: Props) {
           <Stack>
             <FormGroup>
               <SearchTypeSelect />
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Only show shady(ish) routes at:"
-              />
-              <FormControl fullWidth>
+              <SearchShadeCheck />
+              <FormControl fullWidth sx={{ p: 1 }}>
                 <SunHoursField coordinate={props.shadeLocation} />
               </FormControl>
             </FormGroup>

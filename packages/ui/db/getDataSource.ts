@@ -4,11 +4,11 @@ import {
   Area,
   Boulder,
   Crag,
+  Grade,
+  GradingSystem,
   Polygon,
   PolygonCoordinate,
   Route,
-  Grade,
-  GradingSystem,
 } from "./entity";
 
 // Gets a singleton initialized data source
@@ -24,7 +24,7 @@ async function getDataSource(options = null) {
     type: "sqlite",
     database: "database.sqlite",
     synchronize: true,
-    // logging: true,
+    logging: true,
     entities: [
       Crag,
       Area,

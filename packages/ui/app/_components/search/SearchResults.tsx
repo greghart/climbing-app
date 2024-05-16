@@ -45,11 +45,11 @@ type ResultListItemProps = React.ComponentProps<typeof ListItemButton> & {
   primary: React.ReactNode;
   secondary?: React.ReactNode;
 };
-function ResultListItem(props: ResultListItemProps) {
+function ResultListItem({ href, ...props }: ResultListItemProps) {
   return (
-    <Link href={props.href}>
+    <Link href={href}>
       <ListItem dense>
-        <ListItemButton {...props} href={undefined} component="div">
+        <ListItemButton {...props} component="div">
           <ListItemText primary={props.primary} secondary={props.secondary} />
         </ListItemButton>
       </ListItem>
@@ -75,10 +75,10 @@ function RouteResult({ result }: { result: SearchResult }) {
   return (
     <ResultListItem
       href={`/routes/${result.id}`}
-      primary={result.name}
+      primary={`${result.name} (${result.gradeRaw})`}
       secondary={
         <>
-          {result.parent!.parent!.name} | {result.parent!.name}
+          {result.parent!.parent!.name} {">"} {result.parent!.name}
         </>
       }
     />

@@ -1,8 +1,7 @@
 "use client";
 
 import { searchParamsParsers } from "@/app/_components/search/searchParams";
-import { debounce } from "lodash-es";
-import { useQueryState } from "nuqs";
+import useQueryState from "@/app/_components/useQueryState";
 import * as React from "react";
 
 const SearchInput = (props: React.ComponentProps<"input">) => {
@@ -10,9 +9,6 @@ const SearchInput = (props: React.ComponentProps<"input">) => {
     "search",
     searchParamsParsers.search
   );
-  const debouncedSearch = React.useCallback(debounce(setSearch, 350), [
-    setSearch,
-  ]);
   return (
     <input
       type="text"
@@ -21,7 +17,7 @@ const SearchInput = (props: React.ComponentProps<"input">) => {
       autoFocus
       {...props}
       onChange={(e) => {
-        debouncedSearch(e.target.value);
+        setSearch(e.target.value);
       }}
       defaultValue={search}
     />

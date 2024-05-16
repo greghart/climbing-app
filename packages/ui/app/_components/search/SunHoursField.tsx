@@ -1,4 +1,6 @@
 "use client";
+import { searchParamsParsers } from "@/app/_components/search/searchParams";
+import useQueryState from "@/app/_components/useQueryState";
 import { Slider } from "@mui/material";
 import { ICoordinateLiteral } from "models";
 import * as SunCalc from "suncalc";
@@ -8,6 +10,10 @@ interface Props {
 }
 
 export default function SunHoursField(props: Props) {
+  const [hour, setHour] = useQueryState(
+    "shadeHour",
+    searchParamsParsers.shadeHour
+  );
   // 1 tick for each hour that the sun is out at all
   const times = SunCalc.getTimes(
     new Date(),
@@ -45,6 +51,8 @@ export default function SunHoursField(props: Props) {
       max={topHour}
       marks={marks}
       step={1}
+      value={hour}
+      onChange={(_, value) => setHour(value as number)}
       valueLabelDisplay="auto"
       valueLabelFormat={(value) => `${value % 12}${value >= 12 ? "PM" : "AM"}`}
     />
