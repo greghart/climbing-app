@@ -12,12 +12,7 @@ export default function SearchResultsList(props: Props) {
   if (!props.results) return false;
 
   return (
-    <List
-      component="div"
-      disablePadding
-      dense
-      sx={{ width: "100%", maxWidth: "480px" }}
-    >
+    <List component="div" sx={{ width: "100%", maxWidth: "480px" }}>
       {props.results.map((r) => (
         <React.Fragment key={`${r.type}-${r.id}`}>
           {renderResult(r)}

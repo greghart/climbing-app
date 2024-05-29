@@ -5,12 +5,12 @@
  *   * Boulder polygon, if any
  *   * Route markers with popup/links
  */
-import * as React from "react";
+import Boulders from "@/app/_components/explorer/map/Boulders";
+import MyPolygon from "@/app/_components/explorer/map/MyPolygon";
+import RouteMarkers from "@/app/_components/explorer/map/RouteMarkers";
 import * as Leaflet from "leaflet";
 import { Boulder } from "models";
-import MyPolygon from "@/app/_components/explorer/map/MyPolygon";
-import Boulders from "@/app/_components/explorer/map/Boulders";
-import RouteMarkers from "@/app/_components/explorer/map/RouteMarkers";
+import * as React from "react";
 
 interface Props {
   boulder: Boulder;
@@ -33,7 +33,6 @@ const BoulderMap: React.ComponentType<Props> = (props) => {
       ) : (
         <Boulders boulders={[props.boulder]} />
       )}
-      {/* TODO Add these back */}
       {props.showRoutes && <RouteMarkers routes={props.boulder.routes || []} />}
     </React.Fragment>
   );

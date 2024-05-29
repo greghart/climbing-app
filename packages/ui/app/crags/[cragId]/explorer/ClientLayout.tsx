@@ -8,9 +8,6 @@ import { type Props } from "./layout";
 type ClientProps = Omit<Props, "params"> & { crag: ICrag };
 
 export default function ClientLayout(props: ClientProps) {
-  const navigateToSearch = React.useCallback(() => {
-    console.warn("TODO: Navigate to search here");
-  }, []);
   return (
     <>
       <div className="h-100">

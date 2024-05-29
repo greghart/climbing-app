@@ -8,11 +8,7 @@ async function Load(props: { cragId: string }) {
   const crag = await getCrag(props.cragId);
   if (!crag) notFound();
 
-  return (
-    <Drawer crag={crag} title={<Breadcrumbs crag={crag} />}>
-      <div>...</div>
-    </Drawer>
-  );
+  return <Drawer crag={crag} title={<Breadcrumbs crag={crag} />}></Drawer>;
 }
 export default async function page({ params }: { params: { cragId: string } }) {
   return (

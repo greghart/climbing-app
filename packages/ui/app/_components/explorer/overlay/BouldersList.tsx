@@ -1,13 +1,13 @@
 "use client";
-import { IBoulder, IRoute } from "models";
-import * as React from "react";
+import RoutesList from "@/app/_components/explorer/overlay/RoutesList";
+import useRouteTo from "@/app/_components/useRouteTo";
+import { AssistantDirection } from "@mui/icons-material";
+import { Collapse, IconButton, ListItem, Typography } from "@mui/material";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { Collapse, IconButton, ListItem, Typography } from "@mui/material";
-import { AssistantDirection } from "@mui/icons-material";
-import useRouteTo from "@/app/_components/useRouteTo";
-import RoutesList from "@/app/_components/explorer/overlay/RoutesList";
+import { IBoulder, IRoute } from "models";
+import * as React from "react";
 
 interface Props {
   boulders?: IBoulder[];
@@ -37,8 +37,6 @@ export default function BouldersList({ boulders = [] }: Props) {
         {(boulders || []).map((boulder) => (
           <React.Fragment key={boulder.id}>
             <ListItem
-              dense
-              disablePadding
               secondaryAction={
                 <IconButton
                   edge="end"
@@ -51,11 +49,7 @@ export default function BouldersList({ boulders = [] }: Props) {
                 </IconButton>
               }
             >
-              <ListItemButton
-                role={undefined}
-                dense
-                onClick={() => handleExpand(boulder.id!)}
-              >
+              <ListItemButton onClick={() => handleExpand(boulder.id!)}>
                 <ListItemText primary={boulder.name} />
               </ListItemButton>
             </ListItem>

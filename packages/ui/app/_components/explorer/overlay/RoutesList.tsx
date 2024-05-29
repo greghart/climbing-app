@@ -13,16 +13,10 @@ export default function RoutesList(props: Props) {
     return false;
   }
   return (
-    <List
-      component="div"
-      disablePadding
-      dense
-      sx={{ width: "100%", maxWidth: "480px" }}
-    >
+    <List component="div" sx={{ width: "100%", maxWidth: "480px" }}>
       {props.routes.map((route) => (
         <ListItemButton
           {...props.ButtonProps}
-          dense
           key={route.id}
           onClick={(e) => props.onClick?.(route, e)}
         >

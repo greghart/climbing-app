@@ -1,7 +1,8 @@
+import ClientContainer from "@/app/ClientContainer";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import "bootstrap/dist/css/bootstrap.css";
 import clsx from "clsx";
 import { Inter } from "next/font/google";
-import "bootstrap/dist/css/bootstrap.css";
 import "./_scss/application.scss";
 import "./globals.css";
 
@@ -36,7 +37,7 @@ export default function RootLayout({
       </head>
       <body className={clsx(inter.className, "body--sidebar")}>
         <AppRouterCacheProvider>
-          <div id="app">{children}</div>
+          <ClientContainer>{children}</ClientContainer>
         </AppRouterCacheProvider>
       </body>
     </html>
