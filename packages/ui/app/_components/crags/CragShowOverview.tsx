@@ -1,5 +1,5 @@
 "use client";
-import { Add, ExpandLess, ExpandMore } from "@mui/icons-material";
+import { Add, Edit, ExpandLess, ExpandMore } from "@mui/icons-material";
 import {
   Collapse,
   List,
@@ -42,6 +42,14 @@ export default function CragShowOverview(props: Props) {
               <Add />
             </ListItemIcon>
             <ListItemText primary="Setup a trail in this crag" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton component="a" href={`/crags/${props.crag.id}/edit`}>
+            <ListItemIcon>
+              <Edit />
+            </ListItemIcon>
+            <ListItemText primary="Edit this crag" />
           </ListItemButton>
         </ListItem>
         <ListItem>

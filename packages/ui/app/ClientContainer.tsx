@@ -5,7 +5,11 @@ import React from "react";
 
 const theme = createTheme({
   components: {
-    // Name of the component
+    MuiTextField: {
+      defaultProps: {
+        variant: "standard",
+      },
+    },
     MuiList: {
       defaultProps: {
         disablePadding: true,
