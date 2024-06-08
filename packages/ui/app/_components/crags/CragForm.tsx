@@ -1,8 +1,9 @@
 "use client";
-import { Button, Stack, TextField } from "@mui/material";
+import TextField from "@/app/_components/form/TextField";
+import { Button, Stack } from "@mui/material";
 import { ICrag } from "models";
 import React from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 interface Props {
   crag: Partial<ICrag>;
@@ -14,6 +15,11 @@ export interface FormData {
   description: string;
 }
 
+/**
+ * Some design notes
+ * If we want client side validation, we basically need to use client code
+ * and can't do `<form action />`
+ */
 export default function CragForm(props: Props) {
   const { formState, handleSubmit, control, reset } = useForm<FormData>({
     defaultValues: {
@@ -24,7 +30,7 @@ export default function CragForm(props: Props) {
 
   const onSubmit = React.useCallback<SubmitHandler<FormData>>(
     (data) => {
-      props.onValid(data);
+      return props.onValid(data);
     },
     [props.onValid]
   );
@@ -32,21 +38,29 @@ export default function CragForm(props: Props) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack sx={{ p: 1 }} spacing={1}>
-        <Controller
+        <TextField
           control={control}
           name="name"
-          render={({ field }) => (
-            <TextField fullWidth label="Name" {...field} />
-          )}
+          controller={{
+            rules: {
+              required: "required",
+            },
+          }}
         />
         <TextField
-          multiline
-          rows={3}
-          label="Description"
+          control={control}
           name="description"
-          defaultValue={props.crag.description}
+          field={{
+            multiline: true,
+            rows: 3,
+          }}
         />
-        <Button color="success" variant="outlined" type="submit">
+        <Button
+          color="success"
+          variant="outlined"
+          type="submit"
+          disabled={formState.isSubmitting}
+        >
           Save
         </Button>
       </Stack>

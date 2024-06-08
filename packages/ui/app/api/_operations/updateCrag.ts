@@ -7,10 +7,13 @@ interface Data {
   description?: string;
 }
 
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const updateCrag = async (crag: CragSchema, data: Data) => {
   console.warn({ data }, "updateCrag");
   const ds = await getDataSource();
   return await ds.transaction(async (transactionalEntityManager) => {
+    await delay(5000);
     Object.assign(crag, data);
     return transactionalEntityManager.getRepository(Crag).save(crag);
   });

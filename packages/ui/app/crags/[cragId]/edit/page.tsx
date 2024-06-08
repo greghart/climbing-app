@@ -9,7 +9,7 @@ export default async function Page({ params }: { params: { cragId: string } }) {
 
   async function createCrag(data: FormData) {
     "use server";
-    updateCrag(crag!, data);
+    return updateCrag(crag!, data);
   }
 
   return <CragForm crag={crag} onValid={createCrag} />;
