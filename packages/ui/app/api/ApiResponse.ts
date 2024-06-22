@@ -50,7 +50,7 @@ class ApiResponse<Model, Schema> {
     return this;
   }
 
-  zerror(fields: z.SafeParseReturnType<Schema, Schema>) {
+  zerr(fields: z.SafeParseReturnType<Schema, Schema>) {
     const flatten = fields.error!.flatten();
     this.fieldErrors = flatten.fieldErrors;
     this.errors = (this.errors || []).concat(flatten.formErrors);

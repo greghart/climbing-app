@@ -1,8 +1,10 @@
 "use client";
 import SubmitButton from "@/app/_components/form/SubmitButton";
+import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import updateCrag from "@/app/api/_actions/updateCrag";
 import { Stack, TextField } from "@mui/material";
 import { ICrag } from "models";
+import React from "react";
 import { useFormState } from "react-dom";
 
 interface Props {
@@ -19,8 +21,13 @@ export default function CragForm(props: Props) {
     ok: true,
     data: props.crag,
   });
+  const [reqIndex, setReqIndex] = React.useState(0);
+  React.useEffect(() => {
+    setReqIndex((prev) => prev + 1);
+  }, [state]);
   return (
     <form action={formAction}>
+      <SubmitSnack kee={reqIndex} {...state} />
       <Stack sx={{ p: 1 }} spacing={1}>
         <TextField
           name="name"
