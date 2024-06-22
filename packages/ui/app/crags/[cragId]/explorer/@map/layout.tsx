@@ -1,6 +1,6 @@
-import React from "react";
-import getArea from "@/app/api/_operations/getCrag";
+import getArea from "@/app/api/_actions/getCrag";
 import { notFound } from "next/navigation";
+import React from "react";
 import ClientLayout from "./ClientLayout";
 
 export default async function Layout({

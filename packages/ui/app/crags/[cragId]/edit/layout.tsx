@@ -1,5 +1,5 @@
 import ShowLayout from "@/app/_components/show/ShowLayout";
-import getCrag from "@/app/api/_operations/getCrag";
+import getCrag from "@/app/api/_actions/getCrag";
 import { notFound } from "next/navigation";
 
 export interface Props {

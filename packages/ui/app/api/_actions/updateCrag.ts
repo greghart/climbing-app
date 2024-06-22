@@ -1,22 +1,52 @@
+"use server";
+import ApiResponse from "@/app/api/ApiResponse";
 import { Crag, getDataSource } from "@/db";
-import { CragSchema } from "@/db/entity/Crag";
+import { ICrag } from "models";
 import "server-only";
-
-interface Data {
-  name?: string;
-  description?: string;
-}
+import { z } from "zod";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const updateCrag = async (crag: CragSchema, data: Data) => {
-  console.warn({ data }, "updateCrag");
+const schema = z.object({
+  name: z
+    .string({
+      invalid_type_error: "Invalid Name",
+    })
+    .min(5, { message: "Must be 5 or more characters" }),
+  description: z.string().optional(),
+});
+
+class UpdateCragResponse extends ApiResponse<ICrag, z.infer<typeof schema>> {}
+export type FormState = ReturnType<UpdateCragResponse["toJSON"]>;
+
+async function updateCrag(prevState: FormState, data: FormData) {
+  const res = new UpdateCragResponse().hydrate(prevState);
+
+  const validatedFields = schema.safeParse({
+    name: data.get("name"),
+    description: data.get("description"),
+  });
+  // Return early if the form data is invalid
+  if (!validatedFields.success) {
+    return res.zerror(validatedFields).toJSON();
+  }
+
   const ds = await getDataSource();
-  return await ds.transaction(async (transactionalEntityManager) => {
-    await delay(5000);
-    Object.assign(crag, data);
+  const saved = await ds.transaction(async (transactionalEntityManager) => {
+    const crag = await transactionalEntityManager
+      .getRepository(Crag)
+      .findOneBy({ id: prevState.data!.id });
+    if (!crag) {
+      return undefined;
+    }
+    await delay(500);
+    Object.assign(crag, validatedFields.data);
     return transactionalEntityManager.getRepository(Crag).save(crag);
   });
+  if (!saved) {
+    return res.err("crag not found").toJSON();
+  }
+  return res.respond(saved, "Crag updated").toJSON();
   // return await myDataSource.transaction((transactionalEntityManager) => {
   //   return (
   //     Promise.resolve()
@@ -58,6 +88,6 @@ const updateCrag = async (crag: CragSchema, data: Data) => {
   //       })
   //   );
   // });
-};
+}
 
 export default updateCrag;

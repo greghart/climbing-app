@@ -1,5 +1,4 @@
-import React from "react";
-import getBoulder from "@/app/api/_operations/getBoulder";
+import getBoulder from "@/app/api/_actions/getBoulder";
 import { notFound } from "next/navigation";
 import ClientPage from "./ClientPage";
 

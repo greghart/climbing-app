@@ -1,4 +1,4 @@
-import getArea from "@/app/api/_operations/getCrag";
+import getArea from "@/app/api/_actions/getCrag";
 
 // TODO This is unused, but left as a reference if we want a JSON API
 export async function GET(

@@ -1,5 +1,4 @@
-import React from "react";
-import getArea from "@/app/api/_operations/getArea";
+import getArea from "@/app/api/_actions/getArea";
 import { notFound } from "next/navigation";
 import ClientPage from "./ClientPage";
 

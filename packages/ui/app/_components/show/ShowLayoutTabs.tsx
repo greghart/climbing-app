@@ -28,14 +28,6 @@ export default function ShowLayoutTabs(props: Props) {
       : activeToken === "photos"
       ? "photos"
       : "overview";
-  console.warn(
-    {
-      props,
-      activeToken,
-      activeLink,
-    },
-    "ShowLayoutTabs"
-  );
   return (
     <>
       <Tabs value={activeLink} aria-label="nav tabs" role="navigation">

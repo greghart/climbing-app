@@ -1,6 +1,6 @@
-import React from "react";
+import getCrag from "@/app/api/_actions/getCrag";
 import { notFound } from "next/navigation";
-import getCrag from "@/app/api/_operations/getCrag";
+import React from "react";
 import ClientLayout from "./ClientLayout";
 
 export interface Props {

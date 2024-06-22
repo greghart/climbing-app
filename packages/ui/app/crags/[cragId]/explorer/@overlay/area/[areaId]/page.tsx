@@ -1,7 +1,7 @@
 import Area from "@/app/_components/explorer/overlay/Area";
 import Breadcrumbs from "@/app/_components/explorer/overlay/Breadcrumbs";
 import Drawer from "@/app/_components/explorer/overlay/Drawer";
-import getArea from "@/app/api/_operations/getArea";
+import getArea from "@/app/api/_actions/getArea";
 import { notFound } from "next/navigation";
 
 export default async function page({ params }: { params: { areaId: string } }) {

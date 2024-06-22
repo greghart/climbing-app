@@ -3,7 +3,7 @@ import PageLayout from "@/app/_components/layouts/PageLayout";
 import SearchFilters from "@/app/_components/search/SearchFilters";
 import SearchInput from "@/app/_components/search/SearchInput";
 import SearchResults from "@/app/_components/search/SearchResults";
-import { SearchResult } from "@/app/api/_operations/search";
+import { SearchResult } from "@/app/api/_actions/search";
 import { Stack } from "@mui/material";
 import { Crag, ICrag } from "models";
 import * as React from "react";

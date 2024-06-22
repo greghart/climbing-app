@@ -1,5 +1,4 @@
-import React from "react";
-import getRoute from "@/app/api/_operations/getRoute";
+import getRoute from "@/app/api/_actions/getRoute";
 import { notFound } from "next/navigation";
 import ClientPage from "./ClientPage";
 

@@ -1,7 +1,7 @@
 import Boulder from "@/app/_components/explorer/overlay/Boulder";
 import Breadcrumbs from "@/app/_components/explorer/overlay/Breadcrumbs";
 import Drawer from "@/app/_components/explorer/overlay/Drawer";
-import getBoulder from "@/app/api/_operations/getBoulder";
+import getBoulder from "@/app/api/_actions/getBoulder";
 import { notFound } from "next/navigation";
 import React from "react";
 

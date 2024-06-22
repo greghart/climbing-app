@@ -1,4 +1,4 @@
-import { SearchResult } from "@/app/api/_operations/search";
+import { SearchResult } from "@/app/api/_actions/search";
 import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import Link from "next/link";
 import React, { MouseEvent } from "react";

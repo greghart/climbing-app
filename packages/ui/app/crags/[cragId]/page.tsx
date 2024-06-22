@@ -1,6 +1,6 @@
 import CragShowOverview from "@/app/_components/crags/CragShowOverview";
 import ShowLayout from "@/app/_components/show/ShowLayout";
-import getCrag from "@/app/api/_operations/getCrag";
+import getCrag from "@/app/api/_actions/getCrag";
 import { notFound } from "next/navigation";
 
 export default async function Page({ params }: { params: { cragId: string } }) {

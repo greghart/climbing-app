@@ -1,10 +1,10 @@
 import SearchLayout from "@/app/_components/search/SearchLayout";
 import { searchParamsCache } from "@/app/_components/search/searchParams";
-import getCrag from "@/app/api/_operations/getCrag";
+import getCrag from "@/app/api/_actions/getCrag";
 import {
   asSearchResultType,
   default as search,
-} from "@/app/api/_operations/search";
+} from "@/app/api/_actions/search";
 import { notFound } from "next/navigation";
 
 export default async function page({

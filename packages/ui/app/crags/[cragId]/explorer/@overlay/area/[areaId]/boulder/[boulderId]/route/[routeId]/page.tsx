@@ -1,7 +1,7 @@
 import Breadcrumbs from "@/app/_components/explorer/overlay/Breadcrumbs";
 import Drawer from "@/app/_components/explorer/overlay/Drawer";
 import Route from "@/app/_components/explorer/overlay/Route";
-import getRoute from "@/app/api/_operations/getRoute";
+import getRoute from "@/app/api/_actions/getRoute";
 import { notFound } from "next/navigation";
 
 export default async function page({
