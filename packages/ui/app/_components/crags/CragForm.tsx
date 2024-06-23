@@ -1,11 +1,11 @@
 "use client";
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
+import TextField from "@/app/_components/form/TextField";
+import useFormState from "@/app/_components/form/useFormState";
 import updateCrag from "@/app/api/_actions/updateCrag";
-import { Stack, TextField } from "@mui/material";
+import { Stack } from "@mui/material";
 import { ICrag } from "models";
-import React from "react";
-import { useFormState } from "react-dom";
 
 interface Props {
   crag: ICrag;
@@ -17,29 +17,18 @@ interface Props {
  * and can't do `<form action />`
  */
 export default function CragForm(props: Props) {
-  const [state, formAction] = useFormState(updateCrag, {
+  const [state, formAction, meta] = useFormState(updateCrag, {
     ok: true,
     data: props.crag,
   });
-  const [reqIndex, setReqIndex] = React.useState(0);
-  React.useEffect(() => {
-    setReqIndex((prev) => prev + 1);
-  }, [state]);
   return (
     <form action={formAction}>
-      <SubmitSnack kee={reqIndex} {...state} />
+      <SubmitSnack kee={meta.reqIndex} {...state} />
       <Stack sx={{ p: 1 }} spacing={1}>
+        <TextField state={state} name="name" />
         <TextField
-          name="name"
-          label="Name"
-          required
-          defaultValue={state.data!.name}
-          error={"name" in (state.fieldErrors || {})}
-          helperText={state.fieldErrors?.name?.join(",")}
-        />
-        <TextField
+          state={state}
           name="description"
-          label="Description"
           multiline
           rows={3}
           defaultValue={state.data!.description}

@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowBack } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import SearchGroup from "../search/SearchGroup";
@@ -33,7 +34,7 @@ export default function GoBackHeader({
   );
   return (
     <SearchGroup
-      prepend={<i aria-hidden className="fa fa-arrow-left" />}
+      prepend={<ArrowBack />}
       {...props}
       onClickPrepend={handleClickPrepend}
     />

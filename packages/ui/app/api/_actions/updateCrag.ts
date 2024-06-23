@@ -22,10 +22,6 @@ export type FormState = ReturnType<UpdateCragResponse["toJSON"]>;
 async function updateCrag(prevState: FormState, data: FormData) {
   const res = new UpdateCragResponse().hydrate(prevState);
 
-  if (Math.random() > 0.5) {
-    return res.err("Random error").toJSON();
-  }
-
   const validatedFields = schema.safeParse({
     name: data.get("name"),
     description: data.get("description"),

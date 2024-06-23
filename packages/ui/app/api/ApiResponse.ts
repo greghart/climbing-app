@@ -5,7 +5,7 @@ import { z } from "zod";
 // Eg. should we return a full payload every time to let client blindly update,
 // or rely on client doing updates
 
-interface IApiResponse<Model, Schema> {
+export interface IApiResponse<Model, Schema> {
   // If ok, data should be provided
   // If not ok, errors should be provided
   ok: boolean;
@@ -16,7 +16,7 @@ interface IApiResponse<Model, Schema> {
 }
 
 // Simple builder class for responses
-interface ApiResponse<Model, Schema>
+interface ApiResponse<Model, Schema extends Partial<Model>>
   extends Omit<IApiResponse<Model, Schema>, "data"> {}
 
 class ApiResponse<Model, Schema> {
