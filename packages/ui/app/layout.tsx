@@ -26,14 +26,6 @@ export default function RootLayout({
           src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"
           async
         />
-        {/** TODO: Replace fontawesome? */}
-        <script src="https://use.fontawesome.com/470e7e519a.js" async />
-        <link
-          rel="stylesheet"
-          href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-          crossOrigin="anonymous"
-        />
       </head>
       <body className={clsx(inter.className, "body--sidebar")}>
         <AppRouterCacheProvider>

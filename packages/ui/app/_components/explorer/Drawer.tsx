@@ -1,5 +1,6 @@
 "use client";
 import SearchGroup from "@/app/_components/search/SearchGroup";
+import { Menu } from "@mui/material";
 import Box from "@mui/material/Box";
 import MUIDrawer from "@mui/material/Drawer";
 import React, { ReactNode } from "react";
@@ -43,7 +44,7 @@ export default function Drawer(props: Props) {
         <Box p={2} className="h-100 bg-light" width="80vw">
           <SearchGroup
             onClickPrepend={toggleDrawer(false)}
-            prepend={<i aria-hidden className="fa fa-bars" />}
+            prepend={<Menu />
             input={
               <div className="input-group-append flex-grow-up align-items-center text-center">
                 {props.title}

@@ -19,7 +19,7 @@ const SearchInput = (props: React.ComponentProps<"input">) => {
       onChange={(e) => {
         setSearch(e.target.value);
       }}
-      defaultValue={search}
+      defaultValue={props.value ? undefined : search}
     />
   );
 };

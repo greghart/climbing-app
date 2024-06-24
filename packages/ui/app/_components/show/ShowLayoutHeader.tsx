@@ -1,4 +1,5 @@
 import SearchInput from "@/app/_components/search/SearchInput";
+import MapIcon from "@mui/icons-material/Map";
 import { Divider } from "@mui/material";
 import GoBackHeader from "../layouts/GoBackHeader";
 
@@ -18,7 +19,7 @@ function ShowLayoutHeader(props: Props) {
     <>
       <GoBackHeader
         input={<SearchInput disabled value={props.title} />}
-        prepend={<i className="fa fa-globe" />}
+        prepend={<MapIcon />}
         href={props.linkTo}
       />
       <Divider />
