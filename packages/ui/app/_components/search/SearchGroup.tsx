@@ -34,7 +34,7 @@ export default function SearchGroup(props: Props) {
             type="button"
             onClick={props.onClickAppend}
           >
-            {props.prepend}
+            {props.append}
           </button>
         </div>
       )}

@@ -1,3 +1,5 @@
+import { isNumber } from "lodash-es";
+
 export interface ICoordinateLiteral {
   lat: number;
   lng: number;
@@ -43,7 +45,12 @@ class Coordinate {
 export function isCoordinateLiteral(
   coordinate: ICoordinate
 ): coordinate is ICoordinateLiteral {
-  return "lat" in coordinate && "lng" in coordinate;
+  return (
+    "lat" in coordinate &&
+    "lng" in coordinate &&
+    isNumber(coordinate.lat) &&
+    isNumber(coordinate.lng)
+  );
 }
 
 export default Coordinate;

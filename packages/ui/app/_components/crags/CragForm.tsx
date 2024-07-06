@@ -1,11 +1,14 @@
 "use client";
+import AreasMap from "@/app/_components/explorer/map/AreasMap";
+import BoundsField from "@/app/_components/form/BoundsField";
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
 import useFormState from "@/app/_components/form/useFormState";
 import updateCrag from "@/app/api/_actions/updateCrag";
 import { Stack } from "@mui/material";
-import { ICrag } from "models";
+import * as Leaflet from "leaflet";
+import { Crag, ICrag } from "models";
 
 interface Props {
   crag: ICrag;
@@ -17,6 +20,7 @@ interface Props {
  * and can't do `<form action />`
  */
 export default function CragForm(props: Props) {
+  const crag = new Crag(props.crag);
   const [state, formAction, meta] = useFormState(updateCrag, {
     ok: true,
     data: props.crag,
@@ -32,6 +36,17 @@ export default function CragForm(props: Props) {
           multiline
           rows={3}
           defaultValue={state.data!.description}
+        />
+        <BoundsField
+          state={state}
+          name="bounds"
+          outerBounds={new Leaflet.LatLng(
+            crag.center.lat,
+            crag.center.lng
+          ).toBounds(8000)}
+          tracerProps={{
+            children: <AreasMap areas={crag.areas!} />,
+          }}
         />
         <SubmitButton />
       </Stack>

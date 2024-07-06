@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowBack } from "@mui/icons-material";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import SearchGroup from "../search/SearchGroup";
@@ -34,7 +35,15 @@ export default function GoBackHeader({
   );
   return (
     <SearchGroup
-      prepend={<ArrowBack />}
+      prepend={
+        href ? (
+          <Link href={href}>
+            <ArrowBack />
+          </Link>
+        ) : (
+          <ArrowBack />
+        )
+      }
       {...props}
       onClickPrepend={handleClickPrepend}
     />

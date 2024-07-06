@@ -1,5 +1,6 @@
 "use client";
 import { searchParamsParsers } from "@/app/_components/explorer/searchParams";
+import FullScreen from "@/app/_components/layouts/OverMap";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import SearchInput from "@/app/_components/search/SearchInput";
 import useRouteTo from "@/app/_components/useRouteTo";
@@ -71,7 +72,7 @@ export default function Drawer(props: Props) {
 
   return (
     <div>
-      <Box sx={{ zIndex: 1000, position: "absolute", top: 0, width: "100vw" }}>
+      <FullScreen>
         <PageLayout
           header={
             <SearchInput
@@ -81,7 +82,7 @@ export default function Drawer(props: Props) {
             />
           }
         ></PageLayout>
-      </Box>
+      </FullScreen>
       <SwipeableDrawer
         anchor="bottom"
         open={open}

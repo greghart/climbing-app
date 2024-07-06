@@ -44,9 +44,10 @@ export default function Drawer(props: Props) {
         <Box p={2} className="h-100 bg-light" width="80vw">
           <SearchGroup
             onClickPrepend={toggleDrawer(false)}
-            prepend={<Menu />
+            prepend={<Menu />}
             input={
               <div className="input-group-append flex-grow-up align-items-center text-center">
+                {/* TODO: MUI-ify this */}
                 {props.title}
               </div>
             }

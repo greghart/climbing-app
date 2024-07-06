@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useFormState as reactUseFormState } from "react-dom";
 

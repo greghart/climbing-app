@@ -34,9 +34,7 @@ class Crag {
     this.name = data.name;
     this.description = data.description;
 
-    if (data.bounds) {
-      this.bounds = new Bounds(data.bounds);
-    }
+    this.bounds = Bounds.build(data.bounds);
     this.center = Coordinate.build(data.center);
     if (data.areas) {
       this.areas = data.areas.map((area) => new Area(area));

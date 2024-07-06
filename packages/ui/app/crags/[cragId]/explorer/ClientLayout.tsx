@@ -9,13 +9,11 @@ type ClientProps = Omit<Props, "params"> & { crag: ICrag };
 
 export default function ClientLayout(props: ClientProps) {
   return (
-    <>
-      <div className="h-100">
-        <React.Suspense fallback={<Drawer title="Loading overlay..." />}>
-          {props.overlay}
-        </React.Suspense>
-        <Box sx={{ height: "100vh" }}>{props.map}</Box>
-      </div>
-    </>
+    <Box sx={{ height: "100%" }}>
+      <React.Suspense fallback={<Drawer title="Loading overlay..." />}>
+        {props.overlay}
+      </React.Suspense>
+      <Box sx={{ height: "100vh" }}>{props.map}</Box>
+    </Box>
   );
 }

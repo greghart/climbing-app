@@ -9,7 +9,7 @@ export default function SubmitButton(
   return (
     <Button
       color="success"
-      variant="outlined"
+      variant="contained"
       type="submit"
       {...props}
       disabled={pending}

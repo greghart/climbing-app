@@ -1,10 +1,11 @@
 export { default as Area } from "./Area";
 export { default as Boulder } from "./Boulder";
+export { default as Bounds } from "./Bounds";
 export { default as Coordinate } from "./Coordinate";
 export { default as CoordinateOptional } from "./CoordinateOptional";
 export { default as Crag } from "./Crag";
+export { default as Grade } from "./Grade";
+export { default as GradingSystem } from "./GradingSystem";
 export { default as Polygon } from "./Polygon";
 export { default as PolygonCoordinate } from "./PolygonCoordinate";
 export { default as Route } from "./Route";
-export { default as Grade } from "./Grade";
-export { default as GradingSystem } from "./GradingSystem";
