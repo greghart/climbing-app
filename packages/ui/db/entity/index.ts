@@ -1,7 +1,8 @@
 export { default as Area } from "./Area";
 export { default as Boulder } from "./Boulder";
 export { default as Bounds } from "./Bounds";
-export { default as Coordinate } from "./Coordinate";
+export { default as Comment } from "./Comment";
+export { default as Commentable } from "./Commentable";
 export { default as CoordinateOptional } from "./CoordinateOptional";
 export { default as Crag } from "./Crag";
 export { default as Grade } from "./Grade";

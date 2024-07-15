@@ -1,6 +1,8 @@
 import { cascadeOneToMany } from "@/db/cascadeOptions";
 import { AreaSchema } from "@/db/entity/Area";
+import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import Bounds, { BoundsSchema } from "@/db/entity/Bounds";
+import { CommentableSchema } from "@/db/entity/Commentable";
 import { type ICrag } from "models";
 import { EntitySchema } from "typeorm";
 import Coordinate, { CoordinateSchema } from "./Coordinate";
@@ -9,16 +11,13 @@ export type CragSchema = ICrag & {
   areas?: AreaSchema[];
   center: CoordinateSchema;
   bounds?: BoundsSchema;
+  commentable?: CommentableSchema;
 };
 
 const Crag = new EntitySchema<CragSchema>({
   name: "crag",
   columns: {
-    id: {
-      type: Number,
-      primary: true,
-      generated: true,
-    },
+    ...BaseColumnSchemaPart,
     name: {
       type: String,
     },
@@ -44,6 +43,13 @@ const Crag = new EntitySchema<CragSchema>({
       inverseSide: "crag",
       target: "area",
       ...cascadeOneToMany,
+    },
+    commentable: {
+      type: "one-to-one",
+      nullable: true,
+      target: "commentable",
+      onDelete: "SET NULL",
+      joinColumn: true,
     },
   },
   embeddeds: {

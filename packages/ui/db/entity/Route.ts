@@ -1,4 +1,5 @@
 import { cascadeManyToOne } from "@/db/cascadeOptions";
+import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { type BoulderSchema } from "@/db/entity/Boulder";
 import CoordinateOptional from "@/db/entity/CoordinateOptional";
 import { type GradeSchema } from "@/db/entity/Grade";
@@ -13,11 +14,7 @@ export type RouteSchema = IRoute & {
 const Route = new EntitySchema<RouteSchema>({
   name: "route",
   columns: {
-    id: {
-      type: Number,
-      primary: true,
-      generated: true,
-    },
+    ...BaseColumnSchemaPart,
     name: {
       type: String,
     },

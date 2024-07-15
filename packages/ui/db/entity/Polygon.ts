@@ -1,4 +1,5 @@
 import { cascadeOneToMany } from "@/db/cascadeOptions";
+import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { PolygonCoordinateSchema } from "@/db/entity/PolygonCoordinate";
 import { type IPolygon } from "models";
 import { EntitySchema } from "typeorm";
@@ -10,11 +11,7 @@ export type PolygonSchema = IPolygon & {
 const Polygon = new EntitySchema<PolygonSchema>({
   name: "polygon",
   columns: {
-    id: {
-      type: Number,
-      primary: true,
-      generated: true,
-    },
+    ...BaseColumnSchemaPart,
     descriptor: {
       type: String,
     },

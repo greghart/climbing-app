@@ -92,47 +92,6 @@ async function updateCrag(prevState: FormState, data: FormData) {
     return res.err("crag not found").toJSON();
   }
   return res.respond(saved, "Crag updated").toJSON();
-  // return await myDataSource.transaction((transactionalEntityManager) => {
-  //   return (
-  //     Promise.resolve()
-  //       // Setup trail if necessary
-  //       .then(async () => {
-  //         if (data.trail) {
-  //           console.warn("setting trail");
-  //           return setTrail(
-  //             await myDataSource.manager
-  //               .withRepository(TrailRepository)
-  //               .findOrGetTrail(crag),
-  //             data.trail.nodes
-  //           );
-  //         }
-  //       })
-  //       // Setup bounds if necessary
-  //       .then(async () => {
-  //         if (!data.bounds) {
-  //           return;
-  //         }
-  //         const bounds = crag.bounds || new Bounds();
-  //         bounds.topLeft = new Coordinate(
-  //           data.bounds.topLeft.lat,
-  //           data.bounds.topLeft.lng
-  //         );
-  //         bounds.bottomRight = new Coordinate(
-  //           data.bounds.bottomRight.lat,
-  //           data.bounds.bottomRight.lng
-  //         );
-  //         bounds.crag = crag;
-  //         await transactionalEntityManager.save(bounds);
-  //         delete bounds.crag;
-  //         crag.bounds = bounds;
-  //       })
-  //       .then(() => {
-  //         Object.assign(crag, omit(data, "trail", "bounds"));
-  //         debug({ crag }, "save");
-  //         return transactionalEntityManager.save(crag);
-  //       })
-  //   );
-  // });
 }
 
 export default updateCrag;

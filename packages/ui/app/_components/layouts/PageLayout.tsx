@@ -20,7 +20,7 @@ interface Props {
 function Row(props: { children: React.ReactNode }) {
   return (
     <Grid container justifyContent="center">
-      <Grid item xs={11} md={8}>
+      <Grid item xs={12} md={8}>
         {props.children}
       </Grid>
     </Grid>
@@ -33,7 +33,8 @@ function PageLayout(props: Props) {
       <Box pt={2}>
         <Row>{props.header}</Row>
       </Box>
-      <Box sx={{ overflowY: "auto" }}>
+      {/* Only body of page should scroll, but pad a bit since overflow can cause slight offsets, like hiding shadows */}
+      <Box sx={{ overflowY: "auto", paddingBottom: "8px" }}>
         <Row>{props.content}</Row>
       </Box>
     </Stack>

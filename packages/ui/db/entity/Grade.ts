@@ -1,3 +1,4 @@
+import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { type GradingSystemSchema } from "@/db/entity/GradingSystem";
 import { RouteSchema } from "@/db/entity/Route";
 import { IGrade } from "models";
@@ -11,11 +12,7 @@ export type GradeSchema = IGrade & {
 const Grade = new EntitySchema<GradeSchema>({
   name: "grade",
   columns: {
-    id: {
-      type: Number,
-      primary: true,
-      generated: true,
-    },
+    ...BaseColumnSchemaPart,
     name: {
       type: String,
     },

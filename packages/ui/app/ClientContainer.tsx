@@ -18,7 +18,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           width: "100%",
-          maxWidth: "480px",
+          maxWidth: "960px",
         },
       },
     },

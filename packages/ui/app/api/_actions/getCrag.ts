@@ -24,6 +24,8 @@ const getCrag = cache(async (id: number | string) => {
     })
     .then((crag) => {
       if (!crag) return crag;
+      // TODO: Where should this logic exist!?
+      // Hydrate and dehydrate in model?
       // Bounds is embedded, so fields can be null, but model layer wants it all or nothing
       // if (!crag) return crag;
       if (!isBounds(crag.bounds)) {

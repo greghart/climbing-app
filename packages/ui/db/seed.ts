@@ -1,10 +1,9 @@
+import { Crag, Grade, IGrade } from "models";
 import "reflect-metadata";
-import { Crag, Grade, GradingSystem, GradingSystemType, IGrade } from "models";
 import * as entity from "./entity";
-import getDataSource from "./getDataSource";
-import tramJson from "./fixtures/TramData.json";
 import santeeJson from "./fixtures/Santee.json";
-import { Tram } from "@mui/icons-material";
+import tramJson from "./fixtures/TramData.json";
+import getDataSource from "./getDataSource";
 
 getDataSource()
   .then(async (ds) => {
@@ -40,6 +39,36 @@ getDataSource()
     let tram = new Crag(tramJson as any); // any to let arrays pass as tuples
     await cragRepo.clear();
     await cragRepo.save(santeeJson);
+    const pending = {
+      ...tram,
+      areas: (tram.areas || []).map((area) => ({
+        ...area,
+        polygon:
+          area.polygon === undefined
+            ? undefined
+            : {
+                ...area.polygon,
+                coordinates: (area.polygon.coordinates || []).map(
+                  (coord, i) => ({
+                    ...coord,
+                    order: i,
+                  })
+                ),
+              },
+        boulders: (area.boulders || []).map((boulder) => ({
+          ...boulder,
+          routes: (boulder.routes || []).map((route, i) => ({
+            ...route,
+            boulder: undefined,
+            grade:
+              gradesByName[
+                (route.gradeRaw || "").replaceAll("-", "").replaceAll("+", "")
+              ],
+          })),
+        })),
+      })),
+    };
+    console.warn("Pending:\n", pending);
     await cragRepo.save({
       ...tram,
       areas: (tram.areas || []).map((area) => ({
@@ -84,20 +113,8 @@ getDataSource()
         "areas.boulders.routes",
       ],
     });
-    console.warn("Tram:\n", JSON.stringify(tramData, null, 2));
-    if (tramData == null) {
-      return;
+    if (tramData == null || (tramData.areas || []).length == 0) {
+      throw new Error("TramWay crag did not seed correctly :(");
     }
-
-    const loadedTram = new Crag(tramData);
-
-    if (loadedTram.center) {
-      console.log("Center: ", loadedTram.center.tuple);
-    }
-    console.log("Boulder 1:\n", loadedTram.areas![0].polygon);
-
-    console.log(
-      "Here you can setup and run express / fastify / any other framework."
-    );
   })
   .catch((error) => console.log(error));

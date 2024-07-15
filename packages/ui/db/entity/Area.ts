@@ -1,4 +1,5 @@
 import { cascadeManyToOne, cascadeOneToMany } from "@/db/cascadeOptions";
+import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { BoulderSchema } from "@/db/entity/Boulder";
 import { type CragSchema } from "@/db/entity/Crag";
 import { type PolygonSchema } from "@/db/entity/Polygon";
@@ -14,11 +15,7 @@ export type AreaSchema = IArea & {
 const Area = new EntitySchema<AreaSchema>({
   name: "area",
   columns: {
-    id: {
-      type: Number,
-      primary: true,
-      generated: true,
-    },
+    ...BaseColumnSchemaPart,
     name: {
       type: String,
     },

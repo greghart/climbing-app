@@ -1,5 +1,5 @@
 "use client";
-import { Tab, Tabs } from "@mui/material";
+import { Card, CardContent, Tab, Tabs } from "@mui/material";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 
@@ -35,7 +35,7 @@ export default function ShowLayoutTabs(props: Props) {
           label="Overview"
           value="overview"
           selected={activeLink === "overview"}
-          href={`${props.basePath}/overview`}
+          href={`${props.basePath}`}
         />
         <LinkTab
           label="Comments"
@@ -50,7 +50,16 @@ export default function ShowLayoutTabs(props: Props) {
           href={`${props.basePath}/photos`}
         />
       </Tabs>
-      {props.children}
+      <Card
+        sx={{
+          borderRadius: {
+            // square up if this becomes full width
+            xs: 0,
+          },
+        }}
+      >
+        <CardContent>{props.children}</CardContent>
+      </Card>
     </>
   );
 }

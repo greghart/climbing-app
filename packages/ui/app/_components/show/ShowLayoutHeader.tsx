@@ -1,6 +1,5 @@
 import SearchInput from "@/app/_components/search/SearchInput";
 import MapIcon from "@mui/icons-material/Map";
-import { Divider } from "@mui/material";
 import GoBackHeader from "../layouts/GoBackHeader";
 
 interface Props {
@@ -16,14 +15,11 @@ interface Props {
  */
 function ShowLayoutHeader(props: Props) {
   return (
-    <>
-      <GoBackHeader
-        input={<SearchInput disabled value={props.title} />}
-        prepend={<MapIcon />}
-        href={props.linkTo}
-      />
-      <Divider />
-    </>
+    <GoBackHeader
+      input={<SearchInput disabled value={props.title} />}
+      prepend={<MapIcon />}
+      href={props.linkTo}
+    />
   );
 }
 

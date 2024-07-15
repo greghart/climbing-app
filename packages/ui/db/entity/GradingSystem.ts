@@ -1,5 +1,6 @@
+import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { GradeSchema } from "@/db/entity/Grade";
-import { IGradingSystem, GradingSystemType } from "models";
+import { IGradingSystem } from "models";
 import { EntitySchema } from "typeorm";
 
 export type GradingSystemSchema = IGradingSystem & {
@@ -10,11 +11,7 @@ export type GradingSystemSchema = IGradingSystem & {
 const GradingSystem = new EntitySchema<GradingSystemSchema>({
   name: "grading_system",
   columns: {
-    id: {
-      type: Number,
-      primary: true,
-      generated: true,
-    },
+    ...BaseColumnSchemaPart,
     name: {
       type: String,
     },

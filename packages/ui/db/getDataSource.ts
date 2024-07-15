@@ -3,6 +3,8 @@ import { DataSource } from "typeorm";
 import {
   Area,
   Boulder,
+  Comment,
+  Commentable,
   Crag,
   Grade,
   GradingSystem,
@@ -11,38 +13,38 @@ import {
   Route,
 } from "./entity";
 
-// Gets a singleton initialized data source
-let singleton: DataSource;
-async function getDataSource(options = null) {
-  if (options && singleton) {
-    throw new Error(
-      "Data source is already initialized, can't use other options"
-    );
+export const dataSource = new DataSource({
+  type: "sqlite",
+  database: "database.sqlite",
+  synchronize: true,
+  logging: true,
+  entities: [
+    Area,
+    Boulder,
+    Comment,
+    Commentable,
+    Crag,
+    Grade,
+    GradingSystem,
+    Polygon,
+    PolygonCoordinate,
+    Route,
+  ],
+  migrations: [],
+  subscribers: [],
+});
+
+let pending: Promise<DataSource>;
+// our data source that's been initialized, needed to actually query anything
+// just grab ds to setup custom repos
+async function getDataSource() {
+  if (pending) {
+    return pending;
   }
-  if (singleton) return Promise.resolve(singleton);
-  const ds = new DataSource({
-    type: "sqlite",
-    database: "database.sqlite",
-    synchronize: true,
-    logging: true,
-    entities: [
-      Crag,
-      Area,
-      Boulder,
-      Polygon,
-      PolygonCoordinate,
-      Route,
-      Grade,
-      GradingSystem,
-    ],
-    migrations: [],
-    subscribers: [],
-    ...(options || {}),
-  });
-  await ds.initialize();
-  singleton = ds;
+  pending = dataSource.initialize();
+
   // await import("./seed");
-  return ds;
+  return pending;
 }
 
 export default getDataSource;

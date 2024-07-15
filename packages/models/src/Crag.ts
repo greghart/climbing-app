@@ -3,6 +3,7 @@
 // import Trail from "./Trail.js";
 import Area, { type IArea } from "./Area.js";
 import Bounds, { type IBounds } from "./Bounds.js";
+import type { ICommentable } from "./Commentable.js";
 import Coordinate, { type ICoordinate } from "./Coordinate.js";
 
 export interface ICrag {
@@ -19,7 +20,7 @@ export interface ICrag {
 
   // Relationships
   areas?: IArea[];
-  // commentable?: Commentable;
+  commentable?: ICommentable;
   // trail?: Trail;
 }
 
