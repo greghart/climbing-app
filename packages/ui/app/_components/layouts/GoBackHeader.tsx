@@ -4,18 +4,20 @@ import { ArrowBack } from "@mui/icons-material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
-import SearchGroup from "../search/SearchGroup";
+import SearchField from "../search/SearchField";
 
 type Props = {
+  Component?: React.FC<any>;
   href?: string;
   onClickPrepend?: React.MouseEventHandler<any>;
   prepend?: React.ReactNode;
-} & Omit<React.ComponentProps<typeof SearchGroup>, "prepend">;
+} & Omit<React.ComponentProps<typeof SearchField>, "prepend">;
 
 /**
  * A fixed header that has a backbutton prepend setup
  */
 export default function GoBackHeader({
+  Component = SearchField,
   href,
   onClickPrepend,
   ...props
@@ -34,17 +36,15 @@ export default function GoBackHeader({
     [onClickPrepend, router]
   );
   return (
-    <SearchGroup
+    <Component
+      {...props}
       prepend={
         href ? (
-          <Link href={href}>
-            <ArrowBack />
-          </Link>
+          <Link href={href}>{props.prepend || <ArrowBack />}</Link>
         ) : (
-          <ArrowBack />
+          props.prepend || <ArrowBack />
         )
       }
-      {...props}
       onClickPrepend={handleClickPrepend}
     />
   );

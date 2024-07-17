@@ -7,7 +7,6 @@ import TextField from "@/app/_components/form/TextField";
 import useFormState from "@/app/_components/form/useFormState";
 import updateCrag from "@/app/api/_actions/updateCrag";
 import { Stack } from "@mui/material";
-import * as Leaflet from "leaflet";
 import { Crag, ICrag } from "models";
 
 interface Props {
@@ -40,10 +39,7 @@ export default function CragForm(props: Props) {
         <BoundsField
           state={state}
           name="bounds"
-          outerBounds={new Leaflet.LatLng(
-            crag.center.lat,
-            crag.center.lng
-          ).toBounds(8000)}
+          center={crag.center}
           tracerProps={{
             children: <AreasMap areas={crag.areas!} />,
           }}

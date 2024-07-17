@@ -11,7 +11,7 @@ export default async function Page({ params }: { params: { cragId: string } }) {
     <ShowLayout
       headerProps={{
         title: crag.name,
-        linkTo: `/crags/${crag.id}/explorer`,
+        href: `/crags/${crag.id}/explorer`,
       }}
       tabsProps={{
         basePath: `/crags/${crag.id}`,

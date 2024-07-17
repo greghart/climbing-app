@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
-import { Area, IArea } from "models";
-import { useMap } from "react-leaflet";
-import AreaMap from "@/app/_components/explorer/map/AreaMap";
 import blockClicks from "@/app/_components/blockClicks";
+import AreaMap from "@/app/_components/explorer/map/AreaMap";
+import { Area, IArea } from "models";
+import React from "react";
+import { useMap } from "react-leaflet";
 
 export default function ClientPage({ area: _area }: { area: IArea }) {
   const area = new Area(_area);

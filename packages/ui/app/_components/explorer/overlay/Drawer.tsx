@@ -2,7 +2,7 @@
 import { searchParamsParsers } from "@/app/_components/explorer/searchParams";
 import FullScreen from "@/app/_components/layouts/OverMap";
 import PageLayout from "@/app/_components/layouts/PageLayout";
-import SearchInput from "@/app/_components/search/SearchInput";
+import SearchField from "@/app/_components/search/SearchField";
 import useRouteTo from "@/app/_components/useRouteTo";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -75,7 +75,7 @@ export default function Drawer(props: Props) {
       <FullScreen>
         <PageLayout
           header={
-            <SearchInput
+            <SearchField
               onClick={() =>
                 props.crag && routeTo(`/crags/${props.crag.id}/search`)
               }

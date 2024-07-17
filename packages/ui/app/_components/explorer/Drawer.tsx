@@ -1,6 +1,5 @@
 "use client";
-import SearchGroup from "@/app/_components/search/SearchGroup";
-import { Menu } from "@mui/material";
+import SearchField from "@/app/_components/search/SearchField";
 import Box from "@mui/material/Box";
 import MUIDrawer from "@mui/material/Drawer";
 import React, { ReactNode } from "react";
@@ -42,15 +41,9 @@ export default function Drawer(props: Props) {
         className="over-map"
       >
         <Box p={2} className="h-100 bg-light" width="80vw">
-          <SearchGroup
+          <SearchField
             onClickPrepend={toggleDrawer(false)}
-            prepend={<Menu />}
-            input={
-              <div className="input-group-append flex-grow-up align-items-center text-center">
-                {/* TODO: MUI-ify this */}
-                {props.title}
-              </div>
-            }
+            inputProps={{ value: props.title }}
           />
           {props.sidebarChildren}
         </Box>

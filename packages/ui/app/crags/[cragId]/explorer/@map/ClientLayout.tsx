@@ -1,15 +1,7 @@
 "use client";
-import React from "react";
+import CragMap from "@/app/_components/explorer/map/CragMap";
 import { Crag, ICrag } from "models";
-import dynamic from "next/dynamic";
-
-const DynamicCragMap = dynamic(
-  () => import("@/app/_components/explorer/map/CragMap"),
-  {
-    ssr: false,
-  }
-);
-
+import React from "react";
 export default function ClientLayout({
   children,
   crag,
@@ -18,5 +10,5 @@ export default function ClientLayout({
   crag: ICrag;
 }) {
   if (!crag) return null;
-  return <DynamicCragMap crag={new Crag(crag)}>{children}</DynamicCragMap>;
+  return <CragMap crag={new Crag(crag)}>{children}</CragMap>;
 }

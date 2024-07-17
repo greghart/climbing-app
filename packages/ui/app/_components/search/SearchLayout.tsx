@@ -1,7 +1,7 @@
 import GoBackHeader from "@/app/_components/layouts/GoBackHeader";
 import PageLayout from "@/app/_components/layouts/PageLayout";
+import ConnectedSearch from "@/app/_components/search/ConnectedSearch";
 import SearchFilters from "@/app/_components/search/SearchFilters";
-import SearchInput from "@/app/_components/search/SearchInput";
 import SearchResults from "@/app/_components/search/SearchResults";
 import { SearchResult } from "@/app/api/_actions/search";
 import { Stack } from "@mui/material";
@@ -26,7 +26,7 @@ function SearchLayout(props: Props) {
       key="search"
       header={
         <Stack spacing={1}>
-          <GoBackHeader input={<SearchInput />} href={`./explorer`} />
+          <GoBackHeader Component={ConnectedSearch} href={`./explorer`} />
           <SearchFilters shadeLocation={crag.center.literal} />
         </Stack>
       }

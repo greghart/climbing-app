@@ -1,12 +1,10 @@
-import SearchInput from "@/app/_components/search/SearchInput";
-import MapIcon from "@mui/icons-material/Map";
+import { Map } from "@mui/icons-material";
+import React from "react";
 import GoBackHeader from "../layouts/GoBackHeader";
 
-interface Props {
+type Props = React.ComponentProps<typeof GoBackHeader> & {
   title: string;
-  // Link to for map link
-  linkTo: string;
-}
+};
 
 /**
  * Header section of a show layout.
@@ -15,11 +13,7 @@ interface Props {
  */
 function ShowLayoutHeader(props: Props) {
   return (
-    <GoBackHeader
-      input={<SearchInput disabled value={props.title} />}
-      prepend={<MapIcon />}
-      href={props.linkTo}
-    />
+    <GoBackHeader disabled {...props} value={props.title} prepend={<Map />} />
   );
 }
 

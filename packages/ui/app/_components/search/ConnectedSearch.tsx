@@ -1,18 +1,17 @@
 "use client";
 
+import SearchField from "@/app/_components/search/SearchField";
 import { searchParamsParsers } from "@/app/_components/search/searchParams";
 import useQueryState from "@/app/_components/useQueryState";
 import * as React from "react";
 
-const SearchInput = (props: React.ComponentProps<"input">) => {
+const ConnectedSearch = (props: React.ComponentProps<typeof SearchField>) => {
   const [search, setSearch] = useQueryState(
     "search",
     searchParamsParsers.search
   );
   return (
-    <input
-      type="text"
-      className="form-control"
+    <SearchField
       placeholder="Search by area, boulder, or route"
       autoFocus
       {...props}
@@ -24,4 +23,4 @@ const SearchInput = (props: React.ComponentProps<"input">) => {
   );
 };
 
-export default SearchInput;
+export default ConnectedSearch;

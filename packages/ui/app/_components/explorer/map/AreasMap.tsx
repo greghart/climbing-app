@@ -1,7 +1,7 @@
-import { Area } from "models";
-import AreaMap from "@/app/_components/explorer/map/AreaMap";
 import blockClicks from "@/app/_components/blockClicks";
+import AreaMap from "@/app/_components/explorer/map/AreaMap";
 import useRouteTo from "@/app/_components/useRouteTo";
+import { Area } from "models";
 
 interface Props {
   areas: Area[];
