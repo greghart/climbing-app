@@ -1,6 +1,6 @@
 "use client";
 import useSearchParamsPath from "@/app/_components/useSearchParamsPath";
-import { Edit } from "@mui/icons-material";
+import { Info } from "@mui/icons-material";
 import { Grid, Link, Breadcrumbs as MUIBreadcrumbs } from "@mui/material";
 import { IArea, IBoulder, ICrag, IRoute } from "models";
 import NextLink from "next/link";
@@ -11,6 +11,12 @@ interface Props {
   area?: IArea;
   boulder?: IBoulder;
   route?: IRoute;
+  cragHref?: string;
+  cragIconHref?: string;
+  cragIcon?: React.ReactNode;
+  areaHref?: string;
+  boulderHref?: string;
+  routeHref?: string;
 }
 
 function Centered(props: { left: React.ReactNode; right: React.ReactNode }) {
@@ -21,15 +27,19 @@ function Centered(props: { left: React.ReactNode; right: React.ReactNode }) {
     </Grid>
   );
 }
+
 export default function Breadcrumbs(props: Props) {
   const searchParamsPath = useSearchParamsPath();
+  const actionIcon = props.cragIcon || <Info />;
   return (
     <MUIBreadcrumbs>
       {props.crag && (
         <Centered
           left={
             <NextLink
-              href={searchParamsPath(`/crags/${props.crag.id}/explorer`)}
+              href={searchParamsPath(
+                props.cragHref || `/crags/${props.crag.id}/explorer`
+              )}
               passHref
               legacyBehavior
             >
@@ -39,9 +49,13 @@ export default function Breadcrumbs(props: Props) {
             </NextLink>
           }
           right={
-            <NextLink href={`/crags/${props.crag.id}`} passHref legacyBehavior>
+            <NextLink
+              href={props.cragIconHref || `/crags/${props.crag.id}`}
+              passHref
+              legacyBehavior
+            >
               <Link underline="hover" color="inherit">
-                <Edit />
+                {actionIcon}
               </Link>
             </NextLink>
           }
@@ -51,7 +65,8 @@ export default function Breadcrumbs(props: Props) {
         <Grid item>
           <NextLink
             href={searchParamsPath(
-              `/crags/${props.crag.id}/explorer/area/${props.area.id}`
+              props.areaHref ||
+                `/crags/${props.crag.id}/explorer/area/${props.area.id}`
             )}
             passHref
             legacyBehavior
@@ -66,7 +81,8 @@ export default function Breadcrumbs(props: Props) {
         <Grid item>
           <NextLink
             href={searchParamsPath(
-              `/crags/${props.crag.id}/explorer/area/${props.area.id}/boulder/${props.boulder.id}`
+              props.boulderHref ||
+                `/crags/${props.crag.id}/explorer/area/${props.area.id}/boulder/${props.boulder.id}`
             )}
             passHref
             legacyBehavior
@@ -81,7 +97,8 @@ export default function Breadcrumbs(props: Props) {
         <Grid item>
           <NextLink
             href={searchParamsPath(
-              `/crags/${props.crag.id}/explorer/area/${props.area.id}/boulder/${props.boulder.id}/route/${props.route.id}`
+              props.routeHref ||
+                `/crags/${props.crag.id}/explorer/area/${props.area.id}/boulder/${props.boulder.id}/route/${props.route.id}`
             )}
             passHref
             legacyBehavior

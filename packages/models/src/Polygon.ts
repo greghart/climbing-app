@@ -1,3 +1,4 @@
+import type { IArea } from "./Area.js";
 import type { ICoordinate } from "./Coordinate.js";
 import Coordinate from "./Coordinate.js";
 
@@ -12,6 +13,9 @@ export interface IPolygon {
   descriptor?: string;
 
   coordinates?: ICoordinate[];
+
+  // Belongs to options
+  area?: IArea;
 }
 
 interface Polygon extends IPolygon {}

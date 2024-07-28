@@ -12,7 +12,7 @@ export default async function Page({ params }: { params: { cragId: string } }) {
     <CommentForm
       commentable={commentable}
       text=""
-      action={createComment.bind(null, commentable.id!)}
+      action={createComment}
       redirect={`crags/${params.cragId}/comments`}
     />
   );

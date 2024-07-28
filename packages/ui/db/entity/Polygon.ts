@@ -23,6 +23,10 @@ const Polygon = new EntitySchema<PolygonSchema>({
       target: "polygon_coordinate",
       ...cascadeOneToMany,
     },
+    area: {
+      type: "one-to-one",
+      target: "area",
+    },
   },
 });
 

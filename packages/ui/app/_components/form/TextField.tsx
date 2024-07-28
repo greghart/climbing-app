@@ -10,12 +10,14 @@ import { TextField as MUITextField } from "@mui/material";
  * * Distinguishes what we require vs optional customization
  */
 
-type Props<Model, Schema> = React.ComponentProps<typeof MUITextField> & {
-  state: IApiResponse<Model, Schema>;
+type Props<Model, Schema extends Partial<Model>> = React.ComponentProps<
+  typeof MUITextField
+> & {
+  state: IApiResponse<Model, Schema, any>;
   name: keyof Schema & keyof Model;
 };
 
-export default function TextField<Model, Schema>({
+export default function TextField<Model, Schema extends Partial<Model>>({
   state,
   ...props
 }: Props<Model, Schema>) {

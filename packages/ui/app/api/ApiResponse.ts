@@ -5,44 +5,42 @@ import { z } from "zod";
 // Eg. should we return a full payload every time to let client blindly update,
 // or rely on client doing updates
 
-export interface IApiResponse<Model, Schema> {
+export interface IApiResponse<
+  Model,
+  Payload extends Partial<Model>,
+  Meta = {}
+> {
   // If ok, data should be provided
   // If not ok, errors should be provided
   ok: boolean;
-  data?: Model; // Model data
+  data: Model; // Model data
+  meta: Meta; // Extra metadata
   message?: string; // Top level message, if any
-  fieldErrors?: z.typeToFlattenedError<Schema>["fieldErrors"]; // Field level errors
+  fieldErrors?: z.typeToFlattenedError<Payload>["fieldErrors"]; // Field level errors
   errors?: Array<string>; // Top level errors unrelated to field
 }
 
 // Simple builder class for responses
-interface ApiResponse<Model, Schema extends Partial<Model>>
-  extends Omit<IApiResponse<Model, Schema>, "data"> {}
+interface ApiResponse<Model, Schema extends Partial<Model>, Meta>
+  extends IApiResponse<Model, Schema, Meta> {}
 
-class ApiResponse<Model, Schema> {
-  _data?: Model;
-  constructor() {
+class ApiResponse<Model, Schema, Meta = {}> {
+  data: Model;
+  meta: Meta;
+
+  constructor(prevState: IApiResponse<Model, Schema, Meta>) {
     this.ok = true;
     this.fieldErrors = {}; // Leave empties for easier usage
     this.errors = [];
-  }
-
-  // hydrate from prev state
-  hydrate(prevState: IApiResponse<Model, Schema>) {
-    // we want to keep prev form data, even if we return an error
-    if (prevState.data) this.data(prevState.data);
-    return this;
+    this.meta = prevState.meta;
+    this.data = prevState.data;
   }
 
   // respond with a normal successful response
   respond(data: Model, msg: string, ok: boolean = true) {
     this.ok = ok;
-    this.data(data);
+    this.data = data;
     return this.msg(msg);
-  }
-
-  data(data: Model) {
-    this._data = data;
   }
 
   msg(msg: string) {
@@ -62,10 +60,11 @@ class ApiResponse<Model, Schema> {
     return this;
   }
 
-  toJSON(): IApiResponse<Model, Schema> {
+  toJSON(): IApiResponse<Model, Schema, Meta> {
     return {
       ok: this.ok,
-      data: this._data,
+      data: this.data,
+      meta: this.meta,
       message: this.message,
       fieldErrors: this.fieldErrors,
       errors: this.errors,

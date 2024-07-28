@@ -2,7 +2,7 @@
 import { searchParamsParsers } from "@/app/_components/explorer/searchParams";
 import FullScreen from "@/app/_components/layouts/OverMap";
 import PageLayout from "@/app/_components/layouts/PageLayout";
-import SearchField from "@/app/_components/search/SearchField";
+import ConnectedSearch from "@/app/_components/search/ConnectedSearch";
 import useRouteTo from "@/app/_components/useRouteTo";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -70,15 +70,25 @@ export default function Drawer(props: Props) {
     typeof navigator !== "undefined" &&
     /iPad|iPhone|iPod/.test(navigator.userAgent);
 
+  const [disabled, setDisabled] = React.useState(false);
+
   return (
     <div>
       <FullScreen>
         <PageLayout
           header={
-            <SearchField
-              onClick={() =>
-                props.crag && routeTo(`/crags/${props.crag.id}/search`)
-              }
+            <ConnectedSearch
+              disabled={disabled}
+              onClick={() => {
+                setDisabled(true);
+                routeTo(`/crags/${props.crag!.id}/search`);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setDisabled(true);
+                  routeTo(`/crags/${props.crag!.id}/search`);
+                }
+              }}
             />
           }
         ></PageLayout>

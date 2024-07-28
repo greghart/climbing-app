@@ -8,7 +8,7 @@ import BoundsTracer from "@/app/_components/tracer/BoundsTracer";
 import { IApiResponse } from "@/app/api/ApiResponse.js";
 import { Edit } from "@mui/icons-material";
 import { Button, FormHelperText, Grid } from "@mui/material";
-import { IBounds, ICoordinateLiteral } from "models";
+import { IBounds, ICoordinateLiteral, ICrag } from "models";
 import { useState } from "react";
 
 /**
@@ -17,7 +17,11 @@ import { useState } from "react";
  * * Edit to open up bounds tracer
  * * Confirm to stage data into a Next.js compatible hidden input
  */
-type Props<Key extends string, Model extends HasBoundsField<Key>, Schema> = {
+type Props<
+  Key extends string,
+  Model extends HasBoundsField<Key>,
+  Schema extends Model
+> = {
   name: Key;
   state: IApiResponse<Model, Schema>;
   center: ICoordinateLiteral;
@@ -36,11 +40,14 @@ function toIBounds(bounds: Leaflet.LatLngBounds): IBounds {
   };
 }
 
+export type BoundsFieldType = typeof BoundsField;
 export default function BoundsField<
   Key extends string,
   Model extends HasBoundsField<Key>,
-  Schema
->(props: Props<Key, Model, Schema>) {
+  Schema extends Model
+>({ tracerProps, ...props }: Props<Key, Model, Schema>) {
+  const test: ICrag = {} as any;
+
   const [isUpdating, setUpdating] = useState(false);
   const [current, setCurrent] = useState<IBounds | undefined>(
     props.state.data![props.name]
@@ -84,7 +91,7 @@ export default function BoundsField<
 
   return (
     <BoundsTracer
-      {...props.tracerProps}
+      {...tracerProps}
       mapBounds={outerBounds}
       defaultBounds={current}
       onCancel={() => setUpdating(false)}

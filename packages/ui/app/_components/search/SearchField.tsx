@@ -12,12 +12,16 @@ type Props = React.ComponentProps<typeof TextField> & {
 /**
  * Our searcher is always part of a basic group
  * Also used as a template for titles on non search pages
- * TODO: Convert to MUI
  */
 export default function SearchField(props: Props) {
   return (
     <TextField
-      sx={{ backgroundColor: "white" }}
+      sx={{
+        backgroundColor: "white",
+        "& .MuiInputBase-input.Mui-disabled": {
+          WebkitTextFillColor: "black",
+        },
+      }}
       fullWidth
       variant="outlined"
       margin="dense"

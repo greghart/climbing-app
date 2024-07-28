@@ -6,7 +6,7 @@ import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
 import useFormState from "@/app/_components/form/useFormState";
 import updateCrag from "@/app/api/_actions/updateCrag";
-import { Stack } from "@mui/material";
+import { InputLabel, Stack } from "@mui/material";
 import { Crag, ICrag } from "models";
 
 interface Props {
@@ -23,6 +23,7 @@ export default function CragForm(props: Props) {
   const [state, formAction, meta] = useFormState(updateCrag, {
     ok: true,
     data: props.crag,
+    meta: {},
   });
   return (
     <form action={formAction}>
@@ -36,6 +37,7 @@ export default function CragForm(props: Props) {
           rows={3}
           defaultValue={state.data!.description}
         />
+        <InputLabel>BOUNDS</InputLabel>
         <BoundsField
           state={state}
           name="bounds"
