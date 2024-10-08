@@ -1,14 +1,14 @@
 import {
   Column,
   Entity,
-  OneToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
-import Route from "./Route.js";
-import GradingSystem from "./GradingSystem.js";
 import { cascadeManyToOne } from "../db/cascadeOptions.js";
+import GradingSystem from "./GradingSystem.js";
+import Route from "./Route.js";
 
 @Entity()
 export default class Grade {

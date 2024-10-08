@@ -1,3 +1,5 @@
+import Trail from "@/db/entity/Trail";
+import TrailLine from "@/db/entity/TrailLine";
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import {
@@ -29,6 +31,8 @@ export const dataSource = new DataSource({
     Polygon,
     PolygonCoordinate,
     Route,
+    Trail,
+    TrailLine,
   ],
   migrations: [],
   subscribers: [],

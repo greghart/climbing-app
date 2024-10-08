@@ -14,7 +14,7 @@ export interface IPolygon {
 
   coordinates?: ICoordinate[];
 
-  // Belongs to options
+  // Associations
   area?: IArea;
 }
 

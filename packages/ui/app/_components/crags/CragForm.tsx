@@ -6,7 +6,7 @@ import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
 import useFormState from "@/app/_components/form/useFormState";
 import updateCrag from "@/app/api/_actions/updateCrag";
-import { InputLabel, Stack } from "@mui/material";
+import { FormHelperText, InputLabel, Stack } from "@mui/material";
 import { Crag, ICrag } from "models";
 
 interface Props {
@@ -46,6 +46,9 @@ export default function CragForm(props: Props) {
             children: <AreasMap areas={crag.areas!} />,
           }}
         />
+        <FormHelperText>
+          Dictates the bounds of the crag for map purposes
+        </FormHelperText>
         <SubmitButton />
       </Stack>
     </form>
