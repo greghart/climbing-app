@@ -51,6 +51,13 @@ const Crag = new EntitySchema<CragSchema>({
       onDelete: "SET NULL",
       joinColumn: true,
     },
+    trail: {
+      type: "one-to-one",
+      target: "trail",
+      joinColumn: true,
+      onDelete: "SET NULL",
+      cascade: ["insert", "update"],
+    },
   },
   embeddeds: {
     center: {

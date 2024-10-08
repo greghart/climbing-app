@@ -1,7 +1,6 @@
-import { EntitySchema } from "typeorm";
-import { Polygon, type IPolygon } from "models";
 import { cascadeManyToOne } from "@/db/cascadeOptions";
-import { ICoordinateLiteral } from "models";
+import { ICoordinateLiteral, Polygon } from "models";
+import { EntitySchema } from "typeorm";
 
 /**
  * A coordinate of a polygon
