@@ -1,65 +1,59 @@
 "use client";
 import Map from "@/app/_components/explorer/map/Map";
-import BoundsPolygon from "@/app/_components/tracer/BoundsPolygon";
-import BoundsTracer from "@/app/_components/tracer/BoundsTracer";
+import TrailPolygon from "@/app/_components/tracer/TrailPolygon";
+import TrailTracer from "@/app/_components/tracer/TrailTracer";
 import { IApiResponse } from "@/app/api/ApiResponse.js";
 import { Edit } from "@mui/icons-material";
 import { Button, FormHelperText, Grid } from "@mui/material";
-import * as Leaflet from "leaflet";
-import { IBounds, ICoordinateLiteral } from "models";
+import { IBounds, ICoordinateLiteral, ITrail } from "models";
 import { useState } from "react";
 
 /**
- * Climbing app map bounds field
+ * Climbing app map trail field
  * * Displays inline map
- * * Edit to open up bounds tracer
+ * * Edit to open up trail tracer
  * * Confirm to stage data into a Next.js compatible hidden input
  */
 type Props<
   Key extends string,
-  Model extends HasBoundsField<Key>,
+  Model extends HasTrailField<Key>,
   Schema extends Model
 > = {
   name: Key;
   state: IApiResponse<Model, Schema>;
+  bounds?: IBounds;
   center: ICoordinateLiteral;
   // Additional props to tracer
-  tracerProps?: Partial<React.ComponentProps<typeof BoundsTracer>>;
+  tracerProps?: Partial<React.ComponentProps<typeof TrailTracer>>;
 };
 
-type HasBoundsField<Key extends string> = {
-  [key in Key]?: IBounds;
+type HasTrailField<Key extends string> = {
+  [key in Key]?: ITrail;
 };
 
-function toIBounds(bounds: Leaflet.LatLngBounds): IBounds {
-  return {
-    topLeft: bounds.getNorthWest(),
-    bottomRight: bounds.getSouthEast(),
-  };
-}
-
-export type BoundsFieldType = typeof BoundsField;
-export default function BoundsField<
+export type TrailFieldType = typeof TrailField;
+export default function TrailField<
   Key extends string,
-  Model extends HasBoundsField<Key>,
+  Model extends HasTrailField<Key>,
   Schema extends Model
 >({ tracerProps, ...props }: Props<Key, Model, Schema>) {
   const [isUpdating, setUpdating] = useState(false);
-  const [current, setCurrent] = useState<IBounds | undefined>(
+  const [current, setCurrent] = useState<ITrail | undefined>(
     props.state.data![props.name]
-  );
-  // Outer bounds based on center, don't let bounds be too big
-  const outerBounds = toIBounds(
-    new Leaflet.LatLng(props.center.lat, props.center.lng).toBounds(8000)
   );
   const errText = props.state.fieldErrors?.[props.name]?.join(", ");
 
+  console.warn(props.name, current);
   if (!isUpdating) {
     return (
       <Grid container padding={1}>
         <Grid item xs={9}>
-          <Map bounds={outerBounds} style={{ paddingBottom: "50%" }}>
-            {current && <BoundsPolygon bounds={current} />}
+          <Map
+            bounds={props.bounds}
+            center={props.center}
+            style={{ paddingBottom: "50%" }}
+          >
+            <TrailPolygon trail={current} />
           </Map>
         </Grid>
         <Grid item>
@@ -86,10 +80,11 @@ export default function BoundsField<
   }
 
   return (
-    <BoundsTracer
+    <TrailTracer
       {...tracerProps}
-      mapBounds={outerBounds}
-      defaultBounds={current}
+      bounds={props.bounds}
+      center={props.center}
+      defaultTrail={current}
       onCancel={() => setUpdating(false)}
       onSubmit={(bounds) => {
         // TODO: Where to put client state?

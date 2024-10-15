@@ -3,57 +3,82 @@ import Map from "@/app/_components//explorer/map/Map";
 import FullScreen from "@/app/_components/layouts/OverMap";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import SearchField from "@/app/_components/search/SearchField";
-import BoundsPolygon from "@/app/_components/tracer/BoundsPolygon";
-import getRectangle from "@/app/_components/tracer/getRectangle";
+import TrailPolygon from "@/app/_components/tracer/TrailPolygon";
 import { Cancel, Check } from "@mui/icons-material";
 import * as Leaflet from "leaflet";
-import { Bounds, IBounds } from "models";
+import { IBounds, ICoordinateLiteral, ITrail, Trail } from "models";
 import * as React from "react";
 import { Circle, Polyline, useMapEvents } from "react-leaflet";
 
+const snapDistance = 1; // in meters -- adjust this value as needed
+
 /**
- * Top level view for BoundsTracer component
+ * Top level view for TrailTracer component
  *
- * BoundsTracer opens full screen, and allows user to click points on a map and save them
+ * TrailTracer opens full screen, and allows user to click points on a map and save them
  */
 
-interface BoundsTracerProps {
+interface TrailTracerProps {
   title?: string;
-  mapBounds: IBounds; // Bounds to use for this map specifically
-  defaultBounds?: IBounds; // Bounds to show on map
+  bounds?: IBounds;
+  center: ICoordinateLiteral;
+  defaultTrail?: ITrail; // Trail to show on map
   onCancel: React.MouseEventHandler;
-  onSubmit?: (b: IBounds) => unknown;
+  onSubmit?: (b: ITrail) => unknown;
   children?: React.ReactNode;
 }
 
-interface BoundsTracerState {
-  // A rectangle pending submit
-  pending?: IBounds;
-  // A start point of a currently being setup rectangle
+interface TrailTracerState {
+  // trail pending submit, just cares about lines
+  pending?: ITrail;
+  // A start point of a currently being setup line
   start?: Leaflet.LatLngLiteral;
-  // An end point of a currently being setup rectangle
+  // An end point of a currently being setup line
   end?: Leaflet.LatLngLiteral;
 }
 
-export default function BoundsTracer(props: BoundsTracerProps) {
-  const bounds = props.defaultBounds && new Bounds(props.defaultBounds);
-  const [state, setState] = React.useState<BoundsTracerState>({
-    ...(bounds ? { pending: bounds } : {}),
+export default function TrailTracer(props: TrailTracerProps) {
+  const trail = props.defaultTrail && new Trail(props.defaultTrail);
+  const [state, setState] = React.useState<TrailTracerState>({
+    ...(trail ? { pending: trail } : {}),
   });
 
+  const snapToExistingPoint = (point: Leaflet.LatLngLiteral) => {
+    if (!state.pending) return point;
+
+    for (const line of state.pending?.lines || []) {
+      if (Leaflet.latLng(line.start).distanceTo(point) < snapDistance) {
+        return line.start;
+      }
+      if (Leaflet.latLng(line.end).distanceTo(point) < snapDistance) {
+        return line.end;
+      }
+    }
+    return point;
+  };
+
   const handleClick = (e: Leaflet.LeafletMouseEvent) => {
+    // Magnet snap e.latlng to an existing point so that the user can easily connect lines
+    const snappedLatLng = snapToExistingPoint(e.latlng);
+
     // First point
     if (state.start === undefined) {
-      setState({
-        start: e.latlng,
-      });
+      setState((state) => ({
+        ...state,
+        start: snappedLatLng,
+      }));
       // Second point
     } else {
       setState((state) => ({
         ...state,
         start: undefined,
         end: undefined,
-        pending: { topLeft: state.start!, bottomRight: e.latlng },
+        pending: {
+          lines: [
+            ...(state.pending?.lines || []),
+            { start: state.start!, end: snappedLatLng },
+          ],
+        },
       }));
     }
   };
@@ -62,17 +87,10 @@ export default function BoundsTracer(props: BoundsTracerProps) {
     if (state.start !== undefined) {
       setState((state) => ({
         ...state,
-        end: e.latlng,
+        end: snapToExistingPoint(e.latlng),
       }));
     }
   };
-
-  function getPending() {
-    if (!state.pending) {
-      return;
-    }
-    return <Polyline positions={getRectangle(state.pending)} color="green" />;
-  }
 
   function getCurrent() {
     return (
@@ -89,10 +107,7 @@ export default function BoundsTracer(props: BoundsTracerProps) {
         {state.start && state.end && (
           <Polyline
             key="current-line"
-            positions={getRectangle({
-              topLeft: state.start,
-              bottomRight: state.end,
-            })}
+            positions={[state.start, state.end]}
             color="red"
           />
         )}
@@ -107,7 +122,7 @@ export default function BoundsTracer(props: BoundsTracerProps) {
           header={
             <SearchField
               disabled
-              value={props.title || "Click twice to make a rectangle"}
+              value={props.title || "Click twice to add a line"}
               onClickPrepend={props.onCancel}
               prepend={<Cancel />}
               append={<Check />}
@@ -121,13 +136,17 @@ export default function BoundsTracer(props: BoundsTracerProps) {
         />
       </FullScreen>
       <FullScreen zIndex={1000}>
-        <Map bounds={props.mapBounds} style={{ height: "100vh" }}>
+        <Map
+          center={props.center}
+          bounds={props.bounds}
+          style={{ height: "100vh" }}
+        >
           <EventsHandler
             handleClick={handleClick}
             handleMouseMove={handleMouseMove}
           />
           {getCurrent()}
-          <BoundsPolygon bounds={state.pending} />
+          <TrailPolygon trail={state.pending} />
           {props.children}
         </Map>
       </FullScreen>
