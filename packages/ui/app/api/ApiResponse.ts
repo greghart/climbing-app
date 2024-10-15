@@ -52,6 +52,7 @@ class ApiResponse<Model, Schema, Meta = {}> {
     const flatten = fields.error!.flatten();
     this.fieldErrors = flatten.fieldErrors;
     this.errors = (this.errors || []).concat(flatten.formErrors);
+    console.warn("zerr", this.toJSON());
     return this;
   }
 

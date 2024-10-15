@@ -1,5 +1,4 @@
-import * as Leaflet from "leaflet";
-import { Coordinate, IBounds } from "models";
+import { IBounds, ICoordinateLiteral } from "models";
 import React from "react";
 import { MapContainer, ZoomControl } from "react-leaflet";
 import BestTileLayer from "./BestTilerLayer";
@@ -9,12 +8,13 @@ import "leaflet/dist/leaflet.css";
 
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 
+import resolveBounds from "@/app/_util/resolveBounds";
 import "leaflet-defaulticon-compatibility";
 
 interface Props
   extends Omit<React.ComponentProps<typeof MapContainer>, "bounds" | "center"> {
   bounds?: IBounds;
-  center?: Coordinate;
+  center?: ICoordinateLiteral;
 }
 
 /**
@@ -25,15 +25,8 @@ interface Props
  * TODO: Persist map state in URL so transitions keep things in place
  */
 export default function Map({ bounds, center, ...props }: Props) {
-  let resolvedBounds: Leaflet.LatLngBounds;
-  if (bounds) {
-    resolvedBounds = Leaflet.latLngBounds(
-      Leaflet.latLng(bounds.topLeft),
-      Leaflet.latLng(bounds.bottomRight)
-    );
-  } else if (center) {
-    resolvedBounds = new Leaflet.LatLng(center.lat, center.lng).toBounds(8000);
-  } else {
+  const resolvedBounds = resolveBounds(bounds, center);
+  if (!resolvedBounds) {
     return <>No center or bounds supplied</>;
   }
 

@@ -28,12 +28,19 @@ export default function formAction<
   ) => {
     const res = new Response(prevState);
 
-    const validatedFields = schema.safeParse(
-      Array.from(formData.entries()).reduce((acc, [key, value]) => {
-        acc[key] = value;
+    const data = Array.from(formData.entries()).reduce((acc, [key, value]) => {
+      // Next.js metadata
+      if (key.startsWith("$ACTION")) {
         return acc;
-      }, {} as any)
-    ) as z.SafeParseReturnType<Schema, Schema>;
+      }
+      acc[key] = value;
+      return acc;
+    }, {} as any);
+
+    const validatedFields = schema.safeParse(data) as z.SafeParseReturnType<
+      Schema,
+      Schema
+    >;
 
     // Return early if the form data is invalid
     if (!validatedFields.success) {

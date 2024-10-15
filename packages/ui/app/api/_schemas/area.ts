@@ -1,4 +1,5 @@
-import { coordinate, json } from "@/app/api/_schemas";
+import coordinate from "@/app/api/_schemas/coordinate";
+import json from "@/app/api/_schemas/json";
 import { z } from "zod";
 
 const areaSchema = z.object({

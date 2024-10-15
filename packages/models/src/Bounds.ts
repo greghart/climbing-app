@@ -17,7 +17,7 @@ class Bounds {
   topLeft: Coordinate;
   bottomRight: Coordinate;
 
-  static build(data?: IBounds) {
+  static build(data?: Partial<IBounds>) {
     if (isBounds(data)) {
       return new Bounds(data);
     }

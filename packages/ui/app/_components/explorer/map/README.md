@@ -5,4 +5,4 @@ by default client components *still* render on both server and client, the forme
 for server side rendering to send built html to the frontend. 
 
 Since leaflet is basically never going to work on server, we have to block
-this using dynamic import, which we abstract away with the `_Map` convention.
+this using dynamic import, which we abstract away with the underscore `_Component` convention.
