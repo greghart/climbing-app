@@ -1,16 +1,17 @@
 "use client";
 import Map from "@/app/_components//explorer/map/Map";
+import EventsHandler from "@/app/_components/EventsHandler";
 import FullScreen from "@/app/_components/layouts/OverMap";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import SearchField from "@/app/_components/search/SearchField";
-import TrailPolygon from "@/app/_components/tracer/TrailPolygon";
+import TrailPolyline from "@/app/_components/tracer/_TrailPolyline";
 import { Cancel, Check } from "@mui/icons-material";
 import * as Leaflet from "leaflet";
 import { IBounds, ICoordinateLiteral, ITrail, Trail } from "models";
 import * as React from "react";
-import { Circle, Polyline, useMapEvents } from "react-leaflet";
+import { Circle, Polyline, Tooltip } from "react-leaflet";
 
-const snapDistance = 1; // in meters -- adjust this value as needed
+const snapDistance = 2; // in meters -- adjust this value as needed
 
 /**
  * Top level view for TrailTracer component
@@ -57,7 +58,10 @@ export default function TrailTracer(props: TrailTracerProps) {
     return point;
   };
 
+  // Click to add points and lines
   const handleClick = (e: Leaflet.LeafletMouseEvent) => {
+    if (e.originalEvent.ctrlKey) return;
+
     // Magnet snap e.latlng to an existing point so that the user can easily connect lines
     const snappedLatLng = snapToExistingPoint(e.latlng);
 
@@ -74,6 +78,7 @@ export default function TrailTracer(props: TrailTracerProps) {
         start: undefined,
         end: undefined,
         pending: {
+          ...state.pending,
           lines: [
             ...(state.pending?.lines || []),
             { start: state.start!, end: snappedLatLng },
@@ -83,6 +88,7 @@ export default function TrailTracer(props: TrailTracerProps) {
     }
   };
 
+  // Move mouse to preview the current line being drawn
   const handleMouseMove = (e: Leaflet.LeafletMouseEvent) => {
     if (state.start !== undefined) {
       setState((state) => ({
@@ -109,6 +115,7 @@ export default function TrailTracer(props: TrailTracerProps) {
             key="current-line"
             positions={[state.start, state.end]}
             color="red"
+            weight={3}
           />
         )}
       </React.Fragment>
@@ -141,29 +148,38 @@ export default function TrailTracer(props: TrailTracerProps) {
           bounds={props.bounds}
           style={{ height: "100vh" }}
         >
-          <EventsHandler
-            handleClick={handleClick}
-            handleMouseMove={handleMouseMove}
-          />
+          <EventsHandler click={handleClick} mousemove={handleMouseMove} />
           {getCurrent()}
-          <TrailPolygon trail={state.pending} />
+          {/** Separate lines that can be removed */}
+          {(state.pending?.lines || []).map((l, i) => (
+            <TrailPolyline
+              key={[l.start.lat, l.start.lng, l.end.lat, l.end.lng].join(",")}
+              lines={[l]}
+              /** Increase weight since user can interact with them */
+              weight={6}
+              eventHandlers={{
+                click: (e) => {
+                  if (e.originalEvent.ctrlKey) {
+                    const check = JSON.stringify(l);
+                    setState((state) => ({
+                      ...state,
+                      pending: {
+                        ...state.pending,
+                        lines: state.pending!.lines!.filter(
+                          (line) => JSON.stringify(line) !== check
+                        ),
+                      },
+                    }));
+                  }
+                },
+              }}
+            >
+              <Tooltip sticky>Ctrl click to delete line</Tooltip>
+            </TrailPolyline>
+          ))}
           {props.children}
         </Map>
       </FullScreen>
     </>
   );
-}
-
-// Map is a singleton so attach events through hook
-interface eventHandlerProps {
-  handleClick: (e: Leaflet.LeafletMouseEvent) => void;
-  handleMouseMove: (e: Leaflet.LeafletMouseEvent) => void;
-}
-
-function EventsHandler(props: eventHandlerProps) {
-  useMapEvents({
-    click: props.handleClick,
-    mousemove: props.handleMouseMove,
-  });
-  return null;
 }

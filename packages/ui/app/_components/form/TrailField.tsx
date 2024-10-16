@@ -1,6 +1,6 @@
 "use client";
 import Map from "@/app/_components/explorer/map/Map";
-import TrailPolygon from "@/app/_components/tracer/TrailPolygon";
+import TrailPolyline from "@/app/_components/tracer/TrailPolyline";
 import TrailTracer from "@/app/_components/tracer/TrailTracer";
 import { IApiResponse } from "@/app/api/ApiResponse.js";
 import { Edit } from "@mui/icons-material";
@@ -53,7 +53,7 @@ export default function TrailField<
             center={props.center}
             style={{ paddingBottom: "50%" }}
           >
-            <TrailPolygon trail={current} />
+            <TrailPolyline lines={current?.lines} />
           </Map>
         </Grid>
         <Grid item>
