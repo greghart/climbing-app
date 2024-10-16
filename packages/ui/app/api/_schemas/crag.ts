@@ -13,6 +13,7 @@ const cragSchema = z.object({
   trail: schemas.json.stringNullish.pipe(
     z
       .object({
+        id: z.number().optional(),
         lines: z.array(schemas.line),
       })
       .optional()
