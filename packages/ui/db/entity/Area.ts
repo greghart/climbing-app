@@ -1,6 +1,7 @@
 import { cascadeManyToOne, cascadeOneToMany } from "@/db/cascadeOptions";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { BoulderSchema } from "@/db/entity/Boulder";
+import { CommentableSchema } from "@/db/entity/Commentable";
 import { type CragSchema } from "@/db/entity/Crag";
 import { type PolygonSchema } from "@/db/entity/Polygon";
 import { type IArea } from "models";
@@ -10,6 +11,7 @@ export type AreaSchema = IArea & {
   polygon?: PolygonSchema;
   crag?: CragSchema;
   boulders?: BoulderSchema[];
+  commentable?: CommentableSchema;
 };
 
 const Area = new EntitySchema<AreaSchema>({
@@ -42,6 +44,13 @@ const Area = new EntitySchema<AreaSchema>({
       joinColumn: true,
       onDelete: "SET NULL",
       cascade: ["insert", "update"],
+    },
+    commentable: {
+      type: "one-to-one",
+      nullable: true,
+      target: "commentable",
+      onDelete: "SET NULL",
+      joinColumn: true,
     },
   },
 });

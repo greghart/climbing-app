@@ -42,11 +42,12 @@ function getRedirect(
   commentable: CommentableSchema,
   comment: CommentSchema
 ): string {
-  console.warn("getRedirect", { commentable, comment });
   const tokens = commentable.descriptor.split("-");
   if (tokens.length != 2) return "";
   if (tokens[0] === "crag")
     return `/crags/${tokens[1]}/comments?highlight=${comment.id}`;
+  if (tokens[0] === "area")
+    return `/areas/${tokens[1]}/comments?highlight=${comment.id}`;
   return "";
 }
 

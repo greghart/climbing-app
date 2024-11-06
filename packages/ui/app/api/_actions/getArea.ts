@@ -1,12 +1,12 @@
+import { Area, getDataSource } from "@/db";
 import { cache } from "react";
-import { getDataSource, Area } from "@/db";
 import "server-only";
 
-const getArea = cache(async (id: number | string) => {
+const getArea = cache(async (id: number) => {
   console.log("Getting area", id);
   const ds = await getDataSource();
   return ds.getRepository(Area).findOne({
-    where: [{ name: id as string }, { id: id as number }],
+    where: { id },
     relations: [
       "crag",
       "polygon",

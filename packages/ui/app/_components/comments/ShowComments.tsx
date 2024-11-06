@@ -1,3 +1,4 @@
+import CommentListItem from "@/app/_components/comments/CommentListItem";
 import { AddComment } from "@mui/icons-material";
 import {
   List,
@@ -6,7 +7,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { IComment, ICommentable } from "models";
+import { ICommentable } from "models";
 import Link from "next/link";
 
 interface Props {
@@ -25,7 +26,7 @@ function ShowComments(props: Props) {
         </ListItem>
       )}
       {comments.map((thisComment) => {
-        return <Comment key={thisComment.id} comment={thisComment} />;
+        return <CommentListItem key={thisComment.id} comment={thisComment} />;
       })}
       <Link href="comments/new">
         <ListItemButton>
@@ -36,17 +37,6 @@ function ShowComments(props: Props) {
         </ListItemButton>
       </Link>
     </List>
-  );
-}
-
-function Comment(props: { comment: IComment }) {
-  return (
-    <ListItem>
-      <ListItemText
-        primary={props.comment.text}
-        secondary={`Saved at ${props.comment.updatedAt}`}
-      />
-    </ListItem>
   );
 }
 

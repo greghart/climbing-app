@@ -17,7 +17,8 @@ export default function formAction<
   schema: z.SomeZodObject,
   action: (
     res: ApiResponse<Model, Schema, Meta>,
-    data: Schema
+    data: Schema,
+    prevState: IApiResponse<Model, Schema, Meta>
   ) => Promise<ApiResponse<Model, Schema, Meta>>
 ): formActionHandler<Model, Schema, Meta> {
   class Response extends ApiResponse<Model, Schema, Meta> {}
@@ -46,7 +47,7 @@ export default function formAction<
     if (!validatedFields.success) {
       return res.zerr(validatedFields).toJSON();
     }
-    return (await action(res, validatedFields.data)).toJSON();
+    return (await action(res, validatedFields.data, prevState)).toJSON();
   };
 }
 

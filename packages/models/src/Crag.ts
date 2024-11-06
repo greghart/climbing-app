@@ -1,6 +1,3 @@
-// import Coordinate, { CoordinateOptional } from "./Coordinate.js";
-// import Commentable from "./Commentable.js";
-// import Trail from "./Trail.js";
 import Area, { type IArea } from "./Area.js";
 import Bounds, { type IBounds } from "./Bounds.js";
 import type { ICommentable } from "./Commentable.js";

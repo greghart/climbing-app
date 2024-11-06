@@ -1,4 +1,5 @@
 import Boulder, { type IBoulder } from "./Boulder.js";
+import type { ICommentable } from "./Commentable.js";
 import Crag, { type ICrag } from "./Crag.js";
 import Polygon, { type IPolygon } from "./Polygon.js";
 
@@ -6,9 +7,12 @@ export interface IArea {
   id?: number;
   name: string;
   description?: string;
+
+  // Associations
   crag?: ICrag; // EXAMPLE: domain, always belongs to a crag, in code, not always available
   polygon?: IPolygon;
   boulders?: IBoulder[];
+  commentable?: ICommentable;
 }
 
 interface Area extends Omit<IArea, "center"> {}
