@@ -14,11 +14,6 @@ interface Props {
   action: typeof createComment;
 }
 
-/**
- * Some design notes
- * If we want client side validation, we basically need to use client code
- * and can't do `<form action />`
- */
 export default function CommentForm(props: Props) {
   const [state, formAction, meta] = useFormState(props.action, {
     ok: true,

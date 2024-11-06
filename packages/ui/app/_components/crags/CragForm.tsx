@@ -13,11 +13,6 @@ interface Props {
   crag: ICrag;
 }
 
-/**
- * Some design notes
- * If we want client side validation, we basically need to use client code
- * and can't do `<form action />`
- */
 export default function CragForm(props: Props) {
   const crag = new Crag(props.crag);
   const [state, formAction, meta] = useFormState(updateCrag, {

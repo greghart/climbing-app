@@ -43,7 +43,6 @@ export default function TrailField<
   );
   const errText = props.state.fieldErrors?.[props.name]?.join(", ");
 
-  console.warn(props.name, current);
   if (!isUpdating) {
     return (
       <Grid container padding={1}>
@@ -87,7 +86,6 @@ export default function TrailField<
       defaultTrail={current}
       onCancel={() => setUpdating(false)}
       onSubmit={(bounds) => {
-        // TODO: Where to put client state?
         setCurrent(bounds);
         setUpdating(false);
       }}

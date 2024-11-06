@@ -16,11 +16,6 @@ interface Props<Meta> {
   meta: Meta;
 }
 
-/**
- * Some design notes
- * If we want client side validation, we basically need to use client code
- * and can't do `<form action />`
- */
 export default function CragForm<Meta>(props: Props<Meta>) {
   const crag = new Crag(props.crag);
   const [state, formAction, meta] = useFormState(updateCrag, {
