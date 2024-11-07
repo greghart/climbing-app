@@ -1,10 +1,10 @@
+import finderByID from "@/app/_util/finderByID";
 import getArea from "@/app/api/_actions/getArea";
-import { notFound } from "next/navigation";
 import ClientPage from "./ClientPage";
 
+const getter = finderByID(getArea);
 export default async function page({ params }: { params: { areaId: string } }) {
-  const area = await getArea(params.areaId);
-  if (!area) notFound();
+  const area = await getter(params.areaId);
 
   return <ClientPage area={area} />;
 }

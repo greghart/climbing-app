@@ -1,23 +1,11 @@
 import AreaShowOverview from "@/app/_components/areas/AreaShowOverview";
-import ShowLayout from "@/app/_components/show/ShowLayout";
+import finderByID from "@/app/_util/finderByID";
 import getArea from "@/app/api/_actions/getArea";
-import { notFound } from "next/navigation";
+
+const getter = finderByID(getArea);
 
 export default async function Page({ params }: { params: { areaId: string } }) {
-  const area = await getArea(params.areaId);
-  if (!area) notFound();
+  const area = await getter(params.areaId)!;
 
-  return (
-    <ShowLayout
-      headerProps={{
-        title: area.name,
-        href: `/areas/${area.id}/explorer`,
-      }}
-      tabsProps={{
-        basePath: `/areas/${area.id}`,
-      }}
-    >
-      <AreaShowOverview area={area} />
-    </ShowLayout>
-  );
+  return <AreaShowOverview area={area} />;
 }

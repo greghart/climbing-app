@@ -4,7 +4,6 @@ import { cache } from "react";
 import "server-only";
 
 const getCrag = cache(async (id: number | string) => {
-  console.log("Getting crag", id);
   const ds = await getDataSource();
   // Crag IDs for client can also be name
   return ds

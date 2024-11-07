@@ -3,7 +3,6 @@ import { cache } from "react";
 import "server-only";
 
 const getArea = cache(async (id: number) => {
-  console.log("Getting area", id);
   const ds = await getDataSource();
   return ds.getRepository(Area).findOne({
     where: { id },

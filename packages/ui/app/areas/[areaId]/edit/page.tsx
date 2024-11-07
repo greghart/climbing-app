@@ -1,13 +1,13 @@
 "use server";
 
 import AreaForm from "@/app/_components/areas/AreaForm";
+import finderByID from "@/app/_util/finderByID";
 import getArea from "@/app/api/_actions/getArea";
 import updateArea from "@/app/api/_actions/updateArea";
-import { notFound } from "next/navigation";
 
+const getter = finderByID(getArea);
 export default async function Page({ params }: { params: { areaId: string } }) {
-  const area = await getArea(params.areaId);
-  if (!area) notFound();
+  const area = await getter(params.areaId);
 
   return (
     <AreaForm

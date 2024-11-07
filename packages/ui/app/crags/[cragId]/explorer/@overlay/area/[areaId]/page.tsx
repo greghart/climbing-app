@@ -1,12 +1,12 @@
 import Area from "@/app/_components/explorer/overlay/Area";
 import Breadcrumbs from "@/app/_components/explorer/overlay/Breadcrumbs";
 import Drawer from "@/app/_components/explorer/overlay/Drawer";
+import finderByID from "@/app/_util/finderByID";
 import getArea from "@/app/api/_actions/getArea";
-import { notFound } from "next/navigation";
 
+const getter = finderByID(getArea);
 export default async function page({ params }: { params: { areaId: string } }) {
-  const area = await getArea(params.areaId);
-  if (!area) notFound();
+  const area = await getter(params.areaId);
 
   return (
     <Drawer
