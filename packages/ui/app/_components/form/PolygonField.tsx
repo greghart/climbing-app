@@ -1,56 +1,43 @@
 "use client";
 import Map from "@/app/_components/explorer/map/Map";
-import BoundsPolygon from "@/app/_components/tracer/BoundsPolygon";
-import BoundsTracer from "@/app/_components/tracer/BoundsTracer";
+import MyPolygon from "@/app/_components/explorer/map/MyPolygon";
+import PolygonTracer from "@/app/_components/tracer/PolygonTracer";
 import { IApiResponse } from "@/app/api/ApiResponse.js";
 import { Edit } from "@mui/icons-material";
 import { Button, FormHelperText, Grid } from "@mui/material";
-import * as Leaflet from "leaflet";
-import { IBounds, ICoordinateLiteral } from "models";
+import { IPolygon } from "models";
 import { useState } from "react";
 
 /**
- * Climbing app map bounds field
+ * Climbing app map polygon field
  * * Displays inline map
- * * Edit to open up bounds tracer
+ * * Edit to open up polygon tracer
  * * Confirm to stage data into a Next.js compatible hidden input
  */
 type Props<
   Key extends string,
-  Model extends HasBoundsField<Key>,
+  Model extends HasPolygonField<Key>,
   Schema extends Model
 > = {
   name: Key;
   state: IApiResponse<Model, Schema>;
-  center: ICoordinateLiteral;
-  // Additional props to tracer
-  tracerProps?: Partial<React.ComponentProps<typeof BoundsTracer>>;
+  MapProps: React.ComponentProps<typeof Map>;
+  TracerProps?: Partial<React.ComponentProps<typeof PolygonTracer>>;
 };
 
-type HasBoundsField<Key extends string> = {
-  [key in Key]?: IBounds;
+type HasPolygonField<Key extends string> = {
+  [key in Key]?: IPolygon;
 };
 
-function toIBounds(bounds: Leaflet.LatLngBounds): IBounds {
-  return {
-    topLeft: bounds.getNorthWest(),
-    bottomRight: bounds.getSouthEast(),
-  };
-}
-
-export type BoundsFieldType = typeof BoundsField;
-export default function BoundsField<
+export type PolygonFieldType = typeof PolygonField;
+export default function PolygonField<
   Key extends string,
-  Model extends HasBoundsField<Key>,
+  Model extends HasPolygonField<Key>,
   Schema extends Model
->({ tracerProps, ...props }: Props<Key, Model, Schema>) {
+>({ TracerProps, MapProps, ...props }: Props<Key, Model, Schema>) {
   const [isUpdating, setUpdating] = useState(false);
-  const [current, setCurrent] = useState<IBounds | undefined>(
+  const [current, setCurrent] = useState<IPolygon | undefined>(
     props.state.data![props.name]
-  );
-  // Outer bounds based on center, don't let bounds be too big
-  const outerBounds = toIBounds(
-    new Leaflet.LatLng(props.center.lat, props.center.lng).toBounds(8000)
   );
   const errText = props.state.fieldErrors?.[props.name]?.join(", ");
 
@@ -58,8 +45,8 @@ export default function BoundsField<
     return (
       <Grid container padding={1}>
         <Grid item xs={9}>
-          <Map bounds={outerBounds} style={{ paddingBottom: "50%" }}>
-            {current && <BoundsPolygon bounds={current} />}
+          <Map {...MapProps} style={{ paddingBottom: "50%" }}>
+            <MyPolygon positions={current?.coordinates || []} />
           </Map>
         </Grid>
         <Grid item>
@@ -86,13 +73,12 @@ export default function BoundsField<
   }
 
   return (
-    <BoundsTracer
-      {...tracerProps}
-      mapBounds={outerBounds}
-      defaultBounds={current}
+    <PolygonTracer
+      {...MapProps}
+      {...TracerProps}
+      defaultPolygon={current}
       onCancel={() => setUpdating(false)}
       onSubmit={(bounds) => {
-        // TODO: Where to put client state?
         setCurrent(bounds);
         setUpdating(false);
       }}

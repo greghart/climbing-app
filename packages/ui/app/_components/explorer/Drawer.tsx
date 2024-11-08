@@ -42,7 +42,7 @@ export default function Drawer(props: Props) {
       >
         <Box p={2} className="h-100 bg-light" width="80vw">
           <SearchField
-            onClickPrepend={toggleDrawer(false)}
+            PrependButtonProps={{ onClick: toggleDrawer(false) }}
             inputProps={{ value: props.title }}
           />
           {props.sidebarChildren}

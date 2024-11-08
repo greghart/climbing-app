@@ -1,11 +1,12 @@
 "use client";
+import PolygonField from "@/app/_components/form/PolygonField";
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
 import useFormState from "@/app/_components/form/useFormState";
 import areaSchema from "@/app/api/_schemas/area";
 import { formActionHandler } from "@/app/api/formAction";
-import { Stack } from "@mui/material";
+import { FormHelperText, InputLabel, Stack } from "@mui/material";
 import { Crag, IArea, ICrag } from "models";
 import { z } from "zod";
 
@@ -16,7 +17,7 @@ interface Props<Meta> {
   meta: Meta;
 }
 
-export default function AreaForm<Meta>(props: Props<Meta>) {
+export default function AreaForm<Meta extends {}>(props: Props<Meta>) {
   const crag = new Crag(props.crag);
   const [state, formAction, meta] = useFormState(props.action, {
     ok: true,
@@ -35,7 +36,15 @@ export default function AreaForm<Meta>(props: Props<Meta>) {
           rows={3}
           defaultValue={state.data!.description}
         />
-        {/** Polygon field */}
+        <InputLabel>Polygon</InputLabel>
+        <PolygonField
+          state={state}
+          name="polygon"
+          MapProps={{ center: crag.center, bounds: crag.bounds }}
+        />
+        <FormHelperText>
+          Dictates the bounds of the crag for map purposes
+        </FormHelperText>
         <SubmitButton />
       </Stack>
     </form>

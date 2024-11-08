@@ -3,11 +3,9 @@ import omit from "lodash-es/omit";
 import React from "react";
 
 type Props = React.ComponentProps<typeof TextField> & {
-  onClickPrepend?: React.MouseEventHandler<any>;
-  onClickAppend?: React.MouseEventHandler<any>;
-  // Prepend and append are always icon buttons
-  prepend?: React.ReactNode;
-  append?: React.ReactNode;
+  // Props for prepend/append icon buttons, if any
+  PrependButtonProps?: React.ComponentProps<typeof IconButton>;
+  AppendButtonProps?: React.ComponentProps<typeof IconButton>;
 };
 /**
  * Our searcher is always part of a basic group
@@ -31,18 +29,14 @@ export default function SearchField(props: Props) {
       {...omit(props, "onClickPrepend", "onClickAppend", "prepend", "append")}
       InputProps={{
         ...props.InputProps,
-        startAdornment: props.prepend && (
+        startAdornment: props.PrependButtonProps && (
           <InputAdornment position="start">
-            <IconButton onClick={props.onClickPrepend}>
-              {props.prepend}
-            </IconButton>
+            <IconButton {...props.PrependButtonProps} />
           </InputAdornment>
         ),
-        endAdornment: props.append && (
+        endAdornment: props.AppendButtonProps && (
           <InputAdornment position="end">
-            <IconButton onClick={props.onClickAppend}>
-              {props.append}
-            </IconButton>
+            <IconButton {...props.AppendButtonProps} />
           </InputAdornment>
         ),
       }}

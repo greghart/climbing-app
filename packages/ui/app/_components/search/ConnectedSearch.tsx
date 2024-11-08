@@ -10,7 +10,6 @@ const ConnectedSearch = (props: React.ComponentProps<typeof SearchField>) => {
     "search",
     searchParamsParsers.search
   );
-  console.warn("ConnectedSearch", search);
   return (
     <SearchField
       placeholder="Search by area, boulder, or route"

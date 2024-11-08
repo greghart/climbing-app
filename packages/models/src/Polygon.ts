@@ -1,6 +1,5 @@
 import type { IArea } from "./Area.js";
-import type { ICoordinate } from "./Coordinate.js";
-import Coordinate from "./Coordinate.js";
+import Coordinate, { type ICoordinateLiteral } from "./Coordinate.js";
 
 /**
  * Polygon to model a first class polygon
@@ -12,7 +11,7 @@ export interface IPolygon {
   // entity this polygon is describing.
   descriptor?: string;
 
-  coordinates?: ICoordinate[];
+  coordinates?: ICoordinateLiteral[];
 
   // Associations
   area?: IArea;

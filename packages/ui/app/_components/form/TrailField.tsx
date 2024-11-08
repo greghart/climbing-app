@@ -24,7 +24,7 @@ type Props<
   bounds?: IBounds;
   center: ICoordinateLiteral;
   // Additional props to tracer
-  tracerProps?: Partial<React.ComponentProps<typeof TrailTracer>>;
+  TracerProps?: Partial<React.ComponentProps<typeof TrailTracer>>;
 };
 
 type HasTrailField<Key extends string> = {
@@ -36,7 +36,7 @@ export default function TrailField<
   Key extends string,
   Model extends HasTrailField<Key>,
   Schema extends Model
->({ tracerProps, ...props }: Props<Key, Model, Schema>) {
+>({ TracerProps, ...props }: Props<Key, Model, Schema>) {
   const [isUpdating, setUpdating] = useState(false);
   const [current, setCurrent] = useState<ITrail | undefined>(
     props.state.data![props.name]
@@ -80,9 +80,8 @@ export default function TrailField<
 
   return (
     <TrailTracer
-      {...tracerProps}
-      bounds={props.bounds}
-      center={props.center}
+      {...TracerProps}
+      MapProps={{ center: props.center, bounds: props.bounds }}
       defaultTrail={current}
       onCancel={() => setUpdating(false)}
       onSubmit={(bounds) => {

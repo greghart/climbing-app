@@ -7,7 +7,7 @@ import SearchField from "@/app/_components/search/SearchField";
 import TrailPolyline from "@/app/_components/tracer/_TrailPolyline";
 import { Cancel, Check } from "@mui/icons-material";
 import * as Leaflet from "leaflet";
-import { IBounds, ICoordinateLiteral, ITrail, Trail } from "models";
+import { ITrail, Trail } from "models";
 import * as React from "react";
 import { Circle, Polyline, Tooltip } from "react-leaflet";
 
@@ -21,8 +21,7 @@ const snapDistance = 2; // in meters -- adjust this value as needed
 
 interface TrailTracerProps {
   title?: string;
-  bounds?: IBounds;
-  center: ICoordinateLiteral;
+  MapProps: React.ComponentProps<typeof Map>;
   defaultTrail?: ITrail; // Trail to show on map
   onCancel: React.MouseEventHandler;
   onSubmit?: (b: ITrail) => unknown;
@@ -98,7 +97,7 @@ export default function TrailTracer(props: TrailTracerProps) {
     }
   };
 
-  function getCurrent() {
+  const getCurrent = () => {
     return (
       <React.Fragment>
         {state.start && (
@@ -120,7 +119,7 @@ export default function TrailTracer(props: TrailTracerProps) {
         )}
       </React.Fragment>
     );
-  }
+  };
 
   return (
     <>
@@ -130,24 +129,23 @@ export default function TrailTracer(props: TrailTracerProps) {
             <SearchField
               disabled
               value={props.title || "Click twice to add a line"}
-              onClickPrepend={props.onCancel}
-              prepend={<Cancel />}
-              append={<Check />}
-              onClickAppend={() => {
-                if (state.pending) {
-                  props.onSubmit && props.onSubmit(state.pending);
-                }
+              PrependButtonProps={{
+                onClick: props.onCancel,
+                children: <Cancel />,
+              }}
+              AppendButtonProps={{
+                onClick: () =>
+                  state.pending &&
+                  props.onSubmit &&
+                  props.onSubmit(state.pending),
+                children: <Check />,
               }}
             />
           }
         />
       </FullScreen>
       <FullScreen zIndex={1000}>
-        <Map
-          center={props.center}
-          bounds={props.bounds}
-          style={{ height: "100vh" }}
-        >
+        <Map {...props.MapProps} style={{ height: "100vh" }}>
           <EventsHandler click={handleClick} mousemove={handleMouseMove} />
           {getCurrent()}
           {/** Separate lines that can be removed */}

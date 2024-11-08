@@ -12,15 +12,18 @@ interface Props {
 export default function CragMap(props: Props) {
   const routeTo = useRouteTo({ includeSearchParams: true });
   const pathName = usePathname();
+  // TODO: Refactor separate map components and explorer components
+  // for easier re-use and composition
+  // Eg. in PolygonField/PolygonTracer, we have to re-seed the crag info down, versus just
+  // using something directly that is "A map bound to a crag"
+
+  // Ignore clicks on the map if we're already on explorer page
   const targetUrls = [
     `/crags/${props.crag.id}/explorer`,
     `/crags/${props.crag.name}/explorer`,
   ];
 
   return (
-    // <AnimationContext.Consumer>
-    //   {animation => (
-    //     <SlideUp {...animation} appear>
     <Map
       bounds={props.crag.bounds}
       center={props.crag.center}

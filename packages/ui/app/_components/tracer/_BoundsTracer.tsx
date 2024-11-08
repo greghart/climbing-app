@@ -19,7 +19,7 @@ import { Circle, Polyline, useMapEvents } from "react-leaflet";
 
 interface BoundsTracerProps {
   title?: string;
-  mapBounds: IBounds; // Bounds to use for this map specifically
+  MapProps: React.ComponentProps<typeof Map>;
   defaultBounds?: IBounds; // Bounds to show on map
   onCancel: React.MouseEventHandler;
   onSubmit?: (b: IBounds) => unknown;
@@ -67,14 +67,7 @@ export default function BoundsTracer(props: BoundsTracerProps) {
     }
   };
 
-  function getPending() {
-    if (!state.pending) {
-      return;
-    }
-    return <Polyline positions={getRectangle(state.pending)} color="green" />;
-  }
-
-  function getCurrent() {
+  const getCurrent = () => {
     return (
       <React.Fragment>
         {state.start && (
@@ -98,7 +91,7 @@ export default function BoundsTracer(props: BoundsTracerProps) {
         )}
       </React.Fragment>
     );
-  }
+  };
 
   return (
     <>
@@ -108,20 +101,24 @@ export default function BoundsTracer(props: BoundsTracerProps) {
             <SearchField
               disabled
               value={props.title || "Click twice to make a rectangle"}
-              onClickPrepend={props.onCancel}
-              prepend={<Cancel />}
-              append={<Check />}
-              onClickAppend={() => {
-                if (state.pending) {
-                  props.onSubmit && props.onSubmit(state.pending);
-                }
+              PrependButtonProps={{
+                children: <Cancel />,
+                onClick: props.onCancel,
+              }}
+              AppendButtonProps={{
+                children: <Check />,
+                onClick: () => {
+                  if (state.pending) {
+                    props.onSubmit && props.onSubmit(state.pending);
+                  }
+                },
               }}
             />
           }
         />
       </FullScreen>
       <FullScreen zIndex={1000}>
-        <Map bounds={props.mapBounds} style={{ height: "100vh" }}>
+        <Map {...props.MapProps} style={{ height: "100vh" }}>
           <EventsHandler
             handleClick={handleClick}
             handleMouseMove={handleMouseMove}

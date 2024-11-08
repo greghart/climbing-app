@@ -1,6 +1,5 @@
-import React from "react";
 import { Area } from "models";
-import { sortBy } from "lodash-es";
+import React from "react";
 import MyPolygon from "./MyPolygon";
 
 type Props = Partial<React.ComponentProps<typeof MyPolygon>> & {
