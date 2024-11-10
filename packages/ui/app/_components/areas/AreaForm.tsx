@@ -1,4 +1,5 @@
 "use client";
+import AreasMap from "@/app/_components/explorer/map/AreasMap";
 import PolygonField from "@/app/_components/form/PolygonField";
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
@@ -40,7 +41,18 @@ export default function AreaForm<Meta extends {}>(props: Props<Meta>) {
         <PolygonField
           state={state}
           name="polygon"
-          MapProps={{ center: crag.center, bounds: crag.bounds }}
+          MapProps={{
+            center: crag.center,
+            bounds: crag.bounds,
+          }}
+          TracerProps={{
+            children: (
+              <AreasMap
+                areas={crag.areas?.filter((a) => a.id !== props.area!.id) || []}
+                AreaMapProps={{ onClick: undefined }}
+              />
+            ),
+          }}
         />
         <FormHelperText>
           Dictates the bounds of the crag for map purposes

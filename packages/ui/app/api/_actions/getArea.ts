@@ -8,6 +8,11 @@ const getArea = cache(async (id: number) => {
     where: { id },
     relations: [
       "crag",
+      // for polygon tracer / other areas map
+      "crag.areas",
+      "crag.areas.polygon",
+      "crag.areas.polygon.coordinates",
+      // end
       "polygon",
       "polygon.coordinates",
       "boulders",

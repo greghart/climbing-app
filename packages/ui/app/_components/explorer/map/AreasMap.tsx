@@ -5,6 +5,7 @@ import { Area } from "models";
 
 interface Props {
   areas: Area[];
+  AreaMapProps?: Omit<React.ComponentProps<typeof AreaMap>, "area">;
   // onAreaClick?: (area: Area, e: LeafletMouseEvent) => any;
 }
 
@@ -14,12 +15,12 @@ export default function AreasMap(props: Props) {
     return (
       <AreaMap
         key={area.name}
-        {...props}
         area={area}
         onClick={(e) => {
           routeTo(`/area/${area.id}`);
           return blockClicks(e);
         }}
+        {...props.AreaMapProps}
       />
     );
   });
