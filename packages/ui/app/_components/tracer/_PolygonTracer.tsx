@@ -33,29 +33,36 @@ interface PolygonTracerState {
 }
 
 export default function PolygonTracer(props: PolygonTracerProps) {
-  const snapDistance = props.snapDistance || 2; // Update this line
+  // TODO: System wide settings like snap distance for points
+  const snapDistance = props.snapDistance || 4; // in meters -- adjust this value as needed
   const [state, setState] = React.useState<PolygonTracerState>({
     points: props.defaultPolygon?.coordinates || [],
     isDone: (props.defaultPolygon?.coordinates || []).length > 0,
   });
+
+  // TODO: If client perf gets bad, store in a heap to make point lookups faster
+  const snapToStart = (point: Leaflet.LatLngLiteral) => {
+    if (state.points.length <= 2) {
+      // At least a triangle
+      return point;
+    }
+    if (Leaflet.latLng(state.points[0]).distanceTo(point) < snapDistance) {
+      return state.points[0];
+    }
+    return point;
+  };
 
   const handleClick = (e: Leaflet.LeafletMouseEvent) => {
     if (state.isDone) {
       return;
     }
     // If it's a "finishing" point, 'close' the polyline and set it as a polygon
-    if (
-      state.points.length > 2 &&
-      e.latlng.distanceTo(state.points[0]) < snapDistance
-    ) {
+    if (snapToStart(e.latlng) === state.points[0]) {
       const newPoints = state.points.concat([state.points[0]]);
       setState({
         points: newPoints,
         isDone: true,
       });
-      if (props.onSubmit) {
-        props.onSubmit({ coordinates: newPoints });
-      }
     } else {
       setState((state) => ({
         ...state,
@@ -67,8 +74,17 @@ export default function PolygonTracer(props: PolygonTracerProps) {
   const handleMouseMove = (e: Leaflet.LeafletMouseEvent) => {
     setState((state) => ({
       ...state,
-      current: e.latlng,
+      current: snapToStart(e.latlng),
     }));
+  };
+
+  const handleKeyPress = (e: Leaflet.LeafletKeyboardEvent) => {
+    if (e.originalEvent.key === "z" && state.points.length > 0) {
+      setState({
+        points: state.points.slice(0, -1),
+        isDone: false,
+      });
+    }
   };
 
   const getPoints = () => {
@@ -120,6 +136,7 @@ export default function PolygonTracer(props: PolygonTracerProps) {
           <EventsHandler
             handleClick={handleClick}
             handleMouseMove={handleMouseMove}
+            handleKeyPress={handleKeyPress}
           />
           {getPoints()}
           {props.children}
@@ -133,12 +150,14 @@ export default function PolygonTracer(props: PolygonTracerProps) {
 interface eventHandlerProps {
   handleClick: (e: Leaflet.LeafletMouseEvent) => void;
   handleMouseMove: (e: Leaflet.LeafletMouseEvent) => void;
+  handleKeyPress: (e: Leaflet.LeafletKeyboardEvent) => void;
 }
 
 function EventsHandler(props: eventHandlerProps) {
   useMapEvents({
     click: props.handleClick,
     mousemove: props.handleMouseMove,
+    keypress: props.handleKeyPress,
   });
   return null;
 }

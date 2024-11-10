@@ -26,7 +26,15 @@ export default function SearchField(props: Props) {
       hiddenLabel
       size="small"
       placeholder="Search by area, boulder, or route"
-      {...omit(props, "onClickPrepend", "onClickAppend", "prepend", "append")}
+      {...omit(
+        props,
+        "onClickPrepend",
+        "onClickAppend",
+        "prepend",
+        "append",
+        "PrependButtonProps",
+        "AppendButtonProps"
+      )}
       InputProps={{
         ...props.InputProps,
         startAdornment: props.PrependButtonProps && (

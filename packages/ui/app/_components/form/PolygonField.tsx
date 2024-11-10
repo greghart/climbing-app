@@ -74,7 +74,7 @@ export default function PolygonField<
 
   return (
     <PolygonTracer
-      {...MapProps}
+      MapProps={MapProps}
       {...TracerProps}
       defaultPolygon={current}
       onCancel={() => setUpdating(false)}
