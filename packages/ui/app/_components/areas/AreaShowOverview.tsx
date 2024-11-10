@@ -31,11 +31,12 @@ export default function AreaShowOverview(props: Props) {
             primary={
               <Breadcrumbs
                 crag={props.area.crag!}
-                area={props.area}
                 cragHref={`/crags/${props.area.crag!.id!}`}
                 cragIconHref={`/crags/${props.area.crag!.id!}/edit`}
                 cragIcon={<Edit />}
                 areaHref={`/areas/${props.area.id!}`}
+                areaIconHref={`/areas/${props.area.id!}/edit`}
+                areaIcon={<Edit />}
               />
             }
           />

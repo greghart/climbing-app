@@ -36,7 +36,6 @@ export default function SearchField(props: Props) {
         "AppendButtonProps"
       )}
       InputProps={{
-        ...props.InputProps,
         startAdornment: props.PrependButtonProps && (
           <InputAdornment position="start">
             <IconButton {...props.PrependButtonProps} />
@@ -47,6 +46,7 @@ export default function SearchField(props: Props) {
             <IconButton {...props.AppendButtonProps} />
           </InputAdornment>
         ),
+        ...props.InputProps,
       }}
     />
   );

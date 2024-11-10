@@ -12,6 +12,7 @@ const areaSchema = z.object({
   polygon: json.stringNullish
     .pipe(
       z.object({
+        id: z.number().optional(),
         coordinates: z.array(coordinate),
       })
     )

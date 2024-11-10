@@ -78,8 +78,8 @@ export default function PolygonField<
       {...TracerProps}
       defaultPolygon={current}
       onCancel={() => setUpdating(false)}
-      onSubmit={(bounds) => {
-        setCurrent(bounds);
+      onSubmit={(polygon) => {
+        setCurrent(polygon);
         setUpdating(false);
       }}
     />

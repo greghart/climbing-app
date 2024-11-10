@@ -38,14 +38,14 @@ export default function GoBackHeader({
   return (
     <Component
       {...props}
-      prepend={
-        href ? (
+      PrependButtonProps={{
+        children: href ? (
           <Link href={href}>{props.prepend || <ArrowBack />}</Link>
         ) : (
           props.prepend || <ArrowBack />
-        )
-      }
-      onClickPrepend={handleClickPrepend}
+        ),
+        onClick: handleClickPrepend,
+      }}
     />
   );
 }

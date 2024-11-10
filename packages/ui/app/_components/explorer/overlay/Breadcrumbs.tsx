@@ -15,6 +15,8 @@ interface Props {
   cragIconHref?: string;
   cragIcon?: React.ReactNode;
   areaHref?: string;
+  areaIconHref?: string;
+  areaIcon?: React.ReactNode;
   boulderHref?: string;
   routeHref?: string;
 }
@@ -30,7 +32,6 @@ function Centered(props: { left: React.ReactNode; right: React.ReactNode }) {
 
 export default function Breadcrumbs(props: Props) {
   const searchParamsPath = useSearchParamsPath();
-  const actionIcon = props.cragIcon || <Info />;
   return (
     <MUIBreadcrumbs>
       {props.crag && (
@@ -55,27 +56,40 @@ export default function Breadcrumbs(props: Props) {
               legacyBehavior
             >
               <Link underline="hover" color="inherit">
-                {actionIcon}
+                {props.cragIcon || <Info />}
               </Link>
             </NextLink>
           }
         />
       )}
       {props.area && (
-        <Grid item>
-          <NextLink
-            href={searchParamsPath(
-              props.areaHref ||
-                `/crags/${props.crag.id}/explorer/area/${props.area.id}`
-            )}
-            passHref
-            legacyBehavior
-          >
-            <Link underline="hover" color="inherit">
-              {props.area.name}
-            </Link>
-          </NextLink>
-        </Grid>
+        <Centered
+          left={
+            <NextLink
+              href={searchParamsPath(
+                props.areaHref ||
+                  `/crags/${props.crag.id}/explorer/area/${props.area.id}`
+              )}
+              passHref
+              legacyBehavior
+            >
+              <Link underline="hover" color="inherit">
+                {props.area.name}
+              </Link>
+            </NextLink>
+          }
+          right={
+            <NextLink
+              href={props.areaIconHref || `/areas/${props.area.id}`}
+              passHref
+              legacyBehavior
+            >
+              <Link underline="hover" color="inherit">
+                {props.areaIcon || <Info />}
+              </Link>
+            </NextLink>
+          }
+        />
       )}
       {props.area && props.boulder && (
         <Grid item>

@@ -23,18 +23,20 @@ const updateCrag = formAction<ICrag, z.infer<typeof cragSchema>>(
         return undefined;
       }
       await delay(500);
-      // Reset trail line order
-      if (crag.trail) {
-        const qb = transactionalEntityManager.createQueryBuilder();
-        await qb
-          .update("trail_line")
-          // Hacky way to safely keep valid order values free
-          // We want to re-use existing rows but need to avoid unique on (trail, order)
-          .set({ order: () => `${qb.escape("id")} + 10000` })
-          .where("trailId = :id", { id: crag.trail.id })
-          .execute();
-      }
+      // Set order of trail points to match array order
+      // TODO: Any way to do this automagically?
       if (data.trail) {
+        // Reset trail line order
+        if (crag.trail) {
+          const qb = transactionalEntityManager.createQueryBuilder();
+          await qb
+            .update("trail_line")
+            // Hacky way to safely keep valid order values free
+            // We want to re-use existing rows but need to avoid unique on (trail, order)
+            .set({ order: () => `${qb.escape("id")} + 10000` })
+            .where("trailId = :id", { id: crag.trail.id })
+            .execute();
+        }
         data.trail = {
           ...data.trail,
           lines: data.trail.lines.map((line, i) => ({
