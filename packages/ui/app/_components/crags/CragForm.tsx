@@ -36,7 +36,7 @@ export default function CragForm(props: Props) {
         <BoundsField
           state={state}
           name="bounds"
-          center={crag.center}
+          crag={crag}
           TracerProps={{
             children: (
               <AreasMap

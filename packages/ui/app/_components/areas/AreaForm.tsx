@@ -19,7 +19,7 @@ interface Props<Meta> {
 }
 
 export default function AreaForm<Meta extends {}>(props: Props<Meta>) {
-  const crag = new Crag(props.crag);
+  const crag = Crag.build(props.crag);
   const [state, formAction, meta] = useFormState(props.action, {
     ok: true,
     data: props.area || ({} as IArea),
@@ -41,10 +41,7 @@ export default function AreaForm<Meta extends {}>(props: Props<Meta>) {
         <PolygonField
           state={state}
           name="polygon"
-          MapProps={{
-            center: crag.center,
-            bounds: crag.bounds,
-          }}
+          crag={props.crag}
           TracerProps={{
             children: (
               <AreasMap

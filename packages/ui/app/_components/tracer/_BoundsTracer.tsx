@@ -1,13 +1,13 @@
 "use client";
-import Map from "@/app/_components//explorer/map/Map";
 import FullScreen from "@/app/_components/layouts/OverMap";
 import PageLayout from "@/app/_components/layouts/PageLayout";
+import CragMap from "@/app/_components/map/CragMap";
 import SearchField from "@/app/_components/search/SearchField";
 import BoundsPolygon from "@/app/_components/tracer/BoundsPolygon";
 import getRectangle from "@/app/_components/tracer/getRectangle";
 import { Cancel, Check } from "@mui/icons-material";
 import * as Leaflet from "leaflet";
-import { Bounds, IBounds } from "models";
+import { Bounds, IBounds, ICrag } from "models";
 import * as React from "react";
 import { Circle, Polyline, useMapEvents } from "react-leaflet";
 
@@ -19,7 +19,7 @@ import { Circle, Polyline, useMapEvents } from "react-leaflet";
 
 interface BoundsTracerProps {
   title?: string;
-  MapProps: React.ComponentProps<typeof Map>;
+  crag: ICrag;
   defaultBounds?: IBounds; // Bounds to show on map
   onCancel: React.MouseEventHandler;
   onSubmit?: (b: IBounds) => unknown;
@@ -118,7 +118,7 @@ export default function BoundsTracer(props: BoundsTracerProps) {
         />
       </FullScreen>
       <FullScreen zIndex={1000}>
-        <Map {...props.MapProps} style={{ height: "100vh" }}>
+        <CragMap crag={props.crag} style={{ height: "100vh" }}>
           <EventsHandler
             handleClick={handleClick}
             handleMouseMove={handleMouseMove}
@@ -126,7 +126,7 @@ export default function BoundsTracer(props: BoundsTracerProps) {
           {getCurrent()}
           <BoundsPolygon bounds={state.pending} />
           {props.children}
-        </Map>
+        </CragMap>
       </FullScreen>
     </>
   );

@@ -28,12 +28,7 @@ export default function CragForm<Meta>(props: Props<Meta>) {
       <SubmitSnack kee={meta.reqIndex} {...state} />
       <Stack sx={{ p: 1 }} spacing={1}>
         <InputLabel>TRAIL</InputLabel>
-        <TrailField
-          state={state}
-          name="trail"
-          center={crag.center}
-          bounds={crag.bounds}
-        />
+        <TrailField state={state} name="trail" crag={crag} />
         <FormHelperText>
           Setup a walking trail for the crag to hint at the best path to take.
         </FormHelperText>

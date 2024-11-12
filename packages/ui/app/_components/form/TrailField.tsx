@@ -1,11 +1,11 @@
 "use client";
-import Map from "@/app/_components/explorer/map/Map";
+import CragMap from "@/app/_components/map/CragMap";
 import TrailPolyline from "@/app/_components/tracer/TrailPolyline";
 import TrailTracer from "@/app/_components/tracer/TrailTracer";
 import { IApiResponse } from "@/app/api/ApiResponse.js";
 import { Edit } from "@mui/icons-material";
 import { Button, FormHelperText, Grid } from "@mui/material";
-import { IBounds, ICoordinateLiteral, ITrail } from "models";
+import { ICrag, ITrail } from "models";
 import { useState } from "react";
 
 /**
@@ -21,8 +21,7 @@ type Props<
 > = {
   name: Key;
   state: IApiResponse<Model, Schema>;
-  bounds?: IBounds;
-  center: ICoordinateLiteral;
+  crag: ICrag;
   // Additional props to tracer
   TracerProps?: Partial<React.ComponentProps<typeof TrailTracer>>;
 };
@@ -47,13 +46,9 @@ export default function TrailField<
     return (
       <Grid container padding={1}>
         <Grid item xs={9}>
-          <Map
-            bounds={props.bounds}
-            center={props.center}
-            style={{ paddingBottom: "50%" }}
-          >
+          <CragMap crag={props.crag} style={{ paddingBottom: "50%" }}>
             <TrailPolyline lines={current?.lines} />
-          </Map>
+          </CragMap>
         </Grid>
         <Grid item>
           <Button
@@ -81,11 +76,11 @@ export default function TrailField<
   return (
     <TrailTracer
       {...TracerProps}
-      MapProps={{ center: props.center, bounds: props.bounds }}
+      crag={props.crag}
       defaultTrail={current}
       onCancel={() => setUpdating(false)}
-      onSubmit={(bounds) => {
-        setCurrent(bounds);
+      onSubmit={(trail) => {
+        setCurrent(trail);
         setUpdating(false);
       }}
     />

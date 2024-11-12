@@ -1,8 +1,13 @@
-"use client";
-import dynamic from "next/dynamic";
+import BaseCragMap from "@/app/_components/map/CragMap";
+import ClickToCrag from "./ClickToCrag";
 
-const CragMap = dynamic(() => import("./_CragMap"), {
-  ssr: false,
-});
+type Props = React.ComponentProps<typeof BaseCragMap>;
 
-export default CragMap;
+export default function CragMap(props: Props) {
+  return (
+    <BaseCragMap {...props}>
+      <ClickToCrag crag={props.crag} />
+      {props.children}
+    </BaseCragMap>
+  );
+}

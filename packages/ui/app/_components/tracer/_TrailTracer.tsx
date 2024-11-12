@@ -1,13 +1,13 @@
 "use client";
-import Map from "@/app/_components//explorer/map/Map";
 import EventsHandler from "@/app/_components/EventsHandler";
 import FullScreen from "@/app/_components/layouts/OverMap";
 import PageLayout from "@/app/_components/layouts/PageLayout";
+import CragMap from "@/app/_components/map/CragMap";
 import SearchField from "@/app/_components/search/SearchField";
 import TrailPolyline from "@/app/_components/tracer/_TrailPolyline";
 import { Cancel, Check } from "@mui/icons-material";
 import * as Leaflet from "leaflet";
-import { ITrail, Trail } from "models";
+import { ICrag, ITrail, Trail } from "models";
 import * as React from "react";
 import { Circle, Polyline, Tooltip } from "react-leaflet";
 
@@ -18,10 +18,9 @@ const snapDistance = 2; // in meters -- adjust this value as needed
  *
  * TrailTracer opens full screen, and allows user to click points on a map and save them
  */
-
 interface TrailTracerProps {
   title?: string;
-  MapProps: React.ComponentProps<typeof Map>;
+  crag: ICrag;
   defaultTrail?: ITrail; // Trail to show on map
   onCancel: React.MouseEventHandler;
   onSubmit?: (b: ITrail) => unknown;
@@ -145,7 +144,7 @@ export default function TrailTracer(props: TrailTracerProps) {
         />
       </FullScreen>
       <FullScreen zIndex={1000}>
-        <Map {...props.MapProps} style={{ height: "100vh" }}>
+        <CragMap crag={props.crag} style={{ height: "100vh" }}>
           <EventsHandler click={handleClick} mousemove={handleMouseMove} />
           {getCurrent()}
           {/** Separate lines that can be removed */}
@@ -176,7 +175,7 @@ export default function TrailTracer(props: TrailTracerProps) {
             </TrailPolyline>
           ))}
           {props.children}
-        </Map>
+        </CragMap>
       </FullScreen>
     </>
   );

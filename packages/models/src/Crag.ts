@@ -29,6 +29,11 @@ class Crag {
   areas?: Area[];
   trail?: Trail;
 
+  static build(data: ICrag) {
+    if (data instanceof Crag) return data;
+    return new Crag(data);
+  }
+
   constructor(data: ICrag) {
     this.id = data.id;
     this.name = data.name;

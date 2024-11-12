@@ -1,11 +1,11 @@
 "use client";
-import Map from "@/app/_components/explorer/map/Map";
+import CragMap from "@/app/_components/map/CragMap";
 import BoundsPolygon from "@/app/_components/tracer/BoundsPolygon";
 import BoundsTracer from "@/app/_components/tracer/BoundsTracer";
 import { IApiResponse } from "@/app/api/ApiResponse.js";
 import { Edit } from "@mui/icons-material";
 import { Button, FormHelperText, Grid } from "@mui/material";
-import { IBounds, ICoordinateLiteral } from "models";
+import { IBounds, ICrag } from "models";
 import { useState } from "react";
 
 /**
@@ -21,7 +21,7 @@ type Props<
 > = {
   name: Key;
   state: IApiResponse<Model, Schema>;
-  center: ICoordinateLiteral;
+  crag: ICrag;
   // Additional props to tracer
   TracerProps?: Partial<React.ComponentProps<typeof BoundsTracer>>;
 };
@@ -46,9 +46,9 @@ export default function BoundsField<
     return (
       <Grid container padding={1}>
         <Grid item xs={9}>
-          <Map center={props.center} style={{ paddingBottom: "50%" }}>
+          <CragMap crag={props.crag} style={{ paddingBottom: "50%" }}>
             {current && <BoundsPolygon bounds={current} />}
-          </Map>
+          </CragMap>
         </Grid>
         <Grid item>
           <Button
@@ -76,7 +76,7 @@ export default function BoundsField<
   return (
     <BoundsTracer
       {...TracerProps}
-      MapProps={{ center: props.center }}
+      crag={props.crag}
       defaultBounds={current}
       onCancel={() => setUpdating(false)}
       onSubmit={(bounds) => {

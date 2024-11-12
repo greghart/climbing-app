@@ -1,12 +1,12 @@
 "use client";
-import Map from "@/app/_components/explorer/map/Map";
 import MyPolygon from "@/app/_components/explorer/map/MyPolygon";
 import FullScreen from "@/app/_components/layouts/OverMap";
 import PageLayout from "@/app/_components/layouts/PageLayout";
+import CragMap from "@/app/_components/map/CragMap";
 import SearchField from "@/app/_components/search/SearchField";
 import { Cancel, Check } from "@mui/icons-material";
 import * as Leaflet from "leaflet";
-import { ICoordinateLiteral, IPolygon } from "models";
+import { ICoordinateLiteral, ICrag, IPolygon } from "models";
 import * as React from "react";
 import { Polyline, useMapEvents } from "react-leaflet";
 
@@ -18,8 +18,8 @@ import { Polyline, useMapEvents } from "react-leaflet";
 
 interface PolygonTracerProps {
   title?: string;
-  MapProps?: React.ComponentProps<typeof Map>;
   defaultPolygon?: IPolygon; // Polygon to show on map
+  crag: ICrag;
   onCancel: React.MouseEventHandler;
   onSubmit?: (b: IPolygon) => unknown;
   children?: React.ReactNode;
@@ -148,7 +148,7 @@ export default function PolygonTracer(props: PolygonTracerProps) {
         />
       </FullScreen>
       <FullScreen zIndex={1000}>
-        <Map {...props.MapProps} style={{ height: "100vh" }}>
+        <CragMap crag={props.crag} style={{ height: "100vh" }}>
           <EventsHandler
             handleClick={handleClick}
             handleMouseMove={handleMouseMove}
@@ -156,7 +156,7 @@ export default function PolygonTracer(props: PolygonTracerProps) {
           />
           {getCoordinates()}
           {props.children}
-        </Map>
+        </CragMap>
       </FullScreen>
     </>
   );

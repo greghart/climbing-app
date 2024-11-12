@@ -1,12 +1,12 @@
 "use client";
-import Map from "@/app/_components/explorer/map/Map";
 import MyPolygon from "@/app/_components/explorer/map/MyPolygon";
+import CragMap from "@/app/_components/map/CragMap";
 import PolygonTracer from "@/app/_components/tracer/PolygonTracer";
 import { IApiResponse } from "@/app/api/ApiResponse.js";
 import { Edit } from "@mui/icons-material";
 import { Button, FormHelperText, Grid } from "@mui/material";
-import { IPolygon } from "models";
-import { useState } from "react";
+import { ICrag, IPolygon } from "models";
+import React, { useState } from "react";
 
 /**
  * Climbing app map polygon field
@@ -21,8 +21,8 @@ type Props<
 > = {
   name: Key;
   state: IApiResponse<Model, Schema>;
-  MapProps: React.ComponentProps<typeof Map>;
   TracerProps?: Partial<React.ComponentProps<typeof PolygonTracer>>;
+  crag: ICrag;
 };
 
 type HasPolygonField<Key extends string> = {
@@ -34,7 +34,7 @@ export default function PolygonField<
   Key extends string,
   Model extends HasPolygonField<Key>,
   Schema extends Model
->({ TracerProps, MapProps, ...props }: Props<Key, Model, Schema>) {
+>({ TracerProps, ...props }: Props<Key, Model, Schema>) {
   const [isUpdating, setUpdating] = useState(false);
   const [current, setCurrent] = useState<IPolygon | undefined>(
     props.state.data![props.name]
@@ -45,9 +45,9 @@ export default function PolygonField<
     return (
       <Grid container padding={1}>
         <Grid item xs={9}>
-          <Map {...MapProps} style={{ paddingBottom: "50%" }}>
+          <CragMap crag={props.crag} style={{ paddingBottom: "50%" }}>
             <MyPolygon positions={current?.coordinates || []} />
-          </Map>
+          </CragMap>
         </Grid>
         <Grid item>
           <Button
@@ -74,8 +74,8 @@ export default function PolygonField<
 
   return (
     <PolygonTracer
-      MapProps={MapProps}
       {...TracerProps}
+      crag={props.crag}
       defaultPolygon={current}
       onCancel={() => setUpdating(false)}
       onSubmit={(polygon) => {
