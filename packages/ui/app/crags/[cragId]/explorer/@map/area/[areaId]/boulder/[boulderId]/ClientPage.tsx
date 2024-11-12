@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
-import { Boulder, IBoulder } from "models";
-import { useMap } from "react-leaflet";
 import BoulderMap from "@/app/_components/explorer/map/BoulderMap";
-import blockClicks from "@/app/_components/blockClicks";
+import blockClicks from "@/app/_util/blockClicks";
+import { Boulder, IBoulder } from "models";
+import React from "react";
+import { useMap } from "react-leaflet";
 
 export default function ClientPage({
   boulder: _boulder,

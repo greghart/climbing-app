@@ -1,4 +1,4 @@
-import useRouteTo from "@/app/_components/useRouteTo";
+import useRouteTo from "@/app/_util/useRouteTo";
 import { ICrag } from "models";
 import { usePathname } from "next/navigation";
 import { useMapEvent } from "react-leaflet/hooks";

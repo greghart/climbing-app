@@ -1,5 +1,5 @@
+import Breadcrumbs from "@/app/_components/Breadcrumbs";
 import Boulder from "@/app/_components/explorer/overlay/Boulder";
-import Breadcrumbs from "@/app/_components/explorer/overlay/Breadcrumbs";
 import Drawer from "@/app/_components/explorer/overlay/Drawer";
 import getBoulder from "@/app/api/_actions/getBoulder";
 import { notFound } from "next/navigation";

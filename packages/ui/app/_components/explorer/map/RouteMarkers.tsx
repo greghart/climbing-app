@@ -1,7 +1,7 @@
 "use client";
 
 import ConfirmedCircle from "@/app/_components/explorer/map/ConfirmedCircle";
-import useSearchParamsPath from "@/app/_components/useSearchParamsPath";
+import useSearchParamsPath from "@/app/_util/useSearchParamsPath";
 import { Link } from "@mui/material";
 import * as Leaflet from "leaflet";
 import { reduce } from "lodash-es";

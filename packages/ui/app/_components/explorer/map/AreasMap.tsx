@@ -1,10 +1,10 @@
-import blockClicks from "@/app/_components/blockClicks";
 import AreaMap from "@/app/_components/explorer/map/AreaMap";
-import useRouteTo from "@/app/_components/useRouteTo";
-import { Area } from "models";
+import blockClicks from "@/app/_util/blockClicks";
+import useRouteTo from "@/app/_util/useRouteTo";
+import { IArea } from "models";
 
 interface Props {
-  areas: Area[];
+  areas: IArea[];
   AreaMapProps?: Omit<React.ComponentProps<typeof AreaMap>, "area">;
   // onAreaClick?: (area: Area, e: LeafletMouseEvent) => any;
 }

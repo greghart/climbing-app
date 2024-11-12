@@ -2,7 +2,7 @@ import json from "@/app/api/_schemas/json";
 import polygonSchema from "@/app/api/_schemas/polygon";
 import { z } from "zod";
 
-const areaSchema = z.object({
+const boulderSchema = z.object({
   name: z
     .string({
       invalid_type_error: "Invalid Name",
@@ -12,4 +12,4 @@ const areaSchema = z.object({
   polygon: json.stringNullish.pipe(polygonSchema).optional(),
 });
 
-export default areaSchema;
+export default boulderSchema;

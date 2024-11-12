@@ -1,9 +1,9 @@
-import { Area } from "models";
+import { IArea } from "models";
 import React from "react";
 import MyPolygon from "./MyPolygon";
 
 type Props = Partial<React.ComponentProps<typeof MyPolygon>> & {
-  area: Area;
+  area: IArea;
 };
 
 export default function AreaPolygon(props: Props) {

@@ -1,5 +1,5 @@
+import { Boulder, getDataSource } from "@/db";
 import { cache } from "react";
-import { getDataSource, Boulder } from "@/db";
 import "server-only";
 
 const wait = async (ms: number) =>
@@ -13,6 +13,11 @@ const getBoulder = cache(async (id: number | string) => {
     relations: [
       "area",
       "area.crag",
+      // for boulder form map
+      "area.polygon",
+      "area.polygon.coordinates",
+      "area.boulders",
+      // end
       "routes",
       "polygon",
       "polygon.coordinates",

@@ -1,14 +1,14 @@
 import BoulderIcon from "@/app/_components/explorer/map/BoulderIcon";
 import type { LeafletMouseEvent } from "leaflet";
-import { Area, Boulder } from "models";
+import { IBoulder } from "models";
 
 interface Props {
-  boulders: Boulder[];
-  onBoulderClick?: (boulder: Boulder, e: LeafletMouseEvent) => unknown;
+  boulders: IBoulder[];
+  onBoulderClick?: (boulder: IBoulder, e: LeafletMouseEvent) => unknown;
 }
 
 export default function Boulders(props: Props) {
-  return (props.boulders || []).map((thisBoulder: Boulder) => (
+  return (props.boulders || []).map((thisBoulder: IBoulder) => (
     <BoulderIcon
       position={thisBoulder.coordinates}
       key={thisBoulder.id}

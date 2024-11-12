@@ -1,7 +1,7 @@
 "use client";
-import blockClicks from "@/app/_components/blockClicks";
 import BoulderMap from "@/app/_components/explorer/map/BoulderMap";
 import useBoulderView from "@/app/_components/explorer/useBoulderView";
+import blockClicks from "@/app/_util/blockClicks";
 import { IRoute, Route } from "models";
 
 export default function ClientPage({ route: _route }: { route: IRoute }) {

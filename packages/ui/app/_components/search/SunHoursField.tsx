@@ -1,6 +1,6 @@
 "use client";
 import { searchParamsParsers } from "@/app/_components/search/searchParams";
-import useQueryState from "@/app/_components/useQueryState";
+import useQueryState from "@/app/_util/useQueryState";
 import { Slider } from "@mui/material";
 import { ICoordinateLiteral } from "models";
 import * as SunCalc from "suncalc";

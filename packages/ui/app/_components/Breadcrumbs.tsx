@@ -1,5 +1,5 @@
 "use client";
-import useSearchParamsPath from "@/app/_components/useSearchParamsPath";
+import useSearchParamsPath from "@/app/_util/useSearchParamsPath";
 import { Info } from "@mui/icons-material";
 import { Grid, Link, Breadcrumbs as MUIBreadcrumbs } from "@mui/material";
 import { IArea, IBoulder, ICrag, IRoute } from "models";
@@ -18,6 +18,8 @@ interface Props {
   areaIconHref?: string;
   areaIcon?: React.ReactNode;
   boulderHref?: string;
+  boulderIconHref?: string;
+  boulderIcon?: React.ReactNode;
   routeHref?: string;
 }
 
@@ -92,20 +94,33 @@ export default function Breadcrumbs(props: Props) {
         />
       )}
       {props.area && props.boulder && (
-        <Grid item>
-          <NextLink
-            href={searchParamsPath(
-              props.boulderHref ||
-                `/crags/${props.crag.id}/explorer/area/${props.area.id}/boulder/${props.boulder.id}`
-            )}
-            passHref
-            legacyBehavior
-          >
-            <Link underline="hover" color="inherit">
-              {props.boulder.name}
-            </Link>
-          </NextLink>
-        </Grid>
+        <Centered
+          left={
+            <NextLink
+              href={searchParamsPath(
+                props.boulderHref ||
+                  `/crags/${props.crag.id}/explorer/area/${props.area.id}/boulder/${props.boulder.id}`
+              )}
+              passHref
+              legacyBehavior
+            >
+              <Link underline="hover" color="inherit">
+                {props.boulder.name}
+              </Link>
+            </NextLink>
+          }
+          right={
+            <NextLink
+              href={props.boulderIconHref || `/boulders/${props.boulder.id}`}
+              passHref
+              legacyBehavior
+            >
+              <Link underline="hover" color="inherit">
+                {props.boulderIcon || <Info />}
+              </Link>
+            </NextLink>
+          }
+        />
       )}
       {props.area && props.boulder && props.route && (
         <Grid item>

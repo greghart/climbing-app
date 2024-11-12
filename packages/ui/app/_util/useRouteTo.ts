@@ -1,5 +1,5 @@
+import useSearchParamsPath from "@/app/_util/useSearchParamsPath";
 import { usePathname, useRouter } from "next/navigation";
-import useSearchParamsPath from "@/app/_components/useSearchParamsPath";
 import { join } from "path";
 
 interface Params {

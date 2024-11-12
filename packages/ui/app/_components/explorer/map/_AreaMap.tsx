@@ -1,11 +1,11 @@
 import { type LeafletMouseEvent } from "leaflet";
-import { Area } from "models";
+import { IArea } from "models";
 import { LayerGroup, Tooltip } from "react-leaflet";
 import AreaPolygon from "./AreaPolygon";
 import Boulders from "./Boulders";
 
 interface Props {
-  area: Area;
+  area: IArea;
   onClick?: (e: LeafletMouseEvent) => any;
   // Show the polygon of the area
   polygon?: boolean;

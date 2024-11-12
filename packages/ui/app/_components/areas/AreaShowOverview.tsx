@@ -1,5 +1,5 @@
 "use client";
-import Breadcrumbs from "@/app/_components/explorer/overlay/Breadcrumbs";
+import Breadcrumbs from "@/app/_components/Breadcrumbs";
 import { Add, Edit, ExpandLess, ExpandMore } from "@mui/icons-material";
 import {
   Collapse,
@@ -34,9 +34,6 @@ export default function AreaShowOverview(props: Props) {
                 cragHref={`/crags/${props.area.crag!.id!}`}
                 cragIconHref={`/crags/${props.area.crag!.id!}/edit`}
                 cragIcon={<Edit />}
-                areaHref={`/areas/${props.area.id!}`}
-                areaIconHref={`/areas/${props.area.id!}/edit`}
-                areaIcon={<Edit />}
               />
             }
           />

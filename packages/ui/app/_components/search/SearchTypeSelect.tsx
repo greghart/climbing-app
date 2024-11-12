@@ -1,7 +1,7 @@
 "use client";
 
 import { searchParamsParsers } from "@/app/_components/search/searchParams";
-import useQueryState from "@/app/_components/useQueryState";
+import useQueryState from "@/app/_util/useQueryState";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import * as React from "react";
 

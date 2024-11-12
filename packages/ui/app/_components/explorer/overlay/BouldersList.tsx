@@ -1,6 +1,6 @@
 "use client";
 import RoutesList from "@/app/_components/explorer/overlay/RoutesList";
-import useRouteTo from "@/app/_components/useRouteTo";
+import useRouteTo from "@/app/_util/useRouteTo";
 import { AssistantDirection } from "@mui/icons-material";
 import { Collapse, IconButton, ListItem, Typography } from "@mui/material";
 import List from "@mui/material/List";

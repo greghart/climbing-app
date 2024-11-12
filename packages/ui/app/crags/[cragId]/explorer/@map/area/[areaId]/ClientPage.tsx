@@ -1,6 +1,6 @@
 "use client";
-import blockClicks from "@/app/_components/blockClicks";
 import AreaMap from "@/app/_components/explorer/map/AreaMap";
+import blockClicks from "@/app/_util/blockClicks";
 import { Area, IArea } from "models";
 import React from "react";
 import { useMap } from "react-leaflet";

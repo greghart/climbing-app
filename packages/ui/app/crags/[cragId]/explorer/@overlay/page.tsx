@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/app/_components/explorer/overlay/Breadcrumbs";
+import Breadcrumbs from "@/app/_components/Breadcrumbs";
 import Drawer from "@/app/_components/explorer/overlay/Drawer";
 import getCrag from "@/app/api/_actions/getCrag";
 import { notFound } from "next/navigation";

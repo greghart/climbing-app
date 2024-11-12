@@ -2,7 +2,7 @@
 import Truncate from "@/app/_components/Truncate";
 import RoutesDifficultyBreakdown from "@/app/_components/charts/RoutesDifficultyBreakdown";
 import RoutesList from "@/app/_components/explorer/overlay/RoutesList";
-import useRouteTo from "@/app/_components/useRouteTo";
+import useRouteTo from "@/app/_util/useRouteTo";
 import { Stack, Typography } from "@mui/material";
 import { IBoulder, IRoute } from "models";
 

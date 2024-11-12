@@ -5,24 +5,23 @@ import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
 import useFormState from "@/app/_components/form/useFormState";
-import areaSchema from "@/app/api/_schemas/area";
+import boulderSchema from "@/app/api/_schemas/boulder";
 import { formActionHandler } from "@/app/api/formAction";
 import { FormHelperText, InputLabel, Stack } from "@mui/material";
-import { Crag, IArea, ICrag } from "models";
+import { IBoulder, ICrag } from "models";
 import { z } from "zod";
 
 interface Props<Meta> {
   crag: ICrag;
-  area?: IArea;
-  action: formActionHandler<IArea, z.infer<typeof areaSchema>, Meta>;
+  boulder: IBoulder; // TODO: Support adding a boulder to an area -- requires default data for coordinate, name, etc.
+  action: formActionHandler<IBoulder, z.infer<typeof boulderSchema>, Meta>;
   meta: Meta;
 }
 
-export default function AreaForm<Meta extends {}>(props: Props<Meta>) {
-  const crag = Crag.build(props.crag);
+export default function BoulderForm<Meta extends {}>(props: Props<Meta>) {
   const [state, formAction, meta] = useFormState(props.action, {
     ok: true,
-    data: props.area || ({} as IArea),
+    data: props.boulder,
     meta: props.meta,
   });
   return (
@@ -38,6 +37,10 @@ export default function AreaForm<Meta extends {}>(props: Props<Meta>) {
           defaultValue={state.data!.description}
         />
         <InputLabel>Polygon</InputLabel>
+        {/**
+         * TODO: Should be an AreaMap that is centered on the area this boulder is in
+         * TODO: Should include the location of the boulder as well, and it should be the client side data for the tracer as well
+         */}
         <PolygonField
           state={state}
           name="polygon"
@@ -45,14 +48,14 @@ export default function AreaForm<Meta extends {}>(props: Props<Meta>) {
           TracerProps={{
             children: (
               <AreasMap
-                areas={crag.areas?.filter((a) => a.id !== props.area!.id) || []}
-                AreaMapProps={{ onClick: undefined }}
+                areas={[props.boulder.area!]}
+                AreaMapProps={{ onClick: undefined, tooltip: false }}
               />
             ),
           }}
         />
         <FormHelperText>
-          Trace the area polygon to help climbers navigate
+          Trace the boulder to help populate better route and shade data
         </FormHelperText>
         <SubmitButton />
       </Stack>
