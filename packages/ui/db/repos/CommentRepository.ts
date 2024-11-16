@@ -5,7 +5,7 @@ import * as models from "models";
 import { EntitySchema } from "typeorm";
 
 // Base interface for a commentable entity
-interface CommentableEntity {
+export interface CommentableEntity {
   id?: any;
   commentable?: models.ICommentable;
 }

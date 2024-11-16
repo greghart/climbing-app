@@ -48,6 +48,8 @@ function getRedirect(
     return `/crags/${tokens[1]}/comments?highlight=${comment.id}`;
   if (tokens[0] === "area")
     return `/areas/${tokens[1]}/comments?highlight=${comment.id}`;
+  if (tokens[0] === "boulder")
+    return `/boulders/${tokens[1]}/comments?highlight=${comment.id}`;
   return "";
 }
 

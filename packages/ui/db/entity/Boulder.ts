@@ -45,6 +45,13 @@ const Boulder = new EntitySchema<BoulderSchema>({
       onDelete: "SET NULL",
       cascade: ["insert", "update"],
     },
+    commentable: {
+      type: "one-to-one",
+      nullable: true,
+      target: "commentable",
+      onDelete: "SET NULL",
+      joinColumn: true,
+    },
   },
   embeddeds: {
     coordinates: {

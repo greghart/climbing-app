@@ -19,6 +19,8 @@ const Physical =
 // MapBox
 const accessToken =
   "pk.eyJ1IjoiZWxjaG9jb2xhdG8iLCJhIjoiY2pzcWZ3ZXlxMGMyZjQzcnplZjR3Zmp1MSJ9.6xK9xxEQfavcSmfFEohQXA";
+// OpenStreetMap
+const OpenStreetMap = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 // tslint:disable-next-line:max-line-length
 const MapBox = `https://api.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}@2x.png?access_token=${accessToken}`;
 // Serve from our server
@@ -33,7 +35,6 @@ export default function BestTileLayer(props: Props) {
     <TileLayer
       {...props}
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       url={MapBox}
       maxNativeZoom={18}
       minNativeZoom={15}

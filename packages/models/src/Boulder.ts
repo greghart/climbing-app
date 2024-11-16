@@ -1,4 +1,5 @@
 import Area, { type IArea } from "./Area.js";
+import type { ICommentable } from "./Commentable.js";
 import Coordinate, { type ICoordinateLiteral } from "./Coordinate.js";
 import Polygon, { type IPolygon } from "./Polygon.js";
 import Route, { type IRoute } from "./Route.js";
@@ -13,6 +14,7 @@ export interface IBoulder {
   routes?: IRoute[];
   // Polygon coordinates of an outline of a boulder, optional
   polygon?: IPolygon;
+  commentable?: ICommentable;
 }
 
 interface Boulder extends Omit<IBoulder, "center"> {}
