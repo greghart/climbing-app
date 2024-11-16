@@ -8,7 +8,7 @@ function dynamic<P = {}>(
   options?: DynamicOptions<P>
 ) {
   return _dynamic(fn, {
-    loading: () => <p>Javascript support needed</p>,
+    loading: () => <p>Loading... (JS needed)</p>,
     ...options,
   });
 }

@@ -1,4 +1,5 @@
 "use client";
+import EventsHandler from "@/app/_components/EventsHandler";
 import FullScreen from "@/app/_components/layouts/FullScreen";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import CragMap from "@/app/_components/map/CragMap";
@@ -8,7 +9,7 @@ import { Cancel, Check } from "@mui/icons-material";
 import * as Leaflet from "leaflet";
 import { ICoordinateLiteral, ICrag, IPolygon } from "models";
 import * as React from "react";
-import { Polyline, useMapEvents } from "react-leaflet";
+import { Polyline } from "react-leaflet";
 
 /**
  * Top level view for PolygonTracer component
@@ -150,9 +151,9 @@ export default function PolygonTracer(props: PolygonTracerProps) {
       <FullScreen zIndex={1001}>
         <CragMap crag={props.crag} style={{ height: "100vh" }}>
           <EventsHandler
-            handleClick={handleClick}
-            handleMouseMove={handleMouseMove}
-            handleKeyPress={handleKeyPress}
+            click={handleClick}
+            mousemove={handleMouseMove}
+            keypress={handleKeyPress}
           />
           {getCoordinates()}
           {props.children}
@@ -160,20 +161,4 @@ export default function PolygonTracer(props: PolygonTracerProps) {
       </FullScreen>
     </>
   );
-}
-
-// Map is a singleton so attach events through hook
-interface eventHandlerProps {
-  handleClick: (e: Leaflet.LeafletMouseEvent) => void;
-  handleMouseMove: (e: Leaflet.LeafletMouseEvent) => void;
-  handleKeyPress: (e: Leaflet.LeafletKeyboardEvent) => void;
-}
-
-function EventsHandler(props: eventHandlerProps) {
-  useMapEvents({
-    click: props.handleClick,
-    mousemove: props.handleMouseMove,
-    keypress: props.handleKeyPress,
-  });
-  return null;
 }

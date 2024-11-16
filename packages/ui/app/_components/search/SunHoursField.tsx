@@ -40,7 +40,7 @@ export default function SunHoursField(props: Props) {
       const amPm = shownAmPm ? "PM" : "AM";
       return {
         value: value,
-        label: `${value % 12}${showAmPm ? amPm : ""}`,
+        label: `${value === 12 ? 12 : value % 12}${showAmPm ? amPm : ""}`,
       };
     });
   return (

@@ -11,8 +11,10 @@ import { ICrag, ITrail, Trail } from "models";
 import * as React from "react";
 import { Circle, Polyline, Tooltip } from "react-leaflet";
 
-const snapDistance = 2; // in meters -- adjust this value as needed
-
+const snapDistance = 2; // in meters -- adjust this value as neede
+const instructions = `Click to add lines.
+Z to undo last line.
+Space to clear pending line.`;
 /**
  * Top level view for TrailTracer component
  *
@@ -73,7 +75,7 @@ export default function TrailTracer(props: TrailTracerProps) {
     } else {
       setState((state) => ({
         ...state,
-        start: undefined,
+        start: snappedLatLng,
         end: undefined,
         pending: {
           ...state.pending,
@@ -82,6 +84,30 @@ export default function TrailTracer(props: TrailTracerProps) {
             { start: state.start!, end: snappedLatLng },
           ],
         },
+      }));
+    }
+  };
+
+  const handleKeyPress = (e: Leaflet.LeafletKeyboardEvent) => {
+    // z to undo last line
+    if (
+      e.originalEvent.key === "z" &&
+      (state.pending?.lines || []).length > 0
+    ) {
+      setState((state) => ({
+        ...state,
+        pending: {
+          ...state.pending,
+          lines: (state.pending?.lines || []).slice(0, -1),
+        },
+      }));
+    }
+    // space to clear pending line
+    if (e.originalEvent.key === " " && state.start !== undefined) {
+      setState((state) => ({
+        ...state,
+        start: undefined,
+        end: undefined,
       }));
     }
   };
@@ -127,7 +153,9 @@ export default function TrailTracer(props: TrailTracerProps) {
           header={
             <SearchField
               disabled
-              value={props.title || "Click twice to add a line"}
+              value={props.title || instructions}
+              multiline
+              rows={3}
               PrependButtonProps={{
                 onClick: props.onCancel,
                 children: <Cancel />,
@@ -145,7 +173,11 @@ export default function TrailTracer(props: TrailTracerProps) {
       </FullScreen>
       <FullScreen zIndex={1000}>
         <CragMap crag={props.crag} style={{ height: "100vh" }}>
-          <EventsHandler click={handleClick} mousemove={handleMouseMove} />
+          <EventsHandler
+            click={handleClick}
+            mousemove={handleMouseMove}
+            keypress={handleKeyPress}
+          />
           {getCurrent()}
           {/** Separate lines that can be removed */}
           {(state.pending?.lines || []).map((l, i) => (
