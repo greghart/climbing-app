@@ -1,21 +1,21 @@
 "use client";
 
-import ConfirmedCircle from "@/app/_components/explorer/map/ConfirmedCircle";
+import ConfirmedCircle from "@/app/_components/map/ConfirmedCircle";
 import useSearchParamsPath from "@/app/_util/useSearchParamsPath";
 import { Link } from "@mui/material";
 import * as Leaflet from "leaflet";
 import { reduce } from "lodash-es";
-import { Coordinate, ICoordinateLiteral, Route } from "models";
+import { ICoordinateLiteral, IRoute } from "models";
 import NextLink from "next/link";
 import * as React from "react";
 import { Popup } from "react-leaflet";
 
 type Props = {
-  routes: Route[];
+  routes: IRoute[];
 };
 // Need ID and coordinates to place on map
-type PlaceableRoute = Route & { id: number; coordinates: Coordinate };
-function isPlaceable(r: Route): r is PlaceableRoute {
+type PlaceableRoute = IRoute & { id: number; coordinates: ICoordinateLiteral };
+function isPlaceable(r: IRoute): r is PlaceableRoute {
   return Boolean(r.coordinates && r.id);
 }
 
@@ -26,7 +26,7 @@ const GROUP_ECHELON = 1;
  * We want to group routes into circles, so it's easier to handle overlapping routes
  * @todo Optimize algorithm? Route count should be low
  */
-const groupRoutesByCoordinate = (routes: Route[]) => {
+const groupRoutesByCoordinate = (routes: IRoute[]) => {
   const alreadyGrouped = {} as { [key: string]: boolean };
   const placeable = reduce(
     routes,
@@ -46,7 +46,7 @@ const groupRoutesByCoordinate = (routes: Route[]) => {
       }
       alreadyGrouped[thisRoute.id!] = true;
       // Build out a circle centered around current group
-      let currentCenter = thisRoute.coordinates.literal;
+      let currentCenter = thisRoute.coordinates;
       let currentEchelon = GROUP_ECHELON;
 
       const grouped = placeable.reduce((otherMemo, otherRoute, i) => {

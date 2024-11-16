@@ -1,5 +1,5 @@
 "use client";
-import dynamic from "next/dynamic";
+import dynamic from "@/app/_util/dynamic";
 
 const MyPolygon = dynamic(() => import("./_MyPolygon"), {
   ssr: false,

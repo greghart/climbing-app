@@ -9,14 +9,14 @@ export const literalSchema = z.union([
 ]);
 type Literal = z.infer<typeof literalSchema>;
 type Json = Literal | { [key: string]: Json } | Json[];
-export const jsonSchema: z.ZodType<Json> = z.lazy(() =>
+export const baseJsonSchema: z.ZodType<Json> = z.lazy(() =>
   z.union([literalSchema, z.array(jsonSchema), z.record(jsonSchema)])
 );
 
 // objects often come in as stringified json to support simple FormData format
 export const stringToJSONSchema = z
   .string()
-  .transform((str, ctx): z.infer<typeof jsonSchema> => {
+  .transform((str, ctx): z.infer<typeof baseJsonSchema> => {
     try {
       return JSON.parse(str);
     } catch (e) {
@@ -28,7 +28,7 @@ export const stringToJSONSchema = z
 export const nullishStringToJSONSchema = z
   .string()
   .nullish()
-  .transform((str, ctx): z.infer<typeof jsonSchema> | undefined => {
+  .transform((str, ctx): z.infer<typeof baseJsonSchema> | undefined => {
     if (str == null || str == undefined) return;
     try {
       return JSON.parse(str);
@@ -38,10 +38,10 @@ export const nullishStringToJSONSchema = z
     }
   });
 
-const json = {
+const jsonSchema = {
   literal: literalSchema,
-  schema: jsonSchema,
+  schema: baseJsonSchema,
   string: stringToJSONSchema,
   stringNullish: nullishStringToJSONSchema,
 };
-export default json;
+export default jsonSchema;

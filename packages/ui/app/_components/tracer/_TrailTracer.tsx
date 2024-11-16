@@ -1,6 +1,6 @@
 "use client";
 import EventsHandler from "@/app/_components/EventsHandler";
-import FullScreen from "@/app/_components/layouts/OverMap";
+import FullScreen from "@/app/_components/layouts/FullScreen";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import CragMap from "@/app/_components/map/CragMap";
 import SearchField from "@/app/_components/search/SearchField";

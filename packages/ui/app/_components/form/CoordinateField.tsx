@@ -1,44 +1,45 @@
 "use client";
 import CragMap from "@/app/_components/map/CragMap";
-import MyPolygon from "@/app/_components/map/MyPolygon";
-import PolygonTracer from "@/app/_components/tracer/PolygonTracer";
-import { IApiResponse } from "@/app/api/ApiResponse.js";
+import Marker from "@/app/_components/map/Marker";
+import CoordinateTracer from "@/app/_components/tracer/CoordinateTracer";
+import { IApiResponse } from "@/app/api/ApiResponse";
 import { Edit } from "@mui/icons-material";
 import { Button, FormHelperText, Grid } from "@mui/material";
-import { ICrag, IPolygon } from "models";
-import React, { useState } from "react";
+import { ICoordinateLiteral, ICrag } from "models";
+import { useState } from "react";
 
 /**
- * Climbing app map polygon field
+ * Climbing app map coordinate field
  * * Displays inline map
- * * Edit to open up polygon tracer
+ * * Edit to open up coordinate setter
  * * Confirm to stage data into a Next.js compatible hidden input
- * * Children go on the map in both modes
  */
 type Props<
   Key extends string,
-  Model extends HasPolygonField<Key>,
+  Model extends HasCoordinateField<Key>,
   Schema extends Model
 > = {
   name: Key;
   state: IApiResponse<Model, Schema>;
-  TracerProps?: Partial<React.ComponentProps<typeof PolygonTracer>>;
+  TracerProps?: Partial<React.ComponentProps<typeof CoordinateTracer>>;
   crag: ICrag;
-  mapPreview: React.ReactNode;
+  renderPreview?: (c: ICoordinateLiteral) => React.ReactNode;
 };
 
-type HasPolygonField<Key extends string> = {
-  [key in Key]?: IPolygon;
+const defaultRenderPreview = (c: ICoordinateLiteral) => <Marker position={c} />;
+
+type HasCoordinateField<Key extends string> = {
+  [key in Key]?: ICoordinateLiteral;
 };
 
-export type PolygonFieldType = typeof PolygonField;
-export default function PolygonField<
+export type CoordinateFieldType = typeof CoordinateField;
+export default function CoordinateField<
   Key extends string,
-  Model extends HasPolygonField<Key>,
+  Model extends HasCoordinateField<Key>,
   Schema extends Model
->({ TracerProps, ...props }: Props<Key, Model, Schema>) {
+>({ ...props }: Props<Key, Model, Schema>) {
   const [isUpdating, setUpdating] = useState(false);
-  const [current, setCurrent] = useState<IPolygon | undefined>(
+  const [current, setCurrent] = useState<ICoordinateLiteral | undefined>(
     props.state.data![props.name]
   );
   const errText = props.state.fieldErrors?.[props.name]?.join(", ");
@@ -48,8 +49,7 @@ export default function PolygonField<
       <Grid container padding={1}>
         <Grid item xs={9}>
           <CragMap crag={props.crag} style={{ paddingBottom: "50%" }}>
-            <MyPolygon positions={current?.coordinates || []} />
-            {props.mapPreview}
+            {current && (props.renderPreview || defaultRenderPreview)(current)}
           </CragMap>
         </Grid>
         <Grid item>
@@ -72,13 +72,13 @@ export default function PolygonField<
   }
 
   return (
-    <PolygonTracer
-      {...TracerProps}
+    <CoordinateTracer
+      {...props.TracerProps}
       crag={props.crag}
-      defaultPolygon={current}
+      defaultCoordinate={current}
       onCancel={() => setUpdating(false)}
-      onSubmit={(polygon) => {
-        setCurrent(polygon);
+      onSubmit={(coordinate) => {
+        setCurrent(coordinate);
         setUpdating(false);
       }}
     />

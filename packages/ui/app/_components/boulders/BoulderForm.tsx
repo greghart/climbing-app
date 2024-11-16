@@ -1,14 +1,19 @@
 "use client";
-import AreasMap from "@/app/_components/explorer/map/AreasMap";
+import CoordinateField from "@/app/_components/form/CoordinateField";
 import PolygonField from "@/app/_components/form/PolygonField";
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
 import useFormState from "@/app/_components/form/useFormState";
+import AreaMap from "@/app/_components/map/AreaMap";
+import BoulderIcon from "@/app/_components/map/BoulderIcon";
+import BoulderMap from "@/app/_components/map/BoulderMap";
+import useAreaFit from "@/app/_components/map/useAreaFit";
+import useBoulderView from "@/app/_components/map/useBoulderView";
 import boulderSchema from "@/app/api/_schemas/boulder";
 import { formActionHandler } from "@/app/api/formAction";
 import { FormHelperText, InputLabel, Stack } from "@mui/material";
-import { IBoulder, ICrag } from "models";
+import { IArea, IBoulder, ICrag } from "models";
 import { z } from "zod";
 
 interface Props<Meta> {
@@ -36,29 +41,87 @@ export default function BoulderForm<Meta extends {}>(props: Props<Meta>) {
           rows={3}
           defaultValue={state.data!.description}
         />
+
+        <InputLabel>Location</InputLabel>
+        <CoordinateField
+          state={state}
+          name="coordinates"
+          crag={props.crag}
+          renderPreview={(c) => (
+            <>
+              <AreaView area={props.boulder.area!} />
+              <BoulderIcon position={c} />
+              <AreaMap
+                area={props.boulder.area!}
+                onClick={undefined}
+                tooltip={false}
+                showBoulders={false}
+              />
+            </>
+          )}
+          TracerProps={{
+            renderPending: (c) => (
+              <>
+                <AreaView area={props.boulder.area!} />
+                <BoulderIcon position={c} />
+                <AreaMap
+                  area={props.boulder.area!}
+                  onClick={undefined}
+                  tooltip={false}
+                  showBoulders={false}
+                />
+              </>
+            ),
+          }}
+        />
+        <FormHelperText>Set boulder location</FormHelperText>
+
         <InputLabel>Polygon</InputLabel>
-        {/**
-         * TODO: Should be an AreaMap that is centered on the area this boulder is in
-         * TODO: Should include the location of the boulder as well, and it should be the client side data for the tracer as well
-         */}
         <PolygonField
           state={state}
           name="polygon"
           crag={props.crag}
           TracerProps={{
+            snapDistance: 0.3,
             children: (
-              <AreasMap
-                areas={[props.boulder.area!]}
-                AreaMapProps={{ onClick: undefined, tooltip: false }}
-              />
+              <>
+                <BoulderView boulder={props.boulder} />
+                <BoulderIcon
+                  position={props.boulder.coordinates}
+                  opacity={0.5}
+                />
+                <AreaMap
+                  area={props.boulder.area!}
+                  onClick={undefined}
+                  tooltip={false}
+                  showBoulders={false}
+                />
+              </>
             ),
           }}
+          mapPreview={
+            <>
+              <BoulderView boulder={props.boulder} />
+              <BoulderMap boulder={props.boulder} showRoutes />
+            </>
+          }
         />
         <FormHelperText>
           Trace the boulder to help populate better route and shade data
         </FormHelperText>
+
         <SubmitButton />
       </Stack>
     </form>
   );
+}
+
+function BoulderView({ boulder }: { boulder: IBoulder }) {
+  useBoulderView(boulder, { offset: 0.0 });
+  return false;
+}
+
+function AreaView({ area }: { area: IArea }) {
+  useAreaFit(area);
+  return false;
 }

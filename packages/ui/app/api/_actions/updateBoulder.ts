@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import "server-only";
 import { z } from "zod";
 
-type Model = Pick<IBoulder, "name" | "description" | "polygon">;
+type Model = Pick<IBoulder, "name" | "description" | "polygon" | "coordinates">;
 type Meta = { id: number };
 const updateBoulder = formAction<Model, z.infer<typeof boulderSchema>, Meta>(
   boulderSchema,

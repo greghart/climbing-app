@@ -1,5 +1,5 @@
 import Area, { type IArea } from "./Area.js";
-import Coordinate, { type ICoordinate } from "./Coordinate.js";
+import Coordinate, { type ICoordinateLiteral } from "./Coordinate.js";
 import Polygon, { type IPolygon } from "./Polygon.js";
 import Route, { type IRoute } from "./Route.js";
 
@@ -8,7 +8,7 @@ export interface IBoulder {
   name: string;
   description?: string;
   // Just a single location of a boulder
-  coordinates: ICoordinate;
+  coordinates: ICoordinateLiteral;
   area?: IArea;
   routes?: IRoute[];
   // Polygon coordinates of an outline of a boulder, optional

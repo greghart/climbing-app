@@ -1,5 +1,5 @@
 "use client";
-import { LeafletEventHandlerFnMap } from "leaflet";
+import type { LeafletEventHandlerFnMap } from "leaflet";
 import { useMapEvents } from "react-leaflet";
 
 type Props = LeafletEventHandlerFnMap;

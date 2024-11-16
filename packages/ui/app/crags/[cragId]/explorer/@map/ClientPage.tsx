@@ -1,5 +1,5 @@
 "use client";
-import AreasMap from "@/app/_components/explorer/map/AreasMap";
+import AreasMap from "@/app/_components/map/AreasMap";
 import { Crag, ICrag } from "models";
 
 export default function ClientPage({ crag }: { crag: ICrag }) {

@@ -1,10 +1,10 @@
 "use client";
-import AreasMap from "@/app/_components/explorer/map/AreasMap";
 import BoundsField from "@/app/_components/form/BoundsField";
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
 import useFormState from "@/app/_components/form/useFormState";
+import AreasMap from "@/app/_components/map/AreasMap";
 import updateCrag from "@/app/api/_actions/updateCrag";
 import { FormHelperText, InputLabel, Stack } from "@mui/material";
 import { Crag, ICrag } from "models";

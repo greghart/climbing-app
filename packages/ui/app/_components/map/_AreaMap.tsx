@@ -37,11 +37,13 @@ export default function AreaMap({ tooltip = true, ...props }: Props) {
           </Tooltip>
         )}
       </AreaPolygon>
-      <Boulders
-        key={`area-${props.area.id}-boulders`}
-        boulders={props.area.boulders || []}
-        onBoulderClick={props.onBoulderClick}
-      />
+      {props.showBoulders && (
+        <Boulders
+          key={`area-${props.area.id}-boulders`}
+          boulders={props.area.boulders || []}
+          onBoulderClick={props.onBoulderClick}
+        />
+      )}
     </LayerGroup>
   );
 }

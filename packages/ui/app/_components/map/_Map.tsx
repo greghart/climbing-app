@@ -1,7 +1,7 @@
 import { IBounds, ICoordinateLiteral } from "models";
 import React from "react";
 import { MapContainer, ZoomControl } from "react-leaflet";
-import BestTileLayer from "../explorer/map/BestTilerLayer";
+import BestTileLayer from "./BestTilerLayer";
 
 // Spaces to avoid auto sort, order here matters
 import "leaflet/dist/leaflet.css";

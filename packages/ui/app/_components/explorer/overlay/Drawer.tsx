@@ -1,6 +1,6 @@
 "use client";
 import { searchParamsParsers } from "@/app/_components/explorer/searchParams";
-import FullScreen from "@/app/_components/layouts/OverMap";
+import FullScreen from "@/app/_components/layouts/FullScreen";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import ConnectedSearch from "@/app/_components/search/ConnectedSearch";
 import useRouteTo from "@/app/_util/useRouteTo";

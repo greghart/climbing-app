@@ -21,6 +21,11 @@ class Area {
   polygon?: Polygon;
   boulders?: Boulder[];
 
+  static build(data: IArea): Area {
+    if (data instanceof Area) return data;
+    return new Area(data);
+  }
+
   constructor(data: IArea) {
     this.id = data.id;
     this.name = data.name;

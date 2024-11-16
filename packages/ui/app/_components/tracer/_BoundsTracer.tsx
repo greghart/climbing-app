@@ -1,5 +1,5 @@
 "use client";
-import FullScreen from "@/app/_components/layouts/OverMap";
+import FullScreen from "@/app/_components/layouts/FullScreen";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import CragMap from "@/app/_components/map/CragMap";
 import SearchField from "@/app/_components/search/SearchField";
@@ -12,8 +12,6 @@ import * as React from "react";
 import { Circle, Polyline, useMapEvents } from "react-leaflet";
 
 /**
- * Top level view for BoundsTracer component
- *
  * BoundsTracer opens full screen, and allows user to click points on a map and save them
  */
 

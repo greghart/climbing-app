@@ -1,23 +1,11 @@
 "use client";
-import AreaMap from "@/app/_components/explorer/map/AreaMap";
+import AreaMap from "@/app/_components/map/AreaMap";
+import usePolygonFit from "@/app/_components/map/usePolygonFit";
 import blockClicks from "@/app/_util/blockClicks";
-import { Area, IArea } from "models";
-import React from "react";
-import { useMap } from "react-leaflet";
+import { IArea } from "models";
 
-export default function ClientPage({ area: _area }: { area: IArea }) {
-  const area = new Area(_area);
-  const map = useMap();
-  React.useEffect(() => {
-    if (!area.polygon?.coordinates?.length) {
-      return;
-    }
-    map.fitBounds(
-      area.polygon.coordinates.map((c) => {
-        return [c.lat, c.lng] as [number, number];
-      })
-    );
-  }, [area.id]);
+export default function ClientPage({ area }: { area: IArea }) {
+  usePolygonFit(area.polygon);
 
   return (
     <AreaMap area={area} showBoulders tooltip={false} onClick={blockClicks} />

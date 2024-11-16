@@ -5,16 +5,16 @@
  *   * Boulder polygon, if any
  *   * Route markers with popup/links
  */
-import Boulders from "@/app/_components/explorer/map/Boulders";
-import MyPolygon from "@/app/_components/explorer/map/MyPolygon";
-import RouteMarkers from "@/app/_components/explorer/map/RouteMarkers";
-import * as Leaflet from "leaflet";
-import { Boulder } from "models";
+import Boulders from "@/app/_components/map/Boulders";
+import MyPolygon from "@/app/_components/map/MyPolygon";
+import RouteMarkers from "@/app/_components/map/RouteMarkers";
+import type { LeafletMouseEvent } from "leaflet";
+import { IBoulder } from "models";
 import * as React from "react";
 
 interface Props {
-  boulder: Boulder;
-  onClick?: (e: Leaflet.LeafletMouseEvent) => unknown;
+  boulder: IBoulder;
+  onClick?: (e: LeafletMouseEvent) => unknown;
   showRoutes?: boolean;
   // formulateUrl?: React.ComponentProps<typeof RouteMarkers>["formulateUrl"];
 }

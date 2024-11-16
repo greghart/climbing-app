@@ -1,6 +1,6 @@
 "use client";
-import BoulderMap from "@/app/_components/explorer/map/BoulderMap";
-import useBoulderView from "@/app/_components/explorer/useBoulderView";
+import BoulderMap from "@/app/_components/map/BoulderMap";
+import useBoulderView from "@/app/_components/map/useBoulderView";
 import blockClicks from "@/app/_util/blockClicks";
 import { IRoute, Route } from "models";
 

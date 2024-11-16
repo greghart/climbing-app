@@ -1,4 +1,3 @@
-import React from "react";
 import { TileLayer, type TileLayerProps } from "react-leaflet";
 
 // Newer tiles
@@ -33,9 +32,9 @@ export default function BestTileLayer(props: Props) {
   return (
     <TileLayer
       {...props}
-      // url={MapBox}
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      url={MapBox}
       maxNativeZoom={18}
       minNativeZoom={15}
       maxZoom={22}

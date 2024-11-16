@@ -1,4 +1,4 @@
-import BoulderIcon from "@/app/_components/explorer/map/BoulderIcon";
+import BoulderIcon from "@/app/_components/map/BoulderIcon";
 import type { LeafletMouseEvent } from "leaflet";
 import { IBoulder } from "models";
 

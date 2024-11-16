@@ -1,25 +1,10 @@
 "use client";
-import BoulderMap from "@/app/_components/explorer/map/BoulderMap";
+import BoulderMap from "@/app/_components/map/BoulderMap";
+import useBoulderView from "@/app/_components/map/useBoulderView";
 import blockClicks from "@/app/_util/blockClicks";
-import { Boulder, IBoulder } from "models";
-import React from "react";
-import { useMap } from "react-leaflet";
+import { IBoulder } from "models";
 
-export default function ClientPage({
-  boulder: _boulder,
-}: {
-  boulder: IBoulder;
-}) {
-  const boulder = new Boulder(_boulder);
-  const map = useMap();
-  React.useEffect(() => {
-    map.setView(
-      // Keep boulder in top half to account for overlay
-      [boulder.coordinates.lat - 0.0002, boulder.coordinates.lng],
-      20,
-      { animate: true }
-    );
-  }, [boulder.id]);
-
+export default function ClientPage({ boulder }: { boulder: IBoulder }) {
+  useBoulderView(boulder);
   return <BoulderMap boulder={boulder} onClick={blockClicks} />;
 }

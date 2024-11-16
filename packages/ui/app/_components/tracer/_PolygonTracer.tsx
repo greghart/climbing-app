@@ -1,8 +1,8 @@
 "use client";
-import MyPolygon from "@/app/_components/explorer/map/MyPolygon";
-import FullScreen from "@/app/_components/layouts/OverMap";
+import FullScreen from "@/app/_components/layouts/FullScreen";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import CragMap from "@/app/_components/map/CragMap";
+import MyPolygon from "@/app/_components/map/MyPolygon";
 import SearchField from "@/app/_components/search/SearchField";
 import { Cancel, Check } from "@mui/icons-material";
 import * as Leaflet from "leaflet";
@@ -147,7 +147,7 @@ export default function PolygonTracer(props: PolygonTracerProps) {
           }
         />
       </FullScreen>
-      <FullScreen zIndex={1000}>
+      <FullScreen zIndex={1001}>
         <CragMap crag={props.crag} style={{ height: "100vh" }}>
           <EventsHandler
             handleClick={handleClick}

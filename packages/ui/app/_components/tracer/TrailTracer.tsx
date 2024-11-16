@@ -1,5 +1,5 @@
 "use client";
-import dynamic from "next/dynamic";
+import dynamic from "@/app/_util/dynamic";
 
 const TrailTracer = dynamic(() => import("./_TrailTracer"), {
   ssr: false,

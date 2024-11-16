@@ -1,6 +1,10 @@
 import { Box } from "@mui/material";
 
 // Breaks out and sets up a full sized div above map layer at 0,0
+/**
+ * Fullscreen breaks out of whatever container it's in and sets up a full sized div
+ * Note: default 1000 z index is over the map layer, but under the controls layer
+ */
 export default function FullScreen({
   children,
   zIndex = 1000,
