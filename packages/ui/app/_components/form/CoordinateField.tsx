@@ -29,7 +29,7 @@ type Props<
 const defaultRenderPreview = (c: ICoordinateLiteral) => <Marker position={c} />;
 
 type HasCoordinateField<Key extends string> = {
-  [key in Key]?: ICoordinateLiteral;
+  [key in Key]?: ICoordinateLiteral; // optional is most flexible option
 };
 
 export type CoordinateFieldType = typeof CoordinateField;

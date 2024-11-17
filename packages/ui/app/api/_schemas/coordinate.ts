@@ -6,4 +6,8 @@ const coordinateSchema = z.object({
   lng: z.number(),
 });
 
+export const coordinateOptionalSchema = z.object({
+  lat: z.number().nullable(),
+  lng: z.number().nullable(),
+});
 export default coordinateSchema;

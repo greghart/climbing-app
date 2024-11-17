@@ -3,10 +3,11 @@ import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { type BoulderSchema } from "@/db/entity/Boulder";
 import CoordinateOptional from "@/db/entity/CoordinateOptional";
 import { type GradeSchema } from "@/db/entity/Grade";
-import { type IRoute } from "models";
+import { ICoordinateOptional, type IRoute } from "models";
 import { EntitySchema } from "typeorm";
 
 export type RouteSchema = IRoute & {
+  coordinates?: ICoordinateOptional;
   boulder?: BoulderSchema;
   grade?: GradeSchema;
 };
@@ -47,6 +48,13 @@ const Route = new EntitySchema<RouteSchema>({
       joinColumn: true,
       onDelete: "RESTRICT",
       cascade: ["insert", "update"],
+    },
+    commentable: {
+      type: "one-to-one",
+      nullable: true,
+      target: "commentable",
+      onDelete: "SET NULL",
+      joinColumn: true,
     },
   },
   embeddeds: {

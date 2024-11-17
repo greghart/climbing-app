@@ -6,12 +6,12 @@
 // import Photoable from "./Photoable.js";
 
 import Boulder, { type IBoulder } from "./Boulder.js";
+import type Commentable from "./Commentable.js";
 import type Coordinate from "./Coordinate.js";
-import CoordinateOptional, {
-  type ICoordinateOptional,
-} from "./CoordinateOptional.js";
-import Grade from "./Grade.js";
+import type { ICoordinateLiteral } from "./Coordinate.js";
+import CoordinateOptional from "./CoordinateOptional.js";
 import type { IGrade } from "./Grade.js";
+import Grade from "./Grade.js";
 
 export interface IRoute {
   id?: number;
@@ -25,8 +25,8 @@ export interface IRoute {
   grade?: IGrade;
   boulder?: IBoulder;
   // Location of the route if any, this will be setup on a polygon of the boulder
-  coordinates?: ICoordinateOptional;
-  // commentable?: Commentable;
+  coordinates?: ICoordinateLiteral;
+  commentable?: Commentable;
   // photoable?: Photoable;
 }
 
