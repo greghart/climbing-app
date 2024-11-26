@@ -3,6 +3,7 @@ import EventsHandler from "@/app/_components/EventsHandler";
 import FullScreen from "@/app/_components/layouts/FullScreen";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import CragMap from "@/app/_components/map/CragMap";
+import Layers from "@/app/_components/map/Layers";
 import SearchField from "@/app/_components/search/SearchField";
 import TrailPolyline from "@/app/_components/tracer/TrailPolyline";
 import { Cancel, Check } from "@mui/icons-material";
@@ -60,6 +61,7 @@ export default function TrailTracer(props: TrailTracerProps) {
 
   // Click to add points and lines
   const handleClick = (e: Leaflet.LeafletMouseEvent) => {
+    console.warn("handling click");
     if (e.originalEvent.ctrlKey) return;
 
     // Magnet snap e.latlng to an existing point so that the user can easily connect lines
@@ -89,6 +91,7 @@ export default function TrailTracer(props: TrailTracerProps) {
   };
 
   const handleKeyPress = (e: Leaflet.LeafletKeyboardEvent) => {
+    console.warn("handleKeyPress", e.originalEvent.key);
     // z to undo last line
     if (
       e.originalEvent.key === "z" &&
@@ -146,9 +149,10 @@ export default function TrailTracer(props: TrailTracerProps) {
     );
   };
 
+  /** TODO: Refactor to a tracer layout -- they seem to all have controls, instructions, save, cancel, etc. */
   return (
     <>
-      <FullScreen zIndex={1002}>
+      <FullScreen bottom zIndex={1002}>
         <PageLayout
           header={
             <SearchField
@@ -173,6 +177,7 @@ export default function TrailTracer(props: TrailTracerProps) {
       </FullScreen>
       <FullScreen zIndex={1000}>
         <CragMap crag={props.crag} style={{ height: "100vh" }}>
+          <Layers />
           <EventsHandler
             click={handleClick}
             mousemove={handleMouseMove}

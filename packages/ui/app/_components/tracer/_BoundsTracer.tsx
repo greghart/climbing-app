@@ -93,7 +93,7 @@ export default function BoundsTracer(props: BoundsTracerProps) {
 
   return (
     <>
-      <FullScreen zIndex={1002}>
+      <FullScreen bottom zIndex={1002}>
         <PageLayout
           header={
             <SearchField

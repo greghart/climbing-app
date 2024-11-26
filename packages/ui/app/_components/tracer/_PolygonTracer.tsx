@@ -126,7 +126,7 @@ export default function PolygonTracer(props: PolygonTracerProps) {
 
   return (
     <>
-      <FullScreen zIndex={1002}>
+      <FullScreen bottom zIndex={1002}>
         <PageLayout
           header={
             <SearchField

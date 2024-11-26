@@ -8,9 +8,11 @@ import { Box } from "@mui/material";
 export default function FullScreen({
   children,
   zIndex = 1000,
+  bottom = false,
 }: {
   children: React.ReactNode;
   zIndex?: number;
+  bottom?: boolean;
 }) {
   return (
     <Box
@@ -19,8 +21,8 @@ export default function FullScreen({
         position: "absolute!important",
         left: "0!important",
         margin: "0!important",
-        top: "0!important",
-        width: "100vw",
+        [bottom ? "bottom" : "top"]: "0!important",
+        width: "100vw!important",
       }}
     >
       {children}

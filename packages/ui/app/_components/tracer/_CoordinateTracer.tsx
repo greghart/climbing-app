@@ -39,7 +39,7 @@ export default function CoordinateTracer(props: CoordinateTracerProps) {
 
   return (
     <>
-      <FullScreen zIndex={1002}>
+      <FullScreen bottom zIndex={1002}>
         <PageLayout
           header={
             <SearchField

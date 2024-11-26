@@ -55,7 +55,6 @@ export default function BoulderForm<Meta extends {}>(props: Props<Meta>) {
                 area={props.boulder.area!}
                 onClick={undefined}
                 tooltip={false}
-                showBoulders={false}
               />
             </>
           )}
@@ -68,7 +67,6 @@ export default function BoulderForm<Meta extends {}>(props: Props<Meta>) {
                   area={props.boulder.area!}
                   onClick={undefined}
                   tooltip={false}
-                  showBoulders={false}
                 />
               </>
             ),
@@ -94,7 +92,6 @@ export default function BoulderForm<Meta extends {}>(props: Props<Meta>) {
                   area={props.boulder.area!}
                   onClick={undefined}
                   tooltip={false}
-                  showBoulders={false}
                 />
               </>
             ),

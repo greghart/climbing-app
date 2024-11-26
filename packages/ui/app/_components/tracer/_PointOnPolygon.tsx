@@ -94,7 +94,7 @@ export default function PointOnPolygon(props: PointOnPolygonProps) {
 
   return (
     <>
-      <FullScreen zIndex={1002}>
+      <FullScreen bottom zIndex={1002}>
         <PageLayout
           header={
             <SearchField
