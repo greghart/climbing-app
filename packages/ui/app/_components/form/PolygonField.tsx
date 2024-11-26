@@ -31,7 +31,6 @@ type HasPolygonField<Key extends string> = {
   [key in Key]?: IPolygon;
 };
 
-export type PolygonFieldType = typeof PolygonField;
 export default function PolygonField<
   Key extends string,
   Model extends HasPolygonField<Key>,

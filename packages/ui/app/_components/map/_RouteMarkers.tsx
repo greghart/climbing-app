@@ -1,11 +1,11 @@
 "use client";
 
-import ConfirmedCircle from "@/app/_components/map/ConfirmedCircle";
+import Circle from "@/app/_components/map/Circle";
 import useSearchParamsPath from "@/app/_util/useSearchParamsPath";
-import { Link } from "@mui/material";
+import { Link, ListItem } from "@mui/material";
 import * as Leaflet from "leaflet";
 import { reduce } from "lodash-es";
-import { ICoordinateLiteral, IRoute } from "models";
+import { CoordinateOptional, ICoordinateLiteral, IRoute } from "models";
 import NextLink from "next/link";
 import * as React from "react";
 import { Popup } from "react-leaflet";
@@ -16,7 +16,7 @@ type Props = {
 // Need ID and coordinates to place on map
 type PlaceableRoute = IRoute & { id: number; coordinates: ICoordinateLiteral };
 function isPlaceable(r: IRoute): r is PlaceableRoute {
-  return Boolean(r.coordinates && r.id);
+  return CoordinateOptional.build(r.coordinates) !== undefined && !!r.id;
 }
 
 const GROUP_ECHELON = 1;
@@ -100,10 +100,11 @@ const groupRoutesByCoordinate = (routes: IRoute[]) => {
  */
 export default function RouteMarkers(props: Props) {
   const searchParamsPath = useSearchParamsPath();
+  console.warn("ROuteMarkers", groupRoutesByCoordinate(props.routes));
   return (
     <React.Fragment>
       {groupRoutesByCoordinate(props.routes).map((thisGroup) => (
-        <ConfirmedCircle
+        <Circle
           center={[thisGroup.coordinate.lat, thisGroup.coordinate.lng]}
           // radius={thisGroup.size}
           radius={thisGroup.routes.length * 0.2}
@@ -111,19 +112,21 @@ export default function RouteMarkers(props: Props) {
         >
           <Popup closeButton={false}>
             {thisGroup.routes.map((r) => (
-              <NextLink
-                key={`route-${r.id}`}
-                href={searchParamsPath(`routes/${r.id}`)}
-                passHref
-                legacyBehavior
-              >
-                <Link underline="hover" color="inherit">
-                  {r.name} ({r.gradeRaw})
-                </Link>
-              </NextLink>
+              <ListItem key={`route-${r.id}`}>
+                <NextLink
+                  key={`route-${r.id}`}
+                  href={searchParamsPath(`routes/${r.id}`)}
+                  passHref
+                  legacyBehavior
+                >
+                  <Link underline="hover" color="inherit">
+                    {r.name} ({r.gradeRaw})
+                  </Link>
+                </NextLink>
+              </ListItem>
             ))}
           </Popup>
-        </ConfirmedCircle>
+        </Circle>
       ))}
     </React.Fragment>
   );

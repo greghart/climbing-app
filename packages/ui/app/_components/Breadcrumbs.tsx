@@ -21,6 +21,8 @@ interface Props {
   boulderIconHref?: string;
   boulderIcon?: React.ReactNode;
   routeHref?: string;
+  routeIconHref?: string;
+  routeIcon?: React.ReactNode;
 }
 
 function Centered(props: { left: React.ReactNode; right: React.ReactNode }) {
@@ -123,20 +125,33 @@ export default function Breadcrumbs(props: Props) {
         />
       )}
       {props.area && props.boulder && props.route && (
-        <Grid item>
-          <NextLink
-            href={searchParamsPath(
-              props.routeHref ||
-                `/crags/${props.crag.id}/explorer/area/${props.area.id}/boulder/${props.boulder.id}/route/${props.route.id}`
-            )}
-            passHref
-            legacyBehavior
-          >
-            <Link underline="hover" color="inherit">
-              {props.route.name}
-            </Link>
-          </NextLink>
-        </Grid>
+        <Centered
+          left={
+            <NextLink
+              href={searchParamsPath(
+                props.boulderHref ||
+                  `/crags/${props.crag.id}/explorer/area/${props.area.id}/boulder/${props.boulder.id}/route/${props.route.id}`
+              )}
+              passHref
+              legacyBehavior
+            >
+              <Link underline="hover" color="inherit">
+                {props.route.name}
+              </Link>
+            </NextLink>
+          }
+          right={
+            <NextLink
+              href={props.routeIconHref || `/routes/${props.route.id}`}
+              passHref
+              legacyBehavior
+            >
+              <Link underline="hover" color="inherit">
+                {props.routeIcon || <Info />}
+              </Link>
+            </NextLink>
+          }
+        />
       )}
     </MUIBreadcrumbs>
   );

@@ -30,7 +30,6 @@ type HasBoundsField<Key extends string> = {
   [key in Key]?: IBounds;
 };
 
-export type BoundsFieldType = typeof BoundsField;
 export default function BoundsField<
   Key extends string,
   Model extends HasBoundsField<Key>,

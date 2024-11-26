@@ -4,7 +4,7 @@ import FullScreen from "@/app/_components/layouts/FullScreen";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import CragMap from "@/app/_components/map/CragMap";
 import SearchField from "@/app/_components/search/SearchField";
-import TrailPolyline from "@/app/_components/tracer/_TrailPolyline";
+import TrailPolyline from "@/app/_components/tracer/TrailPolyline";
 import { Cancel, Check } from "@mui/icons-material";
 import * as Leaflet from "leaflet";
 import { ICrag, ITrail, Trail } from "models";

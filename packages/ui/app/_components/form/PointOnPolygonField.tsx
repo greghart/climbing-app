@@ -1,40 +1,43 @@
 "use client";
+import Circle from "@/app/_components/map/Circle";
 import CragMap from "@/app/_components/map/CragMap";
-import Marker from "@/app/_components/map/Marker";
 import CoordinateTracer from "@/app/_components/tracer/CoordinateTracer";
+import PointOnPolygon from "@/app/_components/tracer/PointOnPolygon";
 import { IApiResponse } from "@/app/api/ApiResponse";
 import { Edit } from "@mui/icons-material";
 import { Button, FormHelperText, Grid } from "@mui/material";
-import { ICoordinateLiteral, ICrag } from "models";
+import { ICoordinateLiteral, ICrag, IPolygon } from "models";
 import { useState } from "react";
 
 /**
- * Climbing app map coordinate field
+ * Climbing app map point on polygon field
  * * Displays inline map
  * * Edit to open up coordinate setter
+ * * Coordinate setter is constrained to a given polygon
  * * Confirm to stage data into a Next.js compatible hidden input
  */
 type Props<
   Key extends string,
-  Model extends HasCoordinateField<Key>,
+  Model extends HasPointOnPolygon<Key>,
   Schema extends Model
 > = {
   name: Key;
   state: IApiResponse<Model, Schema>;
   TracerProps?: Partial<React.ComponentProps<typeof CoordinateTracer>>;
   crag: ICrag;
+  polygon?: IPolygon;
   renderPreview?: (c: ICoordinateLiteral) => React.ReactNode;
 };
 
-const defaultRenderPreview = (c: ICoordinateLiteral) => <Marker position={c} />;
+const defaultRenderPreview = (c: ICoordinateLiteral) => <Circle center={c} />;
 
-type HasCoordinateField<Key extends string> = {
+type HasPointOnPolygon<Key extends string> = {
   [key in Key]?: ICoordinateLiteral; // optional is most flexible option
 };
 
-export default function CoordinateField<
+export default function PointOnPolygonField<
   Key extends string,
-  Model extends HasCoordinateField<Key>,
+  Model extends HasPointOnPolygon<Key>,
   Schema extends Model
 >({ ...props }: Props<Key, Model, Schema>) {
   const [isUpdating, setUpdating] = useState(false);
@@ -70,9 +73,14 @@ export default function CoordinateField<
     );
   }
 
+  if (!props.polygon) {
+    return "Set up a boulder polygon to choose where route is on this boulder";
+  }
+
   return (
-    <CoordinateTracer
+    <PointOnPolygon
       {...props.TracerProps}
+      polygon={props.polygon}
       crag={props.crag}
       defaultCoordinate={current}
       onCancel={() => setUpdating(false)}

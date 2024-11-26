@@ -6,5 +6,5 @@ import { IBoulder } from "models";
 
 export default function ClientPage({ boulder }: { boulder: IBoulder }) {
   useBoulderView(boulder);
-  return <BoulderMap boulder={boulder} onClick={blockClicks} />;
+  return <BoulderMap boulder={boulder} onClick={blockClicks} showRoutes />;
 }

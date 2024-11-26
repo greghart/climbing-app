@@ -1,8 +1,15 @@
 "use client";
-import dynamic from "@/app/_util/dynamic";
+import getRectangle from "@/app/_components/tracer/getRectangle";
+import { IBounds } from "models";
+import { Polyline } from "react-leaflet";
 
-const BoundsPolygon = dynamic(() => import("./_BoundsPolygon"), {
-  ssr: false,
-});
+interface Props {
+  bounds?: IBounds;
+}
 
-export default BoundsPolygon;
+export default function BoundsPolygon(props: Props) {
+  if (!props.bounds) {
+    return false;
+  }
+  return <Polyline positions={getRectangle(props.bounds)} color="green" />;
+}

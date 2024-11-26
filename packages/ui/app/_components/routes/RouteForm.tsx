@@ -1,10 +1,11 @@
 "use client";
-import CoordinateField from "@/app/_components/form/CoordinateField";
+import PointOnPolygonField from "@/app/_components/form/PointOnPolygonField";
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
 import useFormState from "@/app/_components/form/useFormState";
-import BoulderIcon from "@/app/_components/map/BoulderIcon";
+import BoulderMap from "@/app/_components/map/BoulderMap";
+import Circle from "@/app/_components/map/Circle";
 import useBoulderView from "@/app/_components/map/useBoulderView";
 import routeSchema from "@/app/api/_schemas/route";
 import { formActionHandler } from "@/app/api/formAction";
@@ -37,30 +38,33 @@ export default function RouteForm<Meta extends {}>(props: Props<Meta>) {
           defaultValue={state.data!.description}
         />
 
-        {/* TODO: Only if boulder polygon available  */}
         <InputLabel>Location</InputLabel>
-        <CoordinateField
+        <PointOnPolygonField
           state={state}
           name="coordinates"
           crag={props.route.boulder!.area!.crag!}
+          polygon={props.route.boulder!.polygon}
           renderPreview={(c) => (
             <>
               <BoulderView boulder={props.route.boulder!} />
-              <BoulderIcon position={c} />
+              <BoulderMap boulder={props.route.boulder!} />
+              <Circle center={c} />
             </>
           )}
           TracerProps={{
             renderPending: (c) => (
               <>
                 <BoulderView boulder={props.route.boulder!} />
-                <BoulderIcon position={c} />
+                <BoulderMap boulder={props.route.boulder!} />
               </>
             ),
           }}
         />
-        <FormHelperText>
-          Set route location on the boulder (requires boulder polygon)
-        </FormHelperText>
+        {!props.route.boulder!.polygon && (
+          <FormHelperText>
+            Setup a boulder polygon to set route location on boulder
+          </FormHelperText>
+        )}
 
         <SubmitButton />
       </Stack>

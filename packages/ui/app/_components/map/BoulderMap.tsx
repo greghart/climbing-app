@@ -16,6 +16,7 @@ interface Props {
   boulder: IBoulder;
   onClick?: (e: LeafletMouseEvent) => unknown;
   showRoutes?: boolean;
+  children?: React.ReactNode;
   // formulateUrl?: React.ComponentProps<typeof RouteMarkers>["formulateUrl"];
 }
 
@@ -34,6 +35,7 @@ const BoulderMap: React.ComponentType<Props> = (props) => {
         <Boulders boulders={[props.boulder]} />
       )}
       {props.showRoutes && <RouteMarkers routes={props.boulder.routes || []} />}
+      {props.children}
     </React.Fragment>
   );
 };
