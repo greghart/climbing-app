@@ -1,4 +1,5 @@
 "use client";
+import EventsHandler from "@/app/_components/EventsHandler";
 import FullScreen from "@/app/_components/layouts/FullScreen";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import CragMap from "@/app/_components/map/CragMap";
@@ -9,7 +10,7 @@ import { Cancel, Check } from "@mui/icons-material";
 import * as Leaflet from "leaflet";
 import { Bounds, IBounds, ICrag } from "models";
 import * as React from "react";
-import { Circle, Polyline, useMapEvents } from "react-leaflet";
+import { Circle, Polyline } from "react-leaflet";
 
 /**
  * BoundsTracer opens full screen, and allows user to click points on a map and save them
@@ -117,10 +118,7 @@ export default function BoundsTracer(props: BoundsTracerProps) {
       </FullScreen>
       <FullScreen zIndex={1000}>
         <CragMap crag={props.crag} style={{ height: "100vh" }}>
-          <EventsHandler
-            handleClick={handleClick}
-            handleMouseMove={handleMouseMove}
-          />
+          <EventsHandler click={handleClick} mousemove={handleMouseMove} />
           {getCurrent()}
           <BoundsPolygon bounds={state.pending} />
           {props.children}
@@ -128,18 +126,4 @@ export default function BoundsTracer(props: BoundsTracerProps) {
       </FullScreen>
     </>
   );
-}
-
-// Map is a singleton so attach events through hook
-interface eventHandlerProps {
-  handleClick: (e: Leaflet.LeafletMouseEvent) => void;
-  handleMouseMove: (e: Leaflet.LeafletMouseEvent) => void;
-}
-
-function EventsHandler(props: eventHandlerProps) {
-  useMapEvents({
-    click: props.handleClick,
-    mousemove: props.handleMouseMove,
-  });
-  return null;
 }

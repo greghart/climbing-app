@@ -8,7 +8,9 @@ import "leaflet/dist/leaflet.css";
 
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 
+import { searchParamsParsers } from "@/app/_components/explorer/searchParams";
 import resolveBounds from "@/app/_util/resolveBounds";
+import useQueryState from "@/app/_util/useQueryState";
 import "leaflet-defaulticon-compatibility";
 
 interface Props
@@ -29,6 +31,10 @@ export default function Map({ bounds, center, ...props }: Props) {
   if (!resolvedBounds) {
     return <>No center or bounds supplied</>;
   }
+  const [selected, setSelected] = useQueryState(
+    "tileLayer",
+    searchParamsParsers.tileLayer
+  );
 
   return (
     <MapContainer
@@ -41,7 +47,7 @@ export default function Map({ bounds, center, ...props }: Props) {
       {...props}
       bounds={resolvedBounds}
     >
-      <BestTileLayer />
+      <BestTileLayer layer={selected as any} />
       <ZoomControl position="topright" />
       {props.children}
     </MapContainer>

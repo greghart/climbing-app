@@ -3,6 +3,7 @@ import { searchParamsParsers } from "@/app/_components/explorer/searchParams";
 import FullScreen from "@/app/_components/layouts/FullScreen";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import ConnectedSearch from "@/app/_components/search/ConnectedSearch";
+import useQueryState from "@/app/_util/useQueryState";
 import useRouteTo from "@/app/_util/useRouteTo";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -11,7 +12,6 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { grey } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 import { ICrag } from "models";
-import { useQueryState } from "nuqs";
 import * as React from "react";
 
 interface Props {

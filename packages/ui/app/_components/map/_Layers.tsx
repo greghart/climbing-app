@@ -1,10 +1,41 @@
+"use client";
+import { searchParamsParsers } from "@/app/_components/explorer/searchParams";
 import BestTileLayer from "@/app/_components/map/BestTilerLayer";
+import useQueryState from "@/app/_util/useQueryState";
+import reduce from "lodash-es/reduce";
 import React from "react";
-import { LayersControl } from "react-leaflet";
+import { LayersControl, useMapEvents } from "react-leaflet";
 
 type Props = Omit<React.ComponentProps<typeof LayersControl>, "children"> & {
   children?: (overlay: typeof LayersControl.Overlay) => React.ReactNode;
 };
+
+type Layer = NonNullable<React.ComponentProps<typeof BestTileLayer>["layer"]>;
+
+const layerNames = {
+  MapBox: "Mapbox Tiles",
+  OpenStreetMap: "OSM Tiles",
+} as { [layer in Layer]: string };
+
+const byName = reduce(
+  layerNames,
+  (acc, value, key) => {
+    acc[value] = key as Layer;
+    return acc;
+  },
+  {} as { [name: string]: Layer }
+);
+
+function Layer({ selected, layer }: { selected: Layer; layer: Layer }) {
+  return (
+    <LayersControl.BaseLayer
+      checked={selected === layer}
+      name={layerNames[layer] || "TODO: Add layer name"}
+    >
+      <BestTileLayer layer={layer} />
+    </LayersControl.BaseLayer>
+  );
+}
 
 /**
  * LayersControl wrapper
@@ -12,15 +43,21 @@ type Props = Omit<React.ComponentProps<typeof LayersControl>, "children"> & {
  * * passes overlay component to children to make use a bit easier
  */
 export default function Layers(props: Props) {
-  // TODO: Put chosen layer in local storage or user setting
+  const [selected, setSelected] = useQueryState(
+    "tileLayer",
+    searchParamsParsers.tileLayer
+  );
+  useMapEvents({
+    baselayerchange: (e) => {
+      console.warn(e);
+      console.warn(byName);
+      setSelected(byName[e.name]);
+    },
+  });
   return (
     <LayersControl collapsed={false} position="topright" {...props}>
-      <LayersControl.BaseLayer checked name="Mapbox Tiles">
-        <BestTileLayer />
-      </LayersControl.BaseLayer>
-      <LayersControl.BaseLayer name="OSM Tiles">
-        <BestTileLayer layer="OpenStreetMap" />
-      </LayersControl.BaseLayer>
+      <Layer selected={selected as Layer} layer="MapBox" />
+      <Layer selected={selected as Layer} layer="OpenStreetMap" />
       {props.children?.(LayersControl.Overlay)}
     </LayersControl>
   );

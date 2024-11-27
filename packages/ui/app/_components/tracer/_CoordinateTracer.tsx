@@ -1,4 +1,5 @@
 "use client";
+import EventsHandler from "@/app/_components/EventsHandler";
 import FullScreen from "@/app/_components/layouts/FullScreen";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import CragMap from "@/app/_components/map/CragMap";
@@ -7,7 +8,7 @@ import { Cancel, Check } from "@mui/icons-material";
 import * as Leaflet from "leaflet";
 import { ICoordinateLiteral, ICrag } from "models";
 import * as React from "react";
-import { Marker, useMapEvents } from "react-leaflet";
+import { Marker } from "react-leaflet";
 
 /**
  * CoordinateTracer opens full screen, and allows user to click a point on a map and save it
@@ -62,7 +63,7 @@ export default function CoordinateTracer(props: CoordinateTracerProps) {
       </FullScreen>
       <FullScreen zIndex={1001}>
         <CragMap crag={props.crag} style={{ height: "100vh" }}>
-          <EventsHandler handleClick={handleClick} />
+          <EventsHandler click={handleClick} />
           {state.pending &&
             (props.renderPending || defaultRenderPending)(state.pending)}
           {props.children}
@@ -70,16 +71,4 @@ export default function CoordinateTracer(props: CoordinateTracerProps) {
       </FullScreen>
     </>
   );
-}
-
-// Map is a singleton so attach events through hook
-interface eventHandlerProps {
-  handleClick: (e: Leaflet.LeafletMouseEvent) => void;
-}
-
-function EventsHandler(props: eventHandlerProps) {
-  useMapEvents({
-    click: props.handleClick,
-  });
-  return null;
 }
