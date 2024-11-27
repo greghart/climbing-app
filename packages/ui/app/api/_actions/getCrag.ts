@@ -1,3 +1,4 @@
+import getCragTrail from "@/app/api/_actions/getCragTrail";
 import { Crag, getDataSource } from "@/db";
 import { isBounds } from "models";
 import { cache } from "react";
@@ -10,13 +11,7 @@ const getCrag = cache(async (id: number | string) => {
     .getRepository(Crag)
     .findOne({
       where: [{ name: id as string }, { id: id as number }],
-      relations: [
-        "areas",
-        "areas.polygon",
-        "areas.polygon.coordinates",
-        "trail",
-        "trail.lines",
-      ],
+      relations: ["areas", "areas.polygon", "areas.polygon.coordinates"],
       order: {
         areas: {
           polygon: {
@@ -27,7 +22,7 @@ const getCrag = cache(async (id: number | string) => {
         },
       },
     })
-    .then((crag) => {
+    .then(async (crag) => {
       if (!crag) return crag;
       // TODO: Where should this logic exist!?
       // Hydrate and dehydrate in model?
@@ -36,6 +31,7 @@ const getCrag = cache(async (id: number | string) => {
       if (!isBounds(crag.bounds)) {
         delete crag.bounds;
       }
+      crag.trail = await getCragTrail(crag.id!);
       return crag;
     });
 });

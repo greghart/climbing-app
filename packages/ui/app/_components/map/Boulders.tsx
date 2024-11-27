@@ -1,6 +1,7 @@
 import BoulderIcon from "@/app/_components/map/BoulderIcon";
 import type { LeafletMouseEvent } from "leaflet";
 import { IBoulder } from "models";
+import { Tooltip } from "react-leaflet";
 
 interface Props {
   boulders: IBoulder[];
@@ -17,6 +18,8 @@ export default function Boulders(props: Props) {
           props.onBoulderClick && props.onBoulderClick(thisBoulder, e);
         },
       }}
-    />
+    >
+      <Tooltip direction="center">{thisBoulder.name}</Tooltip>
+    </BoulderIcon>
   ));
 }

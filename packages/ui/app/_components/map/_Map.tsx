@@ -31,7 +31,7 @@ export default function Map({ bounds, center, ...props }: Props) {
   if (!resolvedBounds) {
     return <>No center or bounds supplied</>;
   }
-  const [selected, setSelected] = useQueryState(
+  const [selected, _] = useQueryState(
     "tileLayer",
     searchParamsParsers.tileLayer
   );

@@ -79,7 +79,6 @@ export default function BoundsField<
       defaultBounds={current}
       onCancel={() => setUpdating(false)}
       onSubmit={(bounds) => {
-        // TODO: Where to put client state?
         setCurrent(bounds);
         setUpdating(false);
       }}

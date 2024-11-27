@@ -13,7 +13,7 @@ const getCragTrail = cache(async (id: number) => {
       relations: ["trail", "trail.lines"],
     })
     .then((crag) => {
-      if (!crag) return null;
+      if (!crag) return undefined;
       return crag.trail;
     });
 });

@@ -5,6 +5,7 @@ import Layers from "@/app/_components/map/Layers";
 import usePolygonFit from "@/app/_components/map/usePolygonFit";
 import TrailPolyline from "@/app/_components/tracer/TrailPolyline";
 import blockClicks from "@/app/_util/blockClicks";
+import useRouteTo from "@/app/_util/useRouteTo";
 import { IArea, ITrail } from "models";
 import { LayerGroup } from "react-leaflet";
 
@@ -15,6 +16,7 @@ interface Props {
 
 export default function ClientPage(props: Props) {
   usePolygonFit(props.area.polygon);
+  const routeTo = useRouteTo({ includeSearchParams: true });
   return (
     <Layers>
       {(Overlay) => (
@@ -32,7 +34,10 @@ export default function ClientPage(props: Props) {
             <LayerGroup>
               <Boulders
                 boulders={props.area.boulders || []}
-                onBoulderClick={(b, e) => blockClicks(e)}
+                onBoulderClick={(b, e) => {
+                  routeTo(`/boulder/${b.id}`);
+                  blockClicks(e);
+                }}
               />
             </LayerGroup>
           </Overlay>
