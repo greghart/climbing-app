@@ -12,6 +12,7 @@ type Props = Omit<React.ComponentProps<typeof LayersControl>, "children"> & {
  * * passes overlay component to children to make use a bit easier
  */
 export default function Layers(props: Props) {
+  // TODO: Put chosen layer in local storage or user setting
   return (
     <LayersControl collapsed={false} position="topright" {...props}>
       <LayersControl.BaseLayer checked name="Mapbox Tiles">
