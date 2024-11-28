@@ -16,6 +16,7 @@ export default async function Page({
   return (
     <BoulderForm
       boulder={boulder}
+      area={boulder.area!}
       crag={boulder.area!.crag!}
       action={updateBoulder}
       meta={{ id: boulder.id! }}

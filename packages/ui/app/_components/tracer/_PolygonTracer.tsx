@@ -3,6 +3,7 @@ import EventsHandler from "@/app/_components/EventsHandler";
 import FullScreen from "@/app/_components/layouts/FullScreen";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import CragMap from "@/app/_components/map/CragMap";
+import Layers from "@/app/_components/map/Layers";
 import MyPolygon from "@/app/_components/map/MyPolygon";
 import SearchField from "@/app/_components/search/SearchField";
 import { Cancel, Check } from "@mui/icons-material";
@@ -150,6 +151,7 @@ export default function PolygonTracer(props: PolygonTracerProps) {
       </FullScreen>
       <FullScreen zIndex={1001}>
         <CragMap crag={props.crag} style={{ height: "100vh" }}>
+          <Layers />
           <EventsHandler
             click={handleClick}
             mousemove={handleMouseMove}

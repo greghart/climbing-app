@@ -24,7 +24,7 @@ type Props<
   state: IApiResponse<Model, Schema>;
   TracerProps?: Partial<React.ComponentProps<typeof PolygonTracer>>;
   crag: ICrag;
-  mapPreview: React.ReactNode;
+  mapPreview?: React.ReactNode;
 };
 
 type HasPolygonField<Key extends string> = {

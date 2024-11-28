@@ -23,10 +23,11 @@ type Props<
   state: IApiResponse<Model, Schema>;
   TracerProps?: Partial<React.ComponentProps<typeof CoordinateTracer>>;
   crag: ICrag;
-  renderPreview?: (c: ICoordinateLiteral) => React.ReactNode;
+  renderPreview?: (c?: ICoordinateLiteral) => React.ReactNode;
 };
 
-const defaultRenderPreview = (c: ICoordinateLiteral) => <Marker position={c} />;
+const defaultRenderPreview = (c?: ICoordinateLiteral) =>
+  c && <Marker position={c} />;
 
 type HasCoordinateField<Key extends string> = {
   [key in Key]?: ICoordinateLiteral; // optional is most flexible option
@@ -48,7 +49,7 @@ export default function CoordinateField<
       <Grid container padding={1}>
         <Grid item xs={9}>
           <CragMap crag={props.crag} style={{ paddingBottom: "50%" }}>
-            {current && (props.renderPreview || defaultRenderPreview)(current)}
+            {(props.renderPreview || defaultRenderPreview)(current)}
           </CragMap>
         </Grid>
         <Grid item>

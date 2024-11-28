@@ -7,9 +7,9 @@ import { redirect } from "next/navigation";
 import "server-only";
 import { z } from "zod";
 
-type Model = Pick<IArea, "name" | "description" | "polygon">;
+// type Model = Pick<IArea, "name" | "description" | "polygon">;
 type Meta = { cragId: number };
-const createArea = formAction<Model, z.infer<typeof areaSchema>, Meta>(
+const createArea = formAction<IArea, z.infer<typeof areaSchema>, Meta>(
   areaSchema,
   async (res, data) => {
     const ds = await getDataSource();

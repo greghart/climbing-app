@@ -3,6 +3,7 @@ import EventsHandler from "@/app/_components/EventsHandler";
 import FullScreen from "@/app/_components/layouts/FullScreen";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import CragMap from "@/app/_components/map/CragMap";
+import Layers from "@/app/_components/map/Layers";
 import SearchField from "@/app/_components/search/SearchField";
 import BoundsPolygon from "@/app/_components/tracer/BoundsPolygon";
 import getRectangle from "@/app/_components/tracer/getRectangle";
@@ -118,6 +119,7 @@ export default function BoundsTracer(props: BoundsTracerProps) {
       </FullScreen>
       <FullScreen zIndex={1000}>
         <CragMap crag={props.crag} style={{ height: "100vh" }}>
+          <Layers />
           <EventsHandler click={handleClick} mousemove={handleMouseMove} />
           {getCurrent()}
           <BoundsPolygon bounds={state.pending} />

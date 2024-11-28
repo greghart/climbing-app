@@ -8,17 +8,21 @@ import useFormState from "@/app/_components/form/useFormState";
 import AreaMap from "@/app/_components/map/AreaMap";
 import BoulderIcon from "@/app/_components/map/BoulderIcon";
 import BoulderMap from "@/app/_components/map/BoulderMap";
+import Boulders from "@/app/_components/map/Boulders";
+import Circle from "@/app/_components/map/Circle";
 import useAreaFit from "@/app/_components/map/useAreaFit";
 import useBoulderView from "@/app/_components/map/useBoulderView";
 import boulderSchema from "@/app/api/_schemas/boulder";
 import { formActionHandler } from "@/app/api/formAction";
 import { FormHelperText, InputLabel, Stack } from "@mui/material";
 import { IArea, IBoulder, ICrag } from "models";
+import React from "react";
 import { z } from "zod";
 
 interface Props<Meta> {
   crag: ICrag;
-  boulder: IBoulder; // TODO: Support adding a boulder to an area -- requires default data for coordinate, name, etc.
+  area: IArea;
+  boulder?: IBoulder; // TODO: Support adding a boulder to an area -- requires default data for coordinate, name, etc.
   action: formActionHandler<IBoulder, z.infer<typeof boulderSchema>, Meta>;
   meta: Meta;
 }
@@ -26,7 +30,7 @@ interface Props<Meta> {
 export default function BoulderForm<Meta extends {}>(props: Props<Meta>) {
   const [state, formAction, meta] = useFormState(props.action, {
     ok: true,
-    data: props.boulder,
+    data: props.boulder || ({} as IBoulder),
     meta: props.meta,
   });
   return (
@@ -49,24 +53,25 @@ export default function BoulderForm<Meta extends {}>(props: Props<Meta>) {
           crag={props.crag}
           renderPreview={(c) => (
             <>
-              <AreaView area={props.boulder.area!} />
-              <BoulderIcon position={c} />
-              <AreaMap
-                area={props.boulder.area!}
-                onClick={undefined}
-                tooltip={false}
-              />
+              <AreaView area={props.area} />
+              {c && <MyCircle style="static" center={c} />}
+              <AreaMap area={props.area} onClick={undefined} tooltip={false} />
             </>
           )}
           TracerProps={{
-            renderPending: (c) => (
+            renderPending: (c) => <MyCircle style="dynamic" center={c} />,
+            children: (
               <>
-                <AreaView area={props.boulder.area!} />
-                <BoulderIcon position={c} />
+                <AreaView area={props.area} />
                 <AreaMap
-                  area={props.boulder.area!}
+                  area={props.area}
                   onClick={undefined}
                   tooltip={false}
+                />
+                <Boulders
+                  boulders={(props.area.boulders || []).filter(
+                    (b) => b.id !== state.data.id
+                  )}
                 />
               </>
             ),
@@ -74,38 +79,42 @@ export default function BoulderForm<Meta extends {}>(props: Props<Meta>) {
         />
         <FormHelperText>Set boulder location</FormHelperText>
 
-        <InputLabel>Polygon</InputLabel>
-        <PolygonField
-          state={state}
-          name="polygon"
-          crag={props.crag}
-          TracerProps={{
-            snapDistance: 0.3,
-            children: (
-              <>
-                <BoulderView boulder={props.boulder} />
-                <BoulderIcon
-                  position={props.boulder.coordinates}
-                  opacity={0.5}
-                />
-                <AreaMap
-                  area={props.boulder.area!}
-                  onClick={undefined}
-                  tooltip={false}
-                />
-              </>
-            ),
-          }}
-          mapPreview={
-            <>
-              <BoulderView boulder={props.boulder} />
-              <BoulderMap boulder={props.boulder} showRoutes />
-            </>
-          }
-        />
-        <FormHelperText>
-          Trace the boulder to help populate better route and shade data
-        </FormHelperText>
+        {state.data.coordinates && (
+          <>
+            <InputLabel>Polygon</InputLabel>
+            <PolygonField
+              state={state}
+              name="polygon"
+              crag={props.crag}
+              TracerProps={{
+                snapDistance: 0.3,
+                children: (
+                  <>
+                    <BoulderView boulder={state.data} />
+                    <BoulderIcon
+                      position={state.data.coordinates}
+                      opacity={0.5}
+                    />
+                    <AreaMap
+                      area={props.area}
+                      onClick={undefined}
+                      tooltip={false}
+                    />
+                  </>
+                ),
+              }}
+              mapPreview={
+                <>
+                  <BoulderView boulder={state.data} />
+                  <BoulderMap boulder={state.data} showRoutes />
+                </>
+              }
+            />
+            <FormHelperText>
+              Trace the boulder to help populate better route and shade data
+            </FormHelperText>
+          </>
+        )}
 
         <SubmitButton />
       </Stack>
@@ -121,4 +130,9 @@ function BoulderView({ boulder }: { boulder: IBoulder }) {
 function AreaView({ area }: { area: IArea }) {
   useAreaFit(area);
   return false;
+}
+
+// Use a bigger circle since so it's obvious
+function MyCircle(props: React.ComponentProps<typeof Circle>) {
+  return <Circle {...props} radius={1} />;
 }

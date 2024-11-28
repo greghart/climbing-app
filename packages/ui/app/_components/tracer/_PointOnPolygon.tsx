@@ -3,6 +3,7 @@ import FullScreen from "@/app/_components/layouts/FullScreen";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import Circle from "@/app/_components/map/Circle";
 import CragMap from "@/app/_components/map/CragMap";
+import Layers from "@/app/_components/map/Layers";
 import MyPolygon from "@/app/_components/map/MyPolygon";
 import SearchField from "@/app/_components/search/SearchField";
 import mapLib from "@/app/_util/mapLib";
@@ -118,6 +119,7 @@ export default function PointOnPolygon(props: PointOnPolygonProps) {
       </FullScreen>
       <FullScreen zIndex={1001}>
         <CragMap crag={props.crag} style={{ height: "100vh" }}>
+          <Layers />
           <EventsHandler click={handleClick} mousemove={handleMouseMove} />
           {renderGivenPolygon()}
           {renderCurrentPoint()}
