@@ -4,7 +4,8 @@ import getArea from "@/app/api/_actions/getArea";
 
 const getter = finderByID(getArea);
 
-export default async function Page({ params }: { params: { areaId: string } }) {
+export default async function Page(props: { params: Promise<{ areaId: string }> }) {
+  const params = await props.params;
   const area = await getter(params.areaId)!;
 
   return <AreaShowOverview area={area} />;

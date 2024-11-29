@@ -4,11 +4,12 @@ import Route from "@/app/_components/explorer/overlay/Route";
 import getRoute from "@/app/api/_actions/getRoute";
 import { notFound } from "next/navigation";
 
-export default async function page({
-  params,
-}: {
-  params: { routeId: string };
-}) {
+export default async function page(
+  props: {
+    params: Promise<{ routeId: string }>;
+  }
+) {
+  const params = await props.params;
   const route = await getRoute(params.routeId);
   if (!route) notFound();
 

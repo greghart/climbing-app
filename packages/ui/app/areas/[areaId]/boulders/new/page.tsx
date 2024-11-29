@@ -5,7 +5,8 @@ import createBoulder from "@/app/api/_actions/createBoulder";
 import getArea from "@/app/api/_actions/getArea";
 import { notFound } from "next/navigation";
 
-export default async function Page({ params }: { params: { areaId: number } }) {
+export default async function Page(props: { params: Promise<{ areaId: number }> }) {
+  const params = await props.params;
   const area = await getArea(params.areaId);
   if (!area) notFound();
 

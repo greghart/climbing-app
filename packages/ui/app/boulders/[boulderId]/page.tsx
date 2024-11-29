@@ -4,11 +4,12 @@ import getBoulder from "@/app/api/_actions/getBoulder";
 
 const getter = finderByID(getBoulder);
 
-export default async function Page({
-  params,
-}: {
-  params: { boulderId: string };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ boulderId: string }>;
+  }
+) {
+  const params = await props.params;
   const boulder = await getter(params.boulderId)!;
 
   return <BoulderShowOverview boulder={boulder} />;

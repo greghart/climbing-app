@@ -4,15 +4,15 @@ import getRoute from "@/app/api/_actions/getRoute";
 
 export interface Props {
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     routeId: string;
-  };
+  }>;
 }
 
 const getter = finderByID(getRoute);
 
 export default async function Layout(props: Props) {
-  const route = await getter(props.params.routeId)!;
+  const route = await getter((await props.params).routeId)!;
 
   return (
     <ShowLayout

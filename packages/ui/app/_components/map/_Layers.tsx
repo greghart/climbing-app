@@ -30,7 +30,7 @@ function Layer({ selected, layer }: { selected: Layer; layer: Layer }) {
   return (
     <LayersControl.BaseLayer
       checked={selected === layer}
-      name={layerNames[layer] || "TODO: Add layer name"}
+      name={layerNames[layer] || "Unknown"}
     >
       <BestTileLayer layer={layer} />
     </LayersControl.BaseLayer>

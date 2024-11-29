@@ -2,7 +2,7 @@
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
-import useFormState from "@/app/_components/form/useFormState";
+import useActionState from "@/app/_components/form/useActionState";
 import createComment from "@/app/api/_actions/createComment";
 import { Stack } from "@mui/material";
 import { ICommentable } from "models";
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function CommentForm(props: Props) {
-  const [state, formAction, meta] = useFormState(props.action, {
+  const [state, formAction, meta] = useActionState(props.action, {
     ok: true,
     data: {
       text: props.text,

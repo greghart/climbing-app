@@ -4,13 +4,13 @@ import { notFound } from "next/navigation";
 
 export interface Props {
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     cragId: string;
-  };
+  }>;
 }
 
 export default async function Layout(props: Props) {
-  const crag = await getCrag(props.params.cragId);
+  const crag = await getCrag((await props.params).cragId);
   if (!crag) notFound();
 
   return (

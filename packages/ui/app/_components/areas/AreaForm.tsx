@@ -3,7 +3,7 @@ import PolygonField from "@/app/_components/form/PolygonField";
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
-import useFormState from "@/app/_components/form/useFormState";
+import useActionState from "@/app/_components/form/useActionState";
 import AreasMap from "@/app/_components/map/AreasMap";
 import areaSchema from "@/app/api/_schemas/area";
 import { formActionHandler } from "@/app/api/formAction";
@@ -20,7 +20,7 @@ interface Props<Meta> {
 
 export default function AreaForm<Meta extends {}>(props: Props<Meta>) {
   const crag = Crag.build(props.crag);
-  const [state, formAction, meta] = useFormState(props.action, {
+  const [state, formAction, meta] = useActionState(props.action, {
     ok: true,
     data: props.area || ({} as IArea),
     meta: props.meta,

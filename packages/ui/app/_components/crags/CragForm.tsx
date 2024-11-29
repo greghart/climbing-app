@@ -3,7 +3,7 @@ import BoundsField from "@/app/_components/form/BoundsField";
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
-import useFormState from "@/app/_components/form/useFormState";
+import useActionState from "@/app/_components/form/useActionState";
 import AreasMap from "@/app/_components/map/AreasMap";
 import updateCrag from "@/app/api/_actions/updateCrag";
 import { FormHelperText, InputLabel, Stack } from "@mui/material";
@@ -15,7 +15,7 @@ interface Props {
 
 export default function CragForm(props: Props) {
   const crag = new Crag(props.crag);
-  const [state, formAction, meta] = useFormState(updateCrag, {
+  const [state, formAction, meta] = useActionState(updateCrag, {
     ok: true,
     data: props.crag,
     meta: {},

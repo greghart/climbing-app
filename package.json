@@ -155,5 +155,11 @@
     "webpack-hot-middleware": "^2.25.3",
     "webpack-merge": "latest"
   },
-  "packageManager": "pnpm@9.0.0-beta.2+sha256.013b34133be0fd7f97d8739bd1a64a2b2c4b15af936ef77a14f5db26efb6bef4"
+  "packageManager": "pnpm@9.0.0-beta.2+sha256.013b34133be0fd7f97d8739bd1a64a2b2c4b15af936ef77a14f5db26efb6bef4",
+  "pnpm": {
+    "overrides": {
+      "@types/react": "npm:types-react@19.0.0-rc.1",
+      "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+    }
+  }
 }

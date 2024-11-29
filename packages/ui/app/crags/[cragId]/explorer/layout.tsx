@@ -7,9 +7,9 @@ export interface Props {
   children: React.ReactNode;
   overlay: React.ReactNode;
   map: React.ReactNode;
-  params: {
+  params: Promise<{
     cragId: string;
-  };
+  }>;
 }
 
 /**
@@ -18,8 +18,8 @@ export interface Props {
  * * Map routes
  * * Overlay detail routes
  */
-export default async function RootLayout(props: Props) {
-  const crag = await getCrag(props.params.cragId);
+export default async function RootLayout({ params, ...props }: Props) {
+  const crag = await getCrag((await params).cragId);
   if (!crag) notFound();
 
   return <ClientLayout crag={crag} {...props} />;

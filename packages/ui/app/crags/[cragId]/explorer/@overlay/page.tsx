@@ -9,6 +9,7 @@ async function Load(props: { cragId: string }) {
 
   return <Drawer crag={crag} title={<Breadcrumbs crag={crag} />}></Drawer>;
 }
-export default async function page({ params }: { params: { cragId: string } }) {
+export default async function page(props: { params: Promise<{ cragId: string }> }) {
+  const params = await props.params;
   return <Load cragId={params.cragId} />;
 }

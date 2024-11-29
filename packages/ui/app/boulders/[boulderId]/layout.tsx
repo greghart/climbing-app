@@ -4,15 +4,15 @@ import getBoulder from "@/app/api/_actions/getBoulder";
 
 export interface Props {
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     boulderId: string;
-  };
+  }>;
 }
 
 const getter = finderByID(getBoulder);
 
 export default async function Layout(props: Props) {
-  const boulder = await getter(props.params.boulderId)!;
+  const boulder = await getter((await props.params).boulderId)!;
 
   return (
     <ShowLayout

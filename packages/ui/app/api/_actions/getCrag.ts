@@ -1,6 +1,6 @@
 import getCragTrail from "@/app/api/_actions/getCragTrail";
 import { Crag, getDataSource } from "@/db";
-import { isBounds } from "models";
+import { ICrag, isBounds } from "models";
 import { cache } from "react";
 import "server-only";
 
@@ -32,7 +32,7 @@ const getCrag = cache(async (id: number | string) => {
         delete crag.bounds;
       }
       crag.trail = await getCragTrail(crag.id!);
-      return crag;
+      return crag as ICrag;
     });
 });
 

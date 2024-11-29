@@ -6,7 +6,8 @@ import getArea from "@/app/api/_actions/getArea";
 import updateArea from "@/app/api/_actions/updateArea";
 
 const getter = finderByID(getArea);
-export default async function Page({ params }: { params: { areaId: string } }) {
+export default async function Page(props: { params: Promise<{ areaId: string }> }) {
+  const params = await props.params;
   const area = await getter(params.areaId);
 
   return (

@@ -3,7 +3,7 @@ import PointOnPolygonField from "@/app/_components/form/PointOnPolygonField";
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
-import useFormState from "@/app/_components/form/useFormState";
+import useActionState from "@/app/_components/form/useActionState";
 import BoulderMap from "@/app/_components/map/BoulderMap";
 import Circle from "@/app/_components/map/Circle";
 import useBoulderView from "@/app/_components/map/useBoulderView";
@@ -20,7 +20,7 @@ interface Props<Meta> {
 }
 
 export default function RouteForm<Meta extends {}>(props: Props<Meta>) {
-  const [state, formAction, meta] = useFormState(props.action, {
+  const [state, formAction, meta] = useActionState(props.action, {
     ok: true,
     data: props.route,
     meta: props.meta,

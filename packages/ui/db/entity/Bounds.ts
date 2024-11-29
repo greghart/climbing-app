@@ -1,11 +1,13 @@
-import CoordinateOptional from "@/db/entity/CoordinateOptional";
+import CoordinateOptional, {
+  CoordinateOptionalSchema,
+} from "@/db/entity/CoordinateOptional";
 import { IBounds } from "models";
 import { EntitySchema } from "typeorm";
 import { CoordinateSchema } from "./Coordinate";
 
 // Embeddable Bounds columns
-export type BoundsSchema = IBounds & {
-  topLeft: CoordinateSchema;
+export type BoundsSchema = Omit<IBounds, "topLeft" | "bottomRight"> & {
+  topLeft: CoordinateOptionalSchema;
   bottomRight: CoordinateSchema;
 };
 

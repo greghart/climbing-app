@@ -1,8 +1,7 @@
 "use client";
-import React from "react";
-import { useFormState as reactUseFormState } from "react-dom";
+import React, { useActionState as reactUseActionState } from "react";
 
-export default function useFormState<State, Payload>(
+export default function useActionState<State, Payload>(
   action: (state: Awaited<State>, payload: Payload) => State | Promise<State>,
   initialState: Awaited<State>,
   permalink?: string
@@ -14,7 +13,7 @@ export default function useFormState<State, Payload>(
     reqIndex: number;
   }
 ] {
-  const [state, dispatch, isPending] = reactUseFormState(
+  const [state, dispatch, isPending] = reactUseActionState(
     action,
     initialState,
     permalink

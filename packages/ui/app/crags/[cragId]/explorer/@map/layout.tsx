@@ -3,13 +3,18 @@ import { notFound } from "next/navigation";
 import React from "react";
 import ClientLayout from "./ClientLayout";
 
-export default async function Layout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { cragId: string };
-}) {
+export default async function Layout(
+  props: {
+    children: React.ReactNode;
+    params: Promise<{ cragId: string }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    children
+  } = props;
+
   if (!children) return;
 
   const crag = await getArea(params.cragId);

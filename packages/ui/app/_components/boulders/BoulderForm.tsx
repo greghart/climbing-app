@@ -4,7 +4,7 @@ import PolygonField from "@/app/_components/form/PolygonField";
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
-import useFormState from "@/app/_components/form/useFormState";
+import useActionState from "@/app/_components/form/useActionState";
 import AreaMap from "@/app/_components/map/AreaMap";
 import BoulderIcon from "@/app/_components/map/BoulderIcon";
 import BoulderMap from "@/app/_components/map/BoulderMap";
@@ -28,7 +28,7 @@ interface Props<Meta> {
 }
 
 export default function BoulderForm<Meta extends {}>(props: Props<Meta>) {
-  const [state, formAction, meta] = useFormState(props.action, {
+  const [state, formAction, meta] = useActionState(props.action, {
     ok: true,
     data: props.boulder || ({} as IBoulder),
     meta: props.meta,

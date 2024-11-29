@@ -24,11 +24,12 @@ async function Load({ boulderId }: { boulderId: string }) {
     </Drawer>
   );
 }
-export default async function page({
-  params,
-}: {
-  params: { boulderId: string };
-}) {
+export default async function page(
+  props: {
+    params: Promise<{ boulderId: string }>;
+  }
+) {
+  const params = await props.params;
   return (
     <React.Suspense fallback={<Drawer title="Loading...">Hello</Drawer>}>
       <Load boulderId={params.boulderId} />

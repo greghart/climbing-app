@@ -2,7 +2,7 @@
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TrailField from "@/app/_components/form/TrailField";
-import useFormState from "@/app/_components/form/useFormState";
+import useActionState from "@/app/_components/form/useActionState";
 import updateCrag from "@/app/api/_actions/updateCrag";
 import cragSchema from "@/app/api/_schemas/crag";
 import { formActionHandler } from "@/app/api/formAction";
@@ -18,7 +18,7 @@ interface Props<Meta> {
 
 export default function CragForm<Meta>(props: Props<Meta>) {
   const crag = new Crag(props.crag);
-  const [state, formAction, meta] = useFormState(updateCrag, {
+  const [state, formAction, meta] = useActionState(updateCrag, {
     ok: true,
     data: props.crag,
     meta: {},

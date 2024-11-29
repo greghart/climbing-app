@@ -4,15 +4,15 @@ import getArea from "@/app/api/_actions/getArea";
 
 export interface Props {
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     areaId: string;
-  };
+  }>;
 }
 
 const getter = finderByID(getArea);
 
 export default async function Layout(props: Props) {
-  const area = await getter(props.params.areaId)!;
+  const area = await getter((await props.params).areaId)!;
 
   return (
     <ShowLayout

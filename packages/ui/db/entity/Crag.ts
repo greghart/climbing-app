@@ -7,7 +7,7 @@ import { type ICrag } from "models";
 import { EntitySchema } from "typeorm";
 import Coordinate, { CoordinateSchema } from "./Coordinate";
 
-export type CragSchema = ICrag & {
+export type CragSchema = Omit<ICrag, "bounds"> & {
   areas?: AreaSchema[];
   center: CoordinateSchema;
   bounds?: BoundsSchema;
