@@ -31,7 +31,7 @@
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "react-google-charts": "^4.0.1",
-    "react-leaflet": "^4.2.1",
+    "react-leaflet": "v5.0.0-rc.1",
     "reflect-metadata": "^0.2.2",
     "sqlite3": "^5.1.7",
     "suncalc": "^1.9.0",

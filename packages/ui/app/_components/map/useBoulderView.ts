@@ -1,3 +1,4 @@
+"use client";
 import { IBoulder } from "models";
 import React from "react";
 import { useMap } from "react-leaflet";
