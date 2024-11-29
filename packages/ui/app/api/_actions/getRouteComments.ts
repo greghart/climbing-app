@@ -1,7 +1,7 @@
 import getComments from "@/app/api/_actions/getComments";
-import { Route } from "@/db";
+import { RouteSchema } from "@/db";
 import "server-only";
 
-const getRouteComments = getComments(Route);
+const getRouteComments = getComments(RouteSchema);
 
 export default getRouteComments;

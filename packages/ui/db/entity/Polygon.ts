@@ -1,14 +1,14 @@
 import { cascadeOneToMany } from "@/db/cascadeOptions";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
-import { PolygonCoordinateSchema } from "@/db/entity/PolygonCoordinate";
+import { type PolygonCoordinate } from "@/db/entity/PolygonCoordinate";
 import { type IPolygon } from "models";
 import { EntitySchema } from "typeorm";
 
-export type PolygonSchema = IPolygon & {
-  coordinates: PolygonCoordinateSchema[];
+export type Polygon = IPolygon & {
+  coordinates: PolygonCoordinate[];
 };
 
-const Polygon = new EntitySchema<PolygonSchema>({
+const PolygonSchema = new EntitySchema<Polygon>({
   name: "polygon",
   columns: {
     ...BaseColumnSchemaPart,
@@ -30,4 +30,4 @@ const Polygon = new EntitySchema<PolygonSchema>({
   },
 });
 
-export default Polygon;
+export default PolygonSchema;

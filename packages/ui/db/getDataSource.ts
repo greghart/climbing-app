@@ -1,19 +1,6 @@
-import Trail from "@/db/entity/Trail";
-import TrailLine from "@/db/entity/TrailLine";
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import {
-  Area,
-  Boulder,
-  Comment,
-  Commentable,
-  Crag,
-  Grade,
-  GradingSystem,
-  Polygon,
-  PolygonCoordinate,
-  Route,
-} from "./entity";
+import * as entities from "./entity";
 
 export const dataSource = new DataSource({
   type: "sqlite",
@@ -21,18 +8,18 @@ export const dataSource = new DataSource({
   synchronize: true,
   logging: true,
   entities: [
-    Area,
-    Boulder,
-    Comment,
-    Commentable,
-    Crag,
-    Grade,
-    GradingSystem,
-    Polygon,
-    PolygonCoordinate,
-    Route,
-    Trail,
-    TrailLine,
+    entities.AreaSchema,
+    entities.BoulderSchema,
+    entities.CommentSchema,
+    entities.CommentableSchema,
+    entities.CragSchema,
+    entities.GradeSchema,
+    entities.GradingSystemSchema,
+    entities.PolygonSchema,
+    entities.PolygonCoordinateSchema,
+    entities.RouteSchema,
+    entities.TrailSchema,
+    entities.TrailLineSchema,
   ],
   migrations: [],
   subscribers: [],

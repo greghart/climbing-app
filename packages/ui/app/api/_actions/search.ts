@@ -1,5 +1,6 @@
 import getNormalizedSunValueForRoute from "@/app/_components/sun/getNormalizedSunValueForRoute";
-import { Crag, getDataSource } from "@/db";
+import { getDataSource } from "@/db";
+import CragRepository from "@/db/repos/CragRepository";
 import { reduce } from "lodash-es";
 import { ICrag, Route } from "models";
 import { cache } from "react";
@@ -37,7 +38,7 @@ const search = cache(async (params: SearchParams) => {
 
   // For simplicity, just get all routes in the crag and filter them in memory
   // TODO: Migrate to database as perf requires
-  const crag = await ds.getRepository(Crag).findOne({
+  const crag = await CragRepository.findOneT({
     where: { id: params.cragId },
     relations: ["areas", "areas.boulders", "areas.boulders.routes"],
     select: {

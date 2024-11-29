@@ -8,13 +8,13 @@ import { EntitySchema } from "typeorm";
  * Very similar to a regular coordinate, but has an order which we need
  * for persisting these.
  */
-export interface PolygonCoordinateSchema extends ICoordinateLiteral {
+export interface PolygonCoordinate extends ICoordinateLiteral {
   id?: number;
   order: number;
   polygon?: Polygon;
 }
 
-const PolygonCoordinate = new EntitySchema<PolygonCoordinateSchema>({
+const PolygonCoordinateSchema = new EntitySchema<PolygonCoordinate>({
   name: "polygon_coordinate",
   columns: {
     id: {
@@ -50,4 +50,4 @@ const PolygonCoordinate = new EntitySchema<PolygonCoordinateSchema>({
   ],
 });
 
-export default PolygonCoordinate;
+export default PolygonCoordinateSchema;

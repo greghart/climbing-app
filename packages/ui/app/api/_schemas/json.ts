@@ -10,7 +10,7 @@ export const literalSchema = z.union([
 type Literal = z.infer<typeof literalSchema>;
 type Json = Literal | { [key: string]: Json } | Json[];
 export const baseJsonSchema: z.ZodType<Json> = z.lazy(() =>
-  z.union([literalSchema, z.array(jsonSchema), z.record(jsonSchema)])
+  z.union([literalSchema, z.array(literalSchema), z.record(literalSchema)])
 );
 
 // objects often come in as stringified json to support simple FormData format

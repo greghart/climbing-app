@@ -1,6 +1,6 @@
 import { cascadeManyToOne } from "@/db/cascadeOptions";
-import Coordinate from "@/db/entity/Coordinate";
-import { TrailSchema } from "@/db/entity/Trail";
+import CoordinateSchema from "@/db/entity/Coordinate";
+import { Trail } from "@/db/entity/Trail";
 import { ILine } from "models";
 import { EntitySchema } from "typeorm";
 
@@ -10,12 +10,12 @@ import { EntitySchema } from "typeorm";
  * Very similar to a regular trail, but kept sorted so we can easily squash
  * line 1 end/line 2 start.
  */
-export type TrailLineSchema = ILine & {
-  trail?: TrailSchema;
+export type TrailLine = ILine & {
+  trail?: Trail;
   order: number;
 };
 
-const TrailLine = new EntitySchema<TrailLineSchema>({
+const TrailLineSchema = new EntitySchema<TrailLine>({
   name: "trail_line",
   columns: {
     id: {
@@ -29,11 +29,11 @@ const TrailLine = new EntitySchema<TrailLineSchema>({
   },
   embeddeds: {
     start: {
-      schema: Coordinate,
+      schema: CoordinateSchema,
       prefix: "start",
     },
     end: {
-      schema: Coordinate,
+      schema: CoordinateSchema,
       prefix: "end",
     },
   },
@@ -55,4 +55,4 @@ const TrailLine = new EntitySchema<TrailLineSchema>({
   ],
 });
 
-export default TrailLine;
+export default TrailLineSchema;

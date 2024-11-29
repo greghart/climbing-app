@@ -1,2 +1,2 @@
 export * from "./entity";
-export { default as getDataSource } from "./getDataSource";
+export { dataSource, default as getDataSource } from "./getDataSource";

@@ -1,4 +1,4 @@
-import { getDataSource, Route } from "@/db";
+import { getDataSource, RouteSchema } from "@/db";
 import { CoordinateOptional, IRoute } from "models";
 import { cache } from "react";
 import "server-only";
@@ -6,7 +6,7 @@ import "server-only";
 const getRoute = cache(async (id: number | string) => {
   console.log("Getting route", id);
   const ds = await getDataSource();
-  const route = await ds.getRepository(Route).findOne({
+  const route = await ds.getRepository(RouteSchema).findOne({
     where: [{ name: id as string }, { id: id as number }],
     relations: [
       "boulder",

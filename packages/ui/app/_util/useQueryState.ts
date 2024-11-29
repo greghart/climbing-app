@@ -10,7 +10,7 @@ import React from "react";
 
 /**
  * Our version of useQueryState which supports `debounceMs` option.
- * Only tyepd for parser format but will work with anything.
+ * Only typed for parser format but will work with anything.
  * Updates react immediately, but debounces the query and server update
  */
 function useQueryState<T>(

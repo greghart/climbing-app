@@ -1,20 +1,18 @@
+import { Area, Coordinate, Polygon, Route } from "@/db";
 import { cascadeManyToOne, cascadeOneToMany } from "@/db/cascadeOptions";
-import { type AreaSchema } from "@/db/entity/Area";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
-import Coordinate, { CoordinateSchema } from "@/db/entity/Coordinate";
-import { type PolygonSchema } from "@/db/entity/Polygon";
-import { type RouteSchema } from "@/db/entity/Route";
+import CoordinateSchema from "@/db/entity/Coordinate";
 import { type IBoulder } from "models";
 import { EntitySchema } from "typeorm";
 
-export type BoulderSchema = IBoulder & {
-  polygon?: PolygonSchema;
-  area?: AreaSchema;
-  routes?: RouteSchema[];
-  coordinates: CoordinateSchema;
+export type Boulder = IBoulder & {
+  polygon?: Polygon;
+  area?: Area;
+  routes?: Route[];
+  coordinates: Coordinate;
 };
 
-const Boulder = new EntitySchema<BoulderSchema>({
+const BoulderSchema = new EntitySchema<Boulder>({
   name: "boulder",
   columns: {
     ...BaseColumnSchemaPart,
@@ -55,10 +53,10 @@ const Boulder = new EntitySchema<BoulderSchema>({
   },
   embeddeds: {
     coordinates: {
-      schema: Coordinate,
+      schema: CoordinateSchema,
       prefix: "coordinates_",
     },
   },
 });
 
-export default Boulder;
+export default BoulderSchema;

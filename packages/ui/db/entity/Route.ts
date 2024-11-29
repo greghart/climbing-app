@@ -1,18 +1,17 @@
+import { Boulder, CoordinateOptional, Grade } from "@/db";
 import { cascadeManyToOne } from "@/db/cascadeOptions";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
-import { type BoulderSchema } from "@/db/entity/Boulder";
-import CoordinateOptional from "@/db/entity/CoordinateOptional";
-import { type GradeSchema } from "@/db/entity/Grade";
-import { ICoordinateOptional, type IRoute } from "models";
+import { type IRoute } from "models";
 import { EntitySchema } from "typeorm";
+import CoordinateOptionalSchema from "./CoordinateOptional";
 
-export type RouteSchema = IRoute & {
-  coordinates?: ICoordinateOptional;
-  boulder?: BoulderSchema;
-  grade?: GradeSchema;
+export type Route = IRoute & {
+  coordinates?: CoordinateOptional;
+  boulder?: Boulder;
+  grade?: Grade;
 };
 
-const Route = new EntitySchema<RouteSchema>({
+const RouteSchema = new EntitySchema<Route>({
   name: "route",
   columns: {
     ...BaseColumnSchemaPart,
@@ -59,10 +58,10 @@ const Route = new EntitySchema<RouteSchema>({
   },
   embeddeds: {
     coordinates: {
-      schema: CoordinateOptional,
+      schema: CoordinateOptionalSchema,
       prefix: "coordinates_",
     },
   },
 });
 
-export default Route;
+export default RouteSchema;

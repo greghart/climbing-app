@@ -1,7 +1,7 @@
 "use server";
 import boulderSchema from "@/app/api/_schemas/boulder";
 import formAction from "@/app/api/formAction";
-import { Boulder, getDataSource } from "@/db";
+import { BoulderSchema, getDataSource } from "@/db";
 import { IBoulder } from "models";
 import { redirect } from "next/navigation";
 import "server-only";
@@ -13,7 +13,7 @@ const updateBoulder = formAction<Model, z.infer<typeof boulderSchema>, Meta>(
   boulderSchema,
   async (res, data) => {
     const ds = await getDataSource();
-    const boulder = await ds.getRepository(Boulder).findOne({
+    const boulder = await ds.getRepository(BoulderSchema).findOne({
       where: { id: res.meta.id },
       relations: ["polygon"],
     });
@@ -46,7 +46,9 @@ const updateBoulder = formAction<Model, z.infer<typeof boulderSchema>, Meta>(
       }
       Object.assign(boulder, data);
 
-      return transactionalEntityManager.getRepository(Boulder).save(boulder);
+      return transactionalEntityManager
+        .getRepository(BoulderSchema)
+        .save(boulder);
     });
 
     redirect(`/boulders/${saved.id}`);

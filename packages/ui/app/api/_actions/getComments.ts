@@ -1,4 +1,4 @@
-import { Commentable, getDataSource } from "@/db";
+import { CommentableSchema, getDataSource } from "@/db";
 import CommentRepository, {
   CommentableEntity,
 } from "@/db/repos/CommentRepository";
@@ -22,7 +22,7 @@ function getComments(schema: EntitySchema<CommentableEntity>) {
       .withRepository(CommentRepository)
       .findOrGetCommentable(entity, schema);
 
-    return ds.getRepository(Commentable).findOne({
+    return ds.getRepository(CommentableSchema).findOne({
       where: { id: commentable.id },
       relations: ["comments"], // TODO: add and get user relation
     });

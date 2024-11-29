@@ -1,15 +1,14 @@
+import { GradingSystem, Route } from "@/db";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
-import { type GradingSystemSchema } from "@/db/entity/GradingSystem";
-import { RouteSchema } from "@/db/entity/Route";
 import { IGrade } from "models";
 import { EntitySchema } from "typeorm";
 
-export type GradeSchema = IGrade & {
-  route?: RouteSchema[];
-  system?: GradingSystemSchema;
+export type Grade = IGrade & {
+  route?: Route[];
+  system?: GradingSystem;
 };
 
-const Grade = new EntitySchema<GradeSchema>({
+const GradeSchema = new EntitySchema<Grade>({
   name: "grade",
   columns: {
     ...BaseColumnSchemaPart,
@@ -36,4 +35,4 @@ const Grade = new EntitySchema<GradeSchema>({
   },
 });
 
-export default Grade;
+export default GradeSchema;

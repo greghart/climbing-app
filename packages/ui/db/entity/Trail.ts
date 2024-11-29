@@ -1,14 +1,14 @@
 import { cascadeOneToMany } from "@/db/cascadeOptions";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
-import { TrailLineSchema } from "@/db/entity/TrailLine";
+import { TrailLine } from "@/db/entity/TrailLine";
 import { type ITrail } from "models";
 import { EntitySchema } from "typeorm";
 
-export type TrailSchema = ITrail & {
-  lines: TrailLineSchema[];
+export type Trail = ITrail & {
+  lines: TrailLine[];
 };
 
-const Trail = new EntitySchema<TrailSchema>({
+const TrailSchema = new EntitySchema<Trail>({
   name: "trail",
   columns: {
     ...BaseColumnSchemaPart,
@@ -27,4 +27,4 @@ const Trail = new EntitySchema<TrailSchema>({
   },
 });
 
-export default Trail;
+export default TrailSchema;

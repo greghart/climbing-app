@@ -1,4 +1,4 @@
-import { Boulder, getDataSource } from "@/db";
+import { BoulderSchema, getDataSource } from "@/db";
 import { cache } from "react";
 import "server-only";
 
@@ -8,7 +8,7 @@ const wait = async (ms: number) =>
 const getBoulder = cache(async (id: number | string) => {
   console.log("Getting boulder", id);
   const ds = await getDataSource();
-  return ds.getRepository(Boulder).findOne({
+  return ds.getRepository(BoulderSchema).findOne({
     where: [{ name: id as string }, { id: id as number }],
     relations: [
       "area",

@@ -1,20 +1,20 @@
 import { cascadeOneToMany } from "@/db/cascadeOptions";
-import { AreaSchema } from "@/db/entity/Area";
+import { Area } from "@/db/entity/Area";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
-import Bounds, { BoundsSchema } from "@/db/entity/Bounds";
-import { CommentableSchema } from "@/db/entity/Commentable";
+import BoundsSchema, { Bounds } from "@/db/entity/Bounds";
+import { Commentable } from "@/db/entity/Commentable";
 import { type ICrag } from "models";
 import { EntitySchema } from "typeorm";
-import Coordinate, { CoordinateSchema } from "./Coordinate";
+import CoordinateSchema, { Coordinate } from "./Coordinate";
 
-export type CragSchema = Omit<ICrag, "bounds"> & {
-  areas?: AreaSchema[];
-  center: CoordinateSchema;
-  bounds?: BoundsSchema;
-  commentable?: CommentableSchema;
+export type Crag = Omit<ICrag, "bounds"> & {
+  areas?: Area[];
+  center: Coordinate;
+  bounds?: Bounds;
+  commentable?: Commentable;
 };
 
-const Crag = new EntitySchema<CragSchema>({
+const CragSchema = new EntitySchema<Crag>({
   name: "crag",
   columns: {
     ...BaseColumnSchemaPart,
@@ -61,14 +61,14 @@ const Crag = new EntitySchema<CragSchema>({
   },
   embeddeds: {
     center: {
-      schema: Coordinate,
+      schema: CoordinateSchema,
       prefix: "center_",
     },
     bounds: {
-      schema: Bounds,
+      schema: BoundsSchema,
       prefix: "bounds_",
     },
   },
 });
 
-export default Crag;
+export default CragSchema;

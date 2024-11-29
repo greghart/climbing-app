@@ -1,5 +1,5 @@
 import associationer from "@/app/_util/associationer";
-import { Crag, getDataSource } from "@/db";
+import { CragSchema, getDataSource } from "@/db";
 import { ICrag } from "models";
 import { cache } from "react";
 import "server-only";
@@ -7,7 +7,7 @@ import "server-only";
 const getCragTrail = cache(async (id: number) => {
   const ds = await getDataSource();
   return ds
-    .getRepository(Crag)
+    .getRepository(CragSchema)
     .findOne({
       where: { id },
       relations: ["trail", "trail.lines"],

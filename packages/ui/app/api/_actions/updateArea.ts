@@ -1,7 +1,7 @@
 "use server";
 import areaSchema from "@/app/api/_schemas/area";
 import formAction from "@/app/api/formAction";
-import { Area, getDataSource } from "@/db";
+import { AreaSchema, getDataSource } from "@/db";
 import { IArea } from "models";
 import { redirect } from "next/navigation";
 import "server-only";
@@ -13,7 +13,7 @@ const createArea = formAction<Model, z.infer<typeof areaSchema>, Meta>(
   areaSchema,
   async (res, data) => {
     const ds = await getDataSource();
-    const area = await ds.getRepository(Area).findOne({
+    const area = await ds.getRepository(AreaSchema).findOne({
       where: { id: res.meta.id },
       relations: ["polygon"],
     });
@@ -46,7 +46,7 @@ const createArea = formAction<Model, z.infer<typeof areaSchema>, Meta>(
       }
       Object.assign(area, data);
 
-      return transactionalEntityManager.getRepository(Area).save(area);
+      return transactionalEntityManager.getRepository(AreaSchema).save(area);
     });
 
     redirect(`/areas/${saved.id}`);

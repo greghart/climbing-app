@@ -10,7 +10,7 @@ getDataSource()
     console.log("Inserting a new crag into the database...");
 
     // Setup grading systems
-    const systemRepo = ds.getRepository(entity.GradingSystem);
+    const systemRepo = ds.getRepository(entity.GradingSystemSchema);
     const vGrading = {
       name: "Vermin (V) Scale",
       // type: GradingSystemType.BOULDER,
@@ -25,7 +25,7 @@ getDataSource()
     await systemRepo.clear();
     await systemRepo.save(vGrading);
 
-    const gradeRepo = ds.getRepository(entity.Grade);
+    const gradeRepo = ds.getRepository(entity.GradeSchema);
     const boulderGrades = await gradeRepo.find({
       where: { system: { name: "Vermin (V) Scale" } },
     });
@@ -35,7 +35,7 @@ getDataSource()
     }, {} as Record<string, IGrade>);
 
     // Load crags
-    const cragRepo = ds.getRepository(entity.Crag);
+    const cragRepo = ds.getRepository(entity.CragSchema);
     let tram = new Crag(tramJson as any); // any to let arrays pass as tuples
     await cragRepo.clear();
     await cragRepo.save(santeeJson);

@@ -1,29 +1,27 @@
-import CoordinateOptional, {
-  CoordinateOptionalSchema,
-} from "@/db/entity/CoordinateOptional";
+import { type CoordinateOptional } from "@/db/entity";
+import CoordinateOptionalSchema from "@/db/entity/CoordinateOptional";
 import { IBounds } from "models";
 import { EntitySchema } from "typeorm";
-import { CoordinateSchema } from "./Coordinate";
 
 // Embeddable Bounds columns
-export type BoundsSchema = Omit<IBounds, "topLeft" | "bottomRight"> & {
-  topLeft: CoordinateOptionalSchema;
-  bottomRight: CoordinateSchema;
+export type Bounds = Omit<IBounds, "topLeft" | "bottomRight"> & {
+  topLeft: CoordinateOptional;
+  bottomRight: CoordinateOptional;
 };
 
-const Bounds = new EntitySchema<BoundsSchema>({
+const BoundsSchema = new EntitySchema<Bounds>({
   name: "bounds",
   columns: {},
   embeddeds: {
     topLeft: {
-      schema: CoordinateOptional,
+      schema: CoordinateOptionalSchema,
       prefix: "top_left_",
     },
     bottomRight: {
-      schema: CoordinateOptional,
+      schema: CoordinateOptionalSchema,
       prefix: "bottom_right_",
     },
   },
 });
 
-export default Bounds;
+export default BoundsSchema;

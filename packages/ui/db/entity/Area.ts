@@ -1,20 +1,17 @@
+import { Boulder, Commentable, Crag, Polygon } from "@/db";
 import { cascadeManyToOne, cascadeOneToMany } from "@/db/cascadeOptions";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
-import { BoulderSchema } from "@/db/entity/Boulder";
-import { CommentableSchema } from "@/db/entity/Commentable";
-import { type CragSchema } from "@/db/entity/Crag";
-import { type PolygonSchema } from "@/db/entity/Polygon";
 import { type IArea } from "models";
 import { EntitySchema } from "typeorm";
 
-export type AreaSchema = IArea & {
-  polygon?: PolygonSchema;
-  crag?: CragSchema;
-  boulders?: BoulderSchema[];
-  commentable?: CommentableSchema;
+export type Area = IArea & {
+  polygon?: Polygon;
+  crag?: Crag;
+  boulders?: Boulder[];
+  commentable?: Commentable;
 };
 
-const Area = new EntitySchema<AreaSchema>({
+const AreaSchema = new EntitySchema<Area>({
   name: "area",
   columns: {
     ...BaseColumnSchemaPart,
@@ -55,4 +52,4 @@ const Area = new EntitySchema<AreaSchema>({
   },
 });
 
-export default Area;
+export default AreaSchema;

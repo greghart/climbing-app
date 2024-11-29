@@ -1,10 +1,10 @@
-import { Column, EntitySchema } from "typeorm";
 import { type ICoordinateOptional } from "models";
+import { EntitySchema } from "typeorm";
 
 // Embeddable Coordinate columns that are nullable
-export type CoordinateOptionalSchema = ICoordinateOptional;
+export type CoordinateOptional = ICoordinateOptional;
 
-const CoordinateOptional = new EntitySchema<CoordinateOptionalSchema>({
+const CoordinateOptionalSchema = new EntitySchema<CoordinateOptional>({
   name: "coordinate_optional",
   columns: {
     lat: {
@@ -18,4 +18,4 @@ const CoordinateOptional = new EntitySchema<CoordinateOptionalSchema>({
   },
 });
 
-export default CoordinateOptional;
+export default CoordinateOptionalSchema;

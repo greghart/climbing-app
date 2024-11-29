@@ -1,14 +1,14 @@
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
-import { GradeSchema } from "@/db/entity/Grade";
+import { Grade } from "@/db/entity/Grade";
 import { IGradingSystem } from "models";
 import { EntitySchema } from "typeorm";
 
-export type GradingSystemSchema = IGradingSystem & {
-  grades?: GradeSchema[];
+export type GradingSystem = IGradingSystem & {
+  grades?: Grade[];
   type: string; // TODO: SQLite does not support enums
 };
 
-const GradingSystem = new EntitySchema<GradingSystemSchema>({
+const GradingSystemSchema = new EntitySchema<GradingSystem>({
   name: "grading_system",
   columns: {
     ...BaseColumnSchemaPart,
@@ -29,4 +29,4 @@ const GradingSystem = new EntitySchema<GradingSystemSchema>({
   },
 });
 
-export default GradingSystem;
+export default GradingSystemSchema;

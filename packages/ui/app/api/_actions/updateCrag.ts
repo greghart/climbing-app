@@ -1,8 +1,9 @@
 "use server";
 import cragSchema from "@/app/api/_schemas/crag";
 import formAction from "@/app/api/formAction";
-import { Crag, getDataSource } from "@/db";
-import { ICrag } from "models";
+import { CragSchema, getDataSource } from "@/db";
+import CragRepository from "@/db/repos/CragRepository";
+import { ICrag, isBounds } from "models";
 import "server-only";
 import { z } from "zod";
 
@@ -14,7 +15,7 @@ const updateCrag = formAction<ICrag, z.infer<typeof cragSchema>>(
     const ds = await getDataSource();
     const saved = await ds.transaction(async (transactionalEntityManager) => {
       const crag = await transactionalEntityManager
-        .getRepository(Crag)
+        .getRepository(CragSchema)
         .findOne({
           where: { id: res.data.id },
           relations: ["trail"],
@@ -46,10 +47,15 @@ const updateCrag = formAction<ICrag, z.infer<typeof cragSchema>>(
         } as any;
       }
       Object.assign(crag, data);
-      return transactionalEntityManager.getRepository(Crag).save(crag);
+      return transactionalEntityManager
+        .withRepository(CragRepository)
+        .saveT(crag);
     });
     if (!saved) {
       return res.err("crag not found");
+    }
+    if (!isBounds(saved.bounds)) {
+      delete saved.bounds;
     }
     return res.respond(saved, "Crag updated");
   }

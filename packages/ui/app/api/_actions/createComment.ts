@@ -1,8 +1,12 @@
 "use server";
 import formAction from "@/app/api/formAction";
-import { Comment, Commentable, getDataSource } from "@/db";
-import { CommentSchema } from "@/db/entity/Comment";
-import { CommentableSchema } from "@/db/entity/Commentable";
+import {
+  Comment,
+  Commentable,
+  CommentableSchema,
+  CommentSchema,
+  getDataSource,
+} from "@/db";
 import { IComment } from "models";
 import { redirect } from "next/navigation";
 import "server-only";
@@ -18,7 +22,7 @@ const createComment = formAction<Model, z.infer<typeof schema>, Meta>(
   schema,
   async (res, data, prevState) => {
     const ds = await getDataSource();
-    const commentable = await ds.getRepository(Commentable).findOne({
+    const commentable = await ds.getRepository(CommentableSchema).findOne({
       where: { id: prevState.meta.commentable_id },
     });
     if (!commentable) return res.err("Commentable not found");
@@ -27,7 +31,7 @@ const createComment = formAction<Model, z.infer<typeof schema>, Meta>(
       commentable,
       ...data,
     };
-    const saved = await ds.getRepository(Comment).save(newComment);
+    const saved = await ds.getRepository(CommentSchema).save(newComment);
 
     const redirectUrl = getRedirect(commentable, saved);
     if (redirectUrl.length > 0) {
@@ -38,10 +42,7 @@ const createComment = formAction<Model, z.infer<typeof schema>, Meta>(
   }
 );
 
-function getRedirect(
-  commentable: CommentableSchema,
-  comment: CommentSchema
-): string {
+function getRedirect(commentable: Commentable, comment: Comment): string {
   const tokens = commentable.descriptor.split("-");
   if (tokens.length != 2) return "";
   if (tokens[0] === "crag")

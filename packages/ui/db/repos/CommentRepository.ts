@@ -14,7 +14,7 @@ export interface CommentableEntity {
  * A custom comment repository repository to help us abstract away the
  * polymorphic associations
  */
-const CommentRepository = dataSource.getRepository(db.Comment).extend({
+const CommentRepository = dataSource.getRepository(db.CommentSchema).extend({
   /**
    * Find or get the commentable instance for an entity
    *
@@ -40,7 +40,7 @@ const CommentRepository = dataSource.getRepository(db.Comment).extend({
       commentable = new models.Commentable({
         descriptor: `${schema.options.name}-${entity.id}`,
       });
-      await this.manager.getRepository(db.Commentable).save(commentable);
+      await this.manager.getRepository(db.CommentableSchema).save(commentable);
       entity.commentable = commentable;
       await this.manager.getRepository(schema).save(entity);
     }
@@ -53,7 +53,7 @@ const CommentRepository = dataSource.getRepository(db.Comment).extend({
     comment: models.IComment
   ) {
     comment.commentable = await this.findOrGetCommentable(entity, schema);
-    return this.manager.getRepository(db.Comment).save(comment);
+    return this.manager.getRepository(db.CommentSchema).save(comment);
   },
 });
 

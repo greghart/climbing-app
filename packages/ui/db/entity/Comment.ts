@@ -1,14 +1,14 @@
 import { cascadeManyToOne } from "@/db/cascadeOptions";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
-import { CommentableSchema } from "@/db/entity/Commentable";
+import { Commentable } from "@/db/entity/Commentable";
 import { type IComment } from "models";
 import { EntitySchema } from "typeorm";
 
-export type CommentSchema = IComment & {
-  commentable: CommentableSchema;
+export type Comment = IComment & {
+  commentable: Commentable;
 };
 
-const Comment = new EntitySchema<CommentSchema>({
+const CommentSchema = new EntitySchema<Comment>({
   name: "comment",
   columns: {
     ...BaseColumnSchemaPart,
@@ -25,4 +25,4 @@ const Comment = new EntitySchema<CommentSchema>({
   },
 });
 
-export default Comment;
+export default CommentSchema;
