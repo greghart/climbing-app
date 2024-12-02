@@ -11,7 +11,13 @@ const getCrag = cache(async (id: number | string) => {
     .getRepository(CragSchema)
     .findOne({
       where: [{ name: id as string }, { id: id as number }],
-      relations: ["areas", "areas.polygon", "areas.polygon.coordinates"],
+      relations: [
+        "areas",
+        "areas.boulders",
+        "areas.boulders.routes",
+        "areas.polygon",
+        "areas.polygon.coordinates",
+      ],
       order: {
         areas: {
           polygon: {

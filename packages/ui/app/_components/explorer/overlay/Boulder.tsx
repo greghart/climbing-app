@@ -2,7 +2,7 @@
 import Truncate from "@/app/_components/Truncate";
 import RoutesDifficultyBreakdown from "@/app/_components/charts/RoutesDifficultyBreakdown";
 import RoutesList from "@/app/_components/explorer/overlay/RoutesList";
-import useRouteTo from "@/app/_util/useRouteTo";
+import useRouteTo from "@/app/_components/explorer/useRouteTo";
 import { Stack, Typography } from "@mui/material";
 import { IBoulder, IRoute } from "models";
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function Boulder(props: Props) {
-  const routeTo = useRouteTo({ includeSearchParams: true });
+  const routeTo = useRouteTo({ includeSearchParams: true })("route");
 
   return (
     <Stack spacing={1} alignItems="center">
@@ -29,7 +29,7 @@ export default function Boulder(props: Props) {
       <RoutesList
         routes={props.boulder.routes}
         key="routes-list"
-        onClick={(r: IRoute) => routeTo(`route/${r.id}`)}
+        onClick={(r: IRoute) => routeTo(r.id)}
       />
     </Stack>
   );

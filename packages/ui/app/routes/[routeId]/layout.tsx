@@ -18,11 +18,9 @@ export default async function Layout(props: Props) {
     <ShowLayout
       headerProps={{
         title: route.name,
-        href: `/crags/${
-          route.boulder!.area!.crag!.id
-        }/explorer/area/${route.boulder!.area!.id!}/boulder/${
-          route.boulder!.id
-        }/route/${route.id}`,
+        href: `/crags/${route.boulder!.area!.crag!.id}/explorer/route/${
+          route.id
+        }`,
       }}
       tabsProps={{
         basePath: `/routes/${route.id}`,

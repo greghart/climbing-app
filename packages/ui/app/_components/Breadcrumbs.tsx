@@ -101,7 +101,7 @@ export default function Breadcrumbs(props: Props) {
             <NextLink
               href={searchParamsPath(
                 props.boulderHref ||
-                  `/crags/${props.crag.id}/explorer/area/${props.area.id}/boulder/${props.boulder.id}`
+                  `/crags/${props.crag.id}/explorer/boulder/${props.boulder.id}`
               )}
               passHref
               legacyBehavior
@@ -130,7 +130,7 @@ export default function Breadcrumbs(props: Props) {
             <NextLink
               href={searchParamsPath(
                 props.boulderHref ||
-                  `/crags/${props.crag.id}/explorer/area/${props.area.id}/boulder/${props.boulder.id}/route/${props.route.id}`
+                  `/crags/${props.crag.id}/explorer/route/${props.route.id}`
               )}
               passHref
               legacyBehavior

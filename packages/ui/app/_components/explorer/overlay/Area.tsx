@@ -31,6 +31,7 @@ export default function Area(props: Props) {
         )}
         height="135px"
       />
+      <Typography variant="subtitle1">Boulders</Typography>
       <BouldersList boulders={props.area.boulders} key="boulders-list" />
     </Stack>
   );
