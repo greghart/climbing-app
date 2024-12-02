@@ -22,6 +22,8 @@ export {
   type IGradingSystem,
 } from "./GradingSystem.js";
 export { default as Line, type ILine } from "./Line.js";
+export { default as Photo, type IPhoto } from "./Photo.js";
+export { default as Photoable, type IPhotoable } from "./Photoable.js";
 export { default as Polygon, type IPolygon } from "./Polygon.js";
 export { default as Route, type IRoute } from "./Route.js";
 export { default as Trail, type ITrail } from "./Trail.js";

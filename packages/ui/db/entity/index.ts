@@ -19,7 +19,10 @@ export {
   default as GradingSystemSchema,
   type GradingSystem,
 } from "./GradingSystem";
+export { default as PhotoSchema, type Photo } from "./Photo";
+export { default as PhotoableSchema, type Photoable } from "./Photoable";
 export { default as PolygonSchema, type Polygon } from "./Polygon";
 export { default as RouteSchema, type Route } from "./Route";
 export { default as TrailSchema, type Trail } from "./Trail";
 export { default as TrailLineSchema, type TrailLine } from "./TrailLine";
+export { default as UploadSchema, type Upload } from "./Upload";

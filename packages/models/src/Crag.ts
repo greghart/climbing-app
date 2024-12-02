@@ -19,6 +19,7 @@ export interface ICrag {
   // Associations
   areas?: IArea[];
   commentable?: ICommentable;
+  photoable?: IPhotoable;
   trail?: ITrail;
 }
 

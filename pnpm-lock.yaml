@@ -20,6 +20,9 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
+      power-putty-io:
+        specifier: link:../../power-putty/packages/power-putty-io
+        version: link:../../../power-putty/packages/power-putty-io
       typescript:
         specifier: 5.x.x
         version: 5.4.3
@@ -74,6 +77,9 @@ importers:
       nuqs:
         specifier: ^1.17.1
         version: 1.17.1(next@15.0.3(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)(sass@1.72.0))
+      power-putty-io:
+        specifier: link:../../power-putty/packages/power-putty-io
+        version: link:../../power-putty/packages/power-putty-io
       react:
         specifier: 19.0.0-rc-66855b96-20241106
         version: 19.0.0-rc-66855b96-20241106
