@@ -2,6 +2,7 @@ import Area, { type IArea } from "./Area.js";
 import Bounds, { type IBounds } from "./Bounds.js";
 import type { ICommentable } from "./Commentable.js";
 import Coordinate, { type ICoordinate } from "./Coordinate.js";
+import type { IPhotoable } from "./Photoable.js";
 import Trail, { type ITrail } from "./Trail.js";
 
 export interface ICrag {

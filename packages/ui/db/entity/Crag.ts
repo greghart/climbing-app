@@ -3,6 +3,7 @@ import { Area } from "@/db/entity/Area";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import BoundsSchema, { Bounds } from "@/db/entity/Bounds";
 import { Commentable } from "@/db/entity/Commentable";
+import { Photoable } from "@/db/entity/Photoable";
 import { type ICrag } from "models";
 import { EntitySchema } from "typeorm";
 import CoordinateSchema, { Coordinate } from "./Coordinate";
@@ -12,6 +13,7 @@ export type Crag = Omit<ICrag, "bounds"> & {
   center: Coordinate;
   bounds?: Bounds;
   commentable?: Commentable;
+  photoable?: Photoable;
 };
 
 const CragSchema = new EntitySchema<Crag>({
@@ -48,6 +50,13 @@ const CragSchema = new EntitySchema<Crag>({
       type: "one-to-one",
       nullable: true,
       target: "commentable",
+      onDelete: "SET NULL",
+      joinColumn: true,
+    },
+    photoable: {
+      type: "one-to-one",
+      nullable: true,
+      target: "photoable",
       onDelete: "SET NULL",
       joinColumn: true,
     },

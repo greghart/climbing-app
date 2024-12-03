@@ -5,7 +5,7 @@ import { EntitySchema } from "typeorm";
 export type Upload = IUpload;
 
 const UploadSchema = new EntitySchema<Upload>({
-  name: "photo",
+  name: "upload",
   columns: {
     ...BaseColumnSchemaPart,
     key: {

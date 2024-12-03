@@ -12,11 +12,6 @@ export default async function Page(props: {
   if (!commentable) notFound();
 
   return (
-    <CommentForm
-      commentable={commentable}
-      text=""
-      action={createComment}
-      redirect={`crags/${params.cragId}/comments`}
-    />
+    <CommentForm commentable={commentable} text="" action={createComment} />
   );
 }

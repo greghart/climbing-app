@@ -9,8 +9,11 @@ import { EntitySchema } from "typeorm";
 /**
  * getComments returns comments for given entity.
  * Curried for ease of use.
+ * TODO: Seems like this isn't type safe due to EntitySchema
  */
-function getComments(schema: EntitySchema<CommentableEntity>) {
+function getComments(
+  schema: EntitySchema<CommentableEntity> & CommentableEntity
+) {
   return cache(async (id: number) => {
     const ds = await getDataSource();
     const entity = await ds.getRepository(schema).findOne({

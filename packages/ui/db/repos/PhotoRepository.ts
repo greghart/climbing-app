@@ -6,7 +6,7 @@ import { EntitySchema } from "typeorm";
 
 // Base interface for a photoable entity
 export interface PhotoableEntity {
-  id?: any;
+  id?: number;
   photoable?: models.IPhotoable;
 }
 

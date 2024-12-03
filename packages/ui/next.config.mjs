@@ -5,7 +5,7 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(import.meta.dirname, "app/_scss")],
   },
-  serverExternalPackages: ["typeorm"],
+  serverExternalPackages: ["typeorm", "config"],
 };
 
 export default nextConfig;
