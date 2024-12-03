@@ -2,6 +2,7 @@
 import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
+import UploadField from "@/app/_components/form/UploadField";
 import useActionState from "@/app/_components/form/useActionState";
 import createPhoto from "@/app/api/_actions/createPhoto";
 import { Stack } from "@mui/material";
@@ -30,6 +31,9 @@ export default function PhotoForm(props: Props) {
       <Stack sx={{ p: 1 }} spacing={1}>
         <TextField state={state} name="title" />
         <TextField state={state} name="description" />
+        <UploadField state={state} name="upload">
+          Upload Photo
+        </UploadField>
         <SubmitButton />
       </Stack>
     </form>

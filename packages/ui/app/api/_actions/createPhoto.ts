@@ -13,11 +13,26 @@ import "server-only";
 import { z } from "zod";
 
 // TODO: Add uploading and saving of photos using power-putty
-type Model = Pick<IPhoto, "title" | "description">;
+const MAX_FILE_SIZE = 500000;
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
+
+type Model = Pick<IPhoto, "title" | "description" | "upload">;
 type Meta = { photoable_id: number };
 const schema = z.object({
   title: z.string().min(5).max(1000),
   description: z.string().max(1000).optional(),
+  upload: z
+    .instanceof(File)
+    .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
+      ".jpg, .jpeg, .png and .webp files are accepted."
+    ),
 });
 
 const createPhoto = formAction<Model, z.infer<typeof schema>, Meta>(
@@ -32,7 +47,9 @@ const createPhoto = formAction<Model, z.infer<typeof schema>, Meta>(
     const newPhoto = {
       photoable,
       ...data,
+      upload: undefined, // TODO Upload and create an upload record
     };
+    console.warn("upload", data.upload);
     const saved = await ds.getRepository(PhotoSchema).save(newPhoto);
 
     const redirectUrl = getRedirect(photoable, saved);
