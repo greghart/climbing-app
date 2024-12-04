@@ -37,7 +37,6 @@ export default function formAction<
       acc[key] = value;
       return acc;
     }, {} as any);
-    console.warn("Upload", data.upload);
 
     const validatedFields = schema.safeParse(data) as z.SafeParseReturnType<
       Schema,

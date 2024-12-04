@@ -5,8 +5,9 @@ import TextField from "@/app/_components/form/TextField";
 import UploadField from "@/app/_components/form/UploadField";
 import useActionState from "@/app/_components/form/useActionState";
 import createPhoto from "@/app/api/_actions/createPhoto";
-import { Stack } from "@mui/material";
+import { FormHelperText, Stack } from "@mui/material";
 import { IPhoto, IPhotoable } from "models";
+import React from "react";
 
 interface Props {
   photoable: IPhotoable;
@@ -25,15 +26,36 @@ export default function PhotoForm(props: Props) {
       photoable_id: props.photoable.id!,
     },
   });
+  const [pendingFileName, setPendingFileName] = React.useState<string | null>(
+    null
+  );
   return (
     <form action={formAction}>
       <SubmitSnack kee={meta.reqIndex} {...state} />
       <Stack sx={{ p: 1 }} spacing={1}>
         <TextField state={state} name="title" />
         <TextField state={state} name="description" />
-        <UploadField state={state} name="upload">
+        <UploadField
+          state={state}
+          name="upload"
+          id="photo-upload"
+          accept="image/png, image/jpeg, image/jpg, image/webp"
+          onChange={(e) => {
+            const f = (e.target.files || [])[0];
+            if (f) {
+              // TODO: Dont' re-render this component from state or file input loses data
+              setPendingFileName(f.name);
+            } else {
+              setPendingFileName(null);
+            }
+            return true;
+          }}
+        >
           Upload Photo
         </UploadField>
+        {pendingFileName && (
+          <FormHelperText>Uploading {pendingFileName}...</FormHelperText>
+        )}
         <SubmitButton />
       </Stack>
     </form>

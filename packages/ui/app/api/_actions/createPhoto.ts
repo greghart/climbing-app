@@ -31,10 +31,9 @@ const schema = z.object({
   upload: z
     .instanceof(File)
     .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
-      ".jpg, .jpeg, .png and .webp files are accepted."
-    ),
+    .refine((file) => {
+      return ACCEPTED_IMAGE_TYPES.includes(file.type);
+    }, ".jpg, .jpeg, .png and .webp files are accepted."),
 });
 
 /**
@@ -56,7 +55,6 @@ async function hashFile(f: File): Promise<string> {
 
 async function uploadFile(f: File, dir: string) {
   const hash = await hashFile(f);
-  console.warn("Config", config);
   const engine = getEngine(config["power-putty-io"]);
   const upload = {
     engine: engine.getCode(),
@@ -67,7 +65,7 @@ async function uploadFile(f: File, dir: string) {
     sha1Hash: hash,
     uploadedAt: new Date(),
   };
-  // Find upload with existing key, or save new one.
+  // Find upload with existing key, or save new one
   // Basically if someone uploads the same file, we can re-use
   return (
     dataSource
@@ -75,7 +73,7 @@ async function uploadFile(f: File, dir: string) {
       .findOne({ where: { key: upload.key } })
       .then((existingUpload) => {
         if (existingUpload) {
-          return existingUpload;
+          throw new Error("upload already exists");
         }
         return dataSource.getRepository(UploadSchema).save(upload);
       })
@@ -100,6 +98,11 @@ const createPhoto = formAction<Model, z.infer<typeof schema>, Meta>(
     });
     if (!photoable) return res.err("Photoable not found");
 
+    try {
+      const upload = await uploadFile(data.upload, "photos");
+    } catch (e: any) {
+      return res.err(`Error uploading file: ${e.message}`);
+    }
     const newPhoto = {
       photoable,
       ...data,

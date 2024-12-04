@@ -8,6 +8,7 @@ import {
   Stack,
   styled,
 } from "@mui/material";
+import React from "react";
 
 /**
  * Climbing app file upload
@@ -51,10 +52,14 @@ export default function UploadField<Model, Schema extends Partial<Model>>({
         startIcon={<CloudUpload />}
       >
         {children || `Upload ${props.name.toUpperCase()}`}
-        <VisuallyHiddenInput type="file" {...(props as any)} />
-        <FormHelperText
-          error={props.name in (state.fieldErrors || {})}
-        ></FormHelperText>
+        <VisuallyHiddenInput
+          type="file"
+          onClick={(event) => {
+            // reset input to allow re-uploading same file
+            (event.target as any).value = "";
+          }}
+          {...(props as any)}
+        />
       </MUIButton>
       {errText && <FormHelperText error>{errText}</FormHelperText>}
     </Stack>
