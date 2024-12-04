@@ -7,7 +7,7 @@ import { z } from "zod";
 
 export interface IApiResponse<
   Model,
-  Payload extends Partial<Model>,
+  Payload extends Record<keyof Model, any>,
   Meta = {}
 > {
   // If ok, data should be provided

@@ -52,7 +52,7 @@ function PhotoCard(props: { photo: IPhoto }) {
       <CardMedia
         component="img"
         height={200}
-        image="/boulder_icon.svg.png"
+        image={`/uploads/photos/${props.photo.upload!.key}`}
         alt={props.photo.title}
       />
     </Card>

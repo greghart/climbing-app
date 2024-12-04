@@ -27,3 +27,4 @@ export { default as Photoable, type IPhotoable } from "./Photoable.js";
 export { default as Polygon, type IPolygon } from "./Polygon.js";
 export { default as Route, type IRoute } from "./Route.js";
 export { default as Trail, type ITrail } from "./Trail.js";
+export { default as Upload, type IUpload } from "./Upload.js";

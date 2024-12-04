@@ -11,7 +11,7 @@ import { z } from "zod";
  */
 export default function formAction<
   Model,
-  Schema extends Partial<Model>,
+  Schema extends Partial<Record<keyof Model, any>>,
   Meta = {}
 >(
   schema: z.SomeZodObject,

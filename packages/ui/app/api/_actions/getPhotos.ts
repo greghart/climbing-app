@@ -22,7 +22,7 @@ function getPhotos(schema: EntitySchema<PhotoableEntity>) {
 
     return ds.getRepository(PhotoableSchema).findOne({
       where: { id: photoable.id },
-      relations: ["photos"], // TODO: add and get user relation
+      relations: ["photos", "photos.upload"], // TODO: add and get user relation
     });
   });
 }

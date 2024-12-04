@@ -1,11 +1,13 @@
 "use server";
 import formAction from "@/app/api/formAction";
 import {
+  dataSource,
   getDataSource,
   Photo,
   Photoable,
   PhotoableSchema,
   PhotoSchema,
+  UploadSchema,
 } from "@/db";
 import { IPhoto } from "models";
 import { redirect } from "next/navigation";
@@ -35,6 +37,60 @@ const schema = z.object({
     ),
 });
 
+/**
+ * TODO Refactor this else where
+ */
+import config from "@/app/api/config";
+import crypto from "crypto";
+import path from "path";
+import { DataSource, getEngine } from "power-putty-io";
+
+async function hashFile(f: File): Promise<string> {
+  const hash = crypto.createHash("sha1");
+  hash.setEncoding("hex");
+  hash.write(Buffer.from(await f.arrayBuffer()));
+  hash.end();
+
+  return hash.read().toString();
+}
+
+async function uploadFile(f: File, dir: string) {
+  const hash = await hashFile(f);
+  console.warn("Config", config);
+  const engine = getEngine(config["power-putty-io"]);
+  const upload = {
+    engine: engine.getCode(),
+    key: `${hash}${path.extname(f.name)}`,
+    directory: dir,
+    fileSize: f.size,
+    originalName: f.name,
+    sha1Hash: hash,
+    uploadedAt: new Date(),
+  };
+  // Find upload with existing key, or save new one.
+  // Basically if someone uploads the same file, we can re-use
+  return (
+    dataSource
+      .getRepository(UploadSchema)
+      .findOne({ where: { key: upload.key } })
+      .then((existingUpload) => {
+        if (existingUpload) {
+          return existingUpload;
+        }
+        return dataSource.getRepository(UploadSchema).save(upload);
+      })
+      // Persist in file store
+      .then(async (upload) => {
+        return engine
+          .upload(
+            upload,
+            new DataSource(f.name, Buffer.from(await f.arrayBuffer()))
+          )
+          .then(() => upload);
+      })
+  );
+}
+
 const createPhoto = formAction<Model, z.infer<typeof schema>, Meta>(
   schema,
   async (res, data, prevState) => {
@@ -47,9 +103,8 @@ const createPhoto = formAction<Model, z.infer<typeof schema>, Meta>(
     const newPhoto = {
       photoable,
       ...data,
-      upload: undefined, // TODO Upload and create an upload record
+      upload: await uploadFile(data.upload, "photos"),
     };
-    console.warn("upload", data.upload);
     const saved = await ds.getRepository(PhotoSchema).save(newPhoto);
 
     const redirectUrl = getRedirect(photoable, saved);
