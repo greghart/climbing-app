@@ -1,15 +1,13 @@
+import PhotoCard from "@/app/_components/photos/PhotoCard";
 import { AddAPhoto } from "@mui/icons-material";
 import {
-  Card,
-  CardHeader,
-  CardMedia,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Stack,
   Typography,
 } from "@mui/material";
-import { IPhoto, IPhotoable } from "models";
+import { IPhotoable } from "models";
 import Link from "next/link";
 
 interface Props {
@@ -42,20 +40,4 @@ function ShowPhotos(props: Props) {
   );
 }
 
-function PhotoCard(props: { photo: IPhoto }) {
-  return (
-    <Card>
-      <CardHeader
-        title={props.photo.title}
-        subheader={props.photo.description}
-      />
-      <CardMedia
-        component="img"
-        height={200}
-        image={`/uploads/photos/${props.photo.upload!.key}`}
-        alt={props.photo.title}
-      />
-    </Card>
-  );
-}
 export default ShowPhotos;

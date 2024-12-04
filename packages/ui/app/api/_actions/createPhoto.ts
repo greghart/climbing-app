@@ -9,7 +9,7 @@ import {
   PhotoSchema,
   UploadSchema,
 } from "@/db";
-import { IPhoto } from "models";
+import { IPhoto, IUpload } from "models";
 import { redirect } from "next/navigation";
 import "server-only";
 import { z } from "zod";
@@ -98,15 +98,16 @@ const createPhoto = formAction<Model, z.infer<typeof schema>, Meta>(
     });
     if (!photoable) return res.err("Photoable not found");
 
+    let upload: IUpload;
     try {
-      const upload = await uploadFile(data.upload, "photos");
+      upload = await uploadFile(data.upload, "photos");
     } catch (e: any) {
       return res.err(`Error uploading file: ${e.message}`);
     }
     const newPhoto = {
       photoable,
       ...data,
-      upload: await uploadFile(data.upload, "photos"),
+      upload,
     };
     const saved = await ds.getRepository(PhotoSchema).save(newPhoto);
 
