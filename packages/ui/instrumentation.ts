@@ -1,9 +1,10 @@
-import { getDataSource } from "@/db";
+import { dataSource, getDataSource } from "@/db";
 
 /**
  * https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation
  * Wait for datasource before
  */
 export async function register() {
-  await getDataSource();
+  const ds = await getDataSource();
+  console.warn("ALL DONE", ds === dataSource);
 }

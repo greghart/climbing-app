@@ -45,7 +45,7 @@ export default function AreaForm<Meta extends {}>(props: Props<Meta>) {
           TracerProps={{
             children: (
               <AreasMap
-                areas={crag.areas?.filter((a) => a.id !== props.area!.id) || []}
+                areas={crag.areas?.filter((a) => a.id !== state.data.id) || []}
                 AreaMapProps={{ onClick: undefined }}
               />
             ),

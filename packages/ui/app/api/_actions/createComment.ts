@@ -25,7 +25,7 @@ const createComment = formAction<Model, z.infer<typeof schema>, Meta>(
     const commentable = await ds.getRepository(CommentableSchema).findOne({
       where: { id: prevState.meta.commentable_id },
     });
-    if (!commentable) return res.err("Commentable not found");
+    if (!commentable) return res.withErr("Commentable not found");
 
     const newComment = {
       commentable,

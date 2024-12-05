@@ -8,8 +8,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html>
@@ -27,7 +29,10 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <AppRouterCacheProvider>
-          <ClientContainer>{children}</ClientContainer>
+          <ClientContainer>
+            {children}
+            {modal}
+          </ClientContainer>
         </AppRouterCacheProvider>
       </body>
     </html>

@@ -31,7 +31,7 @@ const PhotoSchema = new EntitySchema<Photo>({
       target: "upload",
       joinColumn: true,
       onDelete: "CASCADE",
-      cascade: ["insert", "update"],
+      cascade: ["insert", "update", "remove"],
     },
   },
 });

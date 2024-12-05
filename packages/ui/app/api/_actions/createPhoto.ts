@@ -3,8 +3,6 @@ import formAction from "@/app/api/formAction";
 import {
   dataSource,
   getDataSource,
-  Photo,
-  Photoable,
   PhotoableSchema,
   PhotoSchema,
   UploadSchema,
@@ -40,6 +38,7 @@ const schema = z.object({
  * TODO Refactor this else where
  */
 import config from "@/app/api/config";
+import getPhotoRedirect from "@/app/api/getPhotoRedirect";
 import crypto from "crypto";
 import path from "path";
 import { DataSource, getEngine } from "power-putty-io";
@@ -96,13 +95,13 @@ const createPhoto = formAction<Model, z.infer<typeof schema>, Meta>(
     const photoable = await ds.getRepository(PhotoableSchema).findOne({
       where: { id: prevState.meta.photoable_id },
     });
-    if (!photoable) return res.err("Photoable not found");
+    if (!photoable) return res.withErr("Photoable not found");
 
     let upload: IUpload;
     try {
       upload = await uploadFile(data.upload, "photos");
     } catch (e: any) {
-      return res.err(`Error uploading file: ${e.message}`);
+      return res.withErr(`Error uploading file: ${e.message}`);
     }
     const newPhoto = {
       photoable,
@@ -111,7 +110,7 @@ const createPhoto = formAction<Model, z.infer<typeof schema>, Meta>(
     };
     const saved = await ds.getRepository(PhotoSchema).save(newPhoto);
 
-    const redirectUrl = getRedirect(photoable, saved);
+    const redirectUrl = getPhotoRedirect(photoable, saved);
     if (redirectUrl.length > 0) {
       redirect(redirectUrl); // Navigate to the new post page
     } else {
@@ -119,19 +118,5 @@ const createPhoto = formAction<Model, z.infer<typeof schema>, Meta>(
     }
   }
 );
-
-function getRedirect(photoable: Photoable, photo: Photo): string {
-  const tokens = photoable.descriptor.split("-");
-  if (tokens.length != 2) return "";
-  if (tokens[0] === "crag")
-    return `/crags/${tokens[1]}/photos?highlight=${photo.id}`;
-  if (tokens[0] === "area")
-    return `/areas/${tokens[1]}/photos?highlight=${photo.id}`;
-  if (tokens[0] === "boulder")
-    return `/boulders/${tokens[1]}/photos?highlight=${photo.id}`;
-  if (tokens[0] === "route")
-    return `/routes/${tokens[1]}/photos?highlight=${photo.id}`;
-  return "";
-}
 
 export default createPhoto;

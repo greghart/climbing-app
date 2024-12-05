@@ -14,7 +14,7 @@ export default function formAction<
   Schema extends Partial<Record<keyof Model, any>>,
   Meta = {}
 >(
-  schema: z.SomeZodObject,
+  schema: z.SomeZodObject | null,
   action: (
     res: ApiResponse<Model, Schema, Meta>,
     data: Schema,
@@ -29,25 +29,44 @@ export default function formAction<
   ) => {
     const res = new Response(prevState);
 
-    const data = Array.from(formData.entries()).reduce((acc, [key, value]) => {
-      // Next.js metadata
-      if (key.startsWith("$ACTION")) {
-        return acc;
+    try {
+      const data = Array.from(formData.entries()).reduce(
+        (acc, [key, value]) => {
+          // Next.js metadata
+          if (key.startsWith("$ACTION")) {
+            return acc;
+          }
+          acc[key] = value;
+          return acc;
+        },
+        {} as any
+      );
+
+      // Validation is opt-in
+      if (!schema) {
+        return (await action(res, data, prevState)).toJSON();
       }
-      acc[key] = value;
-      return acc;
-    }, {} as any);
+      const validatedFields = schema.safeParse(data) as z.SafeParseReturnType<
+        Schema,
+        Schema
+      >;
 
-    const validatedFields = schema.safeParse(data) as z.SafeParseReturnType<
-      Schema,
-      Schema
-    >;
-
-    // Return early if the form data is invalid
-    if (!validatedFields.success) {
-      return res.zerr(validatedFields).toJSON();
+      // Return early if the form data is invalid
+      if (!validatedFields.success) {
+        return res.withData(data).withZerr(validatedFields).toJSON();
+      }
+      return (
+        await action(res.withData(data), validatedFields.data, prevState)
+      ).toJSON();
+    } catch (err: any) {
+      // TODO: This is a quick workaround -- next/navigation redirect throws an error
+      // as a signal -- we should either re-throw it, or handle redirects in our layer to
+      // and call it directly here outside the try
+      if (err.message === "NEXT_REDIRECT") {
+        throw err;
+      }
+      return res.withErr(err.toString()).toJSON();
     }
-    return (await action(res, validatedFields.data, prevState)).toJSON();
   };
 }
 

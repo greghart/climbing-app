@@ -40,22 +40,27 @@ class ApiResponse<Model, Schema, Meta = {}> {
   respond(data: Model, msg: string, ok: boolean = true) {
     this.ok = ok;
     this.data = data;
-    return this.msg(msg);
+    return this.withMsg(msg);
   }
 
-  msg(msg: string) {
+  withData(data: Model) {
+    this.data = data;
+    return this;
+  }
+
+  withMsg(msg: string) {
     this.message = msg;
     return this;
   }
 
-  zerr(fields: z.SafeParseReturnType<Schema, Schema>) {
+  withZerr(fields: z.SafeParseReturnType<Schema, Schema>) {
     const flatten = fields.error!.flatten();
     this.fieldErrors = flatten.fieldErrors;
     this.errors = (this.errors || []).concat(flatten.formErrors);
     return this;
   }
 
-  err(err: string) {
+  withErr(err: string) {
     this.errors = (this.errors || []).concat([err]);
     return this;
   }

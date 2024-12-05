@@ -23,6 +23,7 @@ const TrailSchema = new EntitySchema<Trail>({
     crag: {
       type: "one-to-one",
       target: "crag",
+      inverseSide: "trail",
     },
   },
 });
