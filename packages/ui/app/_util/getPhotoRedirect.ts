@@ -1,8 +1,8 @@
-import { Photo, Photoable } from "@/db";
+import { IPhoto, IPhotoable } from "models";
 
 export default function getPhotoRedirect(
-  photoable: Photoable,
-  photo: Photo
+  photoable: IPhotoable,
+  photo: IPhoto
 ): string {
   const tokens = photoable.descriptor.split("-");
   if (tokens.length != 2) return "";

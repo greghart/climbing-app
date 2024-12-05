@@ -17,10 +17,10 @@ interface Props {
   hideTitle?: boolean;
   hideDelete?: boolean;
 }
-function PhotoCard(props: Props) {
+function PhotoImageListItem(props: Props) {
   "use client";
-  const showTitle = !props.hideTitle;
-  const showDelete = !props.hideDelete;
+  const showTitle = !Boolean(props.hideTitle);
+  const showDelete = !Boolean(props.hideDelete);
   /** TODO:
    * Would be ideal to imagemagick on upload, or at run time, generate consistently sized photos for the grid
    */
@@ -80,4 +80,4 @@ function PhotoCard(props: Props) {
   }
   return card;
 }
-export default PhotoCard;
+export default PhotoImageListItem;

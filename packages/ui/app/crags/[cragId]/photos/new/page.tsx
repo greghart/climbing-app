@@ -1,5 +1,5 @@
 "use server";
-import PhotoForm from "@/app/_components/photos/PhotoForm";
+import CreatePhotoForm from "@/app/_components/photos/CreatePhotoForm";
 import createPhoto from "@/app/api/_actions/createPhoto";
 import getCragPhotos from "@/app/api/_actions/getCragPhotos";
 import { notFound } from "next/navigation";
@@ -11,5 +11,5 @@ export default async function Page(props: {
   const photoable = await getCragPhotos(params.cragId);
   if (!photoable) notFound();
 
-  return <PhotoForm photoable={photoable} action={createPhoto} />;
+  return <CreatePhotoForm photoable={photoable} action={createPhoto} />;
 }

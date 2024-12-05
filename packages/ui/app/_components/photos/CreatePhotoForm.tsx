@@ -15,7 +15,7 @@ interface Props {
   action: typeof createPhoto;
 }
 
-export default function PhotoForm(props: Props) {
+export default function CreatePhotoForm(props: Props) {
   const [state, formAction, meta] = useActionState(props.action, {
     ok: true,
     data: props.photo || {

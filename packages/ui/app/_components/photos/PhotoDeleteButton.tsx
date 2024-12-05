@@ -15,11 +15,7 @@ export default function PhotoDeleteButton({ photo }: { photo: IPhoto }) {
   });
   return (
     <form action={formAction}>
-      <IconButton
-        sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-        aria-label={`remove ${photo.title}`}
-        type="submit"
-      >
+      <IconButton aria-label={`remove ${photo.title}`} type="submit">
         <Delete />
       </IconButton>
     </form>

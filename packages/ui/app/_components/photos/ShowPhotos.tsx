@@ -1,5 +1,5 @@
 "use client";
-import PhotoCard from "@/app/_components/photos/PhotoCard";
+import PhotoImageListItem from "@/app/_components/photos/PhotoImageListItem";
 import { AddAPhoto } from "@mui/icons-material";
 import {
   ImageList,
@@ -22,7 +22,7 @@ interface Props {
 
 function ShowPhotos(props: Props) {
   const photos = props.photoable.photos || [];
-  const bigEnough = useMediaQuery(useTheme().breakpoints.up("sm"));
+  const small = useMediaQuery(useTheme().breakpoints.down("xs"));
   return (
     <Stack>
       {photos.length === 0 && (
@@ -37,11 +37,11 @@ function ShowPhotos(props: Props) {
           maxHeight: "80vh",
           overflowY: "auto",
         }}
-        cols={bigEnough ? 3 : 1}
-        rowHeight={bigEnough ? 240 : 164}
+        cols={small ? 1 : 3}
+        rowHeight={small ? 164 : 240}
       >
         {photos.map((thisPhoto) => (
-          <PhotoCard key={thisPhoto.upload!.key} photo={thisPhoto} />
+          <PhotoImageListItem key={thisPhoto.upload!.key} photo={thisPhoto} />
         ))}
       </ImageList>
       <Link href="photos/new">
