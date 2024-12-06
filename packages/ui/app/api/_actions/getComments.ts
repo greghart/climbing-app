@@ -11,9 +11,7 @@ import { EntitySchema } from "typeorm";
  * Curried for ease of use.
  * TODO: Seems like this isn't type safe due to EntitySchema
  */
-function getComments(
-  schema: EntitySchema<CommentableEntity> & CommentableEntity
-) {
+function getComments(schema: EntitySchema<CommentableEntity>) {
   return cache(async (id: number) => {
     const ds = await getDataSource();
     const entity = await ds.getRepository(schema).findOne({

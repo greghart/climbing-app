@@ -32,8 +32,11 @@ export default async function uploadFile(f: File, dir: string) {
       .getRepository(UploadSchema)
       .findOne({ where: { key: upload.key } })
       .then((existingUpload) => {
+        // TODO: Right now we attach multiple photos to same file, which means
+        // deleting one photo will delete the others. Fine for now, but maybe reconsider
+        // later on
         if (existingUpload) {
-          throw new Error("upload already exists");
+          return existingUpload;
         }
         return dataSource.getRepository(UploadSchema).save(upload);
       })

@@ -8,7 +8,6 @@ import { redirect } from "next/navigation";
 import "server-only";
 import { z } from "zod";
 
-// TODO: Add uploading and saving of photos using power-putty
 const MAX_FILE_SIZE = 500000;
 const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",

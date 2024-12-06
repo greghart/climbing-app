@@ -1,4 +1,4 @@
-import { dataSource, getDataSource } from "@/db";
+import { getDataSource } from "@/db";
 
 /**
  * https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation
@@ -6,5 +6,4 @@ import { dataSource, getDataSource } from "@/db";
  */
 export async function register() {
   const ds = await getDataSource();
-  console.warn("ALL DONE", ds === dataSource);
 }

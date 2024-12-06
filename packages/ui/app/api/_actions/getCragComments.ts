@@ -1,7 +1,7 @@
 import getComments from "@/app/api/_actions/getComments";
-import { CragSchema } from "@/db";
+import { TrailSchema } from "@/db";
 import "server-only";
 
-const getCragComments = getComments(CragSchema);
+const getCragComments = getComments(TrailSchema);
 
 export default getCragComments;

@@ -33,21 +33,20 @@ interface PointOnPolygonState {
 }
 
 export default function PointOnPolygon(props: PointOnPolygonProps) {
-  if ((props.polygon.coordinates || []).length <= 0) {
-    return null;
-  }
-
   const [state, setState] = React.useState<PointOnPolygonState>({
     pending: props.defaultCoordinate,
     processedLines: processLines(props.polygon.coordinates!),
   });
-
   React.useEffect(() => {
     setState((state) => ({
       ...state,
       processedLines: processLines(props.polygon.coordinates!),
     }));
   }, [props.polygon.coordinates]);
+
+  if ((props.polygon.coordinates || []).length <= 0) {
+    return null;
+  }
 
   const handleClick = (e: Leaflet.LeafletMouseEvent) => {
     setState((state) => ({

@@ -1,8 +1,11 @@
+import { Photo } from "@/db";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { IUpload } from "models/lib/Upload";
 import { EntitySchema } from "typeorm";
 
-export type Upload = IUpload;
+export type Upload = IUpload & {
+  photo: Photo;
+};
 
 const UploadSchema = new EntitySchema<Upload>({
   name: "upload",
@@ -33,8 +36,9 @@ const UploadSchema = new EntitySchema<Upload>({
   },
   relations: {
     photo: {
-      type: "one-to-one",
+      type: "one-to-many",
       target: "photo",
+      inverseSide: "upload",
     },
   },
 });

@@ -6,10 +6,8 @@ import { redirect } from "next/navigation";
 import "server-only";
 
 type Meta = { id: number };
-// SSR compatible delete action
 const deletePhoto = formAction<any, any, Meta>(null, async (res) => {
   const ds = await getDataSource();
-  console.warn(ds === dataSource);
   const photo = await dataSource.getRepository(PhotoSchema).findOne({
     where: { id: res.meta.id },
     relations: ["photoable", "upload"],

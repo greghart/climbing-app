@@ -1,3 +1,4 @@
+import { Upload } from "@/db";
 import { cascadeManyToOne } from "@/db/cascadeOptions";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { Photoable } from "@/db/entity/Photoable";
@@ -6,6 +7,7 @@ import { EntitySchema } from "typeorm";
 
 export type Photo = IPhoto & {
   photoable: Photoable;
+  upload: Upload;
 };
 
 const PhotoSchema = new EntitySchema<Photo>({
@@ -27,11 +29,12 @@ const PhotoSchema = new EntitySchema<Photo>({
       ...cascadeManyToOne,
     },
     upload: {
-      type: "one-to-one",
+      type: "many-to-one",
       target: "upload",
-      joinColumn: true,
-      onDelete: "CASCADE",
-      cascade: ["insert", "update", "remove"],
+      ...cascadeManyToOne,
+      // joinColumn: true,
+      // onDelete: "CASCADE",
+      // cascade: ["insert", "update", "remove"],
     },
   },
 });

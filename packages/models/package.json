@@ -16,6 +16,7 @@
   "dependencies": {
     "@types/lodash-es": "^4.17.12",
     "lodash-es": "^4.17.21",
+    "power-putty-io": "^1.0.1",
     "typescript": "5.x.x"
   }
 }

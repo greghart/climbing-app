@@ -22,7 +22,7 @@ interface Props {
 
 function ShowPhotos(props: Props) {
   const photos = props.photoable.photos || [];
-  const small = useMediaQuery(useTheme().breakpoints.down("xs"));
+  const small = useMediaQuery(useTheme().breakpoints.down("sm"));
   return (
     <Stack>
       {photos.length === 0 && (
@@ -41,7 +41,7 @@ function ShowPhotos(props: Props) {
         rowHeight={small ? 164 : 240}
       >
         {photos.map((thisPhoto) => (
-          <PhotoImageListItem key={thisPhoto.upload!.key} photo={thisPhoto} />
+          <PhotoImageListItem key={thisPhoto.id} photo={thisPhoto} />
         ))}
       </ImageList>
       <Link href="photos/new">

@@ -10,7 +10,6 @@ import { Link, Typography } from "@mui/material";
 import NextLink from "next/link";
 
 export interface Props {
-  children: React.ReactNode;
   params: Promise<{
     id: string;
   }>;
@@ -18,8 +17,8 @@ export interface Props {
 
 const getter = finderByID(getPhoto);
 
-export default async function Layout(props: Props) {
-  const photo = await getter((await props.params).id)!;
+export default async function Page(props: Props) {
+  const photo = await getter((await props.params).id);
 
   return (
     <PageLayout

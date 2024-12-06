@@ -16,13 +16,12 @@ function PhotoDialog({ photo }: { photo: IPhoto }) {
   const actionHandler = async (prev: any, data: any) => {
     // redirect client side since intercepts can't handle server side redirects
     const res = await updatePhoto(prev, data);
-    console.warn("redirecting to", getPhotoRedirect(photo.photoable!, photo));
     router.replace(getPhotoRedirect(photo.photoable!, photo));
     return res;
   };
   return (
     <Dialog open={true} onClose={handleClose} maxWidth="lg" fullWidth>
-      <DialogTitle>Photo '{photo.title}'</DialogTitle>
+      <DialogTitle>Photo &apos;{photo.title}&apos;</DialogTitle>
       <DialogContent>
         <Stack>
           <UpdatePhotoForm photo={photo} action={actionHandler as any} />

@@ -1,13 +1,17 @@
+import { Area } from "@/db";
 import { cascadeOneToMany } from "@/db/cascadeOptions";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { Crag } from "@/db/entity/Crag";
 import { Photo } from "@/db/entity/Photo";
-import { IPhotoable } from "models";
+import { Boulder, IPhotoable, Route } from "models";
 import { EntitySchema } from "typeorm";
 
 export type Photoable = IPhotoable & {
   photos: Photo[];
-  crag: Crag;
+  crag?: Crag;
+  area?: Area;
+  boulder?: Boulder;
+  route?: Route;
 };
 
 const PhotoableSchema = new EntitySchema<Photoable>({
@@ -28,6 +32,21 @@ const PhotoableSchema = new EntitySchema<Photoable>({
     crag: {
       type: "one-to-one",
       target: "crag",
+      inverseSide: "photoable",
+    },
+    area: {
+      type: "one-to-one",
+      target: "area",
+      inverseSide: "photoable",
+    },
+    boulder: {
+      type: "one-to-one",
+      target: "boulder",
+      inverseSide: "photoable",
+    },
+    route: {
+      type: "one-to-one",
+      target: "route",
       inverseSide: "photoable",
     },
   },

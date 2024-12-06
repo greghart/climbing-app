@@ -41,9 +41,9 @@ export default function CreatePhotoForm(props: Props) {
           id="photo-upload"
           accept="image/png, image/jpeg, image/jpg, image/webp"
           onChange={(e) => {
+            // NOTE: Pending file name or preview could bein UploadField, but re-rendering component loses upload context
             const f = (e.target.files || [])[0];
             if (f) {
-              // TODO: Dont' re-render this component from state or file input loses data
               setPendingFileName(f.name);
             } else {
               setPendingFileName(null);

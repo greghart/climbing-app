@@ -20,6 +20,9 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
+      power-putty-io:
+        specifier: ^1.0.1
+        version: 1.0.1
       typescript:
         specifier: 5.x.x
         version: 5.4.3
@@ -81,10 +84,10 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       react:
-        specifier: 19.0.0-rc-66855b96-20241106
+        specifier: ^19.0.0-rc.0
         version: 19.0.0-rc-66855b96-20241106
       react-dom:
-        specifier: 19.0.0-rc-66855b96-20241106
+        specifier: ^19.0.0-rc.0
         version: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
       react-google-charts:
         specifier: ^4.0.1
