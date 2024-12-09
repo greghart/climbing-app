@@ -7,8 +7,7 @@ const nextConfig = {
     "power-putty-io": {
       engine: "local",
       local: {
-        rootDirectory:
-          "/home/greg/Checkouts/climbing-app/packages/ui/public/uploads",
+        rootDirectory: process.env.POWER_PUTTY_IO_UPLOADS,
       },
     },
   },

@@ -1,5 +1,6 @@
 import { TileLayer } from "react-leaflet";
 
+console.warn("ENV", process.env);
 // Define tile layers in an object
 const tileLayers = {
   // Newer tiles
@@ -17,7 +18,7 @@ const tileLayers = {
   // OpenStreetMap
   OpenStreetMap: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
   // MapBox
-  MapBox: `https://api.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}@2x.png?access_token=pk.eyJ1IjoiZWxjaG9jb2xhdG8iLCJhIjoiY2pzcWZ3ZXlxMGMyZjQzcnplZjR3Zmp1MSJ9.6xK9xxEQfavcSmfFEohQXA`,
+  MapBox: `https://api.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}@2x.png?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`,
   // Serve from our server
   Mine: "/static/tiles/{x}/{y}/{z}.png",
 };
