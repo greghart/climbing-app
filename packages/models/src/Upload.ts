@@ -1,5 +1,15 @@
-import { type Upload as IOUpload } from "power-putty-io";
 import Photo, { type IPhoto } from "./Photo.js";
+
+export type IOUpload = {
+  id: number;
+  key: string;
+  directory: string;
+  engine: string;
+  originalName: string;
+  fileSize: number;
+  sha1Hash: string;
+  uploadedAt: Date;
+};
 
 export type IUpload = IOUpload & {
   photo?: IPhoto;

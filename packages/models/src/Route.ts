@@ -37,6 +37,11 @@ class Route {
   coordinates?: Coordinate;
   grade?: Grade;
 
+  static build(data: IRoute): Route {
+    if (data instanceof Route) return data;
+    return new Route(data);
+  }
+
   constructor(data: IRoute) {
     this.id = data.id;
     this.name = data.name;
@@ -46,6 +51,8 @@ class Route {
     this.gradeRaw = data.gradeRaw;
     if (data.grade) {
       this.grade = new Grade(data.grade);
+    } else {
+      this.grade = Grade.build(data.gradeRaw);
     }
     if (data.boulder) {
       this.boulder = new Boulder(data.boulder);

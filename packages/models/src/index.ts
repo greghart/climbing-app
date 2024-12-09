@@ -16,11 +16,6 @@ export {
 } from "./CoordinateOptional.js";
 export { default as Crag, type ICrag } from "./Crag.js";
 export { default as Grade, type IGrade } from "./Grade.js";
-export {
-  default as GradingSystem,
-  GradingSystemType,
-  type IGradingSystem,
-} from "./GradingSystem.js";
 export { default as Line, type ILine } from "./Line.js";
 export { default as Photo, type IPhoto } from "./Photo.js";
 export { default as Photoable, type IPhotoable } from "./Photoable.js";

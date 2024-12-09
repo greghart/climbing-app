@@ -1,48 +1,37 @@
 "use client";
+import { reduce } from "lodash-es";
+import { Grade, IRoute, Route } from "models";
 import * as React from "react";
 import { Chart } from "react-google-charts";
-import { reduce } from "lodash-es";
-import { IRoute } from "models";
 
 type Props = Partial<React.ComponentProps<typeof Chart>> & {
   routes: IRoute[];
 };
 
 const buckets = {
-  0: ["V0", "V1", "V2", "V3"],
-  1: ["V4", "V5", "V6"],
-  2: ["V7", "V8", "V9", "V10"],
-  3: ["V11+"],
+  0: [-100, Grade.build("V3+").value],
+  1: [Grade.build("V3+").value, Grade.build("V6+").value],
+  2: [Grade.build("V6+").value, Grade.build("V10+").value],
+  3: [Grade.build("V10+").value, 100000],
 };
 const RoutesDifficultyBreakdown: React.FunctionComponent<Props> = (props) => {
-  console.warn("RoutesDifficultyBreakdown", props);
-  // TODO Make a better more robust grade system
-  // Handle 5.10, .9, VB, etc.
   const routesByBucket = reduce(
-    props.routes,
+    props.routes.map((r) => Route.build(r)),
     (memo, thisRoute) => {
+      if (!thisRoute.grade) return memo;
+
       for (const key in buckets) {
-        if (
-          buckets[key as unknown as keyof typeof buckets].indexOf(
-            thisRoute.gradeRaw.replaceAll("+", "").replaceAll("-", "")
-          ) > -1
-        ) {
+        const bucket = buckets[key as unknown as keyof typeof buckets];
+        const min = bucket[0];
+        const max = bucket[1];
+        if (thisRoute.grade.value >= min && thisRoute.grade.value <= max) {
           memo[key as unknown as keyof typeof buckets] += 1;
           return memo;
         }
       }
+      console.warn("Route", thisRoute, "did not fit in any bucket??");
       memo[3] += 1;
       return memo;
-      // Object.keys(buckets).forEach((thisBucket: unknown) => {
-      //   if (
-      //     buckets[thisBucket as keyof typeof buckets].indexOf(
-      //       thisRoute.gradeRaw.replaceAll("+", "").replaceAll("-", "")
-      //     ) > -1
-      //   ) {
-      //     memo[thisBucket as keyof typeof buckets] += 1;
-      //   }
-      // });
-      // return memo;
     },
     { 0: 0, 1: 0, 2: 0, 3: 0 }
   );

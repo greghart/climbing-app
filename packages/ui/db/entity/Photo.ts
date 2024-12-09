@@ -32,9 +32,6 @@ const PhotoSchema = new EntitySchema<Photo>({
       type: "many-to-one",
       target: "upload",
       ...cascadeManyToOne,
-      // joinColumn: true,
-      // onDelete: "CASCADE",
-      // cascade: ["insert", "update", "remove"],
     },
   },
 });
