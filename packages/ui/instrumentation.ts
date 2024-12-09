@@ -5,5 +5,5 @@ import { getDataSource } from "@/db";
  * Wait for datasource before
  */
 export async function register() {
-  await getDataSource();
+  const ds = await getDataSource();
 }

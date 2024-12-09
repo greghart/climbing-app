@@ -16,7 +16,7 @@ const createBoulder = formAction<Model, z.infer<typeof boulderSchema>, Meta>(
     const area = await ds.getRepository(AreaSchema).findOne({
       where: { id: res.meta.areaId },
     });
-    if (!area) return res.err(`area ${res.meta.areaId} not found`);
+    if (!area) return res.withErr(`area ${res.meta.areaId} not found`);
 
     const newBoulder = {
       area,

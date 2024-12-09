@@ -9,6 +9,7 @@ import { EntitySchema } from "typeorm";
 /**
  * getComments returns comments for given entity.
  * Curried for ease of use.
+ * TODO: Seems like this isn't type safe due to EntitySchema
  */
 function getComments(schema: EntitySchema<CommentableEntity>) {
   return cache(async (id: number) => {

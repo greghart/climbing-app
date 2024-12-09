@@ -17,7 +17,7 @@ const createArea = formAction<Model, z.infer<typeof areaSchema>, Meta>(
       where: { id: res.meta.id },
       relations: ["polygon"],
     });
-    if (!area) return res.err(`area ${res.meta.id} not found`);
+    if (!area) return res.withErr(`area ${res.meta.id} not found`);
 
     const saved = await ds.transaction(async (transactionalEntityManager) => {
       // Set order of polygon points to match array order

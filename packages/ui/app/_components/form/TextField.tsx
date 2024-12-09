@@ -27,7 +27,7 @@ export default function TextField<Model, Schema extends Partial<Model>>({
       label={props.label || props.name.toUpperCase()}
       fullWidth
       defaultValue={state.data![props.name]}
-      error={"name" in (state.fieldErrors || {})}
+      error={props.name in (state.fieldErrors || {})}
       helperText={state.fieldErrors?.[props.name]?.join(",")}
     />
   );

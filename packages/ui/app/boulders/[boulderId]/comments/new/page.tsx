@@ -18,7 +18,6 @@ export default async function Page(
       commentable={commentable}
       text=""
       action={createComment}
-      redirect={`boulders/${params.boulderId}/comments`}
     />
   );
 }

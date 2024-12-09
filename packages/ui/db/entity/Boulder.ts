@@ -1,4 +1,4 @@
-import { Area, Coordinate, Polygon, Route } from "@/db";
+import { Area, Commentable, Coordinate, Photoable, Polygon, Route } from "@/db";
 import { cascadeManyToOne, cascadeOneToMany } from "@/db/cascadeOptions";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import CoordinateSchema from "@/db/entity/Coordinate";
@@ -10,6 +10,8 @@ export type Boulder = IBoulder & {
   area?: Area;
   routes?: Route[];
   coordinates: Coordinate;
+  commentable?: Commentable;
+  photoable?: Photoable;
 };
 
 const BoulderSchema = new EntitySchema<Boulder>({
@@ -47,6 +49,13 @@ const BoulderSchema = new EntitySchema<Boulder>({
       type: "one-to-one",
       nullable: true,
       target: "commentable",
+      onDelete: "SET NULL",
+      joinColumn: true,
+    },
+    photoable: {
+      type: "one-to-one",
+      nullable: true,
+      target: "photoable",
       onDelete: "SET NULL",
       joinColumn: true,
     },

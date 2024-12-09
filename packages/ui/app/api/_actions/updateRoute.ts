@@ -16,7 +16,7 @@ const updateRoute = formAction<Model, z.infer<typeof routeSchema>, Meta>(
     const route = await ds.getRepository(RouteSchema).findOne({
       where: { id: res.meta.id },
     });
-    if (!route) return res.err(`route ${res.meta.id} not found`);
+    if (!route) return res.withErr(`route ${res.meta.id} not found`);
 
     Object.assign(route, data);
 

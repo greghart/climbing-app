@@ -5,7 +5,7 @@ import { type IComment } from "models";
 import { EntitySchema } from "typeorm";
 
 export type Comment = IComment & {
-  commentable: Commentable;
+  commentable?: Commentable;
 };
 
 const CommentSchema = new EntitySchema<Comment>({

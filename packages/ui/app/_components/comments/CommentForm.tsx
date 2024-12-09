@@ -10,7 +10,6 @@ import { ICommentable } from "models";
 interface Props {
   commentable: ICommentable;
   text: string;
-  redirect: string;
   action: typeof createComment;
 }
 

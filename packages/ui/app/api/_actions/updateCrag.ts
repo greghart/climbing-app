@@ -52,7 +52,7 @@ const updateCrag = formAction<ICrag, z.infer<typeof cragSchema>>(
         .saveT(crag);
     });
     if (!saved) {
-      return res.err("crag not found");
+      return res.withErr("crag not found");
     }
     if (!isBounds(saved.bounds)) {
       delete saved.bounds;

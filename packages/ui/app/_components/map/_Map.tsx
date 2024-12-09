@@ -27,14 +27,14 @@ interface Props
  * TODO: Persist map state in URL so transitions keep things in place
  */
 export default function Map({ bounds, center, ...props }: Props) {
-  const resolvedBounds = resolveBounds(bounds, center);
-  if (!resolvedBounds) {
-    return <>No center or bounds supplied</>;
-  }
   const [selected, _] = useQueryState(
     "tileLayer",
     searchParamsParsers.tileLayer
   );
+  const resolvedBounds = resolveBounds(bounds, center);
+  if (!resolvedBounds) {
+    return <>No center or bounds supplied</>;
+  }
 
   return (
     <MapContainer

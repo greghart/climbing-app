@@ -16,7 +16,7 @@ const createArea = formAction<IArea, z.infer<typeof areaSchema>, Meta>(
     const crag = await ds.getRepository(CragSchema).findOne({
       where: { id: res.meta.cragId },
     });
-    if (!crag) return res.err(`crag ${res.meta.cragId} not found`);
+    if (!crag) return res.withErr(`crag ${res.meta.cragId} not found`);
 
     const newArea = {
       crag,

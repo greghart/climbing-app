@@ -1,6 +1,7 @@
 import Boulder, { type IBoulder } from "./Boulder.js";
 import type { ICommentable } from "./Commentable.js";
 import Crag, { type ICrag } from "./Crag.js";
+import type { IPhotoable } from "./Photoable.js";
 import Polygon, { type IPolygon } from "./Polygon.js";
 
 export interface IArea {
@@ -13,6 +14,7 @@ export interface IArea {
   polygon?: IPolygon;
   boulders?: IBoulder[];
   commentable?: ICommentable;
+  photoable?: IPhotoable;
 }
 
 interface Area extends Omit<IArea, "center"> {}

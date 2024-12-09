@@ -1,5 +1,6 @@
 "use client";
-import { Card, CardContent, Tab, Tabs } from "@mui/material";
+import ShowContentCard from "@/app/_components/show/ShowContentCard";
+import { Tab, Tabs } from "@mui/material";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 
@@ -21,45 +22,31 @@ type TabViews = "overview" | "comments" | "photos";
  */
 export default function ShowLayoutTabs(props: Props) {
   const pathname = usePathname();
-  const activeToken = pathname.split("/")[3];
-  const activeLink: TabViews =
-    activeToken === "comments"
-      ? "comments"
-      : activeToken === "photos"
-      ? "photos"
-      : "overview";
+  // Support for intercepted photos, comments, etc.
+  const tab = activeTab(pathname);
   return (
     <>
-      <Tabs value={activeLink} aria-label="nav tabs" role="navigation">
+      <Tabs value={tab} aria-label="nav tabs" role="navigation">
         <LinkTab
           label="Overview"
           value="overview"
-          selected={activeLink === "overview"}
+          selected={tab === "overview"}
           href={`${props.basePath}`}
         />
         <LinkTab
           label="Comments"
           value="comments"
-          selected={activeLink === "comments"}
+          selected={tab === "comments"}
           href={`${props.basePath}/comments`}
         />
         <LinkTab
           label="Photos"
           value="photos"
-          selected={activeLink === "photos"}
+          selected={tab === "photos"}
           href={`${props.basePath}/photos`}
         />
       </Tabs>
-      <Card
-        sx={{
-          borderRadius: {
-            // square up if this becomes full width
-            xs: 0,
-          },
-        }}
-      >
-        <CardContent>{props.children}</CardContent>
-      </Card>
+      <ShowContentCard>{props.children}</ShowContentCard>
     </>
   );
 }
@@ -75,4 +62,10 @@ function LinkTab(props: LinkTabProps) {
   return (
     <Tab component="a" aria-current={props.selected && "page"} {...props} />
   );
+}
+
+function activeTab(pathname: string): TabViews {
+  if (pathname.includes("photos")) return "photos";
+  if (pathname.includes("comments")) return "comments";
+  return "overview";
 }

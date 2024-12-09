@@ -1,4 +1,4 @@
-import { Boulder, Commentable, Crag, Polygon } from "@/db";
+import { Boulder, Commentable, Crag, Photoable, Polygon } from "@/db";
 import { cascadeManyToOne, cascadeOneToMany } from "@/db/cascadeOptions";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { type IArea } from "models";
@@ -9,6 +9,7 @@ export type Area = IArea & {
   crag?: Crag;
   boulders?: Boulder[];
   commentable?: Commentable;
+  photoable?: Photoable;
 };
 
 const AreaSchema = new EntitySchema<Area>({
@@ -46,6 +47,13 @@ const AreaSchema = new EntitySchema<Area>({
       type: "one-to-one",
       nullable: true,
       target: "commentable",
+      onDelete: "SET NULL",
+      joinColumn: true,
+    },
+    photoable: {
+      type: "one-to-one",
+      nullable: true,
+      target: "photoable",
       onDelete: "SET NULL",
       joinColumn: true,
     },

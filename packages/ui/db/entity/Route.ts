@@ -1,4 +1,10 @@
-import { Boulder, CoordinateOptional, Grade } from "@/db";
+import {
+  Boulder,
+  Commentable,
+  CoordinateOptional,
+  Grade,
+  Photoable,
+} from "@/db";
 import { cascadeManyToOne } from "@/db/cascadeOptions";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { type IRoute } from "models";
@@ -9,6 +15,8 @@ export type Route = IRoute & {
   coordinates?: CoordinateOptional;
   boulder?: Boulder;
   grade?: Grade;
+  commentable?: Commentable;
+  photoable?: Photoable;
 };
 
 const RouteSchema = new EntitySchema<Route>({
@@ -52,6 +60,13 @@ const RouteSchema = new EntitySchema<Route>({
       type: "one-to-one",
       nullable: true,
       target: "commentable",
+      onDelete: "SET NULL",
+      joinColumn: true,
+    },
+    photoable: {
+      type: "one-to-one",
+      nullable: true,
+      target: "photoable",
       onDelete: "SET NULL",
       joinColumn: true,
     },

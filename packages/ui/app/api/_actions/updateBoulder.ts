@@ -17,7 +17,7 @@ const updateBoulder = formAction<Model, z.infer<typeof boulderSchema>, Meta>(
       where: { id: res.meta.id },
       relations: ["polygon"],
     });
-    if (!boulder) return res.err(`boulder ${res.meta.id} not found`);
+    if (!boulder) return res.withErr(`boulder ${res.meta.id} not found`);
 
     const saved = await ds.transaction(async (transactionalEntityManager) => {
       // Set order of polygon points to match array order

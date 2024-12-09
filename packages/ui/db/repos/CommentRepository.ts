@@ -6,8 +6,8 @@ import { EntitySchema } from "typeorm";
 
 // Base interface for a commentable entity
 export interface CommentableEntity {
-  id?: any;
-  commentable?: models.ICommentable;
+  id?: number;
+  commentable: models.ICommentable | undefined;
 }
 
 /**
