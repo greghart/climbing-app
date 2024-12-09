@@ -7,7 +7,7 @@ import {
 
 export const searchParamsParsers = {
   overlay: parseAsBoolean.withDefault(false),
-  tileLayer: parseAsString.withDefault("MapBox"),
+  tileLayer: parseAsString.withDefault("Local"),
 };
 
 export const searchParamsCache = createSearchParamsCache(searchParamsParsers);

@@ -1,6 +1,5 @@
 import { TileLayer } from "react-leaflet";
 
-console.warn("ENV", process.env);
 // Define tile layers in an object
 const tileLayers = {
   // Newer tiles
@@ -20,7 +19,7 @@ const tileLayers = {
   // MapBox
   MapBox: `https://api.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}@2x.png?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`,
   // Serve from our server
-  Mine: "/static/tiles/{x}/{y}/{z}.png",
+  Local: "/tiles/mapbox/{x}/{y}/{z}.png",
 };
 
 /**
@@ -35,8 +34,8 @@ export default function BestTileLayer(props: Props) {
     <TileLayer
       {...props}
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      url={tileLayers[props.layer || "MapBox"]}
-      maxNativeZoom={18}
+      url={tileLayers[props.layer || "Local"]}
+      maxNativeZoom={19}
       minNativeZoom={15}
       maxZoom={22}
     />

@@ -15,6 +15,7 @@ type Layer = NonNullable<React.ComponentProps<typeof BestTileLayer>["layer"]>;
 const layerNames = {
   MapBox: "Mapbox Tiles",
   OpenStreetMap: "OSM Tiles",
+  Local: "Local",
 } as { [layer in Layer]: string };
 
 const byName = reduce(
@@ -56,8 +57,9 @@ export default function Layers(props: Props) {
   });
   return (
     <LayersControl collapsed={false} position="topright" {...props}>
-      <Layer selected={selected as Layer} layer="MapBox" />
       <Layer selected={selected as Layer} layer="OpenStreetMap" />
+      <Layer selected={selected as Layer} layer="Local" />
+      <Layer selected={selected as Layer} layer="MapBox" />
       {props.children?.(LayersControl.Overlay)}
     </LayersControl>
   );
