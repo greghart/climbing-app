@@ -13,8 +13,6 @@ export const dataSource = new DataSource({
     entities.CommentSchema,
     entities.CommentableSchema,
     entities.CragSchema,
-    entities.GradeSchema,
-    entities.GradingSystemSchema,
     entities.PhotoSchema,
     entities.PhotoableSchema,
     entities.PolygonSchema,

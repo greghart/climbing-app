@@ -15,7 +15,10 @@ export type IUpload = IOUpload & {
   photo?: IPhoto;
 };
 
-interface Upload extends IUpload {}
+interface Upload extends IUpload {
+  photo?: Photo;
+}
+
 class Upload {
   constructor(data: IUpload) {
     this.id = data.id;

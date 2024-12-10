@@ -1,4 +1,4 @@
-import { Crag, Grade, IGrade } from "models";
+import { Crag } from "models";
 import "reflect-metadata";
 import * as entity from "./entity";
 import santeeJson from "./fixtures/Santee.json";
@@ -8,31 +8,6 @@ import getDataSource from "./getDataSource";
 getDataSource()
   .then(async (ds) => {
     console.log("Inserting a new crag into the database...");
-
-    // Setup grading systems
-    const systemRepo = ds.getRepository(entity.GradingSystemSchema);
-    const vGrading = {
-      name: "Vermin (V) Scale",
-      // type: GradingSystemType.BOULDER,
-      type: "boulder",
-      grades: ["B", ...Array.from({ length: 18 }, (v, i) => i)].map((g, i) => {
-        return new Grade({
-          name: `V${g}`,
-          order: i,
-        });
-      }),
-    };
-    await systemRepo.clear();
-    await systemRepo.save(vGrading);
-
-    const gradeRepo = ds.getRepository(entity.GradeSchema);
-    const boulderGrades = await gradeRepo.find({
-      where: { system: { name: "Vermin (V) Scale" } },
-    });
-    const gradesByName = boulderGrades.reduce((acc, grade) => {
-      acc[grade.name] = grade;
-      return acc;
-    }, {} as Record<string, IGrade>);
 
     // Load crags
     const cragRepo = ds.getRepository(entity.CragSchema);
@@ -60,10 +35,6 @@ getDataSource()
           routes: (boulder.routes || []).map((route, i) => ({
             ...route,
             boulder: undefined,
-            grade:
-              gradesByName[
-                (route.gradeRaw || "").replaceAll("-", "").replaceAll("+", "")
-              ],
           })),
         })),
       })),
@@ -90,10 +61,6 @@ getDataSource()
           routes: (boulder.routes || []).map((route, i) => ({
             ...route,
             boulder: undefined,
-            grade:
-              gradesByName[
-                (route.gradeRaw || "").replaceAll("-", "").replaceAll("+", "")
-              ],
           })),
         })),
       })),

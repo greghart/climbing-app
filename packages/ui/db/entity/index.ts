@@ -14,11 +14,6 @@ export { default as BoundsSchema, type Bounds } from "./Bounds";
 export { default as CommentSchema, type Comment } from "./Comment";
 export { default as CommentableSchema, type Commentable } from "./Commentable";
 export { default as CragSchema, type Crag } from "./Crag";
-export { default as GradeSchema, type Grade as Grade } from "./Grade";
-export {
-  default as GradingSystemSchema,
-  type GradingSystem,
-} from "./GradingSystem";
 export { default as PhotoSchema, type Photo } from "./Photo";
 export { default as PhotoableSchema, type Photoable } from "./Photoable";
 export { default as PolygonSchema, type Polygon } from "./Polygon";

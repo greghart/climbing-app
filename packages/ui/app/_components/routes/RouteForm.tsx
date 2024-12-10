@@ -14,7 +14,8 @@ import { IBoulder, IRoute } from "models";
 import { z } from "zod";
 
 interface Props<Meta> {
-  route: IRoute;
+  boulder: IBoulder;
+  route?: IRoute;
   action: formActionHandler<IRoute, z.infer<typeof routeSchema>, Meta>;
   meta: Meta;
 }
@@ -22,7 +23,7 @@ interface Props<Meta> {
 export default function RouteForm<Meta extends {}>(props: Props<Meta>) {
   const [state, formAction, meta] = useActionState(props.action, {
     ok: true,
-    data: props.route,
+    data: props.route || ({} as IRoute),
     meta: props.meta,
   });
   return (
@@ -42,25 +43,25 @@ export default function RouteForm<Meta extends {}>(props: Props<Meta>) {
         <PointOnPolygonField
           state={state}
           name="coordinates"
-          crag={props.route.boulder!.area!.crag!}
-          polygon={props.route.boulder!.polygon}
+          crag={props.boulder.area!.crag!}
+          polygon={props.boulder.polygon}
           renderPreview={(c) => (
             <>
-              <BoulderView boulder={props.route.boulder!} />
-              <BoulderMap boulder={props.route.boulder!} />
+              <BoulderView boulder={props.boulder} />
+              <BoulderMap boulder={props.boulder} />
               <Circle center={c} />
             </>
           )}
           TracerProps={{
             renderPending: (c) => (
               <>
-                <BoulderView boulder={props.route.boulder!} />
-                <BoulderMap boulder={props.route.boulder!} />
+                <BoulderView boulder={props.boulder} />
+                <BoulderMap boulder={props.boulder} />
               </>
             ),
           }}
         />
-        {!props.route.boulder!.polygon && (
+        {!props.boulder!.polygon && (
           <FormHelperText>
             Setup a boulder polygon to set route location on boulder
           </FormHelperText>

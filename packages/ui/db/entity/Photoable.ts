@@ -1,9 +1,8 @@
-import { Area, Route } from "@/db";
+import { Area, Boulder, Photo, Route } from "@/db";
 import { cascadeOneToMany } from "@/db/cascadeOptions";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { Crag } from "@/db/entity/Crag";
-import { Photo } from "@/db/entity/Photo";
-import { Boulder, IPhotoable } from "models";
+import { IPhotoable } from "models";
 import { EntitySchema } from "typeorm";
 
 export type Photoable = IPhotoable & {
