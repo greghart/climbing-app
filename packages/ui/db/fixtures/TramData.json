@@ -1,0 +1,1780 @@
+{
+  "name": "TramWay",
+  "center": {
+    "lat": 33.810942,
+    "lng": -116.645494
+  },
+  "defaultZoom": 18,
+  "minZoom": 15,
+  "maxZoom": 22,
+  "areas": [
+    {
+      "name": "Jupiter Boulders",
+      "polygon": {
+        "descriptor": "Jupiter Boulders",
+        "coordinates": [
+          {
+            "lat": -116.6010464439999,
+            "lng": 33.87901380800008,
+            "order": 0
+          },
+          {
+            "lat": -116.59724053799994,
+            "lng": 33.87900558800004,
+            "order": 1
+          },
+          {
+            "lat": -116.59724053799994,
+            "lng": 33.875355864000085,
+            "order": 2
+          },
+          {
+            "lat": -116.6010464439999,
+            "lng": 33.875355864000085,
+            "order": 3
+          },
+          {
+            "lat": -116.60103822399994,
+            "lng": 33.87536408400007,
+            "order": 4
+          }
+        ]
+      },
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Hubble",
+          "coordinates": [
+            33.8785,
+            -116.598
+          ],
+          "routes": []
+        },
+        {
+          "name": "Amphitheater",
+          "coordinates": [
+            33.8771,
+            -116.599
+          ],
+          "routes": []
+        },
+        {
+          "name": "Turtleback Boulder",
+          "coordinates": [
+            33.8771,
+            -116.6005
+          ],
+          "routes": []
+        },
+        {
+          "name": "Europa Boulder",
+          "coordinates": [
+            33.8765,
+            -116.5997
+          ],
+          "routes": []
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "The Undiscovered Country",
+      "polygon": {
+        "descriptor": "Test",
+        "coordinates": [
+          [
+            33.80805047500007,
+            -116.6505150459999
+          ],
+          [
+            33.81174260600005,
+            -116.64691819699995
+          ],
+          [
+            33.81138648700005,
+            -116.64452711399991
+          ],
+          [
+            33.806810763000044,
+            -116.64647408699994
+          ]
+        ]
+      },
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Creek Boulder",
+          "coordinates": [
+            33.8113,
+            -116.6454
+          ],
+          "routes": []
+        },
+        {
+          "name": "Wonder Bug Boulder",
+          "coordinates": [
+            33.8112,
+            -116.6465
+          ],
+          "routes": []
+        },
+        {
+          "name": "The Green Room",
+          "coordinates": [
+            33.8109,
+            -116.647
+          ],
+          "routes": []
+        },
+        {
+          "name": "Cassieopeia Boulder",
+          "coordinates": [
+            33.811,
+            -116.6469
+          ],
+          "routes": []
+        },
+        {
+          "name": "Black Cauldron Boulder",
+          "coordinates": [
+            33.8107,
+            -116.6472
+          ],
+          "routes": []
+        },
+        {
+          "name": "Picasso's Prison Palace",
+          "coordinates": [
+            33.8102,
+            -116.6468
+          ],
+          "routes": []
+        },
+        {
+          "name": "Fish Boulder",
+          "coordinates": [
+            33.8099,
+            -116.6482
+          ],
+          "routes": []
+        },
+        {
+          "name": "Ebonic Woman",
+          "coordinates": [
+            33.8091,
+            -116.6474
+          ],
+          "routes": []
+        },
+        {
+          "name": "My Infested Destiny Boulder",
+          "coordinates": [
+            33.8076,
+            -116.6483
+          ],
+          "routes": []
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "Kung Fu Canyon",
+      "polygon": {
+        "descriptor": "Test",
+        "coordinates": [
+          [
+            33.81136214500009,
+            -116.64729800399994
+          ],
+          [
+            33.81136918000004,
+            -116.64728198599995
+          ],
+          [
+            33.81135747600007,
+            -116.64729338799991
+          ]
+        ]
+      },
+      "areas": [],
+      "boulders": [
+        {
+          "name": "House Boulder",
+          "coordinates": [
+            33.8113,
+            -116.6482
+          ],
+          "routes": []
+        },
+        {
+          "name": "The All Day Boulder",
+          "coordinates": [
+            33.8115,
+            -116.6484
+          ],
+          "routes": []
+        },
+        {
+          "name": "Demon Keeper Boulder",
+          "coordinates": [
+            33.8117,
+            -116.6485
+          ],
+          "routes": []
+        },
+        {
+          "name": "Fists of Fury Boulder",
+          "coordinates": [
+            33.8125,
+            -116.6492
+          ],
+          "routes": []
+        },
+        {
+          "name": "Roll the Bones Boulder",
+          "coordinates": [
+            33.8129,
+            -116.6492
+          ],
+          "routes": []
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "Trailside Boulders",
+      "polygon": {
+        "descriptor": "Test",
+        "coordinates": [
+          [
+            33.81199048000008,
+            -116.64771056199994
+          ],
+          [
+            33.813071086000036,
+            -116.64736137699992
+          ],
+          [
+            33.81319221500007,
+            -116.64531732799992
+          ],
+          [
+            33.81212476700006,
+            -116.64491608899993
+          ],
+          [
+            33.811492815000065,
+            -116.64524103099991
+          ],
+          [
+            33.81174260600005,
+            -116.64691819699995
+          ],
+          [
+            33.81136214500009,
+            -116.64729800399994
+          ]
+        ]
+      },
+      "areas": [],
+      "boulders": [
+        {
+          "name": "EZ Boulder",
+          "coordinates": [
+            33.8124,
+            -116.6454
+          ],
+          "routes": [
+            {
+              "name": "Unnamed Mantel",
+              "gradeRaw": ".9"
+            },
+            {
+              "name": "One Handed Mantel",
+              "gradeRaw": "V5"
+            },
+            {
+              "name": "EZ Left",
+              "gradeRaw": "V1"
+            },
+            {
+              "name": "EZ Right",
+              "gradeRaw": "V2"
+            },
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V.8"
+            }
+          ]
+        },
+        {
+          "name": "Mandala of Tram",
+          "coordinates": [
+            33.8126,
+            -116.6454
+          ],
+          "routes": [
+            {
+              "name": "Sling Blade",
+              "gradeRaw": "V3"
+            },
+            {
+              "name": "Green Hornet",
+              "gradeRaw": "V5"
+            },
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V3"
+            },
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V2"
+            },
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V1"
+            },
+            {
+              "name": "Ian's Problem",
+              "gradeRaw": "V5"
+            }
+          ]
+        },
+        {
+          "name": "Frank's Boulder ",
+          "coordinates": [
+            33.8124,
+            -116.6461
+          ],
+          "routes": [
+            {
+              "name": "Sloper Traverse",
+              "gradeRaw": "V6/7"
+            },
+            {
+              "name": "Frank's Direct",
+              "gradeRaw": "V3"
+            },
+            {
+              "name": "Frank's Problem",
+              "gradeRaw": "V4/5"
+            },
+            {
+              "name": "Short Sloper Traverse",
+              "gradeRaw": "V4/5"
+            },
+            {
+              "name": "Posse aka: Hesitation Factor",
+              "gradeRaw": "V7"
+            },
+            {
+              "name": "The Terminator",
+              "gradeRaw": "V2"
+            },
+            {
+              "name": "Frank's Roof",
+              "gradeRaw": "V3"
+            }
+          ]
+        },
+        {
+          "name": "Angus Boulder",
+          "coordinates": [
+            33.8122,
+            -116.6463
+          ],
+          "routes": [
+            {
+              "name": "The Bonn Scott Memorial Face Problem",
+              "gradeRaw": "V4"
+            },
+            {
+              "name": "Angus",
+              "gradeRaw": "V9"
+            },
+            {
+              "name": "Malcomb",
+              "gradeRaw": "V6"
+            },
+            {
+              "name": "Big Ballz",
+              "gradeRaw": "V3"
+            },
+            {
+              "name": "For Those About to Rock",
+              "gradeRaw": "V4"
+            }
+          ]
+        },
+        {
+          "name": "Gluttony Boulderz",
+          "coordinates": [
+            33.8123,
+            -116.647
+          ],
+          "routes": []
+        },
+        {
+          "name": "Blacktop Boulder",
+          "coordinates": [
+            33.8128,
+            -116.6469
+          ],
+          "routes": []
+        },
+        {
+          "name": "Seven Boulder",
+          "coordinates": [
+            33.8129,
+            -116.6467
+          ],
+          "routes": []
+        },
+        {
+          "name": "The Pit & Pendulum Cove",
+          "coordinates": [
+            33.8128,
+            -116.6472
+          ],
+          "routes": []
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "Conquest Ridge",
+      "polygon": {
+        "descriptor": "Test",
+        "coordinates": [
+          [
+            33.81233780100007,
+            -116.65040023599992
+          ],
+          [
+            33.813800677000074,
+            -116.65122861899995
+          ],
+          [
+            33.81434374100007,
+            -116.64912025599995
+          ],
+          [
+            33.813417339000075,
+            -116.64867302699992
+          ]
+        ]
+      },
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Lone Boulder",
+          "coordinates": [
+            33.8135,
+            -116.649
+          ],
+          "routes": []
+        },
+        {
+          "name": "Green Tea Boulder",
+          "coordinates": [
+            33.8138,
+            -116.6492
+          ],
+          "routes": []
+        },
+        {
+          "name": "Boulder",
+          "coordinates": [
+            33.8137,
+            -116.6496
+          ],
+          "routes": []
+        },
+        {
+          "name": "Boulder",
+          "coordinates": [
+            33.813,
+            -116.6499
+          ],
+          "routes": []
+        },
+        {
+          "name": "Crouching Tiger Boulder",
+          "coordinates": [
+            33.8127,
+            -116.6334
+          ],
+          "routes": []
+        },
+        {
+          "name": "Tribe Called Conquest",
+          "coordinates": [
+            33.8135,
+            -116.65
+          ],
+          "routes": []
+        },
+        {
+          "name": "Dragon's Head",
+          "coordinates": [
+            33.8136,
+            -116.6507
+          ],
+          "routes": []
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "Shangri-La Valley",
+      "polygon": {
+        "descriptor": "Test",
+        "coordinates": [
+          [
+            33.81412215100005,
+            -116.64998054699993
+          ],
+          [
+            33.81482291400005,
+            -116.64998276799992
+          ],
+          [
+            33.81572179500006,
+            -116.6463353199999
+          ],
+          [
+            33.813133174000086,
+            -116.6463136509999
+          ],
+          [
+            33.813071086000036,
+            -116.64736137699992
+          ],
+          [
+            33.81199048000008,
+            -116.64771056199994
+          ],
+          [
+            33.813417339000075,
+            -116.64867302699992
+          ],
+          [
+            33.81434374100007,
+            -116.64912025599995
+          ]
+        ]
+      },
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Boulder",
+          "coordinates": [
+            33.8127,
+            -116.6478
+          ],
+          "routes": []
+        },
+        {
+          "name": "Boulder",
+          "coordinates": [
+            33.8137,
+            -116.6482
+          ],
+          "routes": []
+        },
+        {
+          "name": "Oblivion",
+          "coordinates": [
+            33.8132,
+            -116.6472
+          ],
+          "routes": []
+        },
+        {
+          "name": "South Warm-up Boulder",
+          "coordinates": [
+            33.8136,
+            -116.6473
+          ],
+          "routes": []
+        },
+        {
+          "name": "Boulder Cluster",
+          "coordinates": [
+            33.8144,
+            -116.6476
+          ],
+          "routes": []
+        },
+        {
+          "name": "Pebble Beach",
+          "coordinates": [
+            33.8145,
+            -116.6472
+          ],
+          "routes": []
+        },
+        {
+          "name": "Butterscotch Rock",
+          "coordinates": [
+            33.815,
+            -116.6471
+          ],
+          "routes": []
+        },
+        {
+          "name": "Abba Boulder",
+          "coordinates": [
+            33.8147,
+            -116.6494
+          ],
+          "routes": []
+        },
+        {
+          "name": "Gold Wall",
+          "coordinates": [
+            33.8144,
+            -116.6498
+          ],
+          "routes": []
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "Flash Gordon",
+      "polygon": {
+        "descriptor": "Test",
+        "coordinates": [
+          [
+            33.81319221500007,
+            -116.64531732799992
+          ],
+          [
+            33.813133174000086,
+            -116.6463136509999
+          ],
+          [
+            33.81572179500006,
+            -116.6463353199999
+          ],
+          [
+            33.814861670000084,
+            -116.64417338399996
+          ],
+          [
+            33.81329252200004,
+            -116.6445569529999
+          ]
+        ]
+      },
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Warm-Up Boulder",
+          "coordinates": [
+            33.8132,
+            -116.6451
+          ],
+          "routes": [
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V0"
+            },
+            {
+              "name": "The Ledge",
+              "gradeRaw": "V1"
+            },
+            {
+              "name": "The Ledge Traverse",
+              "gradeRaw": "V2"
+            },
+            {
+              "name": "Tree Problem",
+              "gradeRaw": "V0-"
+            },
+            {
+              "name": "Another Tree Problem",
+              "gradeRaw": "V0+"
+            },
+            {
+              "name": "Gumby Traverse",
+              "gradeRaw": "V2"
+            },
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V0"
+            },
+            {
+              "name": "Theatre of the Absurd",
+              "gradeRaw": "V3"
+            },
+            {
+              "name": "The Uninspired",
+              "gradeRaw": "V3"
+            }
+          ]
+        },
+        {
+          "name": "Flash Gordon Boulder",
+          "coordinates": [
+            33.8134,
+            -116.6451
+          ],
+          "routes": [
+            {
+              "name": "The Groveler",
+              "gradeRaw": "V5"
+            },
+            {
+              "name": "Chadinator",
+              "gradeRaw": "V7"
+            },
+            {
+              "name": "Flash Gordon",
+              "gradeRaw": "V3"
+            },
+            {
+              "name": "Buck Rodgers",
+              "gradeRaw": "V2"
+            },
+            {
+              "name": "Buck Rodgers Var.",
+              "gradeRaw": "V3"
+            },
+            {
+              "name": "Space Crack",
+              "gradeRaw": "V0"
+            }
+          ]
+        },
+        {
+          "name": "Moon Boulder",
+          "coordinates": [
+            33.8136,
+            -116.6451
+          ],
+          "routes": [
+            {
+              "name": "Mare Serenitatis",
+              "gradeRaw": ".7"
+            },
+            {
+              "name": "Oceanus",
+              "gradeRaw": ".8"
+            },
+            {
+              "name": "Sepentine Ridge",
+              "gradeRaw": "V0-"
+            },
+            {
+              "name": "Sea of Tranquility",
+              "gradeRaw": "V1"
+            },
+            {
+              "name": "Mare Vaporum",
+              "gradeRaw": "V4"
+            },
+            {
+              "name": "Dark Side of the Moon",
+              "gradeRaw": "V5"
+            }
+          ]
+        },
+        {
+          "name": "Boulder",
+          "coordinates": [
+            33.8136,
+            -116.6446
+          ],
+          "routes": []
+        },
+        {
+          "name": "Dead Tree Boulder",
+          "coordinates": [
+            33.8185,
+            -116.633
+          ],
+          "routes": [
+            {
+              "name": "George of the Jungle",
+              "gradeRaw": "V7"
+            },
+            {
+              "name": "Super Chicken",
+              "gradeRaw": "V1"
+            },
+            {
+              "name": "Tom Slick",
+              "gradeRaw": "V2"
+            }
+          ]
+        },
+        {
+          "name": "Excavation Boulder",
+          "coordinates": [
+            33.8146,
+            -116.6457
+          ],
+          "routes": [
+            {
+              "name": "Demolition Man",
+              "gradeRaw": "V7"
+            },
+            {
+              "name": "Mr. Smiley Traverse",
+              "gradeRaw": "V10"
+            },
+            {
+              "name": "The Elf",
+              "gradeRaw": "V8"
+            },
+            {
+              "name": "The Elf (sit)",
+              "gradeRaw": "V9"
+            },
+            {
+              "name": "The Cavity",
+              "gradeRaw": "V7"
+            },
+            {
+              "name": "Carlton's Var.",
+              "gradeRaw": "V6"
+            }
+          ]
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "Pleiades",
+      "polygon": {
+        "descriptor": "Test",
+      "coordinates": [
+        [
+          33.81212476700006,
+          -116.64491608899993
+        ],
+        [
+          33.81319221500007,
+          -116.64531732799992
+        ],
+        [
+          33.81329252200004,
+          -116.6445569529999
+        ],
+        [
+          33.81400446400005,
+          -116.64438292299991
+        ],
+        [
+          33.81228129400006,
+          -116.64346436199992
+        ]
+      ]},
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Pleiades",
+          "coordinates": [
+            33.8126,
+            -116.6439
+          ],
+          "routes": []
+        },
+        {
+          "name": "Tuna Juice Boulders",
+          "coordinates": [
+            33.8133,
+            -116.6444
+          ],
+          "routes": [
+            {
+              "name": "Tuna Juice",
+              "gradeRaw": "V6"
+            },
+            {
+              "name": "Starkist",
+              "gradeRaw": "V6"
+            },
+            {
+              "name": "Slam Dunk",
+              "gradeRaw": "V3"
+            }
+          ]
+        },
+        {
+          "name": "Bambi Corridor",
+          "coordinates": [
+            33.8131,
+            -116.6446
+          ],
+          "routes": [
+            {
+              "name": "Bambi Traverse",
+              "gradeRaw": "V2"
+            },
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V4"
+            }
+          ]
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "Long Valley and Ranger Station Boulders",
+      "polygon": {
+        "descriptor": "Test",
+      "coordinates": [
+        [
+          33.814861670000084,
+          -116.64417338399996
+        ],
+        [
+          33.81434094500008,
+          -116.64181385099994
+        ],
+        [
+          33.80995895600006,
+          -116.64169761799991
+        ],
+        [
+          33.81001707200005,
+          -116.64274371599993
+        ],
+        [
+          33.81228129400006,
+          -116.64346436199992
+        ],
+        [
+          33.81400446400005,
+          -116.64438292299991
+        ]
+      ]},
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Wesco Boulder",
+          "coordinates": [
+            33.8113,
+            -116.642
+          ],
+          "routes": [
+            {
+              "name": "Wesco Dildo Arete",
+              "gradeRaw": "V7"
+            }
+          ]
+        },
+        {
+          "name": "Satellite Boulder",
+          "coordinates": [
+            33.8107,
+            -116.6422
+          ],
+          "routes": [
+            {
+              "name": "Whitey the Clown",
+              "gradeRaw": "V5"
+            },
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V0"
+            },
+            {
+              "name": "Short Traverse",
+              "gradeRaw": "V3"
+            },
+            {
+              "name": "Long Traverse",
+              "gradeRaw": "V4"
+            },
+            {
+              "name": "Ultra Long Traverse",
+              "gradeRaw": "V5"
+            },
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V1"
+            },
+            {
+              "name": "Drifting",
+              "gradeRaw": "V3"
+            },
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V3"
+            }
+          ]
+        },
+        {
+          "name": "Long Valley Ranger Station",
+          "coordinates": [
+            33.8125,
+            -116.6422
+          ],
+          "routes": []
+        },
+        {
+          "name": "Chimney Rock",
+          "coordinates": [
+            33.8136,
+            -116.6423
+          ],
+          "routes": [
+            {
+              "name": "Right Arete",
+              "gradeRaw": "V1"
+            },
+            {
+              "name": "Center Crack",
+              "gradeRaw": "V0"
+            },
+            {
+              "name": "Dyno Problem",
+              "gradeRaw": "V2"
+            },
+            {
+              "name": "Traverse",
+              "gradeRaw": "V3"
+            },
+            {
+              "name": "Highball Jugs",
+              "gradeRaw": "V0"
+            }
+          ]
+        },
+        {
+          "name": "Vanishing Point Boulder",
+          "coordinates": [
+            33.8138,
+            -116.6439
+          ],
+          "routes": [
+            {
+              "name": "The Honey Pots",
+              "gradeRaw": "V2"
+            },
+            {
+              "name": "Snowblind",
+              "gradeRaw": "V8"
+            },
+            {
+              "name": "Vanishing Point",
+              "gradeRaw": "V9"
+            },
+            {
+              "name": "Flight of Osirus",
+              "gradeRaw": "V6"
+            }
+          ]
+        },
+        {
+          "name": "Ranger Station Rock 1",
+          "coordinates": [
+            33.8126,
+            -116.6422
+          ],
+          "routes": [
+            {
+              "name": "Ranger Rick's Big Send",
+              "gradeRaw": "V6"
+            },
+            {
+              "name": "Blind Hog",
+              "gradeRaw": "V1"
+            },
+            {
+              "name": "Fire Farts",
+              "gradeRaw": "V0+"
+            },
+            {
+              "name": "It's Another Route",
+              "gradeRaw": "V0"
+            },
+            {
+              "name": "Inside Moves",
+              "gradeRaw": ".8"
+            },
+            {
+              "name": "Dynamo Hum",
+              "gradeRaw": "V0"
+            },
+            {
+              "name": "The 19th Hole",
+              "gradeRaw": "V4"
+            },
+            {
+              "name": "The Crumby Route",
+              "gradeRaw": ".7"
+            },
+            {
+              "name": "Floyd E. Queeb",
+              "gradeRaw": "V0"
+            }
+          ]
+        },
+        {
+          "name": "Boulder Cluster",
+          "coordinates": [
+            33.8132,
+            -116.6481
+          ],
+          "routes": [
+            {
+              "name": "Electric Dimension",
+              "gradeRaw": "V1"
+            },
+            {
+              "name": "Between Dimentions",
+              "gradeRaw": "V3"
+            },
+            {
+              "name": "Rising Force",
+              "gradeRaw": "V4"
+            },
+            {
+              "name": "Trilogy",
+              "gradeRaw": "V3"
+            },
+            {
+              "name": "Funky Toe'n",
+              "gradeRaw": "V0"
+            },
+            {
+              "name": "Don't Rock the Boat",
+              "gradeRaw": ".8"
+            },
+            {
+              "name": "Wandering Star",
+              "gradeRaw": "V4"
+            },
+            {
+              "name": "Irritable Bowel Syndrome",
+              "gradeRaw": "V4"
+            },
+            {
+              "name": "Yardarm of the Tram",
+              "gradeRaw": "V1"
+            }
+          ]
+        },
+        {
+          "name": "Re-Animator Boulder",
+          "coordinates": [
+            33.8122,
+            -116.6431
+          ],
+          "routes": [
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V3/4"
+            },
+            {
+              "name": "The Real Man's Problem",
+              "gradeRaw": "V9"
+            },
+            {
+              "name": "Slot Machine aka: Re-Animator",
+              "gradeRaw": "V6"
+            },
+            {
+              "name": "Nipple Shredder",
+              "gradeRaw": "V5"
+            },
+            {
+              "name": "\"Unitizing the \"\"G\"\"",
+              "gradeRaw": "V8\""
+            }
+          ]
+        },
+        {
+          "name": "Ranger Station Rock 3",
+          "coordinates": [
+            33.8128,
+            -116.6434
+          ],
+          "routes": [
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V0"
+            },
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V3"
+            },
+            {
+              "name": "Trailside Tango",
+              "gradeRaw": "V4"
+            },
+            {
+              "name": "Just Another Trailside Attraction",
+              "gradeRaw": "V4"
+            },
+            {
+              "name": "Unnamed",
+              "gradeRaw": "V1"
+            }
+          ]
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "The Icebergs",
+      "polygon": {
+        "descriptor": "Test",
+      "coordinates": [
+        [
+          33.81401328900006,
+          -116.65040318599989
+        ],
+        [
+          33.813800677000074,
+          -116.65122861899995
+        ],
+        [
+          33.81314754500005,
+          -116.65399529399991
+        ],
+        [
+          33.814130712000065,
+          -116.65437343599991
+        ],
+        [
+          33.81565840300004,
+          -116.65213483899993
+        ]
+      ]},
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Tetrys Boulder",
+          "coordinates": [
+            33.8147,
+            -116.6518
+          ],
+          "routes": []
+        },
+        {
+          "name": "Titanic Boulder",
+          "coordinates": [
+            33.814,
+            -116.6527
+          ],
+          "routes": []
+        },
+        {
+          "name": "Iceberg I",
+          "coordinates": [
+            33.8146,
+            -116.653
+          ],
+          "routes": []
+        },
+        {
+          "name": "Iceberg II",
+          "coordinates": [
+            33.8145,
+            -116.653
+          ],
+          "routes": []
+        },
+        {
+          "name": "Iceberg III",
+          "coordinates": [
+            33.8145,
+            -116.6532
+          ],
+          "routes": []
+        },
+        {
+          "name": "The Accordian Boulder",
+          "coordinates": [
+            33.8136,
+            -116.6539
+          ],
+          "routes": []
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "Area 51",
+      "polygon": {
+        "descriptor": "Test",
+      "coordinates": [
+        [
+          33.81504914400006,
+          -116.64906477899991
+        ],
+        [
+          33.81482291400005,
+          -116.64998276799992
+        ],
+        [
+          33.81412215100005,
+          -116.64998054699993
+        ],
+        [
+          33.81401328900006,
+          -116.65040318599989
+        ],
+        [
+          33.81565840300004,
+          -116.65213483899993
+        ],
+        [
+          33.81657501800004,
+          -116.65069790199995
+        ]
+      ]},
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Sunshine Daydream Boulder",
+          "coordinates": [
+            33.8155,
+            -116.6334
+          ],
+          "routes": []
+        },
+        {
+          "name": "Boulder",
+          "coordinates": [
+            33.8152,
+            -116.6511
+          ],
+          "routes": []
+        },
+        {
+          "name": "Boulder",
+          "coordinates": [
+            33.8151,
+            -116.6508
+          ],
+          "routes": []
+        },
+        {
+          "name": "Greasefire Boulder",
+          "coordinates": [
+            33.8146,
+            -116.6505
+          ],
+          "routes": []
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "The Dance Floor",
+      "polygon": {
+        "descriptor": "Test",
+      "coordinates": [
+        [
+          33.81539674600009,
+          -116.64765429399989
+        ],
+        [
+          33.81504914400006,
+          -116.64906477899991
+        ],
+        [
+          33.815654979000044,
+          -116.6497438479999
+        ],
+        [
+          33.816302756000084,
+          -116.64877694299993
+        ]
+      ]},
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Beaver Boulder",
+          "coordinates": [
+            33.8158,
+            -116.6488
+          ],
+          "routes": []
+        },
+        {
+          "name": "Swing Dance Boulder",
+          "coordinates": [
+            33.8157,
+            -116.6492
+          ],
+          "routes": []
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "The Beach",
+      "polygon": {
+        "descriptor": "Test",
+      "coordinates": [
+        [
+          33.81617305300006,
+          -116.64897054399991
+        ],
+        [
+          33.81653206800007,
+          -116.64930593899994
+        ],
+        [
+          33.81860788900008,
+          -116.6465285679999
+        ],
+        [
+          33.81790633800006,
+          -116.64614415699992
+        ],
+        [
+          33.81560073300005,
+          -116.64682656199996
+        ],
+        [
+          33.81539674600009,
+          -116.64765429399989
+        ],
+        [
+          33.816302756000084,
+          -116.64877694299993
+        ],
+        [
+          33.816173097000046,
+          -116.6489704789999
+        ]
+      ]},
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Dead Tree Boulder",
+          "coordinates": [
+            33.8162,
+            -116.648
+          ],
+          "routes": []
+        },
+        {
+          "name": "The Alcove",
+          "coordinates": [
+            33.8161,
+            -116.6478
+          ],
+          "routes": []
+        },
+        {
+          "name": "Blue Flame Boulder",
+          "coordinates": [
+            33.8164,
+            -116.6489
+          ],
+          "routes": []
+        },
+        {
+          "name": "Sharma Boulder",
+          "coordinates": [
+            33.8168,
+            -116.6486
+          ],
+          "routes": []
+        },
+        {
+          "name": "Methane Boulder",
+          "coordinates": [
+            33.8168,
+            -116.6483
+          ],
+          "routes": []
+        },
+        {
+          "name": "Tram Boulder",
+          "coordinates": [
+            33.8168,
+            -116.6479
+          ],
+          "routes": []
+        },
+        {
+          "name": "Swiss Cheese Boulder",
+          "coordinates": [
+            33.8169,
+            -116.6479
+          ],
+          "routes": []
+        },
+        {
+          "name": "Pirates Boulder",
+          "coordinates": [
+            33.817,
+            -116.6478
+          ],
+          "routes": []
+        },
+        {
+          "name": "Obe Boulder",
+          "coordinates": [
+            33.8173,
+            -116.6481
+          ],
+          "routes": []
+        },
+        {
+          "name": "The Conspiracy Boulder",
+          "coordinates": [
+            33.818,
+            -116.6464
+          ],
+          "routes": []
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "Boardwalk Area",
+      "coordinates": [
+        [
+          33.81592384700008,
+          -116.64934252199993
+        ],
+        [
+          33.817560368000045,
+          -116.6507859219999
+        ],
+        [
+          33.819021131000056,
+          -116.64843140299992
+        ],
+        [
+          33.81786916800007,
+          -116.64751694899991
+        ],
+        [
+          33.81653206800007,
+          -116.64930593899994
+        ],
+        [
+          33.816173097000046,
+          -116.6489704789999
+        ],
+        [
+          33.81593424500005,
+          -116.64932700099989
+        ]
+      ],
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Aquaman Boulder",
+          "coordinates": [
+            33.8171,
+            -116.6487
+          ],
+          "routes": []
+        },
+        {
+          "name": "Unison Rock",
+          "coordinates": [
+            33.8005,
+            -116.6487
+          ],
+          "routes": []
+        },
+        {
+          "name": "Glass Boulder",
+          "coordinates": [
+            33.8172,
+            -116.6485
+          ],
+          "routes": []
+        },
+        {
+          "name": "Boardwalk Boulder",
+          "coordinates": [
+            33.8174,
+            -116.6487
+          ],
+          "routes": []
+        },
+        {
+          "name": "Teflon Boulder",
+          "coordinates": [
+            33.818,
+            -116.6488
+          ],
+          "routes": []
+        },
+        {
+          "name": "Roof Boulder",
+          "coordinates": [
+            33.8179,
+            -116.6492
+          ],
+          "routes": []
+        },
+        {
+          "name": "Young Boulder",
+          "coordinates": [
+            33.8182,
+            -116.6491
+          ],
+          "routes": []
+        },
+        {
+          "name": "Emerald City",
+          "coordinates": [
+            33.8176,
+            -116.6494
+          ],
+          "routes": []
+        },
+        {
+          "name": "Quartz Boulder",
+          "coordinates": [
+            33.8175,
+            -116.6498
+          ],
+          "routes": []
+        },
+        {
+          "name": "The Bermuda Triangle",
+          "coordinates": [
+            33.8172,
+            -116.6499
+          ],
+          "routes": []
+        },
+        {
+          "name": "Butterbean Boulder",
+          "coordinates": [
+            33.8171,
+            -116.6501
+          ],
+          "routes": []
+        },
+        {
+          "name": "The Barefoot Sharma Boulder",
+          "coordinates": [
+            33.8179,
+            -116.6481
+          ],
+          "routes": []
+        },
+        {
+          "name": "Dark Star",
+          "coordinates": [
+            33.818,
+            -116.6484
+          ],
+          "routes": []
+        },
+        {
+          "name": "Bloodstone",
+          "coordinates": [
+            33.818,
+            -116.6483
+          ],
+          "routes": []
+        },
+        {
+          "name": "Boulder",
+          "coordinates": [
+            33.8181,
+            -116.6487
+          ],
+          "routes": []
+        },
+        {
+          "name": "Summit Boulderz",
+          "coordinates": [
+            33.8181,
+            -116.6482
+          ],
+          "routes": []
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "The Edge of Nowhere",
+      "coordinates": [
+        [
+          33.81770158900008,
+          -116.65055829599994
+        ],
+        [
+          33.818980768000074,
+          -116.65149708299992
+        ],
+        [
+          33.819989847000045,
+          -116.64989216599992
+        ],
+        [
+          33.818760686000076,
+          -116.6488512
+        ],
+        [
+          33.817710797000075,
+          -116.65054345399994
+        ]
+      ],
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Medusa Boulder",
+          "coordinates": [
+            33.8183,
+            -116.6506
+          ],
+          "routes": []
+        },
+        {
+          "name": "Pancake House",
+          "coordinates": [
+            33.8188,
+            -116.6502
+          ],
+          "routes": []
+        },
+        {
+          "name": "Boulder",
+          "coordinates": [
+            33.819,
+            -116.6503
+          ],
+          "routes": []
+        },
+        {
+          "name": "Boulder",
+          "coordinates": [
+            33.8191,
+            -116.6495
+          ],
+          "routes": []
+        }
+      ],
+      "parentArea": null
+    },
+    {
+      "name": "Year of the Cat",
+      "coordinates": null,
+      "areas": [],
+      "boulders": [
+        {
+          "name": "Year of the Cat Boulder",
+          "coordinates": [
+            33.8142,
+            -116.6342
+          ],
+          "routes": []
+        }
+      ],
+      "parentArea": null
+    }
+  ]
+}

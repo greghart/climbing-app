@@ -1,0 +1,12 @@
+
+{
+  "name": "Santee",
+  "center": {
+    "lat": 32.85052,
+    "lng": -117.02223
+  },
+  "defaultZoom": 18,
+  "minZoom": 15,
+  "maxZoom": 22,
+  "areas": []
+}

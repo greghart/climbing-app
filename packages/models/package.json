@@ -1,0 +1,24 @@
+{
+  "name": "models",
+  "version": "1.0.0",
+  "description": "The climbing app basic models layer (distinct from persistence layer)",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "mocha --recursive ./src/**.spec.ts",
+    "prepublish": "build"
+  },
+  "keywords": [],
+  "author": "Greg Hart",
+  "license": "ISC",
+  "dependencies": {
+    "@types/lodash-es": "^4.17.12",
+    "lodash-es": "^4.17.21",
+    "power-putty-io": "^1.0.1",
+    "power-putty-test": "^1.0.0",
+    "typescript": "5.x.x"
+  }
+}
