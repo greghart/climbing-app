@@ -14,8 +14,6 @@
     "node": "20.x"
   },
   "scripts": {
-    "start": "nps",
-    "test": "nps test"
   },
   "packageManager": "pnpm@9.0.0-beta.2+sha256.013b34133be0fd7f97d8739bd1a64a2b2c4b15af936ef77a14f5db26efb6bef4",
   "pnpm": {
