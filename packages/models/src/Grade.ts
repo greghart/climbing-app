@@ -45,11 +45,40 @@ class Grade {
   }
 }
 
+/**
+ * GRADE DATA BELOW
+ */
+
+type TupleToRecord<T extends readonly string[], V> = {
+  [K in T[number]]: V; // or any other type
+};
+
 // We are focusing on bouldering, so start with v scale and will adapt others
 // into this value system. To start with, normalize as base (V+1) * 10
 // Plus/minus grades can add/subtract 1
 // Slash grades can average the two grades.
-const vGrades: Record<string, number> = {
+const VGrade = [
+  "VB",
+  "V0",
+  "V1",
+  "V2",
+  "V3",
+  "V4",
+  "V5",
+  "V6",
+  "V7",
+  "V8",
+  "V9",
+  "V10",
+  "V11",
+  "V12",
+  "V13",
+  "V14",
+  "V15",
+  "V16",
+  "V17",
+] as const;
+const vGrades: TupleToRecord<typeof VGrade, number> = {
   VB: 0,
   V0: 10,
   V1: 20,
@@ -71,7 +100,7 @@ const vGrades: Record<string, number> = {
   V17: 180,
 };
 
-const grades: Record<GradingSystemType, Record<string, number>> = {
+export const grades: Record<GradingSystemType, Record<string, number>> = {
   [GradingSystemType.V]: vGrades,
   // Sourced from https://en.wikipedia.org/wiki/Grade_(climbing)#Comparison_bouldering
   [GradingSystemType.YDS]: {

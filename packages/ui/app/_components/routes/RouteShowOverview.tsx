@@ -43,6 +43,13 @@ export default function RouteShowOverview(props: Props) {
         </ListItem>
         <ListItem>
           <ListItemText>
+            <Typography variant="body2">
+              <strong>{props.route.gradeRaw}</strong>
+            </Typography>
+          </ListItemText>
+        </ListItem>
+        <ListItem>
+          <ListItemText>
             <Typography variant="body2" component="pre">
               {props.route.description}
             </Typography>

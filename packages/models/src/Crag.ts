@@ -28,7 +28,7 @@ interface Crag extends Omit<ICrag, "center"> {}
 class Crag {
   bounds?: Bounds;
   center: Coordinate; // We map embedded entities with nullable columns to a nullable property.
-  areas?: Area[];
+  areas: Area[];
   trail?: Trail;
 
   static build(data: ICrag) {
@@ -43,9 +43,7 @@ class Crag {
 
     this.bounds = Bounds.build(data.bounds);
     this.center = Coordinate.build(data.center);
-    if (data.areas) {
-      this.areas = data.areas.map((area) => new Area(area));
-    }
+    this.areas = (data.areas || []).map((area) => new Area(area));
     if (data.trail) {
       this.trail = new Trail(data.trail);
     }

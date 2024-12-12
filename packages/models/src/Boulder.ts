@@ -23,7 +23,7 @@ interface Boulder extends Omit<IBoulder, "center"> {}
 class Boulder {
   coordinates: Coordinate;
   area?: Area;
-  routes?: Route[];
+  routes: Route[];
   polygon?: Polygon;
 
   constructor(data: IBoulder) {
@@ -39,9 +39,7 @@ class Boulder {
     if (data.polygon) {
       this.polygon = new Polygon(data.polygon);
     }
-    if (data.routes) {
-      this.routes = data.routes.map((route) => new Route(route));
-    }
+    this.routes = (data.routes || []).map((route) => new Route(route));
   }
 }
 
