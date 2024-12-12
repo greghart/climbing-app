@@ -38,6 +38,7 @@ export default function RouteForm<Meta extends {}>(props: Props<Meta>) {
           rows={3}
           defaultValue={state.data!.description}
         />
+        <TextField state={state} name="gradeRaw" label="Grade" />
 
         <InputLabel>Location</InputLabel>
         <PointOnPolygonField
