@@ -12,3 +12,4 @@ tools for crag exploration that could be modelled for other purposes.
 * `packages` -- PNPM workspaces
   * `packages/models` -- domain models
   * `packages/ui` -- Next.js UI 
+* `clutter` -- our CLimbing FLutter app
