@@ -3,6 +3,6 @@
 # Dev files
 node_modules/
 .vscode/
-/scratch/
+scratch/
 # Locally cached tiles
 static/tiles
