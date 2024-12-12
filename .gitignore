@@ -1,35 +1,8 @@
 # Yarn
 .pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
 # Dev files
-*.log
-.DS_Store
-.idea
-node_modules
-dump.rdb
+node_modules/
 .vscode/
-scratch/
-# Local config just for running migrations
-ormconfig.json
-# Don't need persisted migrations for now
-migration/
-.next/
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
-
-# Lib
-lib/
-build/
-dist/
-tsconfig.tsbuildinfo
-
+/scratch/
+# Locally cached tiles
 static/tiles
-static/uploads
