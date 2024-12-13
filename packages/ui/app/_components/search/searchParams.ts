@@ -16,6 +16,8 @@ export const searchParamsParsers = {
   shade: parseAsBoolean.withDefault(false).withOptions(defaultOptions),
   // TODO: Nicety, get users' current hour as default
   shadeHour: parseAsInteger.withDefault(12).withOptions(defaultOptions),
+  vMin: parseAsInteger.withDefault(0).withOptions(defaultOptions),
+  vMax: parseAsInteger.withDefault(0).withOptions(defaultOptions),
 };
 
 export const searchParamsCache = createSearchParamsCache(searchParamsParsers);

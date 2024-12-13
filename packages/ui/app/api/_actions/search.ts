@@ -1,8 +1,7 @@
 import getNormalizedSunValueForRoute from "@/app/_components/sun/getNormalizedSunValueForRoute";
-import { getDataSource } from "@/db";
 import CragRepository from "@/db/repos/CragRepository";
 import { reduce } from "lodash-es";
-import { ICrag, Route } from "models";
+import { Grade, ICrag, Route } from "models";
 import { cache } from "react";
 import "server-only";
 
@@ -12,6 +11,8 @@ export interface SearchParams {
   type: SearchResultType;
   shade: boolean;
   shadeHour: number | null;
+  vMin: number;
+  vMax: number;
 }
 
 interface Searchable {
@@ -34,8 +35,6 @@ export type SearchResult = Searchable & {
 };
 
 const search = cache(async (params: SearchParams) => {
-  const ds = await getDataSource();
-
   // For simplicity, just get all routes in the crag and filter them in memory
   // TODO: Migrate to database as perf requires
   const crag = await CragRepository.findOneT({
@@ -64,11 +63,13 @@ const search = cache(async (params: SearchParams) => {
   const filterSearch = searchMatcher(params.search);
   const filterType = typeMatcher(params.type);
   const filterSun = sunMatcher(params.shade, params.shadeHour);
+  const filterDifficulty = difficultyMatcher(params.vMin, params.vMax);
   return getSearchableEntitiesForCrag(crag).filter((thisEntity) => {
     return (
       filterType(thisEntity) &&
       filterSearch(thisEntity) &&
-      filterSun(thisEntity)
+      filterSun(thisEntity) &&
+      filterDifficulty(thisEntity)
     );
   });
 });
@@ -132,6 +133,20 @@ const typeMatcher: GetMatcher = (type: SearchResultType) => {
   }
   return (s) => {
     return s.type === type;
+  };
+};
+
+const difficultyMatcher: GetMatcher = (min: number, max: number) => {
+  console.log("difficulty matcher", min, max);
+  if (!(min >= 0 && max <= 170 && min < max)) {
+    return () => true;
+  }
+  return (s) => {
+    console.log("Filtering", s);
+    if (s.type !== "route") return true;
+
+    const value = Grade.build(s.gradeRaw!).value;
+    return s.type === "route" && value >= min && value <= max;
   };
 };
 

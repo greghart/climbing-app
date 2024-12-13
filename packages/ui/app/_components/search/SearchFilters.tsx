@@ -1,3 +1,4 @@
+import DifficultySlider from "@/app/_components/search/DifficultySlider";
 import SearchShadeCheck from "@/app/_components/search/SearchShadeCheck";
 import SearchTypeSelect from "@/app/_components/search/SearchTypeSelect";
 import SunHoursField from "@/app/_components/search/SunHoursField";
@@ -28,6 +29,7 @@ export default function SearchFilters(props: Props) {
             <FormGroup>
               <SearchTypeSelect />
               <SearchShadeCheck />
+              <DifficultySlider />
               <FormControl fullWidth sx={{ p: 1 }}>
                 <SunHoursField coordinate={props.shadeLocation} />
               </FormControl>
