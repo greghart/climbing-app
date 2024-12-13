@@ -1,8 +1,9 @@
+import 'package:clutter/data.dart';
+import 'package:clutter/explorer/crag_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'models/crag.dart';
 import 'package:provider/provider.dart';
 import 'explorer/layout.dart';
 import 'explorer/overlay.dart';
@@ -12,10 +13,10 @@ import 'settings/settings_view.dart';
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
   const MyApp(
-      {super.key, required this.settingsController, required this.crag});
+      {super.key, required this.settingsController, required this.data});
 
   final SettingsController settingsController;
-  final Crag crag;
+  final Data data;
 
   @override
   Widget build(BuildContext context) {
@@ -71,14 +72,21 @@ class MyApp extends StatelessWidget {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
                   default:
+                    // TODO: Do deep routing for crag, area, boulder, route screens
                     return Provider(
-                      create: (context) => crag,
-                      child: const ExplorerLayout(
-                        map: Placeholder(color: Colors.blue),
-                        search: Placeholder(color: Colors.red),
-                        overlay: OverlaySheet(
-                            child: Placeholder(color: Colors.green)),
-                      ),
+                      create: (context) => data,
+                      child: ExplorerLayout(
+                          map: const Placeholder(color: Colors.blue),
+                          search: const Placeholder(color: Colors.red),
+                          overlay: OverlaySheet(
+                            build: (ScrollController scrollController,
+                                bool isOnDesktopAndWeb) {
+                              return CragOverlay(
+                                scrollController: scrollController,
+                                isOnDesktopAndWeb: isOnDesktopAndWeb,
+                              );
+                            },
+                          )),
                     );
                 }
               },
