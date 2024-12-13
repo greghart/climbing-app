@@ -9,10 +9,11 @@ import 'package:flutter/foundation.dart' as foundation;
 class OverlaySheet extends StatefulWidget {
   const OverlaySheet({
     super.key,
-    this.child,
+    this.build,
   });
 
-  final Widget? child;
+  final Widget Function(
+      ScrollController scrollController, bool isOnDesktopAndWeb)? build;
 
   @override
   State<OverlaySheet> createState() => _OverlaySheetState();
@@ -21,7 +22,9 @@ class OverlaySheet extends StatefulWidget {
 class _OverlaySheetState extends State<OverlaySheet> {
   static const double minPosition = 0.2;
   static const double maxPosition = 0.8;
-  double _sheetPosition = math.max(minPosition, math.min(0.5, maxPosition));
+  static const double defaultSheetPosition = 0.2;
+  double _sheetPosition =
+      math.max(minPosition, math.min(defaultSheetPosition, maxPosition));
   final double _dragSensitivity = 600;
 
   setClamped(double value) {
@@ -40,7 +43,7 @@ class _OverlaySheetState extends State<OverlaySheet> {
       maxChildSize: maxPosition,
       builder: (BuildContext context, ScrollController scrollController) {
         return ColoredBox(
-          color: colorScheme.primary,
+          color: colorScheme.surfaceBright,
           child: Column(
             children: [
               Grabber(
@@ -63,7 +66,12 @@ class _OverlaySheetState extends State<OverlaySheet> {
                 isOnDesktopAndWeb: _isOnDesktopAndWeb,
               ),
               Flexible(
-                child: widget.child ?? const Text('Overlay content'),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: widget.build
+                          ?.call(scrollController, _isOnDesktopAndWeb) ??
+                      const Text('Overlay content'),
+                ),
               ),
             ],
           ),
@@ -89,9 +97,20 @@ class _OverlaySheetState extends State<OverlaySheet> {
   }
 }
 
+/// OverlaySheet can work with dynamic children widgets, so we want
+/// to ensure overlay/scroll context is passed down if needed
+class ScrollableContext {
+  const ScrollableContext({
+    required this.scrollController,
+    required this.isOnDesktopAndWeb,
+  });
+
+  final ScrollController scrollController;
+  final bool isOnDesktopAndWeb;
+}
+
 /// A draggable widget that accepts vertical drag gestures
 /// and this is only visible on desktop and web platforms.
-/// TODO: Change this to an expander button instead
 class Grabber extends StatelessWidget {
   const Grabber({
     super.key,
@@ -111,6 +130,7 @@ class Grabber extends StatelessWidget {
     if (!isOnDesktopAndWeb) {
       return const SizedBox.shrink();
     }
+    final theme = Theme.of(context);
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     const Icon expandMore = Icon(Icons.expand_more);
     const Icon expandLess = Icon(Icons.expand_less);
@@ -120,7 +140,7 @@ class Grabber extends StatelessWidget {
       onVerticalDragUpdate: onVerticalDragUpdate,
       child: Container(
         width: double.infinity,
-        color: colorScheme.onSurface,
+        color: colorScheme.secondaryContainer,
         child: Align(
           alignment: Alignment.topCenter,
           // Click to open or close
@@ -131,6 +151,7 @@ class Grabber extends StatelessWidget {
             child: IconButton(
               visualDensity: VisualDensity.compact,
               onPressed: onTap,
+              color: colorScheme.onSecondaryContainer,
               icon: isExpanded ? expandLess : expandMore,
             ),
           ),

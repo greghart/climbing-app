@@ -1,14 +1,14 @@
 import 'models/crag.dart';
 import 'dart:convert' as convert;
 
-/**
- * TODO: For now, this Data class is very dumb and just parses a json string into a crag
- * Long term, we will want to fetch this data from a server, allow re-syncing it, etc.
- */
+/// TODO: For now, this Data class is very dumb and just parses a json string into a crag
+/// Long term, we will want to fetch this data from a server, allow re-syncing it, etc.
 class Data {
-  static crag() {
-    return Crag.fromJson(convert.jsonDecode(cragJson));
+  Data() {
+    crag = Crag.fromJson(convert.jsonDecode(cragJson));
   }
+
+  late final Crag crag;
 }
 
 const cragJson = '''
