@@ -1,3 +1,5 @@
+import 'package:flutter_map/flutter_map.dart';
+
 import 'coordinate.dart';
 import 'types.dart';
 
@@ -35,6 +37,13 @@ class Bounds {
     return Coordinate(
       lat: (topLeft.lat + bottomRight.lat) / 2,
       lng: (topLeft.lng + bottomRight.lng) / 2,
+    );
+  }
+
+  LatLngBounds get toLatLngBounds {
+    return LatLngBounds(
+      topLeft.toLatLng,
+      bottomRight.toLatLng,
     );
   }
 }

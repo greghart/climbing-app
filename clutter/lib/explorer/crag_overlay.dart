@@ -13,7 +13,6 @@ class CragOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final data = context.watch<Data>();
     final theme = Theme.of(context);
 
@@ -37,13 +36,10 @@ class CragOverlay extends StatelessWidget {
             itemCount: data.crag.areas.length,
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
-                onTap: () {
-                  print("here we go");
-                },
+                onTap: () {},
                 trailing: const Icon(Icons.navigate_next),
                 title: Text(
                   'Area ${data.crag.areas[index].name}',
-                  // TODO: Set color properly
                   style: theme.textTheme.bodyMedium,
                 ),
               );

@@ -1,3 +1,5 @@
+import 'package:latlong2/latlong.dart';
+
 import 'coordinate.dart';
 import 'types.dart';
 
@@ -35,5 +37,9 @@ class Polygon {
       'descriptor': descriptor,
       'coordinates': coordinates.map((coord) => coord.toJson()).toList(),
     };
+  }
+
+  List<LatLng> get toLatLngs {
+    return coordinates.map((coord) => coord.toLatLng).toList();
   }
 }
