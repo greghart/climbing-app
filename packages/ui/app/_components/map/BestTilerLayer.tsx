@@ -19,7 +19,7 @@ const tileLayers = {
   // MapBox
   MapBox: `https://api.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}@2x.png?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`,
   // Serve from our server
-  Local: "/tiles/mapbox/{x}/{y}/{z}.png",
+  Local: "/tiles/{x}/{y}/{z}.png",
 };
 
 /**
