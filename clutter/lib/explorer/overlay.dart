@@ -41,6 +41,8 @@ class _OverlaySheetState extends State<OverlaySheet> {
       initialChildSize: _sheetPosition,
       minChildSize: minPosition,
       maxChildSize: maxPosition,
+      snap: true,
+      snapSizes: const [minPosition, 0.5, maxPosition],
       builder: (BuildContext context, ScrollController scrollController) {
         return ColoredBox(
           color: colorScheme.surfaceBright,
@@ -130,7 +132,6 @@ class Grabber extends StatelessWidget {
     if (!isOnDesktopAndWeb) {
       return const SizedBox.shrink();
     }
-    final theme = Theme.of(context);
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     const Icon expandMore = Icon(Icons.expand_more);
     const Icon expandLess = Icon(Icons.expand_less);

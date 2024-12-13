@@ -1,4 +1,5 @@
 import 'types.dart';
+import 'package:latlong2/latlong.dart';
 
 class Coordinate {
   final double lat;
@@ -31,5 +32,9 @@ class Coordinate {
       'lat': lat,
       'lng': lng,
     };
+  }
+
+  LatLng get toLatLng {
+    return LatLng(lat, lng);
   }
 }

@@ -1,12 +1,14 @@
 import 'package:clutter/data.dart';
-import 'package:clutter/explorer/crag_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'package:provider/provider.dart';
+
+import 'explorer/crag_map.dart';
+import 'explorer/crag_overlay.dart';
 import 'explorer/layout.dart';
 import 'explorer/overlay.dart';
+import 'explorer/map.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
@@ -76,8 +78,15 @@ class MyApp extends StatelessWidget {
                     return Provider(
                       create: (context) => data,
                       child: ExplorerLayout(
-                          map: const Placeholder(color: Colors.blue),
-                          search: const Placeholder(color: Colors.red),
+                          map: const MyMap(
+                            children: [CragMap()],
+                          ),
+                          search: const SearchBar(
+                            constraints: BoxConstraints(
+                                minWidth: 360.0,
+                                maxWidth: 480.0,
+                                minHeight: 36.0),
+                          ),
                           overlay: OverlaySheet(
                             build: (ScrollController scrollController,
                                 bool isOnDesktopAndWeb) {
