@@ -1,8 +1,8 @@
-import 'types.dart';
 import 'area.dart';
 import 'bounds.dart';
 import 'coordinate.dart';
 import 'trail.dart';
+import 'types.dart';
 
 class Crag {
   final int id;

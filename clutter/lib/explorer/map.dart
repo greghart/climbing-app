@@ -3,7 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../data.dart';
+import '../models/crag.dart';
 
 class MyMap extends StatelessWidget {
   const MyMap({super.key, this.children});
@@ -12,17 +12,19 @@ class MyMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = context.watch<Data>();
+    final crag = context.watch<Crag>();
+    final mapController = MapController();
 
     return FlutterMap(
+      mapController: mapController,
       options: MapOptions(
-        initialCenter: data.crag.center.toLatLng,
-        initialZoom: data.crag.defaultZoom.toDouble(),
-        maxZoom: data.crag.maxZoom.toDouble(),
-        minZoom: data.crag.minZoom.toDouble(),
+        initialCenter: crag.center.toLatLng,
+        initialZoom: crag.defaultZoom.toDouble(),
+        maxZoom: crag.maxZoom.toDouble(),
+        minZoom: crag.minZoom.toDouble(),
         keepAlive: true,
         cameraConstraint: CameraConstraint.containCenter(
-          bounds: data.crag.bounds.toLatLngBounds,
+          bounds: crag.bounds.toLatLngBounds,
         ),
       ),
       children: [

@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' as foundation;
+import 'package:flutter/material.dart';
 
 /// OverlayView is a DraggableScrollableSheet that works on both
 /// mobile and desktop, showing just a preview of the current view

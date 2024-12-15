@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/link.dart';
 
-import '../models/crag.dart';
+import '../models/area.dart';
 
-class CragOverlay extends StatelessWidget {
-  const CragOverlay({
+class AreaOverlay extends StatelessWidget {
+  const AreaOverlay({
     super.key,
     required this.scrollController,
     required this.isOnDesktopAndWeb,
@@ -14,33 +15,47 @@ class CragOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final crag = context.watch<Crag>();
+    final area = context.watch<Area>();
     final theme = Theme.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(
-          child: Text(
-            crag.name,
-            style: theme.textTheme.displaySmall!,
-          ),
+        // TODO: Breadcrumbs for navigation
+
+        Row(
+          children: [
+            Link(
+              uri: Uri.parse('/explorer'),
+              builder: (BuildContext context, FollowLink? followLink) =>
+                  TextButton(
+                onPressed: followLink,
+                child: const Icon(Icons.arrow_back),
+              ),
+            ),
+            Center(
+              child: Text(
+                area.name,
+                style: theme.textTheme.displaySmall!,
+              ),
+            ),
+          ],
         ),
         const Divider(),
         Text(
-          "Areas",
+          "Boulders",
           style: theme.textTheme.headlineSmall,
         ),
         Flexible(
           child: ListView.builder(
             controller: isOnDesktopAndWeb ? null : scrollController,
-            itemCount: crag.areas.length,
+            itemCount: area.boulders.length,
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
                 onTap: () {},
                 trailing: const Icon(Icons.navigate_next),
                 title: Text(
-                  'Area ${crag.areas[index].name}',
+                  'Boulder ${area.boulders[index].name}',
                   style: theme.textTheme.bodyMedium,
                 ),
               );
