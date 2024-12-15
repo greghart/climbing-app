@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Layout for the explorer page.
 class ExplorerLayout extends StatelessWidget {
   const ExplorerLayout({
     super.key,

@@ -1,24 +1,53 @@
-import 'package:clutter/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import 'explorer/crag_map.dart';
-import 'explorer/crag_overlay.dart';
-import 'explorer/layout.dart';
-import 'explorer/overlay.dart';
-import 'explorer/map.dart';
+import 'data.dart';
+import 'explorer/area_page.dart';
+import 'explorer/crag_page.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
-  const MyApp(
-      {super.key, required this.settingsController, required this.data});
+  MyApp({super.key, required this.settingsController, required this.data});
 
   final SettingsController settingsController;
   final Data data;
+
+  late final _router = GoRouter(
+    routes: [
+      GoRoute(
+        path: '/',
+        redirect: (_, __) => '/explorer',
+      ),
+      GoRoute(
+          path: '/settings',
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return MaterialPage(
+              child: SettingsView(controller: settingsController),
+            );
+          }),
+      GoRoute(
+        path: '/explorer',
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return const MaterialPage(
+            child: CragPage(),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/explorer/areas/:areaId',
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return MaterialPage(
+            child: AreaPage(id: int.parse(state.pathParameters['areaId']!)),
+          );
+        },
+      ),
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -29,78 +58,44 @@ class MyApp extends StatelessWidget {
     return ListenableBuilder(
       listenable: settingsController,
       builder: (BuildContext context, Widget? child) {
-        return MaterialApp(
-          // Providing a restorationScopeId allows the Navigator built by the
-          // MaterialApp to restore the navigation stack when a user leaves and
-          // returns to the app after it has been killed while running in the
-          // background.
-          restorationScopeId: 'app',
+        return Provider(
+          create: (context) => data.crag,
+          child: MaterialApp.router(
+            routerConfig: _router,
+            // Providing a restorationScopeId allows the Navigator built by the
+            // MaterialApp to restore the navigation stack when a user leaves and
+            // returns to the app after it has been killed while running in the
+            // background.
+            restorationScopeId: 'app',
 
-          // Provide the generated AppLocalizations to the MaterialApp. This
-          // allows descendant Widgets to display the correct translations
-          // depending on the user's locale.
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en', ''), // English, no country code
-          ],
+            // Provide the generated AppLocalizations to the MaterialApp. This
+            // allows descendant Widgets to display the correct translations
+            // depending on the user's locale.
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en', ''), // English, no country code
+            ],
 
-          // Use AppLocalizations to configure the correct application title
-          // depending on the user's locale.
-          //
-          // The appTitle is defined in .arb files found in the localization
-          // directory.
-          onGenerateTitle: (BuildContext context) =>
-              AppLocalizations.of(context)!.appTitle,
+            // Use AppLocalizations to configure the correct application title
+            // depending on the user's locale.
+            //
+            // The appTitle is defined in .arb files found in the localization
+            // directory.
+            onGenerateTitle: (BuildContext context) =>
+                AppLocalizations.of(context)!.appTitle,
 
-          // Define a light and dark color theme. Then, read the user's
-          // preferred ThemeMode (light, dark, or system default) from the
-          // SettingsController to display the correct theme.
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
-          themeMode: settingsController.themeMode,
-
-          // Define a function to handle named routes in order to support
-          // Flutter web url navigation and deep linking.
-          onGenerateRoute: (RouteSettings routeSettings) {
-            return MaterialPageRoute<void>(
-              settings: routeSettings,
-              builder: (BuildContext context) {
-                switch (routeSettings.name) {
-                  case SettingsView.routeName:
-                    return SettingsView(controller: settingsController);
-                  default:
-                    // TODO: Do deep routing for crag, area, boulder, route screens
-                    return Provider(
-                      create: (context) => data,
-                      child: ExplorerLayout(
-                          map: const MyMap(
-                            children: [CragMap()],
-                          ),
-                          search: const SearchBar(
-                            constraints: BoxConstraints(
-                                minWidth: 360.0,
-                                maxWidth: 480.0,
-                                minHeight: 36.0),
-                          ),
-                          overlay: OverlaySheet(
-                            build: (ScrollController scrollController,
-                                bool isOnDesktopAndWeb) {
-                              return CragOverlay(
-                                scrollController: scrollController,
-                                isOnDesktopAndWeb: isOnDesktopAndWeb,
-                              );
-                            },
-                          )),
-                    );
-                }
-              },
-            );
-          },
+            // Define a light and dark color theme. Then, read the user's
+            // preferred ThemeMode (light, dark, or system default) from the
+            // SettingsController to display the correct theme.
+            theme: ThemeData(),
+            darkTheme: ThemeData.dark(),
+            themeMode: settingsController.themeMode,
+          ),
         );
       },
     );
