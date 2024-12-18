@@ -26,23 +26,19 @@ class BoulderOverlay extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (boulder.description != null) ...[
-            Flexible(
-              child: Container(
-                padding: const EdgeInsets.only(bottom: 8, top: 8),
-                child: Text(
-                  boulder.description!,
-                  style: theme.textTheme.bodyMedium,
-                ),
+            Container(
+              padding: const EdgeInsets.only(bottom: 8, top: 8),
+              child: Text(
+                boulder.description!,
+                style: theme.textTheme.bodyMedium,
               ),
             ),
           ],
-          Flexible(
-            child: Text(
-              "Routes",
-              style: theme.textTheme.headlineSmall,
-            ),
+          Text(
+            "Routes",
+            style: theme.textTheme.headlineSmall,
           ),
-          Flexible(
+          Expanded(
             child: ListView.builder(
               controller: isOnDesktopAndWeb ? null : scrollController,
               itemCount: boulder.routes.length,

@@ -25,22 +25,18 @@ class AreaOverlay extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Flexible(
-            child: Container(
-              padding: const EdgeInsets.only(bottom: 8, top: 8),
-              child: Text(
-                area.description!,
-                style: theme.textTheme.bodyMedium,
-              ),
-            ),
-          ),
-          Flexible(
+          Container(
+            padding: const EdgeInsets.only(bottom: 8, top: 8),
             child: Text(
-              "Boulders",
-              style: theme.textTheme.headlineSmall,
+              area.description!,
+              style: theme.textTheme.bodyMedium,
             ),
           ),
-          Flexible(
+          Text(
+            "Boulders",
+            style: theme.textTheme.headlineSmall,
+          ),
+          Expanded(
             child: ListView.builder(
               controller: isOnDesktopAndWeb ? null : scrollController,
               itemCount: area.boulders.length,

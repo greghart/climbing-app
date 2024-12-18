@@ -24,20 +24,16 @@ class CragOverlay extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Flexible(
-            child: Container(
-              padding: const EdgeInsets.only(bottom: 8, top: 8),
-              child: Text(
-                crag.description!,
-                style: theme.textTheme.bodyMedium,
-              ),
+          Container(
+            padding: const EdgeInsets.only(bottom: 8, top: 8),
+            child: Text(
+              crag.description!,
+              style: theme.textTheme.bodyMedium,
             ),
           ),
-          Flexible(
-            child: Text(
-              "Areas",
-              style: theme.textTheme.headlineSmall,
-            ),
+          Text(
+            "Areas",
+            style: theme.textTheme.headlineSmall,
           ),
           Flexible(
             child: ListView.builder(

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../models/crag.dart';
+import '../search/my_search_bar.dart';
 import './layout.dart';
 import './map.dart';
 import './overlay.dart';
@@ -37,9 +38,8 @@ class ExplorerPage extends StatelessWidget {
           child: MapBuilder(),
         ),
         // TODO: Make this open the search page once I figure out routing
-        search: SearchBar(
-          constraints: const BoxConstraints(
-              minWidth: 360.0, maxWidth: 480.0, minHeight: 36.0),
+        search: MySearchBar(
+          hintText: "Search crag...",
           onTap: () {
             context.go('/search');
           },
