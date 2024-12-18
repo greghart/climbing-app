@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'data.dart';
-import 'explorer/area_page.dart';
-import 'explorer/crag_page.dart';
+import 'explorer/page.dart';
+import 'explorer/state.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
@@ -30,11 +30,19 @@ class MyApp extends StatelessWidget {
               child: SettingsView(controller: settingsController),
             );
           }),
+      // Note, the explorer routes are just setup for deep linking support.
+      // Once initialized, all "routing" is done internal to the explorer widgets,
+      // to ensure map widget is kept alive. After this, routing will just
+      // serve to update the state and sync navigation.
+      // TODO: Somehow use route stack or intercept back button to support "back".
       GoRoute(
         path: '/explorer',
         pageBuilder: (BuildContext context, GoRouterState state) {
           return const MaterialPage(
-            child: CragPage(),
+            child: ExplorerPage(
+              entityType: EntityType.crag,
+              entityId: null,
+            ),
           );
         },
       ),
@@ -42,7 +50,10 @@ class MyApp extends StatelessWidget {
         path: '/explorer/areas/:areaId',
         pageBuilder: (BuildContext context, GoRouterState state) {
           return MaterialPage(
-            child: AreaPage(id: int.parse(state.pathParameters['areaId']!)),
+            child: ExplorerPage(
+              entityType: EntityType.area,
+              entityId: int.parse(state.pathParameters['areaId']!),
+            ),
           );
         },
       ),
@@ -58,8 +69,10 @@ class MyApp extends StatelessWidget {
     return ListenableBuilder(
       listenable: settingsController,
       builder: (BuildContext context, Widget? child) {
-        return Provider(
-          create: (context) => data.crag,
+        return MultiProvider(
+          providers: [
+            Provider(create: (_) => data.crag),
+          ],
           child: MaterialApp.router(
             routerConfig: _router,
             // Providing a restorationScopeId allows the Navigator built by the

@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../models/crag.dart';
+import '../../models/crag.dart';
+import '../state.dart';
+import 'animate_to.dart';
+import 'my_polygon.dart';
 
 typedef HitValue = ({int id});
 
@@ -28,16 +30,10 @@ class _CragMapState extends State<CragMap> {
       crag.areas.where((a) => a.polygon != null).map((a) {
         return MapEntry(
           a.id,
-          Polygon(
+          MyPolygon(
+            theme: theme,
             points: a.polygon!.toLatLngs,
-            pattern: const StrokePattern.dotted(spacingFactor: 2),
-            color: theme.colorScheme.secondaryContainer.withOpacity(0.5),
-            borderStrokeWidth: 4.0,
-            borderColor: theme.colorScheme.secondary,
-            labelPlacement: PolygonLabelPlacement.polylabel,
             label: a.name,
-            labelStyle: theme.textTheme.bodyMedium!
-                .copyWith(color: theme.colorScheme.onSecondaryContainer),
             hitValue: (id: a.id),
           ),
         );
@@ -73,8 +69,10 @@ class _CragMapState extends State<CragMap> {
       child: GestureDetector(
         onTap: () {
           // We shouldn't really have overlapping areas, just navigate to first area
-          context
-              .go('/explorer/areas/${_hitNotifier.value!.hitValues.first.id}');
+          Provider.of<ExplorerState>(context, listen: false)
+              .setArea(_hitNotifier.value!.hitValues.first.id);
+          // context
+          //     .go('/explorer/areas/${_hitNotifier.value!.hitValues.first.id}');
         },
         // onLongPress: () => _openTouchedGonsModal(
         //   'Long pressed',
@@ -89,12 +87,22 @@ class _CragMapState extends State<CragMap> {
         // child: PolygonLayer(
         //   hitNotifier: _hitNotifier,
         //   simplificationTolerance: 0,
-        child: PolygonLayer(
-          hitNotifier: _hitNotifier,
-          simplificationTolerance: 0,
-          polygons: [
-            ...polygonsById.values,
-            ...?_hoverGons,
+        child: Stack(
+          children: [
+            PolygonLayer(
+              hitNotifier: _hitNotifier,
+              simplificationTolerance: 0,
+              polygons: [
+                ...polygonsById.values,
+                ...?_hoverGons,
+              ],
+            ),
+            AnimateTo(
+              mapController: MapController.of(context),
+              latLng: crag.center.toLatLng,
+              zoom: crag.defaultZoom.toDouble(),
+              offset: Offset.zero,
+            ),
           ],
         ),
       ),

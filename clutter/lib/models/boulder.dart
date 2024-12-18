@@ -5,6 +5,7 @@ import 'types.dart';
 
 class Boulder {
   final int id;
+  final int areaId;
   final String name;
   final String? description;
   final Coordinate coordinates;
@@ -13,6 +14,7 @@ class Boulder {
 
   const Boulder({
     required this.id,
+    required this.areaId,
     required this.name,
     required this.coordinates,
     required this.routes,
@@ -20,7 +22,7 @@ class Boulder {
     this.polygon,
   });
 
-  factory Boulder.fromJson(JsonObject json) {
+  factory Boulder.fromJson(int areaId, JsonObject json) {
     if (json
         case {
           'id': int id,
@@ -32,10 +34,11 @@ class Boulder {
         }) {
       return Boulder(
         id: id,
+        areaId: areaId,
         name: name,
         description: description,
         coordinates: Coordinate.fromJson(coordinates),
-        routes: routes.map((route) => Route.fromJson(route)).toList(),
+        routes: routes.map((route) => Route.fromJson(id, route)).toList(),
         polygon: polygon != null ? Polygon.fromJson(polygon) : null,
       );
     }
