@@ -6,9 +6,9 @@ import 'package:url_launcher/url_launcher.dart';
 import '../models/crag.dart';
 
 class MyMap extends StatelessWidget {
-  const MyMap({super.key, this.children});
+  const MyMap({super.key, this.child});
 
-  final List<Widget>? children;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -16,32 +16,31 @@ class MyMap extends StatelessWidget {
     final mapController = MapController();
 
     return FlutterMap(
-      mapController: mapController,
-      options: MapOptions(
-        initialCenter: crag.center.toLatLng,
-        initialZoom: crag.defaultZoom.toDouble(),
-        maxZoom: crag.maxZoom.toDouble(),
-        minZoom: crag.minZoom.toDouble(),
-        keepAlive: true,
-        cameraConstraint: CameraConstraint.containCenter(
-          bounds: crag.bounds.toLatLngBounds,
+        mapController: mapController,
+        options: MapOptions(
+          initialCenter: crag.center.toLatLng,
+          initialZoom: crag.defaultZoom.toDouble(),
+          maxZoom: crag.maxZoom.toDouble(),
+          minZoom: crag.minZoom.toDouble(),
+          keepAlive: true,
+          cameraConstraint: CameraConstraint.containCenter(
+            bounds: crag.bounds.toLatLngBounds,
+          ),
         ),
-      ),
-      children: [
-        const BestTileLayer(),
-        RichAttributionWidget(
-          // Include a stylish prebuilt attribution widget that meets all requirments
-          attributions: [
-            TextSourceAttribution(
-              'OpenStreetMap contributors',
-              onTap: () => launchUrl(Uri.parse(
-                  'https://openstreetmap.org/copyright')), // (external)
-            ),
-          ],
-        ),
-        ...(children ?? []),
-      ],
-    );
+        children: [
+          const BestTileLayer(),
+          RichAttributionWidget(
+            // Include a stylish prebuilt attribution widget that meets all requirments
+            attributions: [
+              TextSourceAttribution(
+                'OpenStreetMap contributors',
+                onTap: () => launchUrl(Uri.parse(
+                    'https://openstreetmap.org/copyright')), // (external)
+              ),
+            ],
+          ),
+          child,
+        ].whereType<Widget>().toList());
   }
 }
 

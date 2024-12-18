@@ -21,7 +21,7 @@ class OverlaySheet extends StatefulWidget {
 
 class _OverlaySheetState extends State<OverlaySheet> {
   static const double minPosition = 0.2;
-  static const double maxPosition = 0.8;
+  static const double maxPosition = 0.7;
   static const double defaultSheetPosition = 0.2;
   double _sheetPosition =
       math.max(minPosition, math.min(defaultSheetPosition, maxPosition));
@@ -37,7 +37,6 @@ class _OverlaySheetState extends State<OverlaySheet> {
     final isExpanded = _sheetPosition > (maxPosition - minPosition) / 2;
 
     return DraggableScrollableSheet(
-      key: const Key('overlay-sheet'),
       initialChildSize: _sheetPosition,
       minChildSize: minPosition,
       maxChildSize: maxPosition,

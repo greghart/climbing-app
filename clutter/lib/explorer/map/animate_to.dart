@@ -1,55 +1,22 @@
-import 'package:collection/collection.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:provider/provider.dart';
-
-import '../models/area.dart';
-
-typedef HitValue = ({int id});
-
-class AreaMap extends StatelessWidget {
-  const AreaMap({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final area = context.watch<Area>();
-    final theme = Theme.of(context);
-    return Stack(
-      children: [
-        MarkerLayer(
-          markers: area.boulders.map((b) {
-            return Marker(
-              point: b.coordinates.toLatLng,
-              // TODO: Bring in boulder icon
-              child: Icon(Icons.location_pin,
-                  size: 60, color: theme.colorScheme.tertiary),
-            );
-          }).toList(),
-        ),
-        AnimateTo(
-          mapController: MapController.of(context),
-          latLng: LatLng(
-            area.polygon!.coordinates.map((c) => c.lat).average,
-            area.polygon!.coordinates.map((c) => c.lng).average,
-          ),
-          zoom: 18,
-        ),
-      ],
-    );
-  }
-}
 
 class AnimateTo extends StatefulWidget {
-  const AnimateTo(
-      {super.key,
-      required this.latLng,
-      required this.zoom,
-      required this.mapController});
+  const AnimateTo({
+    super.key,
+    required this.latLng,
+    required this.zoom,
+    required this.mapController,
+    this.offset,
+  });
 
   final MapController mapController;
   final LatLng latLng;
   final double zoom;
+  final Offset? offset;
 
   @override
   State<AnimateTo> createState() => _AnimateToState();
@@ -59,28 +26,49 @@ class _AnimateToState extends State<AnimateTo> with TickerProviderStateMixin {
   static const _startedId = 'AnimatedMapController#MoveStarted';
   static const _inProgressId = 'AnimatedMapController#MoveInProgress';
   static const _finishedId = 'AnimatedMapController#MoveFinished';
+  var _once = false;
 
-  @override
-  initState() {
-    super.initState();
-    _animatedMapMove(
-      widget.mapController,
-      widget.latLng,
-      widget.zoom,
-    );
-  }
+  AnimationController? _animationController;
 
   @override
   Widget build(BuildContext context) {
     // Ran for side effect
+    if (!_once) {
+      _animatedMapMove(
+        widget.mapController,
+        widget.latLng,
+        widget.zoom,
+        // we usually want the offset to result in items being just under the search bar
+        widget.offset ??
+            Offset(0, -(MediaQuery.sizeOf(context).height / 2 - 150)),
+      );
+    }
+    _once = true;
     return const SizedBox.shrink();
   }
 
-  void _animatedMapMove(
-      MapController mapController, LatLng destLocation, double destZoom) {
+  @override
+  dispose() {
+    _animationController?.dispose();
+    super.dispose();
+  }
+
+  void _animatedMapMove(MapController mapController, LatLng destLocation,
+      double destZoom, Offset offset) {
     // Create some tweens. These serve to split up the transition from one location to another.
     // In our case, we want to split the transition be<tween> our current map center and the destination.
     final camera = mapController.camera;
+    // Handle offset here since the tweens need to know about it
+    if (offset != Offset.zero) {
+      final newPoint = camera.project(destLocation, destZoom);
+      destLocation = camera.unproject(
+        camera.rotatePoint(
+          newPoint,
+          newPoint - Point(offset.dx, offset.dy),
+        ),
+        destZoom,
+      );
+    }
     final latTween = Tween<double>(
         begin: camera.center.latitude, end: destLocation.latitude);
     final lngTween = Tween<double>(
@@ -88,12 +76,12 @@ class _AnimateToState extends State<AnimateTo> with TickerProviderStateMixin {
     final zoomTween = Tween<double>(begin: camera.zoom, end: destZoom);
 
     // Create a animation controller that has a duration and a TickerProvider.
-    final controller = AnimationController(
+    _animationController = AnimationController(
         duration: const Duration(milliseconds: 500), vsync: this);
     // The animation determines what path the animation will take. You can try different Curves values, although I found
     // fastOutSlowIn to be my favorite.
-    final Animation<double> animation =
-        CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
+    final Animation<double> animation = CurvedAnimation(
+        parent: _animationController!, curve: Curves.fastOutSlowIn);
 
     // Note this method of encoding the target destination is a workaround.
     // When proper animated movement is supported (see #1263) we should be able
@@ -103,7 +91,7 @@ class _AnimateToState extends State<AnimateTo> with TickerProviderStateMixin {
         '$_startedId#${destLocation.latitude},${destLocation.longitude},$destZoom';
     bool hasTriggeredMove = false;
 
-    controller.addListener(() {
+    _animationController!.addListener(() {
       final String id;
       if (animation.value == 1.0) {
         id = _finishedId;
@@ -120,14 +108,6 @@ class _AnimateToState extends State<AnimateTo> with TickerProviderStateMixin {
       );
     });
 
-    animation.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        controller.dispose();
-      } else if (status == AnimationStatus.dismissed) {
-        controller.dispose();
-      }
-    });
-
-    controller.forward();
+    _animationController!.forward();
   }
 }

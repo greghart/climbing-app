@@ -4,6 +4,7 @@ import 'types.dart';
 
 class Route {
   final int id;
+  final int boulderId;
   final String name;
   final int? length; // in feet
   final String? description;
@@ -13,6 +14,7 @@ class Route {
 
   const Route({
     required this.id,
+    required this.boulderId,
     required this.name,
     this.length,
     this.description,
@@ -21,7 +23,7 @@ class Route {
     this.coordinates,
   });
 
-  factory Route.fromJson(JsonObject json) {
+  factory Route.fromJson(int boulderId, JsonObject json) {
     if (json
         case {
           'id': int id,
@@ -34,6 +36,7 @@ class Route {
         }) {
       return Route(
         id: id,
+        boulderId: boulderId,
         name: name,
         length: length,
         description: description,
