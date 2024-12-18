@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'data.dart';
 import 'explorer/page.dart';
 import 'explorer/state.dart';
+import 'search/page.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
@@ -30,6 +31,14 @@ class MyApp extends StatelessWidget {
               child: SettingsView(controller: settingsController),
             );
           }),
+      GoRoute(
+        path: '/search',
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return const MaterialPage(
+            child: SearchPage(),
+          );
+        },
+      ),
       // Note, the explorer routes are just setup for deep linking support.
       // Once initialized, all "routing" is done internal to the explorer widgets,
       // to ensure map widget is kept alive. After this, routing will just
@@ -53,6 +62,28 @@ class MyApp extends StatelessWidget {
             child: ExplorerPage(
               entityType: EntityType.area,
               entityId: int.parse(state.pathParameters['areaId']!),
+            ),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/explorer/boulders/:boulderId',
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return MaterialPage(
+            child: ExplorerPage(
+              entityType: EntityType.boulder,
+              entityId: int.parse(state.pathParameters['boulderId']!),
+            ),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/explorer/routes/:routeId',
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return MaterialPage(
+            child: ExplorerPage(
+              entityType: EntityType.route,
+              entityId: int.parse(state.pathParameters['routeId']!),
             ),
           );
         },

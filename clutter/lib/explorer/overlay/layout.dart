@@ -18,52 +18,42 @@ class OverlayLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            const Breadcrumbs(),
-            Text(
-              title,
-              style: theme.textTheme.headlineSmall!,
-            ),
-          ].whereType<Widget>().toList(),
-        ),
+        Row(children: [Breadcrumbs(title: title)]),
         const Divider(),
-        Flexible(child: child),
+        Expanded(child: child),
       ],
     );
   }
 }
 
 class Breadcrumbs extends StatelessWidget {
-  const Breadcrumbs({super.key});
+  const Breadcrumbs({super.key, required this.title});
 
+  final String title;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     final state = context.watch<ExplorerState>();
-    if (state.entityType == EntityType.crag) {
-      return const SizedBox.shrink();
-    }
 
     return Wrap(
       spacing: 8,
       children: [
-        FilledButton(
-          style: const ButtonStyle(
-            visualDensity: VisualDensity.compact,
+        if (state.area != null) ...[
+          FilledButton(
+            style: const ButtonStyle(
+              visualDensity: VisualDensity.compact,
+            ),
+            onPressed: () {
+              Provider.of<ExplorerState>(context, listen: false).setCrag();
+            },
+            child: Text(state.crag.name),
           ),
-          onPressed: () {
-            Provider.of<ExplorerState>(context, listen: false).setCrag();
-          },
-          child: Text(state.crag.name),
-        ),
-        if (state.boulder != null) ...[
           divider(theme),
+        ],
+        if (state.boulder != null) ...[
           FilledButton(
             style: const ButtonStyle(
               visualDensity: VisualDensity.compact,
@@ -74,9 +64,9 @@ class Breadcrumbs extends StatelessWidget {
             },
             child: Text(state.area!.name),
           ),
+          divider(theme),
         ],
         if (state.route != null) ...[
-          divider(theme),
           FilledButton(
             style: const ButtonStyle(
               visualDensity: VisualDensity.compact,
@@ -87,8 +77,12 @@ class Breadcrumbs extends StatelessWidget {
             },
             child: Text(state.boulder!.name),
           ),
+          divider(theme),
         ],
-        divider(theme),
+        Text(
+          title,
+          style: theme.textTheme.headlineSmall!,
+        ),
       ].whereType<Widget>().toList(),
     );
   }
