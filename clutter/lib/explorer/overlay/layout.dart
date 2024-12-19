@@ -19,8 +19,9 @@ class OverlayLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(children: [Breadcrumbs(title: title)]),
+        Breadcrumbs(title: title),
         const Divider(),
         Expanded(child: child),
       ],
