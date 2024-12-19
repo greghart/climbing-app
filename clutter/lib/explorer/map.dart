@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../models/crag.dart';
 
@@ -29,13 +28,14 @@ class MyMap extends StatelessWidget {
         ),
         children: [
           const BestTileLayer(),
-          RichAttributionWidget(
+          const RichAttributionWidget(
             // Include a stylish prebuilt attribution widget that meets all requirments
+            // TODO: Add a valid attribution
             attributions: [
               TextSourceAttribution(
                 'OpenStreetMap contributors',
-                onTap: () => launchUrl(Uri.parse(
-                    'https://openstreetmap.org/copyright')), // (external)
+                // onTap: () => launchUrl(Uri.parse(
+                //     'https://openstreetmap.org/copyright')), // (external)
               ),
             ],
           ),

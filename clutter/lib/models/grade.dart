@@ -33,6 +33,10 @@ class Grade {
     required this.value,
   });
 
+  String display() {
+    return '${system.value} $raw';
+  }
+
   factory Grade.fromJson(JsonObject json) {
     if (json
         case {

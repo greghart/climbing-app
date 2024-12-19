@@ -23,6 +23,10 @@ class RouteOverlay extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            route.grade.raw,
+            style: theme.textTheme.headlineMedium,
+          ),
           if (route.description != null) ...[
             Text(
               route.description!,
