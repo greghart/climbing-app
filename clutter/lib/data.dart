@@ -186,7 +186,7 @@ const cragJson = '''
       }
     }
   ],
-  "defaultZoom": 18,
+  "defaultZoom": 17,
   "minZoom": 17,
   "maxZoom": 22
 }
