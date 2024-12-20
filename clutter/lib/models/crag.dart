@@ -41,7 +41,7 @@ class Crag {
           'minZoom': int minZoom,
           'maxZoom': int maxZoom,
           'areas': List<dynamic> areas,
-          // 'trail': JsonObject? trail,
+          'trail': JsonObject? trail,
         }) {
       return Crag(
         id: id,
@@ -53,7 +53,7 @@ class Crag {
         minZoom: minZoom,
         maxZoom: maxZoom,
         areas: areas.map((area) => Area.fromJson(area)).toList(),
-        // trail: trail != null ? Trail.fromJson(trail) : null,
+        trail: trail != null ? Trail.fromJson(trail) : null,
       );
     }
     throw JSONException("Crag", json);

@@ -97,6 +97,10 @@ class _CragMapState extends State<CragMap> {
                 ...?_hoverGons,
               ],
             ),
+            PolylineLayer<Object>(
+              simplificationTolerance: 0.3,
+              polylines: crag.trail?.toPolylines ?? [],
+            ),
             AnimateTo(
               mapController: MapController.of(context),
               latLng: crag.center.toLatLng,
