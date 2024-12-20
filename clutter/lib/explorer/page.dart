@@ -45,6 +45,10 @@ class ExplorerPage extends StatelessWidget {
               onTap: () {
                 context.go('/search');
               },
+              leading: IconButton(
+                onPressed: () {},
+                icon: const Offstage(child: Icon(Icons.arrow_back)),
+              ),
             ),
           ),
           overlay: const OverlaySheet(

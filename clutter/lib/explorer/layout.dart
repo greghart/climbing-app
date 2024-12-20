@@ -21,7 +21,7 @@ class ExplorerLayout extends StatelessWidget {
           map,
           // Search bar centered near top of the screen
           Positioned(
-            top: 50,
+            top: 10,
             left: 0,
             right: 0,
             child: Center(child: search),

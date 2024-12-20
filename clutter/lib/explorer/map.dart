@@ -17,15 +17,17 @@ class MyMap extends StatelessWidget {
     return FlutterMap(
         mapController: mapController,
         options: MapOptions(
-          initialCenter: crag.center.toLatLng,
-          initialZoom: crag.defaultZoom.toDouble(),
-          maxZoom: crag.maxZoom.toDouble(),
-          minZoom: crag.minZoom.toDouble(),
-          keepAlive: true,
-          cameraConstraint: CameraConstraint.containCenter(
-            bounds: crag.bounds.toLatLngBounds,
-          ),
-        ),
+            initialCenter: crag.center.toLatLng,
+            initialZoom: crag.defaultZoom.toDouble(),
+            maxZoom: crag.maxZoom.toDouble(),
+            minZoom: crag.minZoom.toDouble(),
+            keepAlive: true,
+            cameraConstraint: CameraConstraint.containCenter(
+              bounds: crag.bounds.toLatLngBounds,
+            ),
+            interactionOptions: const InteractionOptions(
+              flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+            )),
         children: [
           const BestTileLayer(),
           const RichAttributionWidget(
