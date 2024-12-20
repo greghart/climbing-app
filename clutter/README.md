@@ -9,12 +9,12 @@ app for exploring the crag.
 
 ```powershell
 # Restart windows adb service if necessary
-adb.exe kill-server
-adb.exe start-server
-adb.exe devices
+./adb.exe kill-server
+./adb.exe start-server
+./adb.exe devices
 
 # Run on port 5555 
-adb.exe tcpip 5555
+./adb.exe tcpip 5555
 ```
 
 ```bash

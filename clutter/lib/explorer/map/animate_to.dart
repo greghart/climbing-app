@@ -3,6 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:provider/provider.dart';
+
+import '../state.dart';
 
 class AnimateTo extends StatefulWidget {
   const AnimateTo({
@@ -32,6 +35,18 @@ class _AnimateToState extends State<AnimateTo> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final sheetPosition =
+        Provider.of<ExplorerState>(context, listen: false).sheetPosition;
+    // Two constraints -- search bar on top, and sheet on bottom
+    // We generally want to animate such that coordinate is in the center.
+    // Coordinates
+    final fullHeight = MediaQuery.sizeOf(context).height;
+    final top = 76 / fullHeight;
+    final bottom = (1 - sheetPosition);
+    final target = (top + bottom) / 2;
+    // We have a target as ratio from (0,0).
+    // flutter_map wants a pixel offset from center.
+    final offset = target * fullHeight - (fullHeight / 2);
     // Ran for side effect
     if (!_once) {
       _animatedMapMove(
@@ -40,7 +55,10 @@ class _AnimateToState extends State<AnimateTo> with TickerProviderStateMixin {
         widget.zoom,
         // we usually want the offset to result in items being just under the search bar
         widget.offset ??
-            Offset(0, -(MediaQuery.sizeOf(context).height / 2 - 150)),
+            Offset(
+              0,
+              offset,
+            ),
       );
     }
     _once = true;

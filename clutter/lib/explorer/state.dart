@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
+
+import '../models/index.dart' as models;
+
 // ExplorerState handles the internal routing and state management for the explorer pages.
 // Routing just sets up the initial state to support deep linking, but once explorer is open,
 // we need to maintain widgets to keep map from flickering.
 //
 // It is expected that this class will ensure entityId will always reflect an actual entity of entityType
-import 'package:flutter/material.dart';
-
-import '../models/index.dart' as models;
-
 class ExplorerState extends ChangeNotifier {
   ExplorerState({
     required this.crag,
@@ -87,6 +87,13 @@ class ExplorerState extends ChangeNotifier {
     if (route == null) {
       throw ArgumentError('Route not found');
     }
+    notifyListeners();
+  }
+
+  // Just for tracking position
+  double sheetPosition = 0.2;
+  void setSheetPosition(double v) {
+    sheetPosition = v;
     notifyListeners();
   }
 }

@@ -17,17 +17,6 @@ class BoulderMap extends StatelessWidget {
     final theme = Theme.of(context);
     return Stack(
       children: [
-        MarkerLayer(
-          // TODO: Clustering around boulder
-          markers: boulder.routes.where((r) => r.coordinates != null).map((r) {
-            return Marker(
-              point: r.coordinates!.toLatLng,
-              // TODO: Bring in route icon
-              child: Icon(Icons.location_pin,
-                  size: 20, color: theme.colorScheme.tertiary),
-            );
-          }).toList(),
-        ),
         if (boulder.polygon != null) ...[
           PolygonLayer(
             polygons: [
@@ -38,6 +27,24 @@ class BoulderMap extends StatelessWidget {
             ],
           )
         ],
+        MarkerLayer(
+          // TODO: Clustering around boulder
+          markers: boulder.routes.where((r) => r.coordinates != null).map((r) {
+            return Marker(
+              point: r.coordinates!.toLatLng,
+              height: 20,
+              width: 20,
+              child: Container(
+                width: 20,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.tertiary,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            );
+          }).toList(),
+        ),
         AnimateTo(
           mapController: MapController.of(context),
           latLng: boulder.coordinates.toLatLng,
