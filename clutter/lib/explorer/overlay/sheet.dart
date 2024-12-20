@@ -2,6 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../state.dart';
 
 /// OverlaySheet is a DraggableScrollableSheet that works on both
 /// mobile and desktop, showing just a preview of the current view
@@ -21,13 +24,19 @@ class OverlaySheet extends StatefulWidget {
 class _OverlaySheetState extends State<OverlaySheet> {
   static const double minPosition = 0.2;
   static const double maxPosition = 0.7;
-  static const double defaultSheetPosition = 0.2;
-  double _sheetPosition =
-      math.max(minPosition, math.min(defaultSheetPosition, maxPosition));
-  final double _dragSensitivity = 600;
+  static const double _dragSensitivity = 600;
+  double _sheetPosition = 0.2;
 
   setClamped(double value) {
     _sheetPosition = math.max(minPosition, math.min(value, maxPosition));
+    Provider.of<ExplorerState>(context, listen: false)
+        .setSheetPosition(_sheetPosition);
+  }
+
+  bool _handleScrollNotification(DraggableScrollableNotification n) {
+    Provider.of<ExplorerState>(context, listen: false)
+        .setSheetPosition(n.extent);
+    return false;
   }
 
   @override
@@ -54,33 +63,34 @@ class _OverlaySheetState extends State<OverlaySheet> {
                   });
                 },
                 onTap: () {
-                  setState(() {
-                    if (isExpanded) {
-                      setClamped(minPosition);
-                    } else {
-                      setClamped(maxPosition);
-                    }
-                  });
+                  if (isExpanded) {
+                    setClamped(minPosition);
+                  } else {
+                    setClamped(maxPosition);
+                  }
                 },
                 isExpanded: isExpanded,
                 isOnDesktopAndWeb: _isOnDesktopAndWeb,
               ),
               Flexible(
-                child: CustomScrollView(
-                  controller: scrollController,
-                  slivers: [
-                    SliverPadding(
-                      padding: const EdgeInsets.all(8.0),
-                      sliver: widget.sliver,
-                      // sliver: SliverMainAxisGroup(
-                      //   slivers: [
-                      //     SliverToBoxAdapter(child: Breadcrumbs(title: "test")),
-                      //     SliverToBoxAdapter(child: Divider()),
-                      //     SliverToBoxAdapter(child: Text("test")),
-                      //   ],
-                      // ),
-                    ),
-                  ],
+                child: NotificationListener<DraggableScrollableNotification>(
+                  onNotification: _handleScrollNotification,
+                  child: CustomScrollView(
+                    controller: scrollController,
+                    slivers: [
+                      SliverPadding(
+                        padding: const EdgeInsets.all(8.0),
+                        sliver: widget.sliver,
+                        // sliver: SliverMainAxisGroup(
+                        //   slivers: [
+                        //     SliverToBoxAdapter(child: Breadcrumbs(title: "test")),
+                        //     SliverToBoxAdapter(child: Divider()),
+                        //     SliverToBoxAdapter(child: Text("test")),
+                        //   ],
+                        // ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

@@ -14,7 +14,7 @@ import 'overlay/area.dart';
 import 'overlay/boulder.dart';
 import 'overlay/crag.dart';
 import 'overlay/route.dart';
-import 'sheet.dart';
+import 'overlay/sheet.dart';
 import 'state.dart';
 
 class ExplorerPage extends StatelessWidget {
@@ -33,21 +33,23 @@ class ExplorerPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) =>
           ExplorerState(crag: crag, entityType: entityType, entityId: entityId),
-      child: ExplorerLayout(
-        map: const MyMap(
-          child: MapBuilder(),
-        ),
-        search: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: MySearchBar(
-            hintText: "Search crag...",
-            onTap: () {
-              context.go('/search');
-            },
+      child: SafeArea(
+        child: ExplorerLayout(
+          map: const MyMap(
+            child: MapBuilder(),
           ),
-        ),
-        overlay: const OverlaySheet(
-          sliver: OverlayBuilder(),
+          search: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: MySearchBar(
+              hintText: "Search crag...",
+              onTap: () {
+                context.go('/search');
+              },
+            ),
+          ),
+          overlay: const OverlaySheet(
+            sliver: OverlayBuilder(),
+          ),
         ),
       ),
     );
