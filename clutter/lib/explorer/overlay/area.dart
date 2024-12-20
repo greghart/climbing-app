@@ -9,12 +9,8 @@ class AreaOverlay extends StatelessWidget {
   const AreaOverlay({
     super.key,
     required this.area,
-    required this.scrollController,
-    required this.isOnDesktopAndWeb,
   });
   final Area area;
-  final ScrollController scrollController;
-  final bool isOnDesktopAndWeb;
 
   @override
   Widget build(BuildContext context) {
@@ -36,25 +32,18 @@ class AreaOverlay extends StatelessWidget {
             "Boulders",
             style: theme.textTheme.headlineSmall,
           ),
-          Expanded(
-            child: ListView.builder(
-              controller: isOnDesktopAndWeb ? null : scrollController,
-              itemCount: area.boulders.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  onTap: () {
-                    Provider.of<ExplorerState>(context, listen: false)
-                        .setBoulder(area.boulders[index].id);
-                  },
-                  trailing: const Icon(Icons.navigate_next),
-                  title: Text(
-                    'Boulder ${area.boulders[index].name}',
-                    style: theme.textTheme.bodyMedium,
-                  ),
-                );
+          for (final boulder in area.boulders)
+            ListTile(
+              onTap: () {
+                Provider.of<ExplorerState>(context, listen: false)
+                    .setBoulder(boulder.id);
               },
-            ),
-          ),
+              trailing: const Icon(Icons.navigate_next),
+              title: Text(
+                'Boulder ${boulder.name}',
+                style: theme.textTheme.bodyMedium,
+              ),
+            )
         ],
       ),
     );

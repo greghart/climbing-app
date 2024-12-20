@@ -6,7 +6,6 @@ import '../models/crag.dart';
 import '../search/my_search_bar.dart';
 import './layout.dart';
 import './map.dart';
-import './overlay.dart';
 import 'map/area.dart';
 import 'map/boulder.dart';
 import 'map/crag.dart';
@@ -15,6 +14,7 @@ import 'overlay/area.dart';
 import 'overlay/boulder.dart';
 import 'overlay/crag.dart';
 import 'overlay/route.dart';
+import 'sheet.dart';
 import 'state.dart';
 
 class ExplorerPage extends StatelessWidget {
@@ -37,19 +37,17 @@ class ExplorerPage extends StatelessWidget {
         map: const MyMap(
           child: MapBuilder(),
         ),
-        // TODO: Make this open the search page once I figure out routing
-        search: MySearchBar(
-          hintText: "Search crag...",
-          onTap: () {
-            context.go('/search');
-          },
+        search: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: MySearchBar(
+            hintText: "Search crag...",
+            onTap: () {
+              context.go('/search');
+            },
+          ),
         ),
-        overlay: OverlaySheet(
-          build: (ScrollController scrollController, bool isOnDesktopAndWeb) {
-            return OverlayBuilder(
-                scrollController: scrollController,
-                isOnDesktopAndWeb: isOnDesktopAndWeb);
-          },
+        overlay: const OverlaySheet(
+          sliver: OverlayBuilder(),
         ),
       ),
     );
@@ -79,35 +77,20 @@ class MapBuilder extends StatelessWidget {
 class OverlayBuilder extends StatelessWidget {
   const OverlayBuilder({
     super.key,
-    required this.scrollController,
-    required this.isOnDesktopAndWeb,
   });
-  final ScrollController scrollController;
-  final bool isOnDesktopAndWeb;
 
   @override
   Widget build(BuildContext context) {
     var state = context.watch<ExplorerState>();
     switch (state.entityType) {
       case EntityType.area:
-        return AreaOverlay(
-            area: state.area!,
-            scrollController: scrollController,
-            isOnDesktopAndWeb: isOnDesktopAndWeb);
+        return AreaOverlay(area: state.area!);
       case EntityType.boulder:
-        return BoulderOverlay(
-            boulder: state.boulder!,
-            scrollController: scrollController,
-            isOnDesktopAndWeb: isOnDesktopAndWeb);
+        return BoulderOverlay(boulder: state.boulder!);
       case EntityType.route:
-        return RouteOverlay(
-            route: state.route!,
-            scrollController: scrollController,
-            isOnDesktopAndWeb: isOnDesktopAndWeb);
+        return RouteOverlay(route: state.route!);
       default:
-        return CragOverlay(
-            scrollController: scrollController,
-            isOnDesktopAndWeb: isOnDesktopAndWeb);
+        return const CragOverlay();
     }
   }
 }

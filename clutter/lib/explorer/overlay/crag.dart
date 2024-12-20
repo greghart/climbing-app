@@ -8,11 +8,7 @@ import 'layout.dart';
 class CragOverlay extends StatelessWidget {
   const CragOverlay({
     super.key,
-    required this.scrollController,
-    required this.isOnDesktopAndWeb,
   });
-  final ScrollController scrollController;
-  final bool isOnDesktopAndWeb;
 
   @override
   Widget build(BuildContext context) {
@@ -35,25 +31,18 @@ class CragOverlay extends StatelessWidget {
             "Areas",
             style: theme.textTheme.headlineSmall,
           ),
-          Flexible(
-            child: ListView.builder(
-              controller: isOnDesktopAndWeb ? null : scrollController,
-              itemCount: crag.areas.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  onTap: () {
-                    Provider.of<ExplorerState>(context, listen: false)
-                        .setArea(crag.areas[index].id);
-                  },
-                  trailing: const Icon(Icons.navigate_next),
-                  title: Text(
-                    'Area ${crag.areas[index].name}',
-                    style: theme.textTheme.bodyMedium,
-                  ),
-                );
+          for (final area in crag.areas)
+            ListTile(
+              onTap: () {
+                Provider.of<ExplorerState>(context, listen: false)
+                    .setArea(area.id);
               },
-            ),
-          ),
+              trailing: const Icon(Icons.navigate_next),
+              title: Text(
+                'Area ${area.name}',
+                style: theme.textTheme.bodyMedium,
+              ),
+            )
         ],
       ),
     );

@@ -3,17 +3,16 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
 
-/// OverlayView is a DraggableScrollableSheet that works on both
+/// OverlaySheet is a DraggableScrollableSheet that works on both
 /// mobile and desktop, showing just a preview of the current view
 /// by default, and expanding to show more scrollable content when dragged up.
 class OverlaySheet extends StatefulWidget {
   const OverlaySheet({
     super.key,
-    this.build,
+    required this.sliver,
   });
 
-  final Widget Function(
-      ScrollController scrollController, bool isOnDesktopAndWeb)? build;
+  final Widget sliver;
 
   @override
   State<OverlaySheet> createState() => _OverlaySheetState();
@@ -67,11 +66,21 @@ class _OverlaySheetState extends State<OverlaySheet> {
                 isOnDesktopAndWeb: _isOnDesktopAndWeb,
               ),
               Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: widget.build
-                          ?.call(scrollController, _isOnDesktopAndWeb) ??
-                      const Text('Overlay content'),
+                child: CustomScrollView(
+                  controller: scrollController,
+                  slivers: [
+                    SliverPadding(
+                      padding: const EdgeInsets.all(8.0),
+                      sliver: widget.sliver,
+                      // sliver: SliverMainAxisGroup(
+                      //   slivers: [
+                      //     SliverToBoxAdapter(child: Breadcrumbs(title: "test")),
+                      //     SliverToBoxAdapter(child: Divider()),
+                      //     SliverToBoxAdapter(child: Text("test")),
+                      //   ],
+                      // ),
+                    ),
+                  ],
                 ),
               ),
             ],

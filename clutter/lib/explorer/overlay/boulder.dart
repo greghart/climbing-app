@@ -9,12 +9,8 @@ class BoulderOverlay extends StatelessWidget {
   const BoulderOverlay({
     super.key,
     required this.boulder,
-    required this.scrollController,
-    required this.isOnDesktopAndWeb,
   });
   final Boulder boulder;
-  final ScrollController scrollController;
-  final bool isOnDesktopAndWeb;
 
   @override
   Widget build(BuildContext context) {
@@ -38,25 +34,18 @@ class BoulderOverlay extends StatelessWidget {
             "Routes",
             style: theme.textTheme.headlineSmall,
           ),
-          Expanded(
-            child: ListView.builder(
-              controller: isOnDesktopAndWeb ? null : scrollController,
-              itemCount: boulder.routes.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  onTap: () {
-                    Provider.of<ExplorerState>(context, listen: false)
-                        .setRoute(boulder.routes[index].id);
-                  },
-                  trailing: const Icon(Icons.navigate_next),
-                  title: Text(
-                    'Route ${boulder.routes[index].name}',
-                    style: theme.textTheme.bodyMedium,
-                  ),
-                );
+          for (final route in boulder.routes)
+            ListTile(
+              onTap: () {
+                Provider.of<ExplorerState>(context, listen: false)
+                    .setRoute(route.id);
               },
-            ),
-          ),
+              trailing: const Icon(Icons.navigate_next),
+              title: Text(
+                'Route ${route.name}',
+                style: theme.textTheme.bodyMedium,
+              ),
+            )
         ],
       ),
     );
