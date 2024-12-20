@@ -7,12 +7,8 @@ class RouteOverlay extends StatelessWidget {
   const RouteOverlay({
     super.key,
     required this.route,
-    required this.scrollController,
-    required this.isOnDesktopAndWeb,
   });
   final models.Route route;
-  final ScrollController scrollController;
-  final bool isOnDesktopAndWeb;
 
   @override
   Widget build(BuildContext context) {

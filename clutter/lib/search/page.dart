@@ -20,36 +20,41 @@ class SearchPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => SearchState(crag: crag),
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.only(top: 50.0, left: 10.0, right: 10.0),
-          child: Column(
-            children: [
-              // Search bar centered near top of the screen
-              // NOTE: Must be kept in step with search bar in [ExplorerPage]
-              Center(
-                child: Builder(builder: (context) {
-                  return MySearchBar(
-                    autoFocus: true,
-                    hintText: 'Search by area, boulder, or route',
-                    leading: IconButton(
-                      onPressed: () {
-                        if (context.canPop()) {
-                          context.pop();
-                        } else {
-                          context.go('/explorer');
-                        }
-                      },
-                      icon: const Icon(Icons.arrow_back),
-                    ),
-                    onChanged: (value) =>
-                        Provider.of<SearchState>(context, listen: false)
-                            .setSearch(value),
-                  );
-                }),
-              ),
-              const SearchFilters(),
-              const SearchResults(),
-            ],
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+            child: Column(
+              children: [
+                // Search bar centered near top of the screen
+                // NOTE: Must be kept in step with search bar in [ExplorerPage]
+                Center(
+                  child: Builder(builder: (context) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: MySearchBar(
+                        autoFocus: true,
+                        hintText: 'Search by area, boulder, or route',
+                        leading: IconButton(
+                          onPressed: () {
+                            if (context.canPop()) {
+                              context.pop();
+                            } else {
+                              context.go('/explorer');
+                            }
+                          },
+                          icon: const Icon(Icons.arrow_back),
+                        ),
+                        onChanged: (value) =>
+                            Provider.of<SearchState>(context, listen: false)
+                                .setSearch(value),
+                      ),
+                    );
+                  }),
+                ),
+                const SearchFilters(),
+                const SearchResults(),
+              ],
+            ),
           ),
         ),
       ),
