@@ -4,8 +4,8 @@ import 'coordinate.dart';
 import 'types.dart';
 
 class Bounds {
-  final Coordinate topLeft;
-  final Coordinate bottomRight;
+  final LatLng topLeft;
+  final LatLng bottomRight;
 
   const Bounds({
     required this.topLeft,
@@ -19,8 +19,8 @@ class Bounds {
           'bottomRight': JsonObject bottomRight
         }) {
       return Bounds(
-        topLeft: Coordinate.fromJson(topLeft),
-        bottomRight: Coordinate.fromJson(bottomRight),
+        topLeft: jsonLatLng(topLeft),
+        bottomRight: jsonLatLng(bottomRight),
       );
     }
     throw JSONException("Bounds", json);
@@ -33,17 +33,17 @@ class Bounds {
     };
   }
 
-  Coordinate get center {
-    return Coordinate(
-      lat: (topLeft.lat + bottomRight.lat) / 2,
-      lng: (topLeft.lng + bottomRight.lng) / 2,
+  LatLng get center {
+    return LatLng(
+      (topLeft.latitude + bottomRight.latitude) / 2,
+      (topLeft.longitude + bottomRight.longitude) / 2,
     );
   }
 
   LatLngBounds get toLatLngBounds {
     return LatLngBounds(
-      topLeft.toLatLng,
-      bottomRight.toLatLng,
+      topLeft,
+      bottomRight,
     );
   }
 }

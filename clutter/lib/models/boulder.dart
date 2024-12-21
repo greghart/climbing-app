@@ -8,7 +8,7 @@ class Boulder {
   final int areaId;
   final String name;
   final String? description;
-  final Coordinate coordinates;
+  final LatLng coordinates;
   final List<Route> routes;
   final Polygon? polygon;
 
@@ -37,7 +37,7 @@ class Boulder {
         areaId: areaId,
         name: name,
         description: description,
-        coordinates: Coordinate.fromJson(coordinates),
+        coordinates: jsonLatLng(coordinates),
         routes: routes.map((route) => Route.fromJson(id, route)).toList(),
         polygon: polygon != null ? Polygon.fromJson(polygon) : null,
       );

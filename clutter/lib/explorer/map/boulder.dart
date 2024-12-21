@@ -22,7 +22,7 @@ class BoulderMap extends StatelessWidget {
             polygons: [
               MyPolygon(
                 theme: theme,
-                points: boulder.polygon!.toLatLngs,
+                points: boulder.polygon!.coordinates,
               ),
             ],
           )
@@ -31,14 +31,14 @@ class BoulderMap extends StatelessWidget {
           // TODO: Clustering around boulder
           markers: boulder.routes.where((r) => r.coordinates != null).map((r) {
             return Marker(
-              point: r.coordinates!.toLatLng,
+              point: r.coordinates!,
               height: 20,
               width: 20,
               child: Container(
                 width: 20,
                 height: 20,
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.tertiary,
+                  color: theme.colorScheme.secondary,
                   shape: BoxShape.circle,
                 ),
               ),
@@ -47,7 +47,7 @@ class BoulderMap extends StatelessWidget {
         ),
         AnimateTo(
           mapController: MapController.of(context),
-          latLng: boulder.coordinates.toLatLng,
+          latLng: boulder.coordinates,
           zoom: 21,
         ),
       ],

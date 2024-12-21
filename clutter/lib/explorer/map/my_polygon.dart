@@ -14,10 +14,11 @@ class MyPolygon<HitValue extends Object> extends Polygon<HitValue> {
     super.label,
     super.hitValue,
   }) : super(
-          color: color ?? theme.colorScheme.secondaryContainer.withOpacity(0.5),
-          borderColor: borderColor ?? theme.colorScheme.secondary,
+          color: color ??
+              theme.colorScheme.primaryContainer.withValues(alpha: 0.5),
+          borderColor: borderColor ?? theme.colorScheme.primary,
           labelStyle: theme.textTheme.bodyMedium!
-              .copyWith(color: theme.colorScheme.onSecondaryContainer),
+              .copyWith(color: theme.colorScheme.onPrimaryContainer),
         );
 
   final ThemeData theme;

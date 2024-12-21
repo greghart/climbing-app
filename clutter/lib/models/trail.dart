@@ -34,19 +34,16 @@ class Trail {
     };
   }
 
-  List<Polyline<Object>> get toPolylines {
-    var polylines = <Polyline>[];
-    var pending = <LatLng>[
-      lines.first.start.toLatLng,
-      lines.first.end.toLatLng
-    ];
+  List<List<LatLng>> get toPolylines {
+    var polylines = <List<LatLng>>[];
+    var pending = <LatLng>[lines.first.start, lines.first.end];
     for (final line in lines.sublist(1)) {
       // If not linear in setup (which is allowed), pivot to a new polyline
-      if (pending[pending.length - 1] != line.start.toLatLng) {
-        polylines.add(Polyline(points: pending));
-        pending = [line.start.toLatLng];
+      if (pending[pending.length - 1] != line.start) {
+        polylines.add(pending);
+        pending = [line.start];
       }
-      pending.add(line.end.toLatLng);
+      pending.add(line.end);
     }
     return polylines;
   }

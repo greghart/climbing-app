@@ -13,7 +13,7 @@ void main() {
       expect(
           crag.center,
           equals(
-            const models.Coordinate(lat: 32.85052, lng: -117.02223),
+            const models.LatLng(32.85052, -117.02223),
           ));
       expect(crag.areas, hasLength(1));
     });

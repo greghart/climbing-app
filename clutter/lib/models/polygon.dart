@@ -1,12 +1,10 @@
-import 'package:latlong2/latlong.dart';
-
 import 'coordinate.dart';
 import 'types.dart';
 
 class Polygon {
   final int id;
   final String? descriptor;
-  final List<Coordinate> coordinates;
+  final List<LatLng> coordinates;
 
   const Polygon({
     required this.id,
@@ -24,8 +22,7 @@ class Polygon {
       return Polygon(
         id: id,
         descriptor: descriptor,
-        coordinates:
-            coordinates.map((coord) => Coordinate.fromJson(coord)).toList(),
+        coordinates: coordinates.map((coord) => jsonLatLng(coord)).toList(),
       );
     }
     throw JSONException("Polygon", json);
@@ -37,9 +34,5 @@ class Polygon {
       'descriptor': descriptor,
       'coordinates': coordinates.map((coord) => coord.toJson()).toList(),
     };
-  }
-
-  List<LatLng> get toLatLngs {
-    return coordinates.map((coord) => coord.toLatLng).toList();
   }
 }

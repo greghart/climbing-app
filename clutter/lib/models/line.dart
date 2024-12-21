@@ -3,8 +3,8 @@ import 'types.dart';
 
 class Line {
   final int id;
-  final Coordinate start;
-  final Coordinate end;
+  final LatLng start;
+  final LatLng end;
 
   const Line({
     required this.id,
@@ -21,8 +21,8 @@ class Line {
         }) {
       return Line(
         id: id,
-        start: Coordinate.fromJson(start),
-        end: Coordinate.fromJson(end),
+        start: jsonLatLng(start),
+        end: jsonLatLng(end),
       );
     }
     throw JSONException("Line", json);

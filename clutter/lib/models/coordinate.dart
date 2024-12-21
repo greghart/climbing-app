@@ -1,41 +1,13 @@
 import 'package:latlong2/latlong.dart';
-
 import 'types.dart';
 
-class Coordinate {
-  final double lat;
-  final double lng;
+export 'package:latlong2/latlong.dart';
 
-  const Coordinate({
-    required this.lat,
-    required this.lng,
-  });
-
-  factory Coordinate.fromJson(JsonObject json) {
-    if (json case {'lat': double lat, 'lng': double lng}) {
-      return Coordinate(
-        lat: lat,
-        lng: lng,
-      );
-    }
-    throw JSONException("Coordinate", json);
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      (other is Coordinate) ? (lat == other.lat && lng == other.lng) : false;
-
-  @override
-  int get hashCode => Object.hash(lat, lng);
-
-  JsonObject toJson() {
-    return {
-      'lat': lat,
-      'lng': lng,
-    };
-  }
-
-  LatLng get toLatLng {
+/// Rather than having two data structures, just immediately parse climbing-app
+/// Coordinate objects to flutter_map LatLng objects
+LatLng jsonLatLng(JsonObject json) {
+  if (json case {'lat': double lat, 'lng': double lng}) {
     return LatLng(lat, lng);
   }
+  throw JSONException("LatLng", json);
 }

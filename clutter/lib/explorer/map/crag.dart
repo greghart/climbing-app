@@ -32,7 +32,7 @@ class _CragMapState extends State<CragMap> {
           a.id,
           MyPolygon(
             theme: theme,
-            points: a.polygon!.toLatLngs,
+            points: a.polygon!.coordinates,
             label: a.name,
             hitValue: (id: a.id),
           ),
@@ -99,11 +99,17 @@ class _CragMapState extends State<CragMap> {
             ),
             PolylineLayer<Object>(
               simplificationTolerance: 0.3,
-              polylines: crag.trail?.toPolylines ?? [],
+              polylines: (crag.trail?.toPolylines ?? []).map((points) {
+                return Polyline(
+                  points: points,
+                  color: theme.colorScheme.secondary,
+                  strokeWidth: 2.0,
+                );
+              }).toList(),
             ),
             AnimateTo(
               mapController: MapController.of(context),
-              latLng: crag.center.toLatLng,
+              latLng: crag.center,
               zoom: crag.defaultZoom.toDouble(),
               offset: Offset.zero,
             ),

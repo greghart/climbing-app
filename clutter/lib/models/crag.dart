@@ -9,7 +9,7 @@ class Crag {
   final String name;
   final String? description;
   final Bounds bounds;
-  final Coordinate center;
+  final LatLng center;
   final int defaultZoom;
   final int minZoom;
   final int maxZoom;
@@ -48,7 +48,7 @@ class Crag {
         name: name,
         description: description,
         bounds: Bounds.fromJson(bounds),
-        center: Coordinate.fromJson(center),
+        center: jsonLatLng(center),
         defaultZoom: defaultZoom,
         minZoom: minZoom,
         maxZoom: maxZoom,
