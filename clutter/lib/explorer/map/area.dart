@@ -26,7 +26,7 @@ class AreaMap extends StatelessWidget {
             polygons: [
               MyPolygon(
                 theme: theme,
-                points: area.polygon!.toLatLngs,
+                points: area.polygon!.coordinates,
               ),
             ],
           )
@@ -36,7 +36,7 @@ class AreaMap extends StatelessWidget {
             return Marker(
               width: 30,
               height: 30,
-              point: b.coordinates.toLatLng,
+              point: b.coordinates,
               child: IconButton(
                 iconSize: 30,
                 onPressed: () =>
@@ -55,8 +55,8 @@ class AreaMap extends StatelessWidget {
         AnimateTo(
           mapController: MapController.of(context),
           latLng: LatLng(
-            area.polygon!.coordinates.map((c) => c.lat).average,
-            area.polygon!.coordinates.map((c) => c.lng).average,
+            area.polygon!.coordinates.map((c) => c.latitude).average,
+            area.polygon!.coordinates.map((c) => c.longitude).average,
           ),
           zoom: 19,
         ),

@@ -17,7 +17,7 @@ class MyMap extends StatelessWidget {
     return FlutterMap(
         mapController: mapController,
         options: MapOptions(
-            initialCenter: crag.center.toLatLng,
+            initialCenter: crag.center,
             initialZoom: crag.defaultZoom.toDouble(),
             maxZoom: crag.maxZoom.toDouble(),
             minZoom: crag.minZoom.toDouble(),

@@ -63,11 +63,13 @@ class _OverlaySheetState extends State<OverlaySheet> {
                   });
                 },
                 onTap: () {
-                  if (isExpanded) {
-                    setClamped(minPosition);
-                  } else {
-                    setClamped(maxPosition);
-                  }
+                  setState(() {
+                    if (isExpanded) {
+                      setClamped(minPosition);
+                    } else {
+                      setClamped(maxPosition);
+                    }
+                  });
                 },
                 isExpanded: isExpanded,
                 isOnDesktopAndWeb: _isOnDesktopAndWeb,

@@ -10,7 +10,7 @@ class Route {
   final String? description;
   final String? firstAscent;
   final Grade grade;
-  final Coordinate? coordinates;
+  final LatLng? coordinates;
 
   const Route({
     required this.id,
@@ -42,8 +42,7 @@ class Route {
         description: description,
         firstAscent: firstAscent,
         grade: Grade.fromJson(grade),
-        coordinates:
-            coordinates != null ? Coordinate.fromJson(coordinates) : null,
+        coordinates: coordinates != null ? jsonLatLng(coordinates) : null,
       );
     }
     throw JSONException("Route", json);

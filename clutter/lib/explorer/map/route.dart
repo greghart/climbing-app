@@ -23,10 +23,10 @@ class RouteMap extends StatelessWidget {
         MarkerLayer(
           markers: [
             Marker(
-              point: route.coordinates!.toLatLng,
+              point: route.coordinates!,
               // TODO: Bring in route icon
               child: Icon(Icons.location_pin,
-                  size: 20, color: theme.colorScheme.tertiary),
+                  size: 20, color: theme.colorScheme.secondary),
             ),
           ],
         ),
@@ -35,14 +35,14 @@ class RouteMap extends StatelessWidget {
             polygons: [
               MyPolygon(
                 theme: theme,
-                points: state.boulder!.polygon!.toLatLngs,
+                points: state.boulder!.polygon!.coordinates,
               ),
             ],
           )
         ],
         AnimateTo(
           mapController: MapController.of(context),
-          latLng: route.coordinates!.toLatLng,
+          latLng: route.coordinates!,
           zoom: 22,
         ),
       ],

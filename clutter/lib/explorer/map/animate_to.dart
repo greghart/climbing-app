@@ -39,7 +39,6 @@ class _AnimateToState extends State<AnimateTo> with TickerProviderStateMixin {
         Provider.of<ExplorerState>(context, listen: false).sheetPosition;
     // Two constraints -- search bar on top, and sheet on bottom
     // We generally want to animate such that coordinate is in the center.
-    // Coordinates
     final fullHeight = MediaQuery.sizeOf(context).height;
     final top = 76 / fullHeight;
     final bottom = (1 - sheetPosition);
