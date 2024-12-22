@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'my_search_bar.dart';
-import 'state.dart';
+import 'model.dart';
 
 class SearchFilters extends StatelessWidget {
   const SearchFilters({super.key});
@@ -42,7 +42,7 @@ class SearchForm extends StatefulWidget {
 class _SearchFormState extends State<SearchForm> {
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<SearchState>(context);
+    final model = Provider.of<SearchModel>(context);
     return Form(
       child: Column(
         children: [

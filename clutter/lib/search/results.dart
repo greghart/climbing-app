@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import 'state.dart';
+import 'model.dart';
 
 class SearchResults extends StatelessWidget {
   const SearchResults({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<SearchState>(context);
+    final model = Provider.of<SearchModel>(context);
     final theme = Theme.of(context);
     return Flexible(
       child: Container(
@@ -19,7 +19,7 @@ class SearchResults extends StatelessWidget {
     );
   }
 
-  content(SearchState state, ThemeData theme) {
+  content(SearchModel state, ThemeData theme) {
     if (state.isLoading) {
       return const LinearProgressIndicator();
     }
@@ -31,11 +31,11 @@ class SearchResults extends StatelessWidget {
           onTap: () {
             switch (state.results[index].type) {
               case SearchType.area:
-                context.go('/explorer/areas/${state.results[index].id}');
+                context.push('/explorer/areas/${state.results[index].id}');
               case SearchType.boulder:
-                context.go('/explorer/boulders/${state.results[index].id}');
+                context.push('/explorer/boulders/${state.results[index].id}');
               case SearchType.route:
-                context.go('/explorer/routes/${state.results[index].id}');
+                context.push('/explorer/routes/${state.results[index].id}');
               default:
                 throw Exception(
                     'Unknown search result type ${state.results[index].type} (${state.results[index].id})');

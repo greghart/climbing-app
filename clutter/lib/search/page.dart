@@ -6,7 +6,7 @@ import '../models/crag.dart';
 import 'filters.dart';
 import 'my_search_bar.dart';
 import 'results.dart';
-import 'state.dart';
+import 'model.dart';
 
 /// Layout for the search page.
 class SearchPage extends StatelessWidget {
@@ -18,7 +18,7 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final crag = context.watch<Crag>();
     return ChangeNotifierProvider(
-      create: (context) => SearchState(crag: crag),
+      create: (context) => SearchModel(crag: crag),
       child: Scaffold(
         body: SafeArea(
           child: Padding(
@@ -43,7 +43,7 @@ class SearchPage extends StatelessWidget {
                         icon: const Icon(Icons.arrow_back),
                       ),
                       onChanged: (value) =>
-                          Provider.of<SearchState>(context, listen: false)
+                          Provider.of<SearchModel>(context, listen: false)
                               .setSearch(value),
                     );
                   }),
