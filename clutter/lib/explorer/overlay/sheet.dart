@@ -25,7 +25,14 @@ class _OverlaySheetState extends State<OverlaySheet> {
   static const double minPosition = 0.2;
   static const double maxPosition = 0.7;
   static const double _dragSensitivity = 600;
-  double _sheetPosition = 0.2;
+  late double _sheetPosition;
+
+  @override
+  void initState() {
+    super.initState();
+    _sheetPosition =
+        Provider.of<ExplorerSheetModel>(context, listen: false).sheetPosition;
+  }
 
   setClamped(double value) {
     _sheetPosition = math.max(minPosition, math.min(value, maxPosition));

@@ -37,12 +37,6 @@ class ExplorerPage extends StatelessWidget {
           create: (context) => ExplorerModel(
               crag: crag, entityType: entityType, entityId: entityId),
         ),
-        ChangeNotifierProvider(
-          create: (context) => ExplorerSheetModel(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => ExplorerLayersModel(),
-        )
       ],
       child: SafeArea(
         child: Stack(
@@ -56,7 +50,7 @@ class ExplorerPage extends StatelessWidget {
                 child: MySearchBar(
                   hintText: "Search crag...",
                   onTap: () {
-                    context.go('/search');
+                    context.push('/search');
                   },
                   leading: IconButton(
                     onPressed: () {},

@@ -5,8 +5,8 @@ import '../models/grade.dart';
 import '../models/index.dart' as models;
 import '../util/debounce.dart';
 
-class SearchState extends ChangeNotifier {
-  SearchState({
+class SearchModel extends ChangeNotifier {
+  SearchModel({
     required this.crag,
   }) {
     all = [

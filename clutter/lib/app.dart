@@ -105,6 +105,12 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             Provider(create: (_) => data.crag),
+            ChangeNotifierProvider(
+              create: (context) => ExplorerSheetModel(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => ExplorerLayersModel(),
+            )
           ],
           child: MaterialApp.router(
             routerConfig: _router,
