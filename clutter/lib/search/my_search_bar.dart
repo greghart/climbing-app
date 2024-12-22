@@ -12,5 +12,6 @@ class MySearchBar extends SearchBar {
     super.hintText,
     super.leading,
     super.onChanged,
+    super.trailing,
   });
 }

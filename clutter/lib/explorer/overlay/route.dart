@@ -23,12 +23,11 @@ class RouteOverlay extends StatelessWidget {
             route.grade.raw,
             style: theme.textTheme.headlineMedium,
           ),
-          if (route.description != null) ...[
+          if (route.description != null)
             Text(
               route.description!,
               style: theme.textTheme.bodyMedium,
-            )
-          ],
+            ),
         ],
       ),
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/area.dart';
-import '../state.dart';
+import '../model.dart';
 import 'layout.dart';
 
 class AreaOverlay extends StatelessWidget {
@@ -35,7 +35,7 @@ class AreaOverlay extends StatelessWidget {
           for (final boulder in area.boulders)
             ListTile(
               onTap: () {
-                Provider.of<ExplorerState>(context, listen: false)
+                Provider.of<ExplorerModel>(context, listen: false)
                     .setBoulder(boulder.id);
               },
               trailing: const Icon(Icons.navigate_next),

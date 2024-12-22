@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/crag.dart';
-import '../state.dart';
+import '../model.dart';
 import 'layout.dart';
 
 class CragOverlay extends StatelessWidget {
@@ -34,7 +34,7 @@ class CragOverlay extends StatelessWidget {
           for (final area in crag.areas)
             ListTile(
               onTap: () {
-                Provider.of<ExplorerState>(context, listen: false)
+                Provider.of<ExplorerModel>(context, listen: false)
                     .setArea(area.id);
               },
               trailing: const Icon(Icons.navigate_next),

@@ -6,16 +6,17 @@ import '../models/crag.dart';
 import '../search/my_search_bar.dart';
 import './layout.dart';
 import './map.dart';
+import 'layers_menu.dart';
 import 'map/area.dart';
 import 'map/boulder.dart';
 import 'map/crag.dart';
 import 'map/route.dart';
+import 'model.dart';
 import 'overlay/area.dart';
 import 'overlay/boulder.dart';
 import 'overlay/crag.dart';
 import 'overlay/route.dart';
 import 'overlay/sheet.dart';
-import 'state.dart';
 
 class ExplorerPage extends StatelessWidget {
   const ExplorerPage({
@@ -30,30 +31,47 @@ class ExplorerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final crag = context.watch<Crag>();
-    return ChangeNotifierProvider(
-      create: (context) =>
-          ExplorerState(crag: crag, entityType: entityType, entityId: entityId),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ExplorerModel(
+              crag: crag, entityType: entityType, entityId: entityId),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ExplorerSheetModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ExplorerLayersModel(),
+        )
+      ],
       child: SafeArea(
-        child: ExplorerLayout(
-          map: const MyMap(
-            child: MapBuilder(),
-          ),
-          search: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: MySearchBar(
-              hintText: "Search crag...",
-              onTap: () {
-                context.go('/search');
-              },
-              leading: IconButton(
-                onPressed: () {},
-                icon: const Offstage(child: Icon(Icons.arrow_back)),
+        child: Stack(
+          children: [
+            ExplorerLayout(
+              map: const MyMap(
+                child: MapBuilder(),
+              ),
+              search: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: MySearchBar(
+                  hintText: "Search crag...",
+                  onTap: () {
+                    context.go('/search');
+                  },
+                  leading: IconButton(
+                    onPressed: () {},
+                    icon: const Offstage(child: Icon(Icons.arrow_back)),
+                  ),
+                  trailing: const [
+                    LayersMenu(),
+                  ],
+                ),
+              ),
+              overlay: const OverlaySheet(
+                sliver: OverlayBuilder(),
               ),
             ),
-          ),
-          overlay: const OverlaySheet(
-            sliver: OverlayBuilder(),
-          ),
+          ],
         ),
       ),
     );
@@ -66,14 +84,14 @@ class MapBuilder extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    var state = context.watch<ExplorerState>();
-    switch (state.entityType) {
+    var model = context.watch<ExplorerModel>();
+    switch (model.entityType) {
       case EntityType.area:
-        return AreaMap(area: state.area!);
+        return AreaMap(area: model.area!);
       case EntityType.boulder:
-        return BoulderMap(boulder: state.boulder!);
+        return BoulderMap(boulder: model.boulder!);
       case EntityType.route:
-        return RouteMap(route: state.route!);
+        return RouteMap(route: model.route!);
       default:
         return const CragMap();
     }
@@ -87,14 +105,14 @@ class OverlayBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var state = context.watch<ExplorerState>();
-    switch (state.entityType) {
+    var model = context.watch<ExplorerModel>();
+    switch (model.entityType) {
       case EntityType.area:
-        return AreaOverlay(area: state.area!);
+        return AreaOverlay(area: model.area!);
       case EntityType.boulder:
-        return BoulderOverlay(boulder: state.boulder!);
+        return BoulderOverlay(boulder: model.boulder!);
       case EntityType.route:
-        return RouteOverlay(route: state.route!);
+        return RouteOverlay(route: model.route!);
       default:
         return const CragOverlay();
     }

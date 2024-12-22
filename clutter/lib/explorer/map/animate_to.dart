@@ -5,7 +5,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
-import '../state.dart';
+import '../model.dart';
 
 class AnimateTo extends StatefulWidget {
   const AnimateTo({
@@ -36,7 +36,7 @@ class _AnimateToState extends State<AnimateTo> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final sheetPosition =
-        Provider.of<ExplorerState>(context, listen: false).sheetPosition;
+        Provider.of<ExplorerSheetModel>(context, listen: false).sheetPosition;
     // Two constraints -- search bar on top, and sheet on bottom
     // We generally want to animate such that coordinate is in the center.
     final fullHeight = MediaQuery.sizeOf(context).height;

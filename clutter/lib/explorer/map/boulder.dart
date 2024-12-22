@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/boulder.dart';
+import '../model.dart';
 import 'animate_to.dart';
 import 'my_polygon.dart';
 
@@ -15,9 +17,11 @@ class BoulderMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final layers = Provider.of<ExplorerLayersModel>(context);
+
     return Stack(
       children: [
-        if (boulder.polygon != null) ...[
+        if (boulder.polygon != null && layers.isChecked(LayerType.boulders))
           PolygonLayer(
             polygons: [
               MyPolygon(
@@ -25,26 +29,36 @@ class BoulderMap extends StatelessWidget {
                 points: boulder.polygon!.coordinates,
               ),
             ],
-          )
-        ],
-        MarkerLayer(
-          // TODO: Clustering around boulder
-          markers: boulder.routes.where((r) => r.coordinates != null).map((r) {
-            return Marker(
-              point: r.coordinates!,
-              height: 20,
-              width: 20,
-              child: Container(
-                width: 20,
+          ),
+        if (layers.isChecked(LayerType.routes))
+          MarkerLayer(
+            // TODO: Clustering around boulder
+            markers:
+                boulder.routes.where((r) => r.coordinates != null).map((r) {
+              return Marker(
+                point: r.coordinates!,
                 height: 20,
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.secondary,
-                  shape: BoxShape.circle,
+                width: 20,
+                child: GestureDetector(
+                  onTap: () {
+                    Provider.of<ExplorerModel>(context, listen: false)
+                        .setRoute(r.id);
+                  },
+                  child: Tooltip(
+                    message: r.name,
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.secondary,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            );
-          }).toList(),
-        ),
+              );
+            }).toList(),
+          ),
         AnimateTo(
           mapController: MapController.of(context),
           latLng: boulder.coordinates,

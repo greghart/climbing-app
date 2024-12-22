@@ -5,7 +5,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/area.dart';
-import '../state.dart';
+import '../model.dart';
 import 'animate_to.dart';
 import 'my_polygon.dart';
 
@@ -19,9 +19,10 @@ class AreaMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final layers = Provider.of<ExplorerLayersModel>(context);
     return Stack(
       children: [
-        if (area.polygon != null) ...[
+        if (area.polygon != null && layers.isChecked(LayerType.areas))
           PolygonLayer(
             polygons: [
               MyPolygon(
@@ -29,29 +30,30 @@ class AreaMap extends StatelessWidget {
                 points: area.polygon!.coordinates,
               ),
             ],
-          )
-        ],
-        MarkerLayer(
-          markers: area.boulders.map((b) {
-            return Marker(
-              width: 30,
-              height: 30,
-              point: b.coordinates,
-              child: IconButton(
-                iconSize: 30,
-                onPressed: () =>
-                    Provider.of<ExplorerState>(context, listen: false)
-                        .setBoulder(b.id),
-                icon: Image.asset(
-                  'assets/images/boulder_icon.svg.png',
-                  width: 30,
-                  height: 30,
-                  opacity: const AlwaysStoppedAnimation(0.8),
+          ),
+        if (layers.isChecked(LayerType.boulders))
+          MarkerLayer(
+            markers: area.boulders.map((b) {
+              return Marker(
+                width: 30,
+                height: 30,
+                point: b.coordinates,
+                child: IconButton(
+                  iconSize: 30,
+                  onPressed: () =>
+                      Provider.of<ExplorerModel>(context, listen: false)
+                          .setBoulder(b.id),
+                  tooltip: b.name,
+                  icon: Image.asset(
+                    'assets/images/boulder_icon.svg.png',
+                    width: 30,
+                    height: 30,
+                    opacity: const AlwaysStoppedAnimation(0.8),
+                  ),
                 ),
-              ),
-            );
-          }).toList(),
-        ),
+              );
+            }).toList(),
+          ),
         AnimateTo(
           mapController: MapController.of(context),
           latLng: LatLng(
