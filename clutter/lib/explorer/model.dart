@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-
 import '../models/index.dart' as models;
+
+enum EntityType { crag, area, boulder, route }
 
 // ExplorerState handles the internal routing and state management for the explorer pages.
 // Routing just sets up the initial state to support deep linking, but once explorer is open,
 // we need to maintain widgets to keep map from flickering.
 //
 // It is expected that this class will ensure entityId will always reflect an actual entity of entityType
-class ExplorerState extends ChangeNotifier {
-  ExplorerState({
+class ExplorerModel extends ChangeNotifier {
+  ExplorerModel({
     required this.crag,
     required this.entityType,
     this.entityId,
@@ -89,7 +90,9 @@ class ExplorerState extends ChangeNotifier {
     }
     notifyListeners();
   }
+}
 
+class ExplorerSheetModel extends ChangeNotifier {
   // Just for tracking position
   double sheetPosition = 0.2;
   void setSheetPosition(double v) {
@@ -98,4 +101,32 @@ class ExplorerState extends ChangeNotifier {
   }
 }
 
-enum EntityType { crag, area, boulder, route }
+enum LayerType { areas, boulders, routes, trails }
+
+extension Display on LayerType {
+  String display() {
+    return '${name[0].toUpperCase()}${name.substring(1)}';
+  }
+}
+
+// ExplorerLayersModel manages UI state for selected map layers
+class ExplorerLayersModel extends ChangeNotifier {
+  final Map<LayerType, bool> layers = {
+    LayerType.areas: true,
+    LayerType.boulders: true,
+    LayerType.routes: true,
+    LayerType.trails: true,
+  };
+
+  bool isChecked(LayerType type) {
+    return layers[type]!;
+  }
+
+  toggleLayer(LayerType type) {
+    if (!layers.containsKey(type)) {
+      throw ArgumentError('Invalid layer type');
+    }
+    layers[type] = !layers[type]!;
+    notifyListeners();
+  }
+}

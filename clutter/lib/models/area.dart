@@ -31,7 +31,8 @@ class Area {
         name: name,
         description: description,
         polygon: polygon != null ? Polygon.fromJson(polygon) : null,
-        boulders: boulders.map((boulder) => Boulder.fromJson(id, boulder)).toList(),
+        boulders:
+            boulders.map((boulder) => Boulder.fromJson(id, boulder)).toList(),
       );
     }
     throw JSONException('Area', json);

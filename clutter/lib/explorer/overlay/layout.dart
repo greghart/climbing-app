@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../state.dart';
+import '../model.dart';
 
 class OverlayLayout extends StatelessWidget {
   const OverlayLayout({
@@ -61,48 +61,48 @@ class Breadcrumbs extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final state = context.watch<ExplorerState>();
+    final model = context.watch<ExplorerModel>();
 
     return Container(
       color: theme.colorScheme.surfaceBright,
       child: Wrap(
         spacing: 8,
         children: [
-          if (state.area != null) ...[
+          if (model.area != null) ...[
             FilledButton(
               style: const ButtonStyle(
                 visualDensity: VisualDensity.compact,
               ),
               onPressed: () {
-                Provider.of<ExplorerState>(context, listen: false).setCrag();
+                Provider.of<ExplorerModel>(context, listen: false).setCrag();
               },
-              child: Text(state.crag.name),
+              child: Text(model.crag.name),
             ),
             divider(theme),
           ],
-          if (state.boulder != null) ...[
+          if (model.boulder != null) ...[
             FilledButton(
               style: const ButtonStyle(
                 visualDensity: VisualDensity.compact,
               ),
               onPressed: () {
-                Provider.of<ExplorerState>(context, listen: false)
-                    .setArea(state.area!.id);
+                Provider.of<ExplorerModel>(context, listen: false)
+                    .setArea(model.area!.id);
               },
-              child: Text(state.area!.name),
+              child: Text(model.area!.name),
             ),
             divider(theme),
           ],
-          if (state.route != null) ...[
+          if (model.route != null) ...[
             FilledButton(
               style: const ButtonStyle(
                 visualDensity: VisualDensity.compact,
               ),
               onPressed: () {
-                Provider.of<ExplorerState>(context, listen: false)
-                    .setBoulder(state.boulder!.id);
+                Provider.of<ExplorerModel>(context, listen: false)
+                    .setBoulder(model.boulder!.id);
               },
-              child: Text(state.boulder!.name),
+              child: Text(model.boulder!.name),
             ),
             divider(theme),
           ],

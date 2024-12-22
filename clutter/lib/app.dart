@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'data.dart';
+import 'explorer/model.dart';
 import 'explorer/page.dart';
-import 'explorer/state.dart';
 import 'search/page.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
         path: '/search',
         pageBuilder: (BuildContext context, GoRouterState state) {
           return const MaterialPage(
+            restorationId: "search",
             child: SearchPage(),
           );
         },
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         path: '/explorer',
         pageBuilder: (BuildContext context, GoRouterState state) {
           return const MaterialPage(
+            restorationId: "explorer",
             child: ExplorerPage(
               entityType: EntityType.crag,
               entityId: null,

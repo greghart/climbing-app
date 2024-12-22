@@ -4,7 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/crag.dart';
-import '../state.dart';
+import '../model.dart';
 import 'animate_to.dart';
 import 'my_polygon.dart';
 
@@ -39,6 +39,7 @@ class _CragMapState extends State<CragMap> {
         );
       }),
     );
+    final layers = Provider.of<ExplorerLayersModel>(context);
 
     return MouseRegion(
       hitTestBehavior: HitTestBehavior.deferToChild,
@@ -69,51 +70,27 @@ class _CragMapState extends State<CragMap> {
       child: GestureDetector(
         onTap: () {
           // We shouldn't really have overlapping areas, just navigate to first area
-          Provider.of<ExplorerState>(context, listen: false)
+          Provider.of<ExplorerModel>(context, listen: false)
               .setArea(_hitNotifier.value!.hitValues.first.id);
-          // context
-          //     .go('/explorer/areas/${_hitNotifier.value!.hitValues.first.id}');
         },
-        // onLongPress: () => _openTouchedGonsModal(
-        //   'Long pressed',
-        //   _hitNotifier.value!.hitValues,
-        //   _hitNotifier.value!.coordinate,
-        // ),
-        // onSecondaryTap: () => _openTouchedGonsModal(
-        //   'Secondary tapped',
-        //   _hitNotifier.value!.hitValues,
-        //   _hitNotifier.value!.coordinate,
-        // ),
-        // child: PolygonLayer(
-        //   hitNotifier: _hitNotifier,
-        //   simplificationTolerance: 0,
         child: Stack(
           children: [
-            PolygonLayer(
-              hitNotifier: _hitNotifier,
-              simplificationTolerance: 0,
-              polygons: [
-                ...polygonsById.values,
-                ...?_hoverGons,
-              ],
-            ),
-            PolylineLayer<Object>(
-              simplificationTolerance: 0.3,
-              polylines: (crag.trail?.toPolylines ?? []).map((points) {
-                return Polyline(
-                  points: points,
-                  color: theme.colorScheme.secondary,
-                  strokeWidth: 2.0,
-                );
-              }).toList(),
-            ),
+            if (layers.isChecked(LayerType.areas))
+              PolygonLayer(
+                hitNotifier: _hitNotifier,
+                simplificationTolerance: 0,
+                polygons: [
+                  ...polygonsById.values,
+                  ...?_hoverGons,
+                ],
+              ),
             AnimateTo(
               mapController: MapController.of(context),
               latLng: crag.center,
               zoom: crag.defaultZoom.toDouble(),
               offset: Offset.zero,
             ),
-          ],
+          ].whereType<Widget>().toList(),
         ),
       ),
     );

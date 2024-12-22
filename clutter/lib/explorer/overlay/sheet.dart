@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../state.dart';
+import '../model.dart';
 
 /// OverlaySheet is a DraggableScrollableSheet that works on both
 /// mobile and desktop, showing just a preview of the current view
@@ -29,12 +29,12 @@ class _OverlaySheetState extends State<OverlaySheet> {
 
   setClamped(double value) {
     _sheetPosition = math.max(minPosition, math.min(value, maxPosition));
-    Provider.of<ExplorerState>(context, listen: false)
+    Provider.of<ExplorerSheetModel>(context, listen: false)
         .setSheetPosition(_sheetPosition);
   }
 
   bool _handleScrollNotification(DraggableScrollableNotification n) {
-    Provider.of<ExplorerState>(context, listen: false)
+    Provider.of<ExplorerSheetModel>(context, listen: false)
         .setSheetPosition(n.extent);
     return false;
   }

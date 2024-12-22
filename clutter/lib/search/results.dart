@@ -9,12 +9,12 @@ class SearchResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<SearchState>(context);
+    final model = Provider.of<SearchState>(context);
     final theme = Theme.of(context);
     return Flexible(
       child: Container(
         constraints: const BoxConstraints(minWidth: 360.0, maxWidth: 640.0),
-        child: content(state, theme),
+        child: content(model, theme),
       ),
     );
   }

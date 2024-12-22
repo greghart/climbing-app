@@ -42,15 +42,15 @@ class SearchForm extends StatefulWidget {
 class _SearchFormState extends State<SearchForm> {
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<SearchState>(context);
+    final model = Provider.of<SearchState>(context);
     return Form(
       child: Column(
         children: [
           Row(
             children: [
               DropdownMenu<SearchType>(
-                onSelected: (value) => state.setType(value!),
-                initialSelection: state.type,
+                onSelected: (value) => model.setType(value!),
+                initialSelection: model.type,
                 label: const Text("Search by"),
                 dropdownMenuEntries: const [
                   DropdownMenuEntry(label: "Any", value: SearchType.any),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/boulder.dart';
-import '../state.dart';
+import '../model.dart';
 import 'layout.dart';
 
 class BoulderOverlay extends StatelessWidget {
@@ -21,7 +21,7 @@ class BoulderOverlay extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (boulder.description != null) ...[
+          if (boulder.description != null)
             Container(
               padding: const EdgeInsets.only(bottom: 8, top: 8),
               child: Text(
@@ -29,7 +29,6 @@ class BoulderOverlay extends StatelessWidget {
                 style: theme.textTheme.bodyMedium,
               ),
             ),
-          ],
           Text(
             "Routes",
             style: theme.textTheme.headlineSmall,
@@ -37,7 +36,7 @@ class BoulderOverlay extends StatelessWidget {
           for (final route in boulder.routes)
             ListTile(
               onTap: () {
-                Provider.of<ExplorerState>(context, listen: false)
+                Provider.of<ExplorerModel>(context, listen: false)
                     .setRoute(route.id);
               },
               trailing: const Icon(Icons.navigate_next),
