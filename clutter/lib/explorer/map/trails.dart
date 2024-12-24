@@ -25,7 +25,7 @@ class TrailsLayer extends StatelessWidget {
         return Polyline(
           points: points,
           color: theme.colorScheme.secondary,
-          strokeWidth: 2.0,
+          strokeWidth: 4.0,
         );
       }).toList(),
     );

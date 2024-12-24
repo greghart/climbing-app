@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 
 import '../models/crag.dart';
+import 'current_location.dart';
 import 'map/trails.dart';
 
 class MyMap extends StatelessWidget {
@@ -42,6 +43,7 @@ class MyMap extends StatelessWidget {
               ),
             ],
           ),
+          CurrentLocation(crag: crag),
           TrailsLayer(crag: crag),
           child,
         ].whereType<Widget>().toList());
