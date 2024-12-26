@@ -4,10 +4,13 @@ import BestTileLayer from "@/app/_components/map/BestTilerLayer";
 import useQueryState from "@/app/_util/useQueryState";
 import reduce from "lodash-es/reduce";
 import React from "react";
-import { LayersControl, useMapEvents } from "react-leaflet";
+import { LayerGroup, LayersControl, useMapEvents } from "react-leaflet";
 
 type Props = Omit<React.ComponentProps<typeof LayersControl>, "children"> & {
-  children?: (overlay: typeof LayersControl.Overlay) => React.ReactNode;
+  children?: (
+    overlay: typeof LayersControl.Overlay,
+    group: typeof LayerGroup
+  ) => React.ReactNode;
 };
 
 type Layer = NonNullable<React.ComponentProps<typeof BestTileLayer>["layer"]>;
@@ -50,8 +53,6 @@ export default function Layers(props: Props) {
   );
   useMapEvents({
     baselayerchange: (e) => {
-      console.warn(e);
-      console.warn(byName);
       setSelected(byName[e.name]);
     },
   });
@@ -60,7 +61,7 @@ export default function Layers(props: Props) {
       <Layer selected={selected as Layer} layer="OpenStreetMap" />
       <Layer selected={selected as Layer} layer="Local" />
       <Layer selected={selected as Layer} layer="MapBox" />
-      {props.children?.(LayersControl.Overlay)}
+      {props.children?.(LayersControl.Overlay, LayerGroup)}
     </LayersControl>
   );
 }

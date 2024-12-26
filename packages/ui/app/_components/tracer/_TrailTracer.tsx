@@ -28,6 +28,7 @@ interface TrailTracerProps {
   onCancel: React.MouseEventHandler;
   onSubmit?: (b: ITrail) => unknown;
   children?: React.ReactNode;
+  layersChildren?: React.ComponentProps<typeof Layers>["children"];
 }
 
 interface TrailTracerState {
@@ -61,7 +62,6 @@ export default function TrailTracer(props: TrailTracerProps) {
 
   // Click to add points and lines
   const handleClick = (e: Leaflet.LeafletMouseEvent) => {
-    console.warn("handling click");
     if (e.originalEvent.ctrlKey) return;
 
     // Magnet snap e.latlng to an existing point so that the user can easily connect lines
@@ -91,7 +91,6 @@ export default function TrailTracer(props: TrailTracerProps) {
   };
 
   const handleKeyPress = (e: Leaflet.LeafletKeyboardEvent) => {
-    console.warn("handleKeyPress", e.originalEvent.key);
     // z to undo last line
     if (
       e.originalEvent.key === "z" &&
@@ -177,7 +176,6 @@ export default function TrailTracer(props: TrailTracerProps) {
       </FullScreen>
       <FullScreen zIndex={1000}>
         <CragMap crag={props.crag} style={{ height: "100vh" }}>
-          <Layers />
           <EventsHandler
             click={handleClick}
             mousemove={handleMouseMove}
@@ -211,6 +209,7 @@ export default function TrailTracer(props: TrailTracerProps) {
               <Tooltip sticky>Ctrl click to delete line</Tooltip>
             </TrailPolyline>
           ))}
+          <Layers>{props.layersChildren}</Layers>
           {props.children}
         </CragMap>
       </FullScreen>

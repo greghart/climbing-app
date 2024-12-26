@@ -39,7 +39,6 @@ getDataSource()
         })),
       })),
     };
-    console.warn("Pending:\n", pending);
     await cragRepo.save({
       ...tram,
       areas: (tram.areas || []).map((area) => ({

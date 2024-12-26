@@ -10,7 +10,6 @@ export default function useBoulderView(
 ) {
   const map = useMap();
   React.useEffect(() => {
-    console.warn("Zooming");
     map.setView(
       // Keep route in top half to account for overlay
       [boulder.coordinates.lat - offset, boulder.coordinates.lng],

@@ -24,6 +24,7 @@ interface BoundsTracerProps {
   onCancel: React.MouseEventHandler;
   onSubmit?: (b: IBounds) => unknown;
   children?: React.ReactNode;
+  layersChildren?: React.ComponentProps<typeof Layers>["children"];
 }
 
 interface BoundsTracerState {
@@ -119,11 +120,11 @@ export default function BoundsTracer(props: BoundsTracerProps) {
       </FullScreen>
       <FullScreen zIndex={1000}>
         <CragMap crag={props.crag} style={{ height: "100vh" }}>
-          <Layers />
           <EventsHandler click={handleClick} mousemove={handleMouseMove} />
           {getCurrent()}
           <BoundsPolygon bounds={state.pending} />
           {props.children}
+          <Layers>{props.layersChildren}</Layers>
         </CragMap>
       </FullScreen>
     </>

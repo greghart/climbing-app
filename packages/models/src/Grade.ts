@@ -113,27 +113,33 @@ export const grades: Record<GradingSystemType, Record<string, number>> = {
     "5.7": vGrades.VB,
     "5.8": vGrades.V0 - 1,
     "5.9": vGrades.V0,
-    "5.10a": vGrades.V0 + 1,
+    "5.10": vGrades.V0 + 1,
+    "5.10a": vGrades.V0 + 1, // 5.10a == 5.10
     "5.10b": vGrades.V0 + 2,
     "5.10c": vGrades.V1,
     "5.10d": (vGrades.V1 + vGrades.V2) / 2, // V1-2
-    "5.11a": vGrades.V2,
+    "5.11": vGrades.V2,
+    "5.11a": vGrades.V2, // 5.11a == 5.11
     "5.11b": vGrades.V2 + 1,
     "5.11c": vGrades.V3,
     "5.11d": vGrades.V3 + 1,
-    "5.12a": vGrades.V4,
+    "5.12": vGrades.V4,
+    "5.12a": vGrades.V4, // 5.12a == 5.12
     "5.12b": vGrades.V5,
     "5.12c": vGrades.V6,
     "5.12d": vGrades.V7,
-    "5.13a": vGrades.V8,
+    "5.13": vGrades.V8,
+    "5.13a": vGrades.V8, // 5.13a == 5.13
     "5.13b": vGrades.V8 + 1,
     "5.13c": vGrades.V9,
     "5.13d": vGrades.V10,
-    "5.14a": vGrades.V11,
+    "5.14": vGrades.V11,
+    "5.14a": vGrades.V11, // 5.14a == 5.14
     "5.14b": vGrades.V12,
     "5.14c": vGrades.V13,
     "5.14d": vGrades.V14,
-    "5.15a": vGrades.V15,
+    "5.15": vGrades.V15,
+    "5.15a": vGrades.V15, // 5.15a == 5.15
     "5.15b": vGrades.V16,
     "5.15c": vGrades.V17,
   },
@@ -152,17 +158,19 @@ export function parseRaw(raw: string): IGrade {
   throw new RangeError(`No grading system found for  '${raw}'`);
 }
 
+const SPLITTERS = ["/", "-"];
+
 function splitter(
   system: GradingSystemType,
   scorer: (raw: string, flexible?: boolean) => number
 ): (raw: string) => IGrade {
   return (raw: string) => {
     // Support split grades
-    const components = raw.split("/");
-    if (components.length > 2) {
-      throw new RangeError(`Invalid ${system} grade '${raw}'`);
-    }
-    try {
+    const trySplitter = (splitter: string) => {
+      const components = raw.split(splitter);
+      if (components.length > 2) {
+        throw new RangeError(`Invalid ${system} grade '${raw}'`);
+      }
       const score1 = scorer(components[0]);
       let score2 = scorer(components[0]);
       if (components.length === 2) {
@@ -170,22 +178,42 @@ function splitter(
           score2 = scorer(components[1]);
         } catch {
           // Allow second component to be "flexible"
-          // Eg. V5/V6, 5.10/11
-          score2 = scorer(components[1], true);
+          // Eg. V5/6, 5.10/11
+          try {
+            score2 = scorer(components[1], true);
+          } catch {
+            // Allow second component to replace first one
+            // Eg. 5.11a/b -> 5.11b
+            const grade = `${components[0].slice(
+              0,
+              -1 * components[1].length
+            )}${components[1]}`;
+            score2 = scorer(grade);
+          }
         }
       }
-      return {
-        system,
-        raw,
-        value: (score1 + score2) / 2,
-      };
-    } catch (e) {
-      // always throw full input
-      if (e instanceof RangeError) {
-        throw new RangeError(`Invalid ${system} grade '${raw}'`);
+      return [score1, score2];
+    };
+    for (var i = 0; i < SPLITTERS.length; i++) {
+      try {
+        const [score1, score2] = trySplitter(SPLITTERS[i]);
+        return {
+          system,
+          raw,
+          value: (score1 + score2) / 2,
+        };
+      } catch (e) {
+        if (i === SPLITTERS.length - 1) {
+          // last chance
+          // always throw full input
+          if (e instanceof RangeError) {
+            throw new RangeError(`Invalid ${system} grade '${raw}'`);
+          }
+          throw e;
+        }
       }
-      throw e;
     }
+    throw new Error("Unexpectedly failed to parse grade");
   };
 }
 
