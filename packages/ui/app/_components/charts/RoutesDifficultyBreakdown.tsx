@@ -29,7 +29,6 @@ const RoutesDifficultyBreakdown: React.FunctionComponent<Props> = (props) => {
           return memo;
         }
       }
-      console.warn("Route", thisRoute, "did not fit in any bucket??");
       memo[3] += 1;
       return memo;
     },

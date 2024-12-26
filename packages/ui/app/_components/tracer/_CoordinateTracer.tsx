@@ -64,11 +64,11 @@ export default function CoordinateTracer(props: CoordinateTracerProps) {
       </FullScreen>
       <FullScreen zIndex={1001}>
         <CragMap crag={props.crag} style={{ height: "100vh" }}>
-          <Layers />
           <EventsHandler click={handleClick} />
           {state.pending &&
             (props.renderPending || defaultRenderPending)(state.pending)}
           {props.children}
+          <Layers />
         </CragMap>
       </FullScreen>
     </>

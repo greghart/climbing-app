@@ -4,7 +4,7 @@ import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
 import useActionState from "@/app/_components/form/useActionState";
-import AreasMap from "@/app/_components/map/AreasMap";
+import CragLayers from "@/app/_components/map/CragLayers";
 import updateCrag from "@/app/api/_actions/updateCrag";
 import { FormHelperText, InputLabel, Stack } from "@mui/material";
 import { Crag, ICrag } from "models";
@@ -38,12 +38,7 @@ export default function CragForm(props: Props) {
           name="bounds"
           crag={crag}
           TracerProps={{
-            children: (
-              <AreasMap
-                areas={crag.areas!}
-                AreaMapProps={{ onClick: undefined }}
-              />
-            ),
+            layersChildren: CragLayers.builder(crag),
           }}
         />
         <FormHelperText>

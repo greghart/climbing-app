@@ -25,6 +25,7 @@ interface PolygonTracerProps {
   onCancel: React.MouseEventHandler;
   onSubmit?: (b: IPolygon) => unknown;
   children?: React.ReactNode;
+  layersChildren?: React.ComponentProps<typeof Layers>["children"];
   snapDistance?: number; // Add this line
 }
 
@@ -151,7 +152,6 @@ export default function PolygonTracer(props: PolygonTracerProps) {
       </FullScreen>
       <FullScreen zIndex={1001}>
         <CragMap crag={props.crag} style={{ height: "100vh" }}>
-          <Layers />
           <EventsHandler
             click={handleClick}
             mousemove={handleMouseMove}
@@ -159,6 +159,7 @@ export default function PolygonTracer(props: PolygonTracerProps) {
           />
           {getCoordinates()}
           {props.children}
+          <Layers>{props.layersChildren}</Layers>
         </CragMap>
       </FullScreen>
     </>

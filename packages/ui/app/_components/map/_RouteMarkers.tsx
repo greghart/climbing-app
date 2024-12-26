@@ -100,7 +100,6 @@ const groupRoutesByCoordinate = (routes: IRoute[]) => {
  */
 export default function RouteMarkers(props: Props) {
   const searchParamsPath = useSearchParamsPath();
-  console.warn("ROuteMarkers", groupRoutesByCoordinate(props.routes));
   return (
     <React.Fragment>
       {groupRoutesByCoordinate(props.routes).map((thisGroup) => (

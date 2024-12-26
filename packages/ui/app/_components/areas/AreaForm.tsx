@@ -4,8 +4,8 @@ import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
 import useActionState from "@/app/_components/form/useActionState";
+import AreaLayers from "@/app/_components/map/AreaLayers";
 import AreasMap from "@/app/_components/map/AreasMap";
-import Boulders from "@/app/_components/map/Boulders";
 import areaSchema from "@/app/api/_schemas/area";
 import { formActionHandler } from "@/app/api/formAction";
 import { FormHelperText, InputLabel, Stack } from "@mui/material";
@@ -45,14 +45,22 @@ export default function AreaForm<Meta extends {}>(props: Props<Meta>) {
           name="polygon"
           crag={props.crag}
           TracerProps={{
-            children: area && (
-              <>
-                <Boulders boulders={area.boulders || []} />
-                <AreasMap
-                  areas={[area]}
-                  AreaMapProps={{ onClick: undefined }}
-                />
-              </>
+            layersChildren: (Overlay, LayerGroup) => (
+              <AreaLayers
+                Overlay={Overlay}
+                LayerGroup={LayerGroup}
+                area={area}
+                trail={crag.trail}
+                areaLayer={
+                  <AreasMap
+                    areas={crag.areas.filter((a) => a.id !== props.area?.id)}
+                    AreaMapProps={{
+                      onClick: undefined,
+                      PolygonProps: { fillColor: "#a5088d" },
+                    }}
+                  />
+                }
+              />
             ),
           }}
         />
