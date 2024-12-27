@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'my_search_bar.dart';
 import 'model.dart';
+import 'my_search_bar.dart';
 
 class SearchFilters extends StatelessWidget {
   const SearchFilters({super.key});
