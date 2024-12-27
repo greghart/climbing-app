@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../models/crag.dart';
 import 'filters.dart';
+import 'model.dart';
 import 'my_search_bar.dart';
 import 'results.dart';
-import 'model.dart';
 
 /// Layout for the search page.
 class SearchPage extends StatelessWidget {
