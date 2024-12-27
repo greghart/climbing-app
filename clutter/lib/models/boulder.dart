@@ -30,8 +30,12 @@ class Boulder {
           'description': String? description,
           'coordinates': JsonObject coordinates,
           'routes': List routes,
-          'polygon': JsonObject? polygon,
         }) {
+      Polygon? polygon;
+      if (json case {'polygon': JsonObject polygonJson}) {
+        polygon = Polygon.fromJson(polygonJson);
+      }
+
       return Boulder(
         id: id,
         areaId: areaId,
@@ -39,7 +43,7 @@ class Boulder {
         description: description,
         coordinates: jsonLatLng(coordinates),
         routes: routes.map((route) => Route.fromJson(id, route)).toList(),
-        polygon: polygon != null ? Polygon.fromJson(polygon) : null,
+        polygon: polygon,
       );
     }
     throw JSONException("Boulder", json);

@@ -138,6 +138,640 @@ const cragJson = '''
               }
             }
           ]
+        },
+        {
+          "id": 1445,
+          "name": "20 Point Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.8506,
+            "lng": -117.02412
+          },
+          "routes": [
+            {
+              "id": 1752,
+              "name": "Traverse - left",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11d",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11d",
+                "value": 41
+              }
+            },
+            {
+              "id": 1753,
+              "name": "The Ramp",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10d",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10d",
+                "value": 25
+              }
+            },
+            {
+              "id": 1754,
+              "name": "Traverse - right",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10d",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10d",
+                "value": 25
+              }
+            },
+            {
+              "id": 1755,
+              "name": "Twenty Point Problem",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.12a",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.12a",
+                "value": 50
+              }
+            },
+            {
+              "id": 1756,
+              "name": "West Face - right",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              }
+            },
+            {
+              "id": 1757,
+              "name": "West Face - left",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              }
+            }
+          ]
+        },
+        {
+          "id": 1446,
+          "name": "Suzie's Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85036,
+            "lng": -117.02288
+          },
+          "routes": [
+            {
+              "id": 1758,
+              "name": "Suzy's Discharge",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V8",
+              "grade": {
+                "system": "V",
+                "raw": "V8",
+                "value": 90
+              }
+            },
+            {
+              "id": 1759,
+              "name": "Suzies face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "VB",
+              "grade": {
+                "system": "V",
+                "raw": "VB",
+                "value": 0
+              }
+            },
+            {
+              "id": 1760,
+              "name": "Mean Streak",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V11",
+              "grade": {
+                "system": "V",
+                "raw": "V11",
+                "value": 120
+              }
+            },
+            {
+              "id": 1761,
+              "name": "N/a",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0-",
+              "grade": {
+                "system": "V",
+                "raw": "V0-",
+                "value": 9
+              }
+            },
+            {
+              "id": 1762,
+              "name": "Suzie's Mantle",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1/2",
+              "grade": {
+                "system": "V",
+                "raw": "V1/2",
+                "value": 25
+              }
+            },
+            {
+              "id": 1763,
+              "name": "Wall Flower",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V8",
+              "grade": {
+                "system": "V",
+                "raw": "V8",
+                "value": 90
+              }
+            }
+          ]
+        },
+        {
+          "id": 1447,
+          "name": "Snow Cone Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85047,
+            "lng": -117.02349
+          },
+          "routes": [
+            {
+              "id": 1764,
+              "name": "Southeast Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10",
+                "value": 11
+              }
+            },
+            {
+              "id": 1765,
+              "name": "Traverse",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.9+",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.9+",
+                "value": 11
+              }
+            }
+          ]
+        },
+        {
+          "id": 1448,
+          "name": "Round Rock",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85063,
+            "lng": -117.02294
+          },
+          "routes": [
+            {
+              "id": 1766,
+              "name": "Crack Direct",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.7",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.7",
+                "value": 0
+              }
+            },
+            {
+              "id": 1767,
+              "name": "Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10a",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10a",
+                "value": 11
+              }
+            },
+            {
+              "id": 1768,
+              "name": "Round Rock Traverse",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10a/10b",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10a/10b",
+                "value": 11.5
+              }
+            },
+            {
+              "id": 1769,
+              "name": "Crack Traverse",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.8",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.8",
+                "value": 9
+              }
+            },
+            {
+              "id": 1770,
+              "name": "Aréte",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10a",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10a",
+                "value": 11
+              }
+            },
+            {
+              "id": 1771,
+              "name": "Thin Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11a",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11a",
+                "value": 30
+              }
+            }
+          ]
+        },
+        {
+          "id": 1449,
+          "name": "Pile Unknown",
+          "description": null,
+          "coordinates": {
+            "lat": 32.8502,
+            "lng": -117.02333
+          },
+          "routes": [
+            {
+              "id": 1772,
+              "name": "Unknown B",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1773,
+              "name": "Unknown Black Face/Arete",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1774,
+              "name": "The Outlander",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1/2",
+              "grade": {
+                "system": "V",
+                "raw": "V1/2",
+                "value": 25
+              }
+            },
+            {
+              "id": 1775,
+              "name": "Unknown A",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              }
+            }
+          ]
+        },
+        {
+          "id": 1450,
+          "name": "Easy Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85045,
+            "lng": -117.02319
+          },
+          "routes": [
+            {
+              "id": 1776,
+              "name": "Cool Down",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "VB",
+              "grade": {
+                "system": "V",
+                "raw": "VB",
+                "value": 0
+              }
+            },
+            {
+              "id": 1777,
+              "name": "Easy Boulder Corner",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0-",
+              "grade": {
+                "system": "V",
+                "raw": "V0-",
+                "value": 9
+              }
+            }
+          ]
+        },
+        {
+          "id": 1451,
+          "name": "Dog Pile, The",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85048,
+            "lng": -117.02311
+          },
+          "routes": [
+            {
+              "id": 1778,
+              "name": "Big Nuthin",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10+",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10+",
+                "value": 12
+              }
+            },
+            {
+              "id": 1779,
+              "name": "Kung Pao",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.12+",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.12+",
+                "value": 51
+              }
+            },
+            {
+              "id": 1780,
+              "name": "5.9 Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.9-",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.9-",
+                "value": 9
+              }
+            },
+            {
+              "id": 1781,
+              "name": "Shockley's Lunge",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11",
+                "value": 30
+              }
+            },
+            {
+              "id": 1782,
+              "name": "The 5.8 Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.8",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.8",
+                "value": 9
+              }
+            },
+            {
+              "id": 1783,
+              "name": "Epperson's Lunge",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.12",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.12",
+                "value": 50
+              }
+            },
+            {
+              "id": 1784,
+              "name": "Picket Mantel",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11",
+                "value": 30
+              }
+            },
+            {
+              "id": 1785,
+              "name": "Seam Slab",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.5",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.5",
+                "value": -2
+              }
+            },
+            {
+              "id": 1786,
+              "name": "The Hand Crack",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.7",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.7",
+                "value": 0
+              }
+            },
+            {
+              "id": 1787,
+              "name": "Mkay",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "VB",
+              "grade": {
+                "system": "V",
+                "raw": "VB",
+                "value": 0
+              }
+            },
+            {
+              "id": 1788,
+              "name": "Dog Pile Traverse",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0+",
+              "grade": {
+                "system": "V",
+                "raw": "V0+",
+                "value": 11
+              }
+            }
+          ]
+        },
+        {
+          "id": 1452,
+          "name": "Butt Plug, The",
+          "description": null,
+          "coordinates": {
+            "lat": 32.8504,
+            "lng": -117.02342
+          },
+          "routes": [
+            {
+              "id": 1789,
+              "name": "The Butt Plug North Side",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0-",
+              "grade": {
+                "system": "V",
+                "raw": "V0-",
+                "value": 9
+              }
+            },
+            {
+              "id": 1790,
+              "name": "East face traverse L->R",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              }
+            },
+            {
+              "id": 1791,
+              "name": "East face traverse R->L",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              }
+            },
+            {
+              "id": 1792,
+              "name": "East Face of Butt Plug",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V2",
+              "grade": {
+                "system": "V",
+                "raw": "V2",
+                "value": 30
+              }
+            },
+            {
+              "id": 1793,
+              "name": "Butt Plug Mantle",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              }
+            }
+          ]
         }
       ],
       "polygon": {
@@ -147,40 +781,1875 @@ const cragJson = '''
         "descriptor": "area-Dog Pile Area-polygon",
         "coordinates": [
           {
-            "id": 1008,
+            "id": 1043,
             "order": 0,
-            "lat": 32.85058078498583,
-            "lng": -117.02362865209582
+            "lat": 32.850797100730674,
+            "lng": -117.02266305685045
           },
           {
-            "id": 1009,
+            "id": 1044,
             "order": 1,
-            "lat": 32.85030024971881,
-            "lng": -117.02381640672687
+            "lat": 32.85032390935391,
+            "lng": -117.02254772186281
           },
           {
-            "id": 1010,
+            "id": 1045,
             "order": 2,
-            "lat": 32.850149278565496,
-            "lng": -117.02305331826211
+            "lat": 32.849976900740515,
+            "lng": -117.02298760414125
           },
           {
-            "id": 1011,
+            "id": 1046,
             "order": 3,
-            "lat": 32.850397141517725,
-            "lng": -117.02307611703876
+            "lat": 32.8501053391517,
+            "lng": -117.02358841896059
           },
           {
-            "id": 1012,
+            "id": 1047,
             "order": 4,
-            "lat": 32.85053233919986,
-            "lng": -117.0233389735222
+            "lat": 32.85032841595034,
+            "lng": -117.02408462762834
           },
           {
-            "id": 1013,
+            "id": 1048,
             "order": 5,
-            "lat": 32.85054135237133,
-            "lng": -117.023570984602
+            "lat": 32.85059430473533,
+            "lng": -117.02423483133317
+          },
+          {
+            "id": 1049,
+            "order": 6,
+            "lat": 32.850801607303076,
+            "lng": -117.02378690242767
+          },
+          {
+            "id": 1050,
+            "order": 7,
+            "lat": 32.850912018255634,
+            "lng": -117.02277034521104
+          }
+        ]
+      }
+    },
+    {
+      "id": 227,
+      "createdAt": "2024-12-26 18:36:56",
+      "updatedAt": "2024-12-26 18:38:17",
+      "name": "Hillside Area",
+      "description": "",
+      "boulders": [
+        {
+          "id": 1453,
+          "name": "Bread Loaf Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85022,
+            "lng": -117.0202
+          },
+          "routes": [
+            {
+              "id": 1794,
+              "name": "The Bread Loaf",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11-",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11-",
+                "value": 29
+              }
+            }
+          ]
+        },
+        {
+          "id": 1454,
+          "name": "Sunset Grill Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.84997,
+            "lng": -117.02103
+          },
+          "routes": [
+            {
+              "id": 1795,
+              "name": "Thin Crack",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.6",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.6",
+                "value": -1
+              }
+            }
+          ]
+        },
+        {
+          "id": 1455,
+          "name": "Painted Crack Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85016,
+            "lng": -117.02035
+          },
+          "routes": [
+            {
+              "id": 1796,
+              "name": "No More Paint",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10+",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10+",
+                "value": 12
+              }
+            },
+            {
+              "id": 1797,
+              "name": "Painted Traverse",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10",
+                "value": 11
+              }
+            },
+            {
+              "id": 1798,
+              "name": "10a Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10a",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10a",
+                "value": 11
+              }
+            },
+            {
+              "id": 1799,
+              "name": "The Painted Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10+",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10+",
+                "value": 12
+              }
+            },
+            {
+              "id": 1800,
+              "name": "10d Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10c/d",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10c/d",
+                "value": 22.5
+              }
+            },
+            {
+              "id": 1801,
+              "name": "The Painted Crack",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.8",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.8",
+                "value": 9
+              }
+            }
+          ]
+        },
+        {
+          "id": 1456,
+          "name": "Offwidth Rock",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85027,
+            "lng": -117.02077
+          },
+          "routes": [
+            {
+              "id": 1802,
+              "name": "11+ Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11+",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11+",
+                "value": 31
+              }
+            },
+            {
+              "id": 1803,
+              "name": "Undercling",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.9",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.9",
+                "value": 10
+              }
+            },
+            {
+              "id": 1804,
+              "name": "Offwidth Problem",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.9",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.9",
+                "value": 10
+              }
+            }
+          ]
+        },
+        {
+          "id": 1457,
+          "name": "No Hands Traverse Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.84987,
+            "lng": -117.02107
+          },
+          "routes": [
+            {
+              "id": 1805,
+              "name": "No Hands Traverse",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              }
+            }
+          ]
+        },
+        {
+          "id": 1458,
+          "name": "Lightbulb Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.8501,
+            "lng": -117.02055
+          },
+          "routes": [
+            {
+              "id": 1806,
+              "name": "The Lightbulb",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "VB",
+              "grade": {
+                "system": "V",
+                "raw": "VB",
+                "value": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 1459,
+          "name": "Gumdrop Boulder, The",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85009,
+            "lng": -117.01999
+          },
+          "routes": [
+            {
+              "id": 1807,
+              "name": "East arête",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              }
+            }
+          ]
+        },
+        {
+          "id": 1460,
+          "name": "EB Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85042,
+            "lng": -117.02059
+          },
+          "routes": [
+            {
+              "id": 1808,
+              "name": "The Paint Stripe",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0+",
+              "grade": {
+                "system": "V",
+                "raw": "V0+",
+                "value": 11
+              }
+            },
+            {
+              "id": 1809,
+              "name": "E. B. Boulder Right Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1810,
+              "name": "E.B. Boulder Sit Start Right",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              }
+            },
+            {
+              "id": 1811,
+              "name": "E.B. Boulder Left Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.7",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.7",
+                "value": 0
+              }
+            },
+            {
+              "id": 1812,
+              "name": "E.B. Boulder Sit Start Left",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V3",
+              "grade": {
+                "system": "V",
+                "raw": "V3",
+                "value": 40
+              }
+            }
+          ]
+        },
+        {
+          "id": 1461,
+          "name": "Donkey Dick Area, The",
+          "description": null,
+          "coordinates": {
+            "lat": 32.84989,
+            "lng": -117.02048
+          },
+          "routes": [
+            {
+              "id": 1813,
+              "name": "West Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10a/b",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10a/b",
+                "value": 11.5
+              }
+            },
+            {
+              "id": 1814,
+              "name": "Donkey Dick, Right Arete",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10c",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10c",
+                "value": 20
+              }
+            },
+            {
+              "id": 1815,
+              "name": "East Face - Arete",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11a",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11a",
+                "value": 30
+              }
+            },
+            {
+              "id": 1816,
+              "name": "South Face - Center",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11a",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11a",
+                "value": 30
+              }
+            },
+            {
+              "id": 1817,
+              "name": "West Face - Arete",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11a/b",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11a/b",
+                "value": 30.5
+              }
+            },
+            {
+              "id": 1818,
+              "name": "Traverse",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11a/b",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11a/b",
+                "value": 30.5
+              }
+            }
+          ]
+        }
+      ],
+      "polygon": {
+        "id": 192,
+        "createdAt": "2024-12-26 18:38:17",
+        "updatedAt": "2024-12-26 18:38:17",
+        "descriptor": "area-Hillside Area-polygon",
+        "coordinates": [
+          {
+            "id": 1014,
+            "order": 0,
+            "lat": 32.84982480238159,
+            "lng": -117.02116638422014
+          },
+          {
+            "id": 1015,
+            "order": 1,
+            "lat": 32.84955215133746,
+            "lng": -117.02089816331865
+          },
+          {
+            "id": 1016,
+            "order": 2,
+            "lat": 32.84983719559094,
+            "lng": -117.02025040984157
+          },
+          {
+            "id": 1017,
+            "order": 3,
+            "lat": 32.85008505941492,
+            "lng": -117.01983466744424
+          },
+          {
+            "id": 1018,
+            "order": 4,
+            "lat": 32.85030700961521,
+            "lng": -117.02016457915309
+          },
+          {
+            "id": 1019,
+            "order": 5,
+            "lat": 32.8505819116317,
+            "lng": -117.02053472399712
+          },
+          {
+            "id": 1020,
+            "order": 6,
+            "lat": 32.85053008590683,
+            "lng": -117.02077478170396
+          },
+          {
+            "id": 1021,
+            "order": 7,
+            "lat": 32.8502923631724,
+            "lng": -117.02099069952968
+          },
+          {
+            "id": 1022,
+            "order": 8,
+            "lat": 32.85002534682973,
+            "lng": -117.02133134007455
+          },
+          {
+            "id": 1023,
+            "order": 9,
+            "lat": 32.84986874193428,
+            "lng": -117.02131927013399
+          }
+        ]
+      }
+    },
+    {
+      "id": 228,
+      "createdAt": "2024-12-26 18:36:56",
+      "updatedAt": "2024-12-26 18:46:36",
+      "name": "Moby Dick Area",
+      "description": "",
+      "boulders": [
+        {
+          "id": 1462,
+          "name": "Amphitheater, The",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85064,
+            "lng": -117.0211
+          },
+          "routes": [
+            {
+              "id": 1819,
+              "name": "One Cut Above",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V4",
+              "grade": {
+                "system": "V",
+                "raw": "V4",
+                "value": 50
+              }
+            },
+            {
+              "id": 1820,
+              "name": "Thin Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10c",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10c",
+                "value": 20
+              }
+            },
+            {
+              "id": 1821,
+              "name": "Beneath the Shelf",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.7",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.7",
+                "value": 0
+              }
+            },
+            {
+              "id": 1822,
+              "name": "One Cut Above (right finish)",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V5-6",
+              "grade": {
+                "system": "V",
+                "raw": "V5-6",
+                "value": 65
+              }
+            },
+            {
+              "id": 1823,
+              "name": "Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.9",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.9",
+                "value": 10
+              }
+            },
+            {
+              "id": 1824,
+              "name": "Walkman",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0+",
+              "grade": {
+                "system": "V",
+                "raw": "V0+",
+                "value": 11
+              }
+            },
+            {
+              "id": 1825,
+              "name": "Jumpstart",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V3",
+              "grade": {
+                "system": "V",
+                "raw": "V3",
+                "value": 40
+              }
+            },
+            {
+              "id": 1826,
+              "name": "Amp Incline",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1827,
+              "name": "Eastside Traverse (Left)",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1828,
+              "name": "Powell Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V4",
+              "grade": {
+                "system": "V",
+                "raw": "V4",
+                "value": 50
+              }
+            },
+            {
+              "id": 1829,
+              "name": "Eastside Traverse (right)",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1830,
+              "name": "Amphitheatre Traverse",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V3",
+              "grade": {
+                "system": "V",
+                "raw": "V3",
+                "value": 40
+              }
+            },
+            {
+              "id": 1831,
+              "name": "Jumpstart Sit",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V7",
+              "grade": {
+                "system": "V",
+                "raw": "V7",
+                "value": 80
+              }
+            }
+          ]
+        },
+        {
+          "id": 1463,
+          "name": "Triangle Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85024,
+            "lng": -117.02143
+          },
+          "routes": [
+            {
+              "id": 1832,
+              "name": "Triangle Boulder, Left Arete",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11b",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11b",
+                "value": 31
+              }
+            },
+            {
+              "id": 1833,
+              "name": "Hold My Beer",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V2",
+              "grade": {
+                "system": "V",
+                "raw": "V2",
+                "value": 30
+              }
+            }
+          ]
+        },
+        {
+          "id": 1464,
+          "name": "Mudball Cracks",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85131,
+            "lng": -117.0209
+          },
+          "routes": [
+            {
+              "id": 1834,
+              "name": "Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1835,
+              "name": "Left Crack",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.6",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.6",
+                "value": -1
+              }
+            },
+            {
+              "id": 1836,
+              "name": "Center Crack",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.6",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.6",
+                "value": -1
+              }
+            },
+            {
+              "id": 1837,
+              "name": "Right Crack",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.4",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.4",
+                "value": -3
+              }
+            }
+          ]
+        },
+        {
+          "id": 1465,
+          "name": "Moby Dick",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85073,
+            "lng": -117.02097
+          },
+          "routes": [
+            {
+              "id": 1838,
+              "name": "East Buttress",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.8",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.8",
+                "value": 9
+              }
+            },
+            {
+              "id": 1839,
+              "name": "Unnamed ('Puckerfest')",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V3",
+              "grade": {
+                "system": "V",
+                "raw": "V3",
+                "value": 40
+              }
+            }
+          ]
+        },
+        {
+          "id": 1466,
+          "name": "Lieback Rock",
+          "description": "",
+          "coordinates": {
+            "lat": 32.85126,
+            "lng": -117.02071
+          },
+          "polygon": {
+            "id": 195,
+            "descriptor": "boulder-Lieback Rock-polygon",
+            "coordinates": [
+              {
+                "lat": 32.85130662362379,
+                "lng": -117.0207328721881
+              },
+              {
+                "lat": 32.851298737166815,
+                "lng": -117.02074460685255
+              },
+              {
+                "lat": 32.851272542858226,
+                "lng": -117.02074259519578
+              },
+              {
+                "lat": 32.8512362088045,
+                "lng": -117.0207265019417
+              },
+              {
+                "lat": 32.85122888566009,
+                "lng": -117.02070806175473
+              },
+              {
+                "lat": 32.85122888566009,
+                "lng": -117.02068258076909
+              },
+              {
+                "lat": 32.85124437692642,
+                "lng": -117.02066447585821
+              },
+              {
+                "lat": 32.851254798322245,
+                "lng": -117.02066246420148
+              },
+              {
+                "lat": 32.8512888790946,
+                "lng": -117.0206829160452
+              },
+              {
+                "lat": 32.851304370350434,
+                "lng": -117.02071443200113
+              }
+            ]
+          },
+          "routes": [
+            {
+              "id": 1840,
+              "name": "Penny Press",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0-1",
+              "grade": {
+                "system": "V",
+                "raw": "V0-1",
+                "value": 15
+              }
+            },
+            {
+              "id": 1841,
+              "name": "Mantle",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1842,
+              "name": "Reverse Lieback aka Lieback Right",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V3",
+              "grade": {
+                "system": "V",
+                "raw": "V3",
+                "value": 40
+              }
+            },
+            {
+              "id": 1843,
+              "name": "Unknown Slab",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0-",
+              "grade": {
+                "system": "V",
+                "raw": "V0-",
+                "value": 9
+              }
+            },
+            {
+              "id": 1844,
+              "name": "Funky Like a Monkey (aka Lieback Rock Traverse)",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V3",
+              "grade": {
+                "system": "V",
+                "raw": "V3",
+                "value": 40
+              }
+            },
+            {
+              "id": 1845,
+              "name": "Lieback Rock Lieback",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11a",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11a",
+                "value": 30
+              }
+            },
+            {
+              "id": 1846,
+              "name": "Flake",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1847,
+              "name": "Crack",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.7",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.7",
+                "value": 0
+              }
+            },
+            {
+              "id": 1848,
+              "name": "Lieback Rock Dyno",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10a",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10a",
+                "value": 11
+              }
+            },
+            {
+              "id": 1849,
+              "name": "Another unknown slab",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V2-3",
+              "grade": {
+                "system": "V",
+                "raw": "V2-3",
+                "value": 35
+              }
+            },
+            {
+              "id": 1850,
+              "name": "Sloping Disappointment",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V2",
+              "grade": {
+                "system": "V",
+                "raw": "V2",
+                "value": 30
+              }
+            }
+          ]
+        },
+        {
+          "id": 1467,
+          "name": "Bullet Hole Wall",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85081,
+            "lng": -117.02107
+          },
+          "routes": [
+            {
+              "id": 1851,
+              "name": "Seam",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1852,
+              "name": "Face left of American Express",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10a",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10a",
+                "value": 11
+              }
+            },
+            {
+              "id": 1853,
+              "name": "Friction Seam",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V2",
+              "grade": {
+                "system": "V",
+                "raw": "V2",
+                "value": 30
+              }
+            },
+            {
+              "id": 1854,
+              "name": "Bullet Hole Wall Crack",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.7",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.7",
+                "value": 0
+              }
+            },
+            {
+              "id": 1855,
+              "name": "Bullet Hole Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10+",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10+",
+                "value": 12
+              }
+            },
+            {
+              "id": 1856,
+              "name": "Bullet Hole Wall Mantle",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10",
+                "value": 11
+              }
+            },
+            {
+              "id": 1857,
+              "name": "American Express",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.9",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.9",
+                "value": 10
+              }
+            }
+          ]
+        },
+        {
+          "id": 1468,
+          "name": "Beehive Boulders",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85097,
+            "lng": -117.02078
+          },
+          "routes": [
+            {
+              "id": 1858,
+              "name": "Fingercrack",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1859,
+              "name": "Hollow Flake [Unknown]",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1860,
+              "name": "Masochist Crack",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.9",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.9",
+                "value": 10
+              }
+            },
+            {
+              "id": 1861,
+              "name": "Unnamed (Slab)",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1862,
+              "name": "The Alien",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.8-",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.8-",
+                "value": 8
+              }
+            },
+            {
+              "id": 1863,
+              "name": "The Knobs",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0-",
+              "grade": {
+                "system": "V",
+                "raw": "V0-",
+                "value": 9
+              }
+            },
+            {
+              "id": 1864,
+              "name": "Iron Stem",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11c",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11c",
+                "value": 40
+              }
+            },
+            {
+              "id": 1865,
+              "name": "Iron Cross",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V2",
+              "grade": {
+                "system": "V",
+                "raw": "V2",
+                "value": 30
+              }
+            },
+            {
+              "id": 1866,
+              "name": "Off-Width Problem",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.7",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.7",
+                "value": 0
+              }
+            },
+            {
+              "id": 1867,
+              "name": "Bear Hug",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11+",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11+",
+                "value": 31
+              }
+            },
+            {
+              "id": 1868,
+              "name": "The Terrible Face",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11+",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11+",
+                "value": 31
+              }
+            },
+            {
+              "id": 1869,
+              "name": "The Wrist-breaker",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.8",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.8",
+                "value": 9
+              }
+            }
+          ]
+        },
+        {
+          "id": 1469,
+          "name": "Animal Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85064,
+            "lng": -117.02137
+          },
+          "routes": [
+            {
+              "id": 1870,
+              "name": "Dead Animal Traverse",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V2+",
+              "grade": {
+                "system": "V",
+                "raw": "V2+",
+                "value": 31
+              }
+            },
+            {
+              "id": 1871,
+              "name": "Leopold and his Friction",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V6",
+              "grade": {
+                "system": "V",
+                "raw": "V6",
+                "value": 70
+              }
+            },
+            {
+              "id": 1872,
+              "name": "North Face Traverse",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              }
+            },
+            {
+              "id": 1873,
+              "name": "Ron's Pharmacy",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V6",
+              "grade": {
+                "system": "V",
+                "raw": "V6",
+                "value": 70
+              }
+            },
+            {
+              "id": 1874,
+              "name": "Long Tall Texan",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V4",
+              "grade": {
+                "system": "V",
+                "raw": "V4",
+                "value": 50
+              }
+            }
+          ]
+        }
+      ],
+      "polygon": {
+        "id": 194,
+        "createdAt": "2024-12-26 18:46:36",
+        "updatedAt": "2024-12-26 18:46:36",
+        "descriptor": "area-Moby Dick Area-polygon",
+        "coordinates": [
+          {
+            "id": 1035,
+            "order": 0,
+            "lat": 32.85002647348266,
+            "lng": -117.02133134007455
+          },
+          {
+            "id": 1036,
+            "order": 1,
+            "lat": 32.85029010987327,
+            "lng": -117.0209960639477
+          },
+          {
+            "id": 1037,
+            "order": 2,
+            "lat": 32.85053121255334,
+            "lng": -117.02077612280846
+          },
+          {
+            "id": 1038,
+            "order": 3,
+            "lat": 32.8505841649234,
+            "lng": -117.02053338289262
+          },
+          {
+            "id": 1039,
+            "order": 4,
+            "lat": 32.85142576537077,
+            "lng": -117.02047437429431
+          },
+          {
+            "id": 1040,
+            "order": 5,
+            "lat": 32.851660105172286,
+            "lng": -117.02181547880174
+          },
+          {
+            "id": 1041,
+            "order": 6,
+            "lat": 32.850980743371,
+            "lng": -117.02155798673633
+          },
+          {
+            "id": 1042,
+            "order": 7,
+            "lat": 32.85006928628311,
+            "lng": -117.02154725790027
+          }
+        ]
+      }
+    },
+    {
+      "id": 229,
+      "createdAt": "2024-12-26 18:36:56",
+      "updatedAt": "2024-12-26 18:39:11",
+      "name": "Synchronicity Area",
+      "description": "",
+      "boulders": [
+        {
+          "id": 1470,
+          "name": "Carousel, The",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85122,
+            "lng": -117.02249
+          },
+          "routes": [
+            {
+              "id": 1875,
+              "name": "Blades edge",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              }
+            },
+            {
+              "id": 1876,
+              "name": "no name: i'll call it 'two hands in the hole'",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1877,
+              "name": "South Side Undercling",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0-",
+              "grade": {
+                "system": "V",
+                "raw": "V0-",
+                "value": 9
+              }
+            },
+            {
+              "id": 1878,
+              "name": "Center North Side",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1879,
+              "name": "no name SS",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              }
+            },
+            {
+              "id": 1880,
+              "name": "The Carousel",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            }
+          ]
+        },
+        {
+          "id": 1471,
+          "name": "Undisclosed Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.8514,
+            "lng": -117.02306
+          },
+          "routes": [
+            {
+              "id": 1881,
+              "name": "Longbow",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0-",
+              "grade": {
+                "system": "V",
+                "raw": "V0-",
+                "value": 9
+              }
+            },
+            {
+              "id": 1882,
+              "name": "Far North",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            }
+          ]
+        },
+        {
+          "id": 1472,
+          "name": "Synchronicity Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85103,
+            "lng": -117.02183
+          },
+          "routes": [
+            {
+              "id": 1883,
+              "name": "Synchronicity (Aid Crack)",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.12",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.12",
+                "value": 50
+              }
+            }
+          ]
+        },
+        {
+          "id": 1473,
+          "name": "Moon Boulder, The",
+          "description": null,
+          "coordinates": {
+            "lat": 32.851,
+            "lng": -117.02259
+          },
+          "routes": [
+            {
+              "id": 1884,
+              "name": "The Black Spot Problem",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V2",
+              "grade": {
+                "system": "V",
+                "raw": "V2",
+                "value": 30
+              }
+            },
+            {
+              "id": 1885,
+              "name": "Unnamed",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10a/b",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10a/b",
+                "value": 11.5
+              }
+            },
+            {
+              "id": 1886,
+              "name": "Unnamed*",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10c",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10c",
+                "value": 20
+              }
+            },
+            {
+              "id": 1887,
+              "name": "NE face (left)",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V2",
+              "grade": {
+                "system": "V",
+                "raw": "V2",
+                "value": 30
+              }
+            }
+          ]
+        },
+        {
+          "id": 1474,
+          "name": "Lonesome Boulder",
+          "description": null,
+          "coordinates": {
+            "lat": 32.85153,
+            "lng": -117.02204
+          },
+          "routes": [
+            {
+              "id": 1888,
+              "name": "The Flake Right",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.11",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.11",
+                "value": 30
+              }
+            },
+            {
+              "id": 1889,
+              "name": "Kathleen Turner Overdrive",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V2-3",
+              "grade": {
+                "system": "V",
+                "raw": "V2-3",
+                "value": 35
+              }
+            },
+            {
+              "id": 1890,
+              "name": "shelf right",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1891,
+              "name": "Uphill face right",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "VB",
+              "grade": {
+                "system": "V",
+                "raw": "VB",
+                "value": 0
+              }
+            },
+            {
+              "id": 1892,
+              "name": "Left Shelf Mantle",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1893,
+              "name": "ERMFP",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.12b",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.12b",
+                "value": 60
+              }
+            },
+            {
+              "id": 1894,
+              "name": "shelf center",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            },
+            {
+              "id": 1895,
+              "name": "The Flake Left",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "5.10-",
+              "grade": {
+                "system": "YDS",
+                "raw": "5.10-",
+                "value": 10
+              }
+            },
+            {
+              "id": 1896,
+              "name": "East corner",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0+",
+              "grade": {
+                "system": "V",
+                "raw": "V0+",
+                "value": 11
+              }
+            },
+            {
+              "id": 1897,
+              "name": "Uphill face center",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              }
+            }
+          ]
+        }
+      ],
+      "polygon": {
+        "id": 193,
+        "createdAt": "2024-12-26 18:39:11",
+        "updatedAt": "2024-12-26 18:39:11",
+        "descriptor": "area-Synchronicity Area-polygon",
+        "coordinates": [
+          {
+            "id": 1031,
+            "order": 0,
+            "lat": 32.85146181768821,
+            "lng": -117.02323436737062
+          },
+          {
+            "id": 1032,
+            "order": 1,
+            "lat": 32.850801607303076,
+            "lng": -117.02266305685045
+          },
+          {
+            "id": 1033,
+            "order": 2,
+            "lat": 32.850977363448536,
+            "lng": -117.02156066894533
+          },
+          {
+            "id": 1034,
+            "order": 3,
+            "lat": 32.851660105172286,
+            "lng": -117.02181547880174
           }
         ]
       }
@@ -1045,6 +3514,545 @@ const cragJson = '''
         "end": {
           "lat": 32.85019209130672,
           "lng": -117.02324911952022
+        }
+      },
+      {
+        "id": 210,
+        "start": {
+          "lat": 32.85089624527081,
+          "lng": -117.02234521508218
+        },
+        "end": {
+          "lat": 32.85097173024415,
+          "lng": -117.0223639905453
+        }
+      },
+      {
+        "id": 211,
+        "start": {
+          "lat": 32.85097173024415,
+          "lng": -117.0223639905453
+        },
+        "end": {
+          "lat": 32.85105172171297,
+          "lng": -117.0224565267563
+        }
+      },
+      {
+        "id": 212,
+        "start": {
+          "lat": 32.85105172171297,
+          "lng": -117.0224565267563
+        },
+        "end": {
+          "lat": 32.85119367822659,
+          "lng": -117.0224753022194
+        }
+      },
+      {
+        "id": 251,
+        "start": {
+          "lat": 32.85044220743467,
+          "lng": -117.02292792499067
+        },
+        "end": {
+          "lat": 32.8503999581382,
+          "lng": -117.0229245722294
+        }
+      },
+      {
+        "id": 252,
+        "start": {
+          "lat": 32.8503999581382,
+          "lng": -117.0229245722294
+        },
+        "end": {
+          "lat": 32.85044220743467,
+          "lng": -117.02292792499067
+        }
+      },
+      {
+        "id": 253,
+        "start": {
+          "lat": 32.85089624527081,
+          "lng": -117.02234521508218
+        },
+        "end": {
+          "lat": 32.85087371243049,
+          "lng": -117.02265098690988
+        }
+      },
+      {
+        "id": 254,
+        "start": {
+          "lat": 32.85087371243049,
+          "lng": -117.02265098690988
+        },
+        "end": {
+          "lat": 32.85087371243049,
+          "lng": -117.02278912067415
+        }
+      },
+      {
+        "id": 255,
+        "start": {
+          "lat": 32.85087371243049,
+          "lng": -117.02278912067415
+        },
+        "end": {
+          "lat": 32.85081850694756,
+          "lng": -117.0228534936905
+        }
+      },
+      {
+        "id": 256,
+        "start": {
+          "lat": 32.85081850694756,
+          "lng": -117.0228534936905
+        },
+        "end": {
+          "lat": 32.85080836716126,
+          "lng": -117.02290445566179
+        }
+      },
+      {
+        "id": 257,
+        "start": {
+          "lat": 32.85080836716126,
+          "lng": -117.02290445566179
+        },
+        "end": {
+          "lat": 32.85071034916717,
+          "lng": -117.02294468879701
+        }
+      },
+      {
+        "id": 258,
+        "start": {
+          "lat": 32.85071034916717,
+          "lng": -117.02294468879701
+        },
+        "end": {
+          "lat": 32.85063261068105,
+          "lng": -117.02291250228882
+        }
+      },
+      {
+        "id": 259,
+        "start": {
+          "lat": 32.85088385220934,
+          "lng": -117.02257588505746
+        },
+        "end": {
+          "lat": 32.85097173024415,
+          "lng": -117.02258259058
+        }
+      },
+      {
+        "id": 260,
+        "start": {
+          "lat": 32.84979888930185,
+          "lng": -117.02050387859346
+        },
+        "end": {
+          "lat": 32.849832688969556,
+          "lng": -117.02051863074306
+        }
+      },
+      {
+        "id": 261,
+        "start": {
+          "lat": 32.849832688969556,
+          "lng": -117.02051863074306
+        },
+        "end": {
+          "lat": 32.84985803871189,
+          "lng": -117.02047638595106
+        }
+      },
+      {
+        "id": 262,
+        "start": {
+          "lat": 32.84985803871189,
+          "lng": -117.02047638595106
+        },
+        "end": {
+          "lat": 32.84988338844701,
+          "lng": -117.0204482227564
+        }
+      },
+      {
+        "id": 263,
+        "start": {
+          "lat": 32.84988338844701,
+          "lng": -117.0204482227564
+        },
+        "end": {
+          "lat": 32.849904794884345,
+          "lng": -117.02046029269697
+        }
+      },
+      {
+        "id": 264,
+        "start": {
+          "lat": 32.849904794884345,
+          "lng": -117.02046029269697
+        },
+        "end": {
+          "lat": 32.8499509877052,
+          "lng": -117.0204944908619
+        }
+      },
+      {
+        "id": 265,
+        "start": {
+          "lat": 32.8499509877052,
+          "lng": -117.0204944908619
+        },
+        "end": {
+          "lat": 32.849952677685984,
+          "lng": -117.02054277062417
+        }
+      },
+      {
+        "id": 266,
+        "start": {
+          "lat": 32.849952677685984,
+          "lng": -117.02054277062417
+        },
+        "end": {
+          "lat": 32.84998985725534,
+          "lng": -117.020558193326
+        }
+      },
+      {
+        "id": 267,
+        "start": {
+          "lat": 32.84998985725534,
+          "lng": -117.020558193326
+        },
+        "end": {
+          "lat": 32.84999098390872,
+          "lng": -117.02058300375941
+        }
+      },
+      {
+        "id": 268,
+        "start": {
+          "lat": 32.84999098390872,
+          "lng": -117.02058300375941
+        },
+        "end": {
+          "lat": 32.850102522521865,
+          "lng": -117.02060848474505
+        }
+      },
+      {
+        "id": 269,
+        "start": {
+          "lat": 32.850102522521865,
+          "lng": -117.02060848474505
+        },
+        "end": {
+          "lat": 32.8501211122771,
+          "lng": -117.02066279947759
+        }
+      },
+      {
+        "id": 270,
+        "start": {
+          "lat": 32.8501211122771,
+          "lng": -117.02066279947759
+        },
+        "end": {
+          "lat": 32.85006928628311,
+          "lng": -117.02069766819477
+        }
+      },
+      {
+        "id": 271,
+        "start": {
+          "lat": 32.850102522521865,
+          "lng": -117.02060848474505
+        },
+        "end": {
+          "lat": 32.85013575874818,
+          "lng": -117.02053673565388
+        }
+      },
+      {
+        "id": 272,
+        "start": {
+          "lat": 32.85013575874818,
+          "lng": -117.02053673565388
+        },
+        "end": {
+          "lat": 32.85020279448877,
+          "lng": -117.02051930129531
+        }
+      },
+      {
+        "id": 273,
+        "start": {
+          "lat": 32.85020279448877,
+          "lng": -117.02051930129531
+        },
+        "end": {
+          "lat": 32.850293489821944,
+          "lng": -117.02037177979948
+        }
+      },
+      {
+        "id": 274,
+        "start": {
+          "lat": 32.850293489821944,
+          "lng": -117.02037177979948
+        },
+        "end": {
+          "lat": 32.8501870213779,
+          "lng": -117.02034898102283
+        }
+      },
+      {
+        "id": 275,
+        "start": {
+          "lat": 32.850214060994844,
+          "lng": -117.02035434544086
+        },
+        "end": {
+          "lat": 32.850219130922085,
+          "lng": -117.02029399573804
+        }
+      },
+      {
+        "id": 276,
+        "start": {
+          "lat": 32.850219130922085,
+          "lng": -117.02029399573804
+        },
+        "end": {
+          "lat": 32.85016110840393,
+          "lng": -117.02024638652803
+        }
+      },
+      {
+        "id": 277,
+        "start": {
+          "lat": 32.85016110840393,
+          "lng": -117.02024638652803
+        },
+        "end": {
+          "lat": 32.85018307809975,
+          "lng": -117.02019810676576
+        }
+      },
+      {
+        "id": 278,
+        "start": {
+          "lat": 32.85016110840393,
+          "lng": -117.02024638652803
+        },
+        "end": {
+          "lat": 32.85009294597978,
+          "lng": -117.02005863189699
+        }
+      },
+      {
+        "id": 279,
+        "start": {
+          "lat": 32.85009294597978,
+          "lng": -117.02005863189699
+        },
+        "end": {
+          "lat": 32.850087594382295,
+          "lng": -117.01999928802255
+        }
+      },
+      {
+        "id": 280,
+        "start": {
+          "lat": 32.85020279448877,
+          "lng": -117.02051930129531
+        },
+        "end": {
+          "lat": 32.85025433874228,
+          "lng": -117.02064067125323
+        }
+      },
+      {
+        "id": 281,
+        "start": {
+          "lat": 32.85025433874228,
+          "lng": -117.02064067125323
+        },
+        "end": {
+          "lat": 32.85033911911598,
+          "lng": -117.02077008783819
+        }
+      },
+      {
+        "id": 282,
+        "start": {
+          "lat": 32.85036446871364,
+          "lng": -117.02339127659799
+        },
+        "end": {
+          "lat": 32.8503824950898,
+          "lng": -117.02345464378597
+        }
+      },
+      {
+        "id": 283,
+        "start": {
+          "lat": 32.8503824950898,
+          "lng": -117.02345464378597
+        },
+        "end": {
+          "lat": 32.8504100979712,
+          "lng": -117.0234975591302
+        }
+      },
+      {
+        "id": 284,
+        "start": {
+          "lat": 32.8504100979712,
+          "lng": -117.0234975591302
+        },
+        "end": {
+          "lat": 32.85044981230589,
+          "lng": -117.02348951250315
+        }
+      },
+      {
+        "id": 285,
+        "start": {
+          "lat": 32.8504100979712,
+          "lng": -117.0234975591302
+        },
+        "end": {
+          "lat": 32.850439954139354,
+          "lng": -117.02372219413519
+        }
+      },
+      {
+        "id": 286,
+        "start": {
+          "lat": 32.850439954139354,
+          "lng": -117.02372219413519
+        },
+        "end": {
+          "lat": 32.85051431285413,
+          "lng": -117.02387005090715
+        }
+      },
+      {
+        "id": 287,
+        "start": {
+          "lat": 32.85051431285413,
+          "lng": -117.02387005090715
+        },
+        "end": {
+          "lat": 32.85049741315171,
+          "lng": -117.02400751411915
+        }
+      },
+      {
+        "id": 288,
+        "start": {
+          "lat": 32.85049741315171,
+          "lng": -117.02400751411915
+        },
+        "end": {
+          "lat": 32.85053290252311,
+          "lng": -117.02412217855455
+        }
+      },
+      {
+        "id": 289,
+        "start": {
+          "lat": 32.85097173024415,
+          "lng": -117.02152848243713
+        },
+        "end": {
+          "lat": 32.851106927050814,
+          "lng": -117.02162504196168
+        }
+      },
+      {
+        "id": 290,
+        "start": {
+          "lat": 32.851106927050814,
+          "lng": -117.02162504196168
+        },
+        "end": {
+          "lat": 32.85112495327614,
+          "lng": -117.02184364199641
+        }
+      },
+      {
+        "id": 291,
+        "start": {
+          "lat": 32.85112495327614,
+          "lng": -117.02184364199641
+        },
+        "end": {
+          "lat": 32.85106524139072,
+          "lng": -117.02194958925249
+        }
+      },
+      {
+        "id": 292,
+        "start": {
+          "lat": 32.85106524139072,
+          "lng": -117.02194958925249
+        },
+        "end": {
+          "lat": 32.851064114750976,
+          "lng": -117.02205017209054
+        }
+      },
+      {
+        "id": 293,
+        "start": {
+          "lat": 32.851064114750976,
+          "lng": -117.02205017209054
+        },
+        "end": {
+          "lat": 32.85092553795465,
+          "lng": -117.02235460281373
+        }
+      },
+      {
+        "id": 294,
+        "start": {
+          "lat": 32.85111932008112,
+          "lng": -117.02173501253131
+        },
+        "end": {
+          "lat": 32.851270289584036,
+          "lng": -117.02176451683046
+        }
+      },
+      {
+        "id": 295,
+        "start": {
+          "lat": 32.851270289584036,
+          "lng": -117.02176451683046
+        },
+        "end": {
+          "lat": 32.851360702167085,
+          "lng": -117.02186677604915
+        }
+      },
+      {
+        "id": 296,
+        "start": {
+          "lat": 32.851360702167085,
+          "lng": -117.02186677604915
+        },
+        "end": {
+          "lat": 32.851521529306744,
+          "lng": -117.02195897698404
         }
       }
     ]

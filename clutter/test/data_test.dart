@@ -15,7 +15,7 @@ void main() {
           equals(
             const models.LatLng(32.85052, -117.02223),
           ));
-      expect(crag.areas, hasLength(1));
+      expect(crag.areas, hasLength(4));
     });
   });
 }

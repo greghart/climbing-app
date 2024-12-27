@@ -25,7 +25,7 @@ enum GradingSystemType implements Comparable<GradingSystemType> {
 class Grade {
   final GradingSystemType system;
   final String raw;
-  final int value;
+  final double value;
 
   const Grade({
     required this.system,
@@ -42,8 +42,13 @@ class Grade {
         case {
           'system': String system,
           'raw': String raw,
-          'value': int value,
         }) {
+      double value = 0;
+      if (json case {'value': int v}) {
+        value = v.toDouble();
+      } else if (json case {'value': double v}) {
+        value = v;
+      }
       return Grade(
         system: GradingSystemType.fromJson(system),
         raw: raw,
