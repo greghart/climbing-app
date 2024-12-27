@@ -32,8 +32,11 @@ class Route {
           'description': String? description,
           'firstAscent': String? firstAscent,
           'grade': JsonObject grade,
-          'coordinates': JsonObject? coordinates,
         }) {
+      LatLng? ll;
+      if (json case {'coordinates': JsonObject c}) {
+        ll = jsonLatLng(c);
+      }
       return Route(
         id: id,
         boulderId: boulderId,
@@ -42,7 +45,7 @@ class Route {
         description: description,
         firstAscent: firstAscent,
         grade: Grade.fromJson(grade),
-        coordinates: coordinates != null ? jsonLatLng(coordinates) : null,
+        coordinates: ll,
       );
     }
     throw JSONException("Route", json);

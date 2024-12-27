@@ -22,7 +22,7 @@ class RouteMap extends StatelessWidget {
 
     return Stack(
       children: [
-        if (layers.isChecked(LayerType.routes))
+        if (layers.isChecked(LayerType.routes) && route.coordinates != null)
           MarkerLayer(
             markers: [
               Marker(
@@ -45,7 +45,7 @@ class RouteMap extends StatelessWidget {
           ),
         AnimateTo(
           mapController: MapController.of(context),
-          latLng: route.coordinates!,
+          latLng: route.coordinates ?? model.boulder!.coordinates,
           zoom: 22,
         ),
       ],
