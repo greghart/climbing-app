@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import '../../models/boulder.dart';
 import '../model.dart';
 import 'animate_to.dart';
+import 'area.dart';
+import 'color_scheme.dart';
 import 'my_polygon.dart';
 
 typedef HitValue = ({int id});
@@ -30,6 +32,8 @@ class BoulderMap extends StatelessWidget {
               ),
             ],
           ),
+        if (boulder.polygon == null && layers.isChecked(LayerType.boulders))
+          BouldersLayer(boulders: [boulder]),
         if (layers.isChecked(LayerType.routes))
           MarkerLayer(
             // TODO: Clustering around boulder
@@ -50,7 +54,7 @@ class BoulderMap extends StatelessWidget {
                       width: 20,
                       height: 20,
                       decoration: BoxDecoration(
-                        color: theme.colorScheme.secondary,
+                        color: colorScheme.tertiary,
                         shape: BoxShape.circle,
                       ),
                     ),

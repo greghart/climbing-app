@@ -40,7 +40,7 @@ class AreaOverlay extends StatelessWidget {
               },
               trailing: const Icon(Icons.navigate_next),
               title: Text(
-                'Boulder ${boulder.name}',
+                boulder.name,
                 style: theme.textTheme.bodyMedium,
               ),
             )
