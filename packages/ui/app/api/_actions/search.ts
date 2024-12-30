@@ -137,12 +137,10 @@ const typeMatcher: GetMatcher = (type: SearchResultType) => {
 };
 
 const difficultyMatcher: GetMatcher = (min: number, max: number) => {
-  console.log("difficulty matcher", min, max);
   if (!(min >= 0 && max <= 170 && min < max)) {
     return () => true;
   }
   return (s) => {
-    console.log("Filtering", s);
     if (s.type !== "route") return true;
 
     const value = Grade.build(s.gradeRaw!).value;
