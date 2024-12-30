@@ -33,6 +33,10 @@ importers:
       typescript:
         specifier: 5.x.x
         version: 5.4.3
+    devDependencies:
+      mocha:
+        specifier: ^11.0.1
+        version: 11.0.1
 
   packages/ui:
     dependencies:
