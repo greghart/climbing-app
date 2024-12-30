@@ -7,12 +7,10 @@ import {
 } from "@/app/api/_actions/search";
 import { notFound } from "next/navigation";
 
-export default async function page(
-  props: {
-    params: Promise<{ cragId: string }>;
-    searchParams: Promise<Record<string, string | string[] | undefined>>;
-  }
-) {
+export default async function page(props: {
+  params: Promise<{ cragId: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
   const searchParams = await props.searchParams;
   const params = await props.params;
   const crag = await getCrag(params.cragId);
@@ -26,6 +24,8 @@ export default async function page(
     type: asSearchResultType(searchCache.type),
     shade: searchCache.shade,
     shadeHour: searchCache.shadeHour,
+    vMin: searchCache.vMin,
+    vMax: searchCache.vMax,
   });
 
   return <SearchLayout crag={crag} results={results} />;

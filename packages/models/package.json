@@ -20,5 +20,8 @@
     "power-putty-io": "^1.0.1",
     "power-putty-test": "^1.0.0",
     "typescript": "5.x.x"
+  },
+  "devDependencies": {
+    "mocha": "^11.0.1"
   }
 }

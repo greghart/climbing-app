@@ -45,106 +45,11 @@ class Grade {
   }
 }
 
+export default Grade;
+
 /**
- * GRADE DATA BELOW
+ * Grade parsers
  */
-
-type TupleToRecord<T extends readonly string[], V> = {
-  [K in T[number]]: V; // or any other type
-};
-
-// We are focusing on bouldering, so start with v scale and will adapt others
-// into this value system. To start with, normalize as base (V+1) * 10
-// Plus/minus grades can add/subtract 1
-// Slash grades can average the two grades.
-const VGrade = [
-  "VB",
-  "V0",
-  "V1",
-  "V2",
-  "V3",
-  "V4",
-  "V5",
-  "V6",
-  "V7",
-  "V8",
-  "V9",
-  "V10",
-  "V11",
-  "V12",
-  "V13",
-  "V14",
-  "V15",
-  "V16",
-  "V17",
-] as const;
-const vGrades: TupleToRecord<typeof VGrade, number> = {
-  VB: 0,
-  V0: 10,
-  V1: 20,
-  V2: 30,
-  V3: 40,
-  V4: 50,
-  V5: 60,
-  V6: 70,
-  V7: 80,
-  V8: 90,
-  V9: 100,
-  V10: 110,
-  V11: 120,
-  V12: 130,
-  V13: 140,
-  V14: 150,
-  V15: 160,
-  V16: 170,
-  V17: 180,
-};
-
-export const grades: Record<GradingSystemType, Record<string, number>> = {
-  [GradingSystemType.V]: vGrades,
-  // Sourced from https://en.wikipedia.org/wiki/Grade_(climbing)#Comparison_bouldering
-  [GradingSystemType.YDS]: {
-    "5.1": -6,
-    "5.2": -5,
-    "5.3": -4,
-    "5.4": -3,
-    "5.5": -2,
-    "5.6": -1,
-    "5.7": vGrades.VB,
-    "5.8": vGrades.V0 - 1,
-    "5.9": vGrades.V0,
-    "5.10": vGrades.V0 + 1,
-    "5.10a": vGrades.V0 + 1, // 5.10a == 5.10
-    "5.10b": vGrades.V0 + 2,
-    "5.10c": vGrades.V1,
-    "5.10d": (vGrades.V1 + vGrades.V2) / 2, // V1-2
-    "5.11": vGrades.V2,
-    "5.11a": vGrades.V2, // 5.11a == 5.11
-    "5.11b": vGrades.V2 + 1,
-    "5.11c": vGrades.V3,
-    "5.11d": vGrades.V3 + 1,
-    "5.12": vGrades.V4,
-    "5.12a": vGrades.V4, // 5.12a == 5.12
-    "5.12b": vGrades.V5,
-    "5.12c": vGrades.V6,
-    "5.12d": vGrades.V7,
-    "5.13": vGrades.V8,
-    "5.13a": vGrades.V8, // 5.13a == 5.13
-    "5.13b": vGrades.V8 + 1,
-    "5.13c": vGrades.V9,
-    "5.13d": vGrades.V10,
-    "5.14": vGrades.V11,
-    "5.14a": vGrades.V11, // 5.14a == 5.14
-    "5.14b": vGrades.V12,
-    "5.14c": vGrades.V13,
-    "5.14d": vGrades.V14,
-    "5.15": vGrades.V15,
-    "5.15a": vGrades.V15, // 5.15a == 5.15
-    "5.15b": vGrades.V16,
-    "5.15c": vGrades.V17,
-  },
-};
-
 export function parseRaw(raw: string): IGrade {
   if (raw.length === 0) {
     throw new RangeError("Invalid grade ''");
@@ -236,7 +141,7 @@ export function parseRawVScore(raw: string, flexible: boolean = false): number {
     plus = true;
   }
   // Should be a basic grade now
-  let score = grades[GradingSystemType.V]![raw];
+  let score = gradeValues[GradingSystemType.V]![raw];
   if (score === undefined) {
     throw new RangeError(`Invalid V grade '${raw}'`);
   }
@@ -276,7 +181,7 @@ export function parseRawYDSScore(
     plus = true;
   }
   // Should be a basic grade now
-  let score = grades[GradingSystemType.YDS]![raw];
+  let score = gradeValues[GradingSystemType.YDS]![raw];
   if (score === undefined) {
     throw new RangeError(`Invalid YDS grade '${raw}'`);
   }
@@ -290,4 +195,110 @@ export function parseRawYDSScore(
 }
 export const parseRawYDS = splitter(GradingSystemType.YDS, parseRawYDSScore);
 
-export default Grade;
+
+/** Grade data */
+type TupleToRecord<T extends readonly string[], V> = {
+  [K in T[number]]: V; // or any other type
+};
+
+// We are focusing on bouldering, so start with v scale and will adapt others
+// into this value system. To start with, normalize as base (V+1) * 10
+// Plus/minus grades can add/subtract 1
+// Slash grades can average the two grades.
+const VGrade = [
+  "VB",
+  "V0",
+  "V1",
+  "V2",
+  "V3",
+  "V4",
+  "V5",
+  "V6",
+  "V7",
+  "V8",
+  "V9",
+  "V10",
+  "V11",
+  "V12",
+  "V13",
+  "V14",
+  "V15",
+  "V16",
+  "V17",
+] as const;
+const vGradeValues: TupleToRecord<typeof VGrade, number> = {
+  VB: 0,
+  V0: 10,
+  V1: 20,
+  V2: 30,
+  V3: 40,
+  V4: 50,
+  V5: 60,
+  V6: 70,
+  V7: 80,
+  V8: 90,
+  V9: 100,
+  V10: 110,
+  V11: 120,
+  V12: 130,
+  V13: 140,
+  V14: 150,
+  V15: 160,
+  V16: 170,
+  V17: 180,
+};
+
+export const gradeValues: Record<GradingSystemType, Record<string, number>> = {
+  [GradingSystemType.V]: vGradeValues,
+  // Sourced from https://en.wikipedia.org/wiki/Grade_(climbing)#Comparison_bouldering
+  [GradingSystemType.YDS]: {
+    "5.1": -6,
+    "5.2": -5,
+    "5.3": -4,
+    "5.4": -3,
+    "5.5": -2,
+    "5.6": -1,
+    "5.7": vGradeValues.VB,
+    "5.8": vGradeValues.V0 - 1,
+    "5.9": vGradeValues.V0,
+    "5.10": vGradeValues.V0 + 1,
+    "5.10a": vGradeValues.V0 + 1, // 5.10a == 5.10
+    "5.10b": vGradeValues.V0 + 2,
+    "5.10c": vGradeValues.V1,
+    "5.10d": (vGradeValues.V1 + vGradeValues.V2) / 2, // V1-2
+    "5.11": vGradeValues.V2,
+    "5.11a": vGradeValues.V2, // 5.11a == 5.11
+    "5.11b": vGradeValues.V2 + 1,
+    "5.11c": vGradeValues.V3,
+    "5.11d": vGradeValues.V3 + 1,
+    "5.12": vGradeValues.V4,
+    "5.12a": vGradeValues.V4, // 5.12a == 5.12
+    "5.12b": vGradeValues.V5,
+    "5.12c": vGradeValues.V6,
+    "5.12d": vGradeValues.V7,
+    "5.13": vGradeValues.V8,
+    "5.13a": vGradeValues.V8, // 5.13a == 5.13
+    "5.13b": vGradeValues.V8 + 1,
+    "5.13c": vGradeValues.V9,
+    "5.13d": vGradeValues.V10,
+    "5.14": vGradeValues.V11,
+    "5.14a": vGradeValues.V11, // 5.14a == 5.14
+    "5.14b": vGradeValues.V12,
+    "5.14c": vGradeValues.V13,
+    "5.14d": vGradeValues.V14,
+    "5.15": vGradeValues.V15,
+    "5.15a": vGradeValues.V15, // 5.15a == 5.15
+    "5.15b": vGradeValues.V16,
+    "5.15c": vGradeValues.V17,
+  },
+};
+export const grades: Record<GradingSystemType, Record<string, Grade>> = Object.keys(GradingSystemType).reduce(
+  (bySystem, system) => ({
+    ...bySystem,
+    [system]: Object.keys(gradeValues[system as GradingSystemType]).reduce((agg, v) => {
+      agg[v] = Grade.build(v);
+      return agg;
+    }, {} as Record<string, Grade>),
+  }),
+  {} as Record<GradingSystemType, Record<string, Grade>>,
+);
