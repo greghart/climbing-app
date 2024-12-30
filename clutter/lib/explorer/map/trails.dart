@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/crag.dart';
 import '../model.dart';
+import 'color_scheme.dart';
 
 class TrailsLayer extends StatelessWidget {
   const TrailsLayer({
@@ -15,7 +16,6 @@ class TrailsLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final layers = Provider.of<ExplorerLayersModel>(context);
     if (!layers.isChecked(LayerType.trails)) return const SizedBox.shrink();
 
@@ -23,10 +23,10 @@ class TrailsLayer extends StatelessWidget {
       simplificationTolerance: 0.3,
       polylines: (crag.trail?.toPolylines ?? []).map((points) {
         return Polyline(
-          points: points,
-          color: theme.colorScheme.secondary,
-          strokeWidth: 4.0,
-        );
+            points: points,
+            color: colorScheme.onPrimary,
+            strokeWidth: 4.0,
+            pattern: StrokePattern.dashed(segments: const [5, 10]));
       }).toList(),
     );
   }

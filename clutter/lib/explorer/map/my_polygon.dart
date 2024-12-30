@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 
+import 'color_scheme.dart';
+
 class MyPolygon<HitValue extends Object> extends Polygon<HitValue> {
   MyPolygon({
     required this.theme,
@@ -14,11 +16,12 @@ class MyPolygon<HitValue extends Object> extends Polygon<HitValue> {
     super.label,
     super.hitValue,
   }) : super(
-          color: color ??
-              theme.colorScheme.primaryContainer.withValues(alpha: 0.5),
-          borderColor: borderColor ?? theme.colorScheme.primary,
-          labelStyle: theme.textTheme.bodyMedium!
-              .copyWith(color: theme.colorScheme.onPrimaryContainer),
+          color: color ?? colorScheme.secondary.withValues(alpha: 0.3),
+          borderColor: borderColor ?? colorScheme.outline,
+          labelStyle: theme.textTheme.labelLarge!.copyWith(
+            color: colorScheme.onTertiaryContainer,
+            backgroundColor: colorScheme.tertiaryContainer,
+          ),
         );
 
   final ThemeData theme;

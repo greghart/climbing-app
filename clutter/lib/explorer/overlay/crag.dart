@@ -39,7 +39,7 @@ class CragOverlay extends StatelessWidget {
               },
               trailing: const Icon(Icons.navigate_next),
               title: Text(
-                'Area ${area.name}',
+                area.name,
                 style: theme.textTheme.bodyMedium,
               ),
             )

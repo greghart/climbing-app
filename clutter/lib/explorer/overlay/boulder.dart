@@ -41,7 +41,7 @@ class BoulderOverlay extends StatelessWidget {
               },
               trailing: const Icon(Icons.navigate_next),
               title: Text(
-                'Route ${route.name}',
+                route.name,
                 style: theme.textTheme.bodyMedium,
               ),
             )

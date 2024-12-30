@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import '../../models/crag.dart';
 import '../model.dart';
 import 'animate_to.dart';
+import 'area.dart';
+import 'color_scheme.dart';
 import 'my_polygon.dart';
 
 typedef HitValue = ({int id});
@@ -58,7 +60,7 @@ class _CragMapState extends State<CragMap> {
             points: original.points,
             color: null,
             borderStrokeWidth: 6.0,
-            borderColor: theme.colorScheme.secondary,
+            borderColor: colorScheme.outlineVariant,
           );
         }).toList();
         setState(() => _hoverGons = hoverLines);
@@ -75,6 +77,10 @@ class _CragMapState extends State<CragMap> {
         },
         child: Stack(
           children: [
+            if (layers.isChecked(LayerType.boulders))
+              BouldersLayer(
+                boulders: crag.areas.expand((a) => a.boulders).toList(),
+              ),
             if (layers.isChecked(LayerType.areas))
               PolygonLayer(
                 hitNotifier: _hitNotifier,
