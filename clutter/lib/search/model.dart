@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import '../models/grade.dart';
 import '../models/index.dart' as models;
 import '../util/debounce.dart';
@@ -31,13 +32,13 @@ class SearchModel extends ChangeNotifier {
   final models.Crag crag;
   late final List<SearchEntity> all;
 
-  // Filter on type of entity
-  SearchType type = SearchType.any;
-  // Filter on search/name match, case insensitive
-  String search = '';
+  // Calculated results list
   List<SearchEntity> results = [];
+  // Async calculating...
   bool isLoading = false;
 
+  // Filter on type of entity
+  SearchType type = SearchType.any;
   void setType(SearchType value) {
     if (type != value) {
       type = value;
@@ -45,6 +46,28 @@ class SearchModel extends ChangeNotifier {
     }
   }
 
+  // Filter on route difficulty
+  RangeValues gradeRange = const RangeValues(0, 180);
+  RangeLabels gradeLabels = const RangeLabels("VB", "V18");
+  void setGradeRange(RangeValues values) {
+    if (gradeRange != values) {
+      gradeRange = values;
+      gradeLabels = RangeLabels(
+        displayGradeValue(values.start),
+        displayGradeValue(values.end),
+      );
+      updateSearchResults();
+    }
+  }
+
+  String displayGradeValue(double value) {
+    if (value == 0) return "VB";
+
+    return "V${(value / 10).round().toString()}";
+  }
+
+  // Filter on search/name match, case insensitive
+  String search = '';
   void setSearch(String value) {
     if (search != value) {
       search = value;
@@ -59,7 +82,8 @@ class SearchModel extends ChangeNotifier {
     notifyListeners();
 
     _debounceSearch.run(() async {
-      results = await compute(_search, (all: all, type: type, search: search));
+      results = await compute(_search,
+          (all: all, type: type, search: search, gradeRange: gradeRange));
       isLoading = false;
       notifyListeners();
     });
@@ -99,13 +123,17 @@ extension Display on SearchType {
 typedef SearchPayload = ({
   List<SearchEntity> all,
   SearchType type,
-  String search
+  String search,
+  RangeValues gradeRange,
 });
 
 List<SearchEntity> _search(SearchPayload payload) {
   final matchType = _typeMatcher(payload.type);
   final matchSearch = _searchMatcher(payload.search.toLowerCase());
-  return payload.all.where((e) => matchType(e) && matchSearch(e)).toList();
+  final matchDifficulty = _difficultyMatcher(payload.gradeRange);
+  return payload.all
+      .where((e) => matchType(e) && matchSearch(e) && matchDifficulty(e))
+      .toList();
 }
 
 typedef Matcher = bool Function(SearchEntity entity);
@@ -117,4 +145,12 @@ Matcher _searchMatcher(String search) {
 Matcher _typeMatcher(SearchType type) {
   if (type == SearchType.any) return (e) => true;
   return (e) => e.type == type;
+}
+
+Matcher _difficultyMatcher(RangeValues range) {
+  return (e) {
+    if (e.type != SearchType.route) return true;
+    if (e.grade == null) return true;
+    return e.grade!.value >= range.start && e.grade!.value <= range.end;
+  };
 }

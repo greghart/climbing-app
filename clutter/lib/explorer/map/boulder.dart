@@ -18,22 +18,11 @@ class BoulderMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final layers = Provider.of<ExplorerLayersModel>(context);
 
     return Stack(
       children: [
-        if (boulder.polygon != null && layers.isChecked(LayerType.boulders))
-          PolygonLayer(
-            polygons: [
-              MyPolygon(
-                theme: theme,
-                points: boulder.polygon!.coordinates,
-              ),
-            ],
-          ),
-        if (boulder.polygon == null && layers.isChecked(LayerType.boulders))
-          BouldersLayer(boulders: [boulder]),
+        BoulderMapDirect(boulder: boulder),
         if (layers.isChecked(LayerType.routes))
           MarkerLayer(
             // TODO: Clustering around boulder
@@ -70,5 +59,36 @@ class BoulderMap extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+// Directly draw the boulder (icon or polygon), without its' routes
+class BoulderMapDirect extends StatelessWidget {
+  const BoulderMapDirect({
+    super.key,
+    required this.boulder,
+  });
+
+  final Boulder boulder;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final layers = Provider.of<ExplorerLayersModel>(context);
+    if (!layers.isChecked(LayerType.boulders)) {
+      return const SizedBox.shrink();
+    }
+    if (boulder.polygon != null) {
+      return PolygonLayer(
+        polygons: [
+          MyPolygon(
+            theme: theme,
+            points: boulder.polygon!.coordinates,
+          ),
+        ],
+      );
+    } else {
+      return BouldersLayer(boulders: [boulder]);
+    }
   }
 }

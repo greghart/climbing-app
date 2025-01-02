@@ -43,27 +43,46 @@ class _SearchFormState extends State<SearchForm> {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<SearchModel>(context);
-    return Form(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              DropdownMenu<SearchType>(
-                onSelected: (value) => model.setType(value!),
-                initialSelection: model.type,
-                label: const Text("Search by"),
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(label: "Any", value: SearchType.any),
-                  DropdownMenuEntry(label: "Routes", value: SearchType.route),
-                  DropdownMenuEntry(
-                      label: "Boulders", value: SearchType.boulder),
-                  DropdownMenuEntry(label: "Areas", value: SearchType.area),
-                ],
-              ),
-            ],
+    return Row(
+      children: [
+        Expanded(
+          child: Form(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 8.0,
+              children: [
+                DropdownMenu<SearchType>(
+                  onSelected: (value) => model.setType(value!),
+                  initialSelection: model.type,
+                  label: const Text("Search by"),
+                  dropdownMenuEntries: const [
+                    DropdownMenuEntry(label: "Any", value: SearchType.any),
+                    DropdownMenuEntry(label: "Routes", value: SearchType.route),
+                    DropdownMenuEntry(
+                        label: "Boulders", value: SearchType.boulder),
+                    DropdownMenuEntry(label: "Areas", value: SearchType.area),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("Difficulty"),
+                    RangeSlider(
+                      values: model.gradeRange,
+                      max: 180,
+                      divisions: 18,
+                      labels: model.gradeLabels,
+                      onChanged: (RangeValues values) {
+                        model.setGradeRange(values);
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
