@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../models/index.dart' as models;
 import '../model.dart';
 import 'animate_to.dart';
+import 'boulder.dart';
 import 'my_polygon.dart';
 
 typedef HitValue = ({int id});
@@ -33,16 +34,7 @@ class RouteMap extends StatelessWidget {
               ),
             ],
           ),
-        if (model.boulder!.polygon != null &&
-            layers.isChecked(LayerType.boulders))
-          PolygonLayer(
-            polygons: [
-              MyPolygon(
-                theme: theme,
-                points: model.boulder!.polygon!.coordinates,
-              ),
-            ],
-          ),
+        BoulderMapDirect(boulder: model.boulder!),
         AnimateTo(
           mapController: MapController.of(context),
           latLng: route.coordinates ?? model.boulder!.coordinates,
