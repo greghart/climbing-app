@@ -60,12 +60,6 @@ class SearchModel extends ChangeNotifier {
     }
   }
 
-  String displayGradeValue(double value) {
-    if (value == 0) return "VB";
-
-    return "V${(value / 10).round().toString()}";
-  }
-
   // Filter on search/name match, case insensitive
   String search = '';
   void setSearch(String value) {

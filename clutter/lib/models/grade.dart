@@ -66,3 +66,33 @@ class Grade {
     };
   }
 }
+
+/// For now just have a super dumb conversion of grade value to v-scale string
+/// TODO: Implement full grades lib in dart?
+String displayGradeValue(double value) {
+  if (value == 0) return "VB";
+
+  return "V${(value / 10).round().toString()}";
+}
+
+const vGrades = [
+  'VB',
+  'V0',
+  'V1',
+  'V2',
+  'V3',
+  'V4',
+  'V5',
+  'V6',
+  'V7',
+  'V8',
+  'V9',
+  'V10',
+  'V11',
+  'V12',
+  'V13',
+  'V14',
+  'V15',
+  'V16',
+  'V17',
+];

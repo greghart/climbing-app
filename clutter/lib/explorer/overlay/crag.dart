@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../../models/crag.dart';
 import '../model.dart';
+import 'difficulty_chart.dart';
+import 'difficulty_span.dart';
 import 'layout.dart';
 
 class CragOverlay extends StatelessWidget {
@@ -27,6 +29,7 @@ class CragOverlay extends StatelessWidget {
               style: theme.textTheme.bodyMedium,
             ),
           ),
+          DifficultyChartCard(breakdown: crag.difficultyBreakdown),
           Text(
             "Areas",
             style: theme.textTheme.headlineSmall,
@@ -38,9 +41,9 @@ class CragOverlay extends StatelessWidget {
                     .setArea(area.id);
               },
               trailing: const Icon(Icons.navigate_next),
-              title: Text(
-                area.name,
-                style: theme.textTheme.bodyMedium,
+              title: DifficultyBreakdownSpan(
+                text: area.name,
+                breakdown: area.difficultyBreakdown,
               ),
             )
         ],

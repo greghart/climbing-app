@@ -1,6 +1,7 @@
 import 'area.dart';
 import 'bounds.dart';
 import 'coordinate.dart';
+import 'difficulty_breakdown.dart';
 import 'trail.dart';
 import 'types.dart';
 
@@ -15,8 +16,9 @@ class Crag {
   final int maxZoom;
   final List<Area> areas;
   final Trail? trail;
+  final DifficultyBreakdown difficultyBreakdown;
 
-  const Crag({
+  Crag({
     required this.id,
     required this.name,
     this.description,
@@ -27,7 +29,16 @@ class Crag {
     required this.maxZoom,
     required this.areas,
     this.trail,
-  });
+  }) : difficultyBreakdown = DifficultyBreakdown(areas
+            .map(
+              (a) => a.boulders,
+            )
+            .expand((b) => b)
+            .map(
+              (b) => b.routes,
+            )
+            .expand((r) => r)
+            .toList());
 
   factory Crag.fromJson(JsonObject json) {
     if (json

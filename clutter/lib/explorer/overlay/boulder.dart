@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../../models/boulder.dart';
 import '../model.dart';
+import 'difficulty_chart.dart';
+import 'difficulty_span.dart';
 import 'layout.dart';
 
 class BoulderOverlay extends StatelessWidget {
@@ -29,6 +31,7 @@ class BoulderOverlay extends StatelessWidget {
                 style: theme.textTheme.bodyMedium,
               ),
             ),
+          DifficultyChartCard(breakdown: boulder.difficultyBreakdown),
           Text(
             "Routes",
             style: theme.textTheme.headlineSmall,
@@ -40,9 +43,19 @@ class BoulderOverlay extends StatelessWidget {
                     .setRoute(route.id);
               },
               trailing: const Icon(Icons.navigate_next),
-              title: Text(
-                route.name,
-                style: theme.textTheme.bodyMedium,
+              title: RichText(
+                text: TextSpan(
+                  text: route.name,
+                  style: theme.textTheme.bodyMedium,
+                  children: [
+                    const TextSpan(text: ' ('),
+                    DifficultySpan(
+                      text: route.grade.raw,
+                      bucket: route.bucket,
+                    ),
+                    const TextSpan(text: ')'),
+                  ],
+                ),
               ),
             )
         ],

@@ -1,4 +1,5 @@
 import 'coordinate.dart';
+import 'difficulty_breakdown.dart';
 import 'polygon.dart';
 import 'route.dart';
 import 'types.dart';
@@ -11,8 +12,9 @@ class Boulder {
   final LatLng coordinates;
   final List<Route> routes;
   final Polygon? polygon;
+  final DifficultyBreakdown difficultyBreakdown;
 
-  const Boulder({
+  Boulder({
     required this.id,
     required this.areaId,
     required this.name,
@@ -20,7 +22,7 @@ class Boulder {
     required this.routes,
     this.description,
     this.polygon,
-  });
+  }) : difficultyBreakdown = DifficultyBreakdown(routes);
 
   factory Boulder.fromJson(int areaId, JsonObject json) {
     if (json
