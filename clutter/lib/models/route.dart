@@ -1,4 +1,5 @@
 import 'coordinate.dart';
+import 'difficulty_breakdown.dart';
 import 'grade.dart';
 import 'types.dart';
 
@@ -11,8 +12,9 @@ class Route {
   final String? firstAscent;
   final Grade grade;
   final LatLng? coordinates;
+  final DifficultyBucket bucket;
 
-  const Route({
+  Route({
     required this.id,
     required this.boulderId,
     required this.name,
@@ -21,7 +23,7 @@ class Route {
     this.firstAscent,
     required this.grade,
     this.coordinates,
-  });
+  }) : bucket = getBucket(grade);
 
   factory Route.fromJson(int boulderId, JsonObject json) {
     if (json

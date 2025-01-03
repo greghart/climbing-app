@@ -6,7 +6,6 @@ import '../../models/index.dart' as models;
 import '../model.dart';
 import 'animate_to.dart';
 import 'boulder.dart';
-import 'my_polygon.dart';
 
 typedef HitValue = ({int id});
 

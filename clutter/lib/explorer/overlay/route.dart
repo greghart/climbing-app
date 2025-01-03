@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/index.dart' as models;
+import 'difficulty_span.dart';
 import 'layout.dart';
 
 class RouteOverlay extends StatelessWidget {
@@ -19,9 +20,13 @@ class RouteOverlay extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            route.grade.raw,
-            style: theme.textTheme.headlineMedium,
+          RichText(
+            text: TextSpan(
+              children: [
+                DifficultySpan(bucket: route.bucket, text: route.grade.raw),
+              ],
+              style: theme.textTheme.headlineMedium,
+            ),
           ),
           if (route.description != null)
             Text(

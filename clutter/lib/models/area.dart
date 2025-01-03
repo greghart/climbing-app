@@ -1,4 +1,5 @@
 import 'boulder.dart';
+import 'difficulty_breakdown.dart';
 import 'polygon.dart';
 import 'types.dart';
 
@@ -8,14 +9,20 @@ class Area {
   final String? description;
   final Polygon? polygon;
   final List<Boulder> boulders;
+  final DifficultyBreakdown difficultyBreakdown;
 
-  const Area({
+  Area({
     required this.id,
     required this.name,
     required this.boulders,
     this.description,
     this.polygon,
-  });
+  }) : difficultyBreakdown = DifficultyBreakdown(boulders
+            .map(
+              (b) => b.routes,
+            )
+            .expand((r) => r)
+            .toList());
 
   factory Area.fromJson(JsonObject json) {
     if (json

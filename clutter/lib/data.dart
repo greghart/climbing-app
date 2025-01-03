@@ -107,7 +107,7 @@ const cragJson = '''
               "id": 1458,
               "name": "The Butt Plug North Side",
               "length": null,
-              "description": "",
+              "description": null,
               "firstAscent": null,
               "gradeRaw": "V0-",
               "grade": {
@@ -124,7 +124,7 @@ const cragJson = '''
               "id": 1459,
               "name": "East Face of Butt Plug",
               "length": null,
-              "description": "",
+              "description": null,
               "firstAscent": null,
               "gradeRaw": "V2",
               "grade": {
@@ -760,7 +760,7 @@ const cragJson = '''
       "createdAt": "2024-12-26 18:36:56",
       "updatedAt": "2024-12-26 18:38:17",
       "name": "Hillside Area",
-      "description": "",
+      "description": null,
       "boulders": [
         {
           "id": 1453,
@@ -1261,7 +1261,7 @@ const cragJson = '''
       "createdAt": "2024-12-26 18:36:56",
       "updatedAt": "2024-12-26 18:46:36",
       "name": "Moby Dick Area",
-      "description": "",
+      "description": null,
       "boulders": [
         {
           "id": 1462,
@@ -1583,7 +1583,7 @@ const cragJson = '''
         {
           "id": 1466,
           "name": "Lieback Rock",
-          "description": "",
+          "description": null,
           "coordinates": {
             "lat": 32.85126,
             "lng": -117.02071
@@ -2188,7 +2188,7 @@ const cragJson = '''
       "createdAt": "2024-12-26 18:36:56",
       "updatedAt": "2024-12-26 18:39:11",
       "name": "Synchronicity Area",
-      "description": "",
+      "description": null,
       "boulders": [
         {
           "id": 1470,
