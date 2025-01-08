@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import '../models/index.dart' as models;
 
 enum EntityType { crag, area, boulder, route }
@@ -128,5 +131,47 @@ class ExplorerLayersModel extends ChangeNotifier {
     }
     layers[type] = !layers[type]!;
     notifyListeners();
+  }
+}
+
+// ExplorerLocationModel manages the location and heading streams for the explorer map.
+// Uses StreamControllers to let us take in both real events and simulated user events on desktop.
+// Only listens to real data when there are listeners.
+class ExplorerLocationModel {
+  late final StreamController<LocationMarkerPosition?> positionStream;
+  late final StreamController<LocationMarkerHeading?> headingStream;
+
+  ExplorerLocationModel() {
+    const factory = LocationMarkerDataStreamFactory();
+    //
+    StreamSubscription<LocationMarkerPosition?>? actualPositions;
+    StreamSubscription<LocationMarkerHeading?>? actualHeaders;
+
+    positionStream = StreamController.broadcast(onListen: () {
+      actualPositions!.resume();
+    }, onCancel: () {
+      actualPositions!.pause();
+    });
+    headingStream = StreamController.broadcast(onListen: () {
+      actualHeaders!.resume();
+    }, onCancel: () {
+      actualHeaders!.pause();
+    });
+
+    actualPositions = factory
+        .fromGeolocatorPositionStream()
+        .asBroadcastStream()
+        .listen((event) {
+      positionStream.add(event);
+    });
+    actualHeaders =
+        factory.fromCompassHeadingStream().asBroadcastStream().listen((event) {
+      headingStream.add(event);
+    });
+  }
+
+  dispose() {
+    positionStream.close();
+    headingStream.close();
   }
 }

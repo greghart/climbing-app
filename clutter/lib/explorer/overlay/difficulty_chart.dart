@@ -138,7 +138,7 @@ class _DifficultyChartState extends State<DifficultyChart> {
   Widget getTitles(double value, TitleMeta meta) {
     final bucket = widget.breakdown.getBucket(value.toInt());
     return SideTitleWidget(
-      axisSide: meta.axisSide,
+      meta: meta,
       space: 16,
       child: Text(
         bucket.label,

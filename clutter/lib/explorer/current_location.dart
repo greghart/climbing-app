@@ -4,8 +4,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
+import 'package:provider/provider.dart';
 
 import '../models/crag.dart';
+import 'model.dart';
 
 /// A widget that displays the current location of the user on a map.
 /// For now it simulates the streams
@@ -21,8 +23,6 @@ class CurrentLocation extends StatefulWidget {
 }
 
 class _CurrentLocationState extends State<CurrentLocation> {
-  late final StreamController<LocationMarkerPosition> _positionStreamController;
-  late final StreamController<LocationMarkerHeading> _headingStreamController;
   double _currentLat = 0;
   double _currentLng = 0;
   double _heading = 0;
@@ -30,16 +30,17 @@ class _CurrentLocationState extends State<CurrentLocation> {
   @override
   void initState() {
     super.initState();
-    _positionStreamController = StreamController();
-    setLatLng(widget.crag.center.latitude, widget.crag.center.longitude);
-    _headingStreamController = StreamController();
-    setHeading(0);
+    final location = Provider.of<ExplorerLocationModel>(context, listen: false);
+    setLatLng(location.positionStream, widget.crag.center.latitude,
+        widget.crag.center.longitude);
+    setHeading(location.headingStream, 0);
   }
 
-  void setLatLng(double lat, double lng) {
+  void setLatLng(StreamController<LocationMarkerPosition?> stream, double lat,
+      double lng) {
     _currentLat = lat;
     _currentLng = lng;
-    _positionStreamController.add(
+    stream.add(
       LocationMarkerPosition(
         latitude: _currentLat,
         longitude: _currentLng,
@@ -48,47 +49,57 @@ class _CurrentLocationState extends State<CurrentLocation> {
     );
   }
 
-  void setHeading(double heading) {
+  void setHeading(
+      StreamController<LocationMarkerHeading?> stream, double heading) {
     _heading = heading;
-    _headingStreamController
-        .add(LocationMarkerHeading(heading: _heading, accuracy: pi * 0.2));
-  }
-
-  @override
-  void dispose() {
-    _positionStreamController.close();
-    _headingStreamController.close();
-    super.dispose();
+    stream.add(LocationMarkerHeading(heading: _heading, accuracy: pi * 0.2));
   }
 
   @override
   build(BuildContext context) {
+    final locations = Provider.of<ExplorerLocationModel>(context);
     return CallbackShortcuts(
       bindings: <ShortcutActivator, VoidCallback>{
         const SingleActivator(LogicalKeyboardKey.keyQ): () {
-          setHeading(_heading - pi / 8);
+          setHeading(locations.headingStream, _heading - pi / 8);
         },
         const SingleActivator(LogicalKeyboardKey.keyE): () {
-          setHeading(_heading + pi / 8);
+          setHeading(locations.headingStream, _heading + pi / 8);
         },
         const SingleActivator(LogicalKeyboardKey.keyW): () {
-          setLatLng(_currentLat + 0.0001, _currentLng);
+          setLatLng(
+            locations.positionStream,
+            _currentLat + 0.0001,
+            _currentLng,
+          );
         },
         const SingleActivator(LogicalKeyboardKey.keyS): () {
-          setLatLng(_currentLat - 0.0001, _currentLng);
+          setLatLng(
+            locations.positionStream,
+            _currentLat - 0.0001,
+            _currentLng,
+          );
         },
         const SingleActivator(LogicalKeyboardKey.keyA): () {
-          setLatLng(_currentLat, _currentLng - 0.0001);
+          setLatLng(
+            locations.positionStream,
+            _currentLat,
+            _currentLng - 0.0001,
+          );
         },
         const SingleActivator(LogicalKeyboardKey.keyD): () {
-          setLatLng(_currentLat, _currentLng + 0.0001);
+          setLatLng(
+            locations.positionStream,
+            _currentLat,
+            _currentLng + 0.0001,
+          );
         },
       },
       child: Focus(
         autofocus: true,
         child: CurrentLocationLayer(
-          positionStream: _positionStreamController.stream,
-          headingStream: _headingStreamController.stream,
+          positionStream: locations.positionStream.stream,
+          headingStream: locations.headingStream.stream,
         ),
       ),
     );
