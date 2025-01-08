@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../model.dart';
+import 'compass.dart';
 
 class OverlayLayout extends StatelessWidget {
   const OverlayLayout({
@@ -67,7 +68,20 @@ class Breadcrumbs extends StatelessWidget {
       color: theme.colorScheme.surfaceBright,
       child: Wrap(
         spacing: 8,
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
+          SizedBox(
+            height: 40,
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Compass(
+                to: model.route?.coordinates ??
+                    model.boulder?.coordinates ??
+                    model.area?.center ??
+                    model.crag.center,
+              ),
+            ),
+          ),
           if (model.area != null) ...[
             FilledButton(
               style: const ButtonStyle(
@@ -117,5 +131,43 @@ class Breadcrumbs extends StatelessWidget {
 
   Widget divider(ThemeData theme) {
     return Text(" / ", style: theme.textTheme.headlineSmall!);
+  }
+}
+
+/// Re-usable wrapping row for diagrams to have them line up nicely, for chart and compass
+/// NOTE: We are prototyping, compass may go elsewhere
+class DiagramsLayout extends StatelessWidget {
+  const DiagramsLayout({super.key, this.chart, this.compass});
+
+  final Widget? chart;
+  final Widget? compass;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 16.0,
+      runSpacing: 12.0,
+      runAlignment: WrapAlignment.center,
+      alignment: WrapAlignment.spaceAround,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        if (chart != null)
+          SizedBox(
+            height: 216,
+            child: AspectRatio(
+              aspectRatio: 2,
+              child: chart,
+            ),
+          ),
+        if (compass != null)
+          SizedBox(
+            height: 140,
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: compass,
+            ),
+          )
+      ],
+    );
   }
 }

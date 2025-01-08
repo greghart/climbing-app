@@ -36,10 +36,7 @@ class AreaMap extends StatelessWidget {
           BouldersLayer(boulders: area.boulders),
         AnimateTo(
           mapController: MapController.of(context),
-          latLng: LatLng(
-            area.polygon!.coordinates.map((c) => c.latitude).average,
-            area.polygon!.coordinates.map((c) => c.longitude).average,
-          ),
+          latLng: area.center,
           zoom: 19,
         ),
       ],

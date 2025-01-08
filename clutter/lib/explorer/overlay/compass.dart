@@ -43,7 +43,7 @@ class Compass extends StatelessWidget {
                 buildHeadingFirstLetter(toDegrees(normalizeRads(heading))),
                 style: TextStyle(
                   color: Colors.grey[700]!,
-                  fontSize: 46,
+                  fontSize: constraints.maxHeight / 3,
                   // fontWeight: FontWeight.bold,
                 ),
               ),
@@ -68,75 +68,77 @@ class CompassCustomPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    final diameter = size.height; // compass should be setup in box
+    final radius = size.height / 2;
     // Center The Compass In The Middle Of The Screen
-    canvas.translate(size.width / 2, size.height / 2);
+    canvas.translate(radius, radius);
 
     Paint circle = Paint()
-      ..strokeWidth = 2
+      ..strokeWidth = math.max(radius * .02, 2)
       ..color = Colors.white
       ..style = PaintingStyle.fill;
 
     Paint shadowCircle = Paint()
-      ..strokeWidth = 2
+      ..strokeWidth = math.max(radius * .02, 2)
       ..color = Colors.grey.withValues(alpha: 0.2)
       ..style = PaintingStyle.fill;
 
     // Draw Outer Circle
-    canvas.drawCircle(Offset.zero, 100, circle);
+    canvas.drawCircle(Offset.zero, radius, circle);
 
     Paint darkIndexLine = Paint()
       ..color = Colors.grey[700]!
-      ..strokeWidth = 6
+      ..strokeWidth = math.max(radius * .06, 3)
       ..strokeCap = StrokeCap.round;
 
     Paint lightIndexLine = Paint()
       ..color = Colors.grey
-      ..strokeWidth = 3
+      ..strokeWidth = radius * .03
       ..strokeCap = StrokeCap.round;
 
     Paint northTriangle = Paint()
       ..color = Colors.red
       ..style = PaintingStyle.fill
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = 4;
+      ..strokeWidth = math.max(radius * .04, 3);
 
     Paint toPoint = Paint()
       ..color = Colors.green
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = 4;
+      ..strokeWidth = math.max(radius * .06, 3);
 
     canvas.rotate(-math.pi / 2);
 
     // Draw The Light Grey Lines 16 Times While Rotating 22.5° Degrees
     for (int i = 1; i <= 16; i++) {
       canvas.drawLine(
-          Offset.fromDirection(-(heading + toRadians(22.5) * i), 60),
-          Offset.fromDirection(-(heading + toRadians(22.5) * i), 80),
+          Offset.fromDirection(-(heading + toRadians(22.5) * i), radius * .6),
+          Offset.fromDirection(-(heading + toRadians(22.5) * i), radius * .8),
           lightIndexLine);
     }
 
     // Draw The Dark Grey Lines 3 Times While Rotating 90° Degrees
     for (int i = 1; i <= 3; i++) {
       canvas.drawLine(
-          Offset.fromDirection(-(heading + toRadians(90) * i), 60),
-          Offset.fromDirection(-(heading + toRadians(90) * i), 80),
+          Offset.fromDirection(-(heading + toRadians(90) * i), radius * .6),
+          Offset.fromDirection(-(heading + toRadians(90) * i), radius * .8),
           darkIndexLine);
     }
 
     // Draw North Triangle
     Path path = Path();
     path.moveTo(
-      Offset.fromDirection(-heading, 85).dx,
-      Offset.fromDirection(-heading, 85).dy,
+      Offset.fromDirection(-heading, radius * .85).dx,
+      Offset.fromDirection(-heading, radius * .85).dy,
     );
     path.lineTo(
-      Offset.fromDirection(-(heading + toRadians(15)), 60).dx,
-      Offset.fromDirection(-(heading + toRadians(15)), 60).dy,
+      Offset.fromDirection(-(heading + toRadians(15)), radius * .6).dx,
+      Offset.fromDirection(-(heading + toRadians(15)), radius * .6).dy,
     );
     path.lineTo(
-      Offset.fromDirection(-(heading - toRadians(15)), 60).dx,
-      Offset.fromDirection(-(heading - toRadians(15)), 60).dy,
+      Offset.fromDirection(-(heading - toRadians(15)), radius * .6).dx,
+      Offset.fromDirection(-(heading - toRadians(15)), radius * .6).dy,
     );
     path.close();
     canvas.drawPath(path, northTriangle);
@@ -146,7 +148,7 @@ class CompassCustomPainter extends CustomPainter {
     canvas.drawArc(
       Rect.fromCircle(
         center: Offset.zero,
-        radius: 95,
+        radius: radius * .95,
       ),
       toward - accuracy / 2,
       accuracy,
@@ -155,10 +157,10 @@ class CompassCustomPainter extends CustomPainter {
     );
 
     // Draw Shadow For Inner Circle
-    canvas.drawCircle(Offset.zero, 68, shadowCircle);
+    canvas.drawCircle(Offset.zero, radius * .68, shadowCircle);
 
-    // Draw Inner Circle
-    canvas.drawCircle(Offset.zero, 65, circle);
+    // Draw Inner Circle (last so it overlaps strokes and shadow)
+    canvas.drawCircle(Offset.zero, radius * .65, circle);
   }
 
   @override

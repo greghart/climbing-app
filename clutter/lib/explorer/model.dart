@@ -181,6 +181,10 @@ class ExplorerLocationModel extends ChangeNotifier {
         setHeading(event);
       });
     }
+
+    // Setup default data to make consumers easier
+    _setLatLng(crag.center.latitude, crag.center.longitude, notify: false);
+    _setHeading(0, notify: false);
   }
 
   void setPosition(LocationMarkerPosition? position, {notify = true}) {

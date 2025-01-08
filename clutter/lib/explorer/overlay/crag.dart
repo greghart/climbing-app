@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/crag.dart';
 import '../model.dart';
+import 'compass.dart';
 import 'difficulty_chart.dart';
 import 'difficulty_span.dart';
 import 'layout.dart';
@@ -29,7 +30,9 @@ class CragOverlay extends StatelessWidget {
               style: theme.textTheme.bodyMedium,
             ),
           ),
-          DifficultyChartCard(breakdown: crag.difficultyBreakdown),
+          DiagramsLayout(
+            chart: DifficultyChartCard(breakdown: crag.difficultyBreakdown),
+          ),
           Text(
             "Areas",
             style: theme.textTheme.headlineSmall,

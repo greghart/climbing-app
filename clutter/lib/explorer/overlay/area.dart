@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/area.dart';
 import '../model.dart';
+import 'compass.dart';
 import 'difficulty_chart.dart';
 import 'difficulty_span.dart';
 import 'layout.dart';
@@ -31,7 +32,9 @@ class AreaOverlay extends StatelessWidget {
                 style: theme.textTheme.bodyMedium,
               ),
             ),
-          DifficultyChartCard(breakdown: area.difficultyBreakdown),
+          DiagramsLayout(
+            chart: DifficultyChartCard(breakdown: area.difficultyBreakdown),
+          ),
           Text(
             "Boulders",
             style: theme.textTheme.headlineSmall,

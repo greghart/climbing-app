@@ -32,16 +32,8 @@ class BoulderOverlay extends StatelessWidget {
                 style: theme.textTheme.bodyMedium,
               ),
             ),
-          Wrap(
-            spacing: 8.0,
-            children: [
-              DifficultyChartCard(breakdown: boulder.difficultyBreakdown),
-              ConstrainedBox(
-                constraints:
-                    const BoxConstraints.tightFor(width: 300, height: 300),
-                child: Compass(to: boulder.coordinates),
-              ),
-            ],
+          DiagramsLayout(
+            chart: DifficultyChartCard(breakdown: boulder.difficultyBreakdown),
           ),
           Text(
             "Routes",

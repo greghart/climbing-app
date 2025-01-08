@@ -5,6 +5,7 @@ import '../../models/difficulty_breakdown.dart';
 import '../../util/color.dart';
 import 'difficulty_span.dart';
 
+/// Should be within a constrained parent
 class DifficultyChartCard extends StatelessWidget {
   const DifficultyChartCard({super.key, required this.breakdown});
   final DifficultyBreakdown breakdown;
@@ -21,11 +22,9 @@ class DifficultyChartCard extends StatelessWidget {
             "Route Breakdown",
             style: theme.textTheme.titleSmall,
           ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            constraints: const BoxConstraints(minHeight: 100, maxHeight: 180),
-            child: AspectRatio(
-              aspectRatio: 2,
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(8),
               child: DifficultyChart(
                 breakdown: breakdown,
                 colorScheme: theme.colorScheme,

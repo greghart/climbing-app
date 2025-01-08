@@ -1,3 +1,6 @@
+import 'package:collection/collection.dart';
+import 'package:latlong2/latlong.dart';
+
 import 'boulder.dart';
 import 'difficulty_breakdown.dart';
 import 'polygon.dart';
@@ -44,6 +47,10 @@ class Area {
     }
     throw JSONException('Area', json);
   }
+  LatLng get center => LatLng(
+        polygon!.coordinates.map((c) => c.latitude).average,
+        polygon!.coordinates.map((c) => c.longitude).average,
+      );
 
   JsonObject toJson() {
     return {
