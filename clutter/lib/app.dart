@@ -111,9 +111,8 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(
               create: (context) => ExplorerLayersModel(),
             ),
-            Provider(
-              create: (context) => ExplorerLocationModel(),
-              dispose: (context, value) => value.dispose(),
+            ChangeNotifierProvider(
+              create: (context) => ExplorerLocationModel(data.crag),
             )
           ],
           child: MaterialApp.router(

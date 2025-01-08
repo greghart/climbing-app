@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/boulder.dart';
 import '../model.dart';
+import 'compass.dart';
 import 'difficulty_chart.dart';
 import 'difficulty_span.dart';
 import 'layout.dart';
@@ -31,7 +32,17 @@ class BoulderOverlay extends StatelessWidget {
                 style: theme.textTheme.bodyMedium,
               ),
             ),
-          DifficultyChartCard(breakdown: boulder.difficultyBreakdown),
+          Wrap(
+            spacing: 8.0,
+            children: [
+              DifficultyChartCard(breakdown: boulder.difficultyBreakdown),
+              ConstrainedBox(
+                constraints:
+                    const BoxConstraints.tightFor(width: 300, height: 300),
+                child: Compass(to: boulder.coordinates),
+              ),
+            ],
+          ),
           Text(
             "Routes",
             style: theme.textTheme.headlineSmall,

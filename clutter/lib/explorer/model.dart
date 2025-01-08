@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
@@ -134,44 +136,142 @@ class ExplorerLayersModel extends ChangeNotifier {
   }
 }
 
-// ExplorerLocationModel manages the location and heading streams for the explorer map.
+// ExplorerLocationModel manages the location and heading for the explorer map.
 // Uses StreamControllers to let us take in both real events and simulated user events on desktop.
 // Only listens to real data when there are listeners.
-class ExplorerLocationModel {
+// Also manages current position as heading as app state when streams are obtuse.
+class ExplorerLocationModel extends ChangeNotifier {
   late final StreamController<LocationMarkerPosition?> positionStream;
   late final StreamController<LocationMarkerHeading?> headingStream;
+  StreamSubscription<LocationMarkerPosition?>? actualPositions;
+  StreamSubscription<LocationMarkerHeading?>? actualHeadings;
+  // Persist latest state so we can simulate user movement
+  late LocationMarkerPosition currentPosition;
+  late LocationMarkerHeading currentHeading;
 
-  ExplorerLocationModel() {
-    const factory = LocationMarkerDataStreamFactory();
-    //
-    StreamSubscription<LocationMarkerPosition?>? actualPositions;
-    StreamSubscription<LocationMarkerHeading?>? actualHeaders;
-
+  ExplorerLocationModel(models.Crag crag) {
     positionStream = StreamController.broadcast(onListen: () {
-      actualPositions!.resume();
+      actualPositions != null
+          ? actualPositions!.resume()
+          : _setLatLng(crag.center.latitude, crag.center.longitude,
+              notify: false);
     }, onCancel: () {
-      actualPositions!.pause();
+      actualPositions?.pause();
     });
     headingStream = StreamController.broadcast(onListen: () {
-      actualHeaders!.resume();
+      actualHeadings != null
+          ? actualHeadings!.resume()
+          : _setHeading(0, notify: false);
     }, onCancel: () {
-      actualHeaders!.pause();
+      actualHeadings?.pause();
     });
 
-    actualPositions = factory
-        .fromGeolocatorPositionStream()
-        .asBroadcastStream()
-        .listen((event) {
-      positionStream.add(event);
-    });
-    actualHeaders =
-        factory.fromCompassHeadingStream().asBroadcastStream().listen((event) {
-      headingStream.add(event);
-    });
+    if (Platform.isAndroid || Platform.isIOS) {
+      const factory = LocationMarkerDataStreamFactory();
+      actualPositions = factory
+          .fromGeolocatorPositionStream()
+          .asBroadcastStream()
+          .listen((event) {
+        setPosition(event);
+      });
+      actualHeadings = factory
+          .fromCompassHeadingStream()
+          .asBroadcastStream()
+          .listen((event) {
+        setHeading(event);
+      });
+    }
   }
 
+  void setPosition(LocationMarkerPosition? position, {notify = true}) {
+    if (position == null) return;
+
+    currentPosition = position;
+    positionStream.add(position);
+    if (notify) notifyListeners();
+  }
+
+  void setHeading(LocationMarkerHeading? heading, {notify = true}) {
+    if (heading == null) return;
+
+    currentHeading = heading;
+    headingStream.add(heading);
+    if (notify) notifyListeners();
+  }
+
+  // Simulate user movement
+  void rotateLeft() {
+    _setHeading(
+      currentHeading.heading - math.pi / 8,
+    );
+  }
+
+  void rotateRight() {
+    _setHeading(
+      currentHeading.heading + math.pi / 8,
+    );
+  }
+
+  void up() {
+    _setLatLng(
+      currentPosition.latitude + 0.0001,
+      currentPosition.longitude,
+    );
+  }
+
+  void down() {
+    _setLatLng(
+      currentPosition.latitude - 0.0001,
+      currentPosition.longitude,
+    );
+  }
+
+  void left() {
+    _setLatLng(
+      currentPosition.latitude,
+      currentPosition.longitude - 0.0001,
+    );
+  }
+
+  void right() {
+    _setLatLng(
+      currentPosition.latitude,
+      currentPosition.longitude + 0.0001,
+    );
+  }
+
+  void _setHeading(double heading, {notify = true}) {
+    setHeading(
+      LocationMarkerHeading(
+        heading: normalizeRads(heading),
+        accuracy: math.pi * 0.2,
+      ),
+      notify: notify,
+    );
+  }
+
+  void _setLatLng(double lat, double lng, {notify = true}) {
+    setPosition(
+      LocationMarkerPosition(
+        latitude: lat,
+        longitude: lng,
+        accuracy: 0,
+      ),
+      notify: notify,
+    );
+  }
+
+  @override
   dispose() {
+    super.dispose();
     positionStream.close();
     headingStream.close();
+    actualPositions?.cancel();
+    actualHeadings?.cancel();
   }
+}
+
+// Normalize rads to [0, 2*pi]
+double normalizeRads(double r) {
+  return r % (2 * math.pi);
 }
