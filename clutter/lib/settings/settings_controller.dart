@@ -20,11 +20,26 @@ class SettingsController with ChangeNotifier {
   // Allow Widgets to read the user's preferred ThemeMode.
   ThemeMode get themeMode => _themeMode;
 
+  late bool _cozyCompass;
+
+  // Whether to use the small cozy compass in breadcrumbs
+  bool get cozyCompass => _cozyCompass;
+
+  Future<void> updateCozyCompass(bool b) async {
+    if (b == _cozyCompass) return;
+
+    _cozyCompass = b;
+    notifyListeners();
+
+    await _settingsService.updateCozyCompass(b);
+  }
+
   /// Load the user's settings from the SettingsService. It may load from a
   /// local database or the internet. The controller only knows it can load the
   /// settings from the service.
   Future<void> loadSettings() async {
     _themeMode = await _settingsService.themeMode();
+    _cozyCompass = await _settingsService.cozyCompass();
 
     // Important! Inform listeners a change has occurred.
     notifyListeners();

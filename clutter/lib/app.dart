@@ -105,6 +105,7 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             Provider(create: (_) => data.crag),
+            ChangeNotifierProvider.value(value: settingsController),
             ChangeNotifierProvider(
               create: (context) => ExplorerSheetModel(),
             ),

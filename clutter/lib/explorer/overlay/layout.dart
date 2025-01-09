@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../settings/settings_controller.dart';
 import '../model.dart';
 import 'compass.dart';
 
@@ -61,8 +62,8 @@ class Breadcrumbs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     final model = context.watch<ExplorerModel>();
+    final settings = Provider.of<SettingsController>(context);
 
     return Container(
       color: theme.colorScheme.surfaceBright,
@@ -70,18 +71,19 @@ class Breadcrumbs extends StatelessWidget {
         spacing: 8,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          SizedBox(
-            height: 40,
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: Compass(
-                to: model.route?.coordinates ??
-                    model.boulder?.coordinates ??
-                    model.area?.center ??
-                    model.crag.center,
+          if (settings.cozyCompass)
+            SizedBox(
+              height: 40,
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: Compass(
+                  to: model.route?.coordinates ??
+                      model.boulder?.coordinates ??
+                      model.area?.center ??
+                      model.crag.center,
+                ),
               ),
             ),
-          ),
           if (model.area != null) ...[
             FilledButton(
               style: const ButtonStyle(
@@ -144,6 +146,7 @@ class DiagramsLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settings = Provider.of<SettingsController>(context);
     return Wrap(
       spacing: 16.0,
       runSpacing: 12.0,
@@ -159,7 +162,7 @@ class DiagramsLayout extends StatelessWidget {
               child: chart,
             ),
           ),
-        if (compass != null)
+        if (compass != null && !settings.cozyCompass)
           SizedBox(
             height: 140,
             child: AspectRatio(

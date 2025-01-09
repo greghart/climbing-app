@@ -14,4 +14,10 @@ class SettingsService {
     // Use the shared_preferences package to persist settings locally or the
     // http package to persist settings over the network.
   }
+
+  Future<bool> cozyCompass() async => true;
+
+  Future<void> updateCozyCompass(bool b) async {
+    // TODO: Implement
+  }
 }

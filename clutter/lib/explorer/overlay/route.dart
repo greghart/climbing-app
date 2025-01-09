@@ -37,6 +37,12 @@ class RouteOverlay extends StatelessWidget {
               route.description!,
               style: theme.textTheme.bodyMedium,
             ),
+          DiagramsLayout(
+            chart: const SizedBox.shrink(),
+            compass: Compass(
+              to: route.coordinates ?? model.boulder!.coordinates,
+            ),
+          ),
         ],
       ),
     );
