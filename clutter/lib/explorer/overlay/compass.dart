@@ -167,6 +167,7 @@ class CompassCustomPainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
 
+// TODO: Refactor to suncalc
 double toRadians(double degrees) {
   return degrees * math.pi / 180;
 }
