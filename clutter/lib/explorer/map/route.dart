@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/index.dart' as models;
+import '../../entities/index.dart' as models;
 import '../model.dart';
 import 'animate_to.dart';
 import 'boulder.dart';

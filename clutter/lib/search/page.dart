@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../models/crag.dart';
+import '../entities/crag.dart';
 import 'filters.dart';
 import 'model.dart';
 import 'my_search_bar.dart';

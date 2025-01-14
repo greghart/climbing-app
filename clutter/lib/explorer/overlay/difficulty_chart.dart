@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/difficulty_breakdown.dart';
+import '../../entities/difficulty_breakdown.dart';
 import '../../util/color.dart';
 import 'difficulty_span.dart';
 

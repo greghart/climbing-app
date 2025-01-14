@@ -1,3 +1,4 @@
+import '../util/sun.dart';
 import 'coordinate.dart';
 import 'difficulty_breakdown.dart';
 import 'grade.dart';
@@ -12,7 +13,10 @@ class Route {
   final String? firstAscent;
   final Grade grade;
   final LatLng? coordinates;
+  // Which bucket does this route falls into
   final DifficultyBucket bucket;
+  // The vector to the route from the boulder
+  final Vector2? vector;
 
   Route({
     required this.id,
@@ -23,9 +27,11 @@ class Route {
     this.firstAscent,
     required this.grade,
     this.coordinates,
+    this.vector,
   }) : bucket = getBucket(grade);
 
-  factory Route.fromJson(int boulderId, JsonObject json) {
+  factory Route.fromJson(
+      int boulderId, LatLng boulderCoordinates, JsonObject json) {
     if (json
         case {
           'id': int id,
@@ -48,6 +54,14 @@ class Route {
         firstAscent: firstAscent,
         grade: Grade.fromJson(grade),
         coordinates: ll,
+        // TODO: It'd be more accurate to find the normal of the route off the polygon instead of boulder "center"
+        // Center works ok for round boulders, but not for any complexity.
+        vector: ll == null
+            ? null
+            : (
+                ll.latitude - boulderCoordinates.latitude,
+                ll.longitude - boulderCoordinates.longitude,
+              ),
       );
     }
     throw JSONException("Route", json);

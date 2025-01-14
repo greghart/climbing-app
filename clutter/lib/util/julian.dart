@@ -9,7 +9,4 @@ const double j2000 = 2451545;
 
 double toJulian(DateTime date) =>
     date.millisecondsSinceEpoch / dayMs - 0.5 + j1970;
-
-DateTime fromJulian(double j) =>
-    DateTime.fromMillisecondsSinceEpoch(((j + 0.5 - j1970) * dayMs).toInt());
-JulianDay toDays(DateTime date) => toJulian(date) - j2000;
+JulianDay toDays(DateTime date) => toJulian(date);

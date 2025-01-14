@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../models/crag.dart';
+import '../entities/crag.dart';
 import '../search/my_search_bar.dart';
 import './layout.dart';
-import './map.dart';
 import 'layers_menu.dart';
 import 'map/area.dart';
 import 'map/boulder.dart';
 import 'map/crag.dart';
+import 'map/map.dart';
 import 'map/route.dart';
 import 'model.dart';
 import 'overlay/area.dart';

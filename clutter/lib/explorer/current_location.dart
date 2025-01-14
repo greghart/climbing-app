@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:provider/provider.dart';
 
-import '../models/crag.dart';
+import '../entities/crag.dart';
 import 'model.dart';
 
 /// A widget that displays the current location of the user on a map.

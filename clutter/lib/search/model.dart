@@ -1,10 +1,13 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../models/grade.dart';
-import '../models/index.dart' as models;
+import '../entities/grade.dart';
+import '../entities/index.dart' as models;
 import '../util/debounce.dart';
+import '../util/sun.dart';
+import '../util/suncalc.dart' as suncalc;
 
 class SearchModel extends ChangeNotifier {
   SearchModel({
@@ -27,10 +30,12 @@ class SearchModel extends ChangeNotifier {
       ],
     ];
     results = all.sublist(0, min(10, all.length));
+    _sunValues = SunValuesModel(crag: crag);
   }
 
   final models.Crag crag;
   late final List<SearchEntity> all;
+  late final SunValuesModel _sunValues;
 
   // Calculated results list
   List<SearchEntity> results = [];
@@ -60,6 +65,31 @@ class SearchModel extends ChangeNotifier {
     }
   }
 
+  String _displayHourValue(double value) {
+    if (value == 12) return 'Noon';
+
+    return "${(value % 12).round()}${value > 12 ? 'PM' : 'AM'}";
+  }
+
+  // Filter on shade, or shade at time
+  bool shady = false;
+  void setShady(bool? value) {
+    if (value != null && shady != value) {
+      shady = value;
+      updateSearchResults();
+    }
+  }
+
+  double shadyAt = 6;
+  String shadyAtLabel = 'Noon';
+  void setShadyAt(value) {
+    if (shadyAt != value) {
+      shadyAt = value;
+      shadyAtLabel = _displayHourValue(value);
+      updateSearchResults();
+    }
+  }
+
   // Filter on search/name match, case insensitive
   String search = '';
   void setSearch(String value) {
@@ -76,8 +106,15 @@ class SearchModel extends ChangeNotifier {
     notifyListeners();
 
     _debounceSearch.run(() async {
-      results = await compute(_search,
-          (all: all, type: type, search: search, gradeRange: gradeRange));
+      results = await compute(_search, (
+        all: all,
+        type: type,
+        search: search,
+        gradeRange: gradeRange,
+        shady: shady,
+        shadyAt: shadyAt,
+        sunValues: _sunValues.routesById,
+      ));
       isLoading = false;
       notifyListeners();
     });
@@ -86,6 +123,7 @@ class SearchModel extends ChangeNotifier {
   @override
   void dispose() {
     _debounceSearch.dispose();
+    _sunValues.dispose();
     super.dispose();
   }
 }
@@ -119,14 +157,20 @@ typedef SearchPayload = ({
   SearchType type,
   String search,
   RangeValues gradeRange,
+  bool shady,
+  double shadyAt,
+  Map<String, double> sunValues,
 });
 
 List<SearchEntity> _search(SearchPayload payload) {
   final matchType = _typeMatcher(payload.type);
   final matchSearch = _searchMatcher(payload.search.toLowerCase());
   final matchDifficulty = _difficultyMatcher(payload.gradeRange);
+  final matchShade =
+      _shadeMatcher(payload.shady, payload.shadyAt, payload.sunValues);
   return payload.all
-      .where((e) => matchType(e) && matchSearch(e) && matchDifficulty(e))
+      .where((e) =>
+          matchType(e) && matchSearch(e) && matchDifficulty(e) && matchShade(e))
       .toList();
 }
 
@@ -147,4 +191,75 @@ Matcher _difficultyMatcher(RangeValues range) {
     if (e.grade == null) return true;
     return e.grade!.value >= range.start && e.grade!.value <= range.end;
   };
+}
+
+Matcher _shadeMatcher(bool shady, double hour, Map<String, double> sunValues) {
+  if (!shady) return (e) => true;
+  print("shade values $sunValues");
+
+  return (e) {
+    if (e.type != SearchType.route) return false;
+    if (sunValues[e.id.toString()] == null) return false;
+
+    // Totally arbitrary
+    return sunValues[e.id.toString()]! < 0.6;
+  };
+}
+
+const sunExpiry = Duration(minutes: 30);
+
+// Caches sun positions and values for given crag.
+class SunValuesModel extends ChangeNotifier {
+  final models.Crag crag;
+  // General position of sun for this crag
+  // TODO: Technically more accurate to calculate for each entity individually, necessary for larger crags covering more space.
+  late final suncalc.SunPosition sunPosition;
+  // Sun value for each route
+  late final Map<String, double> routesById;
+  late final Timer timer;
+
+  SunValuesModel({
+    required this.crag,
+  }) {
+    refresh();
+    timer = Timer.periodic(sunExpiry, (timer) {
+      refresh();
+    });
+  }
+
+  @override
+  dispose() {
+    super.dispose();
+    timer.cancel();
+  }
+
+  void refresh() {
+    final now = DateTime.now();
+    routesById = {};
+    sunPosition = suncalc.getPosition(
+      time: now,
+      lat: crag.center.latitude,
+      lng: crag.center.longitude,
+    );
+
+    for (var area in crag.areas) {
+      for (var boulder in area.boulders) {
+        for (var route in boulder.routes) {
+          if (route.coordinates == null) continue;
+          routesById[route.id.toString()] = getSunValue(
+            inputVector: (
+              route.coordinates!.latitude - boulder.coordinates.latitude,
+              route.coordinates!.longitude - boulder.coordinates.longitude,
+            ),
+            sunPosition: suncalc.getPosition(
+              time: now,
+              lat: route.coordinates!.latitude,
+              lng: route.coordinates!.longitude,
+            ),
+          );
+        }
+      }
+    }
+    notifyListeners();
+  }
 }

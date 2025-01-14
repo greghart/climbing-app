@@ -1,5 +1,5 @@
 import 'package:clutter/data.dart';
-import 'package:clutter/models/index.dart' as models;
+import 'package:clutter/entities/index.dart' as models;
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

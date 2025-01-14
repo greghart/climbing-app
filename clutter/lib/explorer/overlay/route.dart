@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/index.dart' as models;
+import '../../entities/index.dart' as models;
 import '../model.dart';
 import 'compass.dart';
 import 'difficulty_span.dart';

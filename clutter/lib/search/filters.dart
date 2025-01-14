@@ -78,6 +78,16 @@ class _SearchFormState extends State<SearchForm> {
                     ),
                   ],
                 ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("Shady only?"),
+                    Checkbox(
+                      value: model.shady,
+                      onChanged: model.setShady,
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
