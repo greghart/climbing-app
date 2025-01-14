@@ -37,14 +37,15 @@ class Boulder {
       if (json case {'polygon': JsonObject polygonJson}) {
         polygon = Polygon.fromJson(polygonJson);
       }
+      LatLng c = jsonLatLng(coordinates);
 
       return Boulder(
         id: id,
         areaId: areaId,
         name: name,
         description: description,
-        coordinates: jsonLatLng(coordinates),
-        routes: routes.map((route) => Route.fromJson(id, route)).toList(),
+        coordinates: c,
+        routes: routes.map((route) => Route.fromJson(id, c, route)).toList(),
         polygon: polygon,
       );
     }

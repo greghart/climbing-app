@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/difficulty_breakdown.dart';
+import '../../entities/difficulty_breakdown.dart';
 
 // Colors by bucket key
 const difficultyColors = [

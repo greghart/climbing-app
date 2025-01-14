@@ -1,8 +1,9 @@
-# Models
+# Entities
 
-Dart classes of our domain climbing models.
+Dart classes of our domain climbing models. We call them entities to not conflict with the
+flutter view model nomenclature.
 
-One distinction from `packages/models`: a parent will have children,
+Another distinction from `packages/models`: a parent will have children,
 but children will never have a pointer back to the parent. In Flutter,
 we'll use provider context for accessing the ancestry tree.
 

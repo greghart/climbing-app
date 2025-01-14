@@ -8,8 +8,12 @@ import 'dart:math' as math;
 
 import 'julian.dart';
 
+typedef SunPosition = ({Degrees azimuth, Degrees altitude});
+
 // calculates sun position for a given date and latitude/longitude
-({Degrees azimuth, Degrees altitude}) getPosition({
+// Returns azimuth (direction along horizon, measured from south (0 degrees) to west (270 degrees)) and
+// altitude (angle above the horizon, 0 at the horizon, 90 at the zenith, -90 straight down)
+SunPosition getPosition({
   required DateTime time,
   required double lat,
   required double lng,
@@ -19,7 +23,7 @@ import 'julian.dart';
   final sc = sunCoords(d);
   Degrees ha = hourAngle(
     rightAscension: sc.rightAscension,
-    siderealTime: siderealTime(d, lng),
+    siderealTime: siderealTime(d, -lng),
   );
 
   return (
@@ -41,14 +45,11 @@ Degrees toDegrees(Radians r) {
 }
 
 // shortcuts for easier to read formulas
-const double _pi = 3.141592653589793;
-const double _rad = _pi / 180;
 double _sin(Radians x) => math.sin(x);
 double _cos(Radians x) => math.cos(x);
 double _tan(Radians x) => math.tan(x);
 Radians _asin(double x) => math.asin(x);
 Radians _atan2(double y, double x) => math.atan2(y, x);
-Radians _acos(double x) => math.acos(x);
 
 const _m0 = 357.5291;
 const _m1 = 0.98560028;

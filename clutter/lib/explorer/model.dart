@@ -4,7 +4,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
-import '../models/index.dart' as models;
+import '../entities/index.dart' as models;
 
 enum EntityType { crag, area, boulder, route }
 
@@ -106,7 +106,7 @@ class ExplorerSheetModel extends ChangeNotifier {
   }
 }
 
-enum LayerType { areas, boulders, routes, trails }
+enum LayerType { areas, boulders, routes, trails, sun }
 
 extension Display on LayerType {
   String display() {
@@ -121,6 +121,7 @@ class ExplorerLayersModel extends ChangeNotifier {
     LayerType.boulders: true,
     LayerType.routes: true,
     LayerType.trails: true,
+    LayerType.sun: true,
   };
 
   bool isChecked(LayerType type) {

@@ -68,7 +68,6 @@ class CompassCustomPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final diameter = size.height; // compass should be setup in box
     final radius = size.height / 2;
     // Center The Compass In The Middle Of The Screen
     canvas.translate(radius, radius);
