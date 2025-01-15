@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
       GoRoute(
           path: '/settings',
           pageBuilder: (BuildContext context, GoRouterState state) {
-            return MaterialPage(
-              child: SettingsView(controller: settingsController),
+            return const MaterialPage(
+              child: SettingsView(),
             );
           }),
       GoRoute(

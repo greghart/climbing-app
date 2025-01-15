@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 /// Layout for the explorer page.
 class ExplorerLayout extends StatelessWidget {
@@ -28,6 +29,32 @@ class ExplorerLayout extends StatelessWidget {
           ),
           overlay,
         ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text('Boulder Buddy'),
+            ),
+            ListTile(
+              title: const Text('Explorer'),
+              onTap: () {
+                context.push('/explorer');
+              },
+            ),
+            ListTile(
+              title: const Text('Settings'),
+              onTap: () {
+                context.push('/settings');
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

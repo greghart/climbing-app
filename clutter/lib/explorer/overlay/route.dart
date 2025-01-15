@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../entities/index.dart' as models;
-import '../model.dart';
-import 'compass.dart';
 import 'difficulty_span.dart';
 import 'layout.dart';
 
@@ -17,7 +14,6 @@ class RouteOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final model = Provider.of<ExplorerModel>(context);
 
     return OverlayLayout(
       title: route.name,
@@ -37,11 +33,8 @@ class RouteOverlay extends StatelessWidget {
               route.description!,
               style: theme.textTheme.bodyMedium,
             ),
-          DiagramsLayout(
-            chart: const SizedBox.shrink(),
-            compass: Compass(
-              to: route.coordinates ?? model.boulder!.coordinates,
-            ),
+          const DiagramsLayout(
+            chart: null,
           ),
         ],
       ),
