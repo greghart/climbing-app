@@ -33,8 +33,8 @@ SunPosition getPosition({
 }
 
 // Keep code clear when we're working in degrees vs radians
-typedef Radians = num;
-typedef Degrees = num;
+typedef Radians = double;
+typedef Degrees = double;
 
 Radians toRadians(Degrees d) {
   return d * math.pi / 180;

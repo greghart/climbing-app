@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// A service that stores and retrieves user settings.
 ///
@@ -6,18 +7,19 @@ import 'package:flutter/material.dart';
 /// persist the user settings locally, use the shared_preferences package. If
 /// you'd like to store settings on a web server, use the http package.
 class SettingsService {
+  final SharedPreferencesAsync prefs = SharedPreferencesAsync();
+
   /// Loads the User's preferred ThemeMode from local or remote storage.
-  Future<ThemeMode> themeMode() async => ThemeMode.dark;
+  Future<ThemeMode> themeMode() async => ThemeMode.values
+      .byName(await prefs.getString("themeMode") ?? ThemeMode.dark.name);
 
   /// Persists the user's preferred ThemeMode to local or remote storage.
-  Future<void> updateThemeMode(ThemeMode theme) async {
-    // Use the shared_preferences package to persist settings locally or the
-    // http package to persist settings over the network.
-  }
+  Future<void> updateThemeMode(ThemeMode theme) async =>
+      await prefs.setString("themeMode", theme.name);
 
-  Future<bool> cozyCompass() async => true;
+  Future<bool> cozyCompass() async =>
+      await prefs.getBool("cozyCompass") ?? false;
 
-  Future<void> updateCozyCompass(bool b) async {
-    // TODO: Implement
-  }
+  Future<void> updateCozyCompass(bool b) async =>
+      await prefs.setBool("cozyCompass", b);
 }
