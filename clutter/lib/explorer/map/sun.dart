@@ -37,7 +37,7 @@ class SunLayer extends StatelessWidget {
     }
 
     final sunPosition = suncalc.getPosition(
-      time: DateTime.now().add(const Duration(hours: -9)),
+      time: DateTime.now(),
       lat: coordinate.latitude,
       lng: coordinate.longitude,
     );
