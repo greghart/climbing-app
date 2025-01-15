@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart' as latlng;
 import 'package:provider/provider.dart';
 
+import '../../util/suncalc.dart' as suncalc;
 import '../model.dart';
 
 class Compass extends StatelessWidget {
@@ -21,10 +22,10 @@ class Compass extends StatelessWidget {
       builder: (context, constraints) {
         double heading = locations.currentHeading.heading;
         double toHeading = headingFromCoordinates(
-          toRadians(locations.currentPosition.latitude),
-          toRadians(locations.currentPosition.longitude),
-          toRadians(to.latitude),
-          toRadians(to.longitude),
+          suncalc.toRadians(locations.currentPosition.latitude),
+          suncalc.toRadians(locations.currentPosition.longitude),
+          suncalc.toRadians(to.latitude),
+          suncalc.toRadians(to.longitude),
         );
 
         return SizedBox(
@@ -40,7 +41,8 @@ class Compass extends StatelessWidget {
                 ),
               ),
               Text(
-                buildHeadingFirstLetter(toDegrees(normalizeRads(heading))),
+                buildHeadingFirstLetter(
+                    suncalc.toDegrees(normalizeRads(heading))),
                 style: TextStyle(
                   color: Colors.grey[700]!,
                   fontSize: constraints.maxHeight / 3,
@@ -112,16 +114,20 @@ class CompassCustomPainter extends CustomPainter {
     // Draw The Light Grey Lines 16 Times While Rotating 22.5° Degrees
     for (int i = 1; i <= 16; i++) {
       canvas.drawLine(
-          Offset.fromDirection(-(heading + toRadians(22.5) * i), radius * .6),
-          Offset.fromDirection(-(heading + toRadians(22.5) * i), radius * .8),
+          Offset.fromDirection(
+              -(heading + suncalc.toRadians(22.5) * i), radius * .6),
+          Offset.fromDirection(
+              -(heading + suncalc.toRadians(22.5) * i), radius * .8),
           lightIndexLine);
     }
 
     // Draw The Dark Grey Lines 3 Times While Rotating 90° Degrees
     for (int i = 1; i <= 3; i++) {
       canvas.drawLine(
-          Offset.fromDirection(-(heading + toRadians(90) * i), radius * .6),
-          Offset.fromDirection(-(heading + toRadians(90) * i), radius * .8),
+          Offset.fromDirection(
+              -(heading + suncalc.toRadians(90) * i), radius * .6),
+          Offset.fromDirection(
+              -(heading + suncalc.toRadians(90) * i), radius * .8),
           darkIndexLine);
     }
 
@@ -132,12 +138,12 @@ class CompassCustomPainter extends CustomPainter {
       Offset.fromDirection(-heading, radius * .85).dy,
     );
     path.lineTo(
-      Offset.fromDirection(-(heading + toRadians(15)), radius * .6).dx,
-      Offset.fromDirection(-(heading + toRadians(15)), radius * .6).dy,
+      Offset.fromDirection(-(heading + suncalc.toRadians(15)), radius * .6).dx,
+      Offset.fromDirection(-(heading + suncalc.toRadians(15)), radius * .6).dy,
     );
     path.lineTo(
-      Offset.fromDirection(-(heading - toRadians(15)), radius * .6).dx,
-      Offset.fromDirection(-(heading - toRadians(15)), radius * .6).dy,
+      Offset.fromDirection(-(heading - suncalc.toRadians(15)), radius * .6).dx,
+      Offset.fromDirection(-(heading - suncalc.toRadians(15)), radius * .6).dy,
     );
     path.close();
     canvas.drawPath(path, northTriangle);
@@ -164,15 +170,6 @@ class CompassCustomPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
-}
-
-// TODO: Refactor to suncalc
-double toRadians(double degrees) {
-  return degrees * math.pi / 180;
-}
-
-double toDegrees(double rad) {
-  return rad * 180 / math.pi;
 }
 
 double headingFromCoordinates(

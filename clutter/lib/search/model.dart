@@ -195,7 +195,6 @@ Matcher _difficultyMatcher(RangeValues range) {
 
 Matcher _shadeMatcher(bool shady, double hour, Map<String, double> sunValues) {
   if (!shady) return (e) => true;
-  print("shade values $sunValues");
 
   return (e) {
     if (e.type != SearchType.route) return false;

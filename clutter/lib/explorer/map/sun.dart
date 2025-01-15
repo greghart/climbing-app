@@ -37,10 +37,12 @@ class SunLayer extends StatelessWidget {
     }
 
     final sunPosition = suncalc.getPosition(
-      time: DateTime.now(),
+      time: DateTime.now().add(const Duration(hours: -9)),
       lat: coordinate.latitude,
       lng: coordinate.longitude,
     );
+    if (sunPosition.altitude < 0) return const SizedBox.shrink();
+
     // Suncalc gives azimuth based on 0 degrees at the unit vector (0, -1) (ie. south)
     final Vector2 unitVector = (
       math.cos(suncalc.toRadians(sunPosition.azimuth) + math.pi),
