@@ -25,8 +25,8 @@ class SettingsController with ChangeNotifier {
   // Whether to use the small cozy compass in breadcrumbs
   bool get cozyCompass => _cozyCompass;
 
-  Future<void> updateCozyCompass(bool b) async {
-    if (b == _cozyCompass) return;
+  Future<void> updateCozyCompass(bool? b) async {
+    if (b == null || b == _cozyCompass) return;
 
     _cozyCompass = b;
     notifyListeners();

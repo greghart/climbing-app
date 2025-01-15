@@ -139,14 +139,15 @@ class Breadcrumbs extends StatelessWidget {
 /// Re-usable wrapping row for diagrams to have them line up nicely, for chart and compass
 /// NOTE: We are prototyping, compass may go elsewhere
 class DiagramsLayout extends StatelessWidget {
-  const DiagramsLayout({super.key, this.chart, this.compass});
+  const DiagramsLayout({super.key, this.chart});
 
   final Widget? chart;
-  final Widget? compass;
 
   @override
   Widget build(BuildContext context) {
     final settings = Provider.of<SettingsController>(context);
+    final model = context.watch<ExplorerModel>();
+
     return Wrap(
       spacing: 16.0,
       runSpacing: 12.0,
@@ -162,14 +163,19 @@ class DiagramsLayout extends StatelessWidget {
               child: chart,
             ),
           ),
-        if (compass != null && !settings.cozyCompass)
+        if (!settings.cozyCompass)
           SizedBox(
             height: 140,
             child: AspectRatio(
               aspectRatio: 1,
-              child: compass,
+              child: Compass(
+                to: model.route?.coordinates ??
+                    model.boulder?.coordinates ??
+                    model.area?.center ??
+                    model.crag.center,
+              ),
             ),
-          )
+          ),
       ],
     );
   }

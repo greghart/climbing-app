@@ -39,33 +39,33 @@ class ExplorerPage extends StatelessWidget {
         ),
       ],
       child: SafeArea(
-        child: Stack(
-          children: [
-            ExplorerLayout(
-              map: const MyMap(
-                child: MapBuilder(),
-              ),
-              search: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: MySearchBar(
-                  hintText: "Search crag...",
-                  onTap: () {
-                    context.push('/search');
+        child: ExplorerLayout(
+          map: const MyMap(
+            child: MapBuilder(),
+          ),
+          search: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: MySearchBar(
+              hintText: "Search crag...",
+              onTap: () {
+                context.push('/search');
+              },
+              leading: Builder(builder: (context) {
+                return IconButton(
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
                   },
-                  leading: IconButton(
-                    onPressed: () {},
-                    icon: const Offstage(child: Icon(Icons.arrow_back)),
-                  ),
-                  trailing: const [
-                    LayersMenu(),
-                  ],
-                ),
-              ),
-              overlay: const OverlaySheet(
-                sliver: OverlayBuilder(),
-              ),
+                  icon: const Icon(Icons.menu),
+                );
+              }),
+              trailing: const [
+                LayersMenu(),
+              ],
             ),
-          ],
+          ),
+          overlay: const OverlaySheet(
+            sliver: OverlayBuilder(),
+          ),
         ),
       ),
     );
