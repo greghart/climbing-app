@@ -15,12 +15,12 @@ class SettingsController with ChangeNotifier {
 
   // Make ThemeMode a private variable so it is not updated directly without
   // also persisting the changes with the SettingsService.
-  late ThemeMode _themeMode;
+  late ThemeMode _themeMode = ThemeMode.dark;
 
   // Allow Widgets to read the user's preferred ThemeMode.
   ThemeMode get themeMode => _themeMode;
 
-  late bool _cozyCompass;
+  late bool _cozyCompass = false;
 
   // Whether to use the small cozy compass in breadcrumbs
   bool get cozyCompass => _cozyCompass;

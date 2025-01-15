@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../entities/index.dart' as models;
 
 enum EntityType { crag, area, boulder, route }
@@ -186,6 +189,24 @@ class ExplorerLocationModel extends ChangeNotifier {
     // Setup default data to make consumers easier
     _setLatLng(crag.center.latitude, crag.center.longitude, notify: false);
     _setHeading(0, notify: false);
+  }
+
+  final SharedPreferencesAsync routeLocations = SharedPreferencesAsync();
+  void recordRouteLocation(models.Route r) async {
+    print("recordRouteLocation: ${r.id} -> ${currentPosition.latLng}");
+    await routeLocations.setString(
+      'route_location_${r.id}',
+      jsonEncode(currentPosition.latLng.toJson()),
+    );
+    notifyListeners();
+    print("Done!");
+  }
+
+  Future<LatLng?> getPendingRouteLocation(int id) async {
+    final str = await routeLocations.getString('route_location_$id');
+    print("getPendingRouteLocation: $id -> $str");
+    if (str == null) return null;
+    return LatLng.fromJson(jsonDecode(str));
   }
 
   void setPosition(LocationMarkerPosition? position, {notify = true}) {
