@@ -18,8 +18,7 @@ interface Props {
 }
 
 export default function AreaShowOverview(props: Props) {
-  const [expandedBoulders, setExpandedBoulders] =
-    React.useState<boolean>(false);
+  const [expandedBoulders, setExpandedBoulders] = React.useState<boolean>(true);
   const handleExpand = () => {
     setExpandedBoulders(!expandedBoulders);
   };

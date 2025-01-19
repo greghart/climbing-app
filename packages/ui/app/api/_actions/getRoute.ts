@@ -10,6 +10,7 @@ const getRoute = cache(async (id: number | string) => {
     where: [{ name: id as string }, { id: id as number }],
     relations: [
       "boulder",
+      "boulder.routes",
       "boulder.polygon",
       "boulder.polygon.coordinates",
       "boulder.area",

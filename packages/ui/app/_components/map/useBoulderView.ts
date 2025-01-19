@@ -6,7 +6,7 @@ import { useMap } from "react-leaflet";
 export default function useBoulderView(
   boulder: IBoulder,
   // Default offset keeps boulder intop half of screen if width is big enough
-  { offset = 0.0, zoom = 19 }: { offset?: number; zoom?: number } = {}
+  { offset = 0.0, zoom = 20 }: { offset?: number; zoom?: number } = {}
 ) {
   const map = useMap();
   React.useEffect(() => {

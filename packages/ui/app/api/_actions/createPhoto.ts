@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 import "server-only";
 import { z } from "zod";
 
-const MAX_FILE_SIZE = 500000;
+const MAX_FILE_SIZE = 50 * 1000 * 1000; // 50 MB
 const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
   "image/jpg",
@@ -23,7 +23,7 @@ const schema = z.object({
   description: z.string().max(1000).optional(),
   upload: z
     .instanceof(File)
-    .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
+    .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 50MB.`)
     .refine((file) => {
       return ACCEPTED_IMAGE_TYPES.includes(file.type);
     }, ".jpg, .jpeg, .png and .webp files are accepted."),

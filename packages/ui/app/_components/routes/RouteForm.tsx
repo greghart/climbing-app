@@ -6,6 +6,7 @@ import TextField from "@/app/_components/form/TextField";
 import useActionState from "@/app/_components/form/useActionState";
 import BoulderMap from "@/app/_components/map/BoulderMap";
 import Circle from "@/app/_components/map/Circle";
+import RouteMarkers from "@/app/_components/map/RouteMarkers";
 import useBoulderView from "@/app/_components/map/useBoulderView";
 import routeSchema from "@/app/api/_schemas/route";
 import { formActionHandler } from "@/app/api/formAction";
@@ -50,13 +51,19 @@ export default function RouteForm<Meta extends {}>(props: Props<Meta>) {
             <>
               <BoulderView boulder={props.boulder} />
               <BoulderMap boulder={props.boulder} />
-              <Circle center={c} />
+              {c && <Circle center={c} style="pending" />}
             </>
           )}
           TracerProps={{
-            renderPending: (c) => (
+            renderPending: (c) => <Circle style="pending" center={c} />,
+            children: (
               <>
                 <BoulderView boulder={props.boulder} />
+                <RouteMarkers
+                  routes={(props.boulder.routes || []).filter(
+                    (r) => r.id !== props.route?.id
+                  )}
+                />
                 <BoulderMap boulder={props.boulder} />
               </>
             ),

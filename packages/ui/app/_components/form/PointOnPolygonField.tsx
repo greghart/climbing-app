@@ -1,7 +1,6 @@
 "use client";
 import Circle from "@/app/_components/map/Circle";
 import CragMap from "@/app/_components/map/CragMap";
-import CoordinateTracer from "@/app/_components/tracer/CoordinateTracer";
 import PointOnPolygon from "@/app/_components/tracer/PointOnPolygon";
 import { IApiResponse } from "@/app/api/ApiResponse";
 import { Edit } from "@mui/icons-material";
@@ -23,13 +22,14 @@ type Props<
 > = {
   name: Key;
   state: IApiResponse<Model, Schema>;
-  TracerProps?: Partial<React.ComponentProps<typeof CoordinateTracer>>;
+  TracerProps?: Partial<React.ComponentProps<typeof PointOnPolygon>>;
   crag: ICrag;
   polygon?: IPolygon;
-  renderPreview?: (c: ICoordinateLiteral) => React.ReactNode;
+  renderPreview?: (c: ICoordinateLiteral | undefined) => React.ReactNode;
 };
 
-const defaultRenderPreview = (c: ICoordinateLiteral) => <Circle center={c} />;
+const defaultRenderPreview = (c: ICoordinateLiteral | undefined) =>
+  c && <Circle style="pending" center={c} />;
 
 type HasPointOnPolygon<Key extends string> = {
   [key in Key]?: ICoordinateLiteral; // optional is most flexible option
@@ -51,7 +51,7 @@ export default function PointOnPolygonField<
       <Grid container padding={1}>
         <Grid item xs={9}>
           <CragMap crag={props.crag} style={{ paddingBottom: "50%" }}>
-            {current && (props.renderPreview || defaultRenderPreview)(current)}
+            {(props.renderPreview || defaultRenderPreview)(current)}
           </CragMap>
         </Grid>
         <Grid item>

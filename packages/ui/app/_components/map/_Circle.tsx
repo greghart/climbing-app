@@ -13,6 +13,12 @@ const styles = {
     color: "red",
     fillColor: "#f03",
   },
+  pending: {
+    // a circle that isn't yet committed, yellow for transience
+    color: "yellow",
+    fillColor: "#yellow",
+    fillOpacity: 0.5,
+  },
   dynamic: {
     // a dynamic circle on the move, green for go
     color: "green",

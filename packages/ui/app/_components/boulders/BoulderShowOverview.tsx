@@ -18,7 +18,7 @@ interface Props {
 }
 
 export default function BoulderShowOverview(props: Props) {
-  const [expandedRoutes, setExpandedRoutes] = React.useState<boolean>(false);
+  const [expandedRoutes, setExpandedRoutes] = React.useState<boolean>(true);
   const handleExpand = () => {
     setExpandedRoutes(!expandedRoutes);
   };

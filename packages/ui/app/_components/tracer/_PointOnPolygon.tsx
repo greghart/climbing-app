@@ -24,6 +24,10 @@ interface PointOnPolygonProps {
   renderPending?: (c: ICoordinateLiteral) => React.ReactNode;
 }
 
+const defaultRenderPending = (c: ICoordinateLiteral) => (
+  <Circle center={c} style="pending" />
+);
+
 interface PointOnPolygonState {
   // Current position of point on polygon (if any)
   current?: ICoordinateLiteral;
@@ -89,7 +93,7 @@ export default function PointOnPolygon(props: PointOnPolygonProps) {
     if (!state.pending) {
       return;
     }
-    return <Circle center={state.pending} />;
+    return (props.renderPending || defaultRenderPending)(state.pending);
   };
 
   return (

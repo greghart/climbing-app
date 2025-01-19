@@ -17,7 +17,7 @@ interface Props {
 }
 
 export default function CragShowOverview(props: Props) {
-  const [expandedAreas, setExpandedAreas] = React.useState<boolean>(false);
+  const [expandedAreas, setExpandedAreas] = React.useState<boolean>(true);
   const handleExpand = () => {
     setExpandedAreas(!expandedAreas);
   };
