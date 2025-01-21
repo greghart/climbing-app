@@ -29,6 +29,17 @@ class Polygon {
       this.coordinates = data.coordinates.map(Coordinate.build);
     }
   }
+
+  get center() {
+    return {
+      lat: _average(this.coordinates!.map((c) => c.lat)),
+      lng: _average(this.coordinates!.map((c) => c.lng)),
+    };
+  }
+}
+
+function _average(arr: number[]) {
+  return arr.reduce((a, b) => a + b, 0) / arr.length;
 }
 
 export default Polygon;

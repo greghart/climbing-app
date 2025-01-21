@@ -1,5 +1,7 @@
 import Photoable, { type IPhotoable } from "./Photoable.js";
 import Timestamps, { type ITimestamps } from "./Timestamps.js";
+import type { ITopo } from "./Topo.js";
+import Topo from "./Topo.js";
 import Upload, { type IUpload } from "./Upload.js";
 
 export type IPhoto = {
@@ -8,11 +10,13 @@ export type IPhoto = {
   description?: string;
   upload?: IUpload;
   photoable?: IPhotoable;
+  topo?: ITopo;
   // user: IUser; // TODO
 } & ITimestamps;
 
-interface Photo extends Omit<IPhoto, "photoable"> {
+interface Photo extends Omit<IPhoto, "photoable" | "topo"> {
   photoable?: Photoable;
+  topo?: Topo;
 }
 
 class Photo {
@@ -26,6 +30,9 @@ class Photo {
     }
     if (data.photoable) {
       this.photoable = new Photoable(data.photoable);
+    }
+    if (data.topo) {
+      this.topo = new Topo(data.topo);
     }
   }
 }
