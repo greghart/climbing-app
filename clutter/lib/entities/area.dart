@@ -47,10 +47,7 @@ class Area {
     }
     throw JSONException('Area', json);
   }
-  LatLng get center => LatLng(
-        polygon!.coordinates.map((c) => c.latitude).average,
-        polygon!.coordinates.map((c) => c.longitude).average,
-      );
+  LatLng get center => polygon!.center;
 
   JsonObject toJson() {
     return {

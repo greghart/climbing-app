@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'coordinate.dart';
 import 'types.dart';
 
@@ -35,4 +36,9 @@ class Polygon {
       'coordinates': coordinates.map((coord) => coord.toJson()).toList(),
     };
   }
+
+  LatLng get center => LatLng(
+        coordinates.map((c) => c.latitude).average,
+        coordinates.map((c) => c.longitude).average,
+      );
 }
