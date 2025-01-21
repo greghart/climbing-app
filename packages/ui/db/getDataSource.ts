@@ -18,6 +18,8 @@ export const dataSource = new DataSource({
     entities.PolygonSchema,
     entities.PolygonCoordinateSchema,
     entities.RouteSchema,
+    entities.TopoSchema,
+    entities.TopogonSchema,
     entities.TrailSchema,
     entities.TrailLineSchema,
     entities.UploadSchema,

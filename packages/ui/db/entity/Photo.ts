@@ -33,6 +33,10 @@ const PhotoSchema = new EntitySchema<Photo>({
       target: "upload",
       ...cascadeManyToOne,
     },
+    topo: {
+      type: "one-to-one",
+      target: "topo",
+    },
   },
 });
 
