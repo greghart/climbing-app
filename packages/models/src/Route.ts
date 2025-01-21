@@ -1,11 +1,5 @@
-// import Boulder from "./Boulder.js";
-// import Grade from "./Grade.js";
-// import { cascadeManyToOne } from "../db/cascadeOptions.js";
-// import Commentable from "./Commentable.js";
-// import Coordinate, { CoordinateOptional } from "./Coordinate.js";
-// import Photoable from "./Photoable.js";
-
 import Boulder, { type IBoulder } from "./Boulder.js";
+import type { IComment } from "./Comment.js";
 import type { ICommentable } from "./Commentable.js";
 import type Coordinate from "./Coordinate.js";
 import type { ICoordinateLiteral } from "./Coordinate.js";
@@ -28,6 +22,7 @@ export interface IRoute {
   // Location of the route if any, this will be setup on a polygon of the boulder
   coordinates?: ICoordinateLiteral;
   commentable?: ICommentable;
+  comments?: IComment[];
   photoable?: IPhotoable;
 }
 

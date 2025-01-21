@@ -8,21 +8,25 @@ export {
   isCoordinateLiteral,
   type ICoordinate,
   type ICoordinateLiteral,
-  type ICoordinateTuple
+  type ICoordinateTuple,
 } from "./Coordinate.js";
 export {
   default as CoordinateOptional,
-  type ICoordinateOptional
+  type ICoordinateOptional,
 } from "./CoordinateOptional.js";
 export { default as Crag, type ICrag } from "./Crag.js";
 export {
-  default as Grade, grades, GradingSystemType, type IGrade
+  default as Grade,
+  grades,
+  GradingSystemType,
+  type IGrade,
 } from "./Grade.js";
 export { default as Line, type ILine } from "./Line.js";
 export { default as Photo, type IPhoto } from "./Photo.js";
 export { default as Photoable, type IPhotoable } from "./Photoable.js";
 export { default as Polygon, type IPolygon } from "./Polygon.js";
 export { default as Route, type IRoute } from "./Route.js";
+export { default as Topo, type ITopo } from "./Topo.js";
+export { default as Topogon, type ITopogon } from "./Topogon.js";
 export { default as Trail, type ITrail } from "./Trail.js";
 export { default as Upload, type IUpload } from "./Upload.js";
-
