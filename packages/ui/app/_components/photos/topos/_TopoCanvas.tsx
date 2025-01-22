@@ -42,6 +42,5 @@ function fitImage(img: HTMLImageElement, width: number, height: number) {
   const aspectCanvas = width / height;
   // Scale it down to fit
   const scale = aspectCanvas > aspect ? height / img.height : width / img.width;
-  console.warn("fitImage", { aspect, aspectCanvas, scale });
   return { width: img.width * scale, height: img.height * scale };
 }
