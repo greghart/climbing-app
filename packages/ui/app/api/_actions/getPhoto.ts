@@ -9,7 +9,15 @@ const getPhoto = cache(async (id: number) => {
   const ds = await getDataSource();
   return await ds.getRepository(PhotoSchema).findOne({
     where: { id },
-    relations: ["photoable", "photoable.crag", "upload"],
+    relations: [
+      "photoable",
+      "photoable.crag",
+      "photoable.area",
+      "photoable.boulder",
+      "photoable.route",
+      "upload",
+      "topo",
+    ],
   });
 });
 

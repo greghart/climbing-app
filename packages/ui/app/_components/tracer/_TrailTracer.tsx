@@ -12,7 +12,7 @@ import { ICrag, ITrail, Trail } from "models";
 import * as React from "react";
 import { Circle, Polyline, Tooltip } from "react-leaflet";
 
-const snapDistance = 2; // in meters -- adjust this value as neede
+const snapDistance = 2; // in meters -- adjust this value as needed
 const instructions = `Click to add lines.
 Z to undo last line.
 Space to clear pending line.`;

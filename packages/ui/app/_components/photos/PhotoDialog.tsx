@@ -1,4 +1,5 @@
 "use client";
+import OpenTopoLink from "@/app/_components/photos/OpenTopoLink";
 import PhotoImageListItem from "@/app/_components/photos/PhotoImageListItem";
 import UpdatePhotoForm from "@/app/_components/photos/UpdatePhotoForm";
 import getPhotoRedirect from "@/app/_util/getPhotoRedirect";
@@ -24,6 +25,7 @@ function PhotoDialog({ photo }: { photo: IPhoto }) {
       <DialogTitle>Photo &apos;{photo.title}&apos;</DialogTitle>
       <DialogContent>
         <Stack>
+          <OpenTopoLink photo={photo} />
           <UpdatePhotoForm photo={photo} action={actionHandler as any} />
           <PhotoImageListItem photo={photo} hideTitle />
         </Stack>
