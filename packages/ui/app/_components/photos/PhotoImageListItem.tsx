@@ -60,7 +60,7 @@ function PhotoImageListItem(props: Props) {
               >
                 <Link underline="hover" color="inherit">
                   <Typography variant="subtitle2">
-                    <i>Edit photo</i>
+                    <i>Show more</i>
                   </Typography>
                 </Link>
               </NextLink>

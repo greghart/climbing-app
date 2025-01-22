@@ -20,10 +20,14 @@ const nextConfig = {
 
     config.resolve = config.resolve || {};
     config.resolve.alias = config.resolve.alias || {};
+    // node-config incompatible
     config.resolve.alias.config$ = path.join(
       import.meta.dirname,
       "./app/api/config"
     );
+    // canvas incompatibility
+    config.resolve.alias["konva"] = false;
+    config.resolve.alias["react-konva"] = false;
     return config;
   },
   experimental: {

@@ -2,12 +2,14 @@ import { Upload } from "@/db";
 import { cascadeManyToOne } from "@/db/cascadeOptions";
 import BaseColumnSchemaPart from "@/db/entity/BaseColumnSchemaPart";
 import { Photoable } from "@/db/entity/Photoable";
+import { Topo } from "@/db/entity/Topo";
 import { type IPhoto } from "models";
 import { EntitySchema } from "typeorm";
 
 export type Photo = IPhoto & {
   photoable: Photoable;
   upload: Upload;
+  topo: Topo;
 };
 
 const PhotoSchema = new EntitySchema<Photo>({
@@ -36,6 +38,7 @@ const PhotoSchema = new EntitySchema<Photo>({
     topo: {
       type: "one-to-one",
       target: "topo",
+      inverseSide: "photo",
     },
   },
 });

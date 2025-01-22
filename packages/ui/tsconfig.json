@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "db/fixtures/parseCrag.ts"
-  ],
+, "app/photos/[id]/topo"  ],
   "exclude": [
     "node_modules"
   ]
