@@ -17,6 +17,7 @@ const getPhoto = cache(async (id: number) => {
       "photoable.route",
       "upload",
       "topo",
+      "topo.topogons",
     ],
   });
 });

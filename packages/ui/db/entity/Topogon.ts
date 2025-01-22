@@ -29,6 +29,7 @@ const TopogonSchema = new EntitySchema<Topogon>({
       type: "many-to-one",
       target: "topo",
       ...cascadeManyToOne,
+      nullable: false,
     },
     area: {
       type: "many-to-one",

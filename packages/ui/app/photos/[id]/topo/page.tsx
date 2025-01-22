@@ -22,7 +22,7 @@ export default async function Page(props: Props) {
       content={
         <>
           <PhotoableLink photoable={photo.photoable} />
-          <TopoEditor photo={photo} />
+          <TopoEditor photo={photo} topo={photo.topo} />
         </>
       }
     />

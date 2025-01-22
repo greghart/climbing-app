@@ -1,6 +1,9 @@
 import { Card, CardContent } from "@mui/material";
 
-function ShowContentCard({ children }: { children: React.ReactNode }) {
+function ShowContentCard({
+  children,
+  ...props
+}: React.ComponentProps<typeof Card>) {
   return (
     <Card
       sx={{
@@ -9,6 +12,7 @@ function ShowContentCard({ children }: { children: React.ReactNode }) {
           xs: 0,
         },
       }}
+      {...props}
     >
       <CardContent>{children}</CardContent>
     </Card>
