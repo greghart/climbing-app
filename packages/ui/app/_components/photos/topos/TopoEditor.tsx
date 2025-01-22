@@ -3,6 +3,7 @@ import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
 import useActionState from "@/app/_components/form/useActionState";
+import LineTracer from "@/app/_components/photos/topos/LineTracer";
 import TopoCanvas from "@/app/_components/photos/topos/TopoCanvas";
 import ShowContentCard from "@/app/_components/show/ShowContentCard";
 import putTopo from "@/app/api/_actions/putTopo";
@@ -24,7 +25,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { IPhoto, ITopo } from "models";
+import { IPhoto, ITopo, ITopogon } from "models";
 import React from "react";
 
 interface Props {
@@ -32,18 +33,10 @@ interface Props {
   topo?: ITopo;
 }
 
-let _clientId = 0;
-function ClientId() {
-  // Generate client ids that can be easily known as "client only" on server.
-  _clientId--;
-  return _clientId;
-}
-
-type Tool = "line";
+export type Tool = "line";
 export default function TopoEditor(props: Props) {
   // Note, we still use `useActionState`, but in reality topo editing cannot be
   // done without a fully functional clientside.
-  console.warn("Topo", props.topo);
   const [state, formAction, meta] = useActionState(putTopo, {
     ok: true,
     data: props.topo || {
@@ -57,23 +50,12 @@ export default function TopoEditor(props: Props) {
   });
   const errText = state.fieldErrors?.topogons?.join(", ");
   const [tool, setTool] = React.useState<Tool>("line");
-  const [topogons, setTopogons] = React.useState(state.data.topogons || []);
-  // TODO: Consider setting up a reducer for the complicated client state
+  const [topogons, dispatchTopogons] = React.useReducer(
+    topogonsReducer,
+    state.data.topogons || []
+  );
   const [selectedTopogonId, setSelectedTopogonId] = React.useState<number>(0);
   const selectedTopogon = topogons.find((t) => t.id === selectedTopogonId)!;
-  const handleAddTopogon = (e: React.MouseEvent) => {
-    setTopogons((topogons) => [
-      ...topogons,
-      {
-        id: ClientId(),
-        label: "New topogon",
-        data: "",
-      },
-    ]);
-  };
-  const handleDeleteTopogon = (id: number) => {
-    setTopogons((topogons) => topogons.filter((t) => t.id !== id));
-  };
   // TODO: Take in the available entities to target -- should be constrained to
   // one topogon per entity
   // TODO: Pass in topo info from tools into the canvas editor
@@ -89,7 +71,9 @@ export default function TopoEditor(props: Props) {
       <div style={{ margin: "1em calc(50% - 40vw)" }}>
         <Grid container spacing={2}>
           <Grid item xs={12} lg={8}>
-            <TopoCanvas {...props} />
+            <TopoCanvas {...props}>
+              {(img) => <LineTracer>{img}</LineTracer>}
+            </TopoCanvas>
           </Grid>
           <Grid item xs={12} lg={4}>
             <ShowContentCard>
@@ -111,11 +95,17 @@ export default function TopoEditor(props: Props) {
                 <List sx={{ width: "100%", maxWidth: "480px" }} component="nav">
                   {topogons.map((topogon) => (
                     <ListItem
+                      key={topogon.id}
                       secondaryAction={
                         <IconButton
                           edge="end"
                           aria-label="go"
-                          onClick={() => handleDeleteTopogon(topogon.id)}
+                          onClick={() =>
+                            dispatchTopogons({
+                              type: "removeTopogon",
+                              id: topogon.id,
+                            })
+                          }
                         >
                           <Delete />
                         </IconButton>
@@ -129,7 +119,9 @@ export default function TopoEditor(props: Props) {
                       </ListItemButton>
                     </ListItem>
                   ))}
-                  <ListItemButton onClick={handleAddTopogon}>
+                  <ListItemButton
+                    onClick={() => dispatchTopogons({ type: "addTopogon" })}
+                  >
                     <ListItemIcon>
                       <Add />
                     </ListItemIcon>
@@ -145,17 +137,13 @@ export default function TopoEditor(props: Props) {
                     <MUITextField
                       label="Topogon Label"
                       value={selectedTopogon.label}
-                      onChange={(e) => {
-                        setTopogons((topogons) =>
-                          topogons.map((t) => {
-                            if (t.id !== selectedTopogonId) return t;
-                            return {
-                              ...t,
-                              label: e.target.value,
-                            };
-                          })
-                        );
-                      }}
+                      onChange={(e) =>
+                        dispatchTopogons({
+                          type: "updateTopogon",
+                          id: selectedTopogonId,
+                          update: (t) => ({ ...t, label: e.target.value }),
+                        })
+                      }
                     />
                     {/** Select for the available entities to target */}
                     <ToggleButtonGroup
@@ -186,4 +174,37 @@ export default function TopoEditor(props: Props) {
       </div>
     </form>
   );
+}
+
+let _clientId = 0;
+function ClientId() {
+  // Generate client ids that can be easily known as "client only" on server.
+  _clientId--;
+  return _clientId;
+}
+
+// Manage topogons client side
+type TopogonsAction =
+  | { type: "addTopogon" }
+  | { type: "removeTopogon"; id: number }
+  | { type: "updateTopogon"; id: number; update: (t: ITopogon) => ITopogon };
+function topogonsReducer(topogons: ITopogon[], action: TopogonsAction) {
+  switch (action.type) {
+    case "addTopogon":
+      return [
+        ...topogons,
+        {
+          id: ClientId(),
+          label: "New topogon",
+          data: "",
+        },
+      ];
+    case "removeTopogon":
+      return topogons.filter((t) => t.id !== action.id);
+    case "updateTopogon":
+      return topogons.map((t) => {
+        if (t.id !== action.id) return t;
+        return action.update(t);
+      });
+  }
 }

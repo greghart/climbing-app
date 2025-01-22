@@ -1,13 +1,12 @@
 "use client";
-import LineTracer from "@/app/_components/photos/topos/LineTracer";
-import { IPhoto, ITopo } from "models";
+import { IPhoto } from "models";
 import React from "react";
 import { Image, Stage } from "react-konva";
 import useImage from "use-image";
 
 interface Props {
   photo: IPhoto;
-  topo?: ITopo;
+  children?: (img: React.ReactNode) => React.ReactNode;
 }
 
 export default function TopoCanvas(props: Props) {
@@ -29,9 +28,10 @@ export default function TopoCanvas(props: Props) {
   return (
     <div style={{ width: "100%", height: "100%" }} ref={div}>
       <Stage width={width} height={height}>
-        <LineTracer>
-          <Image image={img} {...fitImage(img!, width, height)} />
-        </LineTracer>
+        {props.children &&
+          props.children(
+            <Image image={img} {...fitImage(img!, width, height)} />
+          )}
       </Stage>
     </div>
   );
