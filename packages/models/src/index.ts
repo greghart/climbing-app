@@ -30,3 +30,5 @@ export { default as Topo, type ITopo } from "./Topo.js";
 export { default as Topogon, type ITopogon } from "./Topogon.js";
 export { default as Trail, type ITrail } from "./Trail.js";
 export { default as Upload, type IUpload } from "./Upload.js";
+export { TopoData };
+import * as TopoData from "./TopogonData.js";
