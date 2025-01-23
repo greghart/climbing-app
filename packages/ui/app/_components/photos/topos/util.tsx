@@ -1,5 +1,4 @@
-export type Point = { x: number; y: number };
-export type Points = Point[];
+import { TopoData } from "models";
 
 export function distanceTo(x1: number, y1: number, x2: number, y2: number) {
   const a = x1 - x2;
@@ -7,6 +6,6 @@ export function distanceTo(x1: number, y1: number, x2: number, y2: number) {
   return Math.sqrt(a * a + b * b);
 }
 
-export function pointsToLine(...points: Points) {
+export function pointsToLine(...points: TopoData.IPoint[]) {
   return points.map((p) => [p.x, p.y]).flat();
 }

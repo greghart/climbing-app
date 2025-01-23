@@ -21,6 +21,8 @@ export type ITopo = {
   title: string;
   photo: IPhoto;
   topogons?: ITopogon[];
+  // The scale of the photo when topogons were created.
+  scale: number;
 };
 
 interface Topo extends Omit<ITopo, "photo" | "topogons"> {

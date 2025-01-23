@@ -2,12 +2,13 @@ import Area, { type IArea } from "./Area.js";
 import Boulder, { type IBoulder } from "./Boulder.js";
 import Route, { type IRoute } from "./Route.js";
 import Topo, { type ITopo } from "./Topo.js";
+import type { ITopogonData } from "./TopogonData.js";
 
 export type ITopogon = {
   id: number;
   label?: string;
   topo?: ITopo;
-  data: string; // TODO: JSON or SVG string
+  data?: ITopogonData;
   // Only can have one of these
   area?: IArea;
   boulder?: IBoulder;
