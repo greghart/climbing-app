@@ -32,7 +32,7 @@ import {
 import { action, toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import { IPhoto } from "models";
-import { Layer } from "react-konva";
+import { Group, Layer } from "react-konva";
 
 interface Props {
   photo: IPhoto;
@@ -77,7 +77,20 @@ function TopoEditor(props: Props) {
                     <Layer>
                       {img}
                       {store.topogons.map((topogon) => (
-                        <Topogon key={topogon.id} topogon={topogon} />
+                        <Group
+                          key={topogon.id}
+                          onMouseOver={(e) =>
+                            store.setHoveredTopogonId(topogon.id)
+                          }
+                          onMouseOut={(e) =>
+                            store.setHoveredTopogonId(undefined)
+                          }
+                          onClick={(e) =>
+                            store.setSelectedTopogonId(topogon.id)
+                          }
+                        >
+                          <Topogon key={topogon.id} topogon={topogon} />
+                        </Group>
                       ))}
                     </Layer>
                   );
@@ -126,7 +139,10 @@ function TopoEditor(props: Props) {
                     >
                       <ListItemButton
                         onClick={() => handleTopogonClick(topogon.id)}
-                        selected={store.selectedTopogonId === topogon.id}
+                        selected={
+                          store.selectedTopogonId === topogon.id ||
+                          store.hoveredTopogonId === topogon.id
+                        }
                       >
                         <ListItemText primary={topogon.label} />
                       </ListItemButton>
