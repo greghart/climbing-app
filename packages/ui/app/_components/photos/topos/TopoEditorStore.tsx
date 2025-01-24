@@ -9,6 +9,7 @@ import React from "react";
 class TopoEditorStore {
   topogonsById: Map<number, Topogon> = new Map();
   selectedTopogonId?: number = undefined;
+  hoveredTopogonId?: number = undefined;
   private topogonOptions: TopogonOptions;
 
   constructor(
@@ -19,9 +20,11 @@ class TopoEditorStore {
     makeObservable(this, {
       topogonsById: observable,
       selectedTopogonId: observable,
+      hoveredTopogonId: observable,
       selectedTopogon: computed,
       topogons: computed,
       topogonEditor: computed,
+      setHoveredTopogonId: action,
       setSelectedTopogonId: action,
       addTopogon: action,
       removeTopogon: action,
@@ -47,6 +50,11 @@ class TopoEditorStore {
 
   setSelectedTopogonId(id?: number) {
     this.selectedTopogonId = id;
+    this.hoveredTopogonId = undefined;
+  }
+
+  setHoveredTopogonId(id?: number) {
+    this.hoveredTopogonId = id;
   }
 
   addTopogon() {

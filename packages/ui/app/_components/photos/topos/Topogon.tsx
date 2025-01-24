@@ -48,6 +48,7 @@ function _TopogonLine({ line, idx }: { line: Line; idx: number }) {
         <LineComponent
           points={line.konvaPoints}
           strokeWidth={4}
+          hitStrokeWidth={10}
           stroke={line.color}
           tension={line.tension}
         />
