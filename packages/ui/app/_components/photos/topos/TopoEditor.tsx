@@ -60,14 +60,8 @@ function TopoEditor(props: Props) {
   const handleTopogonClick = (id: number) =>
     store.setSelectedTopogonId(id === store.selectedTopogonId ? undefined : id);
   const theme = useTheme();
-  // TODO: I need a two tier state system
-  // When a topogon is selected, you also need to be able to select shapes within that topogon (to delete for example).
   // TODO: Take in the available entities to target -- should be constrained to
   // one topogon per entity
-  // TODO: Need to decide serialization of canvas data. Ideally we can always draw
-  // a topogon, and maybe we just always store state in such data (serializing and deserializing
-  // on every change might be too expensive, but we can always cache as needed -- worth clientside
-  // view models at some point?).
   return (
     <form action={formAction}>
       <SubmitSnack kee={meta.reqIndex} {...state} />

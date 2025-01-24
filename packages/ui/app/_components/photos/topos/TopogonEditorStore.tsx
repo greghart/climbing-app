@@ -86,9 +86,5 @@ export default class TopogonEditorStore {
     if (this.selectedLine) this.selectedLine.tension = tension;
   }
 
-  // We should also manage current line editing state, so we can hook up tool info.
-
-  // TODO: More robust handling of topogon editor
-  // Allow selecting lines, adding labels, and hook up to our components
-  // Allow further configuration of our lines: color, tension, etc.
+  // TODO: Allow selecting lines, adding labels, and hook up to our components
 }
