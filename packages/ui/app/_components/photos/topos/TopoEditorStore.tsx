@@ -1,0 +1,79 @@
+import TopogonEditorStore, {
+  IOptions as TopogonOptions,
+} from "@/app/_components/photos/topos/TopogonEditorStore";
+import { Topogon } from "@/app/_models";
+import { action, computed, makeObservable, observable } from "mobx";
+import * as models from "models";
+import React from "react";
+
+class TopoEditorStore {
+  topogonsById: Map<number, Topogon> = new Map();
+  selectedTopogonId?: number = undefined;
+  private topogonOptions: TopogonOptions;
+
+  constructor(
+    photo: models.IPhoto,
+    { topogonOptions }: { topogonOptions: TopogonOptions }
+  ) {
+    this.topogonOptions = topogonOptions;
+    makeObservable(this, {
+      topogonsById: observable,
+      selectedTopogonId: observable,
+      selectedTopogon: computed,
+      topogons: computed,
+      topogonEditor: computed,
+      setSelectedTopogonId: action,
+      addTopogon: action,
+      removeTopogon: action,
+    });
+    this.topogonsById = new Map(
+      (photo.topo?.topogons || []).map((t) => [t.id, new Topogon(t)])
+    );
+  }
+
+  get selectedTopogon() {
+    if (this.selectedTopogonId === undefined) return;
+    return this.topogonsById.get(this.selectedTopogonId);
+  }
+
+  get topogonEditor() {
+    if (this.selectedTopogon === undefined) return;
+    return new TopogonEditorStore(this.selectedTopogon, this.topogonOptions);
+  }
+
+  get topogons() {
+    return Array.from(this.topogonsById.values());
+  }
+
+  setSelectedTopogonId(id?: number) {
+    this.selectedTopogonId = id;
+  }
+
+  addTopogon() {
+    const id = ClientId();
+    this.topogonsById.set(
+      id,
+      new Topogon({
+        id,
+        label: "New topogon",
+      })
+    );
+  }
+
+  removeTopogon(id: number) {
+    this.topogonsById.delete(id);
+  }
+}
+
+let _clientId = 0;
+function ClientId() {
+  // Generate client ids that can be easily known as "client only" on server.
+  _clientId--;
+  return _clientId;
+}
+
+export const TopoEditorStoreContext = React.createContext<TopoEditorStore>(
+  new TopoEditorStore({} as models.IPhoto, { topogonOptions: {} } as any)
+);
+
+export default TopoEditorStore;

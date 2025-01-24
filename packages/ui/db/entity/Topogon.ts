@@ -5,8 +5,9 @@ import { Topo } from "@/db/entity/Topo";
 import { ITopogon } from "models";
 import { EntitySchema } from "typeorm";
 
-export type Topogon = ITopogon & {
+export type Topogon = Omit<ITopogon, "data"> & {
   topo: Topo;
+  data: string; // Our implementation is just stringified JSON
   area?: Area;
   boulder?: Boulder;
   route?: Route;

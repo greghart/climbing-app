@@ -7,7 +7,7 @@ import "server-only";
  */
 const getPhoto = cache(async (id: number) => {
   const ds = await getDataSource();
-  return await ds.getRepository(PhotoSchema).findOne({
+  const photo = await ds.getRepository(PhotoSchema).findOne({
     where: { id },
     relations: [
       "photoable",
@@ -20,6 +20,13 @@ const getPhoto = cache(async (id: number) => {
       "topo.topogons",
     ],
   });
+  if (photo?.topo?.topogons) {
+    photo.topo.topogons = photo.topo.topogons?.map((topogon) => ({
+      ...topogon,
+      data: JSON.parse(topogon.data),
+    }));
+  }
+  return photo;
 });
 
 export default getPhoto;

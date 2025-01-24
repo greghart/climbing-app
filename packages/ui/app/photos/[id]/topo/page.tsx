@@ -2,6 +2,7 @@ import GoBackHeader from "@/app/_components/layouts/GoBackHeader";
 import PageLayout from "@/app/_components/layouts/PageLayout";
 import PhotoableLink from "@/app/_components/photos/PhotoableLink";
 import TopoEditor from "@/app/_components/photos/topos/TopoEditor";
+import TopoEditorStoreProvider from "@/app/_components/photos/topos/TopoEditorStoreProvider";
 import finderByID from "@/app/_util/finderByID";
 import getPhoto from "@/app/api/_actions/getPhoto";
 
@@ -22,7 +23,9 @@ export default async function Page(props: Props) {
       content={
         <>
           <PhotoableLink photoable={photo.photoable} />
-          <TopoEditor photo={photo} topo={photo.topo} />
+          <TopoEditorStoreProvider photo={photo}>
+            <TopoEditor photo={photo} />
+          </TopoEditorStoreProvider>
         </>
       }
     />

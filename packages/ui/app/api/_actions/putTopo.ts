@@ -40,6 +40,7 @@ const putTopo = formAction<Model, z.infer<typeof topoSchema>, Meta>(
         topogons: data.topogons.map((topogon) => ({
           ...topogon,
           id: _resolveId(topogon.id),
+          data: JSON.stringify(topogon.data),
         })),
       };
       console.warn("Data", data);
