@@ -1,7 +1,10 @@
 "use client";
 
 import { ThemeProvider, createTheme } from "@mui/material";
+import { enableStaticRendering } from "mobx-react-lite";
 import React from "react";
+
+enableStaticRendering(typeof window === "undefined");
 
 const theme = createTheme({
   components: {

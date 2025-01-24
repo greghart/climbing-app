@@ -6,7 +6,7 @@ import { Topo } from "@/db/entity/Topo";
 import { type IPhoto } from "models";
 import { EntitySchema } from "typeorm";
 
-export type Photo = IPhoto & {
+export type Photo = Omit<IPhoto, "topo"> & {
   photoable: Photoable;
   upload: Upload;
   topo: Topo;

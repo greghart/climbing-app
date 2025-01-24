@@ -12,9 +12,9 @@ class Point {
     return Math.sqrt(x * x + y * y);
   }
 
-  constructor(x: number, y: number) {
-    this.x = x;
-    this.y = y;
+  constructor(data: IPoint) {
+    this.x = data.x;
+    this.y = data.y;
   }
 
   distanceTo(other: Point) {
@@ -28,14 +28,18 @@ class Point {
 // as konva calls it.
 interface ILine {
   points: IPoint[];
+  color?: string; // Color of line, defaults to green
+  tension?: number; // Tension of line, defaults to 1
 }
 
 interface Line extends Omit<ILine, "points"> {
   points: Point[];
 }
 class Line {
-  constructor(points: Point[]) {
-    this.points = points;
+  constructor(data: ILine) {
+    this.points = data.points.map((p) => new Point(p));
+    this.color = data.color;
+    this.tension = data.tension;
   }
 }
 
@@ -47,9 +51,10 @@ interface TopogonData extends Omit<ITopogonData, "lines"> {
   lines: Line[];
 }
 class TopogonData {
-  constructor({ lines = [] }: { lines?: Line[] } = {}) {
-    this.lines = lines;
+  constructor(data: ITopogonData) {
+    this.lines = data.lines.map((l) => new Line(l));
   }
 }
 
-export { Line, Point, TopogonData, type ILine, type IPoint, type ITopogonData };
+export { Line, Point, type ILine, type IPoint, type ITopogonData };
+export default TopogonData;

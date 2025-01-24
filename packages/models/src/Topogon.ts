@@ -24,6 +24,11 @@ interface Topogon
 }
 
 class Topogon {
+  static build(data: ITopogon) {
+    if (data instanceof Topogon) return data;
+    return new Topogon(data);
+  }
+
   constructor(data: ITopogon) {
     this.id = data.id;
     this.label = data.label;

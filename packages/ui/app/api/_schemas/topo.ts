@@ -11,7 +11,7 @@ const topoSchema = z.object({
           .object({
             id: z.number().optional(),
             label: z.string().min(5).max(1000).optional(),
-            data: z.string(), // TODO: Bother validating visual data?!
+            data: z.any(),
             areaId: z.number().optional(),
             boulderId: z.number().optional(),
             routeId: z.number().optional(),

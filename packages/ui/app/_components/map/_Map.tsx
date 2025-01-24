@@ -24,7 +24,6 @@ interface Props
  *  * handles our domain bounds and coordinate
  *  * sane defaults
  *  * best tile layer
- * TODO: Persist map state in URL so transitions keep things in place
  */
 export default function Map({ bounds, center, ...props }: Props) {
   const [selected, _] = useQueryState(

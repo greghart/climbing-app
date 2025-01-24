@@ -16,8 +16,6 @@ import React from "react";
  * Difficulty selector
  * * MUI TextField Select presentation
  * * Easy hook up to `useFormState` and ApiResponse
- * TODO: This is a bit of a mess, since the raw grades can be such a wide variety of crap, how do we adapt?
- * For now, we'll just let user type in raw grade and we'll parse and validate it
  */
 
 type Props<Model, Schema extends Partial<Model>> = React.ComponentProps<

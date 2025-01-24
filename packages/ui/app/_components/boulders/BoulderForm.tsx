@@ -22,7 +22,7 @@ import { z } from "zod";
 interface Props<Meta> {
   crag: ICrag;
   area: IArea;
-  boulder?: IBoulder; // TODO: Support adding a boulder to an area -- requires default data for coordinate, name, etc.
+  boulder?: IBoulder;
   action: formActionHandler<IBoulder, z.infer<typeof boulderSchema>, Meta>;
   meta: Meta;
 }
