@@ -45,6 +45,7 @@ class Line {
 
 // Label is some text displayed on a background
 interface ILabel {
+  text: string;
   point: IPoint;
   color: string; // Color of text
   fill: string; // Color of background fill
@@ -57,6 +58,8 @@ interface Label extends Omit<ILabel, "point"> {
 
 class Label {
   constructor(data: ILabel) {
+    this.text = data.text;
+    this.direction = data.direction;
     this.point = new Point(data.point);
     this.color = data.color;
     this.fill = data.fill;

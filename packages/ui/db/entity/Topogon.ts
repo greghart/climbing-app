@@ -5,9 +5,11 @@ import { Topo } from "@/db/entity/Topo";
 import { ITopogon } from "models";
 import { EntitySchema } from "typeorm";
 
-export type Topogon = Omit<ITopogon, "data"> & {
+export type Topogon = ITopogon & {
   topo: Topo;
-  data: string; // Our implementation is just stringified JSON
+  // Our implementation is just stringified JSON, but we also want this
+  // to be transparent
+  // data: string;
   area?: Area;
   boulder?: Boulder;
   route?: Route;

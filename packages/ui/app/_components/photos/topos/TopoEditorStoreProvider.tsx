@@ -15,7 +15,8 @@ export default function TopoEditorStoreProvider({
 }) {
   const theme = useTheme();
   const topogonOptions = {
-    defaultLineColor: theme.palette.primary.dark,
+    defaultColor: theme.palette.primary.dark,
+    defaultFillColor: theme.palette.primary.light,
     defaultLineTension: 0.2,
   };
   const [store, setStore] = React.useState<TopoEditorStore>(

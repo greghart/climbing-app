@@ -1,12 +1,13 @@
-import { Line, Topogon } from "@/app/_models";
+import { Label, Line, Topogon } from "@/app/_models";
 import { action, computed, makeObservable, observable } from "mobx";
 import { TopoData } from "models";
 
-export type Tool = "pointer" | "line" | "text";
+export type Tool = "pointer" | "line" | "label";
 export type ComponentType = "line" | "label";
 
 export interface IOptions {
-  defaultLineColor: string;
+  defaultColor: string;
+  defaultFillColor: string;
   defaultLineTension: number;
 }
 
@@ -15,25 +16,33 @@ export default class TopogonEditorStore {
   tool: Tool;
   selectedComponent?: ComponentType;
   selectedComponentIndex?: number;
-  defaultLineColor: string;
+  defaultColor: string; // default color to set and use for all components
+  defaultFillColor: string; // default color to use for background/fill for all components
   defaultLineTension: number;
 
   constructor(topogon: Topogon, options: IOptions) {
     this.topogon = topogon;
     this.tool = "pointer";
-    this.defaultLineColor = options.defaultLineColor;
+    this.defaultColor = options.defaultColor;
+    this.defaultFillColor = options.defaultFillColor;
     this.defaultLineTension = options.defaultLineTension;
     makeObservable(this, {
       tool: observable,
       selectedComponent: observable,
       selectedComponentIndex: observable,
-      selectedLineIndex: computed,
-      defaultLineColor: observable,
+      defaultColor: observable,
+      defaultFillColor: observable,
       defaultLineTension: observable,
+      selectedLineIndex: computed,
+      selectedLabelIndex: computed,
       selectedLine: computed,
+      selectedLabel: computed,
       lines: computed,
+      labels: computed,
       addLine: action,
+      addLabel: action,
       removeSelectedLine: action,
+      removeSelectedLabel: action,
       setSelectedComponent: action,
       setTool: action,
       setLineColor: action,
@@ -47,6 +56,10 @@ export default class TopogonEditorStore {
 
   setTool(tool: Tool) {
     this.tool = tool;
+  }
+
+  resetSelectedComponent() {
+    this.setSelectedComponent("line", undefined);
   }
 
   setSelectedComponent(component: ComponentType, i?: number) {
@@ -102,11 +115,24 @@ export default class TopogonEditorStore {
   addLine(points: TopoData.IPoint[]) {
     const line = new Line({
       points: points,
-      color: this.defaultLineColor,
+      color: this.defaultColor,
       tension: this.defaultLineTension,
     });
     this.lines.push(line);
     this.setSelectedLine(this.lines.length - 1);
+  }
+
+  addLabel(point: TopoData.IPoint) {
+    console.warn("Adding label @", point);
+    const label = new Label({
+      text: "New Label",
+      point: point,
+      color: this.defaultColor,
+      fill: this.defaultFillColor,
+      direction: "up",
+    });
+    this.labels.push(label);
+    this.setSelectedLabel(this.labels.length - 1);
   }
 
   removeSelectedLine() {
@@ -115,8 +141,14 @@ export default class TopogonEditorStore {
     this.setSelectedLine(undefined);
   }
 
+  removeSelectedLabel() {
+    if (this.selectedLabelIndex === undefined) return;
+    this.labels.splice(this.selectedLabelIndex, 1);
+    this.setSelectedLabel(undefined);
+  }
+
   setLineColor(color: string) {
-    this.defaultLineColor = color;
+    this.defaultColor = color;
     if (this.selectedLine) this.selectedLine.color = color;
   }
 

@@ -97,6 +97,7 @@ function TopoEditor(props: Props) {
                   type="hidden"
                   value={JSON.stringify(toJS(store.topogons))}
                 />
+                <input name="scale" type="hidden" value={store.scale} />
                 {errText && (
                   <FormHelperText error>Topogons: {errText}</FormHelperText>
                 )}
@@ -139,6 +140,7 @@ function TopoEditor(props: Props) {
 
                 <Divider />
 
+                {/** TODO: Refactor to tool component */}
                 {topogonStore && (
                   <>
                     <Typography variant="h5">Tools</Typography>
@@ -212,7 +214,7 @@ function TopoEditor(props: Props) {
                           select
                           value={
                             topogonStore.selectedLine?.color ||
-                            topogonStore.defaultLineColor
+                            topogonStore.defaultColor
                           }
                           onChange={(e) =>
                             topogonStore.setLineColor(e.target.value)

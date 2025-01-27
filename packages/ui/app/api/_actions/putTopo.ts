@@ -6,7 +6,7 @@ import { ITopo } from "models";
 import "server-only";
 import { z } from "zod";
 
-type Model = Pick<ITopo, "title" | "topogons">;
+type Model = Pick<ITopo, "title" | "scale" | "topogons">;
 type Meta = { photoId: number; topoId?: number };
 const putTopo = formAction<Model, z.infer<typeof topoSchema>, Meta>(
   topoSchema,
@@ -40,7 +40,7 @@ const putTopo = formAction<Model, z.infer<typeof topoSchema>, Meta>(
         topogons: data.topogons.map((topogon) => ({
           ...topogon,
           id: _resolveId(topogon.id),
-          data: JSON.stringify(topogon.data),
+          data: JSON.stringify(topogon.data) as any,
         })),
       };
       console.warn("Data", data);
@@ -55,7 +55,7 @@ const putTopo = formAction<Model, z.infer<typeof topoSchema>, Meta>(
 /**
  * resolveId handles the client sending clienty negative ids for new entities.
  */
-function _resolveId(id: number | undefined) {
-  return id !== undefined && id > 0 ? id : undefined;
+function _resolveId(id: number | undefined): number {
+  return id !== undefined && id > 0 ? id : (undefined as any);
 }
 export default putTopo;

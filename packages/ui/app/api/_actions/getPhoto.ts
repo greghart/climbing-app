@@ -23,7 +23,7 @@ const getPhoto = cache(async (id: number) => {
   if (photo?.topo?.topogons) {
     photo.topo.topogons = photo.topo.topogons?.map((topogon) => ({
       ...topogon,
-      data: JSON.parse(topogon.data),
+      data: JSON.parse(topogon.data as any as string),
     }));
   }
   return photo;

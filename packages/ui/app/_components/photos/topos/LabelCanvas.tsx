@@ -7,7 +7,9 @@ interface Props {
   TagProps: React.ComponentProps<typeof ReactKonva.Tag>;
   TextProps: React.ComponentProps<typeof ReactKonva.Text>;
 }
-const Label = React.forwardRef<Konva.Label, Props>((props, ref) => {
+
+// Base options for Label
+const LabelCanvas = React.forwardRef<Konva.Label, Props>((props, ref) => {
   return (
     <ReactKonva.Label {...props.LabelProps}>
       <ReactKonva.Tag
@@ -29,4 +31,4 @@ const Label = React.forwardRef<Konva.Label, Props>((props, ref) => {
   );
 });
 
-export default Label;
+export default LabelCanvas;

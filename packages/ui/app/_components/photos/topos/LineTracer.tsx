@@ -1,6 +1,6 @@
 "use client";
-import LineComponent from "@/app/_components/photos/topos/Line";
-import { useTopogonEditorStore } from "@/app/_components/photos/topos/TopoEditorStoreProvider";
+import LineComponent from "@/app/_components/photos/topos/LineCanvas";
+import TopogonEditorStore from "@/app/_components/photos/topos/TopogonEditorStore";
 import { distanceTo, pointsToLine } from "@/app/_components/photos/topos/util";
 import Konva from "konva";
 import { observer } from "mobx-react-lite";
@@ -16,14 +16,14 @@ const snapDistance = 15; // in pixels-- adjust this value as needed
 
 interface LineTracerProps {
   children?: React.ReactNode;
+  store: TopogonEditorStore;
 }
 
 function LineTracer(props: LineTracerProps) {
-  const store = useTopogonEditorStore();
+  const store = props.store;
   const [pending, setPending] = React.useState<TopoData.IPoint | undefined>(
     undefined
   );
-  if (!store) return false;
 
   // We are either editing an existing line, or about to start a new one
   const points = store.selectedLine?.points || [];

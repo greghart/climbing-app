@@ -2,7 +2,8 @@ import Konva from "konva";
 import React from "react";
 import { Line as KonvaLine } from "react-konva";
 
-const Line = React.forwardRef<
+// Base options for Line
+const LineCanvas = React.forwardRef<
   Konva.Line,
   React.ComponentProps<typeof KonvaLine>
 >((props, ref) => {
@@ -19,4 +20,4 @@ const Line = React.forwardRef<
   );
 });
 
-export default Line;
+export default LineCanvas;

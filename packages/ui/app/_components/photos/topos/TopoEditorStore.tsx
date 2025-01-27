@@ -67,7 +67,6 @@ class TopoEditorStore {
       new Topogon({
         id,
         label: "New topogon",
-        scale: this.scale || 1,
       })
     );
   }

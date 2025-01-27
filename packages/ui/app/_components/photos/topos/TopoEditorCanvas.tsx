@@ -1,7 +1,8 @@
 "use client";
+import LabelCanvasEditor from "@/app/_components/photos/topos/LabelCanvasEditor";
 import LineTracer from "@/app/_components/photos/topos/LineTracer";
 import { useTopoEditorStore } from "@/app/_components/photos/topos/TopoEditorStoreProvider";
-import Topogon from "@/app/_components/photos/topos/Topogon";
+import TopogonCanvas from "@/app/_components/photos/topos/TopogonCanvas";
 import { Group, Layer } from "react-konva";
 
 interface Props {
@@ -23,7 +24,7 @@ export default function TopoEditorCanvas(props: Props) {
             onMouseOut={(e) => store.setHoveredTopogonId(undefined)}
             onClick={(e) => store.setSelectedTopogonId(topogon.id)}
           >
-            <Topogon key={topogon.id} topogon={topogon} />
+            <TopogonCanvas key={topogon.id} topogon={topogon} />
           </Group>
         ))}
       </Layer>
@@ -36,17 +37,17 @@ export default function TopoEditorCanvas(props: Props) {
   let tool: React.ReactNode;
   switch (topogonStore.tool) {
     case "line":
-      tool = <LineTracer>{props.img}</LineTracer>;
+      tool = <LineTracer store={topogonStore}>{props.img}</LineTracer>;
       break;
-    case "text":
+    case "label":
       // TODO: Add a label maker
-      tool = <LineTracer>{props.img}</LineTracer>;
+      tool = (
+        <LabelCanvasEditor store={topogonStore}>{props.img}</LabelCanvasEditor>
+      );
       break;
     default:
       tool = (
-        <Layer
-          onClick={(e) => topogonStore.setSelectedComponent("line", undefined)}
-        >
+        <Layer onClick={(e) => topogonStore.resetSelectedComponent()}>
           {props.img}
         </Layer>
       );
@@ -57,7 +58,7 @@ export default function TopoEditorCanvas(props: Props) {
       {tool}
       {/** Always show base topogon, since that's what's being edited */}
       <Layer>
-        <Topogon topogon={store.selectedTopogon} />
+        <TopogonCanvas topogon={store.selectedTopogon} />
       </Layer>
     </>
   );

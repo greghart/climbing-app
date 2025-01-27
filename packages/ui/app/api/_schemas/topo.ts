@@ -4,6 +4,7 @@ import { z } from "zod";
 
 const topoSchema = z.object({
   title: z.string().min(5).max(1000),
+  scale: z.coerce.number(),
   topogons: jsonSchema.stringNullish.pipe(
     z
       .array(
