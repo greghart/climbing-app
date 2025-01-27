@@ -3,13 +3,14 @@ import LabelCanvasEditor from "@/app/_components/photos/topos/LabelCanvasEditor"
 import LineTracer from "@/app/_components/photos/topos/LineTracer";
 import { useTopoEditorStore } from "@/app/_components/photos/topos/TopoEditorStoreProvider";
 import TopogonCanvas from "@/app/_components/photos/topos/TopogonCanvas";
+import { observer } from "mobx-react-lite";
 import { Group, Layer } from "react-konva";
 
 interface Props {
   img: React.ReactNode;
 }
 
-export default function TopoEditorCanvas(props: Props) {
+function _TopoEditorCanvas(props: Props) {
   const store = useTopoEditorStore();
 
   // Show all topogons if user hasn't selected any
@@ -63,3 +64,5 @@ export default function TopoEditorCanvas(props: Props) {
     </>
   );
 }
+
+export default observer(_TopoEditorCanvas);

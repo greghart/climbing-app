@@ -6,11 +6,13 @@ export default class Label extends TopoData.Label {
     super(data);
     this.direction = data.direction || "none";
     makeObservable(this, {
+      text: observable,
       point: observable,
       color: observable,
       fill: observable,
       direction: observable,
       move: action,
+      setText: action,
     });
   }
 
@@ -19,5 +21,9 @@ export default class Label extends TopoData.Label {
       x: this.point.x + offsetX,
       y: this.point.y + offsetY,
     });
+  }
+
+  setText(text: string) {
+    this.text = text;
   }
 }

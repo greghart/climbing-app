@@ -9,6 +9,7 @@ export interface IOptions {
   defaultColor: string;
   defaultFillColor: string;
   defaultLineTension: number;
+  defaultLabelText: string;
 }
 
 export default class TopogonEditorStore {
@@ -19,6 +20,7 @@ export default class TopogonEditorStore {
   defaultColor: string; // default color to set and use for all components
   defaultFillColor: string; // default color to use for background/fill for all components
   defaultLineTension: number;
+  defaultLabelText: string;
 
   constructor(topogon: Topogon, options: IOptions) {
     this.topogon = topogon;
@@ -26,6 +28,7 @@ export default class TopogonEditorStore {
     this.defaultColor = options.defaultColor;
     this.defaultFillColor = options.defaultFillColor;
     this.defaultLineTension = options.defaultLineTension;
+    this.defaultLabelText = options.defaultLabelText;
     makeObservable(this, {
       tool: observable,
       selectedComponent: observable,
@@ -45,7 +48,7 @@ export default class TopogonEditorStore {
       removeSelectedLabel: action,
       setSelectedComponent: action,
       setTool: action,
-      setLineColor: action,
+      setColor: action,
       setLineTension: action,
     });
   }
@@ -55,6 +58,7 @@ export default class TopogonEditorStore {
   }
 
   setTool(tool: Tool) {
+    if (tool === this.tool) return;
     this.tool = tool;
   }
 
@@ -74,6 +78,7 @@ export default class TopogonEditorStore {
 
   setSelectedLine(i?: number) {
     this.setSelectedComponent("line", i);
+    this.setTool("line");
   }
 
   get selectedLineIndex() {
@@ -90,6 +95,7 @@ export default class TopogonEditorStore {
 
   setSelectedLabel(i?: number) {
     this.setSelectedComponent("label", i);
+    this.setTool("label");
   }
 
   get selectedLabelIndex() {
@@ -125,10 +131,11 @@ export default class TopogonEditorStore {
   addLabel(point: TopoData.IPoint) {
     console.warn("Adding label @", point);
     const label = new Label({
-      text: "New Label",
+      text: this.defaultLabelText,
       point: point,
-      color: this.defaultColor,
-      fill: this.defaultFillColor,
+      // Note that labels, we use color for the background (to be consistent with line) and fill for the text
+      color: this.defaultFillColor,
+      fill: this.defaultColor,
       direction: "up",
     });
     this.labels.push(label);
@@ -147,9 +154,15 @@ export default class TopogonEditorStore {
     this.setSelectedLabel(undefined);
   }
 
-  setLineColor(color: string) {
+  setColor(color: string) {
     this.defaultColor = color;
     if (this.selectedLine) this.selectedLine.color = color;
+    if (this.selectedLabel) this.selectedLabel.fill = color;
+  }
+
+  setFill(color: string) {
+    this.defaultFillColor = color;
+    if (this.selectedLabel) this.selectedLabel.color = color;
   }
 
   setLineTension(tension: number) {
@@ -157,5 +170,8 @@ export default class TopogonEditorStore {
     if (this.selectedLine) this.selectedLine.tension = tension;
   }
 
-  // TODO: Allow selecting lines, adding labels, and hook up to our components
+  setText(text: string) {
+    this.defaultLabelText = text;
+    if (this.selectedLabel) this.selectedLabel.text = text;
+  }
 }

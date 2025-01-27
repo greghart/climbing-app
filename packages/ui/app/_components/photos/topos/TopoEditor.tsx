@@ -6,16 +6,10 @@ import useActionState from "@/app/_components/form/useActionState";
 import TopoCanvas from "@/app/_components/photos/topos/TopoCanvas";
 import TopoEditorCanvas from "@/app/_components/photos/topos/TopoEditorCanvas";
 import { useTopoEditorStore } from "@/app/_components/photos/topos/TopoEditorStoreProvider";
+import TopogonEditorTools from "@/app/_components/photos/topos/TopogonEditorTools";
 import ShowContentCard from "@/app/_components/show/ShowContentCard";
 import putTopo from "@/app/api/_actions/putTopo";
-import {
-  Add,
-  AdsClick,
-  Delete,
-  HighlightAlt,
-  Label,
-  LinearScale,
-} from "@mui/icons-material";
+import { Add, Delete } from "@mui/icons-material";
 import {
   Divider,
   FormHelperText,
@@ -26,16 +20,10 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  MenuItem,
-  TextField as MUITextField,
   Stack,
-  ToggleButton,
-  ToggleButtonGroup,
-  Tooltip,
   Typography,
-  useTheme,
 } from "@mui/material";
-import { action, toJS } from "mobx";
+import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import { IPhoto } from "models";
 
@@ -56,6 +44,7 @@ function TopoEditor(props: Props) {
     ok: true,
     data: props.photo?.topo || {
       title: `Topo for ${props.photo.title}`,
+      scale: 1,
       topogons: [],
     },
     meta: {
@@ -66,10 +55,8 @@ function TopoEditor(props: Props) {
   const errText = state.fieldErrors?.topogons?.join(", ");
 
   const store = useTopoEditorStore();
-  const topogonStore = store.topogonEditor;
   const handleTopogonClick = (id: number) =>
     store.setSelectedTopogonId(id === store.selectedTopogonId ? undefined : id);
-  const theme = useTheme();
   // TODO: Take in the available entities to target -- should be constrained to
   // one topogon per entity
   return (
@@ -82,7 +69,7 @@ function TopoEditor(props: Props) {
             <TopoCanvas {...props}>
               {/** TODO: Refactor to separate component?? */}
               {(img, scale) => {
-                store.setScale(scale);
+                setTimeout(() => store.setScale(scale), 50);
                 return <TopoEditorCanvas img={img} />;
               }}
             </TopoCanvas>
@@ -139,107 +126,7 @@ function TopoEditor(props: Props) {
                 </List>
 
                 <Divider />
-
-                {/** TODO: Refactor to tool component */}
-                {topogonStore && (
-                  <>
-                    <Typography variant="h5">Tools</Typography>
-                    <MUITextField
-                      label="Topogon Label"
-                      value={topogonStore.topogon.label}
-                      onChange={action((e) => {
-                        topogonStore.topogon.label = e.target.value;
-                      })}
-                    />
-                    {/** Select for the available entities to target */}
-                    <ToggleButtonGroup
-                      value={topogonStore.tool}
-                      exclusive
-                      onChange={(_, value) =>
-                        value !== null && topogonStore.setTool(value)
-                      }
-                    >
-                      <ToggleButton value="pointer">
-                        <Tooltip title="Pointer tool">
-                          <AdsClick />
-                        </Tooltip>
-                      </ToggleButton>
-                      <ToggleButton value="line">
-                        <Tooltip title="Line tool">
-                          <LinearScale />
-                        </Tooltip>
-                      </ToggleButton>
-                      <ToggleButton value="label">
-                        <Tooltip title="Label tool">
-                          <Label />
-                        </Tooltip>
-                      </ToggleButton>
-                      <ToggleButton value="box" aria-label="centered" disabled>
-                        <Tooltip title="Box tool">
-                          <HighlightAlt />
-                        </Tooltip>
-                      </ToggleButton>
-                    </ToggleButtonGroup>
-                    {topogonStore.tool === "line" && (
-                      <>
-                        <Typography variant="body2">
-                          Click to add lines.
-                        </Typography>
-                        <Typography variant="body2">
-                          Z to undo last line.
-                        </Typography>
-                        <Typography variant="body2">
-                          Space to finish line.
-                        </Typography>
-                        <Typography variant="body2">
-                          X to remove line.
-                        </Typography>
-                        <MUITextField
-                          label="Tension"
-                          type="number"
-                          value={
-                            topogonStore.selectedLine?.tension ||
-                            topogonStore.defaultLineTension
-                          }
-                          onChange={(e) => {
-                            if (Number.isFinite(parseFloat(e.target.value))) {
-                              topogonStore.setLineTension(
-                                parseFloat(e.target.value)
-                              );
-                            }
-                          }}
-                        />
-                        <MUITextField
-                          label="Line color"
-                          select
-                          value={
-                            topogonStore.selectedLine?.color ||
-                            topogonStore.defaultColor
-                          }
-                          onChange={(e) =>
-                            topogonStore.setLineColor(e.target.value)
-                          }
-                        >
-                          {[
-                            theme.palette.primary,
-                            theme.palette.secondary,
-                            theme.palette.error,
-                            theme.palette.warning,
-                            theme.palette.info,
-                            theme.palette.success,
-                          ].map((color) => (
-                            <MenuItem key={color.main} value={color.dark}>
-                              <Typography style={{ color: color.dark }}>
-                                {color.dark}
-                              </Typography>
-                            </MenuItem>
-                          ))}
-                        </MUITextField>
-                      </>
-                    )}
-                    <Divider />
-                  </>
-                )}
+                <TopogonEditorTools />
 
                 <SubmitButton />
               </Stack>

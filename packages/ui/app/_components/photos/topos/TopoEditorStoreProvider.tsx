@@ -1,8 +1,8 @@
 "use client";
+import theme from "@/app/_components/photos/topos/theme";
 import TopoEditorStore, {
   TopoEditorStoreContext,
 } from "@/app/_components/photos/topos/TopoEditorStore";
-import { useTheme } from "@mui/material";
 import { IPhoto } from "models";
 import React from "react";
 
@@ -13,11 +13,11 @@ export default function TopoEditorStoreProvider({
   children: React.ReactNode;
   photo: IPhoto;
 }) {
-  const theme = useTheme();
   const topogonOptions = {
-    defaultColor: theme.palette.primary.dark,
-    defaultFillColor: theme.palette.primary.light,
+    defaultColor: theme.palette.green.dark,
+    defaultFillColor: "#ffffff",
     defaultLineTension: 0.2,
+    defaultLabelText: "New Label",
   };
   const [store, setStore] = React.useState<TopoEditorStore>(
     new TopoEditorStore(photo, { topogonOptions })
