@@ -1,4 +1,4 @@
-import { makeObservable, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import { TopoData } from "models";
 
 export default class Label extends TopoData.Label {
@@ -10,11 +10,14 @@ export default class Label extends TopoData.Label {
       color: observable,
       fill: observable,
       direction: observable,
+      move: action,
     });
   }
 
-  move(x: number, y: number) {
-    this.point.x = x;
-    this.point.y = y;
+  move(offsetX: number, offsetY: number) {
+    this.point = new TopoData.Point({
+      x: this.point.x + offsetX,
+      y: this.point.y + offsetY,
+    });
   }
 }

@@ -1,5 +1,5 @@
-import LabelComponent from "@/app/_components/photos/topos/Label";
-import LineComponent from "@/app/_components/photos/topos/Line";
+import LabelComponent from "@/app/_components/photos/topos/LabelCanvas";
+import LineComponent from "@/app/_components/photos/topos/LineCanvas";
 import { useTopogonEditorStore } from "@/app/_components/photos/topos/TopoEditorStoreProvider";
 import { Label, Line, Topogon as TopogonModel } from "@/app/_models";
 import Konva from "konva";
@@ -11,7 +11,12 @@ interface Props {
   topogon: TopogonModel;
 }
 
-function Topogon(props: Props) {
+/**
+ * TopogonCanvas renders the lines and labels of a Topogon
+ * * Mostly used for read only mode, but does need to be the owner of the transformer
+ *   * TODO: We could refactor this, but right now it's easier to only show Topogon in one place
+ */
+function TopogonCanvas(props: Props) {
   if (!props.topogon?.data) return false;
 
   return (
@@ -22,17 +27,6 @@ function Topogon(props: Props) {
       {props.topogon.data.labels.map((label, i) => (
         <TopogonLabel key={i} idx={i} label={label} />
       ))}
-      <TopogonLabel
-        idx={0}
-        label={
-          new Label({
-            point: { x: 50, y: 50 },
-            color: "green",
-            fill: "blue",
-            direction: "up",
-          })
-        }
-      />
     </>
   );
 }
@@ -66,8 +60,8 @@ function _TopogonLabel({ label, idx }: { label: Label; idx: number }) {
       >
         <LabelComponent
           LabelProps={{ ...label.point }}
-          TextProps={{ text: "testing", fill: "green" }}
-          TagProps={{ fill: "blue" }}
+          TextProps={{ text: label.text, fill: label.color }}
+          TagProps={{ fill: label.fill }}
         />
       </Group>
       {selected && (
@@ -153,10 +147,11 @@ function useTransformer(selected: boolean, ...updaters: any[]) {
   }, [selected]);
   // If line updates, we need to update group and tr manually (former we control, latter is in konva state)
   React.useEffect(() => {
+    console.warn("Resetting group and tr");
     groupRef.current?.position({ x: 0, y: 0 });
     trRef.current?.forceUpdate();
   }, updaters);
   return { groupRef, trRef };
 }
 
-export default observer(Topogon);
+export default observer(TopogonCanvas);

@@ -13,6 +13,7 @@ export default class TopogonData extends models.TopogonData {
     this.labels = data.labels.map((l) => new Label(l));
     makeObservable(this, {
       lines: observable,
+      labels: observable,
     });
   }
 }

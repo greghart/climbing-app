@@ -17,11 +17,12 @@ import Topogon, { type ITopogon } from "./Topogon.js";
  *      labels can bake that into the image.
  */
 export type ITopo = {
-  id: number;
+  id?: number;
   title: string;
   photo: IPhoto;
   topogons?: ITopogon[];
   // The scale of the photo when topogons were created.
+  // Eg. if photo is 1000x1000, but topogon was drawn on 500x500, scale is 0.5
   scale: number;
 };
 
@@ -34,6 +35,7 @@ class Topo {
   constructor(data: ITopo) {
     this.id = data.id;
     this.title = data.title;
+    this.scale = data.scale;
     this.photo = new Photo(data.photo);
     this.topogons = (data.topogons || []).map(
       (topogon) => new Topogon(topogon)
