@@ -2,7 +2,8 @@ import { Line, Topogon } from "@/app/_models";
 import { action, computed, makeObservable, observable } from "mobx";
 import { TopoData } from "models";
 
-export type Tool = "line" | "text";
+export type Tool = "pointer" | "line" | "text";
+export type ComponentType = "line" | "label";
 
 export interface IOptions {
   defaultLineColor: string;
@@ -12,25 +13,28 @@ export interface IOptions {
 export default class TopogonEditorStore {
   topogon: Topogon;
   tool: Tool;
-  selectedLineIndex?: number;
+  selectedComponent?: ComponentType;
+  selectedComponentIndex?: number;
   defaultLineColor: string;
   defaultLineTension: number;
 
   constructor(topogon: Topogon, options: IOptions) {
     this.topogon = topogon;
-    this.tool = "line";
+    this.tool = "pointer";
     this.defaultLineColor = options.defaultLineColor;
     this.defaultLineTension = options.defaultLineTension;
     makeObservable(this, {
       tool: observable,
-      selectedLineIndex: observable,
+      selectedComponent: observable,
+      selectedComponentIndex: observable,
+      selectedLineIndex: computed,
       defaultLineColor: observable,
       defaultLineTension: observable,
       selectedLine: computed,
       lines: computed,
       addLine: action,
       removeSelectedLine: action,
-      setSelectedLine: action,
+      setSelectedComponent: action,
       setTool: action,
       setLineColor: action,
       setLineTension: action,
@@ -45,19 +49,54 @@ export default class TopogonEditorStore {
     this.tool = tool;
   }
 
-  // This should really be "selected components" or something
+  setSelectedComponent(component: ComponentType, i?: number) {
+    if (i === undefined && this.selectedComponent !== undefined) {
+      this.selectedComponent = undefined;
+      this.selectedComponentIndex = undefined;
+      return;
+    }
+    this.selectedComponent = component;
+    this.selectedComponentIndex = i;
+  }
+
   setSelectedLine(i?: number) {
-    this.selectedLineIndex = i;
+    this.setSelectedComponent("line", i);
+  }
+
+  get selectedLineIndex() {
+    return this.selectedComponent === "line"
+      ? this.selectedComponentIndex
+      : undefined;
   }
 
   get selectedLine() {
     if (this.selectedLineIndex === undefined) return;
 
-    return this.topogon.data?.lines[this.selectedLineIndex];
+    return this.topogon.data?.lines[this.selectedComponentIndex!];
+  }
+
+  setSelectedLabel(i?: number) {
+    this.setSelectedComponent("label", i);
+  }
+
+  get selectedLabelIndex() {
+    return this.selectedComponent === "label"
+      ? this.selectedComponentIndex
+      : undefined;
+  }
+
+  get selectedLabel() {
+    if (this.selectedLabelIndex === undefined) return;
+
+    return this.topogon.data?.labels[this.selectedComponentIndex!];
   }
 
   get lines() {
     return this.topogon.data?.lines;
+  }
+
+  get labels() {
+    return this.topogon.data?.labels;
   }
 
   addLine(points: TopoData.IPoint[]) {

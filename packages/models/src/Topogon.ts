@@ -9,6 +9,9 @@ export type ITopogon = {
   label?: string;
   topo?: ITopo;
   data?: ITopogonData;
+  // The topogon data is scaled down by this factor
+  // Eg. if photo is 1000x1000, but topogon was drawn on 500x500, scale is 0.5
+  scale: number;
   // Only can have one of these
   area?: IArea;
   boulder?: IBoulder;

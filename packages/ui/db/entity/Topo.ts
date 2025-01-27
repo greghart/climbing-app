@@ -17,6 +17,9 @@ const TopoSchema = new EntitySchema<Topo>({
     title: {
       type: String,
     },
+    scale: {
+      type: Number,
+    },
   },
   relations: {
     topogons: {

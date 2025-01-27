@@ -169,7 +169,11 @@ class CompassCustomPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
+  bool shouldRepaint(CompassCustomPainter oldDelegate) {
+    return oldDelegate.accuracy != accuracy ||
+        oldDelegate.heading != heading ||
+        oldDelegate.toHeading != toHeading;
+  }
 }
 
 double headingFromCoordinates(
