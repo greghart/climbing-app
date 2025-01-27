@@ -10,7 +10,7 @@ class TopoEditorStore {
   topogonsById: Map<number, Topogon> = new Map();
   selectedTopogonId?: number = undefined;
   hoveredTopogonId?: number = undefined;
-  scale?: number; // Image scale for this topo
+  scale: number = 1; // Image scale for this topo
   private topogonOptions: TopogonOptions;
 
   constructor(
