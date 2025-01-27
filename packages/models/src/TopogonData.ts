@@ -28,8 +28,8 @@ class Point {
 // as konva calls it.
 interface ILine {
   points: IPoint[];
-  color?: string; // Color of line, defaults to green
-  tension?: number; // Tension of line, defaults to 1
+  color: string; // Color of line
+  tension: number; // Tension of line
 }
 
 interface Line extends Omit<ILine, "points"> {
@@ -43,18 +43,50 @@ class Line {
   }
 }
 
+// Label is some text displayed on a background
+interface ILabel {
+  point: IPoint;
+  color: string; // Color of text
+  fill: string; // Color of background fill
+  direction: "up" | "right" | "down" | "left" | "none"; // Direction of label tag (if any)
+}
+
+interface Label extends Omit<ILabel, "point"> {
+  point: Point;
+}
+
+class Label {
+  constructor(data: ILabel) {
+    this.point = new Point(data.point);
+    this.color = data.color;
+    this.fill = data.fill;
+  }
+}
+
 // Top level TopogonData that can describe any of the above robustly
 interface ITopogonData {
   lines: ILine[];
+  labels: ILabel[];
 }
-interface TopogonData extends Omit<ITopogonData, "lines"> {
+interface TopogonData extends Omit<ITopogonData, "lines" | "labels"> {
   lines: Line[];
+  labels: Label[];
 }
 class TopogonData {
   constructor(data: ITopogonData) {
     this.lines = data.lines.map((l) => new Line(l));
+    this.labels = data.labels.map((l) => new Label(l));
   }
 }
 
-export { Line, Point, type ILine, type IPoint, type ITopogonData };
+export {
+  Label,
+  Line,
+  Point,
+  TopogonData,
+  type ILabel,
+  type ILine,
+  type IPoint,
+  type ITopogonData,
+};
 export default TopogonData;

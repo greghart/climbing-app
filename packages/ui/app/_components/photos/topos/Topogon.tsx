@@ -1,6 +1,7 @@
+import LabelComponent from "@/app/_components/photos/topos/Label";
 import LineComponent from "@/app/_components/photos/topos/Line";
 import { useTopogonEditorStore } from "@/app/_components/photos/topos/TopoEditorStoreProvider";
-import { Line, Topogon as TopogonModel } from "@/app/_models";
+import { Label, Line, Topogon as TopogonModel } from "@/app/_models";
 import Konva from "konva";
 import { observer } from "mobx-react-lite";
 import React from "react";
@@ -13,9 +14,72 @@ interface Props {
 function Topogon(props: Props) {
   if (!props.topogon?.data) return false;
 
-  return props.topogon.data.lines.map((line, i) => (
-    <TopogonLine key={i} idx={i} line={line} />
-  ));
+  return (
+    <>
+      {props.topogon.data.lines.map((line, i) => (
+        <TopogonLine key={i} idx={i} line={line} />
+      ))}
+      {props.topogon.data.labels.map((label, i) => (
+        <TopogonLabel key={i} idx={i} label={label} />
+      ))}
+      <TopogonLabel
+        idx={0}
+        label={
+          new Label({
+            point: { x: 50, y: 50 },
+            color: "green",
+            fill: "blue",
+            direction: "up",
+          })
+        }
+      />
+    </>
+  );
+}
+
+function _TopogonLabel({ label, idx }: { label: Label; idx: number }) {
+  const store = useTopogonEditorStore();
+  const selected = store?.selectedLabelIndex === idx;
+  // Transformable
+  const { groupRef, trRef } = useTransformer(
+    selected,
+    label.point.x,
+    label.point.y
+  );
+
+  return (
+    <>
+      <Group
+        ref={groupRef}
+        draggable={selected}
+        onClick={(e) => {
+          if (store && !selected) {
+            store.setSelectedLabel(idx);
+            e.cancelBubble = true;
+          }
+        }}
+        onDragEnd={(e: any) => {
+          const x = e.target.x();
+          const y = e.target.y();
+          label.move(x, y);
+        }}
+      >
+        <LabelComponent
+          LabelProps={{ ...label.point }}
+          TextProps={{ text: "testing", fill: "green" }}
+          TagProps={{ fill: "blue" }}
+        />
+      </Group>
+      {selected && (
+        <Transformer
+          ref={trRef}
+          flipEnabled={false}
+          resizeEnabled={false}
+          rotateEnabled={false}
+        />
+      )}
+    </>
+  );
 }
 
 function _TopogonLine({ line, idx }: { line: Line; idx: number }) {
@@ -23,29 +87,28 @@ function _TopogonLine({ line, idx }: { line: Line; idx: number }) {
   // Don't "select" with just a point, bad UX
   const selected = store?.selectedLineIndex === idx && line.points.length > 1;
   // Transformable
-  const groupRef = React.useRef<Konva.Group>(null);
-  const trRef = React.useRef<any>(null);
-  React.useEffect(() => {
-    if (selected) {
-      // we need to attach transformer manually
-      trRef.current.nodes([groupRef.current]);
-      trRef.current.getLayer().batchDraw();
-    }
-  }, [groupRef, selected]);
+  const { groupRef, trRef } = useTransformer(selected, line.konvaPoints);
 
   return (
     <>
       <Group
         ref={groupRef}
         draggable={selected}
-        onClick={() => store && !selected && store.setSelectedLine(idx)}
+        onClick={(e) => {
+          if (store && !selected) {
+            store.setSelectedLine(idx);
+            e.cancelBubble = true;
+          }
+        }}
         onDragEnd={(e: any) => {
-          line.movePoints({ x: e.target.x(), y: e.target.y() });
-          groupRef.current?.position({ x: 0, y: 0 });
-          trRef.current.position({ x: 0, y: 0 });
+          const x = e.target.x();
+          const y = e.target.y();
+          line.movePoints({ x, y });
         }}
       >
         <LineComponent
+          x={0}
+          y={0}
           points={line.konvaPoints}
           strokeWidth={4}
           hitStrokeWidth={10}
@@ -76,5 +139,24 @@ function _TopogonLine({ line, idx }: { line: Line; idx: number }) {
   );
 }
 const TopogonLine = observer(_TopogonLine);
+const TopogonLabel = observer(_TopogonLabel);
+
+function useTransformer(selected: boolean, ...updaters: any[]) {
+  const groupRef = React.useRef<Konva.Group>(null);
+  const trRef = React.useRef<Konva.Transformer>(null);
+  React.useEffect(() => {
+    if (selected) {
+      // we need to attach transformer manually
+      trRef.current!.nodes([groupRef.current!]);
+      trRef.current!.getLayer()!.batchDraw();
+    }
+  }, [selected]);
+  // If line updates, we need to update group and tr manually (former we control, latter is in konva state)
+  React.useEffect(() => {
+    groupRef.current?.position({ x: 0, y: 0 });
+    trRef.current?.forceUpdate();
+  }, updaters);
+  return { groupRef, trRef };
+}
 
 export default observer(Topogon);

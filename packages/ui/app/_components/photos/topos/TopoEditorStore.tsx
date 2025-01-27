@@ -10,6 +10,7 @@ class TopoEditorStore {
   topogonsById: Map<number, Topogon> = new Map();
   selectedTopogonId?: number = undefined;
   hoveredTopogonId?: number = undefined;
+  scale?: number; // Image scale for this topo
   private topogonOptions: TopogonOptions;
 
   constructor(
@@ -21,6 +22,7 @@ class TopoEditorStore {
       topogonsById: observable,
       selectedTopogonId: observable,
       hoveredTopogonId: observable,
+      scale: observable,
       selectedTopogon: computed,
       topogons: computed,
       topogonEditor: computed,
@@ -28,6 +30,7 @@ class TopoEditorStore {
       setSelectedTopogonId: action,
       addTopogon: action,
       removeTopogon: action,
+      setScale: action,
     });
     this.topogonsById = new Map(
       (photo.topo?.topogons || []).map((t) => [t.id, new Topogon(t)])
@@ -64,12 +67,19 @@ class TopoEditorStore {
       new Topogon({
         id,
         label: "New topogon",
+        scale: this.scale || 1,
       })
     );
   }
 
   removeTopogon(id: number) {
     this.topogonsById.delete(id);
+  }
+
+  setScale(_scale: number) {
+    const scale = parseFloat(_scale.toFixed(3));
+    if (scale === this.scale) return;
+    this.scale = scale;
   }
 }
 

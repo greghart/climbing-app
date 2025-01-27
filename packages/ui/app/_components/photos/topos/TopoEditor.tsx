@@ -3,13 +3,19 @@ import SubmitButton from "@/app/_components/form/SubmitButton";
 import SubmitSnack from "@/app/_components/form/SubmitSnack";
 import TextField from "@/app/_components/form/TextField";
 import useActionState from "@/app/_components/form/useActionState";
-import LineTracer from "@/app/_components/photos/topos/LineTracer";
 import TopoCanvas from "@/app/_components/photos/topos/TopoCanvas";
+import TopoEditorCanvas from "@/app/_components/photos/topos/TopoEditorCanvas";
 import { useTopoEditorStore } from "@/app/_components/photos/topos/TopoEditorStoreProvider";
-import Topogon from "@/app/_components/photos/topos/Topogon";
 import ShowContentCard from "@/app/_components/show/ShowContentCard";
 import putTopo from "@/app/api/_actions/putTopo";
-import { Add, Delete, HighlightAlt, LinearScale } from "@mui/icons-material";
+import {
+  Add,
+  AdsClick,
+  Delete,
+  HighlightAlt,
+  Label,
+  LinearScale,
+} from "@mui/icons-material";
 import {
   Divider,
   FormHelperText,
@@ -32,13 +38,17 @@ import {
 import { action, toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import { IPhoto } from "models";
-import { Group, Layer } from "react-konva";
 
 interface Props {
   photo: IPhoto;
 }
 
-export type Tool = "line";
+/**
+ * Root component for editing and saving the topo for given photo
+ * * Canvas for displaying topogons and editing them when selected
+ * * Topo panel for changing title and selecting, adding, removing topogons
+ * * Topogon panel for editing the selected topogon, if any, including canvas tool
+ */
 function TopoEditor(props: Props) {
   // Note, we still use `useActionState`, but in reality topo editing cannot be
   // done without a fully functional clientside.
@@ -71,38 +81,9 @@ function TopoEditor(props: Props) {
           <Grid item xs={12} lg={8}>
             <TopoCanvas {...props}>
               {/** TODO: Refactor to separate component?? */}
-              {(img) => {
-                if (!store.selectedTopogon) {
-                  return (
-                    <Layer>
-                      {img}
-                      {store.topogons.map((topogon) => (
-                        <Group
-                          key={topogon.id}
-                          onMouseOver={(e) =>
-                            store.setHoveredTopogonId(topogon.id)
-                          }
-                          onMouseOut={(e) =>
-                            store.setHoveredTopogonId(undefined)
-                          }
-                          onClick={(e) =>
-                            store.setSelectedTopogonId(topogon.id)
-                          }
-                        >
-                          <Topogon key={topogon.id} topogon={topogon} />
-                        </Group>
-                      ))}
-                    </Layer>
-                  );
-                }
-                return (
-                  <>
-                    <LineTracer>{img}</LineTracer>
-                    <Layer>
-                      <Topogon topogon={store.selectedTopogon} />
-                    </Layer>
-                  </>
-                );
+              {(img, scale) => {
+                store.setScale(scale);
+                return <TopoEditorCanvas img={img} />;
               }}
             </TopoCanvas>
           </Grid>
@@ -176,6 +157,11 @@ function TopoEditor(props: Props) {
                         value !== null && topogonStore.setTool(value)
                       }
                     >
+                      <ToggleButton value="pointer">
+                        <Tooltip title="Pointer tool">
+                          <AdsClick />
+                        </Tooltip>
+                      </ToggleButton>
                       <ToggleButton value="line">
                         <Tooltip title="Line tool">
                           <LinearScale />
@@ -183,7 +169,7 @@ function TopoEditor(props: Props) {
                       </ToggleButton>
                       <ToggleButton value="label">
                         <Tooltip title="Label tool">
-                          <LinearScale />
+                          <Label />
                         </Tooltip>
                       </ToggleButton>
                       <ToggleButton value="box" aria-label="centered" disabled>
@@ -240,9 +226,9 @@ function TopoEditor(props: Props) {
                             theme.palette.info,
                             theme.palette.success,
                           ].map((color) => (
-                            <MenuItem key={color.main} value={color.main}>
-                              <Typography style={{ color: color.main }}>
-                                {color.main}
+                            <MenuItem key={color.main} value={color.dark}>
+                              <Typography style={{ color: color.dark }}>
+                                {color.dark}
                               </Typography>
                             </MenuItem>
                           ))}

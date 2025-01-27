@@ -7,7 +7,7 @@ export default class Topogon extends models.Topogon {
 
   constructor(topogon: models.ITopogon) {
     super(topogon);
-    this.data = new TopogonData(topogon.data || { lines: [] });
+    this.data = new TopogonData(topogon.data || { lines: [], labels: [] });
     makeObservable(this, {
       data: observable,
       label: observable,
