@@ -16,8 +16,6 @@ const getPhoto = cache(async (id: number) => {
       "photoable.boulder",
       "photoable.route",
       "upload",
-      "topo",
-      "topo.topogons",
     ],
   });
   if (photo?.topo?.topogons) {

@@ -5,15 +5,23 @@ import { Topo } from "@/db/entity/Topo";
 import { ITopogon } from "models";
 import { EntitySchema } from "typeorm";
 
-export type Topogon = ITopogon & {
-  topo: Topo;
-  // Our implementation is just stringified JSON, but we also want this
-  // to be transparent
-  // data: string;
-  area?: Area;
-  boulder?: Boulder;
-  route?: Route;
-};
+// Implementation of foreign keys
+export interface TopogonEntityKeys {
+  routeId: number | null;
+  boulderId: number | null;
+  areaId: number | null;
+}
+
+export type Topogon = ITopogon &
+  TopogonEntityKeys & {
+    topo: Topo;
+    // Our implementation is just stringified JSON, but we also want this
+    // to be transparent
+    // data: string;
+    area?: Area;
+    boulder?: Boulder;
+    route?: Route;
+  };
 
 const TopogonSchema = new EntitySchema<Topogon>({
   name: "topogon",
@@ -25,6 +33,18 @@ const TopogonSchema = new EntitySchema<Topogon>({
     },
     data: {
       type: String,
+    },
+    areaId: {
+      type: "int",
+      nullable: true,
+    },
+    boulderId: {
+      type: "int",
+      nullable: true,
+    },
+    routeId: {
+      type: "int",
+      nullable: true,
     },
   },
   relations: {

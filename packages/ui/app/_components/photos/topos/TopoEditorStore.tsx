@@ -66,9 +66,12 @@ class TopoEditorStore {
       id,
       new Topogon({
         id,
-        label: "New topogon",
+        routeId: null,
+        boulderId: null,
+        areaId: null,
       })
     );
+    this.setSelectedTopogonId(id);
   }
 
   removeTopogon(id: number) {

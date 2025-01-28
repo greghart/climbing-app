@@ -1,4 +1,5 @@
 import { Label, Line, Topogon } from "@/app/_models";
+import { type TopogonEntitiesPool } from "@/app/api/_actions/getTopo";
 import { action, computed, makeObservable, observable } from "mobx";
 import { TopoData } from "models";
 
@@ -10,6 +11,7 @@ export interface IOptions {
   defaultFillColor: string;
   defaultLineTension: number;
   defaultLabelText: string;
+  entityPool?: TopogonEntitiesPool;
 }
 
 export default class TopogonEditorStore {
@@ -21,6 +23,8 @@ export default class TopogonEditorStore {
   defaultFillColor: string; // default color to use for background/fill for all components
   defaultLineTension: number;
   defaultLabelText: string;
+  // Pool of entities topogon can relate to
+  entityPool?: TopogonEntitiesPool;
 
   constructor(topogon: Topogon, options: IOptions) {
     this.topogon = topogon;
@@ -29,6 +33,7 @@ export default class TopogonEditorStore {
     this.defaultFillColor = options.defaultFillColor;
     this.defaultLineTension = options.defaultLineTension;
     this.defaultLabelText = options.defaultLabelText;
+    this.entityPool = options.entityPool;
     makeObservable(this, {
       tool: observable,
       selectedComponent: observable,
@@ -42,6 +47,8 @@ export default class TopogonEditorStore {
       selectedLabel: computed,
       lines: computed,
       labels: computed,
+      entityField: computed,
+      entityId: computed,
       addLine: action,
       addLabel: action,
       removeSelectedLine: action,
@@ -50,6 +57,7 @@ export default class TopogonEditorStore {
       setTool: action,
       setColor: action,
       setLineTension: action,
+      setEntity: action,
     });
   }
 
@@ -173,5 +181,34 @@ export default class TopogonEditorStore {
   setText(text: string) {
     this.defaultLabelText = text;
     if (this.selectedLabel) this.selectedLabel.text = text;
+  }
+
+  // Entity selector
+
+  get entityField() {
+    switch (this.entityPool?.type) {
+      case "route":
+        return "routeId";
+      case "boulder":
+        return "boulderId";
+      case "area":
+        return "areaId";
+      default:
+        return undefined;
+    }
+  }
+
+  get entityId(): number | null {
+    if (!this.entityField) return null;
+    return this.topogon[this.entityField];
+  }
+
+  setEntity(id: number) {
+    this.topogon[this.entityField!] = id;
+    if (this.topogon.label === undefined || this.topogon.label === "") {
+      this.topogon.label = `${
+        this.entityPool!.entities.find((e) => e.id === id)!.name
+      } (${id})`;
+    }
   }
 }
