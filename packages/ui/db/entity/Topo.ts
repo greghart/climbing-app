@@ -18,7 +18,7 @@ const TopoSchema = new EntitySchema<Topo>({
       type: String,
     },
     scale: {
-      type: Number,
+      type: "decimal",
     },
   },
   relations: {

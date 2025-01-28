@@ -1,7 +1,5 @@
-import 'coordinate.dart';
 import 'difficulty_breakdown.dart';
-import 'polygon.dart';
-import 'route.dart';
+import 'index.dart';
 import 'types.dart';
 
 class Boulder {
@@ -13,6 +11,7 @@ class Boulder {
   final List<Route> routes;
   final Polygon? polygon;
   final DifficultyBreakdown difficultyBreakdown;
+  final List<Photo> photos;
 
   Boulder({
     required this.id,
@@ -20,6 +19,7 @@ class Boulder {
     required this.name,
     required this.coordinates,
     required this.routes,
+    required this.photos,
     this.description,
     this.polygon,
   }) : difficultyBreakdown = DifficultyBreakdown(routes);
@@ -32,6 +32,7 @@ class Boulder {
           'description': String? description,
           'coordinates': JsonObject coordinates,
           'routes': List routes,
+          'photos': List photos,
         }) {
       Polygon? polygon;
       if (json case {'polygon': JsonObject polygonJson}) {
@@ -47,6 +48,7 @@ class Boulder {
         coordinates: c,
         routes: routes.map((route) => Route.fromJson(id, c, route)).toList(),
         polygon: polygon,
+        photos: photos.map((photo) => Photo.fromJson(photo)).toList(),
       );
     }
     throw JSONException("Boulder", json);

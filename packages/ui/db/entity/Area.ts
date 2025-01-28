@@ -10,6 +10,7 @@ export type Area = IArea & {
   boulders?: Boulder[];
   commentable?: Commentable;
   photoable?: Photoable;
+  photoableId?: number | null;
 };
 
 const AreaSchema = new EntitySchema<Area>({
@@ -21,6 +22,10 @@ const AreaSchema = new EntitySchema<Area>({
     },
     description: {
       type: String,
+      nullable: true,
+    },
+    photoableId: {
+      type: "int",
       nullable: true,
     },
   },

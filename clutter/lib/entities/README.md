@@ -9,3 +9,9 @@ we'll use provider context for accessing the ancestry tree.
 
 During deserialization, unexpected data maps as null, and we'd expect consumers
 to handle this correctly.
+
+## Potential TODOs
+
+* Filter out fields we don't actually use in the app -- ideally this could be done in both
+  json and memory
+* Zip up the JSON so it's not massive

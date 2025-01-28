@@ -9,5 +9,8 @@ export 'line.dart';
 export 'photo.dart';
 export 'polygon.dart';
 export 'route.dart';
+export 'topo.dart';
+export 'topogon.dart';
+export 'topogon_data.dart';
 export 'trail.dart';
 export 'upload.dart';
