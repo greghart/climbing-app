@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { action } from "mobx";
 import { observer } from "mobx-react-lite";
+import { IRoute } from "models";
 import React from "react";
 
 interface Props {}
@@ -26,11 +27,34 @@ function _TopogonEditorTools(props: Props) {
   const store = useTopogonEditorStore();
   if (!store) return false;
 
+  console.warn("TopogonEditorTools", {
+    topogon: store.topogon,
+    entityId: store.entityId,
+  });
   return (
     <>
       <Typography variant="h5">Tools</Typography>
+      {store.entityPool && (
+        <MUITextField
+          label="Topogon Entity"
+          select
+          value={store.entityId}
+          onChange={action((e) => {
+            store.setEntity(parseInt(e.target.value));
+          })}
+        >
+          {store.entityPool.entities.map((entity) => (
+            <MenuItem key={entity.id} value={entity.id}>
+              {entity.name}{" "}
+              {store.entityPool!.type === "route" && (
+                <>({(entity as IRoute).gradeRaw})</>
+              )}
+            </MenuItem>
+          ))}
+        </MUITextField>
+      )}
       <MUITextField
-        label="Topogon Label"
+        label="Additional info"
         value={store.topogon.label}
         onChange={action((e) => {
           store.topogon.label = e.target.value;

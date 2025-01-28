@@ -49,7 +49,6 @@ function TopoEditor(props: Props) {
     },
     meta: {
       photoId: props.photo.id,
-      topoId: props.photo.topo?.id,
     },
   });
   const errText = state.fieldErrors?.topogons?.join(", ");
@@ -79,6 +78,9 @@ function TopoEditor(props: Props) {
               <Stack spacing={1}>
                 <Typography variant="h5">Info</Typography>
                 <TextField state={state} name="title" />
+                {state.data.id && (
+                  <input name="id" value={state.data.id} type="hidden" />
+                )}
                 <input
                   name="topogons"
                   type="hidden"

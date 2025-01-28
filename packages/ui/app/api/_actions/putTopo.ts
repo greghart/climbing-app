@@ -6,8 +6,8 @@ import { ITopo } from "models";
 import "server-only";
 import { z } from "zod";
 
-type Model = Pick<ITopo, "title" | "scale" | "topogons">;
-type Meta = { photoId: number; topoId?: number };
+type Model = Pick<ITopo, "id" | "title" | "scale" | "topogons">;
+type Meta = { photoId: number };
 const putTopo = formAction<Model, z.infer<typeof topoSchema>, Meta>(
   topoSchema,
   async (res, data, prevState) => {
@@ -19,9 +19,9 @@ const putTopo = formAction<Model, z.infer<typeof topoSchema>, Meta>(
       if (!photo) return res.withErr("Photo to put topo into not found");
 
       // Remove any topogons that client has removed
-      if (prevState.meta.topoId) {
+      if (data.id) {
         const topo = await tx.getRepository(TopoSchema).findOne({
-          where: { id: prevState.meta.topoId },
+          where: { id: data.id },
           relations: ["topogons"],
         });
         if (!topo)
@@ -36,15 +36,12 @@ const putTopo = formAction<Model, z.infer<typeof topoSchema>, Meta>(
       const newTopo = {
         photo,
         ...data,
-        id: _resolveId(prevState.meta.topoId),
         topogons: data.topogons.map((topogon) => ({
           ...topogon,
           id: _resolveId(topogon.id),
           data: JSON.stringify(topogon.data) as any,
         })),
       };
-      console.warn("Data", data);
-      console.warn("Saving topo", newTopo);
       const saved = await tx.getRepository(TopoSchema).save(newTopo);
 
       return res.respond(saved, "Topo saved");
