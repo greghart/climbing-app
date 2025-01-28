@@ -35,7 +35,6 @@ class Upload {
           'fileSize': int fileSize,
           'sha1Hash': String sha1Hash,
           'uploadedAt': String uploadedAt,
-          'photo': JsonObject? photo,
         }) {
       return Upload(
         id: id,
@@ -46,7 +45,6 @@ class Upload {
         fileSize: fileSize,
         sha1Hash: sha1Hash,
         uploadedAt: DateTime.parse(uploadedAt),
-        photo: photo != null ? Photo.fromJson(photo) : null,
       );
     }
     throw JSONException("Upload", json);

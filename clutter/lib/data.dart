@@ -38,6 +38,7 @@ const cragJson = '''
       "updatedAt": "2024-12-09 23:22:49",
       "name": "Dog Pile Area",
       "description": "Dog Pile Boulder and surrounding area",
+      "photoableId": null,
       "boulders": [
         {
           "id": 1444,
@@ -101,13 +102,14 @@ const cragJson = '''
               "coordinates": {
                 "lat": 32.85038260809142,
                 "lng": -117.023405831197
-              }
+              },
+              "photos": []
             },
             {
               "id": 1458,
               "name": "The Butt Plug North Side",
               "length": null,
-              "description": null,
+              "description": "",
               "firstAscent": null,
               "gradeRaw": "V0-",
               "grade": {
@@ -118,13 +120,14 @@ const cragJson = '''
               "coordinates": {
                 "lat": 32.850400405315625,
                 "lng": -117.0234198063049
-              }
+              },
+              "photos": []
             },
             {
               "id": 1459,
               "name": "East Face of Butt Plug",
               "length": null,
-              "description": null,
+              "description": "",
               "firstAscent": null,
               "gradeRaw": "V2",
               "grade": {
@@ -135,9 +138,11 @@ const cragJson = '''
               "coordinates": {
                 "lat": 32.85039152132756,
                 "lng": -117.02340244901657
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1445,
@@ -159,7 +164,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11d",
                 "value": 41
-              }
+              },
+              "photos": []
             },
             {
               "id": 1753,
@@ -172,7 +178,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10d",
                 "value": 25
-              }
+              },
+              "photos": []
             },
             {
               "id": 1754,
@@ -185,7 +192,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10d",
                 "value": 25
-              }
+              },
+              "photos": []
             },
             {
               "id": 1755,
@@ -198,7 +206,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.12a",
                 "value": 50
-              }
+              },
+              "photos": []
             },
             {
               "id": 1756,
@@ -211,7 +220,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V1",
                 "value": 20
-              }
+              },
+              "photos": []
             },
             {
               "id": 1757,
@@ -224,9 +234,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V1",
                 "value": 20
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1446,
@@ -248,7 +260,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V8",
                 "value": 90
-              }
+              },
+              "photos": []
             },
             {
               "id": 1759,
@@ -261,7 +274,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "VB",
                 "value": 0
-              }
+              },
+              "photos": []
             },
             {
               "id": 1760,
@@ -274,7 +288,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V11",
                 "value": 120
-              }
+              },
+              "photos": []
             },
             {
               "id": 1761,
@@ -287,7 +302,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0-",
                 "value": 9
-              }
+              },
+              "photos": []
             },
             {
               "id": 1762,
@@ -300,7 +316,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V1/2",
                 "value": 25
-              }
+              },
+              "photos": []
             },
             {
               "id": 1763,
@@ -313,9 +330,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V8",
                 "value": 90
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1447,
@@ -337,7 +356,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10",
                 "value": 11
-              }
+              },
+              "photos": []
             },
             {
               "id": 1765,
@@ -350,9 +370,11 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.9+",
                 "value": 11
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1448,
@@ -374,7 +396,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.7",
                 "value": 0
-              }
+              },
+              "photos": []
             },
             {
               "id": 1767,
@@ -387,7 +410,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10a",
                 "value": 11
-              }
+              },
+              "photos": []
             },
             {
               "id": 1768,
@@ -400,7 +424,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10a/10b",
                 "value": 11.5
-              }
+              },
+              "photos": []
             },
             {
               "id": 1769,
@@ -413,7 +438,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.8",
                 "value": 9
-              }
+              },
+              "photos": []
             },
             {
               "id": 1770,
@@ -426,7 +452,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10a",
                 "value": 11
-              }
+              },
+              "photos": []
             },
             {
               "id": 1771,
@@ -439,9 +466,11 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11a",
                 "value": 30
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1449,
@@ -463,7 +492,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1773,
@@ -476,7 +506,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1774,
@@ -489,7 +520,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V1/2",
                 "value": 25
-              }
+              },
+              "photos": []
             },
             {
               "id": 1775,
@@ -502,9 +534,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V1",
                 "value": 20
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1450,
@@ -526,7 +560,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "VB",
                 "value": 0
-              }
+              },
+              "photos": []
             },
             {
               "id": 1777,
@@ -539,9 +574,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0-",
                 "value": 9
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1451,
@@ -563,7 +600,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10+",
                 "value": 12
-              }
+              },
+              "photos": []
             },
             {
               "id": 1779,
@@ -576,7 +614,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.12+",
                 "value": 51
-              }
+              },
+              "photos": []
             },
             {
               "id": 1780,
@@ -589,7 +628,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.9-",
                 "value": 9
-              }
+              },
+              "photos": []
             },
             {
               "id": 1781,
@@ -602,7 +642,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11",
                 "value": 30
-              }
+              },
+              "photos": []
             },
             {
               "id": 1782,
@@ -615,7 +656,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.8",
                 "value": 9
-              }
+              },
+              "photos": []
             },
             {
               "id": 1783,
@@ -628,7 +670,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.12",
                 "value": 50
-              }
+              },
+              "photos": []
             },
             {
               "id": 1784,
@@ -641,7 +684,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11",
                 "value": 30
-              }
+              },
+              "photos": []
             },
             {
               "id": 1785,
@@ -654,7 +698,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.5",
                 "value": -2
-              }
+              },
+              "photos": []
             },
             {
               "id": 1786,
@@ -667,7 +712,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.7",
                 "value": 0
-              }
+              },
+              "photos": []
             },
             {
               "id": 1787,
@@ -680,7 +726,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "VB",
                 "value": 0
-              }
+              },
+              "photos": []
             },
             {
               "id": 1788,
@@ -693,9 +740,93 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0+",
                 "value": 11
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
+        },
+        {
+          "id": 1452,
+          "name": "Butt Plug, The",
+          "description": null,
+          "coordinates": {
+            "lat": 32.8504,
+            "lng": -117.02342
+          },
+          "routes": [
+            {
+              "id": 1789,
+              "name": "The Butt Plug North Side",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V0-",
+              "grade": {
+                "system": "V",
+                "raw": "V0-",
+                "value": 9
+              },
+              "photos": []
+            },
+            {
+              "id": 1790,
+              "name": "East face traverse L->R",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              },
+              "photos": []
+            },
+            {
+              "id": 1791,
+              "name": "East face traverse R->L",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              },
+              "photos": []
+            },
+            {
+              "id": 1792,
+              "name": "East Face of Butt Plug",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V2",
+              "grade": {
+                "system": "V",
+                "raw": "V2",
+                "value": 30
+              },
+              "photos": []
+            },
+            {
+              "id": 1793,
+              "name": "Butt Plug Mantle",
+              "length": null,
+              "description": null,
+              "firstAscent": null,
+              "gradeRaw": "V1",
+              "grade": {
+                "system": "V",
+                "raw": "V1",
+                "value": 20
+              },
+              "photos": []
+            }
+          ],
+          "photos": []
         }
       ],
       "polygon": {
@@ -753,14 +884,17 @@ const cragJson = '''
             "lng": -117.02277034521104
           }
         ]
-      }
+      },
+      "photoable": null,
+      "photos": []
     },
     {
       "id": 227,
       "createdAt": "2024-12-26 18:36:56",
       "updatedAt": "2024-12-26 18:38:17",
       "name": "Hillside Area",
-      "description": null,
+      "description": "",
+      "photoableId": null,
       "boulders": [
         {
           "id": 1453,
@@ -782,9 +916,11 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11-",
                 "value": 29
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1454,
@@ -806,9 +942,11 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.6",
                 "value": -1
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1455,
@@ -830,7 +968,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10+",
                 "value": 12
-              }
+              },
+              "photos": []
             },
             {
               "id": 1797,
@@ -843,7 +982,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10",
                 "value": 11
-              }
+              },
+              "photos": []
             },
             {
               "id": 1798,
@@ -856,7 +996,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10a",
                 "value": 11
-              }
+              },
+              "photos": []
             },
             {
               "id": 1799,
@@ -869,7 +1010,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10+",
                 "value": 12
-              }
+              },
+              "photos": []
             },
             {
               "id": 1800,
@@ -882,7 +1024,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10c/d",
                 "value": 22.5
-              }
+              },
+              "photos": []
             },
             {
               "id": 1801,
@@ -895,9 +1038,11 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.8",
                 "value": 9
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1456,
@@ -919,7 +1064,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11+",
                 "value": 31
-              }
+              },
+              "photos": []
             },
             {
               "id": 1803,
@@ -932,7 +1078,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.9",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1804,
@@ -945,9 +1092,11 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.9",
                 "value": 10
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1457,
@@ -969,9 +1118,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V1",
                 "value": 20
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1458,
@@ -993,9 +1144,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "VB",
                 "value": 0
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1459,
@@ -1017,9 +1170,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V1",
                 "value": 20
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1460,
@@ -1041,7 +1196,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0+",
                 "value": 11
-              }
+              },
+              "photos": []
             },
             {
               "id": 1809,
@@ -1054,7 +1210,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1810,
@@ -1067,7 +1224,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V1",
                 "value": 20
-              }
+              },
+              "photos": []
             },
             {
               "id": 1811,
@@ -1080,7 +1238,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.7",
                 "value": 0
-              }
+              },
+              "photos": []
             },
             {
               "id": 1812,
@@ -1093,9 +1252,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V3",
                 "value": 40
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1461,
@@ -1117,7 +1278,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10a/b",
                 "value": 11.5
-              }
+              },
+              "photos": []
             },
             {
               "id": 1814,
@@ -1130,7 +1292,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10c",
                 "value": 20
-              }
+              },
+              "photos": []
             },
             {
               "id": 1815,
@@ -1143,7 +1306,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11a",
                 "value": 30
-              }
+              },
+              "photos": []
             },
             {
               "id": 1816,
@@ -1156,7 +1320,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11a",
                 "value": 30
-              }
+              },
+              "photos": []
             },
             {
               "id": 1817,
@@ -1169,7 +1334,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11a/b",
                 "value": 30.5
-              }
+              },
+              "photos": []
             },
             {
               "id": 1818,
@@ -1182,9 +1348,11 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11a/b",
                 "value": 30.5
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         }
       ],
       "polygon": {
@@ -1254,14 +1422,17 @@ const cragJson = '''
             "lng": -117.02131927013399
           }
         ]
-      }
+      },
+      "photoable": null,
+      "photos": []
     },
     {
       "id": 228,
       "createdAt": "2024-12-26 18:36:56",
       "updatedAt": "2024-12-26 18:46:36",
       "name": "Moby Dick Area",
-      "description": null,
+      "description": "",
+      "photoableId": null,
       "boulders": [
         {
           "id": 1462,
@@ -1283,7 +1454,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V4",
                 "value": 50
-              }
+              },
+              "photos": []
             },
             {
               "id": 1820,
@@ -1296,7 +1468,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10c",
                 "value": 20
-              }
+              },
+              "photos": []
             },
             {
               "id": 1821,
@@ -1309,7 +1482,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.7",
                 "value": 0
-              }
+              },
+              "photos": []
             },
             {
               "id": 1822,
@@ -1322,7 +1496,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V5-6",
                 "value": 65
-              }
+              },
+              "photos": []
             },
             {
               "id": 1823,
@@ -1335,7 +1510,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.9",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1824,
@@ -1348,7 +1524,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0+",
                 "value": 11
-              }
+              },
+              "photos": []
             },
             {
               "id": 1825,
@@ -1361,7 +1538,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V3",
                 "value": 40
-              }
+              },
+              "photos": []
             },
             {
               "id": 1826,
@@ -1374,7 +1552,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1827,
@@ -1387,7 +1566,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1828,
@@ -1400,7 +1580,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V4",
                 "value": 50
-              }
+              },
+              "photos": []
             },
             {
               "id": 1829,
@@ -1413,7 +1594,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1830,
@@ -1426,7 +1608,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V3",
                 "value": 40
-              }
+              },
+              "photos": []
             },
             {
               "id": 1831,
@@ -1439,9 +1622,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V7",
                 "value": 80
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1463,
@@ -1463,7 +1648,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11b",
                 "value": 31
-              }
+              },
+              "photos": []
             },
             {
               "id": 1833,
@@ -1476,9 +1662,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V2",
                 "value": 30
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1464,
@@ -1500,7 +1688,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1835,
@@ -1513,7 +1702,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.6",
                 "value": -1
-              }
+              },
+              "photos": []
             },
             {
               "id": 1836,
@@ -1526,7 +1716,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.6",
                 "value": -1
-              }
+              },
+              "photos": []
             },
             {
               "id": 1837,
@@ -1539,9 +1730,11 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.4",
                 "value": -3
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1465,
@@ -1563,11 +1756,12 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.8",
                 "value": 9
-              }
+              },
+              "photos": []
             },
             {
               "id": 1839,
-              "name": "Unnamed ('Puckerfest')",
+              "name": "Unnamed (\\"Puckerfest\\")",
               "length": null,
               "description": null,
               "firstAscent": null,
@@ -1576,14 +1770,16 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V3",
                 "value": 40
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1466,
           "name": "Lieback Rock",
-          "description": null,
+          "description": "",
           "coordinates": {
             "lat": 32.85126,
             "lng": -117.02071
@@ -1646,7 +1842,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0-1",
                 "value": 15
-              }
+              },
+              "photos": []
             },
             {
               "id": 1841,
@@ -1659,7 +1856,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1842,
@@ -1672,7 +1870,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V3",
                 "value": 40
-              }
+              },
+              "photos": []
             },
             {
               "id": 1843,
@@ -1685,7 +1884,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0-",
                 "value": 9
-              }
+              },
+              "photos": []
             },
             {
               "id": 1844,
@@ -1698,7 +1898,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V3",
                 "value": 40
-              }
+              },
+              "photos": []
             },
             {
               "id": 1845,
@@ -1711,7 +1912,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11a",
                 "value": 30
-              }
+              },
+              "photos": []
             },
             {
               "id": 1846,
@@ -1724,7 +1926,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1847,
@@ -1737,7 +1940,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.7",
                 "value": 0
-              }
+              },
+              "photos": []
             },
             {
               "id": 1848,
@@ -1750,7 +1954,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10a",
                 "value": 11
-              }
+              },
+              "photos": []
             },
             {
               "id": 1849,
@@ -1763,7 +1968,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V2-3",
                 "value": 35
-              }
+              },
+              "photos": []
             },
             {
               "id": 1850,
@@ -1776,9 +1982,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V2",
                 "value": 30
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1467,
@@ -1800,7 +2008,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1852,
@@ -1813,7 +2022,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10a",
                 "value": 11
-              }
+              },
+              "photos": []
             },
             {
               "id": 1853,
@@ -1826,7 +2036,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V2",
                 "value": 30
-              }
+              },
+              "photos": []
             },
             {
               "id": 1854,
@@ -1839,7 +2050,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.7",
                 "value": 0
-              }
+              },
+              "photos": []
             },
             {
               "id": 1855,
@@ -1852,7 +2064,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10+",
                 "value": 12
-              }
+              },
+              "photos": []
             },
             {
               "id": 1856,
@@ -1865,7 +2078,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10",
                 "value": 11
-              }
+              },
+              "photos": []
             },
             {
               "id": 1857,
@@ -1878,9 +2092,11 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.9",
                 "value": 10
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1468,
@@ -1902,7 +2118,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1859,
@@ -1915,7 +2132,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1860,
@@ -1928,7 +2146,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.9",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1861,
@@ -1941,7 +2160,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1862,
@@ -1954,7 +2174,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.8-",
                 "value": 8
-              }
+              },
+              "photos": []
             },
             {
               "id": 1863,
@@ -1967,7 +2188,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0-",
                 "value": 9
-              }
+              },
+              "photos": []
             },
             {
               "id": 1864,
@@ -1980,7 +2202,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11c",
                 "value": 40
-              }
+              },
+              "photos": []
             },
             {
               "id": 1865,
@@ -1993,7 +2216,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V2",
                 "value": 30
-              }
+              },
+              "photos": []
             },
             {
               "id": 1866,
@@ -2006,7 +2230,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.7",
                 "value": 0
-              }
+              },
+              "photos": []
             },
             {
               "id": 1867,
@@ -2019,7 +2244,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11+",
                 "value": 31
-              }
+              },
+              "photos": []
             },
             {
               "id": 1868,
@@ -2032,7 +2258,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11+",
                 "value": 31
-              }
+              },
+              "photos": []
             },
             {
               "id": 1869,
@@ -2045,9 +2272,11 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.8",
                 "value": 9
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1469,
@@ -2069,7 +2298,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V2+",
                 "value": 31
-              }
+              },
+              "photos": []
             },
             {
               "id": 1871,
@@ -2082,7 +2312,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V6",
                 "value": 70
-              }
+              },
+              "photos": []
             },
             {
               "id": 1872,
@@ -2095,7 +2326,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V1",
                 "value": 20
-              }
+              },
+              "photos": []
             },
             {
               "id": 1873,
@@ -2108,7 +2340,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V6",
                 "value": 70
-              }
+              },
+              "photos": []
             },
             {
               "id": 1874,
@@ -2121,9 +2354,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V4",
                 "value": 50
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         }
       ],
       "polygon": {
@@ -2181,101 +2416,368 @@ const cragJson = '''
             "lng": -117.02154725790027
           }
         ]
-      }
+      },
+      "photoable": null,
+      "photos": []
     },
     {
       "id": 229,
       "createdAt": "2024-12-26 18:36:56",
       "updatedAt": "2024-12-26 18:39:11",
       "name": "Synchronicity Area",
-      "description": null,
+      "description": "",
+      "photoableId": null,
       "boulders": [
         {
           "id": 1470,
-          "name": "Carousel, The",
-          "description": null,
+          "name": "The Carousel",
+          "description": "So called for its' potential to be traversed all the way around. South Side Undercling should be obvious from the trail.",
           "coordinates": {
             "lat": 32.85122,
             "lng": -117.02249
           },
+          "polygon": {
+            "id": 196,
+            "descriptor": "boulder-The Carousel-polygon",
+            "coordinates": [
+              {
+                "lat": 32.851233955529366,
+                "lng": -117.02250748872758
+              },
+              {
+                "lat": 32.851231138935354,
+                "lng": -117.02246055006981
+              },
+              {
+                "lat": 32.851227759022436,
+                "lng": -117.02245451509954
+              },
+              {
+                "lat": 32.85120578958529,
+                "lng": -117.02245183289051
+              },
+              {
+                "lat": 32.85119733980033,
+                "lng": -117.02247966080905
+              },
+              {
+                "lat": 32.8511998747359,
+                "lng": -117.02252190560104
+              },
+              {
+                "lat": 32.851211422774824,
+                "lng": -117.0225363224745
+              },
+              {
+                "lat": 32.85122719570361,
+                "lng": -117.02252425253393
+              }
+            ]
+          },
           "routes": [
             {
               "id": 1875,
-              "name": "Blades edge",
+              "name": "North Side Crimps",
               "length": null,
-              "description": null,
+              "description": "Ignoring the juggier holds to the left and right, stay on small crimps straight up the north face.",
               "firstAscent": null,
               "gradeRaw": "V1",
               "grade": {
                 "system": "V",
                 "raw": "V1",
                 "value": 20
-              }
+              },
+              "coordinates": {
+                "lat": 32.8512328361298,
+                "lng": -117.02248883388673
+              },
+              "photos": [
+                {
+                  "id": 37,
+                  "createdAt": "2025-01-19 21:01:47",
+                  "updatedAt": "2025-01-19 21:01:47",
+                  "title": "North Side Crimps",
+                  "description": "",
+                  "upload": {
+                    "id": 27,
+                    "createdAt": "2025-01-17 23:20:06",
+                    "updatedAt": "2025-01-17 23:20:06",
+                    "key": "48151ff284945779145c852a61d48268c347dca8.jpg",
+                    "directory": "photos",
+                    "engine": "local",
+                    "originalName": "carousel_north2.jpg",
+                    "fileSize": 7130957,
+                    "sha1Hash": "48151ff284945779145c852a61d48268c347dca8",
+                    "uploadedAt": "2025-01-17"
+                  },
+                  "topo": null
+                }
+              ]
             },
             {
               "id": 1876,
-              "name": "no name: i'll call it 'two hands in the hole'",
+              "name": "East Side SDS",
               "length": null,
-              "description": null,
+              "description": "Start with obvious underclings and smear feet, working your way up the middle of the face",
               "firstAscent": null,
-              "gradeRaw": "V0",
+              "gradeRaw": "V1",
               "grade": {
                 "system": "V",
-                "raw": "V0",
-                "value": 10
-              }
+                "raw": "V1",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.85120555561055,
+                "lng": -117.02245260344623
+              },
+              "photos": []
             },
             {
               "id": 1877,
               "name": "South Side Undercling",
               "length": null,
-              "description": null,
+              "description": "The obvious undercling, taken for a stand start.",
               "firstAscent": null,
               "gradeRaw": "V0-",
               "grade": {
                 "system": "V",
                 "raw": "V0-",
                 "value": 9
-              }
-            },
-            {
-              "id": 1878,
-              "name": "Center North Side",
-              "length": null,
-              "description": null,
-              "firstAscent": null,
-              "gradeRaw": "V0",
-              "grade": {
-                "system": "V",
-                "raw": "V0",
-                "value": 10
-              }
+              },
+              "coordinates": {
+                "lat": 32.85119762247037,
+                "lng": -117.02248437151542
+              },
+              "photos": [
+                {
+                  "id": 30,
+                  "createdAt": "2025-01-17 22:30:48",
+                  "updatedAt": "2025-01-17 22:30:48",
+                  "title": "South Side Undercling",
+                  "description": "",
+                  "upload": {
+                    "id": 22,
+                    "createdAt": "2025-01-17 22:30:48",
+                    "updatedAt": "2025-01-17 22:30:48",
+                    "key": "f5e5671ff86aad329f5520fd5ebbda8169e83c1d.jpg",
+                    "directory": "photos",
+                    "engine": "local",
+                    "originalName": "carousel_south.jpg",
+                    "fileSize": 7225754,
+                    "sha1Hash": "f5e5671ff86aad329f5520fd5ebbda8169e83c1d",
+                    "uploadedAt": "2025-01-17"
+                  },
+                  "topo": null
+                }
+              ]
             },
             {
               "id": 1879,
-              "name": "no name SS",
+              "name": "North Side SDS",
               "length": null,
-              "description": null,
-              "firstAscent": null,
-              "gradeRaw": "V1",
-              "grade": {
-                "system": "V",
-                "raw": "V1",
-                "value": 20
-              }
-            },
-            {
-              "id": 1880,
-              "name": "The Carousel",
-              "length": null,
-              "description": null,
+              "description": "A sit start on the down facing triangle, reaching for the obvious chipped hole and up.",
               "firstAscent": null,
               "gradeRaw": "V0",
               "grade": {
                 "system": "V",
                 "raw": "V0",
                 "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85123193909682,
+                "lng": -117.02247388479427
+              },
+              "photos": []
+            },
+            {
+              "id": 1880,
+              "name": "The Carousel Traverse",
+              "length": null,
+              "description": "Traverse the boulder, feel like a pony.",
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              },
+              "photos": []
+            },
+            {
+              "id": 1898,
+              "name": "Southeast Side Stand",
+              "length": null,
+              "description": "Easy stand start on the southeast arete",
+              "firstAscent": null,
+              "gradeRaw": "V0",
+              "grade": {
+                "system": "V",
+                "raw": "V0",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85120401858317,
+                "lng": -117.02245766538248
+              },
+              "photos": []
+            }
+          ],
+          "photos": [
+            {
+              "id": 31,
+              "createdAt": "2025-01-17 23:11:11",
+              "updatedAt": "2025-01-17 23:11:11",
+              "title": "Carousel South",
+              "description": "",
+              "upload": {
+                "id": 22,
+                "createdAt": "2025-01-17 22:30:48",
+                "updatedAt": "2025-01-17 22:30:48",
+                "key": "f5e5671ff86aad329f5520fd5ebbda8169e83c1d.jpg",
+                "directory": "photos",
+                "engine": "local",
+                "originalName": "carousel_south.jpg",
+                "fileSize": 7225754,
+                "sha1Hash": "f5e5671ff86aad329f5520fd5ebbda8169e83c1d",
+                "uploadedAt": "2025-01-17"
+              },
+              "topo": {
+                "id": 1,
+                "createdAt": "2025-01-22 18:07:45",
+                "updatedAt": "2025-01-28 17:20:25",
+                "title": "Topo for Carousel South",
+                "scale": 0.173,
+                "topogons": [
+                  {
+                    "id": 5,
+                    "createdAt": "2025-01-24 21:05:37",
+                    "updatedAt": "2025-01-28 17:18:33",
+                    "label": "South Side Undercling (1877)",
+                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":269.7758250760708,\\"y\\":740.09375},{\\"x\\":258.77668331122726,\\"y\\":376.09375},{\\"x\\":264.77621518296013,\\"y\\":132.09375}],\\"color\\":\\"rgb(255, 239, 98)\\",\\"tension\\":0.2}],\\"labels\\":[{\\"text\\":\\"South Side Undercling\\",\\"point\\":{\\"x\\":168.78370523523435,\\"y\\":434.09375},\\"color\\":\\"#000000\\",\\"fill\\":\\"rgb(255, 239, 98)\\",\\"direction\\":\\"up\\"}]}",
+                    "areaId": null,
+                    "boulderId": null,
+                    "routeId": 1877
+                  },
+                  {
+                    "id": 6,
+                    "createdAt": "2025-01-28 17:20:25",
+                    "updatedAt": "2025-01-28 17:20:25",
+                    "label": "The Carousel Traverse (1880)",
+                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":2.796656783958837,\\"y\\":408.09375},{\\"x\\":302.77325037060155,\\"y\\":505.09375},{\\"x\\":558.75327689787,\\"y\\":402.09375}],\\"color\\":\\"rgb(53, 122, 56)\\",\\"tension\\":0.5}],\\"labels\\":[{\\"text\\":\\"Carousel Traverse\\",\\"point\\":{\\"x\\":-1.2030311305297232,\\"y\\":467.09375},\\"color\\":\\"#ffffff\\",\\"fill\\":\\"rgb(53, 122, 56)\\",\\"direction\\":\\"up\\"}]}",
+                    "areaId": null,
+                    "boulderId": null,
+                    "routeId": 1880
+                  }
+                ]
               }
+            },
+            {
+              "id": 33,
+              "createdAt": "2025-01-17 23:12:08",
+              "updatedAt": "2025-01-21 03:15:40",
+              "title": "Carousel East",
+              "description": "asdfasdf",
+              "upload": {
+                "id": 24,
+                "createdAt": "2025-01-17 23:12:08",
+                "updatedAt": "2025-01-17 23:12:08",
+                "key": "809a9776164ed9bfce7f438823ab85a4766c399c.jpg",
+                "directory": "photos",
+                "engine": "local",
+                "originalName": "carousel_east.jpg",
+                "fileSize": 7452504,
+                "sha1Hash": "809a9776164ed9bfce7f438823ab85a4766c399c",
+                "uploadedAt": "2025-01-17"
+              },
+              "topo": {
+                "id": 2,
+                "createdAt": "2025-01-28 17:22:11",
+                "updatedAt": "2025-01-28 17:31:21",
+                "title": "Topo for Carousel East",
+                "scale": 0.173,
+                "topogons": [
+                  {
+                    "id": 7,
+                    "createdAt": "2025-01-28 17:22:11",
+                    "updatedAt": "2025-01-28 17:30:57",
+                    "label": "East Side SDS (1876)",
+                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":247.7775415463837,\\"y\\":786.09375},{\\"x\\":316.77215807131154,\\"y\\":542.09375},{\\"x\\":360.76872513068577,\\"y\\":296.09375},{\\"x\\":296.7737184988687,\\"y\\":47.09375}],\\"color\\":\\"rgb(23, 105, 170)\\",\\"tension\\":0.2}],\\"labels\\":[{\\"text\\":\\"East Side SDS\\",\\"point\\":{\\"x\\":305.7730163064679,\\"y\\":700.09375},\\"color\\":\\"#ffffff\\",\\"fill\\":\\"rgb(23, 105, 170)\\",\\"direction\\":\\"up\\"}]}",
+                    "areaId": null,
+                    "boulderId": null,
+                    "routeId": 1898
+                  },
+                  {
+                    "id": 11,
+                    "createdAt": "2025-01-28 17:31:21",
+                    "updatedAt": "2025-01-28 17:31:21",
+                    "label": "Southeast Side Stand (1898)",
+                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":132.78651400483733,\\"y\\":797.09375},{\\"x\\":202.7810525083873,\\"y\\":363.09375},{\\"x\\":231.7787898884294,\\"y\\":60.09375}],\\"color\\":\\"rgb(53, 122, 56)\\",\\"tension\\":0.2}],\\"labels\\":[{\\"text\\":\\"Southeast Side Stand\\",\\"point\\":{\\"x\\":106.78854256066163,\\"y\\":398.09375},\\"color\\":\\"#ffffff\\",\\"fill\\":\\"rgb(53, 122, 56)\\",\\"direction\\":\\"up\\"}]}",
+                    "areaId": null,
+                    "boulderId": null,
+                    "routeId": 1898
+                  }
+                ]
+              }
+            },
+            {
+              "id": 34,
+              "createdAt": "2025-01-17 23:19:43",
+              "updatedAt": "2025-01-17 23:19:43",
+              "title": "Carousel Northeast",
+              "description": "",
+              "upload": {
+                "id": 25,
+                "createdAt": "2025-01-17 23:19:43",
+                "updatedAt": "2025-01-17 23:19:43",
+                "key": "b180ba77471626d9cee84e6820876c8e96969a6b.jpg",
+                "directory": "photos",
+                "engine": "local",
+                "originalName": "carousel_northeast.jpg",
+                "fileSize": 7530875,
+                "sha1Hash": "b180ba77471626d9cee84e6820876c8e96969a6b",
+                "uploadedAt": "2025-01-17"
+              },
+              "topo": null
+            },
+            {
+              "id": 35,
+              "createdAt": "2025-01-17 23:19:52",
+              "updatedAt": "2025-01-17 23:19:52",
+              "title": "Carousel North",
+              "description": "",
+              "upload": {
+                "id": 26,
+                "createdAt": "2025-01-17 23:19:52",
+                "updatedAt": "2025-01-17 23:19:52",
+                "key": "1c98eb740a6de2cd156e545e934ea9b2cf4eefd4.jpg",
+                "directory": "photos",
+                "engine": "local",
+                "originalName": "carousel_north.jpg",
+                "fileSize": 7794790,
+                "sha1Hash": "1c98eb740a6de2cd156e545e934ea9b2cf4eefd4",
+                "uploadedAt": "2025-01-17"
+              },
+              "topo": null
+            },
+            {
+              "id": 36,
+              "createdAt": "2025-01-17 23:20:06",
+              "updatedAt": "2025-01-17 23:20:06",
+              "title": "Carousel North #2",
+              "description": "",
+              "upload": {
+                "id": 27,
+                "createdAt": "2025-01-17 23:20:06",
+                "updatedAt": "2025-01-17 23:20:06",
+                "key": "48151ff284945779145c852a61d48268c347dca8.jpg",
+                "directory": "photos",
+                "engine": "local",
+                "originalName": "carousel_north2.jpg",
+                "fileSize": 7130957,
+                "sha1Hash": "48151ff284945779145c852a61d48268c347dca8",
+                "uploadedAt": "2025-01-17"
+              },
+              "topo": null
             }
           ]
         },
@@ -2299,7 +2801,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0-",
                 "value": 9
-              }
+              },
+              "photos": []
             },
             {
               "id": 1882,
@@ -2312,9 +2815,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1472,
@@ -2336,9 +2841,11 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.12",
                 "value": 50
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1473,
@@ -2360,7 +2867,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V2",
                 "value": 30
-              }
+              },
+              "photos": []
             },
             {
               "id": 1885,
@@ -2373,7 +2881,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10a/b",
                 "value": 11.5
-              }
+              },
+              "photos": []
             },
             {
               "id": 1886,
@@ -2386,7 +2895,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10c",
                 "value": 20
-              }
+              },
+              "photos": []
             },
             {
               "id": 1887,
@@ -2399,9 +2909,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V2",
                 "value": 30
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         },
         {
           "id": 1474,
@@ -2423,7 +2935,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.11",
                 "value": 30
-              }
+              },
+              "photos": []
             },
             {
               "id": 1889,
@@ -2436,7 +2949,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V2-3",
                 "value": 35
-              }
+              },
+              "photos": []
             },
             {
               "id": 1890,
@@ -2449,7 +2963,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1891,
@@ -2462,7 +2977,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "VB",
                 "value": 0
-              }
+              },
+              "photos": []
             },
             {
               "id": 1892,
@@ -2475,7 +2991,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1893,
@@ -2488,7 +3005,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.12b",
                 "value": 60
-              }
+              },
+              "photos": []
             },
             {
               "id": 1894,
@@ -2501,7 +3019,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1895,
@@ -2514,7 +3033,8 @@ const cragJson = '''
                 "system": "YDS",
                 "raw": "5.10-",
                 "value": 10
-              }
+              },
+              "photos": []
             },
             {
               "id": 1896,
@@ -2527,7 +3047,8 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0+",
                 "value": 11
-              }
+              },
+              "photos": []
             },
             {
               "id": 1897,
@@ -2540,9 +3061,11 @@ const cragJson = '''
                 "system": "V",
                 "raw": "V0",
                 "value": 10
-              }
+              },
+              "photos": []
             }
-          ]
+          ],
+          "photos": []
         }
       ],
       "polygon": {
@@ -2576,7 +3099,9 @@ const cragJson = '''
             "lng": -117.02181547880174
           }
         ]
-      }
+      },
+      "photoable": null,
+      "photos": []
     }
   ],
   "trail": {
@@ -3983,6 +4508,7 @@ const cragJson = '''
   },
   "defaultZoom": 18,
   "minZoom": 17,
-  "maxZoom": 22
+  "maxZoom": 22,
+  "photos": []
 }
 ''';

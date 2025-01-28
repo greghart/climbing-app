@@ -2,6 +2,7 @@ import '../util/sun.dart';
 import 'coordinate.dart';
 import 'difficulty_breakdown.dart';
 import 'grade.dart';
+import 'photo.dart';
 import 'types.dart';
 
 class Route {
@@ -17,6 +18,7 @@ class Route {
   final DifficultyBucket bucket;
   // The vector to the route from the boulder
   final Vector2? vector;
+  final List<Photo> photos;
 
   Route({
     required this.id,
@@ -28,6 +30,7 @@ class Route {
     required this.grade,
     this.coordinates,
     this.vector,
+    required this.photos,
   }) : bucket = getBucket(grade);
 
   factory Route.fromJson(
@@ -40,6 +43,7 @@ class Route {
           'description': String? description,
           'firstAscent': String? firstAscent,
           'grade': JsonObject grade,
+          'photos': List photos,
         }) {
       LatLng? ll;
       if (json case {'coordinates': JsonObject c}) {
@@ -62,6 +66,7 @@ class Route {
                 ll.latitude - boulderCoordinates.latitude,
                 ll.longitude - boulderCoordinates.longitude,
               ),
+        photos: photos.map((photo) => Photo.fromJson(photo)).toList(),
       );
     }
     throw JSONException("Route", json);

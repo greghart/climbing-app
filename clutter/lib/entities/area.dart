@@ -1,8 +1,8 @@
-import 'package:collection/collection.dart';
 import 'package:latlong2/latlong.dart';
 
 import 'boulder.dart';
 import 'difficulty_breakdown.dart';
+import 'photo.dart';
 import 'polygon.dart';
 import 'types.dart';
 
@@ -13,11 +13,13 @@ class Area {
   final Polygon? polygon;
   final List<Boulder> boulders;
   final DifficultyBreakdown difficultyBreakdown;
+  final List<Photo> photos;
 
   Area({
     required this.id,
     required this.name,
     required this.boulders,
+    required this.photos,
     this.description,
     this.polygon,
   }) : difficultyBreakdown = DifficultyBreakdown(boulders
@@ -35,6 +37,7 @@ class Area {
           'description': String? description,
           'polygon': JsonObject? polygon,
           'boulders': List boulders,
+          'photos': List photos,
         }) {
       return Area(
         id: id,
@@ -43,6 +46,7 @@ class Area {
         polygon: polygon != null ? Polygon.fromJson(polygon) : null,
         boulders:
             boulders.map((boulder) => Boulder.fromJson(id, boulder)).toList(),
+        photos: photos.map((photo) => Photo.fromJson(photo)).toList(),
       );
     }
     throw JSONException('Area', json);
