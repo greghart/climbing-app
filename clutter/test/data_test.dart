@@ -1,5 +1,5 @@
 import 'package:clutter/data.dart';
-import 'package:clutter/entities/index.dart' as models;
+import 'package:clutter/entities/index.dart' as entities;
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -13,7 +13,7 @@ void main() {
       expect(
           crag.center,
           equals(
-            const models.LatLng(32.85052, -117.02223),
+            const entities.LatLng(32.85052, -117.02223),
           ));
       expect(crag.areas, hasLength(4));
     });

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 
-import '../../entities/index.dart' as models;
+import '../../entities/index.dart' as entities;
 import '../model.dart';
 import 'animate_to.dart';
 import 'boulder.dart';
@@ -12,7 +12,7 @@ typedef HitValue = ({int id});
 class RouteMap extends StatelessWidget {
   const RouteMap({super.key, required this.route});
 
-  final models.Route route;
+  final entities.Route route;
 
   @override
   Widget build(BuildContext context) {

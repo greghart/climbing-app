@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
+        // TODO: Move back
         redirect: (_, __) => '/explorer/boulders/1470',
       ),
       GoRoute(
@@ -105,6 +106,10 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             Provider(create: (_) => data.crag),
+            Provider(
+              lazy: false,
+              create: (_) => InheritedPhotosModel(crag: data.crag),
+            ),
             ChangeNotifierProvider.value(value: settingsController),
             ChangeNotifierProvider(
               create: (context) => ExplorerSheetModel(),
