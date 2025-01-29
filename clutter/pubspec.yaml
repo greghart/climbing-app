@@ -39,6 +39,7 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - assets/photos/
     # Allll the tile directories unfortunately
     - assets/tiles/
     - assets/tiles/22927/52861/
