@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../entities/index.dart' as models;
+import '../../entities/index.dart' as entities;
+import '../model.dart';
 import 'difficulty_span.dart';
 import 'layout.dart';
+import 'photos.dart';
 
 class RouteOverlay extends StatelessWidget {
   const RouteOverlay({
     super.key,
     required this.route,
   });
-  final models.Route route;
+  final entities.Route route;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final model = Provider.of<InheritedPhotosModel>(context);
 
     return OverlayLayout(
       title: route.name,
@@ -35,6 +39,10 @@ class RouteOverlay extends StatelessWidget {
             ),
           const DiagramsLayout(
             chart: null,
+          ),
+          Photos(
+            photos: route.photos + model.getRoutePhotos(route.id),
+            routeId: route.id,
           ),
         ],
       ),

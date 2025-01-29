@@ -4,13 +4,13 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
-import '../entities/index.dart' as models;
+import '../entities/index.dart' as entities;
 
 enum EntityType { crag, area, boulder, route }
 
-// ExplorerState handles the internal routing and state management for the explorer pages.
+// ExplorerModel handles general state and routing for explorer.
 // Routing just sets up the initial state to support deep linking, but once explorer is open,
-// we need to maintain widgets to keep map from flickering.
+// we need to maintain widgets to keep map from flickering, so track that state here.
 //
 // It is expected that this class will ensure entityId will always reflect an actual entity of entityType
 class ExplorerModel extends ChangeNotifier {
@@ -34,29 +34,29 @@ class ExplorerModel extends ChangeNotifier {
     }
   }
 
-  late final Map<String, models.Area> areasById;
-  late final Map<String, models.Boulder> bouldersById;
-  late final Map<String, models.Route> routesById;
+  late final Map<String, entities.Area> areasById;
+  late final Map<String, entities.Boulder> bouldersById;
+  late final Map<String, entities.Route> routesById;
 
-  models.Crag crag;
+  entities.Crag crag;
   EntityType entityType;
   int? entityId;
 
-  models.Area? get area {
+  entities.Area? get area {
     if (entityType == EntityType.area) {
       return areasById[entityId.toString()];
     }
     return boulder != null ? areasById[boulder!.areaId.toString()] : null;
   }
 
-  models.Boulder? get boulder {
+  entities.Boulder? get boulder {
     if (entityType == EntityType.boulder) {
       return bouldersById[entityId.toString()];
     }
     return route != null ? bouldersById[route!.boulderId.toString()] : null;
   }
 
-  models.Route? get route {
+  entities.Route? get route {
     if (entityType != EntityType.route) {
       return null;
     }
@@ -150,7 +150,7 @@ class ExplorerLocationModel extends ChangeNotifier {
   late LocationMarkerPosition currentPosition;
   late LocationMarkerHeading currentHeading;
 
-  ExplorerLocationModel(models.Crag crag) {
+  ExplorerLocationModel(entities.Crag crag) {
     positionStream = StreamController.broadcast(onListen: () {
       actualPositions != null
           ? actualPositions!.resume()
@@ -279,4 +279,56 @@ class ExplorerLocationModel extends ChangeNotifier {
 // Normalize rads to [0, 2*pi]
 double normalizeRads(double r) {
   return r % (2 * math.pi);
+}
+
+// helps get photos for entities from a parent
+// that references this entity through topogons
+class InheritedPhotosModel {
+  late final Map<int, List<entities.Photo>> photosByAreaId;
+  late final Map<int, List<entities.Photo>> photosByBoulderId;
+  late final Map<int, List<entities.Photo>> photosByRouteId;
+
+  InheritedPhotosModel({
+    required entities.Crag crag,
+  }) {
+    photosByAreaId = {};
+    photosByBoulderId = {};
+    photosByRouteId = {};
+
+    // Areas from crag photos
+    for (var photo in crag.photos) {
+      photo.topo?.topogons.where((t) => t.areaId != null).forEach((t) {
+        if (photosByAreaId[t.areaId] == null) {
+          photosByAreaId[t.areaId!] = [];
+        }
+        photosByAreaId[t.areaId!]!.add(photo);
+      });
+    }
+    for (var area in crag.areas) {
+      // Boulders from area photos
+      for (var photo in area.photos) {
+        photo.topo?.topogons.where((t) => t.boulderId != null).forEach((t) {
+          if (photosByBoulderId[t.boulderId] == null) {
+            photosByBoulderId[t.boulderId!] = [];
+          }
+          photosByBoulderId[t.boulderId!]!.add(photo);
+        });
+      }
+      for (var boulder in area.boulders) {
+        // Routes from boulder photos
+        for (var photo in boulder.photos) {
+          photo.topo?.topogons.where((t) => t.routeId != null).forEach((t) {
+            if (photosByRouteId[t.routeId] == null) {
+              photosByRouteId[t.routeId!] = [];
+            }
+            photosByRouteId[t.routeId!]!.add(photo);
+          });
+        }
+      }
+    }
+  }
+
+  getRoutePhotos(int id) {
+    return photosByRouteId[id] ?? [];
+  }
 }

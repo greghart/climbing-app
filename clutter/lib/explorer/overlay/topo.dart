@@ -9,9 +9,25 @@ import '../../entities/index.dart' as entities;
 /// Topo widget, likely shown as a full screen dialog, with a photo
 /// and drawn lines on top
 class Topo extends StatelessWidget {
-  const Topo({super.key, required this.photo});
+  const Topo({
+    super.key,
+    required this.photo,
+    this.labels = true,
+    this.debug = false,
+    this.areaId,
+    this.boulderId,
+    this.routeId,
+  });
 
   final entities.Photo photo;
+  // Show labels?
+  final bool labels;
+  // Show debug img info as text
+  final bool debug;
+  // Used to filter which topogons are shown
+  final int? areaId;
+  final int? boulderId;
+  final int? routeId;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +41,12 @@ class Topo extends StatelessWidget {
     if (photo.topo == null) {
       return img;
     }
+    final topogons = photo.topo!.topogons.where(
+      (t) =>
+          (areaId == null || t.areaId == areaId) &&
+          (boulderId == null || t.boulderId == boulderId) &&
+          (routeId == null || t.routeId == routeId),
+    );
     Completer<ui.Image> completer = Completer<ui.Image>();
     img.image.resolve(const ImageConfiguration()).addListener(
         ImageStreamListener(
@@ -38,7 +60,8 @@ class Topo extends StatelessWidget {
           future: completer.future,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return const LinearProgressIndicator();
+              return const SizedBox(
+                  width: 25, height: 25, child: LinearProgressIndicator());
             }
             final inputSize = Size(snapshot.data!.width.toDouble(),
                 snapshot.data!.height.toDouble());
@@ -58,36 +81,38 @@ class Topo extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 child: img,
               ),
-              Column(
-                children: [
-                  Text("${snapshot.data!.width} x ${snapshot.data!.height}"),
-                  Text(
-                      "${fitted.destination.width} x ${fitted.destination.height}"),
-                  Text("Scale: $scale"),
-                ],
-              ),
+              if (debug)
+                Column(
+                  children: [
+                    Text("${snapshot.data!.width} x ${snapshot.data!.height}"),
+                    Text(
+                        "${fitted.destination.width} x ${fitted.destination.height}"),
+                    Text("Scale: $scale"),
+                  ],
+                ),
               // Paint all our canvas things
               CustomPaint(
                 size: fitted.destination,
                 painter: TopoPainter(
-                  topo: photo.topo!,
+                  topogons: topogons.toList(),
                   // times 4 because we down size all images by 4x into app
                   scale: scale,
                 ),
               ),
               // Labels can just be chips positioned correctly
-              ...photo.topo!.topogons.expand((t) {
-                return t.data.labels.map((l) {
-                  return Positioned(
-                    top: l.point.y * scale,
-                    left: l.point.x * scale,
-                    child: Chip(
-                      label: Text(l.text, style: TextStyle(color: l.color)),
-                      backgroundColor: l.fill,
-                    ),
-                  );
-                });
-              }),
+              if (labels)
+                ...topogons.expand((t) {
+                  return t.data.labels.map((l) {
+                    return Positioned(
+                      top: l.point.y * scale,
+                      left: l.point.x * scale,
+                      child: Chip(
+                        label: Text(l.text, style: TextStyle(color: l.color)),
+                        backgroundColor: l.fill,
+                      ),
+                    );
+                  });
+                }),
             ]);
           },
         );
@@ -97,18 +122,18 @@ class Topo extends StatelessWidget {
 }
 
 class TopoPainter extends CustomPainter {
-  final entities.Topo topo;
+  final List<entities.Topogon> topogons;
   final double scale;
 
   const TopoPainter({
-    required this.topo,
+    required this.topogons,
     required this.scale,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     // This code is loose for "perf" reasons, no I'm just lazy
-    for (var t in topo.topogons) {
+    for (var t in topogons) {
       // Draw lines
       final linePaint = Paint()
         ..strokeWidth = 4
@@ -157,7 +182,7 @@ class TopoPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(TopoPainter oldDelegate) {
-    return oldDelegate.topo != topo || oldDelegate.scale != scale;
+    return oldDelegate.topogons != topogons || oldDelegate.scale != scale;
   }
 }
 

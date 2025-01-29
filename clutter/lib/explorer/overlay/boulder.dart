@@ -6,7 +6,7 @@ import '../model.dart';
 import 'difficulty_chart.dart';
 import 'difficulty_span.dart';
 import 'layout.dart';
-import 'topo.dart';
+import 'photos.dart';
 
 class BoulderOverlay extends StatelessWidget {
   const BoulderOverlay({
@@ -33,42 +33,7 @@ class BoulderOverlay extends StatelessWidget {
           DiagramsLayout(
             chart: DifficultyChartCard(breakdown: boulder.difficultyBreakdown),
           ),
-          // TODO: Refactor to a re-usable component across all our photo owners
-          Text(
-            "Photos",
-            style: theme.textTheme.headlineSmall,
-          ),
-          SizedBox(
-            height: 100,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: boulder.photos.length,
-              itemBuilder: (context, index) {
-                final photo = boulder.photos[index];
-                return GestureDetector(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.asset(
-                          "assets/photos/${photo.upload!.key}",
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
-                          alignment: Alignment.center,
-                        ),
-                      ),
-                    ),
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Dialog(child: Topo(photo: photo));
-                          });
-                    });
-              },
-            ),
-          ),
+          Photos(photos: boulder.photos),
           Text(
             "Routes",
             style: theme.textTheme.headlineSmall,

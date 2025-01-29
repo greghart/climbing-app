@@ -35,7 +35,10 @@ class ExplorerPage extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => ExplorerModel(
-              crag: crag, entityType: entityType, entityId: entityId),
+            crag: crag,
+            entityType: entityType,
+            entityId: entityId,
+          ),
         ),
       ],
       child: SafeArea(

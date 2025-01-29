@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../entities/grade.dart';
-import '../entities/index.dart' as models;
+import '../entities/index.dart' as entities;
 import '../util/debounce.dart';
 import '../util/sun.dart';
 import '../util/suncalc.dart' as suncalc;
@@ -33,7 +33,7 @@ class SearchModel extends ChangeNotifier {
     _sunValues = SunValuesModel(crag: crag);
   }
 
-  final models.Crag crag;
+  final entities.Crag crag;
   late final List<SearchEntity> all;
   late final SunValuesModel _sunValues;
 
@@ -209,7 +209,7 @@ const sunExpiry = Duration(minutes: 30);
 
 // Caches sun positions and values for given crag.
 class SunValuesModel extends ChangeNotifier {
-  final models.Crag crag;
+  final entities.Crag crag;
   // General position of sun for this crag
   // TODO: Technically more accurate to calculate for each entity individually, necessary for larger crags covering more space.
   late final suncalc.SunPosition sunPosition;
