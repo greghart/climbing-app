@@ -38,10 +38,7 @@ class CragOverlay extends StatelessWidget {
           ),
           for (final area in crag.areas)
             ListTile(
-              onTap: () {
-                Provider.of<ExplorerModel>(context, listen: false)
-                    .setArea(area.id);
-              },
+              onTap: () => context.read<ExplorerModel>().setArea(area.id),
               trailing: const Icon(Icons.navigate_next),
               title: DifficultyBreakdownSpan(
                 text: area.name,

@@ -43,8 +43,7 @@ class SearchPage extends StatelessWidget {
                         icon: const Icon(Icons.arrow_back),
                       ),
                       onChanged: (value) =>
-                          Provider.of<SearchModel>(context, listen: false)
-                              .setSearch(value),
+                          context.read<SearchModel>().setSearch(value),
                     );
                   }),
                 ),

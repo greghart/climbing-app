@@ -60,8 +60,7 @@ class BouldersLayer extends StatelessWidget {
           point: b.coordinates,
           child: IconButton(
             iconSize: 40,
-            onPressed: () => Provider.of<ExplorerModel>(context, listen: false)
-                .setBoulder(b.id),
+            onPressed: () => context.read<ExplorerModel>().setBoulder(b.id),
             tooltip: b.name,
             icon: Image.asset(
               'assets/images/boulder_icon.svg.png',

@@ -40,10 +40,7 @@ class BoulderOverlay extends StatelessWidget {
           ),
           for (final route in boulder.routes)
             ListTile(
-              onTap: () {
-                Provider.of<ExplorerModel>(context, listen: false)
-                    .setRoute(route.id);
-              },
+              onTap: () => context.read<ExplorerModel>().setRoute(route.id),
               trailing: const Icon(Icons.navigate_next),
               title: RichText(
                 text: TextSpan(

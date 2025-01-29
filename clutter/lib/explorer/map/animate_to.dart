@@ -35,8 +35,7 @@ class _AnimateToState extends State<AnimateTo> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final sheetPosition =
-        Provider.of<ExplorerSheetModel>(context, listen: false).sheetPosition;
+    final sheetPosition = context.read<ExplorerSheetModel>().sheetPosition;
     // Two constraints -- search bar on top, and sheet on bottom
     // We generally want to animate such that coordinate is in the center.
     final fullHeight = MediaQuery.sizeOf(context).height;

@@ -89,9 +89,7 @@ class Breadcrumbs extends StatelessWidget {
               style: const ButtonStyle(
                 visualDensity: VisualDensity.compact,
               ),
-              onPressed: () {
-                Provider.of<ExplorerModel>(context, listen: false).setCrag();
-              },
+              onPressed: () => context.read<ExplorerModel>().setCrag(),
               child: Text(model.crag.name),
             ),
             divider(theme),
@@ -101,10 +99,8 @@ class Breadcrumbs extends StatelessWidget {
               style: const ButtonStyle(
                 visualDensity: VisualDensity.compact,
               ),
-              onPressed: () {
-                Provider.of<ExplorerModel>(context, listen: false)
-                    .setArea(model.area!.id);
-              },
+              onPressed: () =>
+                  context.read<ExplorerModel>().setArea(model.area!.id),
               child: Text(model.area!.name),
             ),
             divider(theme),
@@ -114,10 +110,8 @@ class Breadcrumbs extends StatelessWidget {
               style: const ButtonStyle(
                 visualDensity: VisualDensity.compact,
               ),
-              onPressed: () {
-                Provider.of<ExplorerModel>(context, listen: false)
-                    .setBoulder(model.boulder!.id);
-              },
+              onPressed: () =>
+                  context.read<ExplorerModel>().setBoulder(model.boulder!.id),
               child: Text(model.boulder!.name),
             ),
             divider(theme),

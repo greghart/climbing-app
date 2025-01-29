@@ -3,8 +3,10 @@ import 'dart:math' as math;
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../entities/index.dart' as entities;
+import '../model.dart';
 
 /// Topo widget, likely shown as a full screen dialog, with a photo
 /// and drawn lines on top
@@ -12,6 +14,7 @@ class Topo extends StatelessWidget {
   const Topo({
     super.key,
     required this.photo,
+    required this.model,
     this.labels = true,
     this.debug = false,
     this.areaId,
@@ -20,6 +23,9 @@ class Topo extends StatelessWidget {
   });
 
   final entities.Photo photo;
+  // Since topo is shown in a dialog, it can't actually use context
+  // TODO: Troubleshoot this more, this seems crazy and is likely bad performance
+  final ExplorerModel model;
   // Show labels?
   final bool labels;
   // Show debug img info as text
@@ -32,7 +38,6 @@ class Topo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // If this photo has a topo, show all the topogons!
-    // TODO: Scale the drawn topogon components based on how image is currently scaled
     final img = Image.asset(
       "assets/photos/${photo.upload!.key}",
       fit: BoxFit.contain,
@@ -103,11 +108,18 @@ class Topo extends StatelessWidget {
               if (labels)
                 ...topogons.expand((t) {
                   return t.data.labels.map((l) {
+                    var text = l.text;
+                    if (text.isEmpty) {
+                      if (t.routeId != null) {
+                        final route = model.routesById[t.routeId.toString()]!;
+                        text = "${route.name} (${route.grade.raw})";
+                      }
+                    }
                     return Positioned(
                       top: l.point.y * scale,
                       left: l.point.x * scale,
                       child: Chip(
-                        label: Text(l.text, style: TextStyle(color: l.color)),
+                        label: Text(text, style: TextStyle(color: l.color)),
                         backgroundColor: l.fill,
                       ),
                     );

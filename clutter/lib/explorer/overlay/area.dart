@@ -40,10 +40,7 @@ class AreaOverlay extends StatelessWidget {
           ),
           for (final boulder in area.boulders)
             ListTile(
-              onTap: () {
-                Provider.of<ExplorerModel>(context, listen: false)
-                    .setBoulder(boulder.id);
-              },
+              onTap: () => context.read<ExplorerModel>().setBoulder(boulder.id),
               trailing: const Icon(Icons.navigate_next),
               title: DifficultyBreakdownSpan(
                 text: boulder.name,

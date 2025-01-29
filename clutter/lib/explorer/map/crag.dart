@@ -70,11 +70,10 @@ class _CragMapState extends State<CragMap> {
         setState(() => _hoverGons = null);
       },
       child: GestureDetector(
-        onTap: () {
-          // We shouldn't really have overlapping areas, just navigate to first area
-          Provider.of<ExplorerModel>(context, listen: false)
-              .setArea(_hitNotifier.value!.hitValues.first.id);
-        },
+        // We shouldn't really have overlapping areas, just navigate to first area
+        onTap: () => context
+            .read<ExplorerModel>()
+            .setArea(_hitNotifier.value!.hitValues.first.id),
         child: Stack(
           children: [
             if (layers.isChecked(LayerType.boulders))

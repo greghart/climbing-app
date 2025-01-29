@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../entities/index.dart' as entities;
+import '../model.dart';
 import 'topo.dart';
 
 class Photos extends StatelessWidget {
@@ -23,6 +25,7 @@ class Photos extends StatelessWidget {
     if (photos.isEmpty) {
       return const SizedBox.shrink();
     }
+    final model = context.read<ExplorerModel>();
     final theme = Theme.of(context);
 
     return Column(
@@ -46,6 +49,7 @@ class Photos extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Topo(
+                        model: model,
                         photo: photo,
                         labels: false,
                         areaId: areaId,
@@ -60,6 +64,7 @@ class Photos extends StatelessWidget {
                         builder: (BuildContext context) {
                           return Dialog(
                             child: Topo(
+                              model: model,
                               photo: photo,
                               areaId: areaId,
                               boulderId: boulderId,

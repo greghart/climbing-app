@@ -33,10 +33,7 @@ class BoulderMap extends StatelessWidget {
                 height: 20,
                 width: 20,
                 child: GestureDetector(
-                  onTap: () {
-                    Provider.of<ExplorerModel>(context, listen: false)
-                        .setRoute(r.id);
-                  },
+                  onTap: () => context.read<ExplorerModel>().setRoute(r.id),
                   child: Tooltip(
                     message: r.name,
                     child: Container(
