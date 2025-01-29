@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../entities/index.dart' as models;
-import '../model.dart';
 import 'difficulty_span.dart';
 import 'layout.dart';
 

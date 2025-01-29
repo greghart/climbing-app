@@ -1,4 +1,7 @@
 import 'dart:math' as math;
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 
 import 'types.dart';
 
@@ -37,7 +40,7 @@ class TopogonPoint {
 
 class TopogonLine {
   final List<TopogonPoint> points;
-  final String color;
+  final Color color;
   final double tension;
 
   TopogonLine(
@@ -48,7 +51,7 @@ class TopogonLine {
       points: (json['points'] as List)
           .map((p) => TopogonPoint.fromJson(p))
           .toList(),
-      color: json['color'],
+      color: _parseColor(json['color']),
       tension: json['tension'],
     );
   }
@@ -65,8 +68,8 @@ class TopogonLine {
 class Label {
   final String text;
   final TopogonPoint point;
-  final String color;
-  final String fill;
+  final Color color;
+  final Color fill;
   final String direction;
 
   Label({
@@ -81,8 +84,8 @@ class Label {
     return Label(
       text: json['text'],
       point: TopogonPoint.fromJson(json['point']),
-      color: json['color'],
-      fill: json['fill'],
+      color: _parseColor(json['color']),
+      fill: _parseColor(json['fill']),
       direction: json['direction'],
     );
   }
@@ -91,7 +94,7 @@ class Label {
     return {
       'text': text,
       'point': point.toJson(),
-      'color': color,
+      'color': color.toString(),
       'fill': fill,
       'direction': direction,
     };
@@ -107,8 +110,8 @@ class TopogonData {
   factory TopogonData.fromJson(Map<String, dynamic> json) {
     if (json
         case {
-          'lines': List<JsonObject> lines,
-          'labels': List<JsonObject> labels,
+          'lines': List lines,
+          'labels': List labels,
         }) {
       return TopogonData(
         lines: lines.map((l) => TopogonLine.fromJson(l)).toList(),
@@ -124,4 +127,24 @@ class TopogonData {
       'labels': labels.map((l) => l.toJson()).toList(),
     };
   }
+}
+
+Color _parseColor(String color) {
+  if (color.startsWith("#")) {
+    return _hexToColor(color);
+  }
+  if (color.startsWith("rgb")) {
+    final parts = color.substring(4, color.length - 1).split(",");
+    return Color.fromARGB(
+      255,
+      int.parse(parts[0]),
+      int.parse(parts[1]),
+      int.parse(parts[2]),
+    );
+  }
+  return Colors.green;
+}
+
+Color _hexToColor(String code) {
+  return Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
 }
