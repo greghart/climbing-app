@@ -191,24 +191,6 @@ class ExplorerLocationModel extends ChangeNotifier {
     _setHeading(0, notify: false);
   }
 
-  final SharedPreferencesAsync routeLocations = SharedPreferencesAsync();
-  void recordRouteLocation(models.Route r) async {
-    print("recordRouteLocation: ${r.id} -> ${currentPosition.latLng}");
-    await routeLocations.setString(
-      'route_location_${r.id}',
-      jsonEncode(currentPosition.latLng.toJson()),
-    );
-    notifyListeners();
-    print("Done!");
-  }
-
-  Future<LatLng?> getPendingRouteLocation(int id) async {
-    final str = await routeLocations.getString('route_location_$id');
-    print("getPendingRouteLocation: $id -> $str");
-    if (str == null) return null;
-    return LatLng.fromJson(jsonDecode(str));
-  }
-
   void setPosition(LocationMarkerPosition? position, {notify = true}) {
     if (position == null) return;
 
