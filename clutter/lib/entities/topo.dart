@@ -19,7 +19,7 @@ class Topo {
         case {
           'id': int id,
           'title': String title,
-          'topogons': List<JsonObject> topogons,
+          'topogons': List topogons,
           'scale': double scale,
         }) {
       return Topo(

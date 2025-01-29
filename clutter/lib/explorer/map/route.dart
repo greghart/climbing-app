@@ -33,7 +33,6 @@ class RouteMap extends StatelessWidget {
               ),
             ],
           ),
-        PendingRouteMarker(id: route.id),
         BoulderMapDirect(boulder: model.boulder!),
         AnimateTo(
           mapController: MapController.of(context),
@@ -41,50 +40,6 @@ class RouteMap extends StatelessWidget {
           zoom: 22,
         ),
       ],
-    );
-  }
-}
-
-class PendingRouteMarker extends StatefulWidget {
-  const PendingRouteMarker({super.key, required this.id});
-
-  final int id;
-
-  @override
-  State<PendingRouteMarker> createState() => _PendingRouteMarkerState();
-}
-
-class _PendingRouteMarkerState extends State<PendingRouteMarker> {
-  late Future<models.LatLng?> _latLng;
-
-  @override
-  void initState() {
-    super.initState();
-    _latLng = Provider.of<ExplorerLocationModel>(context, listen: false)
-        .getPendingRouteLocation(widget.id);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<models.LatLng?>(
-      future: _latLng,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return MarkerLayer(
-            markers: [
-              Marker(
-                point: snapshot.data!,
-                child: const Icon(
-                  Icons.location_pin,
-                  size: 20,
-                  color: Colors.pink,
-                ),
-              ),
-            ],
-          );
-        }
-        return const SizedBox.shrink();
-      },
     );
   }
 }
