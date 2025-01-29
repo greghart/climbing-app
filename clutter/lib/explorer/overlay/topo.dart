@@ -45,10 +45,14 @@ class Topo extends StatelessWidget {
             final fitted = applyBoxFit(BoxFit.contain, inputSize, outputSize);
             final aspectImg = snapshot.data!.width / snapshot.data!.height;
             final aspectCanvas = outputSize.width / outputSize.height;
-            // Scale it down to fit
-            final scale = aspectCanvas > aspectImg
+            // Scale it down to fit. The image in app is scaled, and then the topo was scaled as well
+            final currentScale = aspectCanvas > aspectImg
                 ? outputSize.height / snapshot.data!.height
                 : outputSize.width / snapshot.data!.width;
+            final scale = currentScale /
+                (photo.topo!.scale *
+                    4); // times 4 because we down size all images by 4x into app
+
             return Stack(children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
@@ -62,14 +66,28 @@ class Topo extends StatelessWidget {
                   Text("Scale: $scale"),
                 ],
               ),
+              // Paint all our canvas things
               CustomPaint(
                 size: fitted.destination,
                 painter: TopoPainter(
                   topo: photo.topo!,
                   // times 4 because we down size all images by 4x into app
-                  scale: scale / (photo.topo!.scale * 4),
+                  scale: scale,
                 ),
               ),
+              // Labels can just be chips positioned correctly
+              ...photo.topo!.topogons.expand((t) {
+                return t.data.labels.map((l) {
+                  return Positioned(
+                    top: l.point.y * scale,
+                    left: l.point.x * scale,
+                    child: Chip(
+                      label: Text(l.text, style: TextStyle(color: l.color)),
+                      backgroundColor: l.fill,
+                    ),
+                  );
+                });
+              }),
             ]);
           },
         );
@@ -89,14 +107,16 @@ class TopoPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    // This code is loose for "perf" reasons, no I'm just lazy
     for (var t in topo.topogons) {
+      // Draw lines
+      final linePaint = Paint()
+        ..strokeWidth = 4
+        ..strokeCap = StrokeCap.round
+        ..style = PaintingStyle.stroke;
       for (var line in t.data.lines) {
+        linePaint.color = line.color;
         // Setup path
-        Paint linePaint = Paint()
-          ..color = line.color
-          ..strokeWidth = 4
-          ..strokeCap = StrokeCap.round
-          ..style = PaintingStyle.stroke;
         final path = Path()
           ..moveTo(line.points[0].x * scale, line.points[0].y * scale);
 
@@ -155,7 +175,6 @@ List<double> _getControlPoints(double x0, double y0, double x1, double y1,
   return [p1x, p1y, p2x, p2y];
 }
 
-// TODO: Use this to grab tension points above, and then use them to draw beziers
 List<entities.TopogonPoint> _expandPoints(
     List<entities.TopogonPoint> points, double tension) {
   final len = points.length;
