@@ -38,13 +38,6 @@ class RouteOverlay extends StatelessWidget {
           const DiagramsLayout(
             chart: null,
           ),
-          FilledButton(
-            onPressed: () {
-              Provider.of<ExplorerLocationModel>(context, listen: false)
-                  .recordRouteLocation(route);
-            },
-            child: const Text('Record route location here'),
-          )
         ],
       ),
     );
