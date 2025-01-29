@@ -30,19 +30,16 @@ class _OverlaySheetState extends State<OverlaySheet> {
   @override
   void initState() {
     super.initState();
-    _sheetPosition =
-        Provider.of<ExplorerSheetModel>(context, listen: false).sheetPosition;
+    _sheetPosition = context.read<ExplorerSheetModel>().sheetPosition;
   }
 
   setClamped(double value) {
     _sheetPosition = math.max(minPosition, math.min(value, maxPosition));
-    Provider.of<ExplorerSheetModel>(context, listen: false)
-        .setSheetPosition(_sheetPosition);
+    context.read<ExplorerSheetModel>().setSheetPosition(_sheetPosition);
   }
 
   bool _handleScrollNotification(DraggableScrollableNotification n) {
-    Provider.of<ExplorerSheetModel>(context, listen: false)
-        .setSheetPosition(n.extent);
+    context.read<ExplorerSheetModel>().setSheetPosition(n.extent);
     return false;
   }
 

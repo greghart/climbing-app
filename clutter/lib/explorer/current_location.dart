@@ -18,8 +18,7 @@ class CurrentLocation extends StatelessWidget {
   @override
   build(BuildContext context) {
     // Just uses streams so don't need to listen
-    final locations =
-        Provider.of<ExplorerLocationModel>(context, listen: false);
+    final locations = context.read<ExplorerLocationModel>();
     return CallbackShortcuts(
       bindings: <ShortcutActivator, VoidCallback>{
         const SingleActivator(LogicalKeyboardKey.keyQ): () {
