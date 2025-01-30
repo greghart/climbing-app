@@ -2491,28 +2491,7 @@ const cragJson = '''
                 "lat": 32.8512328361298,
                 "lng": -117.02248883388673
               },
-              "photos": [
-                {
-                  "id": 37,
-                  "createdAt": "2025-01-19 21:01:47",
-                  "updatedAt": "2025-01-19 21:01:47",
-                  "title": "North Side Crimps",
-                  "description": "",
-                  "upload": {
-                    "id": 27,
-                    "createdAt": "2025-01-17 23:20:06",
-                    "updatedAt": "2025-01-17 23:20:06",
-                    "key": "48151ff284945779145c852a61d48268c347dca8.jpg",
-                    "directory": "photos",
-                    "engine": "local",
-                    "originalName": "carousel_north2.jpg",
-                    "fileSize": 7130957,
-                    "sha1Hash": "48151ff284945779145c852a61d48268c347dca8",
-                    "uploadedAt": "2025-01-17"
-                  },
-                  "topo": null
-                }
-              ]
+              "photos": []
             },
             {
               "id": 1876,
@@ -2651,8 +2630,8 @@ const cragJson = '''
                   {
                     "id": 5,
                     "createdAt": "2025-01-24 21:05:37",
-                    "updatedAt": "2025-01-28 17:18:33",
-                    "label": "South Side Undercling (1877)",
+                    "updatedAt": "2025-01-29 23:46:25",
+                    "label": "",
                     "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":269.7758250760708,\\"y\\":740.09375},{\\"x\\":258.77668331122726,\\"y\\":376.09375},{\\"x\\":264.77621518296013,\\"y\\":132.09375}],\\"color\\":\\"rgb(255, 239, 98)\\",\\"tension\\":0.2}],\\"labels\\":[{\\"text\\":\\"\\",\\"point\\":{\\"x\\":168.78370523523435,\\"y\\":434.09375},\\"color\\":\\"#000000\\",\\"fill\\":\\"rgb(255, 239, 98)\\",\\"direction\\":\\"up\\"}]}",
                     "areaId": null,
                     "boulderId": null,
@@ -2661,9 +2640,9 @@ const cragJson = '''
                   {
                     "id": 6,
                     "createdAt": "2025-01-28 17:20:25",
-                    "updatedAt": "2025-01-28 17:20:25",
-                    "label": "The Carousel Traverse (1880)",
-                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":2.796656783958837,\\"y\\":408.09375},{\\"x\\":302.77325037060155,\\"y\\":505.09375},{\\"x\\":558.75327689787,\\"y\\":402.09375}],\\"color\\":\\"rgb(53, 122, 56)\\",\\"tension\\":0.5}],\\"labels\\":[{\\"text\\":\\"Carousel Traverse\\",\\"point\\":{\\"x\\":-1.2030311305297232,\\"y\\":467.09375},\\"color\\":\\"#ffffff\\",\\"fill\\":\\"rgb(53, 122, 56)\\",\\"direction\\":\\"up\\"}]}",
+                    "updatedAt": "2025-01-29 23:46:30",
+                    "label": "",
+                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":2.796656783958837,\\"y\\":408.09375},{\\"x\\":302.77325037060155,\\"y\\":505.09375},{\\"x\\":558.75327689787,\\"y\\":402.09375}],\\"color\\":\\"rgb(53, 122, 56)\\",\\"tension\\":0.5}],\\"labels\\":[{\\"text\\":\\"\\",\\"point\\":{\\"x\\":-1.2030311305297232,\\"y\\":467.09375},\\"color\\":\\"#ffffff\\",\\"fill\\":\\"rgb(53, 122, 56)\\",\\"direction\\":\\"up\\"}]}",
                     "areaId": null,
                     "boulderId": null,
                     "routeId": 1880
@@ -2699,45 +2678,25 @@ const cragJson = '''
                   {
                     "id": 7,
                     "createdAt": "2025-01-28 17:22:11",
-                    "updatedAt": "2025-01-28 17:30:57",
-                    "label": "East Side SDS (1876)",
-                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":247.7775415463837,\\"y\\":786.09375},{\\"x\\":316.77215807131154,\\"y\\":542.09375},{\\"x\\":360.76872513068577,\\"y\\":296.09375},{\\"x\\":296.7737184988687,\\"y\\":47.09375}],\\"color\\":\\"rgb(23, 105, 170)\\",\\"tension\\":0.2}],\\"labels\\":[{\\"text\\":\\"East Side SDS\\",\\"point\\":{\\"x\\":305.7730163064679,\\"y\\":700.09375},\\"color\\":\\"#ffffff\\",\\"fill\\":\\"rgb(23, 105, 170)\\",\\"direction\\":\\"up\\"}]}",
+                    "updatedAt": "2025-01-29 23:29:59",
+                    "label": "",
+                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":247.7775415463837,\\"y\\":786.09375},{\\"x\\":316.77215807131154,\\"y\\":542.09375},{\\"x\\":360.76872513068577,\\"y\\":296.09375},{\\"x\\":296.7737184988687,\\"y\\":47.09375}],\\"color\\":\\"rgb(23, 105, 170)\\",\\"tension\\":0.2}],\\"labels\\":[{\\"text\\":\\"\\",\\"point\\":{\\"x\\":305.7730163064679,\\"y\\":700.09375},\\"color\\":\\"#ffffff\\",\\"fill\\":\\"rgb(23, 105, 170)\\",\\"direction\\":\\"up\\"}]}",
                     "areaId": null,
                     "boulderId": null,
-                    "routeId": 1898
+                    "routeId": 1876
                   },
                   {
                     "id": 11,
                     "createdAt": "2025-01-28 17:31:21",
-                    "updatedAt": "2025-01-28 17:31:21",
-                    "label": "Southeast Side Stand (1898)",
-                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":132.78651400483733,\\"y\\":797.09375},{\\"x\\":202.7810525083873,\\"y\\":363.09375},{\\"x\\":231.7787898884294,\\"y\\":60.09375}],\\"color\\":\\"rgb(53, 122, 56)\\",\\"tension\\":0.2}],\\"labels\\":[{\\"text\\":\\"Southeast Side Stand\\",\\"point\\":{\\"x\\":106.78854256066163,\\"y\\":398.09375},\\"color\\":\\"#ffffff\\",\\"fill\\":\\"rgb(53, 122, 56)\\",\\"direction\\":\\"up\\"}]}",
+                    "updatedAt": "2025-01-29 23:30:21",
+                    "label": "",
+                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":132.78651400483733,\\"y\\":797.09375},{\\"x\\":202.7810525083873,\\"y\\":363.09375},{\\"x\\":231.7787898884294,\\"y\\":60.09375}],\\"color\\":\\"rgb(53, 122, 56)\\",\\"tension\\":0.2}],\\"labels\\":[{\\"text\\":\\"\\",\\"point\\":{\\"x\\":106.78854256066163,\\"y\\":398.09375},\\"color\\":\\"#ffffff\\",\\"fill\\":\\"rgb(53, 122, 56)\\",\\"direction\\":\\"up\\"}]}",
                     "areaId": null,
                     "boulderId": null,
                     "routeId": 1898
                   }
                 ]
               }
-            },
-            {
-              "id": 34,
-              "createdAt": "2025-01-17 23:19:43",
-              "updatedAt": "2025-01-17 23:19:43",
-              "title": "Carousel Northeast",
-              "description": "",
-              "upload": {
-                "id": 25,
-                "createdAt": "2025-01-17 23:19:43",
-                "updatedAt": "2025-01-17 23:19:43",
-                "key": "b180ba77471626d9cee84e6820876c8e96969a6b.jpg",
-                "directory": "photos",
-                "engine": "local",
-                "originalName": "carousel_northeast.jpg",
-                "fileSize": 7530875,
-                "sha1Hash": "b180ba77471626d9cee84e6820876c8e96969a6b",
-                "uploadedAt": "2025-01-17"
-              },
-              "topo": null
             },
             {
               "id": 35,
@@ -2757,27 +2716,35 @@ const cragJson = '''
                 "sha1Hash": "1c98eb740a6de2cd156e545e934ea9b2cf4eefd4",
                 "uploadedAt": "2025-01-17"
               },
-              "topo": null
-            },
-            {
-              "id": 36,
-              "createdAt": "2025-01-17 23:20:06",
-              "updatedAt": "2025-01-17 23:20:06",
-              "title": "Carousel North #2",
-              "description": "",
-              "upload": {
-                "id": 27,
-                "createdAt": "2025-01-17 23:20:06",
-                "updatedAt": "2025-01-17 23:20:06",
-                "key": "48151ff284945779145c852a61d48268c347dca8.jpg",
-                "directory": "photos",
-                "engine": "local",
-                "originalName": "carousel_north2.jpg",
-                "fileSize": 7130957,
-                "sha1Hash": "48151ff284945779145c852a61d48268c347dca8",
-                "uploadedAt": "2025-01-17"
-              },
-              "topo": null
+              "topo": {
+                "id": 3,
+                "createdAt": "2025-01-29 23:51:21",
+                "updatedAt": "2025-01-29 23:51:21",
+                "title": "Topo for Carousel North",
+                "scale": 0.173,
+                "topogons": [
+                  {
+                    "id": 12,
+                    "createdAt": "2025-01-29 23:51:21",
+                    "updatedAt": "2025-01-29 23:56:26",
+                    "label": "",
+                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":505.75741203089643,\\"y\\":557.09375},{\\"x\\":488.75873839432,\\"y\\":317.09375},{\\"x\\":451.7616251853007,\\"y\\":128.09375},{\\"x\\":445.7620933135679,\\"y\\":92.09375}],\\"color\\":\\"#4caf50\\",\\"tension\\":0.2},{\\"points\\":[{\\"x\\":546.7542131544043,\\"y\\":184.09375},{\\"x\\":586.75109229929,\\"y\\":238.09375}],\\"color\\":\\"#000000\\",\\"tension\\":0.2},{\\"points\\":[{\\"x\\":582.7514043848014,\\"y\\":184.09375},{\\"x\\":551.753823047515,\\"y\\":236.09375}],\\"color\\":\\"#000000\\",\\"tension\\":0.2},{\\"points\\":[{\\"x\\":279.77504486229225,\\"y\\":259.09375},{\\"x\\":331.77098775064366,\\"y\\":321.09375}],\\"color\\":\\"#000000\\",\\"tension\\":0.2},{\\"points\\":[{\\"x\\":258.77668331122726,\\"y\\":318.09375},{\\"x\\":341.7702075368651,\\"y\\":257.09375}],\\"color\\":\\"#000000\\",\\"tension\\":0.2}],\\"labels\\":[{\\"text\\":\\"Avoid good holds\\",\\"point\\":{\\"x\\":267.77598111882656,\\"y\\":334.09375},\\"color\\":\\"#ffffff\\",\\"fill\\":\\"#000000\\",\\"direction\\":\\"up\\"},{\\"text\\":\\"\\",\\"point\\":{\\"x\\":395.76599438246075,\\"y\\":473.09375},\\"color\\":\\"#4caf50\\",\\"fill\\":\\"#000000\\",\\"direction\\":\\"up\\"}]}",
+                    "areaId": null,
+                    "boulderId": null,
+                    "routeId": 1875
+                  },
+                  {
+                    "id": 13,
+                    "createdAt": "2025-01-29 23:55:54",
+                    "updatedAt": "2025-01-29 23:56:32",
+                    "label": "",
+                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":219.77972614496372,\\"y\\":583.09375},{\\"x\\":233.7786338456737,\\"y\\":322.09375},{\\"x\\":241.77800967465083,\\"y\\":205.09375},{\\"x\\":252.77715143949442,\\"y\\":83.09375}],\\"color\\":\\"#4caf50\\",\\"tension\\":0.2}],\\"labels\\":[{\\"text\\":\\"\\",\\"point\\":{\\"x\\":148.7852656627916,\\"y\\":592.09375},\\"color\\":\\"#ffffff\\",\\"fill\\":\\"#4caf50\\",\\"direction\\":\\"up\\"}]}",
+                    "areaId": null,
+                    "boulderId": null,
+                    "routeId": 1879
+                  }
+                ]
+              }
             }
           ]
         },
@@ -2850,23 +2817,61 @@ const cragJson = '''
         {
           "id": 1473,
           "name": "Moon Boulder, The",
-          "description": null,
+          "description": "",
           "coordinates": {
             "lat": 32.851,
             "lng": -117.02259
+          },
+          "polygon": {
+            "id": 197,
+            "descriptor": "boulder-Moon Boulder, The-polygon",
+            "coordinates": [
+              {
+                "lat": 32.85123254723238,
+                "lng": -117.02251520007849
+              },
+              {
+                "lat": 32.85123029395714,
+                "lng": -117.0224602147937
+              },
+              {
+                "lat": 32.85121564766674,
+                "lng": -117.0224514976144
+              },
+              {
+                "lat": 32.85120353630937,
+                "lng": -117.02245417982343
+              },
+              {
+                "lat": 32.85119733980033,
+                "lng": -117.02247831970456
+              },
+              {
+                "lat": 32.8511998747359,
+                "lng": -117.0225202292204
+              },
+              {
+                "lat": 32.85121085945589,
+                "lng": -117.02253565192223
+              }
+            ]
           },
           "routes": [
             {
               "id": 1884,
               "name": "The Black Spot Problem",
               "length": null,
-              "description": null,
+              "description": "A Santee slab classic. Look for a small but noticeable black spot, and work your way up to the seam \\"jug\\" straight up.",
               "firstAscent": null,
               "gradeRaw": "V2",
               "grade": {
                 "system": "V",
                 "raw": "V2",
                 "value": 30
+              },
+              "coordinates": {
+                "lat": 32.851230366317026,
+                "lng": -117.02246198054738
               },
               "photos": []
             },
@@ -2886,9 +2891,9 @@ const cragJson = '''
             },
             {
               "id": 1886,
-              "name": "Unnamed*",
+              "name": "Unnamed",
               "length": null,
-              "description": null,
+              "description": "On the south face of the boulder, climb up ",
               "firstAscent": null,
               "gradeRaw": "5.10c",
               "grade": {
@@ -2896,13 +2901,17 @@ const cragJson = '''
                 "raw": "5.10c",
                 "value": 20
               },
+              "coordinates": {
+                "lat": 32.85120439793535,
+                "lng": -117.02245398900575
+              },
               "photos": []
             },
             {
               "id": 1887,
               "name": "NE face (left)",
               "length": null,
-              "description": null,
+              "description": "Follow the arete to the left of the black spot, avoiding its' eponymous crimp, and slabbing your way up.",
               "firstAscent": null,
               "gradeRaw": "V2",
               "grade": {
@@ -2910,10 +2919,139 @@ const cragJson = '''
                 "raw": "V2",
                 "value": 30
               },
+              "coordinates": {
+                "lat": 32.85122270147233,
+                "lng": -117.0224556958985
+              },
               "photos": []
             }
           ],
-          "photos": []
+          "photos": [
+            {
+              "id": 38,
+              "createdAt": "2025-01-30 00:37:11",
+              "updatedAt": "2025-01-30 00:37:11",
+              "title": "Black Spot",
+              "description": "",
+              "upload": {
+                "id": 28,
+                "createdAt": "2025-01-30 00:37:11",
+                "updatedAt": "2025-01-30 00:37:11",
+                "key": "1464b222b818248e2d72652ed385fc8889cf1d32.jpg",
+                "directory": "photos",
+                "engine": "local",
+                "originalName": "moon_blackspot.jpg",
+                "fileSize": 8273547,
+                "sha1Hash": "1464b222b818248e2d72652ed385fc8889cf1d32",
+                "uploadedAt": "2025-01-29"
+              },
+              "topo": {
+                "id": 4,
+                "createdAt": "2025-01-30 00:38:51",
+                "updatedAt": "2025-01-30 00:38:51",
+                "title": "Topo for Black Spot",
+                "scale": 0.173,
+                "topogons": [
+                  {
+                    "id": 14,
+                    "createdAt": "2025-01-30 00:38:51",
+                    "updatedAt": "2025-01-30 00:38:51",
+                    "label": "",
+                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":226.7791799953187,\\"y\\":697.09375},{\\"x\\":250.7773074822501,\\"y\\":343.09375},{\\"x\\":329.77114379339935,\\"y\\":123.09375},{\\"x\\":364.7684130451743,\\"y\\":41.09375}],\\"color\\":\\"rgb(77, 171, 245)\\",\\"tension\\":0.2}],\\"labels\\":[{\\"text\\":\\"\\",\\"point\\":{\\"x\\":262.77637122571576,\\"y\\":345.09375},\\"color\\":\\"#ffffff\\",\\"fill\\":\\"rgb(77, 171, 245)\\",\\"direction\\":\\"up\\"}]}",
+                    "areaId": null,
+                    "boulderId": null,
+                    "routeId": 1884
+                  },
+                  {
+                    "id": 15,
+                    "createdAt": "2025-01-30 00:40:13",
+                    "updatedAt": "2025-01-30 00:45:09",
+                    "label": "",
+                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":34.79416009986736,\\"y\\":717.09375},{\\"x\\":27.794706249512366,\\"y\\":350.09375},{\\"x\\":78.79072715924163,\\"y\\":187.09375},{\\"x\\":174.7832371069673,\\"y\\":100.09375}],\\"color\\":\\"rgb(255, 239, 98)\\",\\"tension\\":0.5}],\\"labels\\":[{\\"text\\":\\"\\",\\"point\\":{\\"x\\":11,\\"y\\":520.09375},\\"color\\":\\"#000000\\",\\"fill\\":\\"rgb(255, 239, 98)\\",\\"direction\\":\\"up\\"}]}",
+                    "areaId": null,
+                    "boulderId": null,
+                    "routeId": 1887
+                  }
+                ]
+              }
+            },
+            {
+              "id": 39,
+              "createdAt": "2025-01-30 00:37:20",
+              "updatedAt": "2025-01-30 00:39:17",
+              "title": "East Face",
+              "description": "",
+              "upload": {
+                "id": 29,
+                "createdAt": "2025-01-30 00:37:20",
+                "updatedAt": "2025-01-30 00:37:20",
+                "key": "a276fef298d5f75c36c3b3e2c3005e9bb4d27318.jpg",
+                "directory": "photos",
+                "engine": "local",
+                "originalName": "moon_ne_face.jpg",
+                "fileSize": 7578776,
+                "sha1Hash": "a276fef298d5f75c36c3b3e2c3005e9bb4d27318",
+                "uploadedAt": "2025-01-29"
+              },
+              "topo": {
+                "id": 5,
+                "createdAt": "2025-01-30 00:44:48",
+                "updatedAt": "2025-01-30 00:44:48",
+                "title": "Topo for East Face",
+                "scale": 0.173,
+                "topogons": [
+                  {
+                    "id": 16,
+                    "createdAt": "2025-01-30 00:44:48",
+                    "updatedAt": "2025-01-30 00:44:48",
+                    "label": "",
+                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":304,\\"y\\":756.09375},{\\"x\\":213,\\"y\\":407.09375},{\\"x\\":198,\\"y\\":3.09375}],\\"color\\":\\"rgb(255, 239, 98)\\",\\"tension\\":0.2}],\\"labels\\":[{\\"text\\":\\"\\",\\"point\\":{\\"x\\":227,\\"y\\":635.09375},\\"color\\":\\"#000000\\",\\"fill\\":\\"rgb(255, 239, 98)\\",\\"direction\\":\\"up\\"}]}",
+                    "areaId": null,
+                    "boulderId": null,
+                    "routeId": 1885
+                  }
+                ]
+              }
+            },
+            {
+              "id": 40,
+              "createdAt": "2025-01-30 00:47:51",
+              "updatedAt": "2025-01-30 00:47:51",
+              "title": "South Face?",
+              "description": "",
+              "upload": {
+                "id": 30,
+                "createdAt": "2025-01-30 00:47:51",
+                "updatedAt": "2025-01-30 00:47:51",
+                "key": "d47bacec441dc2c8e049908d662bd8f487de2bb4.jpg",
+                "directory": "photos",
+                "engine": "local",
+                "originalName": "moon_south_face.jpg",
+                "fileSize": 8891522,
+                "sha1Hash": "d47bacec441dc2c8e049908d662bd8f487de2bb4",
+                "uploadedAt": "2025-01-29"
+              },
+              "topo": {
+                "id": 6,
+                "createdAt": "2025-01-30 00:48:53",
+                "updatedAt": "2025-01-30 00:48:53",
+                "title": "Topo for South Face?",
+                "scale": 0.173,
+                "topogons": [
+                  {
+                    "id": 17,
+                    "createdAt": "2025-01-30 00:48:53",
+                    "updatedAt": "2025-01-30 00:48:53",
+                    "label": "",
+                    "data": "{\\"lines\\":[{\\"points\\":[{\\"x\\":349.7695833658422,\\"y\\":777.09375},{\\"x\\":297.7736404774908,\\"y\\":217.09375},{\\"x\\":307.77286026371223,\\"y\\":3.09375}],\\"color\\":\\"rgb(53, 122, 56)\\",\\"tension\\":0.2}],\\"labels\\":[{\\"text\\":\\"\\",\\"point\\":{\\"x\\":327.77129983615504,\\"y\\":586.09375},\\"color\\":\\"#ffffff\\",\\"fill\\":\\"rgb(53, 122, 56)\\",\\"direction\\":\\"up\\"}]}",
+                    "areaId": null,
+                    "boulderId": null,
+                    "routeId": 1886
+                  }
+                ]
+              }
+            }
+          ]
         },
         {
           "id": 1474,

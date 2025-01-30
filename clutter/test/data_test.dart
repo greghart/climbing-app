@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('Data loading', () {
     test('should load crag json successfully', () {
-      expect(() => Data(), returnsNormally);
       final crag = Data().crag;
       expect(crag.name, equals("Santee"));
       expect(crag.description, equals("It's not great, but it is Santee"));

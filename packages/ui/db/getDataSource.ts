@@ -6,7 +6,7 @@ export const dataSource = new DataSource({
   type: "sqlite",
   database: "database.sqlite",
   synchronize: true,
-  logging: true,
+  logging: false,
   entities: [
     entities.AreaSchema,
     entities.BoulderSchema,
