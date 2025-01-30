@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -78,6 +79,7 @@ class Photos extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           final settings = context.watch<SettingsController>();
+          final theme = Theme.of(context);
           navigateLeft() {
             Navigator.of(context).pop();
             if (index > 0) {
@@ -137,23 +139,75 @@ class Photos extends StatelessWidget {
               ),
             );
           } else {
-            child = GestureDetector(
-                child: Topo(
-                  model: model,
-                  photo: photo,
-                  areaId: areaId,
-                  boulderId: boulderId,
-                  routeId: routeId,
+            child = Column(
+              spacing: 8,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InteractiveViewer(
+                  minScale: 1,
+                  maxScale: 3,
+                  child: Topo(
+                    model: model,
+                    photo: photo,
+                    areaId: areaId,
+                    boulderId: boulderId,
+                    routeId: routeId,
+                  ),
                 ),
-                onHorizontalDragEnd: (DragEndDetails details) {
-                  if (details.primaryVelocity! > swipeSensitivity) {
-                    // User swiped left, move right
-                    navigateRight();
-                  } else if (details.primaryVelocity! < -swipeSensitivity) {
-                    // User swiped right, move left
-                    navigateLeft();
-                  }
-                });
+                Expanded(
+                  child: GestureDetector(
+                    onHorizontalDragEnd: (details) {
+                      if (details.primaryVelocity! > swipeSensitivity) {
+                        // User swiped right , move left
+                        navigateLeft();
+                      } else if (details.primaryVelocity! < -swipeSensitivity) {
+                        // User swiped left, move right
+                        navigateRight();
+                      }
+                    },
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    IconButton(
+                      splashRadius: 16.0,
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        navigateLeft();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_left_rounded,
+                        size: 32.0,
+                      ),
+                    ),
+                    Row(
+                      spacing: 2,
+                      children: photos.mapIndexed((i, p) {
+                        return TabPageSelectorIndicator(
+                          backgroundColor: i == index
+                              ? theme.colorScheme.secondary
+                              : Colors.transparent,
+                          borderColor: theme.colorScheme.secondary,
+                          size: 12.0,
+                        );
+                      }).toList(),
+                    ),
+                    IconButton(
+                      splashRadius: 16.0,
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        navigateRight();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_right_rounded,
+                        size: 32.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
           }
           return Dialog(
             child: child,
