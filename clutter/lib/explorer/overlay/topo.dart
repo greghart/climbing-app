@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../entities/index.dart' as entities;
 import '../model.dart';
@@ -67,12 +68,13 @@ class Topo extends StatelessWidget {
               return const SizedBox(
                   width: 25, height: 25, child: LinearProgressIndicator());
             }
-            final inputSize = Size(snapshot.data!.width.toDouble(),
+            final imgSize = Size(snapshot.data!.width.toDouble(),
                 snapshot.data!.height.toDouble());
-            final fitted = applyBoxFit(BoxFit.contain, inputSize, outputSize);
+            final fitted = applyBoxFit(BoxFit.contain, imgSize, outputSize);
             final aspectImg = snapshot.data!.width / snapshot.data!.height;
             final aspectCanvas = outputSize.width / outputSize.height;
             // Scale it down to fit. The image in app is scaled, and then the topo was scaled as well
+            // TODO: Overflowing on mobile?!?!
             final currentScale = aspectCanvas > aspectImg
                 ? outputSize.height / snapshot.data!.height
                 : outputSize.width / snapshot.data!.width;
@@ -117,9 +119,22 @@ class Topo extends StatelessWidget {
                     return Positioned(
                       top: l.point.y * scale,
                       left: l.point.x * scale,
-                      child: Chip(
+                      child: ActionChip(
                         label: Text(text, style: TextStyle(color: l.color)),
                         backgroundColor: l.fill,
+                        onPressed: () {
+                          // TODO: Leaky, we know we're in a dialog??
+                          Navigator.of(context).pop();
+                          if (t.areaId != null) {
+                            model.setArea(t.areaId!);
+                          }
+                          if (t.boulderId != null) {
+                            model.setBoulder(t.boulderId!);
+                          }
+                          if (t.routeId != null) {
+                            model.setRoute(t.routeId!);
+                          }
+                        },
                       ),
                     );
                   });

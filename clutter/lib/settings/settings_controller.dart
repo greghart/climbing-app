@@ -25,6 +25,11 @@ class SettingsController with ChangeNotifier {
   // Whether to use the small cozy compass in breadcrumbs
   bool get cozyCompass => _cozyCompass;
 
+  late bool _wideImages = false;
+
+  // Whether to let images widen out past screen size
+  bool get wideImages => _wideImages;
+
   Future<void> updateCozyCompass(bool? b) async {
     if (b == null || b == _cozyCompass) return;
 
@@ -34,12 +39,22 @@ class SettingsController with ChangeNotifier {
     await _settingsService.updateCozyCompass(b);
   }
 
+  Future<void> updateWideImages(bool? b) async {
+    if (b == null || b == _wideImages) return;
+
+    _wideImages = b;
+    notifyListeners();
+
+    await _settingsService.updateWideImages(b);
+  }
+
   /// Load the user's settings from the SettingsService. It may load from a
   /// local database or the internet. The controller only knows it can load the
   /// settings from the service.
   Future<void> loadSettings() async {
     _themeMode = await _settingsService.themeMode();
     _cozyCompass = await _settingsService.cozyCompass();
+    _wideImages = await _settingsService.wideImages();
 
     // Important! Inform listeners a change has occurred.
     notifyListeners();
