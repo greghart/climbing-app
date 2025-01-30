@@ -69,6 +69,21 @@ class SettingsView extends StatelessWidget {
                 ),
               ],
             ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Wide images", style: theme.textTheme.labelLarge),
+                Text(
+                    "Only constrain image height, resulting in wider, scrollable images ",
+                    style: theme.textTheme.labelSmall),
+                Checkbox(
+                  // Read the selected themeMode from the controller
+                  value: settings.wideImages,
+                  // Call the updateThemeMode method any time the user selects a theme.
+                  onChanged: settings.updateWideImages,
+                ),
+              ],
+            ),
           ],
         ),
       ),

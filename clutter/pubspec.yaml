@@ -37,9 +37,12 @@ flutter:
   generate: true
 
   assets:
-    # Add assets from the images directory to the application.
+    # Application images
     - assets/images/
+    # Pre-loaded crag photos
     - assets/photos/
+    # Crag data
+    - assets/santee.json
     # Allll the tile directories unfortunately
     - assets/tiles/
     - assets/tiles/22927/52861/

@@ -22,4 +22,9 @@ class SettingsService {
 
   Future<void> updateCozyCompass(bool b) async =>
       await prefs.setBool("cozyCompass", b);
+
+  Future<bool> wideImages() async => await prefs.getBool("wideImages") ?? true;
+
+  Future<void> updateWideImages(bool b) async =>
+      await prefs.setBool("wideImages", b);
 }

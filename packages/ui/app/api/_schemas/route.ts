@@ -12,7 +12,7 @@ const routeSchema = z.object({
     .string({
       invalid_type_error: "Invalid Name",
     })
-    .min(5, { message: "Must be 5 or more characters" }),
+    .min(4, { message: "Must be 4 or more characters" }),
   description: z.string().optional(),
   coordinates: jsonSchema.stringNullish.pipe(coordinateSchema).optional(),
   gradeRaw: z.string().refine((v) => {

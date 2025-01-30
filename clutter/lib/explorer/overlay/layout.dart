@@ -63,7 +63,7 @@ class Breadcrumbs extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final model = context.watch<ExplorerModel>();
-    final settings = Provider.of<SettingsController>(context);
+    final settings = context.watch<SettingsController>();
 
     return Container(
       color: theme.colorScheme.surfaceBright,
