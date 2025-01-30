@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -12,10 +11,17 @@ class TopogonPoint {
   TopogonPoint({required this.x, required this.y});
 
   factory TopogonPoint.fromJson(Map<String, dynamic> json) {
-    return TopogonPoint(
-      x: json['x'],
-      y: json['y'],
-    );
+    if (json
+        case {
+          'x': num x,
+          'y': num y,
+        }) {
+      return TopogonPoint(
+        x: x.toDouble(),
+        y: y.toDouble(),
+      );
+    }
+    throw JSONException("TopogonPoint", json);
   }
 
   Map<String, dynamic> toJson() {
