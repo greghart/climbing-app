@@ -24,6 +24,7 @@ const getTopo = cache(async (id: number) => {
       "upload",
       "topo",
       "topo.topogons",
+      "topo.topogons",
     ],
   });
   if (!photo) {

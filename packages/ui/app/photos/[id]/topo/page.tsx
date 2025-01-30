@@ -23,7 +23,7 @@ export default async function Page(props: Props) {
       content={
         <>
           <PhotoableLink photoable={photo.photoable} />
-          <TopoEditorStoreProvider photo={photo} entityPool={entities}>
+          <TopoEditorStoreProvider photo={photo} topogonEntitiesPool={entities}>
             <TopoEditor photo={photo} />
           </TopoEditorStoreProvider>
         </>

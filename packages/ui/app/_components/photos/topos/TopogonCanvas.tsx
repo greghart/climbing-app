@@ -1,6 +1,9 @@
 import LabelComponent from "@/app/_components/photos/topos/LabelCanvas";
 import LineComponent from "@/app/_components/photos/topos/LineCanvas";
-import { useTopogonEditorStore } from "@/app/_components/photos/topos/TopoEditorStoreProvider";
+import {
+  useTopoEditorStore,
+  useTopogonEditorStore,
+} from "@/app/_components/photos/topos/TopoEditorStoreProvider";
 import { Label, Line, Topogon as TopogonModel } from "@/app/_models";
 import Konva from "konva";
 import { observer } from "mobx-react-lite";
@@ -17,6 +20,7 @@ interface Props {
  *   * TODO: We could refactor this, but right now it's easier to only show Topogon in one place
  */
 function TopogonCanvas(props: Props) {
+  const rootStore = useTopoEditorStore();
   if (!props.topogon?.data) return false;
 
   return (
@@ -25,13 +29,26 @@ function TopogonCanvas(props: Props) {
         <TopogonLine key={i} idx={i} line={line} />
       ))}
       {props.topogon.data.labels.map((label, i) => (
-        <TopogonLabel key={i} idx={i} label={label} />
+        <TopogonLabel
+          key={i}
+          idx={i}
+          defaultText={rootStore.selectedEntityText(props.topogon) || ""}
+          label={label}
+        />
       ))}
     </>
   );
 }
 
-function _TopogonLabel({ label, idx }: { label: Label; idx: number }) {
+function TopogonLabel_({
+  label,
+  idx,
+  defaultText,
+}: {
+  label: Label;
+  idx: number;
+  defaultText: string;
+}) {
   const store = useTopogonEditorStore();
   const selected = store?.selectedLabelIndex === idx;
   // Transformable
@@ -60,7 +77,10 @@ function _TopogonLabel({ label, idx }: { label: Label; idx: number }) {
       >
         <LabelComponent
           LabelProps={{ ...label.point }}
-          TextProps={{ text: label.text, fill: label.color }}
+          TextProps={{
+            text: label.text === "" ? defaultText : label.text,
+            fill: label.color,
+          }}
           TagProps={{ fill: label.fill }}
         />
       </Group>
@@ -76,7 +96,7 @@ function _TopogonLabel({ label, idx }: { label: Label; idx: number }) {
   );
 }
 
-function _TopogonLine({ line, idx }: { line: Line; idx: number }) {
+function TopogonLine_({ line, idx }: { line: Line; idx: number }) {
   const store = useTopogonEditorStore();
   // Don't "select" with just a point, bad UX
   const selected = store?.selectedLineIndex === idx && line.points.length > 1;
@@ -132,8 +152,8 @@ function _TopogonLine({ line, idx }: { line: Line; idx: number }) {
     </>
   );
 }
-const TopogonLine = observer(_TopogonLine);
-const TopogonLabel = observer(_TopogonLabel);
+const TopogonLine = observer(TopogonLine_);
+const TopogonLabel = observer(TopogonLabel_);
 
 function useTransformer(selected: boolean, ...updaters: any[]) {
   const groupRef = React.useRef<Konva.Group>(null);

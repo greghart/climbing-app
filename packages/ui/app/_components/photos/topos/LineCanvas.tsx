@@ -19,5 +19,6 @@ const LineCanvas = React.forwardRef<
     />
   );
 });
+LineCanvas.displayName = "LineCanvas";
 
 export default LineCanvas;

@@ -23,14 +23,10 @@ import { IRoute } from "models";
 import React from "react";
 
 interface Props {}
-function _TopogonEditorTools(props: Props) {
+function TopogonEditorTools_(props: Props) {
   const store = useTopogonEditorStore();
   if (!store) return false;
 
-  console.warn("TopogonEditorTools", {
-    topogon: store.topogon,
-    entityId: store.entityId,
-  });
   return (
     <>
       <Typography variant="h5">Tools</Typography>
@@ -94,7 +90,7 @@ function _TopogonEditorTools(props: Props) {
     </>
   );
 }
-const TopogonEditorTools = observer(_TopogonEditorTools);
+const TopogonEditorTools = observer(TopogonEditorTools_);
 export default TopogonEditorTools;
 
 function _LabelTool({ store }: { store: TopogonEditorStore }) {
@@ -103,11 +99,15 @@ function _LabelTool({ store }: { store: TopogonEditorStore }) {
       <Typography variant="body2">Click to add label.</Typography>
       <Typography variant="body2">X to remove label.</Typography>
       <MUITextField
-        label="Label"
-        value={store.selectedLabel?.text || store.defaultLabelText}
+        label="Custom Label"
+        value={
+          store.selectedLabel?.text !== undefined
+            ? store.selectedLabel.text
+            : store.defaultLabelText
+        }
+        placeholder="Leave blank to label with entity"
         onChange={(e) => {
           store.selectedLabel?.setText(e.target.value);
-          store.setLineTension(parseFloat(e.target.value));
         }}
       />
       <ColorPicker

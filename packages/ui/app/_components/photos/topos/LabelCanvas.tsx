@@ -30,5 +30,6 @@ const LabelCanvas = React.forwardRef<Konva.Label, Props>((props, ref) => {
     </ReactKonva.Label>
   );
 });
+LabelCanvas.displayName = "LabelCanvas";
 
 export default LabelCanvas;

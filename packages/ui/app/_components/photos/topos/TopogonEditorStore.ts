@@ -1,5 +1,5 @@
+import EntityPoolStore from "@/app/_components/photos/topos/EntityPoolStore";
 import { Label, Line, Topogon } from "@/app/_models";
-import { type TopogonEntitiesPool } from "@/app/api/_actions/getTopo";
 import { action, computed, makeObservable, observable } from "mobx";
 import { TopoData } from "models";
 
@@ -11,7 +11,7 @@ export interface IOptions {
   defaultFillColor: string;
   defaultLineTension: number;
   defaultLabelText: string;
-  entityPool?: TopogonEntitiesPool;
+  entityPool: EntityPoolStore;
 }
 
 export default class TopogonEditorStore {
@@ -23,8 +23,7 @@ export default class TopogonEditorStore {
   defaultFillColor: string; // default color to use for background/fill for all components
   defaultLineTension: number;
   defaultLabelText: string;
-  // Pool of entities topogon can relate to
-  entityPool?: TopogonEntitiesPool;
+  entityPool: EntityPoolStore;
 
   constructor(topogon: Topogon, options: IOptions) {
     this.topogon = topogon;
@@ -137,7 +136,6 @@ export default class TopogonEditorStore {
   }
 
   addLabel(point: TopoData.IPoint) {
-    console.warn("Adding label @", point);
     const label = new Label({
       text: this.defaultLabelText,
       point: point,
@@ -183,10 +181,9 @@ export default class TopogonEditorStore {
     if (this.selectedLabel) this.selectedLabel.text = text;
   }
 
-  // Entity selector
-
   get entityField() {
-    switch (this.entityPool?.type) {
+    // Field of topogon to access
+    switch (this.entityPool.type) {
       case "route":
         return "routeId";
       case "boulder":
@@ -205,10 +202,10 @@ export default class TopogonEditorStore {
 
   setEntity(id: number) {
     this.topogon[this.entityField!] = id;
-    if (this.topogon.label === undefined || this.topogon.label === "") {
-      this.topogon.label = `${
-        this.entityPool!.entities.find((e) => e.id === id)!.name
-      } (${id})`;
-    }
+    // if (this.topogon.label === undefined || this.topogon.label === "") {
+    //   this.topogon.label = `${
+    //     this.entityPool!.entities.find((e) => e.id === id)!.name
+    //   } (${id})`;
+    // }
   }
 }

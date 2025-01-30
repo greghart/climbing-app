@@ -1,7 +1,9 @@
+import EntityPoolStore from "@/app/_components/photos/topos/EntityPoolStore";
 import TopogonEditorStore, {
   IOptions as TopogonOptions,
 } from "@/app/_components/photos/topos/TopogonEditorStore";
 import { Topogon } from "@/app/_models";
+import { TopogonEntitiesPool } from "@/app/api/_actions/getTopo";
 import { action, computed, makeObservable, observable } from "mobx";
 import * as models from "models";
 import React from "react";
@@ -12,12 +14,23 @@ class TopoEditorStore {
   hoveredTopogonId?: number = undefined;
   scale: number = 1; // Image scale for this topo
   private topogonOptions: TopogonOptions;
+  entityPool: EntityPoolStore;
 
   constructor(
     photo: models.IPhoto,
-    { topogonOptions }: { topogonOptions: TopogonOptions }
+    {
+      topogonEntitiesPool,
+      topogonOptions,
+    }: {
+      topogonEntitiesPool?: TopogonEntitiesPool;
+      topogonOptions: Omit<TopogonOptions, "entityPool">;
+    }
   ) {
-    this.topogonOptions = topogonOptions;
+    this.entityPool = new EntityPoolStore(topogonEntitiesPool);
+    this.topogonOptions = {
+      ...topogonOptions,
+      entityPool: this.entityPool,
+    };
     makeObservable(this, {
       topogonsById: observable,
       selectedTopogonId: observable,
@@ -33,7 +46,9 @@ class TopoEditorStore {
       setScale: action,
     });
     this.topogonsById = new Map(
-      (photo.topo?.topogons || []).map((t) => [t.id, new Topogon(t)])
+      // TODO: Leaky abstraction
+      // We know a photo has relationship ids, but that's technically supposed to be an implementation detail
+      (photo.topo?.topogons || []).map((t) => [t.id, new Topogon(t as any)])
     );
   }
 
@@ -66,6 +81,7 @@ class TopoEditorStore {
       id,
       new Topogon({
         id,
+        label: "",
         routeId: null,
         boulderId: null,
         areaId: null,
@@ -82,6 +98,21 @@ class TopoEditorStore {
     const scale = parseFloat(_scale.toFixed(3));
     if (scale === this.scale) return;
     this.scale = scale;
+  }
+
+  selectedEntityText(t: Topogon) {
+    if (t.selected) {
+      switch (this.entityPool.type) {
+        case "route":
+          const route = this.entityPool.route(t.routeId!)!;
+          return `${route.name} (${route.gradeRaw})`;
+        case "boulder":
+          return this.entityPool.boulder(t.boulderId!)?.name;
+        case "area":
+          return this.entityPool.area(t.areaId!)?.name;
+      }
+    }
+    return "";
   }
 }
 
