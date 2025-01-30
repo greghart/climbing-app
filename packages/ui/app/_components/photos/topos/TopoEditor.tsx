@@ -115,7 +115,13 @@ function TopoEditor(props: Props) {
                           store.hoveredTopogonId === topogon.id
                         }
                       >
-                        <ListItemText primary={topogon.label} />
+                        <ListItemText
+                          primary={
+                            topogon.label && topogon.label !== ""
+                              ? topogon.label
+                              : store.selectedEntityText(topogon)
+                          }
+                        />
                       </ListItemButton>
                     </ListItem>
                   ))}

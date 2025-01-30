@@ -26,4 +26,8 @@ export default class Topogon
       areaId: observable,
     });
   }
+
+  get selected() {
+    return this.routeId || this.boulderId || this.areaId;
+  }
 }

@@ -18,5 +18,6 @@ const Text = React.forwardRef<
     />
   );
 });
+Text.displayName = "Text";
 
 export default Text;

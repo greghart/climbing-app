@@ -10,7 +10,7 @@ interface Props {
   img: React.ReactNode;
 }
 
-function _TopoEditorCanvas(props: Props) {
+function TopoEditorCanvas_(props: Props) {
   const store = useTopoEditorStore();
 
   // Show all topogons if user hasn't selected any
@@ -65,4 +65,4 @@ function _TopoEditorCanvas(props: Props) {
   );
 }
 
-export default observer(_TopoEditorCanvas);
+export default observer(TopoEditorCanvas_);

@@ -10,24 +10,26 @@ import React from "react";
 export default function TopoEditorStoreProvider({
   children,
   photo,
-  entityPool,
+  topogonEntitiesPool,
 }: {
   children: React.ReactNode;
   photo: IPhoto;
-  entityPool?: TopogonEntitiesPool;
+  topogonEntitiesPool?: TopogonEntitiesPool;
 }) {
   const topogonOptions = {
     defaultColor: theme.palette.green.dark,
     defaultFillColor: "#ffffff",
     defaultLineTension: 0.2,
-    defaultLabelText: "New Label",
-    entityPool,
+    defaultLabelText: "",
   };
   const [store, setStore] = React.useState<TopoEditorStore>(
-    new TopoEditorStore(photo, { topogonOptions })
+    new TopoEditorStore(photo, { topogonEntitiesPool, topogonOptions })
   );
   React.useEffect(
-    () => setStore(new TopoEditorStore(photo, { topogonOptions })),
+    () =>
+      setStore(
+        new TopoEditorStore(photo, { topogonEntitiesPool, topogonOptions })
+      ),
     [photo]
   );
   return (

@@ -12,7 +12,7 @@ const topoSchema = z.object({
         z
           .object({
             id: z.number().optional(),
-            label: z.string().min(5).max(1000).optional(),
+            label: z.string().max(1000).optional(),
             data: z.any(),
             areaId: z.number().nullable().optional(),
             boulderId: z.number().nullable().optional(),
