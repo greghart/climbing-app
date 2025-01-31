@@ -1,3 +1,4 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -41,37 +42,71 @@ class ExplorerPage extends StatelessWidget {
           ),
         ),
       ],
-      child: SafeArea(
-        child: ExplorerLayout(
-          map: const MyMap(
-            child: MapBuilder(),
-          ),
-          search: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: MySearchBar(
-              hintText: "Search crag...",
-              onTap: () {
-                context.push('/search');
-              },
-              leading: Builder(builder: (context) {
-                return IconButton(
-                  onPressed: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                  icon: const Icon(Icons.menu),
-                );
-              }),
-              trailing: const [
-                LayersMenu(),
-              ],
+      child: BackHandler(
+        child: SafeArea(
+          child: ExplorerLayout(
+            map: const MyMap(
+              child: MapBuilder(),
             ),
-          ),
-          overlay: const OverlaySheet(
-            sliver: OverlayBuilder(),
+            search: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: MySearchBar(
+                hintText: "Search crag...",
+                onTap: () {
+                  context.push('/search');
+                },
+                leading: Builder(builder: (context) {
+                  return IconButton(
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    icon: const Icon(Icons.menu),
+                  );
+                }),
+                trailing: const [
+                  LayersMenu(),
+                ],
+              ),
+            ),
+            overlay: const OverlaySheet(
+              sliver: OverlayBuilder(),
+            ),
           ),
         ),
       ),
     );
+  }
+}
+
+// Intercepts back button to go back for this explorer model stack
+class BackHandler extends StatefulWidget {
+  final Widget child;
+  const BackHandler({super.key, required this.child});
+
+  @override
+  State<BackHandler> createState() => _BackHandlerState();
+}
+
+class _BackHandlerState extends State<BackHandler> {
+  @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    return context.read<ExplorerModel>().popRouteStack();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.child;
   }
 }
 

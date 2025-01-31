@@ -8,6 +8,8 @@ import '../entities/index.dart' as entities;
 
 enum EntityType { crag, area, boulder, route }
 
+typedef RoutingItem = ({EntityType type, int? id});
+
 // ExplorerModel handles general state and routing for explorer.
 // Routing just sets up the initial state to support deep linking, but once explorer is open,
 // we need to maintain widgets to keep map from flickering, so track that state here.
@@ -34,6 +36,7 @@ class ExplorerModel extends ChangeNotifier {
     }
   }
 
+  List<RoutingItem> routeStack = [];
   late final Map<String, entities.Area> areasById;
   late final Map<String, entities.Boulder> bouldersById;
   late final Map<String, entities.Route> routesById;
@@ -63,13 +66,30 @@ class ExplorerModel extends ChangeNotifier {
     return routesById[entityId.toString()];
   }
 
+  void pushCurrentRouteStack() {
+    routeStack.add((type: entityType, id: entityId));
+  }
+
+  bool popRouteStack() {
+    if (routeStack.isEmpty) {
+      return false;
+    }
+    final next = routeStack.removeLast();
+    entityType = next.type;
+    entityId = next.id;
+    notifyListeners();
+    return true;
+  }
+
   void setCrag() {
+    pushCurrentRouteStack();
     entityType = EntityType.crag;
     entityId = null;
     notifyListeners();
   }
 
   void setArea(int id) {
+    pushCurrentRouteStack();
     entityType = EntityType.area;
     entityId = id;
     if (area == null) {
@@ -79,6 +99,7 @@ class ExplorerModel extends ChangeNotifier {
   }
 
   void setBoulder(int id) {
+    pushCurrentRouteStack();
     entityType = EntityType.boulder;
     entityId = id;
     if (boulder == null) {
@@ -88,6 +109,7 @@ class ExplorerModel extends ChangeNotifier {
   }
 
   void setRoute(int id) {
+    pushCurrentRouteStack();
     entityType = EntityType.route;
     entityId = id;
     if (route == null) {
