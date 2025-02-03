@@ -5,7 +5,7 @@ import { type LeafletMouseEvent } from "leaflet";
  * Note we use the event bubble hierarchy to do things like:
  * * Clicking outside anything clickable should reset map to crag
  */
-export default function blockClicks(e: LeafletMouseEvent) {
+export default function blockMapClicks(e: LeafletMouseEvent) {
   e.originalEvent.preventDefault();
   e.originalEvent.stopPropagation();
   return false;

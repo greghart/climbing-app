@@ -1,12 +1,11 @@
 "use client";
 
+import useRouteTo from "@/app/_components/explorer/useRouteTo";
 import Circle from "@/app/_components/map/Circle";
-import useSearchParamsPath from "@/app/_util/useSearchParamsPath";
 import { Link, ListItem } from "@mui/material";
 import * as Leaflet from "leaflet";
 import { reduce } from "lodash-es";
 import { CoordinateOptional, ICoordinateLiteral, IRoute } from "models";
-import NextLink from "next/link";
 import * as React from "react";
 import { Popup } from "react-leaflet";
 
@@ -99,7 +98,7 @@ const groupRoutesByCoordinate = (routes: IRoute[]) => {
  *   * Route markers with popup/links
  */
 export default function RouteMarkers(props: Props) {
-  const searchParamsPath = useSearchParamsPath();
+  const routeTo = useRouteTo({ includeSearchParams: true });
   return (
     <React.Fragment>
       {groupRoutesByCoordinate(props.routes).map((thisGroup) => (
@@ -112,16 +111,19 @@ export default function RouteMarkers(props: Props) {
           <Popup closeButton={false}>
             {thisGroup.routes.map((r) => (
               <ListItem key={`route-${r.id}`}>
-                <NextLink
+                <Link
+                  underline="hover"
+                  color="inherit"
                   key={`route-${r.id}`}
-                  href={searchParamsPath(`routes/${r.id}`)}
-                  passHref
-                  legacyBehavior
+                  href=""
+                  onClick={(e) => {
+                    routeTo("route")(r.id);
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
                 >
-                  <Link underline="hover" color="inherit">
-                    {r.name} ({r.gradeRaw})
-                  </Link>
-                </NextLink>
+                  {r.name} ({r.gradeRaw})
+                </Link>
               </ListItem>
             ))}
           </Popup>

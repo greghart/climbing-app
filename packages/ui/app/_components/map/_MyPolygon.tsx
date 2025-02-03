@@ -1,7 +1,6 @@
-import * as React from "react";
 import { Polygon, type PolygonProps } from "react-leaflet";
 
-import { pick, omit } from "lodash-es";
+import { omit, pick } from "lodash-es";
 
 /**
  * A nice looking polygon for displaying

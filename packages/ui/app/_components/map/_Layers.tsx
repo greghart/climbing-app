@@ -16,6 +16,7 @@ type Props = Omit<React.ComponentProps<typeof LayersControl>, "children"> & {
 type Layer = NonNullable<React.ComponentProps<typeof BestTileLayer>["layer"]>;
 
 const layerNames = {
+  Esri: "Esri World",
   MapBox: "Mapbox Tiles",
   OpenStreetMap: "OSM Tiles",
   Local: "Local",
@@ -58,6 +59,7 @@ export default function Layers(props: Props) {
   });
   return (
     <LayersControl collapsed={false} position="topright" {...props}>
+      <Layer selected={selected as Layer} layer="Esri" />
       <Layer selected={selected as Layer} layer="OpenStreetMap" />
       <Layer selected={selected as Layer} layer="Local" />
       <Layer selected={selected as Layer} layer="MapBox" />

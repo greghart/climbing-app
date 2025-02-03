@@ -1,8 +1,7 @@
-import useRouteTo from "@/app/_components/explorer/useRouteTo";
 import Boulders from "@/app/_components/map/Boulders";
 import MyPolygon from "@/app/_components/map/MyPolygon";
 import RouteMarkers from "@/app/_components/map/RouteMarkers";
-import blockClicks from "@/app/_util/blockClicks";
+import blockMapClicks from "@/app/_util/blockMapClicks";
 import { IBoulder, ITrail } from "models";
 import React from "react";
 import { type LayerGroup, type LayersControl } from "react-leaflet";
@@ -25,7 +24,6 @@ export default function BoulderLayers({
   LayerGroup,
   ...props
 }: Props) {
-  const routeTo = useRouteTo({ includeSearchParams: true });
   return (
     <>
       <Overlay checked name="Boulder Polygon">
@@ -35,7 +33,7 @@ export default function BoulderLayers({
               <MyPolygon
                 positions={props.boulder.polygon.coordinates}
                 eventHandlers={{
-                  click: blockClicks,
+                  click: blockMapClicks,
                 }}
                 fillOpacity={0.1}
               />

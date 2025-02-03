@@ -1,5 +1,5 @@
 import AreaMap from "@/app/_components/map/AreaMap";
-import blockClicks from "@/app/_util/blockClicks";
+import blockMapClicks from "@/app/_util/blockMapClicks";
 import useRouteTo from "@/app/_util/useRouteTo";
 import { IArea } from "models";
 
@@ -20,7 +20,7 @@ export default function AreasMap(props: Props) {
         area={area}
         onClick={(e) => {
           routeTo(`/area/${area.id}`);
-          return blockClicks(e);
+          return blockMapClicks(e);
         }}
         {...props.AreaMapProps}
       />

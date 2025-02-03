@@ -2,7 +2,7 @@ import useRouteTo from "@/app/_components/explorer/useRouteTo";
 import AreasMap from "@/app/_components/map/AreasMap";
 import Boulders from "@/app/_components/map/Boulders";
 import TrailPolyline from "@/app/_components/tracer/TrailPolyline";
-import blockClicks from "@/app/_util/blockClicks";
+import blockMapClicks from "@/app/_util/blockMapClicks";
 import { Crag, IBoulder, ICrag } from "models";
 import React from "react";
 import { type LayerGroup, type LayersControl } from "react-leaflet";
@@ -55,7 +55,7 @@ export default function CragLayers({ Overlay, LayerGroup, ...props }: Props) {
               boulders={boulders}
               onBoulderClick={(b, e) => {
                 routeTo("boulder")(b.id);
-                blockClicks(e);
+                blockMapClicks(e);
               }}
             />
           )}

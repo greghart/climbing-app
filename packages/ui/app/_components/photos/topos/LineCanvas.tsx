@@ -10,7 +10,7 @@ const LineCanvas = React.forwardRef<
   return (
     <KonvaLine
       ref={ref}
-      tension={0.2}
+      tension={0.4}
       stroke="green"
       strokeWidth={4}
       lineJoin="round"
