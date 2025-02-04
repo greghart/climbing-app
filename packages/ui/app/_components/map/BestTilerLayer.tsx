@@ -3,7 +3,6 @@ import { TileLayer } from "react-leaflet";
 // Define tile layers in an object
 const tileLayers = {
   // Newer tiles
-  // Esri: "//wi.maptiles.arcgis.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
   Esri: "//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
   // Classic world
   World:

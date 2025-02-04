@@ -30,10 +30,10 @@ class BoulderOverlay extends StatelessWidget {
               boulder.description!,
               style: theme.textTheme.bodyMedium,
             ),
+          Photos(photos: boulder.photos),
           DiagramsLayout(
             chart: DifficultyChartCard(breakdown: boulder.difficultyBreakdown),
           ),
-          Photos(photos: boulder.photos),
           Text(
             "Routes",
             style: theme.textTheme.headlineSmall,

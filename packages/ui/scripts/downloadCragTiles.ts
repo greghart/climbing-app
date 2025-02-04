@@ -82,10 +82,7 @@ async function downloadCragTiles(cragId: number) {
       return async () => {
         const [x, y, z] = t;
         // Make path,then download and write
-        const dir = path.resolve(
-          __dirname,
-          `../public/tiles/mapbox/${x}/${y}/`
-        );
+        const dir = path.resolve(__dirname, `../public/tiles_esri/${x}/${y}/`);
         fs.mkdirSync(dir, { recursive: true });
         const file = path.resolve(dir, `${z}.png`);
         if (fs.existsSync(file)) return;
@@ -135,7 +132,8 @@ function getAllTiles(
 
 function tileDownload(t: tilebelt.Tile) {
   // tslint:disable-next-line:max-line-length
-  return `http://api.mapbox.com/v4/mapbox.satellite/${t[2]}/${t[0]}/${t[1]}@4x.png?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`;
+  // return `http://api.mapbox.com/v4/mapbox.satellite/${t[2]}/${t[0]}/${t[1]}@4x.png?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`;
+  return `https://tiledbasemaps.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/${t[2]}/${t[1]}/${t[0]}`;
 }
 
 function prottle<T>(concurrency: number) {
