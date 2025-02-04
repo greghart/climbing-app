@@ -6,6 +6,7 @@ import '../model.dart';
 import 'difficulty_chart.dart';
 import 'difficulty_span.dart';
 import 'layout.dart';
+import 'photos.dart';
 
 class CragOverlay extends StatelessWidget {
   const CragOverlay({
@@ -29,6 +30,7 @@ class CragOverlay extends StatelessWidget {
               style: theme.textTheme.bodyMedium,
             ),
           ),
+          Photos(photos: crag.photos),
           DiagramsLayout(
             chart: DifficultyChartCard(breakdown: crag.difficultyBreakdown),
           ),

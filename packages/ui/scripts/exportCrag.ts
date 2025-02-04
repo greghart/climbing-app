@@ -102,7 +102,8 @@ export default async function exportCrag(id: number) {
       })
     ),
   };
-  console.log(JSON.stringify(json, null, 2));
+  // console.log(JSON.stringify(json, null, 2));
+  console.log(JSON.stringify(json));
   process.exit(0);
 }
 

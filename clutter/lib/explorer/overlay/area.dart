@@ -6,6 +6,7 @@ import '../model.dart';
 import 'difficulty_chart.dart';
 import 'difficulty_span.dart';
 import 'layout.dart';
+import 'photos.dart';
 
 class AreaOverlay extends StatelessWidget {
   const AreaOverlay({
@@ -31,6 +32,7 @@ class AreaOverlay extends StatelessWidget {
                 style: theme.textTheme.bodyMedium,
               ),
             ),
+          Photos(photos: area.photos),
           DiagramsLayout(
             chart: DifficultyChartCard(breakdown: area.difficultyBreakdown),
           ),

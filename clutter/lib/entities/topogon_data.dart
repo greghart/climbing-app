@@ -53,13 +53,19 @@ class TopogonLine {
       {required this.points, required this.color, required this.tension});
 
   factory TopogonLine.fromJson(Map<String, dynamic> json) {
-    return TopogonLine(
-      points: (json['points'] as List)
-          .map((p) => TopogonPoint.fromJson(p))
-          .toList(),
-      color: _parseColor(json['color']),
-      tension: json['tension'],
-    );
+    if (json
+        case {
+          'points': List points,
+          'color': String color,
+          'tension': num tension,
+        }) {
+      return TopogonLine(
+        points: points.map((p) => TopogonPoint.fromJson(p)).toList(),
+        color: _parseColor(color),
+        tension: tension.toDouble(),
+      );
+    }
+    throw JSONException("TopogonLine", json);
   }
 
   Map<String, dynamic> toJson() {

@@ -209,7 +209,7 @@ class Photos extends StatelessWidget {
               ],
             );
           }
-          return Dialog(
+          return Dialog.fullscreen(
             child: child,
           );
         });
