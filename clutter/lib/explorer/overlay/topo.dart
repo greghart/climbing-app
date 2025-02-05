@@ -16,7 +16,7 @@ class Topo extends StatelessWidget {
     required this.photo,
     required this.model,
     this.labels = true,
-    this.debug = false,
+    this.debug = true,
     this.areaId,
     this.boulderId,
     this.routeId,
@@ -24,7 +24,6 @@ class Topo extends StatelessWidget {
 
   final entities.Photo photo;
   // Since topo is shown in a dialog, it can't actually use context
-  // TODO: Troubleshoot this more, this seems crazy and is likely bad performance
   final ExplorerModel model;
   // Show labels?
   final bool labels;
@@ -74,72 +73,76 @@ class Topo extends StatelessWidget {
             final aspectImg = snapshot.data!.width / snapshot.data!.height;
             final aspectCanvas = outputSize.width / outputSize.height;
             // Scale it down to fit. The image in app is scaled, and then the topo was scaled as well
-            // TODO: Overflowing on mobile?!?!
-            final currentScale = aspectCanvas > aspectImg
-                ? outputSize.height / snapshot.data!.height
-                : outputSize.width / snapshot.data!.width;
-            final scale = currentScale /
-                (photo.topo!.scale *
-                    4); // times 4 because we down size all images by 4x into app
+            final currentScale = math.min(
+              aspectCanvas > aspectImg
+                  ? outputSize.height / snapshot.data!.height
+                  : outputSize.width / snapshot.data!.width,
+              1,
+            );
+            final scale = // times 4 because we down size all images by 4x into app
+                currentScale / (photo.topo!.scale * 4);
 
-            return Stack(children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: img,
-              ),
-              if (debug)
-                Column(
-                  children: [
-                    Text("${snapshot.data!.width} x ${snapshot.data!.height}"),
-                    Text(
-                        "${fitted.destination.width} x ${fitted.destination.height}"),
-                    Text("Scale: $scale"),
-                  ],
+            return Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: img,
                 ),
-              // Paint all our canvas things
-              CustomPaint(
-                size: fitted.destination,
-                painter: TopoPainter(
-                  topogons: topogons.toList(),
-                  // times 4 because we down size all images by 4x into app
-                  scale: scale,
+                if (debug)
+                  Column(
+                    children: [
+                      Text(
+                          "Img: ${snapshot.data!.width} x ${snapshot.data!.height}"),
+                      Text("Out: ${outputSize.width} x ${outputSize.height}"),
+                      Text(
+                          "Fitted: ${fitted.destination.width} x ${fitted.destination.height}"),
+                      Text("Scale: $scale"),
+                    ],
+                  ),
+                // Paint all our canvas things
+                CustomPaint(
+                  size: fitted.destination,
+                  painter: TopoPainter(
+                    topogons: topogons.toList(),
+                    scale: scale,
+                  ),
                 ),
-              ),
-              // Labels can just be chips positioned correctly
-              if (labels)
-                ...topogons.expand((t) {
-                  return t.data.labels.map((l) {
-                    var text = l.text;
-                    if (text.isEmpty) {
-                      if (t.routeId != null) {
-                        final route = model.routesById[t.routeId.toString()]!;
-                        text = "${route.name} (${route.grade.raw})";
+                // Labels can just be chips positioned correctly
+                if (labels)
+                  ...topogons.expand((t) {
+                    return t.data.labels.map((l) {
+                      var text = l.text;
+                      if (text.isEmpty) {
+                        if (t.routeId != null) {
+                          final route = model.routesById[t.routeId.toString()]!;
+                          text = "${route.name} (${route.grade.raw})";
+                        }
                       }
-                    }
-                    return Positioned(
-                      top: l.point.y * scale,
-                      left: l.point.x * scale,
-                      child: ActionChip(
-                        label: Text(text, style: TextStyle(color: l.color)),
-                        backgroundColor: l.fill,
-                        onPressed: () {
-                          // TODO: Leaky, we know we're in a dialog??
-                          Navigator.of(context).pop();
-                          if (t.areaId != null) {
-                            model.setArea(t.areaId!);
-                          }
-                          if (t.boulderId != null) {
-                            model.setBoulder(t.boulderId!);
-                          }
-                          if (t.routeId != null) {
-                            model.setRoute(t.routeId!);
-                          }
-                        },
-                      ),
-                    );
-                  });
-                }),
-            ]);
+                      return Positioned(
+                        top: l.point.y * scale,
+                        left: l.point.x * scale,
+                        child: ActionChip(
+                          label: Text(text, style: TextStyle(color: l.color)),
+                          backgroundColor: l.fill,
+                          onPressed: () {
+                            // TODO: Leaky, we know we're in a dialog??
+                            Navigator.of(context).pop();
+                            if (t.areaId != null) {
+                              model.setArea(t.areaId!);
+                            }
+                            if (t.boulderId != null) {
+                              model.setBoulder(t.boulderId!);
+                            }
+                            if (t.routeId != null) {
+                              model.setRoute(t.routeId!);
+                            }
+                          },
+                        ),
+                      );
+                    });
+                  }),
+              ],
+            );
           },
         );
       },

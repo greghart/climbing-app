@@ -54,6 +54,7 @@ class Photos extends StatelessWidget {
                       model: model,
                       photo: photo,
                       labels: false,
+                      debug: false,
                       areaId: areaId,
                       boulderId: boulderId,
                       routeId: routeId,
@@ -139,23 +140,43 @@ class Photos extends StatelessWidget {
               ),
             );
           } else {
-            child = Column(
-              spacing: 8,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InteractiveViewer(
-                  minScale: 1,
-                  maxScale: 3,
-                  child: Topo(
-                    model: model,
-                    photo: photo,
-                    areaId: areaId,
-                    boulderId: boulderId,
-                    routeId: routeId,
+            child = LayoutBuilder(builder: (context, constraints) {
+              return Column(
+                spacing: 8,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: constraints.maxHeight - 48,
+                    child: Stack(
+                      children: [
+                        InteractiveViewer(
+                          minScale: 1,
+                          maxScale: 3,
+                          child: Topo(
+                            model: model,
+                            photo: photo,
+                            areaId: areaId,
+                            boulderId: boulderId,
+                            routeId: routeId,
+                          ),
+                        ),
+                        Positioned(
+                          right: -2,
+                          top: -9,
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.cancel,
+                              color: Colors.black.withValues(alpha: 0.5),
+                              size: 36,
+                            ),
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: GestureDetector(
+                  GestureDetector(
                     onHorizontalDragEnd: (details) {
                       if (details.primaryVelocity! > swipeSensitivity) {
                         // User swiped right , move left
@@ -165,49 +186,49 @@ class Photos extends StatelessWidget {
                         navigateRight();
                       }
                     },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        IconButton(
+                          splashRadius: 16.0,
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            navigateLeft();
+                          },
+                          icon: const Icon(
+                            Icons.arrow_left_rounded,
+                            size: 32.0,
+                          ),
+                        ),
+                        Row(
+                          spacing: 2,
+                          children: photos.mapIndexed((i, p) {
+                            return TabPageSelectorIndicator(
+                              backgroundColor: i == index
+                                  ? theme.colorScheme.secondary
+                                  : Colors.transparent,
+                              borderColor: theme.colorScheme.secondary,
+                              size: 12.0,
+                            );
+                          }).toList(),
+                        ),
+                        IconButton(
+                          splashRadius: 16.0,
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            navigateRight();
+                          },
+                          icon: const Icon(
+                            Icons.arrow_right_rounded,
+                            size: 32.0,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    IconButton(
-                      splashRadius: 16.0,
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        navigateLeft();
-                      },
-                      icon: const Icon(
-                        Icons.arrow_left_rounded,
-                        size: 32.0,
-                      ),
-                    ),
-                    Row(
-                      spacing: 2,
-                      children: photos.mapIndexed((i, p) {
-                        return TabPageSelectorIndicator(
-                          backgroundColor: i == index
-                              ? theme.colorScheme.secondary
-                              : Colors.transparent,
-                          borderColor: theme.colorScheme.secondary,
-                          size: 12.0,
-                        );
-                      }).toList(),
-                    ),
-                    IconButton(
-                      splashRadius: 16.0,
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        navigateRight();
-                      },
-                      icon: const Icon(
-                        Icons.arrow_right_rounded,
-                        size: 32.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            );
+                ],
+              );
+            });
           }
           return Dialog.fullscreen(
             child: child,

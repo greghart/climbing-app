@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         path: '/',
         // TODO: Move back
         // redirect: (_, __) => '/explorer',
-        redirect: (_, __) => '/explorer/boulders/1470',
+        redirect: (_, __) => '/explorer/boulders/1468',
       ),
       GoRoute(
           path: '/settings',
