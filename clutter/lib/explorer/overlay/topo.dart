@@ -35,15 +35,15 @@ class Topo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final topogons = photo.topo!.topogons.where(
-      (t) =>
-          (areaId == null || t.areaId == areaId) &&
-          (boulderId == null || t.boulderId == boulderId) &&
-          (routeId == null || t.routeId == routeId),
-    );
     return TopoSizer(
       photo: photo,
       builder: (BuildContext context, TopoSizeData data) {
+        final topogons = photo.topo!.topogons.where(
+          (t) =>
+              (areaId == null || t.areaId == areaId) &&
+              (boulderId == null || t.boulderId == boulderId) &&
+              (routeId == null || t.routeId == routeId),
+        );
         final photoWidget = ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: data.image,
