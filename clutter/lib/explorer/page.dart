@@ -51,6 +51,8 @@ class ExplorerPage extends StatelessWidget {
             search: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: MySearchBar(
+                autoFocus: false,
+                focusNode: FocusNode(),
                 hintText: "Search crag...",
                 onTap: () {
                   context.push('/search');
@@ -91,7 +93,7 @@ class _BackHandlerState extends State<BackHandler> {
   @override
   void initState() {
     super.initState();
-    BackButtonInterceptor.add(myInterceptor);
+    BackButtonInterceptor.add(myInterceptor, context: context);
   }
 
   @override
@@ -101,7 +103,9 @@ class _BackHandlerState extends State<BackHandler> {
   }
 
   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    if (ModalRoute.of(context)?.isCurrent == true) return false;
+    // Only intercept when still on explorer page
+    if (info.ifRouteChanged(context)) return false;
+
     return context.read<ExplorerModel>().popRouteStack();
   }
 
