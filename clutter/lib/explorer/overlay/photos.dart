@@ -147,7 +147,8 @@ class Photos extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
-                    height: constraints.maxHeight - 48,
+                    height: constraints.maxHeight -
+                        56, // 48 (size of buttons) + 8 spacing
                     child: Stack(
                       children: [
                         InteractiveViewer(

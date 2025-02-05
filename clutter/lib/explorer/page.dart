@@ -101,6 +101,7 @@ class _BackHandlerState extends State<BackHandler> {
   }
 
   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    if (ModalRoute.of(context)?.isCurrent == true) return false;
     return context.read<ExplorerModel>().popRouteStack();
   }
 
