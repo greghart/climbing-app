@@ -42,40 +42,74 @@ class ExplorerPage extends StatelessWidget {
           ),
         ),
       ],
-      child: BackHandler(
+      child: const BackHandler(
         child: SafeArea(
           child: ExplorerLayout(
-            map: const MyMap(
+            map: MyMap(
               child: MapBuilder(),
             ),
             search: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: MySearchBar(
-                autoFocus: false,
-                focusNode: FocusNode(),
-                hintText: "Search crag...",
-                onTap: () {
-                  context.push('/search');
-                },
-                leading: Builder(builder: (context) {
-                  return IconButton(
-                    onPressed: () {
-                      Scaffold.of(context).openDrawer();
-                    },
-                    icon: const Icon(Icons.menu),
-                  );
-                }),
-                trailing: const [
-                  LayersMenu(),
-                ],
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: ExplorerSearchBar(),
             ),
-            overlay: const OverlaySheet(
+            overlay: OverlaySheet(
               sliver: OverlayBuilder(),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+// Search bar that shouldn't focus or activate keyboard!
+class ExplorerSearchBar extends StatefulWidget {
+  const ExplorerSearchBar({
+    super.key,
+  });
+
+  @override
+  State<ExplorerSearchBar> createState() => _ExplorerSearchBarState();
+}
+
+class _ExplorerSearchBarState extends State<ExplorerSearchBar> {
+  late FocusNode myFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+
+    myFocusNode = FocusNode(canRequestFocus: false);
+  }
+
+  @override
+  void dispose() {
+    myFocusNode.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MySearchBar(
+      autoFocus: false,
+      focusNode: myFocusNode,
+      hintText: "Search crag...",
+      onTap: () {
+        context.push('/search');
+        myFocusNode.unfocus();
+      },
+      leading: Builder(builder: (context) {
+        return IconButton(
+          onPressed: () {
+            Scaffold.of(context).openDrawer();
+          },
+          icon: const Icon(Icons.menu),
+        );
+      }),
+      trailing: const [
+        LayersMenu(),
+      ],
     );
   }
 }
