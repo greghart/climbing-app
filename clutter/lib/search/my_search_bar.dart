@@ -13,5 +13,6 @@ class MySearchBar extends SearchBar {
     super.leading,
     super.onChanged,
     super.trailing,
+    super.focusNode,
   });
 }

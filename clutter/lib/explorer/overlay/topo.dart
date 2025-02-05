@@ -1,11 +1,11 @@
-import 'dart:async';
 import 'dart:math' as math;
-import 'dart:ui' as ui;
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import '../../entities/index.dart' as entities;
 import '../model.dart';
+import 'topo_sizer.dart';
 
 /// Topo widget, likely shown as a full screen dialog, with a photo
 /// and drawn lines on top
@@ -35,77 +35,63 @@ class Topo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // If this photo has a topo, show all the topogons!
-    final img = Image.asset(
-      "assets/photos/${photo.upload!.key}",
-      fit: BoxFit.contain,
-      alignment: Alignment.center,
-    );
-    if (photo.topo == null) {
-      return img;
-    }
     final topogons = photo.topo!.topogons.where(
       (t) =>
           (areaId == null || t.areaId == areaId) &&
           (boulderId == null || t.boulderId == boulderId) &&
           (routeId == null || t.routeId == routeId),
     );
-    Completer<ui.Image> completer = Completer<ui.Image>();
-    img.image.resolve(const ImageConfiguration()).addListener(
-        ImageStreamListener(
-            (ImageInfo info, bool _) => completer.complete(info.image)));
-    return LayoutBuilder(
-      // With constraints, we can predict what size our image will be based on its' aspect
-      // ratio and `BoxFit.contain` fitting
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final outputSize = Size(constraints.maxWidth, constraints.maxHeight);
-        return FutureBuilder<ui.Image>(
-          future: completer.future,
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return const SizedBox(
-                  width: 25, height: 25, child: LinearProgressIndicator());
-            }
-            final imgSize = Size(snapshot.data!.width.toDouble(),
-                snapshot.data!.height.toDouble());
-            final fitted = applyBoxFit(BoxFit.contain, imgSize, outputSize);
-            final aspectImg = snapshot.data!.width / snapshot.data!.height;
-            final aspectCanvas = outputSize.width / outputSize.height;
-            // Scale it down to fit. The image in app is scaled, and then the topo was scaled as well
-            final currentScale = math.min(
-              aspectCanvas > aspectImg
-                  ? outputSize.height / snapshot.data!.height
-                  : outputSize.width / snapshot.data!.width,
-              1,
-            );
-            final scale = // times 4 because we down size all images by 4x into app
-                currentScale / (photo.topo!.scale * 4);
+    return TopoSizer(
+      photo: photo,
+      builder: (BuildContext context, TopoSizeData data) {
+        final photoWidget = ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: data.image,
+        );
+        final debugWidget = Column(
+          children: [
+            Text("Img: ${data.imageSize.width} x ${data.imageSize.height}"),
+            Text("Out: ${data.outSize.width} x ${data.outSize.height}"),
+            Text(
+                "Fitted: ${data.fittedSize.width} x ${data.fittedSize.height}"),
+            Text("Scale: ${data.scale}"),
+          ],
+        );
+        handleTopogonRoute(entities.Topogon t) {
+          Navigator.of(context).pop();
+          if (t.areaId != null) {
+            model.setArea(t.areaId!);
+          }
+          if (t.boulderId != null) {
+            model.setBoulder(t.boulderId!);
+          }
+          if (t.routeId != null) {
+            model.setRoute(t.routeId!);
+          }
+        }
 
-            return Stack(
+        final paintWidget = CustomPaint(
+          size: data.fittedSize,
+          painter: TopoPainter(
+            topogons: topogons.toList(),
+            scale: data.scale,
+          ),
+        );
+
+        // In certain cases, we may not want to put labels onto photo
+        // If there's not much room (low scale, lots of topogons), we can try putting labels under
+        final separateLabels =
+            data.scale <= 0.5 && labels == true && topogons.length > 5;
+        if (!separateLabels) {
+          return InteractiveViewer(
+            minScale: 1,
+            maxScale: 3,
+            child: Stack(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: img,
-                ),
-                if (debug)
-                  Column(
-                    children: [
-                      Text(
-                          "Img: ${snapshot.data!.width} x ${snapshot.data!.height}"),
-                      Text("Out: ${outputSize.width} x ${outputSize.height}"),
-                      Text(
-                          "Fitted: ${fitted.destination.width} x ${fitted.destination.height}"),
-                      Text("Scale: $scale"),
-                    ],
-                  ),
+                photoWidget,
+                if (debug) debugWidget,
                 // Paint all our canvas things
-                CustomPaint(
-                  size: fitted.destination,
-                  painter: TopoPainter(
-                    topogons: topogons.toList(),
-                    scale: scale,
-                  ),
-                ),
+                paintWidget,
                 // Labels can just be chips positioned correctly
                 if (labels)
                   ...topogons.expand((t) {
@@ -118,31 +104,73 @@ class Topo extends StatelessWidget {
                         }
                       }
                       return Positioned(
-                        top: l.point.y * scale,
-                        left: l.point.x * scale,
+                        top: l.point.y * data.scale,
+                        left: l.point.x * data.scale,
                         child: ActionChip(
                           label: Text(text, style: TextStyle(color: l.color)),
                           backgroundColor: l.fill,
-                          onPressed: () {
-                            // TODO: Leaky, we know we're in a dialog??
-                            Navigator.of(context).pop();
-                            if (t.areaId != null) {
-                              model.setArea(t.areaId!);
-                            }
-                            if (t.boulderId != null) {
-                              model.setBoulder(t.boulderId!);
-                            }
-                            if (t.routeId != null) {
-                              model.setRoute(t.routeId!);
-                            }
-                          },
+                          onPressed: () => handleTopogonRoute(t),
                         ),
                       );
                     });
                   }),
               ],
-            );
-          },
+            ),
+          );
+        }
+        final theme = Theme.of(context);
+        return Column(
+          children: [
+            SizedBox(
+              width: data.fittedSize.width,
+              height: data.fittedSize.height,
+              child: InteractiveViewer(
+                minScale: 1,
+                maxScale: 3,
+                child: Stack(
+                  children: [
+                    photoWidget,
+                    if (debug) debugWidget,
+                    paintWidget,
+                  ],
+                ),
+              ),
+            ),
+            SizedBox.fromSize(
+              size: Size(
+                data.outSize.width,
+                data.outSize.height - data.fittedSize.height,
+              ),
+              child: ListView(
+                children: topogons
+                    .sorted((a, b) => a.data.labels[0].point.x
+                        .compareTo(b.data.labels[0].point.x))
+                    .map((t) {
+                  var text = "";
+                  if (t.routeId != null) {
+                    final route = model.routesById[t.routeId.toString()]!;
+                    text = "${route.name} (${route.grade.raw})";
+                  }
+                  Color color = theme.colorScheme.onPrimary;
+                  Color fill = theme.colorScheme.primary;
+                  if (t.data.labels.isNotEmpty) {
+                    color = t.data.labels[0].color;
+                    fill = t.data.labels[0].fill;
+                  }
+                  return ListTile(
+                    dense: true,
+                    tileColor: fill,
+                    onTap: () => handleTopogonRoute(t),
+                    trailing: const Icon(Icons.navigate_next),
+                    title: Text(
+                      text,
+                      style: theme.textTheme.bodyMedium!.copyWith(color: color),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
         );
       },
     );

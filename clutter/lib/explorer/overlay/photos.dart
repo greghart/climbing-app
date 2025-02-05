@@ -101,6 +101,19 @@ class Photos extends StatelessWidget {
             showTopoDialog(context, photos[index], index, model);
           }
 
+          final exitButton = Positioned(
+            right: -2,
+            top: -9,
+            child: IconButton(
+              icon: Icon(
+                Icons.cancel,
+                color: Colors.black.withValues(alpha: 0.5),
+                size: 36,
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          );
+
           Widget? child;
           if (settings.wideImages) {
             // Row gives infinite width constraint to topo, which means we will only
@@ -120,12 +133,17 @@ class Photos extends StatelessWidget {
                     tooltip: "Left",
                     icon: const Icon(Icons.arrow_left),
                   ),
-                  Topo(
-                    model: model,
-                    photo: photo,
-                    areaId: areaId,
-                    boulderId: boulderId,
-                    routeId: routeId,
+                  Stack(
+                    children: [
+                      Topo(
+                        model: model,
+                        photo: photo,
+                        areaId: areaId,
+                        boulderId: boulderId,
+                        routeId: routeId,
+                      ),
+                      exitButton
+                    ],
                   ),
                   IconButton(
                     padding: EdgeInsets.zero,
@@ -151,29 +169,14 @@ class Photos extends StatelessWidget {
                         56, // 48 (size of buttons) + 8 spacing
                     child: Stack(
                       children: [
-                        InteractiveViewer(
-                          minScale: 1,
-                          maxScale: 3,
-                          child: Topo(
-                            model: model,
-                            photo: photo,
-                            areaId: areaId,
-                            boulderId: boulderId,
-                            routeId: routeId,
-                          ),
+                        Topo(
+                          model: model,
+                          photo: photo,
+                          areaId: areaId,
+                          boulderId: boulderId,
+                          routeId: routeId,
                         ),
-                        Positioned(
-                          right: -2,
-                          top: -9,
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.cancel,
-                              color: Colors.black.withValues(alpha: 0.5),
-                              size: 36,
-                            ),
-                            onPressed: () => Navigator.of(context).pop(),
-                          ),
-                        ),
+                        exitButton,
                       ],
                     ),
                   ),
