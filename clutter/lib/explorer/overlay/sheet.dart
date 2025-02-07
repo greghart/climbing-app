@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../model.dart';
+import '../tutorial.dart';
 
 /// OverlaySheet is a DraggableScrollableSheet that works on both
 /// mobile and desktop, showing just a preview of the current view
@@ -56,6 +57,7 @@ class _OverlaySheetState extends State<OverlaySheet> {
       snapSizes: const [minPosition, 0.5, maxPosition],
       builder: (BuildContext context, ScrollController scrollController) {
         return ColoredBox(
+          key: explorerOverlayKey,
           color: colorScheme.surfaceBright,
           child: Column(
             children: [

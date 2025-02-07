@@ -10,7 +10,12 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
       final crag = Data(await rootBundle.loadString("assets/santee.json")).crag;
       expect(crag.name, equals("Santee"));
-      expect(crag.description, equals("It's not great, but it is Santee"));
+      expect(
+        crag.description,
+        equals(
+          "Welcome to Santee, your local slab and crack training mecca.",
+        ),
+      );
       expect(crag.bounds, isNotNull);
       expect(
           crag.center,

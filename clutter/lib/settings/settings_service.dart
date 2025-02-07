@@ -27,4 +27,10 @@ class SettingsService {
 
   Future<void> updateWideImages(bool b) async =>
       await prefs.setBool("wideImages", b);
+
+  Future<bool> explorerTutorial() async =>
+      await prefs.getBool("explorerTutorial") ?? true;
+
+  Future<void> updateExplorerTutorial(bool b) async =>
+      await prefs.setBool("explorerTutorial", b);
 }

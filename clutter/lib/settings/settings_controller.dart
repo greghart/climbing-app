@@ -13,23 +13,23 @@ class SettingsController with ChangeNotifier {
   // Make SettingsService a private variable so it is not used directly.
   final SettingsService _settingsService;
 
-  // Make ThemeMode a private variable so it is not updated directly without
-  // also persisting the changes with the SettingsService.
-  late ThemeMode _themeMode = ThemeMode.dark;
+  /// Load the user's settings from the SettingsService. It may load from a
+  /// local database or the internet. The controller only knows it can load the
+  /// settings from the service.
+  Future<void> loadSettings() async {
+    _themeMode = await _settingsService.themeMode();
+    _cozyCompass = await _settingsService.cozyCompass();
+    _wideImages = await _settingsService.wideImages();
+    _explorerTutorial = await _settingsService.explorerTutorial();
+    print("Set explorer tutorial to $_explorerTutorial");
 
-  // Allow Widgets to read the user's preferred ThemeMode.
-  ThemeMode get themeMode => _themeMode;
-
-  late bool _cozyCompass = false;
+    // Important! Inform listeners a change has occurred.
+    notifyListeners();
+  }
 
   // Whether to use the small cozy compass in breadcrumbs
+  late bool _cozyCompass = false;
   bool get cozyCompass => _cozyCompass;
-
-  late bool _wideImages = false;
-
-  // Whether to let images widen out past screen size
-  bool get wideImages => _wideImages;
-
   Future<void> updateCozyCompass(bool? b) async {
     if (b == null || b == _cozyCompass) return;
 
@@ -38,6 +38,10 @@ class SettingsController with ChangeNotifier {
 
     await _settingsService.updateCozyCompass(b);
   }
+
+  // Whether to let images widen out past screen size
+  late bool _wideImages = false;
+  bool get wideImages => _wideImages;
 
   Future<void> updateWideImages(bool? b) async {
     if (b == null || b == _wideImages) return;
@@ -48,17 +52,27 @@ class SettingsController with ChangeNotifier {
     await _settingsService.updateWideImages(b);
   }
 
-  /// Load the user's settings from the SettingsService. It may load from a
-  /// local database or the internet. The controller only knows it can load the
-  /// settings from the service.
-  Future<void> loadSettings() async {
-    _themeMode = await _settingsService.themeMode();
-    _cozyCompass = await _settingsService.cozyCompass();
-    _wideImages = await _settingsService.wideImages();
+  // Whether to show the explorer tutorial
+  late bool _explorerTutorial = true;
+  bool get explorerTutorial => _explorerTutorial;
+  Future<void> updateExplorerTutorial(bool? b) async {
+    if (b == null || b == _explorerTutorial) return;
 
-    // Important! Inform listeners a change has occurred.
+    _explorerTutorial = b;
     notifyListeners();
+
+    await _settingsService.updateExplorerTutorial(b);
   }
+
+  Future<void> resetTutorials() async {
+    await updateExplorerTutorial(true);
+  }
+
+  // Allow Widgets to read the user's preferred ThemeMode.
+  // @note Make ThemeMode a private variable so it is not updated directly without
+  // also persisting the changes with the SettingsService.
+  late ThemeMode _themeMode = ThemeMode.dark;
+  ThemeMode get themeMode => _themeMode;
 
   /// Update and persist the ThemeMode based on the user's selection.
   Future<void> updateThemeMode(ThemeMode? newThemeMode) async {

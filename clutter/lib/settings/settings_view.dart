@@ -84,6 +84,23 @@ class SettingsView extends StatelessWidget {
                 ),
               ],
             ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Reset tutorial", style: theme.textTheme.labelLarge),
+                Text(
+                  "Reset the tutorial so it displays again next time you open the app (may need to restar the app)",
+                  style: theme.textTheme.labelSmall,
+                ),
+                FilledButton(
+                  style: const ButtonStyle(
+                    visualDensity: VisualDensity.compact,
+                  ),
+                  onPressed: () => settings.resetTutorials(),
+                  child: const Text("Reset"),
+                ),
+              ],
+            ),
           ],
         ),
       ),

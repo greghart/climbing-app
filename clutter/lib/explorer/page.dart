@@ -18,6 +18,7 @@ import 'overlay/boulder.dart';
 import 'overlay/crag.dart';
 import 'overlay/route.dart';
 import 'overlay/sheet.dart';
+import 'tutorial.dart';
 
 class ExplorerPage extends StatelessWidget {
   const ExplorerPage({
@@ -92,6 +93,7 @@ class _ExplorerSearchBarState extends State<ExplorerSearchBar> {
   @override
   Widget build(BuildContext context) {
     return MySearchBar(
+      key: explorerSearchBarKey,
       autoFocus: false,
       focusNode: myFocusNode,
       hintText: "Search crag...",
@@ -101,14 +103,15 @@ class _ExplorerSearchBarState extends State<ExplorerSearchBar> {
       },
       leading: Builder(builder: (context) {
         return IconButton(
+          key: explorerSearchBarHamburgerKey,
           onPressed: () {
             Scaffold.of(context).openDrawer();
           },
           icon: const Icon(Icons.menu),
         );
       }),
-      trailing: const [
-        LayersMenu(),
+      trailing: [
+        LayersMenu(key: explorerSearchBarLayersKey),
       ],
     );
   }

@@ -23,6 +23,7 @@ dependencies:
   fl_chart: ^0.70.0
   shared_preferences: ^2.3.5
   back_button_interceptor: ^8.0.3
+  tutorial_coach_mark: ^1.2.12
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'tutorial.dart';
+
 /// Layout for the explorer page.
 class ExplorerLayout extends StatelessWidget {
   const ExplorerLayout({
@@ -28,6 +30,7 @@ class ExplorerLayout extends StatelessWidget {
             child: Center(child: search),
           ),
           overlay,
+          const Tutorial(),
         ],
       ),
       drawer: Drawer(
