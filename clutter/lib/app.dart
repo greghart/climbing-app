@@ -45,7 +45,6 @@ class MyApp extends StatelessWidget {
       // Once initialized, all "routing" is done internal to the explorer widgets,
       // to ensure map widget is kept alive. After this, routing will just
       // serve to update the state and sync navigation.
-      // TODO: Somehow use route stack or intercept back button to support "back".
       GoRoute(
         path: '/explorer',
         pageBuilder: (BuildContext context, GoRouterState state) {

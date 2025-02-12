@@ -23,7 +23,7 @@ class OverlaySheet extends StatefulWidget {
 }
 
 class _OverlaySheetState extends State<OverlaySheet> {
-  static const double minPosition = 0.2;
+  static const double minPosition = 0.01;
   static const double maxPosition = 0.7;
   static const double _dragSensitivity = 600;
   late double _sheetPosition;
@@ -54,7 +54,7 @@ class _OverlaySheetState extends State<OverlaySheet> {
       minChildSize: minPosition,
       maxChildSize: maxPosition,
       snap: true,
-      snapSizes: const [minPosition, 0.5, maxPosition],
+      snapSizes: const [0.2, 0.5, maxPosition],
       builder: (BuildContext context, ScrollController scrollController) {
         return ColoredBox(
           key: explorerOverlayKey,

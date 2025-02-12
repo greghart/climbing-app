@@ -38,6 +38,16 @@ class _TutorialState extends State<Tutorial> {
     final screenSize = MediaQuery.of(context).size;
     final targets = [
       MyTargetFocus(
+        identify: "Welcome",
+        keyTarget: explorerSearchBarKey,
+        title: "Welcome to Boulder Buddy Santee",
+        description: """
+This is an open source app to help explore the boulders of Santee. Split up into areas, boulders, and routes, we hope you'll find this a useful tool to guide your next sesh. 
+
+This tutorial will guide you through the app, but feel free to skip. You can always reset this tutorial in the settings.
+""",
+      ),
+      MyTargetFocus(
         identify: "Search",
         keyTarget: explorerSearchBarKey,
         title: "Search Bar",
@@ -173,19 +183,22 @@ class MyTargetFocus extends TargetFocus {
     super.enableOverlayTab = true,
     super.shape = ShapeLightFocus.RRect,
     super.alignSkip = Alignment.bottomRight,
-    required this.title,
-    required this.description,
+    // Either provide title, desc, alignment, or contents manually
+    this.title = "TITLE",
+    this.description = "DESCRIPTION",
     this.align = ContentAlign.bottom,
+    List<TargetContent>? contents,
   }) : super(
-          contents: [
-            TargetContent(
-              align: align,
-              child: TutorialEntry(
-                title: title,
-                description: description,
-              ),
-            )
-          ],
+          contents: contents ??
+              [
+                TargetContent(
+                  align: align,
+                  child: TutorialEntry(
+                    title: title,
+                    description: description,
+                  ),
+                )
+              ],
         );
 
   final String title;

@@ -33,21 +33,20 @@ class MyMap extends StatelessWidget {
             )),
         children: [
           const BestTileLayer(),
+          CurrentLocation(crag: crag),
+          TrailsLayer(crag: crag),
+          const SunLayer(),
+          child,
           const RichAttributionWidget(
             // Include a stylish prebuilt attribution widget that meets all requirments
-            // TODO: Add a valid attribution
             attributions: [
               TextSourceAttribution(
-                'OpenStreetMap contributors',
+                'Esri, Maxar, Earthstar Geographics, and the GIS User Community',
                 // onTap: () => launchUrl(Uri.parse(
                 //     'https://openstreetmap.org/copyright')), // (external)
               ),
             ],
           ),
-          CurrentLocation(crag: crag),
-          TrailsLayer(crag: crag),
-          const SunLayer(),
-          child,
         ].whereType<Widget>().toList());
   }
 }
