@@ -1,5 +1,5 @@
 name: clutter
-description: "A new Flutter project."
+description: "A free and open source guide for Santee boulders."
 
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
@@ -25,6 +25,7 @@ dependencies:
   back_button_interceptor: ^8.0.3
   tutorial_coach_mark: ^1.2.12
   url_launcher: ^6.3.1
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   flutter_test:

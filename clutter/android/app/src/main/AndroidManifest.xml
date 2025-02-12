@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="clutter"
+        android:label="Santee Buddy"
         android:name="${applicationName}"
         android:enableOnBackInvokedCallback="false"
         android:icon="@mipmap/ic_launcher">

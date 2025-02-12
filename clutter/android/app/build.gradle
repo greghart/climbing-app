@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.clutter"
+    namespace = "io.github.greghart.clutter"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
