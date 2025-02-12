@@ -1,6 +1,6 @@
 {
-  "appTitle": "clutter",
+  "appTitle": "Santee Boulders",
   "@appTitle": {
-    "description": "The title of the application"
+    "description": "A free and open source guide for Santee boulders."
   }
 }
