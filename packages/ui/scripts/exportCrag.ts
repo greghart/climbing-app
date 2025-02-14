@@ -15,7 +15,7 @@ export default async function exportCrag(id: number) {
   const _crag = resolveCrag(
     await ds.getRepository(CragSchema).findOne({
       where: { id },
-      relations: ["areas", "trail", "trail.lines", "photoable"],
+      relations: ["areas", "trail", "trail.lines", "photoable", "parking"],
     })
   );
   if (!_crag) {

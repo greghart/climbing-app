@@ -67,6 +67,11 @@ const CragSchema = new EntitySchema<Crag>({
       onDelete: "SET NULL",
       cascade: ["insert", "update"],
     },
+    parking: {
+      type: "one-to-one",
+      target: "parking",
+      inverseSide: "crag",
+    },
   },
   embeddeds: {
     center: {

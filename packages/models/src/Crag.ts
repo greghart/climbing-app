@@ -1,8 +1,9 @@
 import Area, { type IArea } from "./Area.js";
 import Bounds, { type IBounds } from "./Bounds.js";
-import type { ICommentable } from "./Commentable.js";
+import { type ICommentable } from "./Commentable.js";
 import Coordinate, { type ICoordinate } from "./Coordinate.js";
-import type { IPhotoable } from "./Photoable.js";
+import Parking, { type IParking } from "./Parking.js";
+import { type IPhotoable } from "./Photoable.js";
 import Trail, { type ITrail } from "./Trail.js";
 
 export interface ICrag {
@@ -18,21 +19,24 @@ export interface ICrag {
   maxZoom?: number;
 
   // Associations
+  parking?: IParking;
   areas?: IArea[];
   commentable?: ICommentable;
   photoable?: IPhotoable;
   trail?: ITrail;
 }
 
-interface Crag extends Omit<ICrag, "center"> {}
+interface Crag extends Omit<ICrag, "center" | "parking"> {}
 class Crag {
-  bounds?: Bounds;
-  center: Coordinate; // We map embedded entities with nullable columns to a nullable property.
+  bounds?: Bounds; // We map embedded entities with nullable columns to a nullable property.
+  parking?: Parking;
+  center: Coordinate;
   areas: Area[];
   trail?: Trail;
 
   static build(data: ICrag) {
     if (data instanceof Crag) return data;
+
     return new Crag(data);
   }
 
@@ -46,6 +50,9 @@ class Crag {
     this.areas = (data.areas || []).map((area) => new Area(area));
     if (data.trail) {
       this.trail = new Trail(data.trail);
+    }
+    if (data.parking) {
+      this.parking = new Parking(data.parking);
     }
 
     this.defaultZoom = data.defaultZoom;

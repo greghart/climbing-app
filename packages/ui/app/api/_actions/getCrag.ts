@@ -17,6 +17,7 @@ const getCrag = cache(async (id: number | string) => {
         "areas.boulders.routes",
         "areas.polygon",
         "areas.polygon.coordinates",
+        "parking",
       ],
       order: {
         areas: {

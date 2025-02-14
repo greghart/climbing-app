@@ -24,6 +24,7 @@ export {
   type IGrade,
 } from "./Grade.js";
 export { default as Line, type ILine } from "./Line.js";
+export { default as Parking, type IParking } from "./Parking.js";
 export { default as Photo, type IPhoto } from "./Photo.js";
 export { default as Photoable, type IPhotoable } from "./Photoable.js";
 export { default as Polygon, type IPolygon } from "./Polygon.js";

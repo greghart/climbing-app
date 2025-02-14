@@ -4,6 +4,7 @@ import { ICrag } from "models";
 import { cache } from "react";
 import "server-only";
 
+// Separated out for performance.
 const getCragTrail = cache(async (id: number) => {
   const ds = await getDataSource();
   return ds

@@ -17,7 +17,7 @@ interface Props<Meta> {
   meta: Meta;
 }
 
-export default function CragForm<Meta>(props: Props<Meta>) {
+export default function TrailForm<Meta>(props: Props<Meta>) {
   const crag = new Crag(props.crag);
   const [state, formAction, meta] = useActionState(updateCrag, {
     ok: true,
