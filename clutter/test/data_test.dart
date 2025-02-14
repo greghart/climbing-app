@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('Data loading', () {
     test('should load crag json successfully', () async {
-      WidgetsFlutterBinding.ensureInitialized();
+      WidgetsFlutterBinding.ensureInitialized(); // initialize asset loaders
       final crag = Data(await rootBundle.loadString("assets/santee.json")).crag;
       expect(crag.name, equals("Santee"));
       expect(

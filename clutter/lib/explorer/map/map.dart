@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../entities/crag.dart';
 import '../current_location.dart';
@@ -37,13 +38,16 @@ class MyMap extends StatelessWidget {
           TrailsLayer(crag: crag),
           const SunLayer(),
           child,
-          const RichAttributionWidget(
+          RichAttributionWidget(
             // Include a stylish prebuilt attribution widget that meets all requirments
             attributions: [
               TextSourceAttribution(
                 'Esri, Maxar, Earthstar Geographics, and the GIS User Community',
-                // onTap: () => launchUrl(Uri.parse(
-                //     'https://openstreetmap.org/copyright')), // (external)
+                onTap: () => launchUrl(
+                  Uri.parse(
+                    'https://www.arcgis.com/home/item.html?id=226d23f076da478bba4589e7eae95952',
+                  ),
+                ), // (external)
               ),
             ],
           ),

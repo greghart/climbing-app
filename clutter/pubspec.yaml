@@ -24,6 +24,7 @@ dependencies:
   shared_preferences: ^2.3.5
   back_button_interceptor: ^8.0.3
   tutorial_coach_mark: ^1.2.12
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:

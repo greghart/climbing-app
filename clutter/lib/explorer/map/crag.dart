@@ -89,6 +89,22 @@ class _CragMapState extends State<CragMap> {
                   ...?_hoverGons,
                 ],
               ),
+            if (crag.parking != null)
+              MarkerLayer(
+                markers: [
+                  Marker(
+                    width: 40,
+                    height: 40,
+                    point: crag.parking!.location,
+                    child: const Icon(
+                      Icons.local_parking,
+                      fill: 1.0,
+                      size: 40,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ],
+              ),
             AnimateTo(
               mapController: MapController.of(context),
               latLng: crag.center,

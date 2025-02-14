@@ -5,6 +5,7 @@ import '../../entities/crag.dart';
 import '../model.dart';
 import 'difficulty_chart.dart';
 import 'difficulty_span.dart';
+import 'directions.dart';
 import 'layout.dart';
 import 'photos.dart';
 
@@ -22,31 +23,38 @@ class CragOverlay extends StatelessWidget {
       title: crag.name,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 8,
         children: [
-          Container(
-            padding: const EdgeInsets.only(bottom: 8, top: 8),
-            child: Text(
-              crag.description!,
-              style: theme.textTheme.bodyMedium,
-            ),
+          Text(
+            crag.description!,
+            style: theme.textTheme.bodyMedium,
           ),
           Photos(photos: crag.photos),
           DiagramsLayout(
             chart: DifficultyChartCard(breakdown: crag.difficultyBreakdown),
           ),
           Text(
+            "Directions & Parking",
+            style: theme.textTheme.headlineSmall,
+          ),
+          Directions(crag: crag),
+          Text(
             "Areas",
             style: theme.textTheme.headlineSmall,
           ),
-          for (final area in crag.areas)
-            ListTile(
-              onTap: () => context.read<ExplorerModel>().setArea(area.id),
-              trailing: const Icon(Icons.navigate_next),
-              title: DifficultyBreakdownSpan(
-                text: area.name,
-                breakdown: area.difficultyBreakdown,
-              ),
-            )
+          Column(
+            children: [
+              for (final area in crag.areas)
+                ListTile(
+                  onTap: () => context.read<ExplorerModel>().setArea(area.id),
+                  trailing: const Icon(Icons.navigate_next),
+                  title: DifficultyBreakdownSpan(
+                    text: area.name,
+                    breakdown: area.difficultyBreakdown,
+                  ),
+                )
+            ],
+          ),
         ],
       ),
     );

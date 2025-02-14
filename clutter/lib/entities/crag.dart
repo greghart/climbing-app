@@ -2,6 +2,7 @@ import 'area.dart';
 import 'bounds.dart';
 import 'coordinate.dart';
 import 'difficulty_breakdown.dart';
+import 'parking.dart';
 import 'photo.dart';
 import 'trail.dart';
 import 'types.dart';
@@ -19,6 +20,7 @@ class Crag {
   final Trail? trail;
   final DifficultyBreakdown difficultyBreakdown;
   final List<Photo> photos;
+  final Parking? parking;
 
   Crag({
     required this.id,
@@ -31,6 +33,7 @@ class Crag {
     required this.maxZoom,
     required this.areas,
     required this.photos,
+    required this.parking,
     this.trail,
   }) : difficultyBreakdown = DifficultyBreakdown(areas
             .map(
@@ -57,6 +60,7 @@ class Crag {
           'areas': List<dynamic> areas,
           'trail': JsonObject? trail,
           'photos': List photos,
+          'parking': JsonObject? parking,
         }) {
       return Crag(
         id: id,
@@ -70,6 +74,7 @@ class Crag {
         areas: areas.map((area) => Area.fromJson(area)).toList(),
         trail: trail != null ? Trail.fromJson(trail) : null,
         photos: photos.map((photo) => Photo.fromJson(photo)).toList(),
+        parking: parking != null ? Parking.fromJson(parking) : null,
       );
     }
     throw JSONException("Crag", json);
