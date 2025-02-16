@@ -31,11 +31,14 @@ class SearchResults extends StatelessWidget {
           onTap: () {
             switch (state.results[index].type) {
               case SearchType.area:
-                context.push('/explorer/areas/${state.results[index].id}');
+                context.pushReplacement(
+                    '/explorer/areas/${state.results[index].id}');
               case SearchType.boulder:
-                context.push('/explorer/boulders/${state.results[index].id}');
+                context.pushReplacement(
+                    '/explorer/boulders/${state.results[index].id}');
               case SearchType.route:
-                context.push('/explorer/routes/${state.results[index].id}');
+                context.pushReplacement(
+                    '/explorer/routes/${state.results[index].id}');
               default:
                 throw Exception(
                     'Unknown search result type ${state.results[index].type} (${state.results[index].id})');

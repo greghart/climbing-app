@@ -5,12 +5,12 @@ import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 import '../settings/settings_controller.dart';
 
 // Declare unique keys for our tutorial targets
-final explorerSearchBarKey = GlobalKey(debugLabel: 'explorer_search_bar');
+final explorerSearchBarKey = LabeledGlobalKey('explorer_search_bar');
 final explorerSearchBarHamburgerKey =
-    GlobalKey(debugLabel: 'explorer_search_bar_hamburger');
+    LabeledGlobalKey('explorer_search_bar_hamburger');
 final explorerSearchBarLayersKey =
-    GlobalKey(debugLabel: 'explorer_search_bar_layers');
-final explorerOverlayKey = GlobalKey(debugLabel: 'explorer_overlay');
+    LabeledGlobalKey('explorer_search_bar_layers');
+final explorerOverlayKey = LabeledGlobalKey('explorer_overlay');
 
 class Tutorial extends StatefulWidget {
   const Tutorial({super.key});
