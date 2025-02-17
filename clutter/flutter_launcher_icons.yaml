@@ -1,12 +1,12 @@
 # flutter pub run flutter_launcher_icons
 flutter_launcher_icons:
-  image_path: "assets/images/boulder_icon.svg.png"
+  image_path: "boulder_icon_large.png"
 
   android: true
   # image_path_android: "assets/icon/icon.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   adaptive_icon_background: "#FFFFFF"
-  adaptive_icon_foreground: "assets/images/boulder_icon.svg.png"
+  adaptive_icon_foreground: "boulder_icon_large.png"
   adaptive_icon_inset: 12
 
   ios: true

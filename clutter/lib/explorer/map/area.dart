@@ -63,7 +63,7 @@ class BouldersLayer extends StatelessWidget {
             onPressed: () => context.read<ExplorerModel>().setBoulder(b.id),
             tooltip: b.name,
             icon: Image.asset(
-              'assets/images/boulder_icon.svg.png',
+              'assets/images/boulder_icon.png',
               width: 40,
               height: 40,
               opacity: const AlwaysStoppedAnimation(0.8),
