@@ -161,6 +161,7 @@ class Topo extends StatelessWidget {
                         child: FilledButton(
                           style: FilledButton.styleFrom(
                             backgroundColor: rainbowColor.primaryContainer,
+                            visualDensity: VisualDensity.compact,
                           ),
                           onPressed: () => handleTopogonRoute(t),
                           child: Text(
