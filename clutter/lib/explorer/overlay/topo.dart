@@ -121,7 +121,7 @@ class Topo extends StatelessWidget {
         // In certain cases, we may not want to put labels onto photo
         // If there's not much room (low scale, lots of topogons), we can try putting labels underneath
         final separateLabels =
-            data.scale <= 0.5 && labels == true && topogons.length > 5;
+            data.scale <= 0.5 && labels == true && topogons.length > 4;
         final paintWidget = CustomPaint(
           size: data.fittedSize,
           painter: TopoPainter(
