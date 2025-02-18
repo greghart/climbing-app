@@ -7,6 +7,54 @@ import '../../entities/index.dart' as entities;
 import '../model.dart';
 import 'topo_sizer.dart';
 
+// Rainbow colors to use to help distinguish lots of routes on one boulder
+buildRainbowColor(Color c) {
+  return ColorScheme.fromSeed(
+    brightness: Brightness.light,
+    contrastLevel: 0.05,
+    seedColor: c,
+  );
+}
+
+final rainbow = [
+  buildRainbowColor(Colors.red),
+  buildRainbowColor(Colors.orange),
+  buildRainbowColor(Colors.yellow),
+  buildRainbowColor(Colors.green),
+  buildRainbowColor(Colors.blue),
+  buildRainbowColor(Colors.indigo),
+  buildRainbowColor(Colors.deepPurple),
+];
+
+const characters = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z'
+];
+
 /// Topo widget, likely shown as a full screen dialog, with a photo
 /// and drawn lines on top
 class Topo extends StatelessWidget {
@@ -70,23 +118,26 @@ class Topo extends StatelessWidget {
           }
         }
 
+        // In certain cases, we may not want to put labels onto photo
+        // If there's not much room (low scale, lots of topogons), we can try putting labels underneath
+        final separateLabels =
+            data.scale <= 0.5 && labels == true && topogons.length > 5;
         final paintWidget = CustomPaint(
           size: data.fittedSize,
           painter: TopoPainter(
             topogons: topogons.toList(),
             scale: data.scale,
+            separateLabels: separateLabels,
           ),
         );
 
-        // In certain cases, we may not want to put labels onto photo
-        // If there's not much room (low scale, lots of topogons), we can try putting labels under
-        final separateLabels =
-            data.scale <= 0.5 && labels == true && topogons.length > 5;
         if (!separateLabels) {
           return InteractiveViewer(
-            minScale: 1,
+            boundaryMargin: const EdgeInsets.all(40.0),
+            minScale: 0.8,
             maxScale: 3,
             child: Stack(
+              clipBehavior: Clip.none,
               children: [
                 photoWidget,
                 if (debug) debugWidget,
@@ -94,7 +145,8 @@ class Topo extends StatelessWidget {
                 paintWidget,
                 // Labels can just be chips positioned correctly
                 if (labels)
-                  ...topogons.expand((t) {
+                  ...topogons.expandIndexed((i, t) {
+                    ColorScheme rainbowColor = rainbow[i % rainbow.length];
                     return t.data.labels.map((l) {
                       var text = l.text;
                       if (text.isEmpty) {
@@ -106,10 +158,17 @@ class Topo extends StatelessWidget {
                       return Positioned(
                         top: l.point.y * data.scale,
                         left: l.point.x * data.scale,
-                        child: ActionChip(
-                          label: Text(text, style: TextStyle(color: l.color)),
-                          backgroundColor: l.fill,
+                        child: FilledButton(
+                          style: FilledButton.styleFrom(
+                            backgroundColor: rainbowColor.primaryContainer,
+                          ),
                           onPressed: () => handleTopogonRoute(t),
+                          child: Text(
+                            text,
+                            style: TextStyle(
+                              color: rainbowColor.onPrimaryContainer,
+                            ),
+                          ),
                         ),
                       );
                     });
@@ -125,7 +184,8 @@ class Topo extends StatelessWidget {
               width: data.fittedSize.width,
               height: data.fittedSize.height,
               child: InteractiveViewer(
-                minScale: 1,
+                boundaryMargin: const EdgeInsets.all(40.0),
+                minScale: 0.8,
                 maxScale: 3,
                 child: Stack(
                   children: [
@@ -142,29 +202,31 @@ class Topo extends StatelessWidget {
                 data.outSize.height - data.fittedSize.height,
               ),
               child: ListView(
-                children: topogons
-                    .sorted((a, b) => a.data.labels[0].point.x
-                        .compareTo(b.data.labels[0].point.x))
-                    .map((t) {
+                children: topogons.mapIndexed((i, t) {
                   var text = "";
                   if (t.routeId != null) {
                     final route = model.routesById[t.routeId.toString()]!;
                     text = "${route.name} (${route.grade.raw})";
                   }
-                  Color color = theme.colorScheme.onPrimary;
-                  Color fill = theme.colorScheme.primary;
-                  if (t.data.labels.isNotEmpty) {
-                    color = t.data.labels[0].color;
-                    fill = t.data.labels[0].fill;
-                  }
+                  Color color = rainbow[i % rainbow.length].onPrimaryContainer;
+                  Color fill = rainbow[i % rainbow.length].primaryContainer;
                   return ListTile(
                     dense: true,
                     tileColor: fill,
                     onTap: () => handleTopogonRoute(t),
                     trailing: const Icon(Icons.navigate_next),
-                    title: Text(
-                      text,
-                      style: theme.textTheme.bodyMedium!.copyWith(color: color),
+                    title: RichText(
+                      text: TextSpan(
+                        style:
+                            theme.textTheme.bodyMedium!.copyWith(color: color),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: "(${characters[i % characters.length]}) ",
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          TextSpan(text: text),
+                        ],
+                      ),
                     ),
                   );
                 }).toList(),
@@ -180,23 +242,28 @@ class Topo extends StatelessWidget {
 class TopoPainter extends CustomPainter {
   final List<entities.Topogon> topogons;
   final double scale;
+  // If we have separate labels, display a character circle (eg. 'A') at each route instead to help correlate, and use rainbow colors
+  final bool separateLabels;
 
   const TopoPainter({
     required this.topogons,
     required this.scale,
+    required this.separateLabels,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     // This code is loose for "perf" reasons, no I'm just lazy
-    for (var t in topogons) {
+    math.Point<double>? separateLabelPoint;
+    for (final (index, t) in topogons.indexed) {
+      ColorScheme rainbowColor = rainbow[index % rainbow.length];
       // Draw lines
       final linePaint = Paint()
         ..strokeWidth = 4
         ..strokeCap = StrokeCap.round
         ..style = PaintingStyle.stroke;
       for (var line in t.data.lines) {
-        linePaint.color = line.color;
+        linePaint.color = rainbowColor.primaryContainer;
         // Setup path
         final path = Path()
           ..moveTo(line.points[0].x * scale, line.points[0].y * scale);
@@ -232,6 +299,48 @@ class TopoPainter extends CustomPainter {
           }
         }
         canvas.drawPath(path, linePaint);
+      }
+    }
+
+    // All separate labels should be on top of any line
+    for (final (index, t) in topogons.indexed) {
+      ColorScheme rainbowColor = rainbow[index % rainbow.length];
+
+      // Add a character circle if separate labels to help correlate
+      if (separateLabels) {
+        final circlePaint = Paint()
+          ..color = rainbowColor.primaryContainer
+          ..style = PaintingStyle.fill;
+        final textPainter = TextPainter(
+          text: TextSpan(
+            text: characters[index % characters.length],
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: rainbowColor.onPrimaryContainer,
+              fontSize: 14,
+            ),
+          ),
+          textDirection: TextDirection.ltr,
+        )..layout();
+        var start = math.Point(
+          t.data.lines[0].points[0].x * scale,
+          t.data.lines[0].points[0].y * scale,
+        );
+        if (separateLabelPoint != null &&
+            start.distanceTo(separateLabelPoint) < 20) {
+          start = math.Point(start.x, start.y - 30);
+        }
+        canvas.drawCircle(Offset(start.x, start.y), 14, circlePaint);
+
+        textPainter.paint(
+          canvas,
+          Offset(
+            start.x - 6,
+            start.y - 7,
+          ),
+        );
+
+        separateLabelPoint = start;
       }
     }
   }

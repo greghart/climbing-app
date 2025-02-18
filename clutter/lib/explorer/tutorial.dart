@@ -75,8 +75,11 @@ This tutorial will guide you through the app, but feel free to skip. You can alw
           ),
         ),
         title: "Sun arrow",
-        description:
-            "The sun arrow displays the azimuth (direction of the sun along the horizon), and its' altitude (angle above horizon) is represented by how filled the length is",
+        description: """
+The sun arrow displays the azimuth (direction of the sun along the horizon), and its' altitude (angle above horizon) is represented by how filled the length is",
+
+Note, the sun arrow only shows up when the sun is out!
+""",
       ),
       MyTargetFocus(
         identify: "Overlay",

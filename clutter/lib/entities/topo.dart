@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 import 'topogon.dart';
 import 'types.dart';
 
@@ -25,7 +27,12 @@ class Topo {
       return Topo(
         id: id,
         title: title,
-        topogons: topogons.map((e) => Topogon.fromJson(e)).toList(),
+        // Try and sort topogons left to right to make them easier to be consistent with
+        topogons: topogons
+            .map((e) => Topogon.fromJson(e))
+            .sorted((a, b) => a.data.lines[0].points[0].x
+                .compareTo(b.data.lines[0].points[0].x))
+            .toList(),
         scale: scale,
       );
     }

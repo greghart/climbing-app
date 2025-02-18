@@ -98,7 +98,7 @@ class _ExplorerSearchBarState extends State<ExplorerSearchBar> {
       focusNode: myFocusNode,
       hintText: "Search crag...",
       onTap: () {
-        context.push('/search');
+        context.pushReplacement('/search');
         myFocusNode.unfocus();
       },
       leading: Builder(builder: (context) {
