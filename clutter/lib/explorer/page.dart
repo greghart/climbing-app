@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../entities/crag.dart';
 import '../search/my_search_bar.dart';
+import '../settings/settings_controller.dart';
 import './layout.dart';
 import 'layers_menu.dart';
 import 'map/area.dart';
@@ -93,17 +94,21 @@ class _ExplorerSearchBarState extends State<ExplorerSearchBar> {
   @override
   Widget build(BuildContext context) {
     return MySearchBar(
-      key: explorerSearchBarKey,
+      key: context.read<SettingsController>().explorerTutorial
+          ? explorerSearchBarKey
+          : null,
       autoFocus: false,
       focusNode: myFocusNode,
       hintText: "Search crag...",
       onTap: () {
-        context.pushReplacement('/search');
+        context.push('/search');
         myFocusNode.unfocus();
       },
       leading: Builder(builder: (context) {
         return IconButton(
-          key: explorerSearchBarHamburgerKey,
+          key: context.read<SettingsController>().explorerTutorial
+              ? explorerSearchBarHamburgerKey
+              : null,
           onPressed: () {
             Scaffold.of(context).openDrawer();
           },
@@ -111,7 +116,11 @@ class _ExplorerSearchBarState extends State<ExplorerSearchBar> {
         );
       }),
       trailing: [
-        LayersMenu(key: explorerSearchBarLayersKey),
+        LayersMenu(
+          key: context.read<SettingsController>().explorerTutorial
+              ? explorerSearchBarLayersKey
+              : null,
+        ),
       ],
     );
   }

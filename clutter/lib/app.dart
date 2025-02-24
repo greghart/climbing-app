@@ -110,6 +110,8 @@ class MyApp extends StatelessWidget {
               create: (_) => InheritedPhotosModel(crag: data.crag),
             ),
             ChangeNotifierProvider.value(value: settingsController),
+            // Anything we want to persist across routes must be setup here.
+            // Eg. overlay position should be kept in sync across route changes.
             ChangeNotifierProvider(
               create: (context) => ExplorerSheetModel(),
             ),

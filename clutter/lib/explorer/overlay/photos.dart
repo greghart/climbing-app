@@ -58,6 +58,7 @@ class Photos extends StatelessWidget {
                       areaId: areaId,
                       boulderId: boulderId,
                       routeId: routeId,
+                      interactive: false,
                     ),
                   ),
                 ),

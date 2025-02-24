@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../settings/settings_controller.dart';
 import '../model.dart';
 import '../tutorial.dart';
 
@@ -57,7 +58,9 @@ class _OverlaySheetState extends State<OverlaySheet> {
       snapSizes: const [0.2, 0.5, maxPosition],
       builder: (BuildContext context, ScrollController scrollController) {
         return ColoredBox(
-          key: explorerOverlayKey,
+          key: context.read<SettingsController>().explorerTutorial
+              ? explorerOverlayKey
+              : null,
           color: colorScheme.surfaceBright,
           child: Column(
             children: [
