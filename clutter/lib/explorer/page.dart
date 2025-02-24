@@ -41,6 +41,7 @@ class ExplorerPage extends StatelessWidget {
             crag: crag,
             entityType: entityType,
             entityId: entityId,
+            sheetModel: context.read<ExplorerSheetModel>(),
           ),
         ),
       ],

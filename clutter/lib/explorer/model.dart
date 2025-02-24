@@ -8,7 +8,11 @@ import '../entities/index.dart' as entities;
 
 enum EntityType { crag, area, boulder, route }
 
-typedef RoutingItem = ({EntityType type, int? id});
+typedef RoutingItem = ({
+  EntityType type,
+  int? id,
+  double scroll,
+});
 
 // ExplorerModel handles general state and routing for explorer.
 // Routing just sets up the initial state to support deep linking, but once explorer is open,
@@ -19,6 +23,7 @@ class ExplorerModel extends ChangeNotifier {
   ExplorerModel({
     required this.crag,
     required this.entityType,
+    required this.sheetModel,
     this.entityId,
   }) {
     areasById = {};
@@ -40,6 +45,7 @@ class ExplorerModel extends ChangeNotifier {
   late final Map<String, entities.Area> areasById;
   late final Map<String, entities.Boulder> bouldersById;
   late final Map<String, entities.Route> routesById;
+  ExplorerSheetModel sheetModel;
 
   entities.Crag crag;
   EntityType entityType;
@@ -67,7 +73,11 @@ class ExplorerModel extends ChangeNotifier {
   }
 
   void pushCurrentRouteStack() {
-    routeStack.add((type: entityType, id: entityId));
+    routeStack.add((
+      type: entityType,
+      id: entityId,
+      scroll: sheetModel.controller?.position.pixels ?? 0
+    ));
   }
 
   bool popRouteStack() {
@@ -78,6 +88,8 @@ class ExplorerModel extends ChangeNotifier {
     entityType = next.type;
     entityId = next.id;
     notifyListeners();
+    // Everything should be rebuilt, so we can update our new controller
+    sheetModel.controller?.jumpTo(next.scroll);
     return true;
   }
 
@@ -122,9 +134,15 @@ class ExplorerModel extends ChangeNotifier {
 class ExplorerSheetModel extends ChangeNotifier {
   // Just for tracking position
   double sheetPosition = 0.2;
+  ScrollController? controller;
+
   void setSheetPosition(double v) {
     sheetPosition = v;
     notifyListeners();
+  }
+
+  void setScrollController(ScrollController c) {
+    controller = c;
   }
 }
 

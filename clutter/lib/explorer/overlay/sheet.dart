@@ -49,6 +49,7 @@ class _OverlaySheetState extends State<OverlaySheet> {
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final isExpanded = _sheetPosition > (maxPosition - minPosition) / 2;
+    final model = context.watch<ExplorerModel>();
 
     return DraggableScrollableSheet(
       initialChildSize: _sheetPosition,
@@ -57,6 +58,9 @@ class _OverlaySheetState extends State<OverlaySheet> {
       snap: true,
       snapSizes: const [0.2, 0.5, maxPosition],
       builder: (BuildContext context, ScrollController scrollController) {
+        context
+            .read<ExplorerSheetModel>()
+            .setScrollController(scrollController);
         return ColoredBox(
           key: context.read<SettingsController>().explorerTutorial
               ? explorerOverlayKey
@@ -88,6 +92,7 @@ class _OverlaySheetState extends State<OverlaySheet> {
                   onNotification: _handleScrollNotification,
                   child: CustomScrollView(
                     controller: scrollController,
+                    restorationId: "${model.entityType}${model.entityId}",
                     slivers: [
                       SliverPadding(
                         padding: const EdgeInsets.all(8.0),
