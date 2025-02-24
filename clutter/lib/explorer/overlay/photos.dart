@@ -72,171 +72,186 @@ class Photos extends StatelessWidget {
     );
   }
 
-  static const swipeSensitivity = 500;
-
   showTopoDialog(BuildContext context, entities.Photo photo, int index,
       ExplorerModel model) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          final settings = context.watch<SettingsController>();
-          final theme = Theme.of(context);
-          navigateLeft() {
-            Navigator.of(context).pop();
-            if (index > 0) {
-              index = index - 1;
-            } else {
-              index = photos.length - 1;
-            }
-            showTopoDialog(context, photos[index], index, model);
-          }
-
-          navigateRight() {
-            Navigator.of(context).pop();
-            if (index < photos.length - 1) {
-              index = index + 1;
-            } else {
-              index = 0;
-            }
-            showTopoDialog(context, photos[index], index, model);
-          }
-
-          final exitButton = Positioned(
-            right: -2,
-            top: -9,
-            child: IconButton(
-              icon: Icon(
-                Icons.cancel,
-                color: Colors.black.withValues(alpha: 0.5),
-                size: 36,
+          return Dialog.fullscreen(
+            child: PhotosDialog(
+              photos: photos,
+              index: index,
+              child: Topo(
+                model: model,
+                photo: photo,
+                areaId: areaId,
+                boulderId: boulderId,
+                routeId: routeId,
+                interactive: false,
               ),
-              onPressed: () => Navigator.of(context).pop(),
+              onPhotoNav: (i) {
+                Navigator.of(context).pop();
+                showTopoDialog(context, photos[i], i, model);
+              },
             ),
           );
-
-          Widget? child;
-          if (settings.wideImages) {
-            // Row gives infinite width constraint to topo, which means we will only
-            // constrain height for photo. That keeps photo from becoming too small on
-            // portrait phones, but would overflow, so we let user scroll to see buttons
-            child = SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    padding: EdgeInsets.zero,
-                    visualDensity: VisualDensity.compact,
-                    onPressed: () {
-                      navigateLeft();
-                    },
-                    tooltip: "Left",
-                    icon: const Icon(Icons.arrow_left),
-                  ),
-                  Stack(
-                    children: [
-                      Topo(
-                        model: model,
-                        photo: photo,
-                        areaId: areaId,
-                        boulderId: boulderId,
-                        routeId: routeId,
-                      ),
-                      exitButton
-                    ],
-                  ),
-                  IconButton(
-                    padding: EdgeInsets.zero,
-                    visualDensity: VisualDensity.compact,
-                    onPressed: () {
-                      navigateRight();
-                    },
-                    tooltip: "Right",
-                    icon: const Icon(Icons.arrow_right),
-                  ),
-                ],
-              ),
-            );
-          } else {
-            child = LayoutBuilder(builder: (context, constraints) {
-              return Column(
-                spacing: 8,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    height: constraints.maxHeight -
-                        56, // 48 (size of buttons) + 8 spacing
-                    child: Stack(
-                      children: [
-                        Topo(
-                          model: model,
-                          photo: photo,
-                          areaId: areaId,
-                          boulderId: boulderId,
-                          routeId: routeId,
-                        ),
-                        exitButton,
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onHorizontalDragEnd: (details) {
-                      if (details.primaryVelocity! > swipeSensitivity) {
-                        // User swiped right , move left
-                        navigateLeft();
-                      } else if (details.primaryVelocity! < -swipeSensitivity) {
-                        // User swiped left, move right
-                        navigateRight();
-                      }
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          splashRadius: 16.0,
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            navigateLeft();
-                          },
-                          icon: const Icon(
-                            Icons.arrow_left_rounded,
-                            size: 32.0,
-                          ),
-                        ),
-                        Row(
-                          spacing: 2,
-                          children: photos.mapIndexed((i, p) {
-                            return TabPageSelectorIndicator(
-                              backgroundColor: i == index
-                                  ? theme.colorScheme.secondary
-                                  : Colors.transparent,
-                              borderColor: theme.colorScheme.secondary,
-                              size: 12.0,
-                            );
-                          }).toList(),
-                        ),
-                        IconButton(
-                          splashRadius: 16.0,
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            navigateRight();
-                          },
-                          icon: const Icon(
-                            Icons.arrow_right_rounded,
-                            size: 32.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              );
-            });
-          }
-          return Dialog.fullscreen(
-            child: child,
-          );
         });
+  }
+}
+
+// Layout expands all space available.
+// Given a child, it will center it vertically, with a tab photo selector at bottom.
+// Buttons or swipes left or right will navigate photos
+class PhotosDialog extends StatelessWidget {
+  const PhotosDialog({
+    super.key,
+    required this.child,
+    required this.photos,
+    required this.index,
+    this.swipeSensitivity = 500,
+    this.onPhotoNav,
+  });
+
+  final Widget child;
+  final List<entities.Photo> photos;
+  final int index;
+  final int swipeSensitivity;
+  final Function(int i)? onPhotoNav;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    navigateLeft() {
+      onPhotoNav?.call(
+        index > 0 ? index - 1 : photos.length - 1,
+      );
+    }
+
+    navigateRight() {
+      onPhotoNav?.call(
+        index < photos.length - 1 ? index + 1 : 0,
+      );
+    }
+
+    return LayoutBuilder(builder: (context, constraints) {
+      return Column(
+        spacing: 8,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height:
+                constraints.maxHeight - 56, // 48 (size of buttons) + 8 spacing
+            child: Stack(
+              children: [
+                PhotosViewer(child: child),
+                Positioned(
+                  right: -2,
+                  top: -9,
+                  child: IconButton(
+                    style: IconButton.styleFrom(
+                      backgroundColor: theme.colorScheme.secondaryContainer
+                          .withValues(alpha: 0.2),
+                    ),
+                    icon: Icon(
+                      Icons.cancel,
+                      color: theme.colorScheme.onSecondaryContainer,
+                      size: 36,
+                    ),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ),
+                Positioned(
+                  left: 2,
+                  top: -9,
+                  child: IconButton(
+                    style: IconButton.styleFrom(
+                      backgroundColor: theme.colorScheme.secondaryContainer
+                          .withValues(alpha: 0.2),
+                    ),
+                    icon: Icon(
+                      Icons.fullscreen,
+                      color: theme.colorScheme.onSecondaryContainer,
+                      size: 36,
+                    ),
+                    onPressed: () =>
+                        context.read<SettingsController>().toggleWideImages(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              IconButton(
+                splashRadius: 16.0,
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  navigateLeft();
+                },
+                icon: const Icon(
+                  Icons.arrow_left_rounded,
+                  size: 32.0,
+                ),
+              ),
+              Row(
+                spacing: 2,
+                children: photos.mapIndexed((i, p) {
+                  return TabPageSelectorIndicator(
+                    backgroundColor: i == index
+                        ? theme.colorScheme.secondary
+                        : Colors.transparent,
+                    borderColor: theme.colorScheme.secondary,
+                    size: 12.0,
+                  );
+                }).toList(),
+              ),
+              IconButton(
+                splashRadius: 16.0,
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  navigateRight();
+                },
+                icon: const Icon(
+                  Icons.arrow_right_rounded,
+                  size: 32.0,
+                ),
+              ),
+            ],
+          ),
+        ],
+      );
+    });
+  }
+}
+
+// Simple widget to decide whether we're in "wide" mode or not
+class PhotosViewer extends StatelessWidget {
+  const PhotosViewer({
+    super.key,
+    required this.child,
+  });
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final settings = context.watch<SettingsController>();
+    if (settings.wideImages) {
+      // Wide images should take up infinite width and scroll
+      return ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              child,
+            ],
+          ),
+        ],
+      );
+    }
+    return child;
   }
 }

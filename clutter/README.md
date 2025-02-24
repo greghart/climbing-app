@@ -22,3 +22,18 @@ The user facing application name is currently "Boulder Buddy [Crag]"
 ```bash
 adb connect $IP:5555
 ```
+
+## Release
+
+### Android
+
+```
+flutter build appbundle
+
+# Upload to play store
+# [project]/build/app/outputs/bundle/release/app.aab
+
+# Add debug artifacts from
+# [project]\build\app\intermediates\merged_native_libs\release\out\lib
+# zip all folders and upload to play store
+```

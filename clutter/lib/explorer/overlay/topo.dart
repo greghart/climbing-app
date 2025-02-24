@@ -62,6 +62,7 @@ class Topo extends StatelessWidget {
     super.key,
     required this.photo,
     required this.model,
+    this.interactive = true,
     this.labels = true,
     this.debug = false,
     this.areaId,
@@ -72,6 +73,8 @@ class Topo extends StatelessWidget {
   final entities.Photo photo;
   // Since topo is shown in a dialog, it can't actually use context
   final ExplorerModel model;
+  // Whether to put photo in interactive viewer
+  final bool interactive;
   // Show labels?
   final bool labels;
   // Show debug img info as text
@@ -132,10 +135,8 @@ class Topo extends StatelessWidget {
         );
 
         if (!separateLabels) {
-          return InteractiveViewer(
-            boundaryMargin: const EdgeInsets.all(40.0),
-            minScale: 0.8,
-            maxScale: 3,
+          return MyInteractiveViewer(
+            enabled: interactive,
             child: Stack(
               clipBehavior: Clip.none,
               children: [
@@ -184,10 +185,8 @@ class Topo extends StatelessWidget {
             SizedBox(
               width: data.fittedSize.width,
               height: data.fittedSize.height,
-              child: InteractiveViewer(
-                boundaryMargin: const EdgeInsets.all(40.0),
-                minScale: 0.8,
-                maxScale: 3,
+              child: MyInteractiveViewer(
+                enabled: interactive,
                 child: Stack(
                   children: [
                     photoWidget,
@@ -382,4 +381,27 @@ List<entities.TopogonPoint> _expandPoints(
   }
 
   return allPoints;
+}
+
+class MyInteractiveViewer extends StatelessWidget {
+  const MyInteractiveViewer({
+    super.key,
+    required this.child,
+    required this.enabled,
+  });
+
+  final Widget child;
+  final bool enabled;
+
+  @override
+  Widget build(BuildContext context) {
+    if (!enabled) return child;
+
+    return InteractiveViewer(
+      boundaryMargin: const EdgeInsets.all(40.0),
+      minScale: 0.8,
+      maxScale: 3,
+      child: child,
+    );
+  }
 }

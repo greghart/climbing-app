@@ -52,6 +52,10 @@ class SettingsController with ChangeNotifier {
     await _settingsService.updateWideImages(b);
   }
 
+  Future<void> toggleWideImages() async {
+    updateWideImages(!_wideImages);
+  }
+
   // Whether to show the explorer tutorial
   late bool _explorerTutorial = true;
   bool get explorerTutorial => _explorerTutorial;
