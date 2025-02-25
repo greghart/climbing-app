@@ -19,7 +19,7 @@ class SettingsController with ChangeNotifier {
   Future<void> loadSettings() async {
     _themeMode = await _settingsService.themeMode();
     _cozyCompass = await _settingsService.cozyCompass();
-    _wideImages = await _settingsService.wideImages();
+    _fullSizeImages = await _settingsService.fullSizeImages();
     _explorerTutorial = await _settingsService.explorerTutorial();
     print("Set explorer tutorial to $_explorerTutorial");
 
@@ -39,21 +39,21 @@ class SettingsController with ChangeNotifier {
     await _settingsService.updateCozyCompass(b);
   }
 
-  // Whether to let images widen out past screen size
-  late bool _wideImages = false;
-  bool get wideImages => _wideImages;
+  // Whether to let images expand out of screen (requiring a scroll)
+  late bool _fullSizeImages = false;
+  bool get fullSizeImages => _fullSizeImages;
 
-  Future<void> updateWideImages(bool? b) async {
-    if (b == null || b == _wideImages) return;
+  Future<void> updateFullSizeImages(bool? b) async {
+    if (b == null || b == _fullSizeImages) return;
 
-    _wideImages = b;
+    _fullSizeImages = b;
     notifyListeners();
 
-    await _settingsService.updateWideImages(b);
+    await _settingsService.updateFullSizeImages(b);
   }
 
   Future<void> toggleWideImages() async {
-    updateWideImages(!_wideImages);
+    updateFullSizeImages(!_fullSizeImages);
   }
 
   // Whether to show the explorer tutorial

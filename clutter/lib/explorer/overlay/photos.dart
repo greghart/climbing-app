@@ -82,13 +82,13 @@ class Photos extends StatelessWidget {
             child: PhotosDialog(
               photos: photos,
               index: index,
-              child: Topo(
+              builder: (bool fullSize) => Topo(
                 model: model,
                 photo: photo,
                 areaId: areaId,
                 boulderId: boulderId,
                 routeId: routeId,
-                interactive: false,
+                interactive: !fullSize,
               ),
               onPhotoNav: (i) {
                 Navigator.of(context).pop();
@@ -106,14 +106,14 @@ class Photos extends StatelessWidget {
 class PhotosDialog extends StatelessWidget {
   const PhotosDialog({
     super.key,
-    required this.child,
+    required this.builder,
     required this.photos,
     required this.index,
     this.swipeSensitivity = 500,
     this.onPhotoNav,
   });
 
-  final Widget child;
+  final FullSizeViewBuilder builder;
   final List<entities.Photo> photos;
   final int index;
   final int swipeSensitivity;
@@ -145,7 +145,7 @@ class PhotosDialog extends StatelessWidget {
                 constraints.maxHeight - 56, // 48 (size of buttons) + 8 spacing
             child: Stack(
               children: [
-                PhotosViewer(child: child),
+                PhotosViewer(builder: builder),
                 Positioned(
                   right: -2,
                   top: -9,
@@ -227,32 +227,32 @@ class PhotosDialog extends StatelessWidget {
   }
 }
 
-// Simple widget to decide whether we're in "wide" mode or not
+typedef FullSizeViewBuilder = Widget Function(bool fullSize);
+
+// Simple widget to decide whether we're in "full size" mode or not
 class PhotosViewer extends StatelessWidget {
   const PhotosViewer({
     super.key,
-    required this.child,
+    required this.builder,
   });
 
-  final Widget child;
+  final FullSizeViewBuilder builder;
 
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<SettingsController>();
-    if (settings.wideImages) {
-      // Wide images should take up infinite width and scroll
-      return ListView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              child,
-            ],
-          ),
-        ],
-      );
+    if (settings.fullSizeImages) {
+      // Wide images should really be based on aspect ratio -- in portrait, scroll horizontally, in landscape, scroll vertically
+      return OrientationBuilder(builder: (context, orientation) {
+        return SingleChildScrollView(
+          scrollDirection: orientation == Orientation.landscape
+              ? Axis.vertical
+              : Axis.horizontal,
+          child: builder(true),
+        );
+      });
     }
-    return child;
+    return builder(false);
+    // return SingleChildScrollView(scrollDirection: Axis.vertical, child: child);
   }
 }
