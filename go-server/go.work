@@ -1,0 +1,7 @@
+go 1.24.1
+
+replace github.com/greghart/powerputtygo/errcmp => ../../powerputtygo/errcmp
+
+replace github.com/greghart/powerputtygo/sqlp => ../../powerputtygo/sqlp
+
+use .

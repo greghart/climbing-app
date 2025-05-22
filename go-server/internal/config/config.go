@@ -20,7 +20,7 @@ func Load() *Config {
 	}
 
 	return &Config{
-		DBDriver: getEnv("DB_DRIVER", "sqlite"),
+		DBDriver: getEnv("DB_DRIVER", "sqlite3"),
 		DBSource: getEnv("DB_SOURCE", "./database.sqlite"),
 	}
 }

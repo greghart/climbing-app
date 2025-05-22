@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/jmoiron/sqlx"
-	_ "modernc.org/sqlite"
+	"github.com/greghart/powerputtygo/sqlp"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 type Options struct {
@@ -14,15 +14,22 @@ type Options struct {
 }
 
 type DB struct {
-	*sqlx.DB
+	*sqlp.DB
 	Options
 }
 
+func NewDB(o Options) *DB {
+	return &DB{
+		Options: o,
+	}
+}
+
 func (db *DB) Start() error {
-	d, err := sqlx.Open(db.Options.Driver, db.Options.Source)
+	d, err := sqlp.Open(db.Options.Driver, db.Options.Source)
 	if err != nil {
 		return fmt.Errorf("Failed to connect to database: %v", err)
 	}
+	db.DB = d
 
 	// Verify the connection
 	if err := db.Ping(); err != nil {
@@ -30,7 +37,17 @@ func (db *DB) Start() error {
 	}
 
 	// TODO: Integrate logging solution, maybe try grafana!
-	db.DB = d
 	log.Println("Database connection established")
 	return nil
+}
+
+func (db *DB) Stop() {
+	if db.DB == nil {
+		return
+	}
+	if err := db.Close(); err != nil {
+		log.Printf("Failed to close database connection: %v", err)
+	} else {
+		log.Println("Database connection closed")
+	}
 }

@@ -1,8 +1,8 @@
 package models
 
 type CoordinateOptional struct {
-	Lat *float64 `json:"lat,omitzero"`
-	Lng *float64 `json:"lng,omitzero"`
+	Lat *float64 `json:"lat,omitzero" sqlp:"lat"`
+	Lng *float64 `json:"lng,omitzero" sqlp:"lng"`
 }
 
 func (c CoordinateOptional) IsZero() bool {

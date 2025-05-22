@@ -1,8 +1,8 @@
 package models
 
 type Point struct {
-	X float64 `json:"x"`
-	Y float64 `json:"y"`
+	X float64 `json:"x" sqlp:"x"`
+	Y float64 `json:"y" sqlp:"y"`
 }
 
 func (p Point) IsZero() bool {
