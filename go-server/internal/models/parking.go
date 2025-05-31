@@ -1,7 +1,7 @@
 package models
 
 type Parking struct {
-	ID          *int       `json:"id,omitzero" sqlp:"id"`
+	ID          *int64     `json:"id,omitzero" sqlp:"id"`
 	Name        *string    `json:"name,omitzero" sqlp:"name"`
 	Description *string    `json:"description,omitzero" sqlp:"description"`
 	Location    Coordinate `json:"location" sqlp:"location"`

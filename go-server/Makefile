@@ -3,7 +3,7 @@ GO_FILES = $(shell find . -name \*.go)
 MD_FILES = $(shell find . -name \*.md)
 
 server:
-	go run ./cmd/server/main.go
+	wgo run ./cmd/server/main.go
 .PHONY: server
 
 bg_server:

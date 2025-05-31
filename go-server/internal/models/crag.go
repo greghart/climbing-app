@@ -1,7 +1,7 @@
 package models
 
 type Crag struct {
-	ID          *int         `json:"id,omitzero" sqlp:"id"`
+	ID          int64        `json:"id,omitzero" sqlp:"id"`
 	Name        string       `json:"name" sqlp:"name"`
 	Description *string      `json:"description,omitzero" sqlp:"description"`
 	Bounds      *Bounds      `json:"bounds,omitzero" sqlp:"bounds"`
@@ -17,7 +17,7 @@ type Crag struct {
 }
 
 func (c Crag) IsZero() bool {
-	return c.ID == nil && c.Name == "" && c.Description == nil && c.Bounds == nil && c.Center.IsZero() &&
+	return c.ID == 0 && c.Name == "" && c.Description == nil && c.Bounds == nil && c.Center.IsZero() &&
 		c.DefaultZoom == 0 && c.MinZoom == nil && c.MaxZoom == nil && c.Parking == nil &&
 		len(c.Areas) == 0 && c.Commentable == nil && c.Photoable == nil && c.Trail == nil
 }

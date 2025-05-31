@@ -1,7 +1,7 @@
 package models
 
 type Trail struct {
-	ID    *int   `json:"id,omitzero" sqlp:"id"`
+	ID    *int64 `json:"id,omitzero" sqlp:"id"`
 	Crag  *Crag  `json:"crag,omitzero" sqlp:"crag"`
 	Lines []Line `json:"lines,omitzero" sqlp:"lines"`
 }

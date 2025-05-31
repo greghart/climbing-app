@@ -1,7 +1,7 @@
 package models
 
 type Topo struct {
-	ID    *int   `json:"id,omitzero" sqlp:"id"`
+	ID    *int64 `json:"id,omitzero" sqlp:"id"`
 	Title string `json:"title" sqlp:"title"`
 }
 

@@ -1,7 +1,7 @@
 package models
 
 type Comment struct {
-	ID          *int         `json:"id,omitzero" sqlp:"id"`
+	ID          *int64       `json:"id,omitzero" sqlp:"id"`
 	Text        string       `json:"text" sqlp:"text"`
 	Commentable *Commentable `json:"commentable" sqlp:"commentable"`
 	Timestamps

@@ -1,7 +1,7 @@
 package models
 
 type Photoable struct {
-	ID         *int     `json:"id,omitzero" sqlp:"id"`
+	ID         *int64   `json:"id,omitzero" sqlp:"id"`
 	Crag       *Crag    `json:"crag,omitzero" sqlp:"crag"`
 	Area       *Area    `json:"area,omitzero" sqlp:"area"`
 	Boulder    *Boulder `json:"boulder,omitzero" sqlp:"boulder"`
