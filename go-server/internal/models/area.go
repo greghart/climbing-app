@@ -1,7 +1,7 @@
 package models
 
 type Area struct {
-	ID          *int         `json:"id,omitzero" sqlp:"id"`
+	ID          *int64       `json:"id,omitzero" sqlp:"id"`
 	Name        string       `json:"name" sqlp:"name"`
 	Description *string      `json:"description,omitzero" sqlp:"description"`
 	Crag        *Crag        `json:"crag,omitzero" sqlp:"crag"`

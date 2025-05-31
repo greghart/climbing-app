@@ -1,7 +1,7 @@
 package models
 
 type Grade struct {
-	ID     *int    `json:"id,omitzero" sqlp:"id"`
+	ID     *int64  `json:"id,omitzero" sqlp:"id"`
 	Raw    string  `json:"raw" sqlp:"raw"`
 	System string  `json:"system" sqlp:"system"`
 	Value  float64 `json:"value" sqlp:"value"`
