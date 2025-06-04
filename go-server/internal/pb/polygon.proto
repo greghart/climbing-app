@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package pb;
+
+import "coordinate.proto";
+
+option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+message Polygon {
+  int64 id = 1;
+  string descriptor = 2;
+  repeated Coordinate coordinates = 3;
+    // Area area = 4; // Omitted to avoid circular reference
+}

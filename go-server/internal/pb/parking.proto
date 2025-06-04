@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package pb;
+
+import "coordinate.proto";
+
+option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+message Parking {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  Coordinate location = 4;
+    // Crag crag = 5; // Omitted to avoid circular reference
+}

@@ -2,10 +2,12 @@ GOFMT_FILES = $(shell go list -f '{{.Dir}}' ./... | grep -v '/pb')
 GO_FILES = $(shell find . -name \*.go)
 MD_FILES = $(shell find . -name \*.md)
 
+# run a server in watch mode
 server:
 	wgo run ./cmd/server/main.go
 .PHONY: server
 
+# run a server in bg (clean up with `make clean`)
 bg_server:
 	 go build -o tmp/server ./cmd/server/main.go
 	 ./tmp/server & echo $$! > server.pid
@@ -22,6 +24,17 @@ clean:
 	@if [ -f "tmp/server" ]; then \
 		rm tmp/server ; \
 	fi
+.PHONY: clean
+
+# Protoc
+protoc:
+	@protoc --proto_path=./internal/pb \
+		--go_out=internal/pb \
+		--go_opt=paths=source_relative \
+		--go-grpc_out=internal/pb \
+		--go-grpc_opt=paths=source_relative \
+		./internal/pb/*.proto
+.PHONY: protoc
 
 # diff-check runs git-diff and fails if there are any changes.
 diff-check:
@@ -41,6 +54,7 @@ diff-check:
 # locally, but it should be rare.
 lint:
 	@go tool golangci-lint run
+	@protolint lint ./internal/pb/*.proto
 .PHONY: lint
 
 test:

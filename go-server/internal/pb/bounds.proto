@@ -1,0 +1,11 @@
+syntax = "proto3";
+package pb;
+
+import "coordinate.proto";
+
+option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+message Bounds {
+  Coordinate top_left = 1;
+  Coordinate bottom_right = 2;
+}

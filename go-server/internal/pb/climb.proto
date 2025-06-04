@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package pb;
+
+import "crag.proto";
+
+option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+message GetCragRequest {
+  int64 id = 1;
+}
+
+message GetCragResponse {
+  Crag crag = 1;
+}
+
+message GetCragsRequest {
+}
+
+message GetCragsResponse {
+  repeated Crag crags = 1;
+}
+
+service ClimbService {
+  rpc GetCrag(GetCragRequest) returns (GetCragResponse);
+  rpc GetCrags(GetCragsRequest) returns (GetCragsResponse);
+}

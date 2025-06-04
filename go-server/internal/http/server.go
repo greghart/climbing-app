@@ -1,6 +1,7 @@
 package http
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"os"
@@ -13,11 +14,13 @@ import (
 
 type Server struct {
 	env  *config.Env
+	http *http.Server
 	opts Options
 }
 
 type Options struct {
 	ExpectedHost string
+	Port         int
 }
 
 func NewServer(env *config.Env, opts Options) *Server {
@@ -31,25 +34,30 @@ func (s *Server) Start() error {
 	if s.opts.ExpectedHost == "" {
 		return fmt.Errorf("ExpectedHost must be set in server options")
 	}
-	httpServer := &http.Server{
-		Addr:           ":8080",
+	if s.opts.Port == 0 {
+		return fmt.Errorf("Port must be set in server options")
+	}
+
+	s.http = &http.Server{
+		Addr:           fmt.Sprintf(":%d", s.opts.Port),
 		Handler:        s.Handler(),
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	return httpServer.ListenAndServe()
+	return s.http.ListenAndServe()
 }
 
-func (s *Server) Stop() {
+func (s *Server) Stop(ctx context.Context) error {
+	return s.http.Shutdown(ctx) // Gracefully shutdown the server
 }
 
 func (s *Server) Handler() http.Handler {
 	r := gin.Default()
 
 	r.Use(apiKeyAuthMiddleware())
-	r.Use(securityHeaders(s.opts.ExpectedHost))
+	r.Use(securityHeaders(fmt.Sprintf("%s:%d", s.opts.ExpectedHost, s.opts.Port)))
 
 	{
 		v1 := r.Group("/v1")
@@ -90,7 +98,7 @@ func (s *Server) getCrag(c *gin.Context) {
 		return
 	}
 	if crag == nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("failed to find crag %v", id)})
+		c.JSON(http.StatusNotFound, gin.H{"error": fmt.Sprintf("failed to find crag %v", id)})
 		return
 	}
 
@@ -113,9 +121,10 @@ func (s *Server) error(c *gin.Context, err error, _status ...int) {
 ////////////////////////////////////////////////////////////////////////////////
 // Middleware
 
+var apiKey = os.Getenv("API_KEY")
+
 func apiKeyAuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		apiKey := os.Getenv("API_KEY")
 		reqKey := c.GetHeader("X-API-Key")
 		if apiKey == "" || reqKey != apiKey {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "unauthorized"})

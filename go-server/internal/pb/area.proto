@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package pb;
+
+import "boulder.proto";
+import "commentable.proto";
+import "photoable.proto";
+import "polygon.proto";
+
+option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+message Area {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  // Crag crag = 4; // Omitted to avoid circular reference
+  Polygon polygon = 5;
+  repeated Boulder boulders = 6;
+  Commentable commentable = 7;
+  Photoable photoable = 8;
+}

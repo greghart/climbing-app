@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package pb;
+
+import "area.proto";
+import "bounds.proto";
+import "commentable.proto";
+import "coordinate.proto";
+import "parking.proto";
+import "photoable.proto";
+import "trail.proto";
+
+option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+message Crag {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  Bounds bounds = 4;
+  Coordinate center = 5;
+  int32 default_zoom = 6;
+  int32 min_zoom = 7;
+  int32 max_zoom = 8;
+  Parking parking = 9;
+  repeated Area areas = 10;
+  Commentable commentable = 11;
+  Photoable photoable = 12;
+  Trail trail = 13;
+}

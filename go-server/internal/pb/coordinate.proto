@@ -1,0 +1,9 @@
+syntax = "proto3";
+package pb;
+
+option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+message Coordinate {
+  double lat = 1;
+  double lng = 2;
+}

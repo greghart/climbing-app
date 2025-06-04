@@ -25,7 +25,7 @@ func Load() Config {
 	return Config{
 		DBDriver:     getEnv("DB_DRIVER", "sqlite3"),
 		DBSource:     getEnv("DB_SOURCE", "./database.sqlite"),
-		ExpectedHost: getEnv("HOST", "localhost:8080"),
+		ExpectedHost: getEnv("HOST", "localhost"),
 	}
 }
 

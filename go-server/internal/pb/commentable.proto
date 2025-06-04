@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package pb;
+
+import "comment.proto";
+
+option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+message Commentable {
+  int64 id = 1;
+  string descriptor = 2;
+  repeated Comment comments = 3;
+}
