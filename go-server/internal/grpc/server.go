@@ -3,7 +3,6 @@ package grpc
 import (
 	"context"
 	"fmt"
-	"log"
 	"net"
 	"os"
 	"strings"
@@ -116,7 +115,6 @@ func ensureValidToken(ctx context.Context, req any, _ *grpc.UnaryServerInfo, han
 	}
 	// The keys within metadata.MD are normalized to lowercase.
 	// See: https://godoc.org/google.golang.org/grpc/metadata#New
-	log.Printf("metadata: %+v\n", md)
 	if !valid(md["authorization"]) {
 		return nil, errInvalidToken
 	}

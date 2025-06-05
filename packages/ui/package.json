@@ -13,6 +13,9 @@
     "typeorm": false
   },
   "dependencies": {
+    "@bufbuild/protobuf": "^2.5.1",
+    "@connectrpc/connect": "^2.0.2",
+    "@connectrpc/connect-node": "^2.0.2",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -47,6 +50,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@bufbuild/protoc-gen-es": "^2.5.1",
     "@mapbox/tilebelt": "^2.0.2",
     "@types/node": "^20.12.4",
     "@types/react": "npm:types-react@19.0.0-rc.1",
