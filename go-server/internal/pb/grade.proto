@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+message Grade {
+  enum GradingSystem{
+    GRADING_SYSTEM_UNSPECIFIED = 0;
+    GRADING_SYSTEM_V_SCALE = 1;
+    GRADING_SYSTEM_YDS = 2;
+  }
+
+  string raw = 2; // User input string
+  GradingSystem system = 3;
+  double value = 4; 
+}

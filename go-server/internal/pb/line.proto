@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package pb;
 
 import "coordinate.proto";
@@ -9,5 +10,5 @@ message Line {
   int64 id = 1;
   Coordinate start = 2;
   Coordinate end = 3;
-    // Trail trail = 4; // Omitted to avoid circular reference
+  int64 trail_id = 4;
 }

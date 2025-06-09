@@ -25,7 +25,8 @@ type Line struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Start         *Coordinate            `protobuf:"bytes,2,opt,name=start,proto3" json:"start,omitempty"`
-	End           *Coordinate            `protobuf:"bytes,3,opt,name=end,proto3" json:"end,omitempty"` // Trail trail = 4; // Omitted to avoid circular reference
+	End           *Coordinate            `protobuf:"bytes,3,opt,name=end,proto3" json:"end,omitempty"`
+	TrailId       int64                  `protobuf:"varint,4,opt,name=trail_id,json=trailId,proto3" json:"trail_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -81,16 +82,24 @@ func (x *Line) GetEnd() *Coordinate {
 	return nil
 }
 
+func (x *Line) GetTrailId() int64 {
+	if x != nil {
+		return x.TrailId
+	}
+	return 0
+}
+
 var File_line_proto protoreflect.FileDescriptor
 
 const file_line_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"line.proto\x12\x02pb\x1a\x10coordinate.proto\"^\n" +
+	"line.proto\x12\x02pb\x1a\x10coordinate.proto\"y\n" +
 	"\x04Line\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12$\n" +
 	"\x05start\x18\x02 \x01(\v2\x0e.pb.CoordinateR\x05start\x12 \n" +
-	"\x03end\x18\x03 \x01(\v2\x0e.pb.CoordinateR\x03endB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
+	"\x03end\x18\x03 \x01(\v2\x0e.pb.CoordinateR\x03end\x12\x19\n" +
+	"\btrail_id\x18\x04 \x01(\x03R\atrailIdB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
 
 var (
 	file_line_proto_rawDescOnce sync.Once

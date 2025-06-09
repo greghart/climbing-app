@@ -23,7 +23,9 @@ const (
 
 type Comment struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // Add more fields as needed
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Text          string                 `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
+	Timestamps    *Timestamps            `protobuf:"bytes,3,opt,name=timestamps,proto3" json:"timestamps,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -65,13 +67,31 @@ func (x *Comment) GetId() int64 {
 	return 0
 }
 
+func (x *Comment) GetText() string {
+	if x != nil {
+		return x.Text
+	}
+	return ""
+}
+
+func (x *Comment) GetTimestamps() *Timestamps {
+	if x != nil {
+		return x.Timestamps
+	}
+	return nil
+}
+
 var File_comment_proto protoreflect.FileDescriptor
 
 const file_comment_proto_rawDesc = "" +
 	"\n" +
-	"\rcomment.proto\x12\x02pb\"\x19\n" +
+	"\rcomment.proto\x12\x02pb\x1a\x10timestamps.proto\"]\n" +
 	"\aComment\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02idB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04text\x18\x02 \x01(\tR\x04text\x12.\n" +
+	"\n" +
+	"timestamps\x18\x03 \x01(\v2\x0e.pb.TimestampsR\n" +
+	"timestampsB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
 
 var (
 	file_comment_proto_rawDescOnce sync.Once
@@ -87,14 +107,16 @@ func file_comment_proto_rawDescGZIP() []byte {
 
 var file_comment_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_comment_proto_goTypes = []any{
-	(*Comment)(nil), // 0: pb.Comment
+	(*Comment)(nil),    // 0: pb.Comment
+	(*Timestamps)(nil), // 1: pb.Timestamps
 }
 var file_comment_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: pb.Comment.timestamps:type_name -> pb.Timestamps
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_comment_proto_init() }
@@ -102,6 +124,7 @@ func file_comment_proto_init() {
 	if File_comment_proto != nil {
 		return
 	}
+	file_timestamps_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

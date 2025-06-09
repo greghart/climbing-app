@@ -33,8 +33,8 @@ type Crag struct {
 	MaxZoom       int32                  `protobuf:"varint,8,opt,name=max_zoom,json=maxZoom,proto3" json:"max_zoom,omitempty"`
 	Parking       *Parking               `protobuf:"bytes,9,opt,name=parking,proto3" json:"parking,omitempty"`
 	Areas         []*Area                `protobuf:"bytes,10,rep,name=areas,proto3" json:"areas,omitempty"`
-	Commentable   *Commentable           `protobuf:"bytes,11,opt,name=commentable,proto3" json:"commentable,omitempty"`
-	Photoable     *Photoable             `protobuf:"bytes,12,opt,name=photoable,proto3" json:"photoable,omitempty"`
+	Comments      []*Comment             `protobuf:"bytes,11,rep,name=comments,proto3" json:"comments,omitempty"`
+	Photos        []*Photo               `protobuf:"bytes,12,rep,name=photos,proto3" json:"photos,omitempty"`
 	Trail         *Trail                 `protobuf:"bytes,13,opt,name=trail,proto3" json:"trail,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -140,16 +140,16 @@ func (x *Crag) GetAreas() []*Area {
 	return nil
 }
 
-func (x *Crag) GetCommentable() *Commentable {
+func (x *Crag) GetComments() []*Comment {
 	if x != nil {
-		return x.Commentable
+		return x.Comments
 	}
 	return nil
 }
 
-func (x *Crag) GetPhotoable() *Photoable {
+func (x *Crag) GetPhotos() []*Photo {
 	if x != nil {
-		return x.Photoable
+		return x.Photos
 	}
 	return nil
 }
@@ -167,7 +167,7 @@ const file_crag_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
 	"crag.proto\x12\x02pb\x1a\n" +
-	"area.proto\x1a\fbounds.proto\x1a\x11commentable.proto\x1a\x10coordinate.proto\x1a\rparking.proto\x1a\x0fphotoable.proto\x1a\vtrail.proto\"\xb9\x03\n" +
+	"area.proto\x1a\fbounds.proto\x1a\rcomment.proto\x1a\x10coordinate.proto\x1a\rparking.proto\x1a\vphoto.proto\x1a\vtrail.proto\"\xa5\x03\n" +
 	"\x04Crag\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -180,9 +180,9 @@ const file_crag_proto_rawDesc = "" +
 	"\bmax_zoom\x18\b \x01(\x05R\amaxZoom\x12%\n" +
 	"\aparking\x18\t \x01(\v2\v.pb.ParkingR\aparking\x12\x1e\n" +
 	"\x05areas\x18\n" +
-	" \x03(\v2\b.pb.AreaR\x05areas\x121\n" +
-	"\vcommentable\x18\v \x01(\v2\x0f.pb.CommentableR\vcommentable\x12+\n" +
-	"\tphotoable\x18\f \x01(\v2\r.pb.PhotoableR\tphotoable\x12\x1f\n" +
+	" \x03(\v2\b.pb.AreaR\x05areas\x12'\n" +
+	"\bcomments\x18\v \x03(\v2\v.pb.CommentR\bcomments\x12!\n" +
+	"\x06photos\x18\f \x03(\v2\t.pb.PhotoR\x06photos\x12\x1f\n" +
 	"\x05trail\x18\r \x01(\v2\t.pb.TrailR\x05trailB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
 
 var (
@@ -199,22 +199,22 @@ func file_crag_proto_rawDescGZIP() []byte {
 
 var file_crag_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_crag_proto_goTypes = []any{
-	(*Crag)(nil),        // 0: pb.Crag
-	(*Bounds)(nil),      // 1: pb.Bounds
-	(*Coordinate)(nil),  // 2: pb.Coordinate
-	(*Parking)(nil),     // 3: pb.Parking
-	(*Area)(nil),        // 4: pb.Area
-	(*Commentable)(nil), // 5: pb.Commentable
-	(*Photoable)(nil),   // 6: pb.Photoable
-	(*Trail)(nil),       // 7: pb.Trail
+	(*Crag)(nil),       // 0: pb.Crag
+	(*Bounds)(nil),     // 1: pb.Bounds
+	(*Coordinate)(nil), // 2: pb.Coordinate
+	(*Parking)(nil),    // 3: pb.Parking
+	(*Area)(nil),       // 4: pb.Area
+	(*Comment)(nil),    // 5: pb.Comment
+	(*Photo)(nil),      // 6: pb.Photo
+	(*Trail)(nil),      // 7: pb.Trail
 }
 var file_crag_proto_depIdxs = []int32{
 	1, // 0: pb.Crag.bounds:type_name -> pb.Bounds
 	2, // 1: pb.Crag.center:type_name -> pb.Coordinate
 	3, // 2: pb.Crag.parking:type_name -> pb.Parking
 	4, // 3: pb.Crag.areas:type_name -> pb.Area
-	5, // 4: pb.Crag.commentable:type_name -> pb.Commentable
-	6, // 5: pb.Crag.photoable:type_name -> pb.Photoable
+	5, // 4: pb.Crag.comments:type_name -> pb.Comment
+	6, // 5: pb.Crag.photos:type_name -> pb.Photo
 	7, // 6: pb.Crag.trail:type_name -> pb.Trail
 	7, // [7:7] is the sub-list for method output_type
 	7, // [7:7] is the sub-list for method input_type
@@ -230,10 +230,10 @@ func file_crag_proto_init() {
 	}
 	file_area_proto_init()
 	file_bounds_proto_init()
-	file_commentable_proto_init()
+	file_comment_proto_init()
 	file_coordinate_proto_init()
 	file_parking_proto_init()
-	file_photoable_proto_init()
+	file_photo_proto_init()
 	file_trail_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{

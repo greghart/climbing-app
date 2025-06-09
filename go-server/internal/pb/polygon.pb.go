@@ -25,7 +25,8 @@ type Polygon struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Descriptor_   string                 `protobuf:"bytes,2,opt,name=descriptor,proto3" json:"descriptor,omitempty"`
-	Coordinates   []*Coordinate          `protobuf:"bytes,3,rep,name=coordinates,proto3" json:"coordinates,omitempty"` // Area area = 4; // Omitted to avoid circular reference
+	Coordinates   []*Coordinate          `protobuf:"bytes,3,rep,name=coordinates,proto3" json:"coordinates,omitempty"`
+	AreaId        int64                  `protobuf:"varint,4,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -81,17 +82,25 @@ func (x *Polygon) GetCoordinates() []*Coordinate {
 	return nil
 }
 
+func (x *Polygon) GetAreaId() int64 {
+	if x != nil {
+		return x.AreaId
+	}
+	return 0
+}
+
 var File_polygon_proto protoreflect.FileDescriptor
 
 const file_polygon_proto_rawDesc = "" +
 	"\n" +
-	"\rpolygon.proto\x12\x02pb\x1a\x10coordinate.proto\"k\n" +
+	"\rpolygon.proto\x12\x02pb\x1a\x10coordinate.proto\"\x84\x01\n" +
 	"\aPolygon\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1e\n" +
 	"\n" +
 	"descriptor\x18\x02 \x01(\tR\n" +
 	"descriptor\x120\n" +
-	"\vcoordinates\x18\x03 \x03(\v2\x0e.pb.CoordinateR\vcoordinatesB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
+	"\vcoordinates\x18\x03 \x03(\v2\x0e.pb.CoordinateR\vcoordinates\x12\x17\n" +
+	"\aarea_id\x18\x04 \x01(\x03R\x06areaIdB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
 
 var (
 	file_polygon_proto_rawDescOnce sync.Once

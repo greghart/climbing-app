@@ -121,9 +121,9 @@ func (s *Server) error(c *gin.Context, err error, _status ...int) {
 ////////////////////////////////////////////////////////////////////////////////
 // Middleware
 
-var apiKey = os.Getenv("API_KEY")
-
 func apiKeyAuthMiddleware() gin.HandlerFunc {
+	var apiKey = os.Getenv("API_KEY")
+
 	return func(c *gin.Context) {
 		reqKey := c.GetHeader("X-API-Key")
 		if apiKey == "" || reqKey != apiKey {

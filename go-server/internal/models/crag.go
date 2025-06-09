@@ -14,10 +14,21 @@ type Crag struct {
 	Commentable *Commentable `json:"commentable,omitzero" sqlp:"commentable"`
 	Photoable   *Photoable   `json:"photoable,omitzero" sqlp:"photoable"`
 	Trail       *Trail       `json:"trail,omitzero" sqlp:"trail"`
+	Timestamps
 }
 
 func (c Crag) IsZero() bool {
-	return c.ID == 0 && c.Name == "" && c.Description == nil && c.Bounds == nil && c.Center.IsZero() &&
-		c.DefaultZoom == 0 && c.MinZoom == nil && c.MaxZoom == nil && c.Parking == nil &&
-		len(c.Areas) == 0 && c.Commentable == nil && c.Photoable == nil && c.Trail == nil
+	return (c.ID == 0 &&
+		c.Name == "" &&
+		c.Description == nil &&
+		c.Bounds == nil &&
+		c.Center.IsZero() &&
+		c.DefaultZoom == 0 &&
+		c.MinZoom == nil &&
+		c.MaxZoom == nil &&
+		c.Parking == nil &&
+		len(c.Areas) == 0 &&
+		c.Commentable == nil &&
+		c.Photoable == nil &&
+		c.Trail == nil)
 }

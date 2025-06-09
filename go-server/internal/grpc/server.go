@@ -49,7 +49,7 @@ func (s *Server) Start() error {
 	}
 
 	opts := []grpc.ServerOption{
-		grpc.UnaryInterceptor(ensureValidToken),
+		grpc.UnaryInterceptor(ensureValidToken(os.Getenv("API_KEY"))),
 	}
 	s.grpc = grpc.NewServer(opts...)
 	pb.RegisterClimbServiceServer(s.grpc, s)
@@ -108,24 +108,24 @@ func (s *Server) GetCrags(ctx context.Context, req *pb.GetCragsRequest) (*pb.Get
 // the token is missing or invalid, the interceptor blocks execution of the
 // handler and returns an error. Otherwise, the interceptor invokes the unary
 // handler.
-func ensureValidToken(ctx context.Context, req any, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {
-		return nil, errMissingMetadata
+func ensureValidToken(token string) grpc.UnaryServerInterceptor {
+	return func(ctx context.Context, req any, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
+		md, ok := metadata.FromIncomingContext(ctx)
+		if !ok {
+			return nil, errMissingMetadata
+		}
+		// The keys within metadata.MD are normalized to lowercase.
+		// See: https://godoc.org/google.golang.org/grpc/metadata#New
+		if !valid(md["authorization"], token) {
+			return nil, errInvalidToken
+		}
+		// Continue execution of handler after ensuring a valid token.
+		return handler(ctx, req)
 	}
-	// The keys within metadata.MD are normalized to lowercase.
-	// See: https://godoc.org/google.golang.org/grpc/metadata#New
-	if !valid(md["authorization"]) {
-		return nil, errInvalidToken
-	}
-	// Continue execution of handler after ensuring a valid token.
-	return handler(ctx, req)
 }
 
-var apiKey = os.Getenv("API_KEY")
-
 // valid validates the authorization.
-func valid(authorization []string) bool {
+func valid(authorization []string, apiKey string) bool {
 	if len(authorization) < 1 {
 		return false
 	}

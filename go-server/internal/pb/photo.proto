@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pb;
+
+import "timestamps.proto";
+import "upload.proto";
+
+option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+message Photo {
+  int64 id = 1;
+  string title = 2;
+  string description = 3;
+  Upload upload = 4;
+  // Topo topo = 5;
+  Timestamps timestamps = 6;
+}
+

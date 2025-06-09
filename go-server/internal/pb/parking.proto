@@ -11,5 +11,5 @@ message Parking {
   string name = 2;
   string description = 3;
   Coordinate location = 4;
-    // Crag crag = 5; // Omitted to avoid circular reference
+  int64 crag_id = 5;
 }

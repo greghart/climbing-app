@@ -26,7 +26,7 @@ func main() {
 
 	server := myhttp.NewServer(env, myhttp.Options{
 		ExpectedHost: cfg.ExpectedHost,
-		Port:         8080,
+		Port:         cfg.HTTPPort,
 	})
 	go func() {
 		if err := server.Start(); !errors.Is(err, http.ErrServerClosed) {
@@ -36,7 +36,7 @@ func main() {
 
 	grpcServer := grpc.NewServer(env, grpc.Options{
 		ExpectedHost: cfg.ExpectedHost,
-		Port:         8081,
+		Port:         cfg.GRPCPort,
 	})
 	go func() {
 		if err := grpcServer.Start(); err != nil {

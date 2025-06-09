@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package pb;
+
+import "topogon_data.proto";
+
+option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+message Topogon {
+  int64 id = 1;
+  string label = 2;
+  TopogonData data = 3;
+  int64 topo_id = 4;
+  int64 area_id = 5;
+  int64 boulder_id = 6;
+  int64 route_id = 7;
+}

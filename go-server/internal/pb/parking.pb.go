@@ -26,7 +26,8 @@ type Parking struct {
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Location      *Coordinate            `protobuf:"bytes,4,opt,name=location,proto3" json:"location,omitempty"` // Crag crag = 5; // Omitted to avoid circular reference
+	Location      *Coordinate            `protobuf:"bytes,4,opt,name=location,proto3" json:"location,omitempty"`
+	CragId        int64                  `protobuf:"varint,5,opt,name=crag_id,json=cragId,proto3" json:"crag_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -89,16 +90,24 @@ func (x *Parking) GetLocation() *Coordinate {
 	return nil
 }
 
+func (x *Parking) GetCragId() int64 {
+	if x != nil {
+		return x.CragId
+	}
+	return 0
+}
+
 var File_parking_proto protoreflect.FileDescriptor
 
 const file_parking_proto_rawDesc = "" +
 	"\n" +
-	"\rparking.proto\x12\x02pb\x1a\x10coordinate.proto\"{\n" +
+	"\rparking.proto\x12\x02pb\x1a\x10coordinate.proto\"\x94\x01\n" +
 	"\aParking\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12*\n" +
-	"\blocation\x18\x04 \x01(\v2\x0e.pb.CoordinateR\blocationB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
+	"\blocation\x18\x04 \x01(\v2\x0e.pb.CoordinateR\blocation\x12\x17\n" +
+	"\acrag_id\x18\x05 \x01(\x03R\x06cragIdB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
 
 var (
 	file_parking_proto_rawDescOnce sync.Once

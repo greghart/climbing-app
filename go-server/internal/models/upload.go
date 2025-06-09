@@ -1,7 +1,7 @@
 package models
 
 type Upload struct {
-	ID           int    `json:"id" sqlp:"id"`
+	ID           int64  `json:"id" sqlp:"id"`
 	Key          string `json:"key" sqlp:"key"`
 	Directory    string `json:"directory" sqlp:"directory"`
 	Engine       string `json:"engine" sqlp:"engine"`
@@ -12,5 +12,12 @@ type Upload struct {
 }
 
 func (u Upload) IsZero() bool {
-	return u.ID == 0 && u.Key == "" && u.Directory == "" && u.Engine == "" && u.OriginalName == "" && u.FileSize == 0 && u.Sha1Hash == "" && u.UploadedAt == ""
+	return u.ID == 0 &&
+		u.Key == "" &&
+		u.Directory == "" &&
+		u.Engine == "" &&
+		u.OriginalName == "" &&
+		u.FileSize == 0 &&
+		u.Sha1Hash == "" &&
+		u.UploadedAt == ""
 }

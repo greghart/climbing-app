@@ -10,5 +10,5 @@ message Polygon {
   int64 id = 1;
   string descriptor = 2;
   repeated Coordinate coordinates = 3;
-    // Area area = 4; // Omitted to avoid circular reference
+  int64 area_id = 4;
 }

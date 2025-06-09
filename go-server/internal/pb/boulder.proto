@@ -1,9 +1,23 @@
 syntax = "proto3";
+
 package pb;
+
+import "comment.proto";
+import "coordinate.proto";
+import "photo.proto";
+import "polygon.proto";
+import "route.proto";
 
 option go_package = "github.com/greghart/climbing-app/internal/pb";
 
 message Boulder {
   int64 id = 1;
-    // Add more fields as needed
+  string name = 2;
+  string description = 3;
+  Coordinate coordinates = 4;
+  int64 area_id = 5;
+  repeated Route routes = 6;
+  Polygon polygon = 7;
+  repeated Comment comments = 8;
+  repeated Photo photos = 9;
 }

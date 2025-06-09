@@ -4,10 +4,10 @@ package pb;
 
 import "area.proto";
 import "bounds.proto";
-import "commentable.proto";
+import "comment.proto";
 import "coordinate.proto";
 import "parking.proto";
-import "photoable.proto";
+import "photo.proto";
 import "trail.proto";
 
 option go_package = "github.com/greghart/climbing-app/internal/pb";
@@ -23,7 +23,7 @@ message Crag {
   int32 max_zoom = 8;
   Parking parking = 9;
   repeated Area areas = 10;
-  Commentable commentable = 11;
-  Photoable photoable = 12;
+  repeated Comment comments = 11;
+  repeated Photo photos = 12;
   Trail trail = 13;
 }

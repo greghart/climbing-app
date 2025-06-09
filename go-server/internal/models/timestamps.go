@@ -1,10 +1,13 @@
 package models
 
+import "time"
+
 type Timestamps struct {
-	CreatedAt string `json:"createdAt"`
-	UpdatedAt string `json:"updatedAt"`
+	CreatedAt time.Time `json:"createdAt" sqlp:"created_at"`
+	UpdatedAt time.Time `json:"updatedAt" sqlp:"updated_at"`
 }
 
 func (t Timestamps) IsZero() bool {
-	return t.CreatedAt == "" && t.UpdatedAt == ""
+	return t.CreatedAt.IsZero() &&
+		t.UpdatedAt.IsZero()
 }

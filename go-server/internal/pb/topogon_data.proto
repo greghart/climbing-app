@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+message TopogonData {
+  // Sub-messages for internal representation of topogon data.
+  message Point {
+    double x = 1;
+    double y = 2;
+  }
+
+  message Line {
+    repeated Point points = 1;
+    string color = 2;
+    double tension = 3;
+  }
+
+  message Label {
+    string text = 1;
+    Point point = 2;
+    string color = 3;
+    string fill = 4;
+    Direction direction = 5;
+  }
+
+  enum Direction {
+    DIRECTION_UNSPECIFIED = 0;
+    DIRECTION_UP = 1;
+    DIRECTION_RIGHT = 2;
+    DIRECTION_DOWN = 3;
+    DIRECTION_LEFT = 4;
+  }
+
+  repeated Label polygons = 1;
+  repeated Line lines = 2;
+}

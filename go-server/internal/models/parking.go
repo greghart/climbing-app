@@ -9,5 +9,9 @@ type Parking struct {
 }
 
 func (p Parking) IsZero() bool {
-	return p.ID == nil && p.Name == nil && p.Description == nil && p.Location.IsZero() && p.Crag == nil
+	return p.ID == nil &&
+		p.Name == nil &&
+		p.Description == nil &&
+		p.Location.IsZero() &&
+		p.Crag == nil
 }

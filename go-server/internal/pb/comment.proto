@@ -1,9 +1,13 @@
 syntax = "proto3";
+
 package pb;
+
+import "timestamps.proto";
 
 option go_package = "github.com/greghart/climbing-app/internal/pb";
 
 message Comment {
   int64 id = 1;
-    // Add more fields as needed
+  string text = 2;
+  Timestamps timestamps = 3;
 }

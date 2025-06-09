@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package pb;
+
+import "grade.proto";
+
+option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+message Route {
+  // Size specifies the size of the route in whatever dimensions user puts in
+  message Size {
+    SizeUnits units = 1; // Units of measurement
+    int32 height = 2; // Height from bottom to top
+    int32 width = 3; // Width from left to right
+  }
+  enum SizeUnits {
+    SIZE_UNITS_UNSPECIFIED = 0; // Unspecified size units
+    SIZE_UNITS_METERS = 1; // Meters
+    SIZE_UNITS_FEET = 2; // Feet
+  }
+
+  int64 id = 1;
+  string name = 2;
+  Size size = 3;
+  string description = 4;
+  string first_ascent = 5;
+  Grade grade = 6;
+  int64 boulder_id = 8;
+}

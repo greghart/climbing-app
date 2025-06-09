@@ -23,7 +23,15 @@ const (
 
 type Boulder struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // Add more fields as needed
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Coordinates   *Coordinate            `protobuf:"bytes,4,opt,name=coordinates,proto3" json:"coordinates,omitempty"`
+	AreaId        int64                  `protobuf:"varint,5,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
+	Routes        []*Route               `protobuf:"bytes,6,rep,name=routes,proto3" json:"routes,omitempty"`
+	Polygon       *Polygon               `protobuf:"bytes,7,opt,name=polygon,proto3" json:"polygon,omitempty"`
+	Comments      []*Comment             `protobuf:"bytes,8,rep,name=comments,proto3" json:"comments,omitempty"`
+	Photos        []*Photo               `protobuf:"bytes,9,rep,name=photos,proto3" json:"photos,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -65,13 +73,77 @@ func (x *Boulder) GetId() int64 {
 	return 0
 }
 
+func (x *Boulder) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Boulder) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *Boulder) GetCoordinates() *Coordinate {
+	if x != nil {
+		return x.Coordinates
+	}
+	return nil
+}
+
+func (x *Boulder) GetAreaId() int64 {
+	if x != nil {
+		return x.AreaId
+	}
+	return 0
+}
+
+func (x *Boulder) GetRoutes() []*Route {
+	if x != nil {
+		return x.Routes
+	}
+	return nil
+}
+
+func (x *Boulder) GetPolygon() *Polygon {
+	if x != nil {
+		return x.Polygon
+	}
+	return nil
+}
+
+func (x *Boulder) GetComments() []*Comment {
+	if x != nil {
+		return x.Comments
+	}
+	return nil
+}
+
+func (x *Boulder) GetPhotos() []*Photo {
+	if x != nil {
+		return x.Photos
+	}
+	return nil
+}
+
 var File_boulder_proto protoreflect.FileDescriptor
 
 const file_boulder_proto_rawDesc = "" +
 	"\n" +
-	"\rboulder.proto\x12\x02pb\"\x19\n" +
+	"\rboulder.proto\x12\x02pb\x1a\rcomment.proto\x1a\x10coordinate.proto\x1a\vphoto.proto\x1a\rpolygon.proto\x1a\vroute.proto\"\xb0\x02\n" +
 	"\aBoulder\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02idB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x120\n" +
+	"\vcoordinates\x18\x04 \x01(\v2\x0e.pb.CoordinateR\vcoordinates\x12\x17\n" +
+	"\aarea_id\x18\x05 \x01(\x03R\x06areaId\x12!\n" +
+	"\x06routes\x18\x06 \x03(\v2\t.pb.RouteR\x06routes\x12%\n" +
+	"\apolygon\x18\a \x01(\v2\v.pb.PolygonR\apolygon\x12'\n" +
+	"\bcomments\x18\b \x03(\v2\v.pb.CommentR\bcomments\x12!\n" +
+	"\x06photos\x18\t \x03(\v2\t.pb.PhotoR\x06photosB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
 
 var (
 	file_boulder_proto_rawDescOnce sync.Once
@@ -87,14 +159,24 @@ func file_boulder_proto_rawDescGZIP() []byte {
 
 var file_boulder_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_boulder_proto_goTypes = []any{
-	(*Boulder)(nil), // 0: pb.Boulder
+	(*Boulder)(nil),    // 0: pb.Boulder
+	(*Coordinate)(nil), // 1: pb.Coordinate
+	(*Route)(nil),      // 2: pb.Route
+	(*Polygon)(nil),    // 3: pb.Polygon
+	(*Comment)(nil),    // 4: pb.Comment
+	(*Photo)(nil),      // 5: pb.Photo
 }
 var file_boulder_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: pb.Boulder.coordinates:type_name -> pb.Coordinate
+	2, // 1: pb.Boulder.routes:type_name -> pb.Route
+	3, // 2: pb.Boulder.polygon:type_name -> pb.Polygon
+	4, // 3: pb.Boulder.comments:type_name -> pb.Comment
+	5, // 4: pb.Boulder.photos:type_name -> pb.Photo
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_boulder_proto_init() }
@@ -102,6 +184,11 @@ func file_boulder_proto_init() {
 	if File_boulder_proto != nil {
 		return
 	}
+	file_comment_proto_init()
+	file_coordinate_proto_init()
+	file_photo_proto_init()
+	file_polygon_proto_init()
+	file_route_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

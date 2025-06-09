@@ -4,9 +4,12 @@ type Polygon struct {
 	ID          *int64       `json:"id,omitzero" sqlp:"id"`
 	Descriptor  *string      `json:"descriptor,omitzero" sqlp:"descriptor"`
 	Coordinates []Coordinate `json:"coordinates,omitzero" sqlp:"coordinates"`
-	Area        *Area        `json:"area,omitzero" sqlp:"area"`
+	AreaID      int64        `json:"area_id,omitzero" sqlp:"area"`
 }
 
 func (p Polygon) IsZero() bool {
-	return p.ID == nil && p.Descriptor == nil && len(p.Coordinates) == 0 && p.Area == nil
+	return p.ID == nil &&
+		p.Descriptor == nil &&
+		len(p.Coordinates) == 0 &&
+		p.AreaID == 0
 }

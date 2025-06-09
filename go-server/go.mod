@@ -4,6 +4,8 @@ go 1.24.1
 
 require (
 	github.com/gin-gonic/gin v1.10.1
+	github.com/google/go-cmp v0.7.0
+	github.com/greghart/powerputtygo/errcmp v0.0.0-00010101000000-000000000000
 	github.com/greghart/powerputtygo/sqlp v0.0.0-00010101000000-000000000000
 	github.com/joho/godotenv v1.5.1
 	github.com/mattn/go-sqlite3 v1.14.28
@@ -88,7 +90,6 @@ require (
 	github.com/golangci/plugin-module-register v0.1.1 // indirect
 	github.com/golangci/revgrep v0.8.0 // indirect
 	github.com/golangci/unconvert v0.0.0-20240309020433-c5143eacb3ed // indirect
-	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/gordonklaus/ineffassign v0.1.0 // indirect
 	github.com/gostaticanalysis/analysisutil v0.7.1 // indirect
 	github.com/gostaticanalysis/comment v1.5.0 // indirect
