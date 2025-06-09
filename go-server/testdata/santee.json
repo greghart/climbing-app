@@ -1,0 +1,333 @@
+{
+    "id": 55,
+    "name": "Santee",
+    "description": "Welcome to Santee, your local slab and crack training mecca.",
+    "bounds": {
+        "topLeft": {
+            "lat": 32.85220489996955,
+            "lng": -117.02677988327027
+        },
+        "bottomRight": {
+            "lat": 32.84690509679729,
+            "lng": -117.01916240966798
+        }
+    },
+    "center": {
+        "lat": 32.850515,
+        "lng": -117.022235
+    },
+    "defaultZoom": 18,
+    "minZoom": 17,
+    "maxZoom": 22,
+    "areas": [
+        {
+            "id": 226,
+            "name": "Dog Pile Area",
+            "description": "",
+            "boulders": [
+                {
+                    "id": 1445,
+                    "name": "20 Point Boulder",
+                    "description": "",
+                    "coordinates": {
+                        "lat": 32.85059381131804,
+                        "lng": -117.0241365662861
+                    }
+                },
+                {
+                    "id": 1444,
+                    "name": "Butt Plug",
+                    "description": "Name speaks for itself",
+                    "coordinates": {
+                        "lat": 32.85038594495237,
+                        "lng": -117.0234277925539
+                    }
+                },
+                {
+                    "id": 1475,
+                    "name": "Outlander Boulder",
+                    "description": "Stands alone, totally outside the dog pile area farther to the south at the end of the wash",
+                    "coordinates": {
+                        "lat": 32.84947560846604,
+                        "lng": -117.02273008293392
+                    }
+                },
+                {
+                    "id": 1449,
+                    "name": "Pile Unknown",
+                    "description": "",
+                    "coordinates": {
+                        "lat": 32.850195,
+                        "lng": -117.023335
+                    }
+                },
+                {
+                    "id": 1448,
+                    "name": "Round Rock",
+                    "description": "A predictably oval-like rock seen easily from the trail.",
+                    "coordinates": {
+                        "lat": 32.850625,
+                        "lng": -117.022945
+                    }
+                },
+                {
+                    "id": 1447,
+                    "name": "Snow Cone Boulder",
+                    "description": "",
+                    "coordinates": {
+                        "lat": 32.850465,
+                        "lng": -117.023495
+                    }
+                },
+                {
+                    "id": 1446,
+                    "name": "Suzie's Boulder",
+                    "description": "If you're at the dog pile, you'll be looking roughly at the Mean Streak face of the boulder",
+                    "coordinates": {
+                        "lat": 32.850355,
+                        "lng": -117.022885
+                    }
+                },
+                {
+                    "id": 1451,
+                    "name": "The Dog Pile",
+                    "description": "The cluster of very large and noticeable boulder, mostly with climbs on the south and east sides",
+                    "coordinates": {
+                        "lat": 32.850474999999996,
+                        "lng": -117.023115
+                    }
+                }
+            ]
+        },
+        {
+            "id": 227,
+            "name": "Hillside Area",
+            "description": "",
+            "boulders": [
+                {
+                    "id": 1453,
+                    "name": "Bread Loaf Boulder",
+                    "description": "The squat and unsurprisingly bread loaf shaped boulder just east of the more obvious painted crack boulder.",
+                    "coordinates": {
+                        "lat": 32.850215,
+                        "lng": -117.020205
+                    }
+                },
+                {
+                    "id": 1460,
+                    "name": "EB Boulder",
+                    "description": "One of the nicest hangout boulders in Santee due to the adjacent eucalyptus tree, it also hosts a few solid lines.",
+                    "coordinates": {
+                        "lat": 32.850428124338094,
+                        "lng": -117.0205444470048
+                    }
+                },
+                {
+                    "id": 1459,
+                    "name": "Gumdrop Boulder, The",
+                    "description": "The east most boulder in Santee, past Painted and Breadloaf.",
+                    "coordinates": {
+                        "lat": 32.850085,
+                        "lng": -117.01999500000001
+                    }
+                },
+                {
+                    "id": 1458,
+                    "name": "Lightbulb Boulder",
+                    "description": "The bulb shaped boulder sitting in the middle of the hillside.",
+                    "coordinates": {
+                        "lat": 32.85008505941492,
+                        "lng": -117.02055115252735
+                    }
+                },
+                {
+                    "id": 1457,
+                    "name": "No Hands Traverse Boulder",
+                    "description": "You can either scramble your way west from Lightbulb Boulder, or turn right off the main trail.",
+                    "coordinates": {
+                        "lat": 32.849865,
+                        "lng": -117.021075
+                    }
+                },
+                {
+                    "id": 1456,
+                    "name": "Offwidth Rock",
+                    "description": "The largest boulder viewable from the entrance, with an obvious offwidth crack that beckons you to find its' secrets.",
+                    "coordinates": {
+                        "lat": 32.85023687566521,
+                        "lng": -117.02077176421884
+                    }
+                },
+                {
+                    "id": 1455,
+                    "name": "Painted Crack Boulder",
+                    "description": "The large boulder with an obvious crack seen from the trail, straight east and a bit than offwidth rock.",
+                    "coordinates": {
+                        "lat": 32.850155,
+                        "lng": -117.020355
+                    }
+                },
+                {
+                    "id": 1454,
+                    "name": "Sunset Grill Boulder",
+                    "description": "You can either scramble your way west from Lightbulb Boulder, or go past No Hands Boulder when turning off from the main trail",
+                    "coordinates": {
+                        "lat": 32.849965,
+                        "lng": -117.021035
+                    }
+                },
+                {
+                    "id": 1461,
+                    "name": "The Donkey Dick",
+                    "description": "The obviously phallic boulder easily seeable from the entrance to Santee.",
+                    "coordinates": {
+                        "lat": 32.849885,
+                        "lng": -117.02048500000001
+                    }
+                }
+            ]
+        },
+        {
+            "id": 228,
+            "name": "Moby Dick Area",
+            "description": "",
+            "boulders": [
+                {
+                    "id": 1462,
+                    "name": "Amphitheater, The",
+                    "description": "",
+                    "coordinates": {
+                        "lat": 32.850644510357746,
+                        "lng": -117.02113048053266
+                    }
+                },
+                {
+                    "id": 1469,
+                    "name": "Animal Boulder",
+                    "description": "A bit hidden behind the bushes, but close to the main trail with a few easy problems.",
+                    "coordinates": {
+                        "lat": 32.850635,
+                        "lng": -117.021375
+                    }
+                },
+                {
+                    "id": 1468,
+                    "name": "Beehive Boulder",
+                    "description": "One of the most versatile and featured boulders in Santee, with cracks, jugs, slopers and crimps",
+                    "coordinates": {
+                        "lat": 32.85101066922889,
+                        "lng": -117.02086460656407
+                    }
+                },
+                {
+                    "id": 1476,
+                    "name": "Beehive Boulder #2",
+                    "description": "A bit up the hill from Beehive lies another boulder with a fair amount of crimps and jugs.",
+                    "coordinates": {
+                        "lat": 32.85086871243049,
+                        "lng": -117.02067517555238
+                    }
+                },
+                {
+                    "id": 1467,
+                    "name": "Bullet Hole Wall",
+                    "description": "Named for an actual bullet hole on the north face of this boulder that hugs the Moby Dick on the north side.\r\nSadly the bullet hole is now a \"chiseled out bullet hole\", but that doesn't roll off the tongue as well",
+                    "coordinates": {
+                        "lat": 32.850771539491134,
+                        "lng": -117.02107381886722
+                    }
+                },
+                {
+                    "id": 1466,
+                    "name": "Lieback Rock",
+                    "description": "",
+                    "coordinates": {
+                        "lat": 32.851255,
+                        "lng": -117.020715
+                    }
+                },
+                {
+                    "id": 1465,
+                    "name": "Moby Dick",
+                    "description": "",
+                    "coordinates": {
+                        "lat": 32.850725,
+                        "lng": -117.020975
+                    }
+                },
+                {
+                    "id": 1464,
+                    "name": "Mudball Cracks",
+                    "description": "Watch out for critters and bees in these generous cracks, great for learning or honing your techniques.",
+                    "coordinates": {
+                        "lat": 32.851304999999996,
+                        "lng": -117.020905
+                    }
+                },
+                {
+                    "id": 1463,
+                    "name": "Triangle Boulder",
+                    "description": "An obvious triangle shaped boulder whose overhanging face should be visible to the right as you come up the trail",
+                    "coordinates": {
+                        "lat": 32.850235,
+                        "lng": -117.021435
+                    }
+                }
+            ]
+        },
+        {
+            "id": 229,
+            "name": "Synchronicity Area",
+            "description": "",
+            "boulders": [
+                {
+                    "id": 1474,
+                    "name": "Lonesome Boulder",
+                    "description": "Up and right from The Carousel, it should be quite noticeable from the main trail.",
+                    "coordinates": {
+                        "lat": 32.851524999999995,
+                        "lng": -117.022045
+                    }
+                },
+                {
+                    "id": 1473,
+                    "name": "Moon Boulder, The",
+                    "description": "Southwest of The Carousel, it's a bit more shrouded from the trail, but should still be easily ID'd by the black spot slab.",
+                    "coordinates": {
+                        "lat": 32.850995,
+                        "lng": -117.022595
+                    }
+                },
+                {
+                    "id": 1472,
+                    "name": "Synchronicity Boulder",
+                    "description": "Obvious boulder at end of the wash, but unfortunately bare of boulder routes.",
+                    "coordinates": {
+                        "lat": 32.851030948752985,
+                        "lng": -117.02174805915834
+                    }
+                },
+                {
+                    "id": 1470,
+                    "name": "The Carousel",
+                    "description": "So called for its' potential to be traversed all the way around. South Side Undercling should be obvious from the trail.",
+                    "coordinates": {
+                        "lat": 32.851214999999996,
+                        "lng": -117.022495
+                    }
+                },
+                {
+                    "id": 1471,
+                    "name": "Undisclosed Boulder",
+                    "description": "Hard to get to and a bit messy! ",
+                    "coordinates": {
+                        "lat": 32.851395,
+                        "lng": -117.023065
+                    }
+                }
+            ]
+        }
+    ],
+    "createdAt": "2024-07-14T03:01:03Z",
+    "updatedAt": "2025-02-14T18:01:58Z"
+}

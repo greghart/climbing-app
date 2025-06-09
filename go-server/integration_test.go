@@ -2,9 +2,11 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
+	"strings"
 	"testing"
 	"time"
 
@@ -40,24 +42,40 @@ func TestServer_crags(t *testing.T) {
 		errcmp.MustMatch(t, err, "rpc error: code = NotFound desc = failed to find crag -1")
 	})
 
+	// Santee is a good option for snapshot testing, since it should basically never change.
 	t.Run("GetCrag Santee", func(t *testing.T) {
 		res, err := client.GetCrag(ctx, &pb.GetCragRequest{
 			Id: 55,
 		})
 		errcmp.MustMatch(t, err, "")
-		expected := mygrpc.ProtoToCrag(&pb.Crag{
-			Id:          55,
-			Name:        "Santee",
-			Description: "Welcome to Santee, your local slab and crack training mecca.",
-			Center:      &pb.Coordinate{Lat: 32.850515, Lng: -117.022235},
-			Areas: []*pb.Area{
-				{Id: 226, Name: "Dog Pile Area"},
-				{Id: 227, Name: "Hillside Area"},
-				{Id: 228, Name: "Moby Dick Area"},
-				{Id: 229, Name: "Synchronicity Area"},
-			},
-		})
+		// TODO: Get expected data for model.Crag from `testdata/santee.json`
+
+		// expected := mygrpc.ProtoToCrag(&pb.Crag{
+		// 	Id:          55,
+		// 	Name:        "Santee",
+		// 	Description: "Welcome to Santee, your local slab and crack training mecca.",
+		// 	Center:      &pb.Coordinate{Lat: 32.850515, Lng: -117.022235},
+		// 	Areas: []*pb.Area{
+		// 		{Id: 226, Name: "Dog Pile Area", Boulders: []*pb.Boulder{
+		// 			{Id: 1445, Name: "20 Point Boulder"},
+		// 			{Id: 1444, Name: "Butt Plug"},
+		// 			{Id: 1475, Name: "Outlander Boulder"},
+		// 			{Id: 1449, Name: "Pile Unknown"},
+		// 			{Id: 1448, Name: "Round Rock"},
+		// 			{Id: 1447, Name: "Snow Cone Boulder"},
+		// 		}},
+		// 		{Id: 227, Name: "Hillside Area"},
+		// 		{Id: 228, Name: "Moby Dick Area"},
+		// 		{Id: 229, Name: "Synchronicity Area"},
+		// 	},
+		// })
+		// Load expected crag from testdata/santee.json
+		expected, err := loadCragFromJSON("testdata/santee.json")
+		if err != nil {
+			t.Fatalf("failed to load expected crag: %v", err)
+		}
 		actual := mygrpc.ProtoToCrag(res.Crag)
+		// For integration test,
 		if !cmp.Equal(actual, expected, cragComparer) {
 			t.Errorf("GetCrag response mismatch (-got +want):\n%v", cmp.Diff(actual, expected, cragComparer))
 		}
@@ -65,6 +83,7 @@ func TestServer_crags(t *testing.T) {
 }
 
 // //////////////////////////////////////////////////////////////////////////////
+
 // TODO: Setup a test util package for our entity comparers in a shared space
 func _ptrComparer[T any](cmp func(a, b T) bool) func(x, y *T) bool {
 	return func(x, y *T) bool {
@@ -105,11 +124,11 @@ func _routeComparer(x, y models.Route) bool {
 func _boulderComparer(x, y models.Boulder) bool {
 	return (x.ID == y.ID &&
 		x.Name == y.Name &&
+		_ptrStringComparer(x.Description, y.Description) &&
 		cmp.Equal(x.Coordinates, y.Coordinates) &&
 		// TODO Polygon comparer
 		// TODO Comments comparer
 		// TODO Photo comparer
-		_ptrStringComparer(x.Description, y.Description) &&
 		_sliceComparer(x.Routes, y.Routes, _routeComparer))
 }
 
@@ -129,7 +148,23 @@ func _cragComparer(x, y models.Crag) bool {
 		_sliceComparer(x.Areas, y.Areas, _areaComparer))
 }
 
-var cragComparer = cmp.Comparer(_cragComparer)
+func pathFilter(paths ...string) func(cmp.Path) bool {
+	return func(p cmp.Path) bool {
+		for _, p2 := range paths {
+			if strings.Contains(p.String(), p2) {
+				return true
+			}
+		}
+		return false
+	}
+}
+
+var (
+	cragComparer    = cmp.Comparer(_cragComparer)
+	areaComparer    = cmp.Comparer(_areaComparer)
+	boulderComparer = cmp.Comparer(_boulderComparer)
+	routeComparer   = cmp.Comparer(_routeComparer)
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -183,4 +218,18 @@ func grpcClient(t *testing.T) pb.ClimbServiceClient {
 
 	client := pb.NewClimbServiceClient(conn)
 	return client
+}
+
+// loadCragFromJSON loads a models.Crag from a JSON file
+func loadCragFromJSON(path string) (*models.Crag, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+	var crag models.Crag
+	if err := json.NewDecoder(f).Decode(&crag); err != nil {
+		return nil, err
+	}
+	return &crag, nil
 }
