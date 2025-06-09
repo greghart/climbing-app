@@ -45,13 +45,6 @@ func derefInt32(i *int) int32 {
 	return int32(*i)
 }
 
-func derefInt64(i *int64) int64 {
-	if i == nil {
-		return 0
-	}
-	return *i
-}
-
 // BoundsToProto converts a *models.Bounds to a *pb.Bounds
 func BoundsToProto(m *models.Bounds) *pb.Bounds {
 	if m == nil {
@@ -80,7 +73,7 @@ func ParkingToProto(m *models.Parking) *pb.Parking {
 		return nil
 	}
 	return &pb.Parking{
-		Id:          derefInt64(m.ID),
+		Id:          m.ID,
 		Name:        derefString(m.Name),
 		Description: derefString(m.Description),
 		Location:    CoordinateToProto(&m.Location),
@@ -118,7 +111,7 @@ func PolygonToProto(m *models.Polygon) *pb.Polygon {
 		return nil
 	}
 	return &pb.Polygon{
-		Id:          derefInt64(m.ID),
+		Id:          m.ID,
 		Descriptor_: derefString(m.Descriptor),
 		Coordinates: CoordinatesToProto(m.Coordinates),
 	}
@@ -148,7 +141,7 @@ func BoulderToProto(m *models.Boulder) *pb.Boulder {
 		return nil
 	}
 	return &pb.Boulder{
-		Id:          derefInt64(m.ID),
+		Id:          m.ID,
 		Name:        m.Name,
 		Description: derefString(m.Description),
 		Coordinates: CoordinateToProto(&m.Coordinates),
@@ -192,16 +185,12 @@ func RouteToProto(m *models.Route) *pb.Route {
 	if m == nil {
 		return nil
 	}
-	var boulderId int64
-	if m.Boulder != nil && m.Boulder.ID != nil {
-		boulderId = *m.Boulder.ID
-	}
 	return &pb.Route{
-		Id:          derefInt64(m.ID),
+		Id:          m.ID,
 		Name:        m.Name,
 		Description: derefString(m.Description),
 		FirstAscent: derefString(m.FirstAscent),
-		BoulderId:   boulderId,
+		BoulderId:   m.BoulderID,
 		Grade:       GradeToProto(m.Grade),
 		// TODO: Size is omitted as models.Route does not have a Size field yet
 	}
@@ -225,7 +214,7 @@ func CommentToProto(m *models.Comment) *pb.Comment {
 		return nil
 	}
 	return &pb.Comment{
-		Id:         derefInt64(m.ID),
+		Id:         m.ID,
 		Text:       m.Text,
 		Timestamps: TimestampsToProto(&m.Timestamps),
 	}
@@ -269,7 +258,7 @@ func TrailToProto(m *models.Trail) *pb.Trail {
 		return nil
 	}
 	return &pb.Trail{
-		Id:    derefInt64(m.ID),
+		Id:    m.ID,
 		Lines: LinesToProto(m.Lines),
 	}
 }
@@ -289,15 +278,10 @@ func LineToProto(m *models.Line) *pb.Line {
 		return nil
 	}
 	return &pb.Line{
-		Id:    derefInt64(m.ID),
+		Id:    m.ID,
 		Start: CoordinateToProto(&m.Start),
 		End:   CoordinateToProto(&m.End),
 	}
-}
-
-// Helper functions for creating pointers
-func int64Ptr(i int64) *int64 {
-	return &i
 }
 
 func intPtr(i int32) *int {
@@ -326,7 +310,7 @@ func ProtoToLine(p *pb.Line) *models.Line {
 		return nil
 	}
 	return &models.Line{
-		ID:    int64Ptr(p.Id),
+		ID:    p.Id,
 		Start: ProtoToCoordinate(p.Start),
 		End:   ProtoToCoordinate(p.End),
 	}
@@ -349,7 +333,7 @@ func ProtoToTrail(p *pb.Trail) *models.Trail {
 		return nil
 	}
 	return &models.Trail{
-		ID:    int64Ptr(p.Id),
+		ID:    p.Id,
 		Lines: ProtoToLines(p.Lines),
 	}
 }
@@ -431,7 +415,7 @@ func ProtoToParking(p *pb.Parking) *models.Parking {
 		return nil
 	}
 	return &models.Parking{
-		ID:          int64Ptr(p.GetId()),
+		ID:          p.GetId(),
 		Name:        stringPtr(p.GetName()),
 		Description: stringPtr(p.GetDescription()),
 		Location:    ProtoToCoordinate(p.GetLocation()),
@@ -471,7 +455,7 @@ func ProtoToPolygon(p *pb.Polygon) *models.Polygon {
 		return nil
 	}
 	return &models.Polygon{
-		ID:          int64Ptr(p.GetId()),
+		ID:          p.GetId(),
 		Descriptor:  stringPtr(p.GetDescriptor_()),
 		Coordinates: ProtoToCoordinates(p.GetCoordinates()),
 	}
@@ -505,7 +489,7 @@ func ProtoToBoulder(p *pb.Boulder) *models.Boulder {
 		return nil
 	}
 	return &models.Boulder{
-		ID:          int64Ptr(p.GetId()),
+		ID:          p.GetId(),
 		Name:        p.GetName(),
 		Description: stringPtr(p.GetDescription()),
 		Coordinates: ProtoToCoordinate(p.GetCoordinates()),
@@ -543,17 +527,13 @@ func ProtoToRoute(p *pb.Route) *models.Route {
 	if p == nil {
 		return nil
 	}
-	var boulder *models.Boulder
-	if p.BoulderId != 0 {
-		boulder = &models.Boulder{ID: int64Ptr(p.BoulderId)}
-	}
 	return &models.Route{
-		ID:          int64Ptr(p.GetId()),
+		ID:          p.GetId(),
 		Name:        p.GetName(),
 		Description: stringPtr(p.GetDescription()),
 		FirstAscent: stringPtr(p.GetFirstAscent()),
 		Grade:       ProtoToGrade(p.GetGrade()),
-		Boulder:     boulder,
+		BoulderID:   p.GetBoulderId(),
 		// Note: Size field is omitted as models.Route does not have it
 	}
 }
@@ -577,7 +557,7 @@ func ProtoToCommentable(p []*pb.Comment) *models.Commentable {
 		return nil
 	}
 	return &models.Commentable{
-		ID:         int64Ptr(0),
+		ID:         0,
 		Descriptor: "unknown",
 		Comments:   ProtoToComments(p),
 	}
@@ -600,7 +580,7 @@ func ProtoToComment(p *pb.Comment) *models.Comment {
 		return nil
 	}
 	return &models.Comment{
-		ID:         int64Ptr(p.GetId()),
+		ID:         p.GetId(),
 		Text:       p.GetText(),
 		Timestamps: ProtoToTimestamps(p.GetTimestamps()),
 	}

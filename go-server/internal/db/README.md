@@ -2,6 +2,15 @@
 
 Persistence layer is a sqlite database.
 
+## IDs
+
+Technically, when an entity hasn't been persisted yet, we have no ID and one may consider it nil.
+However, they are required in schema, and so this codebase chooses to use normal `int64`s for
+simplicity, with the convention that 0 value indicates the entity is not saved or non existent 
+(when embedded for example)
+
+Pointer primitives (or `sql.NullX`) should still be used for nullable columns.
+
 ## Relationships
 
 Generally, a parent (has many, has one side) can embed child data, while the child should just keep

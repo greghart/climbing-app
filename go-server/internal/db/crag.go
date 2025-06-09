@@ -79,7 +79,7 @@ func (c *Crags) GetCrag(ctx context.Context, id int) (*models.Crag, error) {
 			grabPending()
 			pending = row.Area
 		}
-		if row.Boulder.ID != nil {
+		if row.Boulder.ID != 0 {
 			pending.Boulders = append(pending.Boulders, row.Boulder)
 		}
 	}

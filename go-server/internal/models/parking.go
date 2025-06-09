@@ -1,7 +1,7 @@
 package models
 
 type Parking struct {
-	ID          *int64     `json:"id,omitzero" sqlp:"id"`
+	ID          int64      `json:"id,omitzero" sqlp:"id"`
 	Name        *string    `json:"name,omitzero" sqlp:"name"`
 	Description *string    `json:"description,omitzero" sqlp:"description"`
 	Location    Coordinate `json:"location" sqlp:"location"`
@@ -9,7 +9,7 @@ type Parking struct {
 }
 
 func (p Parking) IsZero() bool {
-	return p.ID == nil &&
+	return p.ID == 0 &&
 		p.Name == nil &&
 		p.Description == nil &&
 		p.Location.IsZero() &&

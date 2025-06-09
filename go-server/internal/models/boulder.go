@@ -1,7 +1,7 @@
 package models
 
 type Boulder struct {
-	ID          *int64       `json:"id,omitzero" sqlp:"id"`
+	ID          int64        `json:"id,omitzero" sqlp:"id"`
 	Name        string       `json:"name" sqlp:"name"`
 	Description *string      `json:"description,omitzero" sqlp:"description"`
 	Coordinates Coordinate   `json:"coordinates" sqlp:"coordinates"`
@@ -13,7 +13,7 @@ type Boulder struct {
 }
 
 func (b Boulder) IsZero() bool {
-	return b.ID == nil &&
+	return b.ID == 0 &&
 		b.Name == "" &&
 		b.Description == nil &&
 		b.Coordinates.IsZero() &&

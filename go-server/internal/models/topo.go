@@ -1,7 +1,7 @@
 package models
 
 type Topo struct {
-	ID       *int64    `json:"id,omitzero" sqlp:"id"`
+	ID       int64     `json:"id,omitzero" sqlp:"id"`
 	Title    string    `json:"title" sqlp:"title"`
 	Topogons []Topogon `json:"topogons,omitzero" sqlp:"topogons"`
 	// The scale of the photo when topogons were created.
@@ -10,5 +10,5 @@ type Topo struct {
 }
 
 func (t Topo) IsZero() bool {
-	return t.ID == nil && t.Title == "" && len(t.Topogons) == 0 && t.Scale == 0
+	return t.ID == 0 && t.Title == "" && len(t.Topogons) == 0 && t.Scale == 0
 }
