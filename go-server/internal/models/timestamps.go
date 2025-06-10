@@ -3,8 +3,8 @@ package models
 import "time"
 
 type Timestamps struct {
-	CreatedAt time.Time `json:"createdAt" sqlp:"created_at"`
-	UpdatedAt time.Time `json:"updatedAt" sqlp:"updated_at"`
+	CreatedAt time.Time `json:"createdAt" sqlp:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt" sqlp:"updatedAt"`
 }
 
 func (t Timestamps) IsZero() bool {

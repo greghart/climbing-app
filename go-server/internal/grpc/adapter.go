@@ -27,6 +27,7 @@ func CragToProto(m *models.Crag) *pb.Crag {
 		Comments:    CommentableToProto(m.Commentable),
 		Photos:      PhotoableToProto(m.Photoable),
 		Trail:       TrailToProto(m.Trail),
+		Timestamps:  TimestampsToProto(m.Timestamps),
 	}
 }
 
@@ -216,14 +217,13 @@ func CommentToProto(m *models.Comment) *pb.Comment {
 	return &pb.Comment{
 		Id:         m.ID,
 		Text:       m.Text,
-		Timestamps: TimestampsToProto(&m.Timestamps),
+		Timestamps: TimestampsToProto(m.Timestamps),
 	}
 }
 
-func TimestampsToProto(t *models.Timestamps) *pb.Timestamps {
-	if t == nil {
-		return nil
-	}
+// TimestampsToProto converts a models.Timestamps to a *pb.Timestamps.
+// Note that Timestamps are never nullable in our system.
+func TimestampsToProto(t models.Timestamps) *pb.Timestamps {
 	return &pb.Timestamps{
 		CreatedAt: timestamppb.New(t.CreatedAt),
 		UpdatedAt: timestamppb.New(t.UpdatedAt),
@@ -248,7 +248,7 @@ func PhotoToProto(m *models.Photo) *pb.Photo {
 		Title:       m.Title,
 		Description: derefString(m.Description),
 		Upload:      UploadToProto(m.Upload),
-		Timestamps:  TimestampsToProto(&m.Timestamps),
+		Timestamps:  TimestampsToProto(m.Timestamps),
 	}
 }
 
@@ -395,6 +395,7 @@ func ProtoToCrag(p *pb.Crag) *models.Crag {
 		Commentable: ProtoToCommentable(p.GetComments()),
 		Photoable:   ProtoToPhotoable(p.GetPhotos()),
 		Trail:       ProtoToTrail(p.GetTrail()),
+		Timestamps:  ProtoToTimestamps(p.GetTimestamps()),
 	}
 }
 
@@ -609,7 +610,7 @@ func UploadToProto(m *models.Upload) *pb.Upload {
 		OriginalName: m.OriginalName,
 		FileSize:     int64(m.FileSize),
 		Sha1Hash:     m.Sha1Hash,
-		UploadedAt:   m.UploadedAt,
+		UploadedAt:   timestamppb.New(m.UploadedAt),
 	}
 }
 
@@ -620,12 +621,12 @@ func ProtoToUpload(p *pb.Upload) *models.Upload {
 	}
 	return &models.Upload{
 		ID:           p.GetId(),
-		Key:          p.Key,
-		Directory:    p.Directory,
-		Engine:       p.Engine,
-		OriginalName: p.OriginalName,
-		FileSize:     int(p.FileSize),
-		Sha1Hash:     p.Sha1Hash,
-		UploadedAt:   p.UploadedAt,
+		Key:          p.GetKey(),
+		Directory:    p.GetDirectory(),
+		Engine:       p.GetEngine(),
+		OriginalName: p.GetOriginalName(),
+		FileSize:     int(p.GetFileSize()),
+		Sha1Hash:     p.GetSha1Hash(),
+		UploadedAt:   p.GetUploadedAt().AsTime(),
 	}
 }

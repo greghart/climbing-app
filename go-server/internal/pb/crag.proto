@@ -8,6 +8,7 @@ import "comment.proto";
 import "coordinate.proto";
 import "parking.proto";
 import "photo.proto";
+import "timestamps.proto";
 import "trail.proto";
 
 option go_package = "github.com/greghart/climbing-app/internal/pb";
@@ -26,4 +27,5 @@ message Crag {
   repeated Comment comments = 11;
   repeated Photo photos = 12;
   Trail trail = 13;
+  Timestamps timestamps = 14;
 }

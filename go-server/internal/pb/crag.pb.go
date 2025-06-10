@@ -36,6 +36,7 @@ type Crag struct {
 	Comments      []*Comment             `protobuf:"bytes,11,rep,name=comments,proto3" json:"comments,omitempty"`
 	Photos        []*Photo               `protobuf:"bytes,12,rep,name=photos,proto3" json:"photos,omitempty"`
 	Trail         *Trail                 `protobuf:"bytes,13,opt,name=trail,proto3" json:"trail,omitempty"`
+	Timestamps    *Timestamps            `protobuf:"bytes,14,opt,name=timestamps,proto3" json:"timestamps,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -161,13 +162,20 @@ func (x *Crag) GetTrail() *Trail {
 	return nil
 }
 
+func (x *Crag) GetTimestamps() *Timestamps {
+	if x != nil {
+		return x.Timestamps
+	}
+	return nil
+}
+
 var File_crag_proto protoreflect.FileDescriptor
 
 const file_crag_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
 	"crag.proto\x12\x02pb\x1a\n" +
-	"area.proto\x1a\fbounds.proto\x1a\rcomment.proto\x1a\x10coordinate.proto\x1a\rparking.proto\x1a\vphoto.proto\x1a\vtrail.proto\"\xa5\x03\n" +
+	"area.proto\x1a\fbounds.proto\x1a\rcomment.proto\x1a\x10coordinate.proto\x1a\rparking.proto\x1a\vphoto.proto\x1a\x10timestamps.proto\x1a\vtrail.proto\"\xd5\x03\n" +
 	"\x04Crag\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -183,7 +191,10 @@ const file_crag_proto_rawDesc = "" +
 	" \x03(\v2\b.pb.AreaR\x05areas\x12'\n" +
 	"\bcomments\x18\v \x03(\v2\v.pb.CommentR\bcomments\x12!\n" +
 	"\x06photos\x18\f \x03(\v2\t.pb.PhotoR\x06photos\x12\x1f\n" +
-	"\x05trail\x18\r \x01(\v2\t.pb.TrailR\x05trailB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
+	"\x05trail\x18\r \x01(\v2\t.pb.TrailR\x05trail\x12.\n" +
+	"\n" +
+	"timestamps\x18\x0e \x01(\v2\x0e.pb.TimestampsR\n" +
+	"timestampsB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
 
 var (
 	file_crag_proto_rawDescOnce sync.Once
@@ -207,6 +218,7 @@ var file_crag_proto_goTypes = []any{
 	(*Comment)(nil),    // 5: pb.Comment
 	(*Photo)(nil),      // 6: pb.Photo
 	(*Trail)(nil),      // 7: pb.Trail
+	(*Timestamps)(nil), // 8: pb.Timestamps
 }
 var file_crag_proto_depIdxs = []int32{
 	1, // 0: pb.Crag.bounds:type_name -> pb.Bounds
@@ -216,11 +228,12 @@ var file_crag_proto_depIdxs = []int32{
 	5, // 4: pb.Crag.comments:type_name -> pb.Comment
 	6, // 5: pb.Crag.photos:type_name -> pb.Photo
 	7, // 6: pb.Crag.trail:type_name -> pb.Trail
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	8, // 7: pb.Crag.timestamps:type_name -> pb.Timestamps
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_crag_proto_init() }
@@ -234,6 +247,7 @@ func file_crag_proto_init() {
 	file_coordinate_proto_init()
 	file_parking_proto_init()
 	file_photo_proto_init()
+	file_timestamps_proto_init()
 	file_trail_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{

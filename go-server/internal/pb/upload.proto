@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package pb;
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/greghart/climbing-app/internal/pb";
 
 message Upload {
@@ -12,5 +14,5 @@ message Upload {
   string original_name = 5;
   int64 file_size = 6;
   string sha1_hash = 7;
-  string uploaded_at = 8;
+  google.protobuf.Timestamp uploaded_at = 8;
 }

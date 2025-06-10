@@ -7,12 +7,12 @@ const BaseColumnSchemaPart = {
     generated: true,
   } as EntitySchemaColumnOptions,
   createdAt: {
-    name: "created_at",
+    name: "createdAt",
     type: "date",
     createDate: true,
   } as EntitySchemaColumnOptions,
   updatedAt: {
-    name: "updated_at",
+    name: "updatedAt",
     type: "date",
     updateDate: true,
   } as EntitySchemaColumnOptions,

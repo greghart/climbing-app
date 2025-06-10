@@ -9,6 +9,7 @@ package pb
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -30,7 +31,7 @@ type Upload struct {
 	OriginalName  string                 `protobuf:"bytes,5,opt,name=original_name,json=originalName,proto3" json:"original_name,omitempty"`
 	FileSize      int64                  `protobuf:"varint,6,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
 	Sha1Hash      string                 `protobuf:"bytes,7,opt,name=sha1_hash,json=sha1Hash,proto3" json:"sha1_hash,omitempty"`
-	UploadedAt    string                 `protobuf:"bytes,8,opt,name=uploaded_at,json=uploadedAt,proto3" json:"uploaded_at,omitempty"`
+	UploadedAt    *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=uploaded_at,json=uploadedAt,proto3" json:"uploaded_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -114,18 +115,18 @@ func (x *Upload) GetSha1Hash() string {
 	return ""
 }
 
-func (x *Upload) GetUploadedAt() string {
+func (x *Upload) GetUploadedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.UploadedAt
 	}
-	return ""
+	return nil
 }
 
 var File_upload_proto protoreflect.FileDescriptor
 
 const file_upload_proto_rawDesc = "" +
 	"\n" +
-	"\fupload.proto\x12\x02pb\"\xe0\x01\n" +
+	"\fupload.proto\x12\x02pb\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfc\x01\n" +
 	"\x06Upload\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x10\n" +
 	"\x03key\x18\x02 \x01(\tR\x03key\x12\x1c\n" +
@@ -133,8 +134,8 @@ const file_upload_proto_rawDesc = "" +
 	"\x06engine\x18\x04 \x01(\tR\x06engine\x12#\n" +
 	"\roriginal_name\x18\x05 \x01(\tR\foriginalName\x12\x1b\n" +
 	"\tfile_size\x18\x06 \x01(\x03R\bfileSize\x12\x1b\n" +
-	"\tsha1_hash\x18\a \x01(\tR\bsha1Hash\x12\x1f\n" +
-	"\vuploaded_at\x18\b \x01(\tR\n" +
+	"\tsha1_hash\x18\a \x01(\tR\bsha1Hash\x12;\n" +
+	"\vuploaded_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"uploadedAtB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
 
 var (
@@ -151,14 +152,16 @@ func file_upload_proto_rawDescGZIP() []byte {
 
 var file_upload_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_upload_proto_goTypes = []any{
-	(*Upload)(nil), // 0: pb.Upload
+	(*Upload)(nil),                // 0: pb.Upload
+	(*timestamppb.Timestamp)(nil), // 1: google.protobuf.Timestamp
 }
 var file_upload_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: pb.Upload.uploaded_at:type_name -> google.protobuf.Timestamp
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_upload_proto_init() }
