@@ -78,6 +78,7 @@ func ParkingToProto(m *models.Parking) *pb.Parking {
 		Name:        derefString(m.Name),
 		Description: derefString(m.Description),
 		Location:    CoordinateToProto(&m.Location),
+		CragId:      m.CragID,
 	}
 }
 
@@ -258,8 +259,9 @@ func TrailToProto(m *models.Trail) *pb.Trail {
 		return nil
 	}
 	return &pb.Trail{
-		Id:    m.ID,
-		Lines: LinesToProto(m.Lines),
+		Id:     m.ID,
+		CragId: m.CragID,
+		Lines:  LinesToProto(m.Lines),
 	}
 }
 
@@ -417,6 +419,7 @@ func ProtoToParking(p *pb.Parking) *models.Parking {
 	}
 	return &models.Parking{
 		ID:          p.GetId(),
+		CragID:      p.GetCragId(),
 		Name:        stringPtr(p.GetName()),
 		Description: stringPtr(p.GetDescription()),
 		Location:    ProtoToCoordinate(p.GetLocation()),

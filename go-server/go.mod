@@ -6,6 +6,7 @@ require (
 	github.com/gin-gonic/gin v1.10.1
 	github.com/google/go-cmp v0.7.0
 	github.com/greghart/powerputtygo/errcmp v0.0.0-00010101000000-000000000000
+	github.com/greghart/powerputtygo/mapperp v0.0.0-00010101000000-000000000000
 	github.com/greghart/powerputtygo/sqlp v0.0.0-00010101000000-000000000000
 	github.com/joho/godotenv v1.5.1
 	github.com/mattn/go-sqlite3 v1.14.28
@@ -221,6 +222,8 @@ require (
 )
 
 replace github.com/greghart/powerputtygo/sqlp => ../../powerputtygo/sqlp
+
+replace github.com/greghart/powerputtygo/mapperp => ../../powerputtygo/mapperp
 
 replace github.com/greghart/powerputtygo/errcmp => ../../powerputtygo/errcmp
 

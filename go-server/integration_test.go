@@ -48,7 +48,7 @@ func TestServer_crags(t *testing.T) {
 	santeeFixturePath := "testdata/santee.json"
 
 	t.Run("snapshot Santee", func(t *testing.T) {
-		t.SkipNow()
+		// t.SkipNow()
 
 		cfg := config.Load()
 		env := config.NewEnv(cfg)
@@ -78,15 +78,20 @@ func TestServer_crags(t *testing.T) {
 			t.Fatalf("failed to load expected crag: %v", err)
 		}
 		actual := mygrpc.ProtoToCrag(res.Crag)
-		// For integration test, we can ignore update timestamps since those are expected to change
-		ignoreTimestamps := cmp.FilterPath(
-			func(p cmp.Path) bool {
-				return strings.Contains(p.String(), "UpdatedAt") || strings.Contains(p.String(), "CreatedAt")
-			},
-			cmp.Ignore(),
-		)
-		if !cmp.Equal(actual, expected, cmpopts.EquateEmpty(), ignoreTimestamps) {
-			t.Errorf("GetCrag response mismatch (-got +want):\n%v", cmp.Diff(actual, expected, cmpopts.EquateEmpty()))
+		opts := cmp.Options{
+			cmpopts.EquateEmpty(),
+			// For integration test, we can ignore update timestamps since those are expected to change
+			cmp.FilterPath(
+				func(p cmp.Path) bool {
+					return strings.Contains(p.String(), "UpdatedAt") || strings.Contains(p.String(), "CreatedAt")
+				},
+				cmp.Ignore(),
+			),
+		}
+		data, _ := json.MarshalIndent(actual, "", "  ")
+		t.Logf("actual: %+v", string(data))
+		if !cmp.Equal(actual, expected, opts) {
+			t.Errorf("GetCrag response mismatch (-got +want):\n%v", cmp.Diff(actual, expected, opts))
 		}
 	})
 }

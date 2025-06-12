@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/greghart/climbing-app/internal/models"
+	"github.com/greghart/powerputtygo/mapperp"
 	"github.com/greghart/powerputtygo/sqlp"
 )
 
@@ -35,10 +36,16 @@ func (c *Crags) GetCrag(ctx context.Context, id int) (*models.Crag, error) {
 			boulder.name AS boulder_name,
 			COALESCE(boulder.description, "") AS boulder_description,
 			boulder.coordinates_Lat AS boulder_coordinates_Lat,
-			boulder.coordinates_Lng AS boulder_coordinates_Lng
+			boulder.coordinates_Lng AS boulder_coordinates_Lng,
+			parking.id AS parking_id,
+			parking.name AS parking_name,
+			parking.description AS parking_description,
+			parking.location_Lat AS parking_location_Lat,
+			parking.location_Lng AS parking_location_Lng
 		FROM crag
 		LEFT JOIN area ON area.cragId = crag.id
 		LEFT JOIN boulder on boulder.areaId = area.id
+		LEFT JOIN parking ON parking.cragId = crag.id
 		WHERE crag.id = ?
 	`
 	rows, err := c.Query(ctx, q, id)
@@ -58,35 +65,34 @@ func (c *Crags) GetCrag(ctx context.Context, id int) (*models.Crag, error) {
 		return nil, fmt.Errorf("failed to reflect crag scanner: %w", err)
 	}
 
-	crag := models.Crag{}
-	pending := models.Area{}
-	grabPending := func() {
-		if pending.ID != 0 {
-			crag.Areas = append(crag.Areas, pending)
-		}
-	}
+	cragMapper := mapperp.One(
+		func(row *cragRow) *models.Crag { return &row.Crag },
+		// areas
+		mapperp.InnerSlice(
+			func(e *models.Crag) *[]models.Area { return &e.Areas },
+			func(e *models.Area) int64 { return e.ID },
+			func(row *cragRow) *models.Area { return &row.Area },
+			mapperp.Last(
+				// boulders
+				mapperp.InnerSlice(
+					func(e *models.Area) *[]models.Boulder { return &e.Boulders },
+					func(e *models.Boulder) int64 { return e.ID },
+					func(row *cragRow) *models.Boulder { return &row.Boulder },
+				),
+			),
+		),
+	)
+
+	var crag models.Crag
 	for i := 0; rows.Next(); i++ {
 		row, err := scanner.Scan()
 		if err != nil {
 			return nil, fmt.Errorf("failed to scan row: %w", err)
 		}
-
-		if i == 0 { // Crag data is r
-			crag = row.Crag
-		}
-		// New area being scanned
-		if row.Area.ID != 0 && row.Area.ID != pending.ID {
-			grabPending()
-			pending = row.Area
-		}
-		if row.Boulder.ID != 0 {
-			pending.Boulders = append(pending.Boulders, row.Boulder)
-		}
+		cragMapper(&crag, &row, i)
 	}
-	grabPending()
 	if crag.ID == 0 {
 		return nil, nil
 	}
-
 	return &crag, nil
 }

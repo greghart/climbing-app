@@ -8,6 +8,6 @@ option go_package = "github.com/greghart/climbing-app/internal/pb";
 
 message Trail {
   int64 id = 1;
-  // Crag crag = 2; // Omitted to avoid circular reference
+  int64 crag_id = 2; // Omitted to avoid circular reference
   repeated Line lines = 3;
 }

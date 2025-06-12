@@ -5,7 +5,7 @@ type Parking struct {
 	Name        *string    `json:"name,omitzero" sqlp:"name"`
 	Description *string    `json:"description,omitzero" sqlp:"description"`
 	Location    Coordinate `json:"location" sqlp:"location"`
-	Crag        *Crag      `json:"crag,omitzero" sqlp:"crag"`
+	CragID      int64      `json:"crag_id,omitzero" sqlp:"cragId"`
 }
 
 func (p Parking) IsZero() bool {
@@ -13,5 +13,5 @@ func (p Parking) IsZero() bool {
 		p.Name == nil &&
 		p.Description == nil &&
 		p.Location.IsZero() &&
-		p.Crag == nil
+		p.CragID == 0
 }

@@ -1,11 +1,11 @@
 package models
 
 type Trail struct {
-	ID    int64  `json:"id,omitzero" sqlp:"id"`
-	Crag  *Crag  `json:"crag,omitzero" sqlp:"crag"`
-	Lines []Line `json:"lines,omitzero" sqlp:"lines"`
+	ID     int64  `json:"id,omitzero" sqlp:"id"`
+	CragID int64  `json:"crag_id,omitzero" sqlp:"cragId"`
+	Lines  []Line `json:"lines,omitzero" sqlp:"lines"`
 }
 
 func (t Trail) IsZero() bool {
-	return t.ID == 0 && t.Crag == nil && len(t.Lines) == 0
+	return t.ID == 0 && t.CragID == 0 && len(t.Lines) == 0
 }
