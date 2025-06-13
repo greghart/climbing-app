@@ -21,7 +21,6 @@
   "maxZoom": 22,
   "parking": {
     "id": 1,
-    "name": "",
     "description": "Local park parking lot. From here, a downright criminal would jay walk straight across the road (using cautious use of the median), while law abiding citizens will go east down Mast Blvd to the cross walk and back up",
     "location": {
       "lat": 32.847342745655745,
@@ -32,12 +31,10 @@
     {
       "id": 226,
       "name": "Dog Pile Area",
-      "description": "",
       "boulders": [
         {
           "id": 1445,
           "name": "20 Point Boulder",
-          "description": "",
           "coordinates": {
             "lat": 32.85059381131804,
             "lng": -117.0241365662861
@@ -64,7 +61,6 @@
         {
           "id": 1449,
           "name": "Pile Unknown",
-          "description": "",
           "coordinates": {
             "lat": 32.850195,
             "lng": -117.023335
@@ -82,7 +78,6 @@
         {
           "id": 1447,
           "name": "Snow Cone Boulder",
-          "description": "",
           "coordinates": {
             "lat": 32.850465,
             "lng": -117.023495
@@ -111,7 +106,6 @@
     {
       "id": 227,
       "name": "Hillside Area",
-      "description": "",
       "boulders": [
         {
           "id": 1453,
@@ -199,12 +193,10 @@
     {
       "id": 228,
       "name": "Moby Dick Area",
-      "description": "",
       "boulders": [
         {
           "id": 1462,
           "name": "Amphitheater, The",
-          "description": "",
           "coordinates": {
             "lat": 32.850644510357746,
             "lng": -117.02113048053266
@@ -249,7 +241,6 @@
         {
           "id": 1466,
           "name": "Lieback Rock",
-          "description": "",
           "coordinates": {
             "lat": 32.851255,
             "lng": -117.020715
@@ -258,7 +249,6 @@
         {
           "id": 1465,
           "name": "Moby Dick",
-          "description": "",
           "coordinates": {
             "lat": 32.850725,
             "lng": -117.020975
@@ -287,7 +277,6 @@
     {
       "id": 229,
       "name": "Synchronicity Area",
-      "description": "",
       "boulders": [
         {
           "id": 1474,

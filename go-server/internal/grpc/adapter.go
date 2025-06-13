@@ -292,6 +292,9 @@ func intPtr(i int32) *int {
 }
 
 func stringPtr(s string) *string {
+	if s == "" {
+		return nil
+	}
 	return &s
 }
 
