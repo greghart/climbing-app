@@ -6,8 +6,6 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-// Adapters between our model layer and protobufs
-
 // CragToProto converts a models.Crag to a pb.Crag
 func CragToProto(m *models.Crag) *pb.Crag {
 	if m == nil {

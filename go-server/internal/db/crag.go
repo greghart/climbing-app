@@ -73,8 +73,8 @@ func NewCrags(db *sqlp.DB) *Crags {
 	}
 }
 
-func (c *Crags) GetCrags(ctx context.Context) ([]models.Crag, error) {
-	q, _, err := c.queryTemplate.Include("area", "boulder", "parking").Execute()
+func (c *Crags) GetCrags(ctx context.Context, req CragsReadRequest) ([]models.Crag, error) {
+	q, _, err := req.ForTemplate(c.queryTemplate).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("failed to apply query template: %w", err)
 	}
@@ -105,11 +105,8 @@ func (c *Crags) GetCrags(ctx context.Context) ([]models.Crag, error) {
 
 // GetCrag retries a single crag by its ID, including its' entire association tree.
 // Good example of advanced usage, joins and scanning with sqlp.
-func (c *Crags) GetCrag(ctx context.Context, id int) (*models.Crag, error) {
-	q, args, err := c.queryTemplate.
-		Param("id", id).
-		Include("area", "boulder", "parking").
-		Execute()
+func (c *Crags) GetCrag(ctx context.Context, req CragsReadRequest) (*models.Crag, error) {
+	q, args, err := req.ForTemplate(c.queryTemplate).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("failed to apply query template: %w", err)
 	}
@@ -138,6 +135,43 @@ func (c *Crags) GetCrag(ctx context.Context, id int) (*models.Crag, error) {
 	}
 	return &crag, nil
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+// ReadRequest shared by GetCrag and GetCrags.
+type CragsReadRequest struct {
+	ID             int64
+	IncludeArea    bool
+	IncludeBoulder bool
+	IncludeParking bool
+}
+
+func NewDefaultCragsReadRequest() *CragsReadRequest {
+	return &CragsReadRequest{
+		ID:             0,
+		IncludeArea:    true,
+		IncludeBoulder: true,
+		IncludeParking: true,
+	}
+}
+
+func (r *CragsReadRequest) ForTemplate(t queryp.Templater) queryp.Templater {
+	if r.IncludeArea {
+		t = t.Include("area")
+	}
+	if r.IncludeBoulder {
+		t = t.Include("boulder")
+	}
+	if r.IncludeParking {
+		t = t.Include("parking")
+	}
+	if r.ID > 0 {
+		t = t.Param("id", r.ID)
+	}
+	return t
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 // cragRow is a row returned by our getCrag query.
 type cragRow struct {

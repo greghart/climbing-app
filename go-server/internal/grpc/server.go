@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/greghart/climbing-app/internal/config"
+	"github.com/greghart/climbing-app/internal/db"
 	"github.com/greghart/climbing-app/internal/pb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -73,7 +74,12 @@ func (s *Server) Stop() {
 }
 
 func (s *Server) GetCrag(ctx context.Context, req *pb.GetCragRequest) (*pb.GetCragResponse, error) {
-	crag, err := s.env.Repos.Crags.GetCrag(ctx, int(req.Id))
+	crag, err := s.env.Repos.Crags.GetCrag(ctx, db.CragsReadRequest{
+		ID:             req.Id,
+		IncludeArea:    req.Opts.IncludeAreas,
+		IncludeBoulder: req.Opts.IncludeBoulders,
+		IncludeParking: req.Opts.IncludeParking,
+	})
 	if err != nil {
 		return nil, status.Errorf(codes.Unavailable, "failed to get crag %v: %v", req.Id, err)
 	}
@@ -87,7 +93,11 @@ func (s *Server) GetCrag(ctx context.Context, req *pb.GetCragRequest) (*pb.GetCr
 }
 
 func (s *Server) GetCrags(ctx context.Context, req *pb.GetCragsRequest) (*pb.GetCragsResponse, error) {
-	crags, err := s.env.Repos.Crags.GetCrags(ctx)
+	crags, err := s.env.Repos.Crags.GetCrags(ctx, db.CragsReadRequest{
+		IncludeArea:    req.Opts.IncludeAreas,
+		IncludeBoulder: req.Opts.IncludeBoulders,
+		IncludeParking: req.Opts.IncludeParking,
+	})
 	if err != nil {
 		return nil, status.Errorf(codes.Unavailable, "failed to get crags: %v", err)
 	}

@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"slices"
 	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/greghart/climbing-app/internal/config"
+	"github.com/greghart/climbing-app/internal/db"
 )
 
 type Server struct {
@@ -72,11 +74,26 @@ func (s *Server) Handler() http.Handler {
 	return r
 }
 
-////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////
 // Handlers
 
+type cragsReadRequest struct {
+	ID       int      `uri:"id"`
+	Includes []string `form:"includes[]"`
+}
+
 func (s *Server) getCrags(c *gin.Context) {
-	crags, err := s.env.Repos.Crags.GetCrags(c.Request.Context())
+	var req cragsReadRequest
+	if err := c.ShouldBind(&req); err != nil {
+		s.error(c, fmt.Errorf("Failed to bind request params: %v", err), http.StatusBadRequest)
+		return
+	}
+
+	crags, err := s.env.Repos.Crags.GetCrags(c.Request.Context(), db.CragsReadRequest{
+		IncludeArea:    slices.Contains(req.Includes, "area"),
+		IncludeBoulder: slices.Contains(req.Includes, "boulder"),
+		IncludeParking: slices.Contains(req.Includes, "parking"),
+	})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Failed to get crags: %v", err)})
 		return
@@ -91,8 +108,18 @@ func (s *Server) getCrag(c *gin.Context) {
 		s.error(c, fmt.Errorf("Invalid crag ID: %v", err), http.StatusBadRequest)
 		return
 	}
+	var req cragsReadRequest
+	if err = c.ShouldBind(&req); err != nil {
+		s.error(c, fmt.Errorf("Failed to bind request params: %v", err), http.StatusBadRequest)
+		return
+	}
 
-	crag, err := s.env.Repos.Crags.GetCrag(c.Request.Context(), id)
+	crag, err := s.env.Repos.Crags.GetCrag(c.Request.Context(), db.CragsReadRequest{
+		ID:             int64(id),
+		IncludeArea:    slices.Contains(req.Includes, "area"),
+		IncludeBoulder: slices.Contains(req.Includes, "boulder"),
+		IncludeParking: slices.Contains(req.Includes, "parking"),
+	})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("failed to get crag %v: %v", id, err)})
 		return
