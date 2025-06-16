@@ -8,7 +8,10 @@ type Parking struct {
 	CragID      int64      `json:"crag_id,omitzero" sqlp:"cragId"`
 }
 
-func (p Parking) IsZero() bool {
+func (p *Parking) IsZero() bool {
+	if p == nil {
+		return true
+	}
 	return p.ID == 0 &&
 		p.Name == nil &&
 		p.Description == nil &&

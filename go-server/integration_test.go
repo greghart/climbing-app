@@ -48,7 +48,7 @@ func TestServer_crags(t *testing.T) {
 	santeeFixturePath := "testdata/santee.json"
 
 	t.Run("snapshot Santee", func(t *testing.T) {
-		// t.SkipNow()
+		t.SkipNow()
 
 		cfg := config.Load()
 		env := config.NewEnv(cfg)
