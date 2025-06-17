@@ -1,6 +1,7 @@
 package config
 
 import (
+	"encoding/json"
 	"log"
 	"os"
 	"strconv"
@@ -9,6 +10,7 @@ import (
 )
 
 type Config struct {
+	RootDir string
 	// DB config
 	DBDriver string
 	DBSource string
@@ -20,18 +22,20 @@ type Config struct {
 
 func Load() Config {
 	// Load .env file if it exists
-	err := godotenv.Load()
-	if err != nil {
-		log.Println("No .env file found, using environment variables")
-	}
+	godotenv.Load(".env.local") // nolint:errcheck
+	godotenv.Load()             // nolint:errcheck
 
-	return Config{
+	cfg := Config{
+		RootDir:      getEnvString("ROOT_DIR", "/var/app"),
 		DBDriver:     getEnvString("DB_DRIVER", "sqlite3"),
 		DBSource:     getEnvString("DB_SOURCE", "./database.sqlite"),
 		ExpectedHost: getEnvString("HOST", "localhost"),
 		HTTPPort:     getEnvInt("HTTP_PORT", 8080),
 		GRPCPort:     getEnvInt("GRPC_PORT", 8081),
 	}
+	js, _ := json.MarshalIndent(cfg, "", "  ") // nolint:errcheck
+	log.Printf("CFG: %s", string(js))
+	return cfg
 }
 
 type adapter[T any] func(string) (T, error)

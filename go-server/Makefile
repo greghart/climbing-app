@@ -36,6 +36,21 @@ protoc:
 		./internal/pb/*.proto
 .PHONY: protoc
 
+# DB Migrations
+# requires golang-migrate to be installed
+migrate:
+	@migrate
+		-e sql \
+		-d ./migrations \
+		up
+
+migrate_new:
+	migrate \
+		create \
+		-ext sql \
+		-dir ./migrations \
+		${arg} 
+
 # diff-check runs git-diff and fails if there are any changes.
 diff-check:
 	@FINDINGS="$$(git status -s -uall)" ; \

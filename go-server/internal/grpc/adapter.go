@@ -184,7 +184,7 @@ func PolygonToProto(m *models.Polygon) *pb.Polygon {
 	return &pb.Polygon{
 		Id:          m.ID,
 		Descriptor_: derefString(m.Descriptor),
-		Coordinates: CoordinatesToProto(m.Coordinates),
+		Coordinates: PolygonCoordinatesToProto(m.Coordinates),
 	}
 }
 
@@ -196,15 +196,33 @@ func ProtoToPolygon(p *pb.Polygon) *models.Polygon {
 	return &models.Polygon{
 		ID:          p.GetId(),
 		Descriptor:  stringPtr(p.GetDescriptor_()),
-		Coordinates: ProtoToCoordinates(p.GetCoordinates()),
+		Coordinates: ProtoToPolygonCoordinates(p.GetCoordinates()),
 	}
 }
 
 // Coordinates
-func CoordinatesToProto(coords []models.Coordinate) []*pb.Coordinate {
-	result := make([]*pb.Coordinate, 0, len(coords))
+func PolygonCoordinatesToProto(coords []models.PolygonCoordinate) []*pb.PolygonCoordinate {
+	result := make([]*pb.PolygonCoordinate, 0, len(coords))
 	for i := range coords {
-		result = append(result, CoordinateToProto(&coords[i]))
+		result = append(result, &pb.PolygonCoordinate{
+			Id:          coords[i].ID,
+			Order:       int64(coords[i].Order),
+			Coordinates: CoordinateToProto(&coords[i].Coordinate),
+		})
+	}
+	return result
+}
+
+func ProtoToPolygonCoordinates(pbCoords []*pb.PolygonCoordinate) []models.PolygonCoordinate {
+	result := make([]models.PolygonCoordinate, 0, len(pbCoords))
+	for i, p := range pbCoords {
+		if p != nil {
+			result = append(result, models.PolygonCoordinate{
+				ID:         p.Id,
+				Order:      i,
+				Coordinate: ProtoToCoordinate(p.Coordinates),
+			})
+		}
 	}
 	return result
 }

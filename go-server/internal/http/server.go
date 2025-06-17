@@ -10,12 +10,12 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/greghart/climbing-app/internal/config"
 	"github.com/greghart/climbing-app/internal/db"
+	"github.com/greghart/climbing-app/internal/env"
 )
 
 type Server struct {
-	env  *config.Env
+	env  *env.Env
 	http *http.Server
 	opts Options
 }
@@ -25,7 +25,7 @@ type Options struct {
 	Port         int
 }
 
-func NewServer(env *config.Env, opts Options) *Server {
+func NewServer(env *env.Env, opts Options) *Server {
 	return &Server{
 		env:  env,
 		opts: opts,

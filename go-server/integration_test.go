@@ -14,21 +14,21 @@ import (
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/greghart/climbing-app/internal/config"
 	"github.com/greghart/climbing-app/internal/db"
+	"github.com/greghart/climbing-app/internal/env"
 	mygrpc "github.com/greghart/climbing-app/internal/grpc"
-	"github.com/greghart/climbing-app/internal/models"
 	"github.com/greghart/climbing-app/internal/pb"
+	"github.com/greghart/climbing-app/internal/testutil"
 	"github.com/greghart/powerputtygo/errcmp"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
 )
 
-// Note, for integration tests, it's just easier to always test against our domain models, instead
-// of comparing protobuf objects (which are code genned and presumed to be correct).
-// That means we're implicitly testing both the domain to GRPC conversion, as well as the
-// GRPC to domain conversion, which is our code.
+// Currently this is just testing the gRPC server and client, as well as our adapter layer, against
+// the actual database. We use Santee which shouldn't really change ever, so it's a fair and easy
+// thing to run snapshots against.
 
-func TestServer_crags(t *testing.T) {
+func TestGrpcServer_crags(t *testing.T) {
 	grpcServer(t)
 
 	// All tests should run fast
@@ -46,13 +46,13 @@ func TestServer_crags(t *testing.T) {
 
 	// Santee is a good option for snapshot testing, since it should basically never change.
 	santeeId := int64(55)
-	santeeFixturePath := "testdata/santee.json"
+	santeeFixturePath := "./testdata/santee.json"
 
 	t.Run("snapshot Santee", func(t *testing.T) {
 		t.SkipNow()
 
 		cfg := config.Load()
-		env := config.NewEnv(cfg)
+		env := env.New(cfg)
 		defer env.Stop()
 		errcmp.MustMatch(t, env.Start(), "")
 
@@ -84,10 +84,7 @@ func TestServer_crags(t *testing.T) {
 		errcmp.MustMatch(t, err, "")
 
 		// Load expected crag from testdata/santee.json
-		expected, err := loadCragFromJSON(santeeFixturePath)
-		if err != nil {
-			t.Fatalf("failed to load expected crag: %v", err)
-		}
+		expected := testutil.LoadCragFromJSON(t, santeeFixturePath)
 		actual := mygrpc.ProtoToCrag(res.Crag)
 		opts := cmp.Options{
 			cmpopts.EquateEmpty(),
@@ -114,7 +111,7 @@ func grpcServer(t *testing.T) *mygrpc.Server {
 	t.Helper()
 
 	cfg := config.Load()
-	env := config.NewEnv(cfg)
+	env := env.New(cfg)
 
 	if err := env.Start(); err != nil {
 		t.Fatalf("Failed to start environment: %v", err)
@@ -159,18 +156,4 @@ func grpcClient(t *testing.T) pb.ClimbServiceClient {
 
 	client := pb.NewClimbServiceClient(conn)
 	return client
-}
-
-// loadCragFromJSON loads a models.Crag from a JSON file
-func loadCragFromJSON(path string) (*models.Crag, error) {
-	f, err := os.Open(path)
-	if err != nil {
-		return nil, err
-	}
-	defer f.Close()
-	var crag models.Crag
-	if err := json.NewDecoder(f).Decode(&crag); err != nil {
-		return nil, err
-	}
-	return &crag, nil
 }

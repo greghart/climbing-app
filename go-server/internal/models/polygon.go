@@ -1,9 +1,9 @@
 package models
 
 type Polygon struct {
-	ID          int64        `json:"id,omitzero" sqlp:"id"`
-	Descriptor  *string      `json:"descriptor,omitzero" sqlp:"descriptor"`
-	Coordinates []Coordinate `json:"coordinates,omitzero" sqlp:"coordinates"`
+	ID          int64               `json:"id,omitzero" sqlp:"id"`
+	Descriptor  *string             `json:"descriptor,omitzero" sqlp:"descriptor"`
+	Coordinates []PolygonCoordinate `json:"coordinates,omitzero" sqlp:"coordinates"`
 }
 
 func (p Polygon) IsZero() bool {

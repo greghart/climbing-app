@@ -7,8 +7,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/greghart/climbing-app/internal/config"
 	"github.com/greghart/climbing-app/internal/db"
+	"github.com/greghart/climbing-app/internal/env"
 	"github.com/greghart/climbing-app/internal/pb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -26,7 +26,7 @@ type Server struct {
 	pb.UnimplementedClimbServiceServer
 	grpc *grpc.Server
 	opts Options
-	env  *config.Env
+	env  *env.Env
 }
 
 type Options struct {
@@ -34,7 +34,7 @@ type Options struct {
 	Port         int
 }
 
-func NewServer(env *config.Env, opts Options) *Server {
+func NewServer(env *env.Env, opts Options) *Server {
 	return &Server{
 		env:  env,
 		opts: opts,

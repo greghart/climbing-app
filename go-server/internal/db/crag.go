@@ -16,9 +16,9 @@ type Crags struct {
 	getMapper     func() mapperp.Mapper[cragRow, models.Crag]
 }
 
-func NewCrags(db *sqlp.DB) *Crags {
+func NewCrags(db *DB) *Crags {
 	return &Crags{
-		Repository: sqlp.NewRepository[models.Crag](db, "crag"),
+		Repository: sqlp.NewRepository[models.Crag](db.DB, "crag"),
 		queryTemplate: queryp.Must(queryp.NewTemplate(`
 			SELECT 
 				crag.*
@@ -56,13 +56,12 @@ func NewCrags(db *sqlp.DB) *Crags {
 			{{- end}}
 		`)),
 		getMapper: func() mapperp.Mapper[cragRow, models.Crag] {
-			return mapperp.InnerSlice(
+			return mapperp.InnerSlice( // areas
 				func(e *models.Crag) *[]models.Area { return &e.Areas },
 				func(e *models.Area) int64 { return e.ID },
 				func(row *cragRow) *models.Area { return &row.Area },
-				mapperp.Take(
-					// boulders
-					mapperp.InnerSlice(
+				mapperp.Take( // area
+					mapperp.InnerSlice( // boulders
 						func(e *models.Area) *[]models.Boulder { return &e.Boulders },
 						func(e *models.Boulder) int64 { return e.ID },
 						func(row *cragRow) *models.Boulder { return &row.Boulder },
@@ -79,7 +78,6 @@ func (c *Crags) GetCrags(ctx context.Context, req CragsReadRequest) ([]models.Cr
 		return nil, fmt.Errorf("failed to apply query template: %w", err)
 	}
 
-	var crags []models.Crag
 	mapper := mapperp.Slice(
 		func(e *models.Crag) int64 { return e.ID },
 		func(row *cragRow) *models.Crag { return &row.Crag },
@@ -92,6 +90,7 @@ func (c *Crags) GetCrags(ctx context.Context, req CragsReadRequest) ([]models.Cr
 	}
 	defer rows.Close()
 
+	var crags []models.Crag
 	for i := 0; rows.Next(); i++ {
 		row, err := rows.ScanOut()
 		if err != nil {

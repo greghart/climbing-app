@@ -1,4 +1,7 @@
 {
+  "//": "this is a snapshot of Santee as of June 2025",
+  "//": "this is used for testing purposes and shouldn't be updated willy nilly",
+  "//": "since we make test assertiosn off it",
   "id": 55,
   "name": "Santee",
   "description": "Welcome to Santee, your local slab and crack training mecca.",

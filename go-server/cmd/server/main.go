@@ -11,13 +11,14 @@ import (
 	"time"
 
 	"github.com/greghart/climbing-app/internal/config"
+	"github.com/greghart/climbing-app/internal/env"
 	"github.com/greghart/climbing-app/internal/grpc"
 	myhttp "github.com/greghart/climbing-app/internal/http"
 )
 
 func main() {
 	cfg := config.Load()
-	env := config.NewEnv(cfg)
+	env := env.New(cfg)
 	defer env.Stop()
 
 	if err := env.Start(); err != nil {

@@ -1,8 +1,9 @@
-package config
+package env
 
 import (
 	"fmt"
 
+	"github.com/greghart/climbing-app/internal/config"
 	"github.com/greghart/climbing-app/internal/db"
 )
 
@@ -18,7 +19,7 @@ type Repos struct {
 	Crags *db.Crags
 }
 
-func NewEnv(cfg Config) *Env {
+func New(cfg config.Config) *Env {
 	database := db.NewDB(db.Options{
 		Driver: cfg.DBDriver,
 		Source: cfg.DBSource,
@@ -35,7 +36,7 @@ func (e *Env) Start() error {
 		return fmt.Errorf("failed to start db: %w", err)
 	}
 	e.Repos = Repos{
-		Crags: db.NewCrags(e.DB.DB),
+		Crags: db.NewCrags(e.DB),
 	}
 	return nil
 }

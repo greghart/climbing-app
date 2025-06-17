@@ -6,7 +6,7 @@ type Area struct {
 	Description *string      `json:"description,omitzero" sqlp:"description"`
 	CragID      int64        `json:"crag_id,omitzero" sqlp:"cragId"`
 	Polygon     *Polygon     `json:"polygon,omitzero" sqlp:"polygon"`
-	Boulders    []Boulder    `json:"boulders,omitzero" sqlp:"boulders"`
+	Boulders    []Boulder    `json:"boulders,omitzero"`
 	Commentable *Commentable `json:"commentable,omitzero" sqlp:"commentable"`
 	Photoable   *Photoable   `json:"photoable,omitzero" sqlp:"photoable"`
 }

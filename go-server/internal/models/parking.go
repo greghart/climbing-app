@@ -4,7 +4,7 @@ type Parking struct {
 	ID          int64      `json:"id,omitzero" sqlp:"id"`
 	Name        *string    `json:"name,omitzero" sqlp:"name"`
 	Description *string    `json:"description,omitzero" sqlp:"description"`
-	Location    Coordinate `json:"location" sqlp:"location"`
+	Location    Coordinate `json:"location" sqlp:"location,promote"`
 	CragID      int64      `json:"crag_id,omitzero" sqlp:"cragId"`
 }
 
