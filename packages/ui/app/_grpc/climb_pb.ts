@@ -2,17 +2,44 @@
 // @generated from file climb.proto (package pb, syntax proto3)
 /* eslint-disable */
 
-import type { Message } from "@bufbuild/protobuf";
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Crag } from "./crag_pb";
 import { file_crag } from "./crag_pb";
+import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file climb.proto.
  */
 export const file_climb: GenFile = /*@__PURE__*/
-  fileDesc("CgtjbGltYi5wcm90bxICcGIiHAoOR2V0Q3JhZ1JlcXVlc3QSCgoCaWQYASABKAMiKQoPR2V0Q3JhZ1Jlc3BvbnNlEhYKBGNyYWcYASABKAsyCC5wYi5DcmFnIhEKD0dldENyYWdzUmVxdWVzdCIrChBHZXRDcmFnc1Jlc3BvbnNlEhcKBWNyYWdzGAEgAygLMggucGIuQ3JhZzJ5CgxDbGltYlNlcnZpY2USMgoHR2V0Q3JhZxISLnBiLkdldENyYWdSZXF1ZXN0GhMucGIuR2V0Q3JhZ1Jlc3BvbnNlEjUKCEdldENyYWdzEhMucGIuR2V0Q3JhZ3NSZXF1ZXN0GhQucGIuR2V0Q3JhZ3NSZXNwb25zZUIuWixnaXRodWIuY29tL2dyZWdoYXJ0L2NsaW1iaW5nLWFwcC9pbnRlcm5hbC9wYmIGcHJvdG8z", [file_crag]);
+  fileDesc("CgtjbGltYi5wcm90bxICcGIiWwoPUmVhZENyYWdPcHRpb25zEhUKDWluY2x1ZGVfYXJlYXMYASABKAgSGAoQaW5jbHVkZV9ib3VsZGVycxgCIAEoCBIXCg9pbmNsdWRlX3BhcmtpbmcYAyABKAgiPwoOR2V0Q3JhZ1JlcXVlc3QSCgoCaWQYASABKAMSIQoEb3B0cxgCIAEoCzITLnBiLlJlYWRDcmFnT3B0aW9ucyIpCg9HZXRDcmFnUmVzcG9uc2USFgoEY3JhZxgBIAEoCzIILnBiLkNyYWciNAoPR2V0Q3JhZ3NSZXF1ZXN0EiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQ3JhZ09wdGlvbnMiKwoQR2V0Q3JhZ3NSZXNwb25zZRIXCgVjcmFncxgBIAMoCzIILnBiLkNyYWcyeQoMQ2xpbWJTZXJ2aWNlEjIKB0dldENyYWcSEi5wYi5HZXRDcmFnUmVxdWVzdBoTLnBiLkdldENyYWdSZXNwb25zZRI1CghHZXRDcmFncxITLnBiLkdldENyYWdzUmVxdWVzdBoULnBiLkdldENyYWdzUmVzcG9uc2VCLlosZ2l0aHViLmNvbS9ncmVnaGFydC9jbGltYmluZy1hcHAvaW50ZXJuYWwvcGJiBnByb3RvMw", [file_crag]);
+
+/**
+ * @generated from message pb.ReadCragOptions
+ */
+export type ReadCragOptions = Message<"pb.ReadCragOptions"> & {
+  /**
+   * @generated from field: bool include_areas = 1;
+   */
+  includeAreas: boolean;
+
+  /**
+   * @generated from field: bool include_boulders = 2;
+   */
+  includeBoulders: boolean;
+
+  /**
+   * @generated from field: bool include_parking = 3;
+   */
+  includeParking: boolean;
+};
+
+/**
+ * Describes the message pb.ReadCragOptions.
+ * Use `create(ReadCragOptionsSchema)` to create a new message.
+ */
+export const ReadCragOptionsSchema: GenMessage<ReadCragOptions> = /*@__PURE__*/
+  messageDesc(file_climb, 0);
 
 /**
  * @generated from message pb.GetCragRequest
@@ -22,6 +49,11 @@ export type GetCragRequest = Message<"pb.GetCragRequest"> & {
    * @generated from field: int64 id = 1;
    */
   id: bigint;
+
+  /**
+   * @generated from field: pb.ReadCragOptions opts = 2;
+   */
+  opts?: ReadCragOptions;
 };
 
 /**
@@ -29,7 +61,7 @@ export type GetCragRequest = Message<"pb.GetCragRequest"> & {
  * Use `create(GetCragRequestSchema)` to create a new message.
  */
 export const GetCragRequestSchema: GenMessage<GetCragRequest> = /*@__PURE__*/
-  messageDesc(file_climb, 0);
+  messageDesc(file_climb, 1);
 
 /**
  * @generated from message pb.GetCragResponse
@@ -46,12 +78,16 @@ export type GetCragResponse = Message<"pb.GetCragResponse"> & {
  * Use `create(GetCragResponseSchema)` to create a new message.
  */
 export const GetCragResponseSchema: GenMessage<GetCragResponse> = /*@__PURE__*/
-  messageDesc(file_climb, 1);
+  messageDesc(file_climb, 2);
 
 /**
  * @generated from message pb.GetCragsRequest
  */
 export type GetCragsRequest = Message<"pb.GetCragsRequest"> & {
+  /**
+   * @generated from field: pb.ReadCragOptions opts = 2;
+   */
+  opts?: ReadCragOptions;
 };
 
 /**
@@ -59,7 +95,7 @@ export type GetCragsRequest = Message<"pb.GetCragsRequest"> & {
  * Use `create(GetCragsRequestSchema)` to create a new message.
  */
 export const GetCragsRequestSchema: GenMessage<GetCragsRequest> = /*@__PURE__*/
-  messageDesc(file_climb, 2);
+  messageDesc(file_climb, 3);
 
 /**
  * @generated from message pb.GetCragsResponse
@@ -76,7 +112,7 @@ export type GetCragsResponse = Message<"pb.GetCragsResponse"> & {
  * Use `create(GetCragsResponseSchema)` to create a new message.
  */
 export const GetCragsResponseSchema: GenMessage<GetCragsResponse> = /*@__PURE__*/
-  messageDesc(file_climb, 3);
+  messageDesc(file_climb, 4);
 
 /**
  * @generated from service pb.ClimbService

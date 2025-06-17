@@ -5,9 +5,13 @@ import "server-only";
 
 const getCrag = cache(async (id: number | string) => {
   return client
-    .getCrag({ id: BigInt(id) })
+    .getCrag({
+      id: BigInt(id),
+      opts: { includeAreas: true, includeBoulders: true, includeParking: true },
+    })
     .then((res) => {
       if (res.crag) {
+        console.warn("getCrag adapted:\n", ProtoToCrag(res.crag));
         return ProtoToCrag(res.crag);
       }
       return null;

@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file polygon.proto.
  */
 export const file_polygon: GenFile = /*@__PURE__*/
-  fileDesc("Cg1wb2x5Z29uLnByb3RvEgJwYiJOCgdQb2x5Z29uEgoKAmlkGAEgASgDEhIKCmRlc2NyaXB0b3IYAiABKAkSIwoLY29vcmRpbmF0ZXMYAyADKAsyDi5wYi5Db29yZGluYXRlQi5aLGdpdGh1Yi5jb20vZ3JlZ2hhcnQvY2xpbWJpbmctYXBwL2ludGVybmFsL3BiYgZwcm90bzM", [file_coordinate]);
+  fileDesc("Cg1wb2x5Z29uLnByb3RvEgJwYiJfCgdQb2x5Z29uEgoKAmlkGAEgASgDEhIKCmRlc2NyaXB0b3IYAiABKAkSIwoLY29vcmRpbmF0ZXMYAyADKAsyDi5wYi5Db29yZGluYXRlEg8KB2FyZWFfaWQYBCABKANCLlosZ2l0aHViLmNvbS9ncmVnaGFydC9jbGltYmluZy1hcHAvaW50ZXJuYWwvcGJiBnByb3RvMw", [file_coordinate]);
 
 /**
  * @generated from message pb.Polygon
@@ -29,11 +29,14 @@ export type Polygon = Message<"pb.Polygon"> & {
   descriptor: string;
 
   /**
-   * Area area = 4; // Omitted to avoid circular reference
-   *
    * @generated from field: repeated pb.Coordinate coordinates = 3;
    */
   coordinates: Coordinate[];
+
+  /**
+   * @generated from field: int64 area_id = 4;
+   */
+  areaId: bigint;
 };
 
 /**

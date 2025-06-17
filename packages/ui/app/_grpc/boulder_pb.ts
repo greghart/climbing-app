@@ -4,24 +4,72 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Comment } from "./comment_pb";
+import { file_comment } from "./comment_pb";
+import type { Coordinate } from "./coordinate_pb";
+import { file_coordinate } from "./coordinate_pb";
+import type { Photo } from "./photo_pb";
+import { file_photo } from "./photo_pb";
+import type { Polygon } from "./polygon_pb";
+import { file_polygon } from "./polygon_pb";
+import type { Route } from "./route_pb";
+import { file_route } from "./route_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file boulder.proto.
  */
 export const file_boulder: GenFile = /*@__PURE__*/
-  fileDesc("Cg1ib3VsZGVyLnByb3RvEgJwYiIVCgdCb3VsZGVyEgoKAmlkGAEgASgDQi5aLGdpdGh1Yi5jb20vZ3JlZ2hhcnQvY2xpbWJpbmctYXBwL2ludGVybmFsL3BiYgZwcm90bzM");
+  fileDesc("Cg1ib3VsZGVyLnByb3RvEgJwYiLhAQoHQm91bGRlchIKCgJpZBgBIAEoAxIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEiMKC2Nvb3JkaW5hdGVzGAQgASgLMg4ucGIuQ29vcmRpbmF0ZRIPCgdhcmVhX2lkGAUgASgDEhkKBnJvdXRlcxgGIAMoCzIJLnBiLlJvdXRlEhwKB3BvbHlnb24YByABKAsyCy5wYi5Qb2x5Z29uEh0KCGNvbW1lbnRzGAggAygLMgsucGIuQ29tbWVudBIZCgZwaG90b3MYCSADKAsyCS5wYi5QaG90b0IuWixnaXRodWIuY29tL2dyZWdoYXJ0L2NsaW1iaW5nLWFwcC9pbnRlcm5hbC9wYmIGcHJvdG8z", [file_comment, file_coordinate, file_photo, file_polygon, file_route]);
 
 /**
  * @generated from message pb.Boulder
  */
 export type Boulder = Message<"pb.Boulder"> & {
   /**
-   * Add more fields as needed
-   *
    * @generated from field: int64 id = 1;
    */
   id: bigint;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string description = 3;
+   */
+  description: string;
+
+  /**
+   * @generated from field: pb.Coordinate coordinates = 4;
+   */
+  coordinates?: Coordinate;
+
+  /**
+   * @generated from field: int64 area_id = 5;
+   */
+  areaId: bigint;
+
+  /**
+   * @generated from field: repeated pb.Route routes = 6;
+   */
+  routes: Route[];
+
+  /**
+   * @generated from field: pb.Polygon polygon = 7;
+   */
+  polygon?: Polygon;
+
+  /**
+   * @generated from field: repeated pb.Comment comments = 8;
+   */
+  comments: Comment[];
+
+  /**
+   * @generated from field: repeated pb.Photo photos = 9;
+   */
+  photos: Photo[];
 };
 
 /**

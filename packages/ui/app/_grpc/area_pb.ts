@@ -6,10 +6,10 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Boulder } from "./boulder_pb";
 import { file_boulder } from "./boulder_pb";
-import type { Commentable } from "./commentable_pb";
-import { file_commentable } from "./commentable_pb";
-import type { Photoable } from "./photoable_pb";
-import { file_photoable } from "./photoable_pb";
+import type { Comment } from "./comment_pb";
+import { file_comment } from "./comment_pb";
+import type { Photo } from "./photo_pb";
+import { file_photo } from "./photo_pb";
 import type { Polygon } from "./polygon_pb";
 import { file_polygon } from "./polygon_pb";
 import type { Message } from "@bufbuild/protobuf";
@@ -18,7 +18,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file area.proto.
  */
 export const file_area: GenFile = /*@__PURE__*/
-  fileDesc("CgphcmVhLnByb3RvEgJwYiK6AQoEQXJlYRIKCgJpZBgBIAEoAxIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEhwKB3BvbHlnb24YBSABKAsyCy5wYi5Qb2x5Z29uEh0KCGJvdWxkZXJzGAYgAygLMgsucGIuQm91bGRlchIkCgtjb21tZW50YWJsZRgHIAEoCzIPLnBiLkNvbW1lbnRhYmxlEiAKCXBob3RvYWJsZRgIIAEoCzINLnBiLlBob3RvYWJsZUIuWixnaXRodWIuY29tL2dyZWdoYXJ0L2NsaW1iaW5nLWFwcC9pbnRlcm5hbC9wYmIGcHJvdG8z", [file_boulder, file_commentable, file_photoable, file_polygon]);
+  fileDesc("CgphcmVhLnByb3RvEgJwYiK9AQoEQXJlYRIKCgJpZBgBIAEoAxIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEg8KB2NyYWdfaWQYBCABKAMSHAoHcG9seWdvbhgFIAEoCzILLnBiLlBvbHlnb24SHQoIYm91bGRlcnMYBiADKAsyCy5wYi5Cb3VsZGVyEh0KCGNvbW1lbnRzGAcgAygLMgsucGIuQ29tbWVudBIZCgZwaG90b3MYCCADKAsyCS5wYi5QaG90b0IuWixnaXRodWIuY29tL2dyZWdoYXJ0L2NsaW1iaW5nLWFwcC9pbnRlcm5hbC9wYmIGcHJvdG8z", [file_boulder, file_comment, file_photo, file_polygon]);
 
 /**
  * @generated from message pb.Area
@@ -40,8 +40,11 @@ export type Area = Message<"pb.Area"> & {
   description: string;
 
   /**
-   * Crag crag = 4; // Omitted to avoid circular reference
-   *
+   * @generated from field: int64 crag_id = 4;
+   */
+  cragId: bigint;
+
+  /**
    * @generated from field: pb.Polygon polygon = 5;
    */
   polygon?: Polygon;
@@ -52,14 +55,14 @@ export type Area = Message<"pb.Area"> & {
   boulders: Boulder[];
 
   /**
-   * @generated from field: pb.Commentable commentable = 7;
+   * @generated from field: repeated pb.Comment comments = 7;
    */
-  commentable?: Commentable;
+  comments: Comment[];
 
   /**
-   * @generated from field: pb.Photoable photoable = 8;
+   * @generated from field: repeated pb.Photo photos = 8;
    */
-  photoable?: Photoable;
+  photos: Photo[];
 };
 
 /**

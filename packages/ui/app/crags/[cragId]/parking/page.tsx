@@ -11,5 +11,11 @@ export default async function Page(props: {
   const crag = await getCrag(params.cragId);
   if (!crag) notFound();
 
-  return <ParkingForm crag={crag} meta={{ cragId: crag.id! }} />;
+  return (
+    <ParkingForm
+      crag={crag}
+      parking={crag.parking}
+      meta={{ cragId: crag.id! }}
+    />
+  );
 }

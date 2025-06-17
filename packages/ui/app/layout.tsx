@@ -22,10 +22,6 @@ export default function RootLayout({
         />
         <meta charSet="utf-8" />
         <meta property="og:title" content="Climbing App" />
-        <script
-          src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"
-          async
-        />
       </head>
       <body className={inter.className}>
         <AppRouterCacheProvider>

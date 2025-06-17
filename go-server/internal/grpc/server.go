@@ -74,12 +74,7 @@ func (s *Server) Stop() {
 }
 
 func (s *Server) GetCrag(ctx context.Context, req *pb.GetCragRequest) (*pb.GetCragResponse, error) {
-	crag, err := s.env.Repos.Crags.GetCrag(ctx, db.CragsReadRequest{
-		ID:             req.Id,
-		IncludeArea:    req.Opts.IncludeAreas,
-		IncludeBoulder: req.Opts.IncludeBoulders,
-		IncludeParking: req.Opts.IncludeParking,
-	})
+	crag, err := s.env.Repos.Crags.GetCrag(ctx, protoToCragReadRequest(req))
 	if err != nil {
 		return nil, status.Errorf(codes.Unavailable, "failed to get crag %v: %v", req.Id, err)
 	}
@@ -93,11 +88,7 @@ func (s *Server) GetCrag(ctx context.Context, req *pb.GetCragRequest) (*pb.GetCr
 }
 
 func (s *Server) GetCrags(ctx context.Context, req *pb.GetCragsRequest) (*pb.GetCragsResponse, error) {
-	crags, err := s.env.Repos.Crags.GetCrags(ctx, db.CragsReadRequest{
-		IncludeArea:    req.Opts.IncludeAreas,
-		IncludeBoulder: req.Opts.IncludeBoulders,
-		IncludeParking: req.Opts.IncludeParking,
-	})
+	crags, err := s.env.Repos.Crags.GetCrags(ctx, protoToCragsReadRequest(req))
 	if err != nil {
 		return nil, status.Errorf(codes.Unavailable, "failed to get crags: %v", err)
 	}
@@ -141,4 +132,27 @@ func valid(authorization []string, apiKey string) bool {
 	}
 	token := strings.TrimPrefix(authorization[0], "Bearer ")
 	return token == apiKey
+}
+
+func protoToCragsReadRequest(req *pb.GetCragsRequest) db.CragsReadRequest {
+	if req.Opts == nil {
+		return db.CragsReadRequest{}
+	}
+	return db.CragsReadRequest{
+		IncludeArea:    req.Opts.IncludeAreas,
+		IncludeBoulder: req.Opts.IncludeBoulders,
+		IncludeParking: req.Opts.IncludeParking,
+	}
+}
+
+func protoToCragReadRequest(req *pb.GetCragRequest) db.CragsReadRequest {
+	out := db.CragsReadRequest{
+		ID: req.Id,
+	}
+	if req.Opts != nil {
+		out.IncludeArea = req.Opts.IncludeAreas
+		out.IncludeBoulder = req.Opts.IncludeBoulders
+		out.IncludeParking = req.Opts.IncludeParking
+	}
+	return out
 }

@@ -9,7 +9,7 @@ import Timestamps, { type ITimestamps } from "./Timestamps.js";
 export type IComment = {
   id?: number;
   text: string;
-  commentable: ICommentable;
+  commentable?: ICommentable;
   // user: IUser; // TODO
 } & ITimestamps;
 

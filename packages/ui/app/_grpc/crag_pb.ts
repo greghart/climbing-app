@@ -8,14 +8,16 @@ import type { Area } from "./area_pb";
 import { file_area } from "./area_pb";
 import type { Bounds } from "./bounds_pb";
 import { file_bounds } from "./bounds_pb";
-import type { Commentable } from "./commentable_pb";
-import { file_commentable } from "./commentable_pb";
+import type { Comment } from "./comment_pb";
+import { file_comment } from "./comment_pb";
 import type { Coordinate } from "./coordinate_pb";
 import { file_coordinate } from "./coordinate_pb";
 import type { Parking } from "./parking_pb";
 import { file_parking } from "./parking_pb";
-import type { Photoable } from "./photoable_pb";
-import { file_photoable } from "./photoable_pb";
+import type { Photo } from "./photo_pb";
+import { file_photo } from "./photo_pb";
+import type { Timestamps } from "./timestamps_pb";
+import { file_timestamps } from "./timestamps_pb";
 import type { Trail } from "./trail_pb";
 import { file_trail } from "./trail_pb";
 import type { Message } from "@bufbuild/protobuf";
@@ -24,7 +26,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file crag.proto.
  */
 export const file_crag: GenFile = /*@__PURE__*/
-  fileDesc("CgpjcmFnLnByb3RvEgJwYiLEAgoEQ3JhZxIKCgJpZBgBIAEoAxIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEhoKBmJvdW5kcxgEIAEoCzIKLnBiLkJvdW5kcxIeCgZjZW50ZXIYBSABKAsyDi5wYi5Db29yZGluYXRlEhQKDGRlZmF1bHRfem9vbRgGIAEoBRIQCghtaW5fem9vbRgHIAEoBRIQCghtYXhfem9vbRgIIAEoBRIcCgdwYXJraW5nGAkgASgLMgsucGIuUGFya2luZxIXCgVhcmVhcxgKIAMoCzIILnBiLkFyZWESJAoLY29tbWVudGFibGUYCyABKAsyDy5wYi5Db21tZW50YWJsZRIgCglwaG90b2FibGUYDCABKAsyDS5wYi5QaG90b2FibGUSGAoFdHJhaWwYDSABKAsyCS5wYi5UcmFpbEIuWixnaXRodWIuY29tL2dyZWdoYXJ0L2NsaW1iaW5nLWFwcC9pbnRlcm5hbC9wYmIGcHJvdG8z", [file_area, file_bounds, file_commentable, file_coordinate, file_parking, file_photoable, file_trail]);
+  fileDesc("CgpjcmFnLnByb3RvEgJwYiLaAgoEQ3JhZxIKCgJpZBgBIAEoAxIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEhoKBmJvdW5kcxgEIAEoCzIKLnBiLkJvdW5kcxIeCgZjZW50ZXIYBSABKAsyDi5wYi5Db29yZGluYXRlEhQKDGRlZmF1bHRfem9vbRgGIAEoBRIQCghtaW5fem9vbRgHIAEoBRIQCghtYXhfem9vbRgIIAEoBRIcCgdwYXJraW5nGAkgASgLMgsucGIuUGFya2luZxIXCgVhcmVhcxgKIAMoCzIILnBiLkFyZWESHQoIY29tbWVudHMYCyADKAsyCy5wYi5Db21tZW50EhkKBnBob3RvcxgMIAMoCzIJLnBiLlBob3RvEhgKBXRyYWlsGA0gASgLMgkucGIuVHJhaWwSIgoKdGltZXN0YW1wcxgOIAEoCzIOLnBiLlRpbWVzdGFtcHNCLlosZ2l0aHViLmNvbS9ncmVnaGFydC9jbGltYmluZy1hcHAvaW50ZXJuYWwvcGJiBnByb3RvMw", [file_area, file_bounds, file_comment, file_coordinate, file_parking, file_photo, file_timestamps, file_trail]);
 
 /**
  * @generated from message pb.Crag
@@ -81,19 +83,24 @@ export type Crag = Message<"pb.Crag"> & {
   areas: Area[];
 
   /**
-   * @generated from field: pb.Commentable commentable = 11;
+   * @generated from field: repeated pb.Comment comments = 11;
    */
-  commentable?: Commentable;
+  comments: Comment[];
 
   /**
-   * @generated from field: pb.Photoable photoable = 12;
+   * @generated from field: repeated pb.Photo photos = 12;
    */
-  photoable?: Photoable;
+  photos: Photo[];
 
   /**
    * @generated from field: pb.Trail trail = 13;
    */
   trail?: Trail;
+
+  /**
+   * @generated from field: pb.Timestamps timestamps = 14;
+   */
+  timestamps?: Timestamps;
 };
 
 /**

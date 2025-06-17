@@ -146,15 +146,6 @@ type CragsReadRequest struct {
 	IncludeParking bool
 }
 
-func NewDefaultCragsReadRequest() *CragsReadRequest {
-	return &CragsReadRequest{
-		ID:             0,
-		IncludeArea:    true,
-		IncludeBoulder: true,
-		IncludeParking: true,
-	}
-}
-
 func (r *CragsReadRequest) ForTemplate(t queryp.Templater) queryp.Templater {
 	if r.IncludeArea {
 		t = t.Include("area")
@@ -165,7 +156,7 @@ func (r *CragsReadRequest) ForTemplate(t queryp.Templater) queryp.Templater {
 	if r.IncludeParking {
 		t = t.Include("parking")
 	}
-	if r.ID > 0 {
+	if r.ID != 0 {
 		t = t.Param("id", r.ID)
 	}
 	return t

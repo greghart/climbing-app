@@ -1,3 +1,6 @@
+import { Photo } from "@/app/_grpc/photo_pb";
+import { Timestamps } from "@/app/_grpc/timestamps_pb";
+import { timestampDate, type Timestamp } from "@bufbuild/protobuf/wkt";
 import type {
   IArea,
   IBoulder,
@@ -8,24 +11,47 @@ import type {
   ICrag,
   ILine,
   IParking,
+  IPhoto,
   IPhotoable,
   IPolygon,
   ITrail,
+  IUpload,
 } from "models";
+import { ITimestamps } from "models/lib/Timestamps";
 import type { Area } from "./area_pb";
 import type { Boulder } from "./boulder_pb";
 import type { Bounds } from "./bounds_pb";
 import type { Comment } from "./comment_pb";
-import type { Commentable } from "./commentable_pb";
 import type { Coordinate } from "./coordinate_pb";
 import type { Crag } from "./crag_pb";
 import type { Line } from "./line_pb";
 import type { Parking } from "./parking_pb";
-import type { Photoable } from "./photoable_pb";
 import type { Polygon } from "./polygon_pb";
 import type { Trail } from "./trail_pb";
+import type { Upload } from "./upload_pb";
 
 // --- ADAPTERS ---
+
+// Timestamps
+export function ProtoToTimestamps(proto?: Timestamps): ITimestamps {
+  if (!proto) {
+    return {
+      createdAt: new Date(0),
+      updatedAt: new Date(0),
+    };
+  }
+
+  return {
+    createdAt: ProtoToDate(proto.createdAt),
+    updatedAt: ProtoToDate(proto.updatedAt),
+  };
+}
+
+export function ProtoToDate(proto?: Timestamp): Date {
+  if (!proto) return new Date(0);
+
+  return timestampDate(proto);
+}
 
 // Coordinate
 export function ProtoToCoordinate(proto?: Coordinate): ICoordinateLiteral {
@@ -66,28 +92,55 @@ export function ProtoToLine(proto: Line): ILine {
 export function ProtoToComment(proto: Comment): IComment {
   return {
     id: typeof proto.id === "bigint" ? Number(proto.id) : proto.id,
-    text: "", // Not available in proto
-    commentable: { id: undefined, descriptor: "", comments: [] },
-    createdAt: new Date(0),
-    updatedAt: new Date(0),
+    text: proto.text,
+    ...ProtoToTimestamps(proto.timestamps),
+  };
+}
+
+// Upload
+export function ProtoToUpload(proto?: Upload): IUpload | undefined {
+  if (!proto) return undefined;
+  return {
+    id: typeof proto.id === "bigint" ? Number(proto.id) : proto.id,
+    key: proto.key,
+    directory: proto.directory,
+    engine: proto.engine,
+    originalName: proto.originalName,
+    fileSize:
+      typeof proto.fileSize === "bigint"
+        ? Number(proto.fileSize)
+        : proto.fileSize,
+    sha1Hash: proto.sha1Hash,
+    uploadedAt: ProtoToDate(proto.uploadedAt),
+  };
+}
+
+// Photo
+export function ProtoToPhoto(proto: Photo): IPhoto {
+  return {
+    id: typeof proto.id === "bigint" ? Number(proto.id) : proto.id,
+    title: proto.title,
+    description: proto.description,
+    upload: ProtoToUpload(proto.upload),
+    ...ProtoToTimestamps(proto.timestamps),
   };
 }
 
 // Commentable
-export function ProtoToCommentable(proto: Commentable): ICommentable {
+export function ProtoToCommentable(proto: Comment[]): ICommentable {
   return {
-    id: typeof proto.id === "bigint" ? Number(proto.id) : proto.id,
-    descriptor: proto.descriptor,
-    comments: proto.comments?.map(ProtoToComment),
+    id: 0,
+    descriptor: "unknown",
+    comments: proto?.map(ProtoToComment),
   };
 }
 
 // Photoable
-export function ProtoToPhotoable(proto: Photoable): IPhotoable {
+export function ProtoToPhotoable(proto: Photo[]): IPhotoable {
   return {
-    id: typeof proto.id === "bigint" ? Number(proto.id) : proto.id,
-    descriptor: proto.descriptor,
-    // photos: proto.photos?.map(ProtoToPhoto), // Add if available
+    id: 0,
+    descriptor: "unknown",
+    photos: proto?.map(ProtoToPhoto),
   };
 }
 
@@ -99,19 +152,39 @@ export function ProtoToArea(proto: Area): IArea {
     description: proto.description,
     polygon: proto.polygon ? ProtoToPolygon(proto.polygon) : undefined,
     boulders: proto.boulders?.map((b: Boulder) => ProtoToBoulder(b)),
-    commentable: proto.commentable
-      ? ProtoToCommentable(proto.commentable)
-      : undefined,
-    photoable: proto.photoable ? ProtoToPhotoable(proto.photoable) : undefined,
+    commentable: {
+      id: undefined,
+      descriptor: "",
+      comments: proto.comments?.map(ProtoToComment),
+    },
+    photoable: {
+      id: undefined,
+      descriptor: "",
+      photos: proto.photos?.map(ProtoToPhoto),
+    },
   };
 }
 
-// Boulder (minimal, only id field available in proto)
+// Boulder
 export function ProtoToBoulder(proto: Boulder): IBoulder {
   return {
     id: typeof proto.id === "bigint" ? Number(proto.id) : proto.id,
-    name: "", // Not available in proto
-    coordinates: { lat: 0, lng: 0 }, // Not available in proto
+    name: proto.name,
+    description: proto.description,
+    coordinates: ProtoToCoordinate(proto.coordinates),
+    area: undefined, // area is not directly available in proto
+    routes: proto.routes?.map((r: any) => ProtoToRoute(r)),
+    polygon: proto.polygon ? ProtoToPolygon(proto.polygon) : undefined,
+    commentable: {
+      id: undefined,
+      descriptor: "",
+      comments: proto.comments?.map(ProtoToComment),
+    },
+    photoable: {
+      id: undefined,
+      descriptor: "",
+      photos: proto.photos?.map(ProtoToPhoto),
+    },
   };
 }
 
@@ -128,10 +201,16 @@ export function ProtoToCrag(proto: Crag): ICrag {
     maxZoom: proto.maxZoom,
     parking: proto.parking ? ProtoToParking(proto.parking) : undefined,
     areas: proto.areas?.map((a: Area) => ProtoToArea(a)),
-    commentable: proto.commentable
-      ? ProtoToCommentable(proto.commentable)
-      : undefined,
-    photoable: proto.photoable ? ProtoToPhotoable(proto.photoable) : undefined,
+    commentable: {
+      id: undefined,
+      descriptor: "",
+      comments: proto.comments?.map(ProtoToComment),
+    },
+    photoable: {
+      id: undefined,
+      descriptor: "",
+      photos: proto.photos?.map(ProtoToPhoto),
+    },
     trail: proto.trail ? ProtoToTrail(proto.trail) : undefined,
   };
 }
@@ -144,12 +223,20 @@ export function ProtoToTrail(proto: Trail): ITrail {
   };
 }
 
+// Parking
 export function ProtoToParking(proto: Parking): IParking {
   return {
     id: typeof proto.id === "bigint" ? Number(proto.id) : proto.id,
     name: proto.name,
     description: proto.description,
     location: ProtoToCoordinate(proto.location),
-    // If you add more fields to IParking, map them here
+  };
+}
+
+// Route (stub)
+export function ProtoToRoute(proto: any): any {
+  return {
+    id: typeof proto.id === "bigint" ? Number(proto.id) : proto.id,
+    // Add more fields as needed
   };
 }

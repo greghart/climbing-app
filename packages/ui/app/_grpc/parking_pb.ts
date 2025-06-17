@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file parking.proto.
  */
 export const file_parking: GenFile = /*@__PURE__*/
-  fileDesc("Cg1wYXJraW5nLnByb3RvEgJwYiJaCgdQYXJraW5nEgoKAmlkGAEgASgDEgwKBG5hbWUYAiABKAkSEwoLZGVzY3JpcHRpb24YAyABKAkSIAoIbG9jYXRpb24YBCABKAsyDi5wYi5Db29yZGluYXRlQi5aLGdpdGh1Yi5jb20vZ3JlZ2hhcnQvY2xpbWJpbmctYXBwL2ludGVybmFsL3BiYgZwcm90bzM", [file_coordinate]);
+  fileDesc("Cg1wYXJraW5nLnByb3RvEgJwYiJrCgdQYXJraW5nEgoKAmlkGAEgASgDEgwKBG5hbWUYAiABKAkSEwoLZGVzY3JpcHRpb24YAyABKAkSIAoIbG9jYXRpb24YBCABKAsyDi5wYi5Db29yZGluYXRlEg8KB2NyYWdfaWQYBSABKANCLlosZ2l0aHViLmNvbS9ncmVnaGFydC9jbGltYmluZy1hcHAvaW50ZXJuYWwvcGJiBnByb3RvMw", [file_coordinate]);
 
 /**
  * @generated from message pb.Parking
@@ -34,11 +34,14 @@ export type Parking = Message<"pb.Parking"> & {
   description: string;
 
   /**
-   * Crag crag = 5; // Omitted to avoid circular reference
-   *
    * @generated from field: pb.Coordinate location = 4;
    */
   location?: Coordinate;
+
+  /**
+   * @generated from field: int64 crag_id = 5;
+   */
+  cragId: bigint;
 };
 
 /**

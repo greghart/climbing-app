@@ -13,6 +13,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/greghart/climbing-app/internal/config"
+	"github.com/greghart/climbing-app/internal/db"
 	mygrpc "github.com/greghart/climbing-app/internal/grpc"
 	"github.com/greghart/climbing-app/internal/models"
 	"github.com/greghart/climbing-app/internal/pb"
@@ -55,7 +56,12 @@ func TestServer_crags(t *testing.T) {
 		defer env.Stop()
 		errcmp.MustMatch(t, env.Start(), "")
 
-		crag, err := env.Repos.Crags.GetCrag(ctx, int(santeeId))
+		crag, err := env.Repos.Crags.GetCrag(ctx, db.CragsReadRequest{
+			ID:             santeeId,
+			IncludeArea:    true,
+			IncludeBoulder: true,
+			IncludeParking: true,
+		})
 		errcmp.MustMatch(t, err, "")
 
 		f, err := os.OpenFile(santeeFixturePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
@@ -69,6 +75,11 @@ func TestServer_crags(t *testing.T) {
 	t.Run("GetCrag Santee", func(t *testing.T) {
 		res, err := client.GetCrag(ctx, &pb.GetCragRequest{
 			Id: santeeId,
+			Opts: &pb.ReadCragOptions{
+				IncludeAreas:    true,
+				IncludeBoulders: true,
+				IncludeParking:  true,
+			},
 		})
 		errcmp.MustMatch(t, err, "")
 

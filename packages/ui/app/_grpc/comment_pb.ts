@@ -4,24 +4,34 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Timestamps } from "./timestamps_pb";
+import { file_timestamps } from "./timestamps_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file comment.proto.
  */
 export const file_comment: GenFile = /*@__PURE__*/
-  fileDesc("Cg1jb21tZW50LnByb3RvEgJwYiIVCgdDb21tZW50EgoKAmlkGAEgASgDQi5aLGdpdGh1Yi5jb20vZ3JlZ2hhcnQvY2xpbWJpbmctYXBwL2ludGVybmFsL3BiYgZwcm90bzM");
+  fileDesc("Cg1jb21tZW50LnByb3RvEgJwYiJHCgdDb21tZW50EgoKAmlkGAEgASgDEgwKBHRleHQYAiABKAkSIgoKdGltZXN0YW1wcxgDIAEoCzIOLnBiLlRpbWVzdGFtcHNCLlosZ2l0aHViLmNvbS9ncmVnaGFydC9jbGltYmluZy1hcHAvaW50ZXJuYWwvcGJiBnByb3RvMw", [file_timestamps]);
 
 /**
  * @generated from message pb.Comment
  */
 export type Comment = Message<"pb.Comment"> & {
   /**
-   * Add more fields as needed
-   *
    * @generated from field: int64 id = 1;
    */
   id: bigint;
+
+  /**
+   * @generated from field: string text = 2;
+   */
+  text: string;
+
+  /**
+   * @generated from field: pb.Timestamps timestamps = 3;
+   */
+  timestamps?: Timestamps;
 };
 
 /**

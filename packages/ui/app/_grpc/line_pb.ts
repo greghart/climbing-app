@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file line.proto.
  */
 export const file_line: GenFile = /*@__PURE__*/
-  fileDesc("CgpsaW5lLnByb3RvEgJwYiJOCgRMaW5lEgoKAmlkGAEgASgDEh0KBXN0YXJ0GAIgASgLMg4ucGIuQ29vcmRpbmF0ZRIbCgNlbmQYAyABKAsyDi5wYi5Db29yZGluYXRlQi5aLGdpdGh1Yi5jb20vZ3JlZ2hhcnQvY2xpbWJpbmctYXBwL2ludGVybmFsL3BiYgZwcm90bzM", [file_coordinate]);
+  fileDesc("CgpsaW5lLnByb3RvEgJwYiJgCgRMaW5lEgoKAmlkGAEgASgDEh0KBXN0YXJ0GAIgASgLMg4ucGIuQ29vcmRpbmF0ZRIbCgNlbmQYAyABKAsyDi5wYi5Db29yZGluYXRlEhAKCHRyYWlsX2lkGAQgASgDQi5aLGdpdGh1Yi5jb20vZ3JlZ2hhcnQvY2xpbWJpbmctYXBwL2ludGVybmFsL3BiYgZwcm90bzM", [file_coordinate]);
 
 /**
  * @generated from message pb.Line
@@ -29,11 +29,14 @@ export type Line = Message<"pb.Line"> & {
   start?: Coordinate;
 
   /**
-   * Trail trail = 4; // Omitted to avoid circular reference
-   *
    * @generated from field: pb.Coordinate end = 3;
    */
   end?: Coordinate;
+
+  /**
+   * @generated from field: int64 trail_id = 4;
+   */
+  trailId: bigint;
 };
 
 /**
