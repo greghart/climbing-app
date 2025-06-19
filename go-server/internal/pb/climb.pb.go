@@ -22,12 +22,10 @@ const (
 )
 
 type ReadCragOptions struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	IncludeAreas    bool                   `protobuf:"varint,1,opt,name=include_areas,json=includeAreas,proto3" json:"include_areas,omitempty"`
-	IncludeBoulders bool                   `protobuf:"varint,2,opt,name=include_boulders,json=includeBoulders,proto3" json:"include_boulders,omitempty"`
-	IncludeParking  bool                   `protobuf:"varint,3,opt,name=include_parking,json=includeParking,proto3" json:"include_parking,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Includes      []string               `protobuf:"bytes,1,rep,name=includes,proto3" json:"includes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ReadCragOptions) Reset() {
@@ -60,25 +58,11 @@ func (*ReadCragOptions) Descriptor() ([]byte, []int) {
 	return file_climb_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ReadCragOptions) GetIncludeAreas() bool {
+func (x *ReadCragOptions) GetIncludes() []string {
 	if x != nil {
-		return x.IncludeAreas
+		return x.Includes
 	}
-	return false
-}
-
-func (x *ReadCragOptions) GetIncludeBoulders() bool {
-	if x != nil {
-		return x.IncludeBoulders
-	}
-	return false
-}
-
-func (x *ReadCragOptions) GetIncludeParking() bool {
-	if x != nil {
-		return x.IncludeParking
-	}
-	return false
+	return nil
 }
 
 type GetCragRequest struct {
@@ -270,11 +254,9 @@ var File_climb_proto protoreflect.FileDescriptor
 const file_climb_proto_rawDesc = "" +
 	"\n" +
 	"\vclimb.proto\x12\x02pb\x1a\n" +
-	"crag.proto\"\x8a\x01\n" +
-	"\x0fReadCragOptions\x12#\n" +
-	"\rinclude_areas\x18\x01 \x01(\bR\fincludeAreas\x12)\n" +
-	"\x10include_boulders\x18\x02 \x01(\bR\x0fincludeBoulders\x12'\n" +
-	"\x0finclude_parking\x18\x03 \x01(\bR\x0eincludeParking\"I\n" +
+	"crag.proto\"-\n" +
+	"\x0fReadCragOptions\x12\x1a\n" +
+	"\bincludes\x18\x01 \x03(\tR\bincludes\"I\n" +
 	"\x0eGetCragRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12'\n" +
 	"\x04opts\x18\x02 \x01(\v2\x13.pb.ReadCragOptionsR\x04opts\"/\n" +

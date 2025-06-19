@@ -2,6 +2,12 @@ GOFMT_FILES = $(shell go list -f '{{.Dir}}' ./... | grep -v '/pb')
 GO_FILES = $(shell find . -name \*.go)
 MD_FILES = $(shell find . -name \*.md)
 
+include .env
+ifneq (,$(wildcard .env.local))
+include .env.local
+endif
+export
+
 # run a server in watch mode
 server:
 	wgo run ./cmd/server/main.go

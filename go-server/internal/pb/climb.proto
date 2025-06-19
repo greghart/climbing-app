@@ -7,9 +7,7 @@ import "crag.proto";
 option go_package = "github.com/greghart/climbing-app/internal/pb";
 
 message ReadCragOptions {
-  bool include_areas = 1;
-  bool include_boulders = 2;
-  bool include_parking = 3;
+  repeated string includes = 1;
 }
 
 message GetCragRequest {

@@ -2,13 +2,13 @@ syntax = "proto3";
 
 package pb;
 
-import "polygon_coordinate.proto";
+import "coordinate.proto";
 
 option go_package = "github.com/greghart/climbing-app/internal/pb";
 
 message Polygon {
   int64 id = 1;
   string descriptor = 2;
-  repeated PolygonCoordinate coordinates = 3;
+  repeated Coordinate coordinates = 3;
   int64 area_id = 4;
 }

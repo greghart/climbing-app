@@ -139,9 +139,7 @@ func protoToCragsReadRequest(req *pb.GetCragsRequest) db.CragsReadRequest {
 		return db.CragsReadRequest{}
 	}
 	return db.CragsReadRequest{
-		IncludeArea:    req.Opts.IncludeAreas,
-		IncludeBoulder: req.Opts.IncludeBoulders,
-		IncludeParking: req.Opts.IncludeParking,
+		Include: db.CragsIncludeSchema.Include(req.Opts.Includes...),
 	}
 }
 
@@ -150,9 +148,7 @@ func protoToCragReadRequest(req *pb.GetCragRequest) db.CragsReadRequest {
 		ID: req.Id,
 	}
 	if req.Opts != nil {
-		out.IncludeArea = req.Opts.IncludeAreas
-		out.IncludeBoulder = req.Opts.IncludeBoulders
-		out.IncludeParking = req.Opts.IncludeParking
+		out.Include = db.CragsIncludeSchema.Include(req.Opts.Includes...)
 	}
 	return out
 }

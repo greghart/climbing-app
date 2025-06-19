@@ -200,39 +200,24 @@ func ProtoToPolygon(p *pb.Polygon) *models.Polygon {
 	}
 }
 
-// Coordinates
-func PolygonCoordinatesToProto(coords []models.PolygonCoordinate) []*pb.PolygonCoordinate {
-	result := make([]*pb.PolygonCoordinate, 0, len(coords))
+// Note PolygonCoordinate <-> Proto is not 1:1
+func PolygonCoordinatesToProto(coords []models.PolygonCoordinate) []*pb.Coordinate {
+	result := make([]*pb.Coordinate, 0, len(coords))
 	for i := range coords {
-		result = append(result, &pb.PolygonCoordinate{
-			Id:          coords[i].ID,
-			Order:       int64(coords[i].Order),
-			Coordinates: CoordinateToProto(&coords[i].Coordinate),
-		})
+		result = append(result, CoordinateToProto(&coords[i].Coordinate))
 	}
 	return result
 }
 
-func ProtoToPolygonCoordinates(pbCoords []*pb.PolygonCoordinate) []models.PolygonCoordinate {
+// Note PolygonCoordinate <-> Proto is not 1:1
+func ProtoToPolygonCoordinates(pbCoords []*pb.Coordinate) []models.PolygonCoordinate {
 	result := make([]models.PolygonCoordinate, 0, len(pbCoords))
-	for i, p := range pbCoords {
-		if p != nil {
+	for i, c := range pbCoords {
+		if c != nil {
 			result = append(result, models.PolygonCoordinate{
-				ID:         p.Id,
 				Order:      i,
-				Coordinate: ProtoToCoordinate(p.Coordinates),
+				Coordinate: ProtoToCoordinate(c),
 			})
-		}
-	}
-	return result
-}
-
-// ProtoToCoordinates converts a slice of *pb.Coordinate to a slice of models.Coordinate
-func ProtoToCoordinates(pbCoords []*pb.Coordinate) []models.Coordinate {
-	result := make([]models.Coordinate, 0, len(pbCoords))
-	for _, p := range pbCoords {
-		if p != nil {
-			result = append(result, ProtoToCoordinate(p))
 		}
 	}
 	return result

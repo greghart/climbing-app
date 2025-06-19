@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"slices"
 	"strconv"
 	"time"
 
@@ -90,9 +89,7 @@ func (s *Server) getCrags(c *gin.Context) {
 	}
 
 	crags, err := s.env.Repos.Crags.GetCrags(c.Request.Context(), db.CragsReadRequest{
-		IncludeArea:    slices.Contains(req.Includes, "area"),
-		IncludeBoulder: slices.Contains(req.Includes, "boulder"),
-		IncludeParking: slices.Contains(req.Includes, "parking"),
+		Include: db.CragsIncludeSchema.Include(req.Includes...),
 	})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Failed to get crags: %v", err)})
@@ -115,10 +112,8 @@ func (s *Server) getCrag(c *gin.Context) {
 	}
 
 	crag, err := s.env.Repos.Crags.GetCrag(c.Request.Context(), db.CragsReadRequest{
-		ID:             int64(id),
-		IncludeArea:    slices.Contains(req.Includes, "area"),
-		IncludeBoulder: slices.Contains(req.Includes, "boulder"),
-		IncludeParking: slices.Contains(req.Includes, "parking"),
+		ID:      int64(id),
+		Include: db.CragsIncludeSchema.Include(req.Includes...),
 	})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("failed to get crag %v: %v", id, err)})

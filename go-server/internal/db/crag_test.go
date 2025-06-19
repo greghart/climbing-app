@@ -19,13 +19,12 @@ var cragsReadPermutations = []struct {
 	input CragsReadRequest
 }{
 	{"basic", CragsReadRequest{}},
-	{"with areas", CragsReadRequest{IncludeArea: true}},
-	{"with boulders", CragsReadRequest{IncludeArea: true, IncludeBoulder: true}},
-	{"with parking", CragsReadRequest{IncludeParking: true}},
-	{"areas+boulders", CragsReadRequest{IncludeArea: true, IncludeBoulder: true}},
-	{"areas+parking", CragsReadRequest{IncludeArea: true, IncludeParking: true}},
-	{"boulders+parking", CragsReadRequest{IncludeBoulder: true, IncludeParking: true}},
-	{"all", CragsReadRequest{IncludeArea: true, IncludeBoulder: true, IncludeParking: true}},
+	{"with areas", CragsReadRequest{Include: CragsIncludeSchema.Include("area")}},
+	{"with boulders", CragsReadRequest{Include: CragsIncludeSchema.Include("area.boulder")}},
+	{"with parking", CragsReadRequest{Include: CragsIncludeSchema.Include("parking")}},
+	{"areas+boulders", CragsReadRequest{Include: CragsIncludeSchema.Include("boulder")}}, // not allowed!
+	{"areas+parking", CragsReadRequest{Include: CragsIncludeSchema.Include("area", "parking")}},
+	{"all", CragsReadRequest{Include: CragsIncludeSchema.Include("area.boulder", "parking")}},
 }
 
 // Ignore timestamps since those are
@@ -113,13 +112,13 @@ func loadSanteeFixture(t *testing.T, ctx context.Context, db *DB) {
 
 // goc: helper to produce the expected crag for a given include request
 func expectedCragForInclude(crag *models.Crag, req CragsReadRequest) *models.Crag {
-	if !req.IncludeArea && !req.IncludeBoulder {
+	if !req.Include.IsIncluded("area") {
 		crag.Areas = nil
 	}
-	if !req.IncludeParking {
+	if !req.Include.IsIncluded("parking") {
 		crag.Parking = nil
 	}
-	if req.IncludeArea && !req.IncludeBoulder {
+	if req.Include.IsIncluded("area") && !req.Include.IsIncluded("area.boulder") {
 		for i := range crag.Areas {
 			crag.Areas[i].Boulders = nil
 		}

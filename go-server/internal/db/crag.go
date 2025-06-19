@@ -7,6 +7,7 @@ import (
 	"github.com/greghart/climbing-app/internal/models"
 	"github.com/greghart/powerputtygo/mapperp"
 	"github.com/greghart/powerputtygo/queryp"
+	"github.com/greghart/powerputtygo/servicep"
 	"github.com/greghart/powerputtygo/sqlp"
 )
 
@@ -22,12 +23,12 @@ func NewCrags(db *DB) *Crags {
 		queryTemplate: queryp.Must(queryp.NewTemplate(`
 			SELECT 
 				crag.*
-				{{- if .Include "area" "boulder"}},
+				{{- if .Include "area"}},
 				COALESCE(area.id, 0) AS area_id,
 				COALESCE(area.name, "") AS area_name,
 				area.description AS area_description
 				{{- end}}
-				{{- if .Include "boulder"}},
+				{{- if .Include "area.boulder"}},
 				COALESCE(boulder.id, 0) AS boulder_id,
 				COALESCE(boulder.name, 0) AS boulder_name,
 				boulder.description AS boulder_description,
@@ -42,10 +43,10 @@ func NewCrags(db *DB) *Crags {
 				COALESCE(parking.location_Lng, 0) AS parking_location_Lng
 				{{- end}}
 			FROM crag
-			{{if .Include "area" "boulder" -}}
+			{{if .Include "area" -}}
 			LEFT JOIN area ON area.cragId = crag.id
 			{{- end}}
-			{{if .Include "boulder" -}}
+			{{if .Include "area.boulder" -}}
 			LEFT JOIN boulder on boulder.areaId = area.id
 			{{- end}}
 			{{if .Include "parking" -}}
@@ -137,23 +138,22 @@ func (c *Crags) GetCrag(ctx context.Context, req CragsReadRequest) (*models.Crag
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// CragsIncludeSchema defines our db layer support for inclusions (and can nicely
+// be re-used at API layer as well).
+var CragsIncludeSchema = servicep.NewIncludeSchema().Allow(
+	"area.boulder",
+	"parking",
+)
+
 // ReadRequest shared by GetCrag and GetCrags.
 type CragsReadRequest struct {
-	ID             int64
-	IncludeArea    bool
-	IncludeBoulder bool
-	IncludeParking bool
+	ID      int64
+	Include *servicep.IncludeRequest
 }
 
 func (r *CragsReadRequest) ForTemplate(t queryp.Templater) queryp.Templater {
-	if r.IncludeArea {
-		t = t.Include("area")
-	}
-	if r.IncludeBoulder {
-		t = t.Include("boulder")
-	}
-	if r.IncludeParking {
-		t = t.Include("parking")
+	for inc := range r.Include.All() {
+		t = t.Include(inc)
 	}
 	if r.ID != 0 {
 		t = t.Param("id", r.ID)

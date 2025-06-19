@@ -12,26 +12,16 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file climb.proto.
  */
 export const file_climb: GenFile = /*@__PURE__*/
-  fileDesc("CgtjbGltYi5wcm90bxICcGIiWwoPUmVhZENyYWdPcHRpb25zEhUKDWluY2x1ZGVfYXJlYXMYASABKAgSGAoQaW5jbHVkZV9ib3VsZGVycxgCIAEoCBIXCg9pbmNsdWRlX3BhcmtpbmcYAyABKAgiPwoOR2V0Q3JhZ1JlcXVlc3QSCgoCaWQYASABKAMSIQoEb3B0cxgCIAEoCzITLnBiLlJlYWRDcmFnT3B0aW9ucyIpCg9HZXRDcmFnUmVzcG9uc2USFgoEY3JhZxgBIAEoCzIILnBiLkNyYWciNAoPR2V0Q3JhZ3NSZXF1ZXN0EiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQ3JhZ09wdGlvbnMiKwoQR2V0Q3JhZ3NSZXNwb25zZRIXCgVjcmFncxgBIAMoCzIILnBiLkNyYWcyeQoMQ2xpbWJTZXJ2aWNlEjIKB0dldENyYWcSEi5wYi5HZXRDcmFnUmVxdWVzdBoTLnBiLkdldENyYWdSZXNwb25zZRI1CghHZXRDcmFncxITLnBiLkdldENyYWdzUmVxdWVzdBoULnBiLkdldENyYWdzUmVzcG9uc2VCLlosZ2l0aHViLmNvbS9ncmVnaGFydC9jbGltYmluZy1hcHAvaW50ZXJuYWwvcGJiBnByb3RvMw", [file_crag]);
+  fileDesc("CgtjbGltYi5wcm90bxICcGIiIwoPUmVhZENyYWdPcHRpb25zEhAKCGluY2x1ZGVzGAEgAygJIj8KDkdldENyYWdSZXF1ZXN0EgoKAmlkGAEgASgDEiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQ3JhZ09wdGlvbnMiKQoPR2V0Q3JhZ1Jlc3BvbnNlEhYKBGNyYWcYASABKAsyCC5wYi5DcmFnIjQKD0dldENyYWdzUmVxdWVzdBIhCgRvcHRzGAIgASgLMhMucGIuUmVhZENyYWdPcHRpb25zIisKEEdldENyYWdzUmVzcG9uc2USFwoFY3JhZ3MYASADKAsyCC5wYi5DcmFnMnkKDENsaW1iU2VydmljZRIyCgdHZXRDcmFnEhIucGIuR2V0Q3JhZ1JlcXVlc3QaEy5wYi5HZXRDcmFnUmVzcG9uc2USNQoIR2V0Q3JhZ3MSEy5wYi5HZXRDcmFnc1JlcXVlc3QaFC5wYi5HZXRDcmFnc1Jlc3BvbnNlQi5aLGdpdGh1Yi5jb20vZ3JlZ2hhcnQvY2xpbWJpbmctYXBwL2ludGVybmFsL3BiYgZwcm90bzM", [file_crag]);
 
 /**
  * @generated from message pb.ReadCragOptions
  */
 export type ReadCragOptions = Message<"pb.ReadCragOptions"> & {
   /**
-   * @generated from field: bool include_areas = 1;
+   * @generated from field: repeated string includes = 1;
    */
-  includeAreas: boolean;
-
-  /**
-   * @generated from field: bool include_boulders = 2;
-   */
-  includeBoulders: boolean;
-
-  /**
-   * @generated from field: bool include_parking = 3;
-   */
-  includeParking: boolean;
+  includes: string[];
 };
 
 /**
