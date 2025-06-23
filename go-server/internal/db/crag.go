@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/greghart/climbing-app/internal/models"
 	"github.com/greghart/powerputtygo/mapperp"
@@ -13,22 +14,26 @@ import (
 
 type Crags struct {
 	*sqlp.Repository[models.Crag]
+	trails        *Trails
+	areas         *Areas
 	queryTemplate *queryp.Template
 	getMapper     func() mapperp.Mapper[cragRow, models.Crag]
 }
 
-func NewCrags(db *DB) *Crags {
+func NewCrags(db *DB, trails *Trails, areas *Areas) *Crags {
 	return &Crags{
 		Repository: sqlp.NewRepository[models.Crag](db.DB, "crag"),
+		trails:     trails,
+		areas:      areas,
 		queryTemplate: queryp.Must(queryp.NewTemplate(`
 			SELECT 
 				crag.*
-				{{- if .Include "area"}},
+				{{- if .Include "areas"}},
 				COALESCE(area.id, 0) AS area_id,
 				COALESCE(area.name, "") AS area_name,
 				area.description AS area_description
 				{{- end}}
-				{{- if .Include "area.boulder"}},
+				{{- if .Include "areas.boulders"}},
 				COALESCE(boulder.id, 0) AS boulder_id,
 				COALESCE(boulder.name, 0) AS boulder_name,
 				boulder.description AS boulder_description,
@@ -43,15 +48,15 @@ func NewCrags(db *DB) *Crags {
 				COALESCE(parking.location_Lng, 0) AS parking_location_Lng
 				{{- end}}
 			FROM crag
-			{{if .Include "area" -}}
-			LEFT JOIN area ON area.cragId = crag.id
-			{{- end}}
-			{{if .Include "area.boulder" -}}
-			LEFT JOIN boulder on boulder.areaId = area.id
-			{{- end}}
-			{{if .Include "parking" -}}
-			LEFT JOIN parking ON parking.cragId = crag.id
-			{{- end}}
+				{{if .Include "areas" -}}
+				LEFT JOIN area ON area.cragId = crag.id
+				{{- end}}
+				{{if .Include "areas.boulders" -}}
+				LEFT JOIN boulder on boulder.areaId = area.id
+				{{- end}}
+				{{if .Include "parking" -}}
+				LEFT JOIN parking ON parking.cragId = crag.id
+				{{- end}}
 			{{if .Param "id" -}}
 			WHERE crag.id = :id
 			{{- end}}
@@ -133,16 +138,54 @@ func (c *Crags) GetCrag(ctx context.Context, req CragsReadRequest) (*models.Crag
 	if crag.ID == 0 {
 		return nil, nil
 	}
+
+	// Post-process step: we don't necessarily need to only run one query to fulfill the request
+	// For our cases, a trail ends up potentially creating too large a join, and it's better to
+	// load that separately. (Note, this kind of logic would more naturally be placed in a service
+	// layer if complexity grows too large).
+	// This also highlights that we don't necessarily want a universal schema for all use cases --
+	// eg for the crags listing, getting all trails is not needed and potentially too expensive.
+	if req.Include.IsIncluded("trail") && c.trails != nil {
+		trail, err := c.trails.GetTrail(ctx, TrailsReadRequest{
+			CragID:  crag.ID,
+			Include: TrailsIncludeSchema.Include("lines"),
+		})
+		if err != nil {
+			return nil, fmt.Errorf("failed to get trail for crag %d: %w", crag.ID, err)
+		}
+		crag.Trail = trail
+	}
+	if req.Include.IsIncluded("areas.polygon") && c.areas != nil {
+		subcludes := []string{}
+		for inc := range req.Include.All() {
+			cut, ok := strings.CutPrefix(inc, "areas.")
+			if ok {
+				subcludes = append(subcludes, cut)
+			}
+		}
+		areas, err := c.areas.GetAreas(ctx, AreasReadRequest{
+			CragID:  crag.ID,
+			Include: AreasIncludeSchema.Include(subcludes...),
+		})
+		if err != nil {
+			return nil, fmt.Errorf("failed to get areas for crag %d: %w", crag.ID, err)
+		}
+		crag.Areas = areas
+	}
+
 	return &crag, nil
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// CragsIncludeSchema defines our db layer support for inclusions (and can nicely
-// be re-used at API layer as well).
+// CragsIncludeSchema defines our db layer support for inclusions.
+// Note it's intentionally public, so grpc or http layer can validate it if desired.
 var CragsIncludeSchema = servicep.NewIncludeSchema().Allow(
-	"area.boulder",
+	"areas.polygon.coordinates",
+	"areas.boulders.polygon.coordinates",
+	"areas.boulders.routes",
 	"parking",
+	"trail",
 )
 
 // ReadRequest shared by GetCrag and GetCrags.

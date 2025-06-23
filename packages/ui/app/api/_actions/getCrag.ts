@@ -6,7 +6,16 @@ import "server-only";
 const getCrag = cache(
   async (
     id: number | string,
-    opts: { includes?: string[] } = { includes: ["area.boulder", "parking"] }
+    opts: { includes?: string[] } = {
+      includes: [
+        "areas.boulders",
+        "areas.boulders.routes",
+        "areas.polygon",
+        "areas.polygon.coordinates",
+        "parking",
+        "trail",
+      ],
+    }
   ) => {
     return client
       .getCrag({

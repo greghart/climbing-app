@@ -58,7 +58,7 @@ func TestGrpcServer_crags(t *testing.T) {
 
 		crag, err := env.Repos.Crags.GetCrag(ctx, db.CragsReadRequest{
 			ID:      santeeId,
-			Include: db.CragsIncludeSchema.Include("area.boulder", "parking"),
+			Include: db.CragsIncludeSchema.Include("areas.boulders", "parking"),
 		})
 		errcmp.MustMatch(t, err, "")
 
@@ -74,7 +74,7 @@ func TestGrpcServer_crags(t *testing.T) {
 		res, err := client.GetCrag(ctx, &pb.GetCragRequest{
 			Id: santeeId,
 			Opts: &pb.ReadCragOptions{
-				Includes: []string{"area.boulder", "parking"},
+				Includes: []string{"areas.boulders", "parking"},
 			},
 		})
 		errcmp.MustMatch(t, err, "")

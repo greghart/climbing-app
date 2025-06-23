@@ -1,7 +1,6 @@
 package config
 
 import (
-	"encoding/json"
 	"log"
 	"os"
 	"strconv"
@@ -33,8 +32,6 @@ func Load() Config {
 		HTTPPort:     getEnvInt("HTTP_PORT", 8080),
 		GRPCPort:     getEnvInt("GRPC_PORT", 8081),
 	}
-	js, _ := json.MarshalIndent(cfg, "", "  ") // nolint:errcheck
-	log.Printf("CFG: %s", string(js))
 	return cfg
 }
 

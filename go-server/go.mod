@@ -236,4 +236,6 @@ replace github.com/greghart/powerputtygo/errcmp => ../../powerputtygo/errcmp
 
 replace github.com/greghart/powerputtygo/servicep => ../../powerputtygo/servicep
 
+replace github.com/greghart/powerputtygo/clientp => ../../powerputtygo/clientp
+
 tool github.com/golangci/golangci-lint/cmd/golangci-lint

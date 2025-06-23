@@ -19,12 +19,12 @@ var cragsReadPermutations = []struct {
 	input CragsReadRequest
 }{
 	{"basic", CragsReadRequest{}},
-	{"with areas", CragsReadRequest{Include: CragsIncludeSchema.Include("area")}},
-	{"with boulders", CragsReadRequest{Include: CragsIncludeSchema.Include("area.boulder")}},
+	{"with areas", CragsReadRequest{Include: CragsIncludeSchema.Include("areas")}},
+	{"with boulders", CragsReadRequest{Include: CragsIncludeSchema.Include("areas.boulders")}},
 	{"with parking", CragsReadRequest{Include: CragsIncludeSchema.Include("parking")}},
 	{"areas+boulders", CragsReadRequest{Include: CragsIncludeSchema.Include("boulder")}}, // not allowed!
 	{"areas+parking", CragsReadRequest{Include: CragsIncludeSchema.Include("area", "parking")}},
-	{"all", CragsReadRequest{Include: CragsIncludeSchema.Include("area.boulder", "parking")}},
+	{"all", CragsReadRequest{Include: CragsIncludeSchema.Include("areas.boulders", "parking")}},
 }
 
 // Ignore timestamps since those are
@@ -43,7 +43,7 @@ func TestCrags_GetCrags(t *testing.T) {
 	defer cancel()
 	loadSanteeFixture(t, ctx, db)
 
-	cragsRepo := NewCrags(db)
+	cragsRepo := NewCrags(db, nil, nil)
 	for _, perm := range cragsReadPermutations {
 		t.Run(perm.name, func(t *testing.T) {
 			expected := testutil.LoadCragFromJSON(t, "testdata/santee.json")
@@ -66,7 +66,7 @@ func TestCrags_GetCrag(t *testing.T) {
 	defer cancel()
 	loadSanteeFixture(t, ctx, db)
 
-	cragsRepo := NewCrags(db)
+	cragsRepo := NewCrags(db, nil, nil)
 	for _, perm := range cragsReadPermutations {
 		t.Run(perm.name, func(t *testing.T) {
 			expected := testutil.LoadCragFromJSON(t, "testdata/santee.json")
@@ -112,13 +112,13 @@ func loadSanteeFixture(t *testing.T, ctx context.Context, db *DB) {
 
 // goc: helper to produce the expected crag for a given include request
 func expectedCragForInclude(crag *models.Crag, req CragsReadRequest) *models.Crag {
-	if !req.Include.IsIncluded("area") {
+	if !req.Include.IsIncluded("areas") {
 		crag.Areas = nil
 	}
 	if !req.Include.IsIncluded("parking") {
 		crag.Parking = nil
 	}
-	if req.Include.IsIncluded("area") && !req.Include.IsIncluded("area.boulder") {
+	if req.Include.IsIncluded("areas") && !req.Include.IsIncluded("areas.boulders") {
 		for i := range crag.Areas {
 			crag.Areas[i].Boulders = nil
 		}

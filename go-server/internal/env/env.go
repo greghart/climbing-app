@@ -12,11 +12,12 @@ import (
 // Eg config sets db settings, env sets up db and services
 type Env struct {
 	DB    *db.DB
-	Repos Repos
+	Repos *Repos
 }
 
 type Repos struct {
-	Crags *db.Crags
+	Crags  *db.Crags
+	Trails *db.Trails
 }
 
 func New(cfg config.Config) *Env {
@@ -35,8 +36,11 @@ func (e *Env) Start() error {
 	if err := e.DB.Start(); err != nil {
 		return fmt.Errorf("failed to start db: %w", err)
 	}
-	e.Repos = Repos{
-		Crags: db.NewCrags(e.DB),
+	trails := db.NewTrails(e.DB)
+	areas := db.NewAreas(e.DB)
+	e.Repos = &Repos{
+		Crags:  db.NewCrags(e.DB, trails, areas),
+		Trails: trails,
 	}
 	return nil
 }
