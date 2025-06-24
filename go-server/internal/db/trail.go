@@ -64,7 +64,7 @@ func (t *Trails) GetTrail(ctx context.Context, req TrailsReadRequest) (*models.T
 		if err != nil {
 			return nil, fmt.Errorf("failed to scan row: %w", err)
 		}
-		mapper(&trail, &row, i)
+		mapper(&trail, &row)
 	}
 	if trail.ID == 0 {
 		return nil, nil

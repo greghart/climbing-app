@@ -2,16 +2,39 @@ package db
 
 import (
 	"context"
+	"log"
+	"time"
 
 	"github.com/greghart/climbing-app/internal/models"
+	"github.com/greghart/powerputtygo/clientp"
 	"github.com/greghart/powerputtygo/mapperp"
 	"github.com/greghart/powerputtygo/queryp"
 	"github.com/greghart/powerputtygo/servicep"
 	"github.com/greghart/powerputtygo/sqlp"
 )
 
-// Areas repository for area table
-// Provides methods to get a single area or all areas for a crag
+var AreasIncludeSchema = servicep.NewIncludeSchema().Allow(
+	"polygon.coordinates",
+	"boulders.polygon.coordinates",
+	"boulders.routes",
+)
+
+type AreasReadRequest struct {
+	CragIDs []int64
+	Include *servicep.IncludeRequest
+}
+
+func (r *AreasReadRequest) ForTemplate(t queryp.Templater) queryp.Templater {
+	for inc := range r.Include.All() {
+		t = t.Include(inc)
+	}
+	if len(r.CragIDs) > 0 {
+		t = t.Param("cragIds", r.CragIDs)
+	}
+	return t
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 type Areas struct {
 	*sqlp.Repository[models.Area]
@@ -31,21 +54,23 @@ func NewAreas(db *DB) *Areas {
 				{{- end}}
 				{{- if .Include "polygon.coordinates"}},
 				COALESCE(polygon_coordinate.id, 0) AS polygon_coordinate_id,
-				polygon_coordinate.lat AS polygon_coordinate_Lat,
-				polygon_coordinate.lng AS polygon_coordinate_Lng,
-				polygon_coordinate."order" AS polygon_coordinate_order
+				COALESCE(polygon_coordinate.lat,0) AS polygon_coordinate_Lat,
+				COALESCE(polygon_coordinate.lng, 0) AS polygon_coordinate_Lng,
+				COALESCE(polygon_coordinate."order", 0) AS polygon_coordinate_order
 				{{- end}}
 				{{- if .Include "boulders"}},
 				COALESCE(boulder.id, 0) AS boulder_id,
-				boulder.name AS boulder_name,
+				COALESCE(boulder.name, "") AS boulder_name,
 				boulder.description AS boulder_description,
-				boulder.coordinates_Lat AS boulder_coordinates_Lat,
-				boulder.coordinates_Lng AS boulder_coordinates_Lng
+				COALESCE(boulder.coordinates_Lat, 0) AS boulder_coordinates_Lat,
+				COALESCE(boulder.coordinates_Lng, 0) AS boulder_coordinates_Lng
 				{{- end}}
-				{{- if .Include "boulders.route"}},
+				{{- if .Include "boulders.routes"}},
 				COALESCE(route.id, 0) AS route_id,
-				route.name AS route_name,
-				route.length AS route_length,
+				COALESCE(route.name, "") AS route_name,
+				COALESCE(route.gradeRaw, "") AS route_gradeRaw,
+				COALESCE(route.coordinates_Lat, 0) AS route_coordinates_Lat,
+				COALESCE(route.coordinates_Lng, 0) AS route_coordinates_Lng,
 				route.description AS route_description
 				{{- end}}
 				{{- if .Include "boulders.polygon" }},
@@ -54,32 +79,40 @@ func NewAreas(db *DB) *Areas {
 				{{- end}}
 				{{- if .Include "boulders.polygon.coordinates"}},
 				COALESCE(boulder_polygon_coordinate.id, 0) AS boulder_polygon_coordinate_id,
-				boulder_polygon_coordinate.lat AS boulder_polygon_coordinate_Lat,
-				boulder_polygon_coordinate.lng AS boulder_polygon_coordinate_Lng,
-				boulder_polygon_coordinate."order" AS boulder_polygon_coordinate_order
+				COALESCE(boulder_polygon_coordinate.lat, 0) AS boulder_polygon_coordinate_Lat,
+				COALESCE(boulder_polygon_coordinate.lng, 0) AS boulder_polygon_coordinate_Lng,
+				COALESCE(boulder_polygon_coordinate."order", 0) AS boulder_polygon_coordinate_order
 				{{- end}}
 			FROM area
-				{{if .Include "polygon" -}}
+				{{- if .Include "polygon"}}
 				LEFT JOIN polygon ON polygon.id = area.polygonId
-				{{- end}}
-				{{if .Include "polygon.coordinates" -}}
+				{{- end -}}
+				{{- if .Include "polygon.coordinates"}}
 				LEFT JOIN polygon_coordinate ON polygon_coordinate.polygonId = polygon.id
-				{{- end}}
-				{{if .Include "boulders" -}}
+				{{- end -}}
+				{{- if .Include "boulders"}}
 				LEFT JOIN boulder ON boulder.areaId = area.id
-				{{- end}}
-				{{if .Include "boulders.route" -}}
+				{{- end -}}
+				{{- if .Include "boulders.routes"}}
 				LEFT JOIN route ON route.boulderId = boulder.id
-				{{- end}}
-				{{if .Include "boulders.polygon" -}}
+				{{- end -}}
+				{{- if .Include "boulders.polygon"}}
 				LEFT JOIN polygon AS boulder_polygon ON boulder_polygon.id = boulder.polygonId
-				{{- end}}
-				{{if .Include "boulders.polygon.coordinates" -}}
+				{{- end -}}
+				{{- if .Include "boulders.polygon.coordinates"}}
 				LEFT JOIN polygon_coordinate AS boulder_polygon_coordinate ON boulder_polygon_coordinate.polygonId = boulder_polygon.id
-				{{- end}}
-			{{if .Param "cragId" -}}
-			WHERE area.cragId = :cragId
+				{{- end -}}
+			{{- if .HasParams}}
+			WHERE
+				1=1
+				{{- if .Param "id"}}
+				AND area.id = :id
+				{{- end -}}
+				{{- if .Param "cragIds"}}
+				AND area.cragId IN (:cragIds)
+				{{- end -}}
 			{{- end}}
+			ORDER BY area.id, boulder.id ASC
 		`)),
 		getMapper: func() mapperp.Mapper[areaRow, models.Area] {
 			return mapperp.All(
@@ -87,7 +120,7 @@ func NewAreas(db *DB) *Areas {
 					func(e *models.Area) *models.Polygon { return e.Polygon },
 					mapperp.One(
 						func(row *areaRow) *models.Polygon { return row.Polygon },
-						mapperp.InnerSlice( // polygon coordinates)
+						mapperp.InnerSlice( // polygon coordinates
 							func(e *models.Polygon) *[]models.PolygonCoordinate { return &e.Coordinates },
 							func(e *models.PolygonCoordinate) int64 { return e.ID },
 							func(row *areaRow) *models.PolygonCoordinate { return &row.PolygonCoordinate },
@@ -107,7 +140,7 @@ func NewAreas(db *DB) *Areas {
 						mapperp.Inner( // boulder polygon
 							func(e *models.Boulder) *models.Polygon { return e.Polygon },
 							mapperp.One(
-								func(row *areaRow) *models.Polygon { return &row.BoulderPolygon },
+								func(row *areaRow) *models.Polygon { return row.Boulder.Polygon },
 								mapperp.InnerSlice( // boulder polygon coordinates
 									func(e *models.Polygon) *[]models.PolygonCoordinate { return &e.Coordinates },
 									func(e *models.PolygonCoordinate) int64 { return e.ID },
@@ -120,6 +153,31 @@ func NewAreas(db *DB) *Areas {
 			)
 		},
 	}
+}
+
+// BatchAreasByCrag returns a batch client for getting areas in bulk by crag ID.
+func (a *Areas) BatchAreasByCrag(req AreasReadRequest) *clientp.Batch[int64, []models.Area] {
+	return clientp.NewBatch(
+		func(ctx context.Context, ids []int64) (map[int64][]models.Area, error) {
+			req := req
+			req.CragIDs = ids
+			results, err := a.GetAreas(ctx, req)
+			if err != nil {
+				return nil, err
+			}
+
+			out := make(map[int64][]models.Area, len(results))
+			for _, res := range results {
+				if _, ok := out[res.CragID]; !ok {
+					out[res.CragID] = []models.Area{}
+				}
+				out[res.CragID] = append(out[res.CragID], res)
+			}
+
+			return out, nil
+		},
+		clientp.BatchOptions{Timeout: 25 * time.Millisecond},
+	)
 }
 
 // GetArea retrieves a single area by its ID using the new query template and mapper
@@ -144,7 +202,7 @@ func (a *Areas) GetArea(ctx context.Context, id int64, req AreasReadRequest) (*m
 		if err != nil {
 			return nil, err
 		}
-		mapper(&area, &row, i)
+		mapper(&area, &row)
 	}
 	if area.ID == 0 {
 		return nil, nil
@@ -155,6 +213,7 @@ func (a *Areas) GetArea(ctx context.Context, id int64, req AreasReadRequest) (*m
 // GetAreas retrieves all areas for a given cragId using the new query template and mapper
 func (a *Areas) GetAreas(ctx context.Context, req AreasReadRequest) ([]models.Area, error) {
 	q, args, err := req.ForTemplate(a.queryTemplate).Execute()
+	log.Println(q)
 	if err != nil {
 		return nil, err
 	}
@@ -175,32 +234,9 @@ func (a *Areas) GetAreas(ctx context.Context, req AreasReadRequest) ([]models.Ar
 		if err != nil {
 			return nil, err
 		}
-		mapper(&areas, &row, i)
+		mapper(&areas, &row)
 	}
 	return areas, rows.Err()
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-var AreasIncludeSchema = servicep.NewIncludeSchema().Allow(
-	"polygon.coordinates",
-	"boulders.polygon.coordinates",
-	"boulders.routes",
-)
-
-type AreasReadRequest struct {
-	CragID  int64
-	Include *servicep.IncludeRequest
-}
-
-func (r *AreasReadRequest) ForTemplate(t queryp.Templater) queryp.Templater {
-	for inc := range r.Include.All() {
-		t = t.Include(inc)
-	}
-	if r.CragID != 0 {
-		t = t.Param("cragId", r.CragID)
-	}
-	return t
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -211,6 +247,5 @@ type areaRow struct {
 	PolygonCoordinate        models.PolygonCoordinate `sqlp:"polygon_coordinate"`
 	Boulder                  models.Boulder           `sqlp:"boulder"`
 	Route                    models.Route             `sqlp:"route"`
-	BoulderPolygon           models.Polygon           `sqlp:"boulder_polygon"`
 	BoulderPolygonCoordinate models.PolygonCoordinate `sqlp:"boulder_polygon_coordinate"`
 }

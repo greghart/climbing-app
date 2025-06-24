@@ -2,6 +2,8 @@
 
 Persistence layer is a sqlite database.
 
+Note, most conventions are always commented upon in `db/crag` as the first iteration.
+
 ## IDs
 
 Technically, when an entity hasn't been persisted yet, we have no ID and one may consider it nil.
@@ -11,13 +13,19 @@ simplicity, with the convention that 0 value indicates the entity is not saved o
 
 Pointer primitives (or `sql.NullX`) should still be used for nullable columns.
 
+## Parameters
+
+Always prefer a slice parameter over a primitive (eg. `IDs` over `ID`), since the former can model
+the latter, but not vice versa. No need to worry about performance between `id = :id` and `id IN (:ids)`.
+
 ## Relationships
 
 Generally, a parent (has many, has one side) can embed child data, while the child should just keep
 the identifier.
 
 Eg. Crag has `Areas []Area`, but Area just has `CragID int`. This keeps data mostly one directional,
-and minimizes bad expectations around circular data.
+and minimizes bad expectations around circular data. Additionally, we can mostly keep these IDs
+out of the serialization layer (json/protobuf).
 
 ## Performance
 

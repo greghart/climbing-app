@@ -212,10 +212,9 @@ func PolygonCoordinatesToProto(coords []models.PolygonCoordinate) []*pb.Coordina
 // Note PolygonCoordinate <-> Proto is not 1:1
 func ProtoToPolygonCoordinates(pbCoords []*pb.Coordinate) []models.PolygonCoordinate {
 	result := make([]models.PolygonCoordinate, 0, len(pbCoords))
-	for i, c := range pbCoords {
+	for _, c := range pbCoords {
 		if c != nil {
 			result = append(result, models.PolygonCoordinate{
-				Order:      i,
 				Coordinate: ProtoToCoordinate(c),
 			})
 		}

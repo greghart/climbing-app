@@ -1,0 +1,14 @@
+{
+  "id": 56,
+  "name": "Empty",
+  "bounds": {
+    "topLeft": {
+      "lat": 1,
+      "lng": 2
+    },
+    "bottomRight": {
+      "lat": 3,
+      "lng": 4
+    }
+  }
+}
