@@ -289,7 +289,7 @@ func RouteToProto(m *models.Route) *pb.Route {
 		Description: derefString(m.Description),
 		FirstAscent: derefString(m.FirstAscent),
 		BoulderId:   m.BoulderID,
-		Grade:       GradeToProto(m.Grade),
+		Grade:       GradeToProto(m.GetGrade()),
 		// TODO: Size is omitted as models.Route does not have a Size field yet
 	}
 }

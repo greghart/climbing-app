@@ -1,21 +1,25 @@
+import { Grade, Grade_GradingSystem } from "@/app/_grpc/grade_pb";
 import { Photo } from "@/app/_grpc/photo_pb";
 import { Timestamps } from "@/app/_grpc/timestamps_pb";
 import { timestampDate, type Timestamp } from "@bufbuild/protobuf/wkt";
-import type {
-  IArea,
-  IBoulder,
-  IBounds,
-  IComment,
-  ICommentable,
-  ICoordinateLiteral,
-  ICrag,
-  ILine,
-  IParking,
-  IPhoto,
-  IPhotoable,
-  IPolygon,
-  ITrail,
-  IUpload,
+import {
+  GradingSystemType,
+  IGrade,
+  type IArea,
+  type IBoulder,
+  type IBounds,
+  type IComment,
+  type ICommentable,
+  type ICoordinateLiteral,
+  type ICrag,
+  type ILine,
+  type IParking,
+  type IPhoto,
+  type IPhotoable,
+  type IPolygon,
+  type IRoute,
+  type ITrail,
+  type IUpload,
 } from "models";
 import { ITimestamps } from "models/lib/Timestamps";
 import type { Area } from "./area_pb";
@@ -27,6 +31,7 @@ import type { Crag } from "./crag_pb";
 import type { Line } from "./line_pb";
 import type { Parking } from "./parking_pb";
 import type { Polygon } from "./polygon_pb";
+import type { Route } from "./route_pb";
 import type { Trail } from "./trail_pb";
 import type { Upload } from "./upload_pb";
 
@@ -233,10 +238,40 @@ export function ProtoToParking(proto: Parking): IParking {
   };
 }
 
-// Route (stub)
-export function ProtoToRoute(proto: any): any {
+// Route
+export function ProtoToRoute(proto: Route): IRoute {
   return {
     id: typeof proto.id === "bigint" ? Number(proto.id) : proto.id,
-    // Add more fields as needed
+    name: proto.name,
+    description: proto.description,
+    grade: ProtoToGrade(proto.grade),
+    gradeRaw: proto.grade?.raw || "?",
+  };
+}
+
+export function ProtoToGrade(proto?: Grade): IGrade {
+  if (!proto) {
+    return {
+      id: 0,
+      system: GradingSystemType.V,
+      raw: "?",
+      value: 0,
+    };
+  }
+  let system: GradingSystemType;
+  switch (proto.system) {
+    case Grade_GradingSystem.V_SCALE:
+      system = GradingSystemType.V;
+      break;
+    case Grade_GradingSystem.YDS:
+      system = GradingSystemType.YDS;
+      break;
+    default:
+      system = GradingSystemType.V;
+  }
+  return {
+    system: system,
+    raw: proto.raw,
+    value: proto.value,
   };
 }

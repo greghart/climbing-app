@@ -8,9 +8,7 @@ const getCrag = cache(
     id: number | string,
     opts: { includes?: string[] } = {
       includes: [
-        "areas.boulders",
         "areas.boulders.routes",
-        "areas.polygon",
         "areas.polygon.coordinates",
         "parking",
         "trail",
