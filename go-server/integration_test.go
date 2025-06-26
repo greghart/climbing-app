@@ -13,10 +13,10 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/greghart/climbing-app/internal/config"
-	"github.com/greghart/climbing-app/internal/db"
 	"github.com/greghart/climbing-app/internal/env"
 	mygrpc "github.com/greghart/climbing-app/internal/grpc"
 	"github.com/greghart/climbing-app/internal/pb"
+	"github.com/greghart/climbing-app/internal/service"
 	"github.com/greghart/climbing-app/internal/testutil"
 	"github.com/greghart/powerputtygo/errcmp"
 	"google.golang.org/grpc"
@@ -56,9 +56,9 @@ func TestGrpcServer_crags(t *testing.T) {
 		defer env.Stop()
 		errcmp.MustMatch(t, env.Start(), "")
 
-		crag, err := env.Repos.Crags.GetCrag(ctx, db.CragsReadRequest{
+		crag, err := env.Services.Crags.GetCrag(ctx, service.CragsReadRequest{
 			ID:      santeeId,
-			Include: db.CragsIncludeSchema.Include("areas.boulders", "areas.polygon.coordinates", "parking"),
+			Include: service.CragsIncludeSchema.Include("areas.boulders", "areas.polygon.coordinates", "parking"),
 		})
 		errcmp.MustMatch(t, err, "")
 

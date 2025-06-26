@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ClimbService_GetCrag_FullMethodName  = "/pb.ClimbService/GetCrag"
-	ClimbService_GetCrags_FullMethodName = "/pb.ClimbService/GetCrags"
+	ClimbService_GetCrag_FullMethodName   = "/pb.ClimbService/GetCrag"
+	ClimbService_ListCrags_FullMethodName = "/pb.ClimbService/ListCrags"
 )
 
 // ClimbServiceClient is the client API for ClimbService service.
@@ -28,7 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ClimbServiceClient interface {
 	GetCrag(ctx context.Context, in *GetCragRequest, opts ...grpc.CallOption) (*GetCragResponse, error)
-	GetCrags(ctx context.Context, in *GetCragsRequest, opts ...grpc.CallOption) (*GetCragsResponse, error)
+	ListCrags(ctx context.Context, in *ListCragsRequest, opts ...grpc.CallOption) (*ListCragsResponse, error)
 }
 
 type climbServiceClient struct {
@@ -49,10 +49,10 @@ func (c *climbServiceClient) GetCrag(ctx context.Context, in *GetCragRequest, op
 	return out, nil
 }
 
-func (c *climbServiceClient) GetCrags(ctx context.Context, in *GetCragsRequest, opts ...grpc.CallOption) (*GetCragsResponse, error) {
+func (c *climbServiceClient) ListCrags(ctx context.Context, in *ListCragsRequest, opts ...grpc.CallOption) (*ListCragsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetCragsResponse)
-	err := c.cc.Invoke(ctx, ClimbService_GetCrags_FullMethodName, in, out, cOpts...)
+	out := new(ListCragsResponse)
+	err := c.cc.Invoke(ctx, ClimbService_ListCrags_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ func (c *climbServiceClient) GetCrags(ctx context.Context, in *GetCragsRequest, 
 // for forward compatibility.
 type ClimbServiceServer interface {
 	GetCrag(context.Context, *GetCragRequest) (*GetCragResponse, error)
-	GetCrags(context.Context, *GetCragsRequest) (*GetCragsResponse, error)
+	ListCrags(context.Context, *ListCragsRequest) (*ListCragsResponse, error)
 	mustEmbedUnimplementedClimbServiceServer()
 }
 
@@ -78,8 +78,8 @@ type UnimplementedClimbServiceServer struct{}
 func (UnimplementedClimbServiceServer) GetCrag(context.Context, *GetCragRequest) (*GetCragResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCrag not implemented")
 }
-func (UnimplementedClimbServiceServer) GetCrags(context.Context, *GetCragsRequest) (*GetCragsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCrags not implemented")
+func (UnimplementedClimbServiceServer) ListCrags(context.Context, *ListCragsRequest) (*ListCragsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCrags not implemented")
 }
 func (UnimplementedClimbServiceServer) mustEmbedUnimplementedClimbServiceServer() {}
 func (UnimplementedClimbServiceServer) testEmbeddedByValue()                      {}
@@ -120,20 +120,20 @@ func _ClimbService_GetCrag_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ClimbService_GetCrags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCragsRequest)
+func _ClimbService_ListCrags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCragsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ClimbServiceServer).GetCrags(ctx, in)
+		return srv.(ClimbServiceServer).ListCrags(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ClimbService_GetCrags_FullMethodName,
+		FullMethod: ClimbService_ListCrags_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClimbServiceServer).GetCrags(ctx, req.(*GetCragsRequest))
+		return srv.(ClimbServiceServer).ListCrags(ctx, req.(*ListCragsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -150,8 +150,8 @@ var ClimbService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClimbService_GetCrag_Handler,
 		},
 		{
-			MethodName: "GetCrags",
-			Handler:    _ClimbService_GetCrags_Handler,
+			MethodName: "ListCrags",
+			Handler:    _ClimbService_ListCrags_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

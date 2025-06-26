@@ -19,15 +19,15 @@ message GetCragResponse {
   Crag crag = 1;
 }
 
-message GetCragsRequest {
+message ListCragsRequest {
   ReadCragOptions opts = 2;
 }
 
-message GetCragsResponse {
+message ListCragsResponse {
   repeated Crag crags = 1;
 }
 
 service ClimbService {
   rpc GetCrag(GetCragRequest) returns (GetCragResponse);
-  rpc GetCrags(GetCragsRequest) returns (GetCragsResponse);
+  rpc ListCrags(ListCragsRequest) returns (ListCragsResponse);
 }

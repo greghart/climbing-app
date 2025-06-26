@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file climb.proto.
  */
 export const file_climb: GenFile = /*@__PURE__*/
-  fileDesc("CgtjbGltYi5wcm90bxICcGIiIwoPUmVhZENyYWdPcHRpb25zEhAKCGluY2x1ZGVzGAEgAygJIj8KDkdldENyYWdSZXF1ZXN0EgoKAmlkGAEgASgDEiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQ3JhZ09wdGlvbnMiKQoPR2V0Q3JhZ1Jlc3BvbnNlEhYKBGNyYWcYASABKAsyCC5wYi5DcmFnIjQKD0dldENyYWdzUmVxdWVzdBIhCgRvcHRzGAIgASgLMhMucGIuUmVhZENyYWdPcHRpb25zIisKEEdldENyYWdzUmVzcG9uc2USFwoFY3JhZ3MYASADKAsyCC5wYi5DcmFnMnkKDENsaW1iU2VydmljZRIyCgdHZXRDcmFnEhIucGIuR2V0Q3JhZ1JlcXVlc3QaEy5wYi5HZXRDcmFnUmVzcG9uc2USNQoIR2V0Q3JhZ3MSEy5wYi5HZXRDcmFnc1JlcXVlc3QaFC5wYi5HZXRDcmFnc1Jlc3BvbnNlQi5aLGdpdGh1Yi5jb20vZ3JlZ2hhcnQvY2xpbWJpbmctYXBwL2ludGVybmFsL3BiYgZwcm90bzM", [file_crag]);
+  fileDesc("CgtjbGltYi5wcm90bxICcGIiIwoPUmVhZENyYWdPcHRpb25zEhAKCGluY2x1ZGVzGAEgAygJIj8KDkdldENyYWdSZXF1ZXN0EgoKAmlkGAEgASgDEiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQ3JhZ09wdGlvbnMiKQoPR2V0Q3JhZ1Jlc3BvbnNlEhYKBGNyYWcYASABKAsyCC5wYi5DcmFnIjUKEExpc3RDcmFnc1JlcXVlc3QSIQoEb3B0cxgCIAEoCzITLnBiLlJlYWRDcmFnT3B0aW9ucyIsChFMaXN0Q3JhZ3NSZXNwb25zZRIXCgVjcmFncxgBIAMoCzIILnBiLkNyYWcyfAoMQ2xpbWJTZXJ2aWNlEjIKB0dldENyYWcSEi5wYi5HZXRDcmFnUmVxdWVzdBoTLnBiLkdldENyYWdSZXNwb25zZRI4CglMaXN0Q3JhZ3MSFC5wYi5MaXN0Q3JhZ3NSZXF1ZXN0GhUucGIuTGlzdENyYWdzUmVzcG9uc2VCLlosZ2l0aHViLmNvbS9ncmVnaGFydC9jbGltYmluZy1hcHAvaW50ZXJuYWwvcGJiBnByb3RvMw", [file_crag]);
 
 /**
  * @generated from message pb.ReadCragOptions
@@ -71,9 +71,9 @@ export const GetCragResponseSchema: GenMessage<GetCragResponse> = /*@__PURE__*/
   messageDesc(file_climb, 2);
 
 /**
- * @generated from message pb.GetCragsRequest
+ * @generated from message pb.ListCragsRequest
  */
-export type GetCragsRequest = Message<"pb.GetCragsRequest"> & {
+export type ListCragsRequest = Message<"pb.ListCragsRequest"> & {
   /**
    * @generated from field: pb.ReadCragOptions opts = 2;
    */
@@ -81,16 +81,16 @@ export type GetCragsRequest = Message<"pb.GetCragsRequest"> & {
 };
 
 /**
- * Describes the message pb.GetCragsRequest.
- * Use `create(GetCragsRequestSchema)` to create a new message.
+ * Describes the message pb.ListCragsRequest.
+ * Use `create(ListCragsRequestSchema)` to create a new message.
  */
-export const GetCragsRequestSchema: GenMessage<GetCragsRequest> = /*@__PURE__*/
+export const ListCragsRequestSchema: GenMessage<ListCragsRequest> = /*@__PURE__*/
   messageDesc(file_climb, 3);
 
 /**
- * @generated from message pb.GetCragsResponse
+ * @generated from message pb.ListCragsResponse
  */
-export type GetCragsResponse = Message<"pb.GetCragsResponse"> & {
+export type ListCragsResponse = Message<"pb.ListCragsResponse"> & {
   /**
    * @generated from field: repeated pb.Crag crags = 1;
    */
@@ -98,10 +98,10 @@ export type GetCragsResponse = Message<"pb.GetCragsResponse"> & {
 };
 
 /**
- * Describes the message pb.GetCragsResponse.
- * Use `create(GetCragsResponseSchema)` to create a new message.
+ * Describes the message pb.ListCragsResponse.
+ * Use `create(ListCragsResponseSchema)` to create a new message.
  */
-export const GetCragsResponseSchema: GenMessage<GetCragsResponse> = /*@__PURE__*/
+export const ListCragsResponseSchema: GenMessage<ListCragsResponse> = /*@__PURE__*/
   messageDesc(file_climb, 4);
 
 /**
@@ -117,12 +117,12 @@ export const ClimbService: GenService<{
     output: typeof GetCragResponseSchema;
   },
   /**
-   * @generated from rpc pb.ClimbService.GetCrags
+   * @generated from rpc pb.ClimbService.ListCrags
    */
-  getCrags: {
+  listCrags: {
     methodKind: "unary";
-    input: typeof GetCragsRequestSchema;
-    output: typeof GetCragsResponseSchema;
+    input: typeof ListCragsRequestSchema;
+    output: typeof ListCragsResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_climb, 0);

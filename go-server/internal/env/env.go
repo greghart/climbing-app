@@ -5,19 +5,20 @@ import (
 
 	"github.com/greghart/climbing-app/internal/config"
 	"github.com/greghart/climbing-app/internal/db"
+	"github.com/greghart/climbing-app/internal/service"
 )
 
 // The Env struct represents the managed environment for the application that's dependent on
 // static configuration values.
 // Eg config sets db settings, env sets up db and services
 type Env struct {
-	DB    *db.DB
-	Repos *Repos
+	DB       *db.DB
+	Repos    *db.Repos
+	Services *Services
 }
 
-type Repos struct {
-	Crags  *db.Crags
-	Trails *db.Trails
+type Services struct {
+	Crags *service.Crags
 }
 
 func New(cfg config.Config) *Env {
@@ -38,9 +39,13 @@ func (e *Env) Start() error {
 	}
 	trails := db.NewTrails(e.DB)
 	areas := db.NewAreas(e.DB)
-	e.Repos = &Repos{
+	e.Repos = &db.Repos{
 		Crags:  db.NewCrags(e.DB, trails, areas),
+		Areas:  db.NewAreas(e.DB),
 		Trails: trails,
+	}
+	e.Services = &Services{
+		Crags: service.NewCrags(e.Repos),
 	}
 	return nil
 }

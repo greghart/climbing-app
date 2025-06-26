@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/greghart/climbing-app/internal/db"
 	"github.com/greghart/climbing-app/internal/env"
+	"github.com/greghart/climbing-app/internal/service"
 )
 
 type Server struct {
@@ -65,7 +65,7 @@ func (s *Server) Handler() http.Handler {
 
 		{
 			crags := v1.Group("/crags")
-			crags.GET("", s.getCrags)
+			crags.GET("", s.listCrags)
 			crags.GET("/:id", s.getCrag)
 		}
 	}
@@ -81,15 +81,15 @@ type cragsReadRequest struct {
 	Includes []string `form:"includes[]"`
 }
 
-func (s *Server) getCrags(c *gin.Context) {
+func (s *Server) listCrags(c *gin.Context) {
 	var req cragsReadRequest
 	if err := c.ShouldBind(&req); err != nil {
 		s.error(c, fmt.Errorf("Failed to bind request params: %v", err), http.StatusBadRequest)
 		return
 	}
 
-	crags, err := s.env.Repos.Crags.GetCrags(c.Request.Context(), db.CragsReadRequest{
-		Include: db.CragsIncludeSchema.Include(req.Includes...),
+	crags, err := s.env.Services.Crags.ListCrags(c.Request.Context(), service.CragsReadRequest{
+		Include: service.CragsIncludeSchema.Include(req.Includes...),
 	})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Failed to get crags: %v", err)})
@@ -111,9 +111,9 @@ func (s *Server) getCrag(c *gin.Context) {
 		return
 	}
 
-	crag, err := s.env.Repos.Crags.GetCrag(c.Request.Context(), db.CragsReadRequest{
+	crag, err := s.env.Services.Crags.GetCrag(c.Request.Context(), service.CragsReadRequest{
 		ID:      int64(id),
-		Include: db.CragsIncludeSchema.Include(req.Includes...),
+		Include: service.CragsIncludeSchema.Include(req.Includes...),
 	})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("failed to get crag %v: %v", id, err)})

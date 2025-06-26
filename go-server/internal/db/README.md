@@ -31,19 +31,39 @@ out of the serialization layer (json/protobuf).
 
 Generally for database performance, assuming you are using indices properly and not doing anything
 obviously wrong, the main perf decision to make is when fetching relationships. For N relationships,
-you can generally either Join N tables or make N+1 queries.
+you can generally either Join N tables or make 1+N queries.
 
-Obviously without proper benchmarking, and at the scale of the amount of data we are working with,
-performance between these two options remains a question mark. Instead, use your judgement for 
-which approach to take, and more importantly, keep things as flexible as possible. 
-Eg. if you need to join N entities to get data for one API, but for another you only need 1, then
-ensure you're not using the same database calls.
+Obviously without proper benchmarking, performance between these two options will always be a 
+question mark.
 
-If you do decide to make N separate queries, ensure you use concurrency for non interdependent
-queries so we're not waiting on N round trips to database.
+Instead, use your judgement for which approach to take, and consider [maintainability](#maintainability)
+as the first priority, adn then handle performance as required by performance testing.
 
-## Cleanliness
+## Maintainability
 
-The other side to the above decision is what's cleanest. Database should always be very local to
-the server, so it's probably fine to do full tree populations in memory instead of through massive
-joins.
+The design of our persistence layer code should align to Go style simplicity -- we avoid ORMs, and
+`powerputty` can be used for dynamic queries, scanning, data mapping, etc. As long as the flow is 
+maintained and the code is clear, anything should work.
+
+As far as the joins vs multiple queries, those do have maintenance costs.
+
+Joins:
+* \+ One repo can field all the data it needs directly
+* \+ SQL is fun?!?!
+* \+ It can feel gratifying
+* \- More complicated SQL
+* \- Multiple repos will end up having similar SQL
+* \- 1:N relationships are harder to map in memory (needs `mapperp`)
+
+Multiple Queries:
+* \+ Queries can be kept fairly simple and repo specific
+* \+ Less query re-use across repos
+* \- One request would need to hit multiple repos
+* \- We still need the data mapping, just happens in a different layer (or repo interdependencies)
+* \- You don't get to flex your SQL as much
+
+Either way, we should also keep user and wire concerns in mind. While it may be more "maintainable"
+to always return all the crag data ever needed in one method, a user doesn't necessarily want that 
+overhead, and we shouldn't ignore bandwidth costs either.  Eg. if you need to join N entities to 
+get data for one API, but for another you only need 1, then ensure you're not using the same 
+database calls. `servicep.IncludeSchema` should help compose this logic up nicely.

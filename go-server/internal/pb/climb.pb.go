@@ -161,27 +161,27 @@ func (x *GetCragResponse) GetCrag() *Crag {
 	return nil
 }
 
-type GetCragsRequest struct {
+type ListCragsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Opts          *ReadCragOptions       `protobuf:"bytes,2,opt,name=opts,proto3" json:"opts,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetCragsRequest) Reset() {
-	*x = GetCragsRequest{}
+func (x *ListCragsRequest) Reset() {
+	*x = ListCragsRequest{}
 	mi := &file_climb_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetCragsRequest) String() string {
+func (x *ListCragsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetCragsRequest) ProtoMessage() {}
+func (*ListCragsRequest) ProtoMessage() {}
 
-func (x *GetCragsRequest) ProtoReflect() protoreflect.Message {
+func (x *ListCragsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_climb_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -193,39 +193,39 @@ func (x *GetCragsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetCragsRequest.ProtoReflect.Descriptor instead.
-func (*GetCragsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListCragsRequest.ProtoReflect.Descriptor instead.
+func (*ListCragsRequest) Descriptor() ([]byte, []int) {
 	return file_climb_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetCragsRequest) GetOpts() *ReadCragOptions {
+func (x *ListCragsRequest) GetOpts() *ReadCragOptions {
 	if x != nil {
 		return x.Opts
 	}
 	return nil
 }
 
-type GetCragsResponse struct {
+type ListCragsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Crags         []*Crag                `protobuf:"bytes,1,rep,name=crags,proto3" json:"crags,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetCragsResponse) Reset() {
-	*x = GetCragsResponse{}
+func (x *ListCragsResponse) Reset() {
+	*x = ListCragsResponse{}
 	mi := &file_climb_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetCragsResponse) String() string {
+func (x *ListCragsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetCragsResponse) ProtoMessage() {}
+func (*ListCragsResponse) ProtoMessage() {}
 
-func (x *GetCragsResponse) ProtoReflect() protoreflect.Message {
+func (x *ListCragsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_climb_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -237,12 +237,12 @@ func (x *GetCragsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetCragsResponse.ProtoReflect.Descriptor instead.
-func (*GetCragsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListCragsResponse.ProtoReflect.Descriptor instead.
+func (*ListCragsResponse) Descriptor() ([]byte, []int) {
 	return file_climb_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *GetCragsResponse) GetCrags() []*Crag {
+func (x *ListCragsResponse) GetCrags() []*Crag {
 	if x != nil {
 		return x.Crags
 	}
@@ -261,14 +261,14 @@ const file_climb_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12'\n" +
 	"\x04opts\x18\x02 \x01(\v2\x13.pb.ReadCragOptionsR\x04opts\"/\n" +
 	"\x0fGetCragResponse\x12\x1c\n" +
-	"\x04crag\x18\x01 \x01(\v2\b.pb.CragR\x04crag\":\n" +
-	"\x0fGetCragsRequest\x12'\n" +
-	"\x04opts\x18\x02 \x01(\v2\x13.pb.ReadCragOptionsR\x04opts\"2\n" +
-	"\x10GetCragsResponse\x12\x1e\n" +
-	"\x05crags\x18\x01 \x03(\v2\b.pb.CragR\x05crags2y\n" +
+	"\x04crag\x18\x01 \x01(\v2\b.pb.CragR\x04crag\";\n" +
+	"\x10ListCragsRequest\x12'\n" +
+	"\x04opts\x18\x02 \x01(\v2\x13.pb.ReadCragOptionsR\x04opts\"3\n" +
+	"\x11ListCragsResponse\x12\x1e\n" +
+	"\x05crags\x18\x01 \x03(\v2\b.pb.CragR\x05crags2|\n" +
 	"\fClimbService\x122\n" +
-	"\aGetCrag\x12\x12.pb.GetCragRequest\x1a\x13.pb.GetCragResponse\x125\n" +
-	"\bGetCrags\x12\x13.pb.GetCragsRequest\x1a\x14.pb.GetCragsResponseB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
+	"\aGetCrag\x12\x12.pb.GetCragRequest\x1a\x13.pb.GetCragResponse\x128\n" +
+	"\tListCrags\x12\x14.pb.ListCragsRequest\x1a\x15.pb.ListCragsResponseB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
 
 var (
 	file_climb_proto_rawDescOnce sync.Once
@@ -284,22 +284,22 @@ func file_climb_proto_rawDescGZIP() []byte {
 
 var file_climb_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_climb_proto_goTypes = []any{
-	(*ReadCragOptions)(nil),  // 0: pb.ReadCragOptions
-	(*GetCragRequest)(nil),   // 1: pb.GetCragRequest
-	(*GetCragResponse)(nil),  // 2: pb.GetCragResponse
-	(*GetCragsRequest)(nil),  // 3: pb.GetCragsRequest
-	(*GetCragsResponse)(nil), // 4: pb.GetCragsResponse
-	(*Crag)(nil),             // 5: pb.Crag
+	(*ReadCragOptions)(nil),   // 0: pb.ReadCragOptions
+	(*GetCragRequest)(nil),    // 1: pb.GetCragRequest
+	(*GetCragResponse)(nil),   // 2: pb.GetCragResponse
+	(*ListCragsRequest)(nil),  // 3: pb.ListCragsRequest
+	(*ListCragsResponse)(nil), // 4: pb.ListCragsResponse
+	(*Crag)(nil),              // 5: pb.Crag
 }
 var file_climb_proto_depIdxs = []int32{
 	0, // 0: pb.GetCragRequest.opts:type_name -> pb.ReadCragOptions
 	5, // 1: pb.GetCragResponse.crag:type_name -> pb.Crag
-	0, // 2: pb.GetCragsRequest.opts:type_name -> pb.ReadCragOptions
-	5, // 3: pb.GetCragsResponse.crags:type_name -> pb.Crag
+	0, // 2: pb.ListCragsRequest.opts:type_name -> pb.ReadCragOptions
+	5, // 3: pb.ListCragsResponse.crags:type_name -> pb.Crag
 	1, // 4: pb.ClimbService.GetCrag:input_type -> pb.GetCragRequest
-	3, // 5: pb.ClimbService.GetCrags:input_type -> pb.GetCragsRequest
+	3, // 5: pb.ClimbService.ListCrags:input_type -> pb.ListCragsRequest
 	2, // 6: pb.ClimbService.GetCrag:output_type -> pb.GetCragResponse
-	4, // 7: pb.ClimbService.GetCrags:output_type -> pb.GetCragsResponse
+	4, // 7: pb.ClimbService.ListCrags:output_type -> pb.ListCragsResponse
 	6, // [6:8] is the sub-list for method output_type
 	4, // [4:6] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name

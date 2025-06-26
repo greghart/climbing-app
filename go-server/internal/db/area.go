@@ -159,7 +159,6 @@ func NewAreas(db *DB) *Areas {
 func (a *Areas) BatchAreasByCrag(req AreasReadRequest) *clientp.Batch[int64, []models.Area] {
 	return clientp.NewBatch(
 		func(ctx context.Context, ids []int64) (map[int64][]models.Area, error) {
-			req := req
 			req.CragIDs = ids
 			results, err := a.GetAreas(ctx, req)
 			if err != nil {

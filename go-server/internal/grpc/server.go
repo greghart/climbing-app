@@ -7,9 +7,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/greghart/climbing-app/internal/db"
 	"github.com/greghart/climbing-app/internal/env"
 	"github.com/greghart/climbing-app/internal/pb"
+	"github.com/greghart/climbing-app/internal/service"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
@@ -74,7 +74,7 @@ func (s *Server) Stop() {
 }
 
 func (s *Server) GetCrag(ctx context.Context, req *pb.GetCragRequest) (*pb.GetCragResponse, error) {
-	crag, err := s.env.Repos.Crags.GetCrag(ctx, protoToCragReadRequest(req))
+	crag, err := s.env.Services.Crags.GetCrag(ctx, protoToCragReadRequest(req))
 	if err != nil {
 		return nil, status.Errorf(codes.Unavailable, "failed to get crag %v: %v", req.Id, err)
 	}
@@ -87,8 +87,8 @@ func (s *Server) GetCrag(ctx context.Context, req *pb.GetCragRequest) (*pb.GetCr
 	}, nil
 }
 
-func (s *Server) GetCrags(ctx context.Context, req *pb.GetCragsRequest) (*pb.GetCragsResponse, error) {
-	crags, err := s.env.Repos.Crags.GetCrags(ctx, protoToCragsReadRequest(req))
+func (s *Server) ListCrags(ctx context.Context, req *pb.ListCragsRequest) (*pb.ListCragsResponse, error) {
+	crags, err := s.env.Services.Crags.ListCrags(ctx, protoToCragsReadRequest(req))
 	if err != nil {
 		return nil, status.Errorf(codes.Unavailable, "failed to get crags: %v", err)
 	}
@@ -98,7 +98,7 @@ func (s *Server) GetCrags(ctx context.Context, req *pb.GetCragsRequest) (*pb.Get
 		pbCrags = append(pbCrags, CragToProto(&crag))
 	}
 
-	return &pb.GetCragsResponse{
+	return &pb.ListCragsResponse{
 		Crags: pbCrags,
 	}, nil
 }
@@ -134,21 +134,21 @@ func valid(authorization []string, apiKey string) bool {
 	return token == apiKey
 }
 
-func protoToCragsReadRequest(req *pb.GetCragsRequest) db.CragsReadRequest {
+func protoToCragsReadRequest(req *pb.ListCragsRequest) service.CragsReadRequest {
 	if req.Opts == nil {
-		return db.CragsReadRequest{}
+		return service.CragsReadRequest{}
 	}
-	return db.CragsReadRequest{
-		Include: db.CragsIncludeSchema.Include(req.Opts.Includes...),
+	return service.CragsReadRequest{
+		Include: service.CragsIncludeSchema.Include(req.Opts.Includes...),
 	}
 }
 
-func protoToCragReadRequest(req *pb.GetCragRequest) db.CragsReadRequest {
-	out := db.CragsReadRequest{
+func protoToCragReadRequest(req *pb.GetCragRequest) service.CragsReadRequest {
+	out := service.CragsReadRequest{
 		ID: req.Id,
 	}
 	if req.Opts != nil {
-		out.Include = db.CragsIncludeSchema.Include(req.Opts.Includes...)
+		out.Include = service.CragsIncludeSchema.Include(req.Opts.Includes...)
 	}
 	return out
 }
