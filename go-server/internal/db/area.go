@@ -112,7 +112,7 @@ func NewAreas(db *DB) *Areas {
 				AND area.cragId IN (:cragIds)
 				{{- end -}}
 			{{- end}}
-			ORDER BY area.id, boulder.id ASC
+			ORDER BY area.id {{- if .Include "boulders" }},boulder.id{{end}} ASC
 		`)),
 		getMapper: func() mapperp.Mapper[areaRow, models.Area] {
 			return mapperp.All(

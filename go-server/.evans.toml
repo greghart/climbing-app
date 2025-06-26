@@ -1,0 +1,15 @@
+[default]
+package = "pb"
+service = "ClimbService"
+
+
+[server]
+port = 8081
+host = "localhost"
+reflection = true
+
+[request.header]
+Authorization = "Bearer development"
+
+# Example requests
+# echo '{ "id": 55, "opts": { "includes": ["areas.polygon.coordinates", "areas.boulders.routes", "parking"] } }' | evans cli call GetCrag  

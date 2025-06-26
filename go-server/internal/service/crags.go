@@ -38,96 +38,122 @@ func NewCrags(repos *db.Repos) *Crags {
 	}
 }
 
-func (c *Crags) GetCrag(ctx context.Context, req CragsReadRequest) (*models.Crag, error) {
-	var errGroup errgroup.Group
-	// Get crag data
-	cragCh := make(chan *models.Crag, 1)
-	errGroup.Go(func() error {
-		crag, err := c.repos.Crags.GetCrag(ctx, db.CragsReadRequest{
-			ID:      req.ID,
-			Include: db.CragsIncludeSchema.FromRequest(req.Include),
-		})
+// TODO: Keep working on these APIs and move to powerputty
+func addErrGroupFn[T any](eg *errgroup.Group, fn func() (T, error)) <-chan T {
+	ch := make(chan T, 1)
+	eg.Go(func() error {
+		result, err := fn()
 		if err != nil {
 			return err
 		}
-		cragCh <- crag
+		ch <- result
 		return nil
 	})
+	return ch
+}
 
-	// Get areas data (if requested)
-	if req.Include.IsIncluded("areas") {
-		errGroup.Go(func() error {
-			areas, err := c.repos.Areas.GetAreas(ctx, db.AreasReadRequest{
-				CragIDs: []int64{req.ID},
-				Include: db.AreasIncludeSchema.IncludeSeq(req.Include.Subcludes("areas")),
-			})
-			if err != nil {
-				return err
+// pipe will pipe one goroutine's output into various other dependencies.
+// 'deps' should be ran for side effects, since we can't use generics to model variadic outputs.
+// TODO: Keep working on these APIs and move to powerputty
+func pipe[T any](ctx context.Context, getIn func() (T, error), deps ...func(T) error) (T, error) {
+	eg, ctx := errgroup.WithContext(ctx)
+	// Initial getting of our primary data
+	primaryCh := addErrGroupFn(eg, getIn)
+	// Final result and error after all dependencies are done
+	resultCh := make(chan T, 1)
+	errCh := make(chan error, 1)
+
+	go func() {
+		for {
+			select {
+			case t := <-primaryCh:
+				for _, out := range deps {
+					eg.Go(func() error {
+						return out(t)
+					})
+				}
+				resultCh <- t
+				return
+			case <-ctx.Done():
+				errCh <- ctx.Err()
+				return
 			}
-			crag := <-cragCh
-			crag.Areas = areas
-			cragCh <- crag
-			return nil
-		})
+		}
+	}()
+
+	if err := eg.Wait(); err != nil {
+		var t T
+		return t, fmt.Errorf("failed to get dependencies: %w", err)
 	}
+	return <-resultCh, <-errCh
+}
+
+func (c *Crags) GetCrag(ctx context.Context, req CragsReadRequest) (*models.Crag, error) {
+	var errGroup errgroup.Group
+	cragCh := addErrGroupFn(&errGroup, func() (*models.Crag, error) {
+		return c.repos.Crags.GetCrag(ctx, db.CragsReadRequest{
+			ID:      req.ID,
+			Include: db.CragsIncludeSchema.FromRequest(req.Include),
+		})
+	})
+	areasCh := addErrGroupFn(&errGroup, func() ([]models.Area, error) {
+		if !req.Include.IsIncluded("areas") {
+			return nil, nil
+		}
+		return c.repos.Areas.GetAreas(ctx, db.AreasReadRequest{
+			CragIDs: []int64{req.ID},
+			Include: db.AreasIncludeSchema.IncludeSeq(req.Include.Subcludes("areas")),
+		})
+	})
 
 	if err := errGroup.Wait(); err != nil {
 		return nil, fmt.Errorf("failed to get crags: %w", err)
 	}
-	return <-cragCh, nil
+	crag := <-cragCh
+	areas := <-areasCh
+	if crag != nil {
+		crag.Areas = areas
+	}
+	return crag, nil
 }
 
 func (c *Crags) ListCrags(ctx context.Context, req CragsReadRequest) ([]models.Crag, error) {
 	var errGroup errgroup.Group
-	// Get crags data
-	cragsCh := make(chan []models.Crag, 1)
-	errGroup.Go(func() error {
-		crags, err := c.repos.Crags.GetCrags(ctx, db.CragsReadRequest{
+	cragsCh := addErrGroupFn(&errGroup, func() ([]models.Crag, error) {
+		return c.repos.Crags.GetCrags(ctx, db.CragsReadRequest{
 			ID:      req.ID,
 			Include: db.CragsIncludeSchema.FromRequest(req.Include),
 		})
-		if err != nil {
-			return err
-		}
-		cragsCh <- crags
-		return nil
 	})
-
-	// Get areas data (if requested)
-	if req.Include.IsIncluded("areas") {
-		batchAreas := c.repos.Areas.BatchAreasByCrag(db.AreasReadRequest{
+	areasByCragIDCh := addErrGroupFn(&errGroup, func() (map[int64][]models.Area, error) {
+		if !req.Include.IsIncluded("areas") {
+			return nil, nil
+		}
+		areas, err := c.repos.Areas.GetAreas(ctx, db.AreasReadRequest{
 			Include: db.AreasIncludeSchema.IncludeSeq(req.Include.Subcludes("areas")),
 		})
-		batchAreas.Start()
-		defer batchAreas.Stop()
-
-		// TODO: This batch API is still a bit awkward and roundabout.
-		errGroup.Go(func() error {
-			crags := <-cragsCh
-			var areaErrGroup errgroup.Group
-			for i := range crags {
-				areaErrGroup.Go(func() error {
-					crag := &crags[i]
-					areas, err := batchAreas.Execute(ctx, crag.ID)
-					if err != nil {
-						return fmt.Errorf("failed to get areas for crag %d: %w", crag.ID, err)
-					}
-					if areas != nil {
-						crag.Areas = *areas
-					}
-					return nil
-				})
+		if err != nil {
+			return nil, err
+		}
+		byCragID := make(map[int64][]models.Area, len(areas))
+		for _, area := range areas {
+			if _, ok := byCragID[area.CragID]; !ok {
+				byCragID[area.CragID] = []models.Area{}
 			}
-			if err := areaErrGroup.Wait(); err != nil {
-				return err
-			}
-			cragsCh <- crags
-			return nil
-		})
-	}
+			byCragID[area.CragID] = append(byCragID[area.CragID], area)
+		}
+		return byCragID, nil
+	})
 
 	if err := errGroup.Wait(); err != nil {
 		return nil, fmt.Errorf("failed to get crags: %w", err)
 	}
-	return <-cragsCh, nil
+	crags := <-cragsCh
+	areasByCragID := <-areasByCragIDCh
+	for i := range crags {
+		if areas, ok := areasByCragID[crags[i].ID]; ok {
+			crags[i].Areas = areas
+		}
+	}
+	return crags, nil
 }
