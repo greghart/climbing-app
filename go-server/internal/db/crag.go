@@ -13,9 +13,7 @@ import (
 
 // CragsIncludeSchema defines our db layer support for inclusions.
 // Note it's intentionally public, so grpc or http layer can validate it if desired.
-var CragsIncludeSchema = servicep.NewIncludeSchema().Allow(
-	"parking", "trail",
-)
+var CragsIncludeSchema = servicep.NewIncludeSchema().Allow("parking")
 
 type CragsReadRequest struct {
 	ID      int64
@@ -36,16 +34,12 @@ func (r *CragsReadRequest) ForTemplate(t queryp.Templater) queryp.Templater {
 
 type Crags struct {
 	*sqlp.Repository[models.Crag]
-	trails        *Trails
-	areas         *Areas
 	queryTemplate *queryp.Template
 }
 
-func NewCrags(db *DB, trails *Trails, areas *Areas) *Crags {
+func NewCrags(db *sqlp.DB) *Crags {
 	return &Crags{
-		Repository: sqlp.NewRepository[models.Crag](db.DB, "crag"),
-		trails:     trails,
-		areas:      areas,
+		Repository: sqlp.NewRepository[models.Crag](db, "crag"),
 		queryTemplate: queryp.Must(queryp.NewTemplate(`
 			SELECT 
 				crag.*
@@ -73,14 +67,13 @@ func NewCrags(db *DB, trails *Trails, areas *Areas) *Crags {
 }
 
 func (c *Crags) GetCrags(ctx context.Context, req CragsReadRequest) ([]models.Crag, error) {
-	q, _, err := req.ForTemplate(c.queryTemplate).Execute()
+	q, args, err := req.ForTemplate(c.queryTemplate).Execute()
 	log.Println(q)
 	if err != nil {
 		return nil, fmt.Errorf("failed to apply query template: %w", err)
 	}
 
-	crags, err := sqlp.Select[models.Crag](ctx, c.DB, q)
-	return crags, err
+	return c.Select(ctx, q, args...)
 }
 
 // GetCrag retries a single crag by its ID, including its' entire association tree.
@@ -91,5 +84,5 @@ func (c *Crags) GetCrag(ctx context.Context, req CragsReadRequest) (*models.Crag
 		return nil, fmt.Errorf("failed to apply query template: %w", err)
 	}
 
-	return sqlp.Get[models.Crag](ctx, c.DB, q, args...)
+	return c.Get(ctx, q, args...)
 }

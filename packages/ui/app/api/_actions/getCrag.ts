@@ -1,5 +1,8 @@
 import { ProtoToCrag } from "@/app/_grpc/adapters";
 import client from "@/app/_grpc/client";
+import getCragTrail from "@/app/api/_actions/getCragTrail";
+import resolveCrag from "@/app/api/resolveCrag";
+import { CragSchema, getDataSource } from "@/db";
 import { cache } from "react";
 import "server-only";
 
@@ -11,7 +14,7 @@ const getCrag = cache(
         "areas.boulders.routes",
         "areas.polygon.coordinates",
         "parking",
-        "trail",
+        "trail.lines",
       ],
     }
   ) => {
@@ -22,7 +25,8 @@ const getCrag = cache(
       })
       .then((res) => {
         if (res.crag) {
-          return ProtoToCrag(res.crag);
+          const proto = ProtoToCrag(res.crag);
+          return proto;
         }
         return null;
       })
@@ -30,37 +34,39 @@ const getCrag = cache(
         console.error("Error fetching crag:", err);
         throw err;
       });
-    // const ds = await getDataSource();
-    // // Crag IDs for client can also be name
-    // return ds
-    //   .getRepository(CragSchema)
-    //   .findOne({
-    //     where: [{ name: id as string }, { id: id as number }],
-    //     relations: [
-    //       "areas",
-    //       "areas.boulders",
-    //       "areas.boulders.routes",
-    //       "areas.polygon",
-    //       "areas.polygon.coordinates",
-    //       "parking",
-    //     ],
-    //     order: {
-    //       areas: {
-    //         polygon: {
-    //           coordinates: {
-    //             order: "ASC",
-    //           },
-    //         },
-    //       },
-    //     },
-    //   })
-    //   .then(async (_crag) => {
-    //     const crag = resolveCrag(_crag);
-    //     if (!crag) return crag;
-    //     crag.trail = await getCragTrail(crag.id!);
-    //     return crag;
-    //   });
   }
 );
 
+const getCragLegacy = cache(async (id: number | string) => {
+  const ds = await getDataSource();
+  // Crag IDs for client can also be name
+  return ds
+    .getRepository(CragSchema)
+    .findOne({
+      where: [{ name: id as string }, { id: id as number }],
+      relations: [
+        "areas",
+        "areas.boulders",
+        "areas.boulders.routes",
+        "areas.polygon",
+        "areas.polygon.coordinates",
+        "parking",
+      ],
+      order: {
+        areas: {
+          polygon: {
+            coordinates: {
+              order: "ASC",
+            },
+          },
+        },
+      },
+    })
+    .then(async (_crag) => {
+      const crag = resolveCrag(_crag);
+      if (!crag) return crag;
+      crag.trail = await getCragTrail(crag.id!);
+      return crag;
+    });
+});
 export default getCrag;

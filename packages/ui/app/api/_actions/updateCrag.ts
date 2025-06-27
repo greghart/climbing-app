@@ -7,8 +7,6 @@ import { ICrag, isBounds } from "models";
 import "server-only";
 import { z } from "zod";
 
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 const updateCrag = formAction<ICrag, z.infer<typeof cragSchema>>(
   cragSchema,
   async (res, data) => {
@@ -23,7 +21,6 @@ const updateCrag = formAction<ICrag, z.infer<typeof cragSchema>>(
       if (!crag) {
         return undefined;
       }
-      await delay(500);
       // Set order of trail points to match array order
       // TODO: Any way to do this automagically?
       if (data.trail) {

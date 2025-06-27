@@ -37,12 +37,10 @@ func (e *Env) Start() error {
 	if err := e.DB.Start(); err != nil {
 		return fmt.Errorf("failed to start db: %w", err)
 	}
-	trails := db.NewTrails(e.DB)
-	areas := db.NewAreas(e.DB)
 	e.Repos = &db.Repos{
-		Crags:  db.NewCrags(e.DB, trails, areas),
-		Areas:  db.NewAreas(e.DB),
-		Trails: trails,
+		Crags:  db.NewCrags(e.DB.DB),
+		Areas:  db.NewAreas(e.DB.DB),
+		Trails: db.NewTrails(e.DB.DB),
 	}
 	e.Services = &Services{
 		Crags: service.NewCrags(e.Repos),

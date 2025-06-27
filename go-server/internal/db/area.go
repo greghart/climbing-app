@@ -42,9 +42,9 @@ type Areas struct {
 	getMapper     func() mapperp.Mapper[areaRow, models.Area]
 }
 
-func NewAreas(db *DB) *Areas {
+func NewAreas(db *sqlp.DB) *Areas {
 	return &Areas{
-		Repository: sqlp.NewRepository[models.Area](db.DB, "area"),
+		Repository: sqlp.NewRepository[models.Area](db, "area"),
 		queryTemplate: queryp.Must(queryp.NewTemplate(`
 			SELECT 
 				area.*
@@ -112,7 +112,7 @@ func NewAreas(db *DB) *Areas {
 				AND area.cragId IN (:cragIds)
 				{{- end -}}
 			{{- end}}
-			ORDER BY area.id {{- if .Include "boulders" }},boulder.id{{end}} ASC
+			ORDER BY area.id {{- if .Include "boulders" }}, boulder.id{{end}} ASC
 		`)),
 		getMapper: func() mapperp.Mapper[areaRow, models.Area] {
 			return mapperp.All(

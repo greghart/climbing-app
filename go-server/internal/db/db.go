@@ -13,6 +13,7 @@ type Options struct {
 	Source string
 }
 
+// DB is a loose wrapper around sqlp.DB that sets up app defaults and start/stop functionality.
 type DB struct {
 	*sqlp.DB
 	Options

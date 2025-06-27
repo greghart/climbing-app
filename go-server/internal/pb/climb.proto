@@ -27,6 +27,10 @@ message ListCragsResponse {
   repeated Crag crags = 1;
 }
 
+message UpdateCragRequest {
+  Crag crag = 1;
+}
+
 service ClimbService {
   rpc GetCrag(GetCragRequest) returns (GetCragResponse);
   rpc ListCrags(ListCragsRequest) returns (ListCragsResponse);
