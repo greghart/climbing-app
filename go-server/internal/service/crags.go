@@ -54,6 +54,8 @@ func addErrGroupFn[T any](eg *errgroup.Group, fn func() (T, error)) <-chan T {
 }
 
 func (c *Crags) GetCrag(ctx context.Context, req CragsReadRequest) (*models.Crag, error) {
+	defer getCragObserver()()
+
 	// Can be clever if we want and frame single get as a list with a single ID filter.
 	crags, err := c.ListCrags(ctx, req)
 	if err != nil || len(crags) == 0 {
@@ -63,6 +65,8 @@ func (c *Crags) GetCrag(ctx context.Context, req CragsReadRequest) (*models.Crag
 }
 
 func (c *Crags) ListCrags(ctx context.Context, req CragsReadRequest) ([]models.Crag, error) {
+	defer listCragsObserver()()
+
 	var errGroup errgroup.Group
 	cragsCh := addErrGroupFn(&errGroup, func() ([]models.Crag, error) {
 		return c.repos.Crags.GetCrags(ctx, db.CragsReadRequest{

@@ -11,18 +11,23 @@ import (
 	"time"
 
 	"github.com/greghart/climbing-app/internal/config"
-	"github.com/greghart/climbing-app/internal/env"
+	envpkg "github.com/greghart/climbing-app/internal/env"
 	"github.com/greghart/climbing-app/internal/grpc"
 	myhttp "github.com/greghart/climbing-app/internal/http"
 )
 
 func main() {
 	cfg := config.Load()
-	env := env.New(cfg)
+	env := envpkg.New(cfg)
 	defer env.Stop()
 
+	// Handle SIGINT (CTRL+C) gracefully.
+	ctx, stopSig := signal.NotifyContext(context.Background(), os.Interrupt)
+	defer stopSig()
+
+	// Spin up environment
 	if err := env.Start(); err != nil {
-		log.Fatalf("Failed to start environment: %v", err)
+		log.Fatalf("failed to start environment: %v", err)
 	}
 
 	server := myhttp.NewServer(env, myhttp.Options{
@@ -45,13 +50,9 @@ func main() {
 		}
 	}()
 
-	// Setting up signal capturing
-	stop := make(chan os.Signal, 1)
-	signal.Notify(stop, os.Interrupt)
-
 	// Waiting for SIGINT (kill -2)
 	log.Println("Press Ctrl+C to stop the servers...")
-	<-stop
+	<-ctx.Done()
 
 	// Shutdown both servers gracefully
 	log.Println("Shutting down servers...")

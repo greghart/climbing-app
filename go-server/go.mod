@@ -4,24 +4,25 @@ go 1.24.1
 
 require (
 	github.com/gin-gonic/gin v1.10.1
-	// dev/test only dependencies below here
-	github.com/golang-migrate/migrate/v4 v4.18.3
-	github.com/google/go-cmp v0.7.0
 	github.com/greghart/powerputtygo/clientp v0.0.0-20250623035537-5d48ebace2b1
-	github.com/greghart/powerputtygo/errcmp v0.0.0-20250623035537-5d48ebace2b1
 	github.com/greghart/powerputtygo/mapperp v0.0.0-20250623035537-5d48ebace2b1
 	github.com/greghart/powerputtygo/queryp v0.0.0-20250623035537-5d48ebace2b1
 	github.com/greghart/powerputtygo/servicep v0.0.0-20250623035537-5d48ebace2b1
 	github.com/greghart/powerputtygo/sqlp v0.0.0-20250623035537-5d48ebace2b1
+	github.com/greghart/powerputtygo/utilp v0.0.0-00010101000000-000000000000
 	github.com/joho/godotenv v1.5.1
 	github.com/mattn/go-sqlite3 v1.14.28
+	github.com/prometheus/client_golang v1.22.0
+	golang.org/x/sync v0.15.0
 	google.golang.org/grpc v1.73.0
 	google.golang.org/protobuf v1.36.6
 )
 
+// dev/test only
 require (
-	github.com/greghart/powerputtygo/utilp v0.0.0-00010101000000-000000000000
-	golang.org/x/sync v0.15.0
+	github.com/golang-migrate/migrate/v4 v4.18.3
+	github.com/google/go-cmp v0.7.0
+	github.com/greghart/powerputtygo/errcmp v0.0.0-20250623035537-5d48ebace2b1
 )
 
 require (
@@ -76,6 +77,7 @@ require (
 	github.com/ghostiam/protogetter v0.3.9 // indirect
 	github.com/gin-contrib/sse v1.1.0 // indirect
 	github.com/go-critic/go-critic v0.12.0 // indirect
+	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.26.0 // indirect
@@ -91,7 +93,6 @@ require (
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/gofrs/flock v0.12.1 // indirect
-	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/golangci/dupl v0.0.0-20250308024227-f665c8d69b32 // indirect
 	github.com/golangci/go-printf-func-name v0.1.0 // indirect
 	github.com/golangci/gofmt v0.0.0-20250106114630-d62b90e6713d // indirect
@@ -140,13 +141,13 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
-	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
 	github.com/mgechev/revive v1.7.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/moricho/tparallel v0.3.2 // indirect
+	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/nakabonne/nestif v0.3.1 // indirect
 	github.com/nishanths/exhaustive v0.12.0 // indirect
 	github.com/nishanths/predeclared v0.2.2 // indirect
@@ -156,10 +157,9 @@ require (
 	github.com/pelletier/go-toml/v2 v2.2.4 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/polyfloyd/go-errorlint v1.7.1 // indirect
-	github.com/prometheus/client_golang v1.12.1 // indirect
-	github.com/prometheus/client_model v0.2.0 // indirect
-	github.com/prometheus/common v0.32.1 // indirect
-	github.com/prometheus/procfs v0.7.3 // indirect
+	github.com/prometheus/client_model v0.6.1 // indirect
+	github.com/prometheus/common v0.62.0 // indirect
+	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/quasilyte/go-ruleguard v0.4.3-0.20240823090925-0fe6f58b47b1 // indirect
 	github.com/quasilyte/go-ruleguard/dsl v0.3.22 // indirect
 	github.com/quasilyte/gogrep v0.5.0 // indirect

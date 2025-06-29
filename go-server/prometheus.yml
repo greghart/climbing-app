@@ -1,0 +1,9 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'go-server'
+    static_configs:
+      - targets: [ '172.27.0.78:8080' ] # or your Go app port
+        labels: 
+          instance: 'local'

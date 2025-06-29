@@ -11,6 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/greghart/climbing-app/internal/env"
 	"github.com/greghart/climbing-app/internal/service"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 type Server struct {
@@ -57,8 +58,15 @@ func (s *Server) Stop(ctx context.Context) error {
 func (s *Server) Handler() http.Handler {
 	r := gin.Default()
 
+	r.GET("/metrics", gin.WrapH(promhttp.Handler()))
+
 	r.Use(apiKeyAuthMiddleware())
 	r.Use(securityHeaders(fmt.Sprintf("%s:%d", s.opts.ExpectedHost, s.opts.Port)))
+	r.Use(func(ctx *gin.Context) {
+		// Start the request observer for metrics
+		defer httpRequestObserver(ctx.Request.Method, ctx.FullPath())()
+		ctx.Next()
+	})
 
 	{
 		v1 := r.Group("/v1")
