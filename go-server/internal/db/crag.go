@@ -3,7 +3,6 @@ package db
 import (
 	"context"
 	"fmt"
-	"log"
 
 	"github.com/greghart/climbing-app/internal/models"
 	"github.com/greghart/powerputtygo/queryp"
@@ -68,7 +67,6 @@ func NewCrags(db *sqlp.DB) *Crags {
 
 func (c *Crags) GetCrags(ctx context.Context, req CragsReadRequest) ([]models.Crag, error) {
 	q, args, err := req.ForTemplate(c.queryTemplate).Execute()
-	log.Println(q)
 	if err != nil {
 		return nil, fmt.Errorf("failed to apply query template: %w", err)
 	}

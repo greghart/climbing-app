@@ -2,7 +2,6 @@ package db
 
 import (
 	"context"
-	"log"
 	"time"
 
 	"github.com/greghart/climbing-app/internal/models"
@@ -212,7 +211,6 @@ func (a *Areas) GetArea(ctx context.Context, id int64, req AreasReadRequest) (*m
 // GetAreas retrieves all areas for a given cragId using the new query template and mapper
 func (a *Areas) GetAreas(ctx context.Context, req AreasReadRequest) ([]models.Area, error) {
 	q, args, err := req.ForTemplate(a.queryTemplate).Execute()
-	log.Println(q)
 	if err != nil {
 		return nil, err
 	}

@@ -7,29 +7,29 @@ import (
 )
 
 var (
-	httpNamespace      = "http"
-	httpRequestCounter = prometheus.NewCounterVec(prometheus.CounterOpts{
-		Namespace: httpNamespace,
+	metricsNamespace      = "http"
+	metricsRequestCounter = prometheus.NewCounterVec(prometheus.CounterOpts{
+		Namespace: metricsNamespace,
 		Name:      "request_count",
 		Help:      "Count of HTTP requests by method and path",
 	}, []string{"method", "path"})
-	httpRequestDuration = prometheus.NewHistogramVec(prometheus.HistogramOpts{
-		Namespace: httpNamespace,
+	metricsRequestDuration = prometheus.NewHistogramVec(prometheus.HistogramOpts{
+		Namespace: metricsNamespace,
 		Name:      "request_duration_seconds",
 		Help:      "Duration of HTTP requests by method and path",
 	}, []string{"method", "path"})
 )
 
 func init() {
-	prometheus.MustRegister(httpRequestCounter)
-	prometheus.MustRegister(httpRequestDuration)
+	prometheus.MustRegister(metricsRequestCounter)
+	prometheus.MustRegister(metricsRequestDuration)
 }
 
 // httpRequestObserver returns a function to be used at the top of an HTTP handler and deferred
 // to automatically track HTTP layer metrics.
 func httpRequestObserver(method, path string) func() {
-	counter := httpRequestCounter.WithLabelValues(method, path)
-	durationer := httpRequestDuration.WithLabelValues(method, path)
+	counter := metricsRequestCounter.WithLabelValues(method, path)
+	durationer := metricsRequestDuration.WithLabelValues(method, path)
 	start := time.Now()
 	counter.Inc()
 	return func() {

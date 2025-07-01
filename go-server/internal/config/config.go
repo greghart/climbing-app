@@ -2,6 +2,7 @@ package config
 
 import (
 	"log"
+	"log/slog"
 	"os"
 	"strconv"
 
@@ -9,7 +10,8 @@ import (
 )
 
 type Config struct {
-	RootDir string
+	RootDir  string
+	LogLevel int
 	// DB config
 	DBDriver string
 	DBSource string
@@ -25,9 +27,12 @@ func Load() Config {
 	godotenv.Load()             // nolint:errcheck
 
 	cfg := Config{
-		RootDir:      getEnvString("ROOT_DIR", "/var/app"),
-		DBDriver:     getEnvString("DB_DRIVER", "sqlite3"),
-		DBSource:     getEnvString("DB_SOURCE", "./database.sqlite"),
+		RootDir:  getEnvString("ROOT_DIR", "/var/app"),
+		LogLevel: getEnvInt("LOG_LEVEL", int(slog.LevelInfo)),
+		// DB
+		DBDriver: getEnvString("DB_DRIVER", "sqlite3"),
+		DBSource: getEnvString("DB_SOURCE", "./database.sqlite"),
+		// HTTP
 		ExpectedHost: getEnvString("HOST", "localhost"),
 		HTTPPort:     getEnvInt("HTTP_PORT", 8080),
 		GRPCPort:     getEnvInt("GRPC_PORT", 8081),

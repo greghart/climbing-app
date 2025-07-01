@@ -3,7 +3,9 @@ package main
 import (
 	"context"
 	"errors"
+	"fmt"
 	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
@@ -18,6 +20,10 @@ import (
 
 func main() {
 	cfg := config.Load()
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+		Level: slog.Level(cfg.LogLevel),
+	}))
+	slog.SetDefault(logger)
 	env := envpkg.New(cfg)
 	defer env.Stop()
 
@@ -51,11 +57,11 @@ func main() {
 	}()
 
 	// Waiting for SIGINT (kill -2)
-	log.Println("Press Ctrl+C to stop the servers...")
+	slog.Info("Press Ctrl+C to stop the servers...")
 	<-ctx.Done()
 
 	// Shutdown both servers gracefully
-	log.Println("Shutting down servers...")
+	slog.Info("Shutting down servers...")
 	// Use a WaitGroup to wait for both servers to stop
 	var wg sync.WaitGroup
 	wg.Add(2)
@@ -71,7 +77,7 @@ func main() {
 		defer wg.Done()
 		if err := server.Stop(ctx); err != nil {
 			// handle err
-			log.Printf("failed to stop http server: %v", err)
+			slog.Error(fmt.Sprintf("failed to stop http server: %v", err))
 		}
 	}()
 	go func() {
@@ -82,10 +88,10 @@ func main() {
 	for {
 		select {
 		case <-waitCh:
-			log.Printf("servers stopped gracefully")
+			slog.Info("servers stopped gracefully")
 			os.Exit(0)
 		case <-ctx.Done():
-			log.Printf("shutdown timed out, servers may not have stopped gracefully")
+			slog.Error("shutdown timed out, servers may not have stopped gracefully")
 			os.Exit(1)
 		}
 	}

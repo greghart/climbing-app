@@ -3,7 +3,6 @@ package db
 import (
 	"context"
 	"fmt"
-	"log"
 
 	"github.com/greghart/climbing-app/internal/models"
 	"github.com/greghart/powerputtygo/mapperp"
@@ -81,7 +80,6 @@ func NewTrails(db *sqlp.DB) *Trails {
 
 func (t *Trails) GetTrails(ctx context.Context, req TrailsReadRequest) ([]models.Trail, error) {
 	q, args, err := req.ForTemplate(t.queryTemplate).Execute()
-	log.Println(q)
 	if err != nil {
 		return nil, fmt.Errorf("failed to apply query template: %w", err)
 	}

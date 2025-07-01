@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
-	"log"
+	"log/slog"
 	"slices"
 
 	"github.com/greghart/climbing-app/internal/db"
@@ -44,7 +44,7 @@ func addErrGroupFn[T any](eg *errgroup.Group, fn func() (T, error)) <-chan T {
 		defer close(ch)
 		result, err := fn()
 		if err != nil {
-			log.Printf("error in errgroup function: %v", err)
+			slog.Error(fmt.Sprintf("error in errgroup function: %v", err))
 			return err
 		}
 		ch <- result
