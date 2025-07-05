@@ -1,5 +1,7 @@
 package models
 
+import "github.com/greghart/powerputtygo/sqlp"
+
 type Photoable struct {
 	ID         int64   `json:"id,omitzero" sqlp:"id"`
 	CragID     int64   `json:"crag_id,omitzero" sqlp:"crag"`
@@ -18,4 +20,13 @@ func (p Photoable) IsZero() bool {
 		p.RouteID == 0 &&
 		p.Descriptor == "" &&
 		len(p.Photos) == 0
+}
+
+var PhotoableMapper = sqlp.Mapper[Photoable]{
+	"id":         func(p *Photoable) any { return &p.ID },
+	"crag":       func(p *Photoable) any { return &p.CragID },
+	"area":       func(p *Photoable) any { return &p.AreaID },
+	"boulder":    func(p *Photoable) any { return &p.BoulderID },
+	"route":      func(p *Photoable) any { return &p.RouteID },
+	"descriptor": func(p *Photoable) any { return &p.Descriptor },
 }
