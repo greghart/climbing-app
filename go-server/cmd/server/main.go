@@ -12,6 +12,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/grafana/pyroscope-go"
 	"github.com/greghart/climbing-app/internal/config"
 	envpkg "github.com/greghart/climbing-app/internal/env"
 	"github.com/greghart/climbing-app/internal/grpc"
@@ -26,6 +27,27 @@ func main() {
 	slog.SetDefault(logger)
 	env := envpkg.New(cfg)
 	defer env.Stop()
+
+	// Pyroscope profiling
+	profiler, err := pyroscope.Start(pyroscope.Config{
+		ApplicationName: "climbing-app.service",
+		ServerAddress:   "http://localhost:4040",
+		Tags: map[string]string{
+			"env": os.Getenv("ENV"),
+		},
+		ProfileTypes: []pyroscope.ProfileType{
+			pyroscope.ProfileCPU,
+			pyroscope.ProfileAllocObjects,
+			pyroscope.ProfileAllocSpace,
+			pyroscope.ProfileInuseObjects,
+			pyroscope.ProfileInuseSpace,
+			pyroscope.ProfileGoroutines,
+		},
+	})
+	if err != nil {
+		log.Printf("Pyroscope initialization failed: %v", err)
+	}
+	defer profiler.Stop() // nolint:errcheck
 
 	// Handle SIGINT (CTRL+C) gracefully.
 	ctx, stopSig := signal.NotifyContext(context.Background(), os.Interrupt)
