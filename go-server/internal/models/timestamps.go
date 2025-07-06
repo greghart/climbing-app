@@ -1,10 +1,6 @@
 package models
 
-import (
-	"time"
-
-	"github.com/greghart/powerputtygo/sqlp"
-)
+import "time"
 
 type Timestamps struct {
 	CreatedAt time.Time `json:"createdAt" sqlp:"createdAt"`
@@ -14,9 +10,4 @@ type Timestamps struct {
 func (t Timestamps) IsZero() bool {
 	return t.CreatedAt.IsZero() &&
 		t.UpdatedAt.IsZero()
-}
-
-var TimestampsMapper = sqlp.Mapper[Timestamps]{
-	"createdAt": func(t *Timestamps) any { return &t.CreatedAt },
-	"updatedAt": func(t *Timestamps) any { return &t.UpdatedAt },
 }

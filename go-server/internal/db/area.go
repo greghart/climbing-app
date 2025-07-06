@@ -43,7 +43,7 @@ type Areas struct {
 
 func NewAreas(db *sqlp.DB) *Areas {
 	return &Areas{
-		Repository: sqlp.NewRepository[models.Area](db, "area").WithMapper(models.AreaMapper),
+		Repository: sqlp.NewRepository[models.Area](db, "area"),
 		queryTemplate: queryp.Must(queryp.NewTemplate(`
 			SELECT 
 				area.*
@@ -189,7 +189,6 @@ func (a *Areas) GetArea(ctx context.Context, id int64, req AreasReadRequest) (*m
 		return nil, err
 	}
 	defer rows.Close()
-	rows.SetMapper(areaRowMapper)
 
 	var area models.Area
 	mapper := mapperp.One(
@@ -220,7 +219,6 @@ func (a *Areas) GetAreas(ctx context.Context, req AreasReadRequest) ([]models.Ar
 		return nil, err
 	}
 	defer rows.Close()
-	rows.SetMapper(areaRowMapper)
 
 	var areas []models.Area
 	mapper := mapperp.Slice(
@@ -248,38 +246,3 @@ type areaRow struct {
 	Route                    models.Route             `sqlp:"route"`
 	BoulderPolygonCoordinate models.PolygonCoordinate `sqlp:"boulder_polygon_coordinate"`
 }
-
-var areaRowMapper = func() sqlp.Mapper[areaRow] {
-	mapper := sqlp.Mapper[areaRow]{}
-	mapper = sqlp.MergeMappers(
-		mapper,
-		models.AreaMapper,
-		"",
-		func(row *areaRow) *models.Area { return &row.Area },
-	)
-	mapper = sqlp.MergeMappers(
-		mapper,
-		models.PolygonCoordinateMapper,
-		"polygon_coordinate",
-		func(row *areaRow) *models.PolygonCoordinate { return &row.PolygonCoordinate },
-	)
-	mapper = sqlp.MergeMappers(
-		mapper,
-		models.BoulderMapper,
-		"boulder",
-		func(row *areaRow) *models.Boulder { return &row.Boulder },
-	)
-	mapper = sqlp.MergeMappers(
-		mapper,
-		models.PolygonCoordinateMapper,
-		"boulder_polygon_coordinate",
-		func(row *areaRow) *models.PolygonCoordinate { return &row.BoulderPolygonCoordinate },
-	)
-	mapper = sqlp.MergeMappers(
-		mapper,
-		models.RouteMapper,
-		"route",
-		func(row *areaRow) *models.Route { return &row.Route },
-	)
-	return mapper
-}()

@@ -1,10 +1,6 @@
 package models
 
-import (
-	"encoding/json"
-
-	"github.com/greghart/powerputtygo/sqlp"
-)
+import "encoding/json"
 
 type Route struct {
 	ID          int64   `json:"id,omitzero" sqlp:"id"`
@@ -58,23 +54,3 @@ func (r *Route) UnmarshalJSON(data []byte) error {
 	alias.Grade = r.GetGrade()
 	return nil
 }
-
-var RouteMapper = func() sqlp.Mapper[Route] {
-	mapper := sqlp.Mapper[Route]{
-		"id":          func(r *Route) any { return &r.ID },
-		"name":        func(r *Route) any { return &r.Name },
-		"description": func(r *Route) any { return &r.Description },
-		"firstAscent": func(r *Route) any { return &r.FirstAscent },
-		"gradeRaw":    func(r *Route) any { return &r.GradeRaw },
-		"boulderId":   func(r *Route) any { return &r.BoulderID },
-	}
-	mapper = sqlp.MergeMappers(
-		mapper,
-		CoordinateMapper,
-		"",
-		func(r *Route) *Coordinate {
-			return &r.Coordinates
-		},
-	)
-	return mapper
-}()
