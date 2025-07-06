@@ -28,6 +28,21 @@ import (
 // the actual database. We use Santee which shouldn't really change ever, so it's a fair and easy
 // thing to run snapshots against.
 
+func BenchmarkGrpcServer(b *testing.B) {
+	grpcServer(b)
+	client := grpcClient(b)
+
+	for b.Loop() {
+		_, err := client.GetCrag(context.Background(), &pb.GetCragRequest{
+			Id: 55,
+			Opts: &pb.ReadCragOptions{
+				Includes: []string{"areas.boulders", "areas.polygon.coordinates", "parking"},
+			},
+		})
+		errcmp.MustMatch(b, err, "")
+	}
+}
+
 func TestGrpcServer_crags(t *testing.T) {
 	grpcServer(t)
 
@@ -103,7 +118,7 @@ func TestGrpcServer_crags(t *testing.T) {
 ////////////////////////////////////////////////////////////////////////////////
 
 // grpcServer returns a locally running grpc grpcServer that we can make requests against
-func grpcServer(t *testing.T) *mygrpc.Server {
+func grpcServer(t testing.TB) *mygrpc.Server {
 	t.Helper()
 
 	cfg := config.Load()
@@ -129,7 +144,7 @@ func grpcServer(t *testing.T) *mygrpc.Server {
 	return grpcServer
 }
 
-func grpcClient(t *testing.T) pb.ClimbServiceClient {
+func grpcClient(t testing.TB) pb.ClimbServiceClient {
 	t.Helper()
 
 	md := metadata.Pairs("Authorization", "Bearer "+os.Getenv("API_KEY"))
