@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log/slog"
 	"slices"
+	"time"
 
 	"github.com/greghart/climbing-app/internal/db"
 	"github.com/greghart/climbing-app/internal/models"
@@ -96,6 +97,47 @@ func (c *Crags) ListCrags(ctx context.Context, req CragsReadRequest) ([]models.C
 		}
 	}
 	return crags, nil
+}
+
+func (c *Crags) Update(ctx context.Context, req CragUpdateRequest) error {
+	defer updateCragObserver()()
+
+	if req.RequestedAt.IsZero() {
+		return fmt.Errorf("requested_at must be set")
+	}
+
+	return c.repos.Crags.RunInTx(ctx, func(ctx context.Context) error {
+		crag, err := c.repos.Crags.Find(ctx, req.ID)
+		if err != nil {
+			return fmt.Errorf("failed to find crag for update with ID %d: %w", req.ID, err)
+		}
+		// Update crag
+		if req.Name != nil {
+			crag.Name = *req.Name
+		}
+		if req.Description != nil {
+			crag.Description = req.Description
+		}
+		if req.Bounds != nil {
+			crag.Bounds = req.Bounds
+		}
+		if _, err := c.repos.Crags.Update(ctx, crag); err != nil {
+			return fmt.Errorf("failed to update crag: %w", err)
+		}
+		// TOOD: Update trail directly if needed
+		return nil
+	})
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+type CragUpdateRequest struct {
+	ID          int64
+	Name        *string
+	Description *string
+	Trail       *models.Trail
+	Bounds      *models.Bounds
+	RequestedAt time.Time
 }
 
 ////////////////////////////////////////////////////////////////////////////////

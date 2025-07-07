@@ -113,6 +113,19 @@ func (s *Server) ListCrags(ctx context.Context, _req *pb.ListCragsRequest) (*pb.
 	}, nil
 }
 
+func (s *Server) UpdateCrag(ctx context.Context, _req *pb.UpdateCragRequest) (*pb.UpdateCragResponse, error) {
+	req := (*UpdateCragRequest)(_req)
+	if err := req.Validate(); err != nil {
+		return nil, status.Errorf(codes.InvalidArgument, "invalid request: %v", err)
+	}
+
+	err := s.env.Services.Crags.Update(ctx, req.ToService())
+	if err != nil {
+		return nil, status.Errorf(codes.Unavailable, "failed to update crag: %v", err)
+	}
+	return &pb.UpdateCragResponse{}, nil
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 type ListCragsRequest pb.ListCragsRequest
@@ -154,6 +167,27 @@ func (req *GetCragRequest) ToService() service.CragsReadRequest {
 		out.Include = service.CragsIncludeSchema.Include(req.Opts.Includes...)
 	}
 	return out
+}
+
+type UpdateCragRequest pb.UpdateCragRequest
+
+func (req *UpdateCragRequest) Validate() error {
+	if req.RequestedAt.AsTime().IsZero() {
+		return fmt.Errorf("requested_at must be set")
+	}
+	return nil
+}
+
+func (req *UpdateCragRequest) ToService() service.CragUpdateRequest {
+	fm := NewFieldMask(req.FieldMask)
+	return service.CragUpdateRequest{
+		ID:          req.Id,
+		Name:        MaskPtr(fm, "name", req.Name),
+		Description: MaskPtr(fm, "description", req.Description),
+		Trail:       MaskValue(fm, "trail", ProtoToTrail(req.Trail)),
+		Bounds:      MaskValue(fm, "bounds", ProtoToBounds(req.Bounds)),
+		RequestedAt: req.RequestedAt.AsTime(),
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////

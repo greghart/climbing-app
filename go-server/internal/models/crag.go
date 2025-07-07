@@ -18,7 +18,7 @@ type Crag struct {
 	Timestamps
 }
 
-func (c Crag) IsZero() bool {
+func (c *Crag) IsZero() bool {
 	return (c.ID == 0 &&
 		c.Name == "" &&
 		c.Description == nil &&

@@ -30,7 +30,7 @@ const (
 type ClimbServiceClient interface {
 	GetCrag(ctx context.Context, in *GetCragRequest, opts ...grpc.CallOption) (*GetCragResponse, error)
 	ListCrags(ctx context.Context, in *ListCragsRequest, opts ...grpc.CallOption) (*ListCragsResponse, error)
-	UpdateCrag(ctx context.Context, in *UpdateCragRequest, opts ...grpc.CallOption) (*ListCragsResponse, error)
+	UpdateCrag(ctx context.Context, in *UpdateCragRequest, opts ...grpc.CallOption) (*UpdateCragResponse, error)
 }
 
 type climbServiceClient struct {
@@ -61,9 +61,9 @@ func (c *climbServiceClient) ListCrags(ctx context.Context, in *ListCragsRequest
 	return out, nil
 }
 
-func (c *climbServiceClient) UpdateCrag(ctx context.Context, in *UpdateCragRequest, opts ...grpc.CallOption) (*ListCragsResponse, error) {
+func (c *climbServiceClient) UpdateCrag(ctx context.Context, in *UpdateCragRequest, opts ...grpc.CallOption) (*UpdateCragResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListCragsResponse)
+	out := new(UpdateCragResponse)
 	err := c.cc.Invoke(ctx, ClimbService_UpdateCrag_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -77,7 +77,7 @@ func (c *climbServiceClient) UpdateCrag(ctx context.Context, in *UpdateCragReque
 type ClimbServiceServer interface {
 	GetCrag(context.Context, *GetCragRequest) (*GetCragResponse, error)
 	ListCrags(context.Context, *ListCragsRequest) (*ListCragsResponse, error)
-	UpdateCrag(context.Context, *UpdateCragRequest) (*ListCragsResponse, error)
+	UpdateCrag(context.Context, *UpdateCragRequest) (*UpdateCragResponse, error)
 	mustEmbedUnimplementedClimbServiceServer()
 }
 
@@ -94,7 +94,7 @@ func (UnimplementedClimbServiceServer) GetCrag(context.Context, *GetCragRequest)
 func (UnimplementedClimbServiceServer) ListCrags(context.Context, *ListCragsRequest) (*ListCragsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCrags not implemented")
 }
-func (UnimplementedClimbServiceServer) UpdateCrag(context.Context, *UpdateCragRequest) (*ListCragsResponse, error) {
+func (UnimplementedClimbServiceServer) UpdateCrag(context.Context, *UpdateCragRequest) (*UpdateCragResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCrag not implemented")
 }
 func (UnimplementedClimbServiceServer) mustEmbedUnimplementedClimbServiceServer() {}

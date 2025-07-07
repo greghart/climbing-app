@@ -38,7 +38,10 @@ type Crags struct {
 
 func NewCrags(db *sqlp.DB) *Crags {
 	return &Crags{
-		Repository: sqlp.NewRepository[models.Crag](db, "crag"),
+		Repository: sqlp.NewRepository[models.Crag](db, "crag").
+			WithIdentifier(func(e *models.Crag) any {
+				return e.ID
+			}),
 		queryTemplate: queryp.Must(queryp.NewTemplate(`
 			SELECT 
 				crag.*

@@ -2,9 +2,11 @@ syntax = "proto3";
 
 package pb;
 
+import "bounds.proto";
 import "crag.proto";
 import "google/protobuf/field_mask.proto";
-import "line.proto";
+import "google/protobuf/timestamp.proto";
+import "trail.proto";
 
 
 option go_package = "github.com/greghart/climbing-app/internal/pb";
@@ -31,19 +33,20 @@ message ListCragsResponse {
 }
 
 message UpdateCragRequest {
-  message UpdateTrail {
-    repeated Line lines = 1;
-  }
   int64 id = 1;
   google.protobuf.FieldMask field_mask = 2;
   string name = 3;
   string description = 4;
-  UpdateTrail trail = 5;
+  Trail trail = 5;
+  Bounds bounds = 6;
+  google.protobuf.Timestamp requested_at = 7;
+}
 
+message UpdateCragResponse {
 }
 
 service ClimbService {
   rpc GetCrag(GetCragRequest) returns (GetCragResponse);
   rpc ListCrags(ListCragsRequest) returns (ListCragsResponse);
-  rpc UpdateCrag(UpdateCragRequest) returns (ListCragsResponse);
+  rpc UpdateCrag(UpdateCragRequest) returns (UpdateCragResponse);
 }
