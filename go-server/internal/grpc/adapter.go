@@ -290,7 +290,7 @@ func RouteToProto(m *models.Route) *pb.Route {
 		FirstAscent: derefString(m.FirstAscent),
 		BoulderId:   m.BoulderID,
 		Grade:       GradeToProto(m.GetGrade()),
-		// TODO: Size is omitted as models.Route does not have a Size field yet
+		Coordinates: CoordinateToProto(&m.Coordinates),
 	}
 }
 
@@ -306,7 +306,7 @@ func ProtoToRoute(p *pb.Route) *models.Route {
 		FirstAscent: stringPtr(p.GetFirstAscent()),
 		Grade:       ProtoToGrade(p.GetGrade()),
 		BoulderID:   p.GetBoulderId(),
-		// Note: Size field is omitted as models.Route does not have it
+		Coordinates: ProtoToCoordinate(p.GetCoordinates()),
 	}
 }
 
@@ -337,9 +337,9 @@ func GradeToProto(m *models.Grade) *pb.Grade {
 	}
 	var system pb.Grade_GradingSystem
 	switch m.System {
-	case "V_SCALE":
+	case models.GradingSystemV:
 		system = pb.Grade_GRADING_SYSTEM_V_SCALE
-	case "YDS":
+	case models.GradingSystemYDS:
 		system = pb.Grade_GRADING_SYSTEM_YDS
 	default:
 		system = pb.Grade_GRADING_SYSTEM_UNSPECIFIED
@@ -359,9 +359,9 @@ func ProtoToGrade(p *pb.Grade) *models.Grade {
 	var system models.GradingSystem
 	switch p.GetSystem() {
 	case pb.Grade_GRADING_SYSTEM_V_SCALE:
-		system = "V_SCALE"
+		system = models.GradingSystemV
 	case pb.Grade_GRADING_SYSTEM_YDS:
-		system = "YDS"
+		system = models.GradingSystemYDS
 	default:
 		system = ""
 	}
@@ -555,9 +555,8 @@ func TrailToProto(m *models.Trail) *pb.Trail {
 		return nil
 	}
 	return &pb.Trail{
-		Id:     m.ID,
-		CragId: m.CragID,
-		Lines:  LinesToProto(m.Lines),
+		Id:    m.ID,
+		Lines: LinesToProto(m.Lines),
 	}
 }
 

@@ -44,11 +44,11 @@ func NewTrails(db *sqlp.DB) *Trails {
 				trail.*,
 				crag.id AS cragId
 				{{- if .Include "lines"}},
-				trail_line.id AS line_id,
-				trail_line.startLat AS line_start_Lat,
-				trail_line.startLng AS line_start_Lng,
-				trail_line.endLat AS line_end_Lat,
-				trail_line.endLng AS line_end_Lng
+				COALESCE(trail_line.id, 0) AS line_id,
+				COALESCE(trail_line.start_Lat, 0) AS line_start_Lat,
+				COALESCE(trail_line.start_Lng, 0) AS line_start_Lng,
+				COALESCE(trail_line.end_Lat, 0) AS line_end_Lat,
+				COALESCE(trail_line.end_Lng, 0) AS line_end_Lng
 				{{- end}}
 			FROM trail
 				JOIN crag ON crag.trailId = trail.id

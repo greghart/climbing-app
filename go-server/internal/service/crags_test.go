@@ -12,21 +12,6 @@ import (
 	"github.com/greghart/powerputtygo/errcmp"
 )
 
-// Permutations of include flags for CragsReadRequest
-var cragsReadPermutations = []struct {
-	name  string
-	input CragsReadRequest
-}{
-	{"basic", CragsReadRequest{}},
-	{"with areas", CragsReadRequest{Include: CragsIncludeSchema.Include("areas")}},
-	{"with boulders", CragsReadRequest{Include: CragsIncludeSchema.Include("areas.boulders")}},
-	{"with parking", CragsReadRequest{Include: CragsIncludeSchema.Include("parking")}},
-	{"areas+boulders", CragsReadRequest{Include: CragsIncludeSchema.Include("boulder")}}, // won't fetch
-	{"areas+parking", CragsReadRequest{Include: CragsIncludeSchema.Include("areas", "parking")}},
-	{"areas+polygon", CragsReadRequest{Include: CragsIncludeSchema.Include("areas.polygon.coordinates")}},
-	{"all", CragsReadRequest{Include: CragsIncludeSchema.Include("areas.boulders", "parking")}},
-}
-
 // Ignore timestamps since those are
 var cmpOpts = cmp.Options{
 	cmpopts.EquateEmpty(),
@@ -43,9 +28,13 @@ func TestCrags_GetCrags(t *testing.T) {
 	service := NewCrags(repos)
 	testutil.LoadCrags(t, ctx, repos.Crags.DB)
 
-	for _, perm := range cragsReadPermutations {
-		t.Run(perm.name, func(t *testing.T) {
-			_crags, err := service.ListCrags(ctx, perm.input)
+	combos := testutil.IncludeCombos(CragsIncludeSchema)
+	for _, includes := range combos {
+		t.Run(strings.Join(includes, ","), func(t *testing.T) {
+			req := CragsReadRequest{
+				Include: CragsIncludeSchema.Include(includes...),
+			}
+			_crags, err := service.ListCrags(ctx, req)
 			errcmp.MustMatch(t, err, "")
 			crags := make([]models.Crag, len(_crags))
 			for i := range _crags {
@@ -64,7 +53,7 @@ func TestCrags_GetCrags(t *testing.T) {
 			}
 
 			for i, got := range crags {
-				want := expectedCragForInclude(*expected[i], perm.input)
+				want := expectedCragForInclude(*expected[i], req)
 				if !cmp.Equal(got, want, cmpOpts) {
 					t.Errorf("crag mismatch (-got +want):\n%s", cmp.Diff(got, want, cmpOpts))
 				}
@@ -78,15 +67,17 @@ func TestCrags_GetCrag(t *testing.T) {
 	service := NewCrags(repos)
 	testutil.LoadCrags(t, ctx, repos.Crags.DB)
 
-	for _, perm := range cragsReadPermutations {
-		t.Run(perm.name, func(t *testing.T) {
+	for _, includes := range testutil.IncludeCombos(CragsIncludeSchema) {
+		t.Run(strings.Join(includes, ","), func(t *testing.T) {
 			expected := testutil.LoadCragFromJSON(t, "testdata/santee.json")
-			input := perm.input
-			input.ID = 55
-			crag, err := testutil.NormalizeCrag(service.GetCrag(ctx, input))
+			req := CragsReadRequest{
+				Include: CragsIncludeSchema.Include(includes...),
+			}
+			req.ID = 55
+			crag, err := testutil.NormalizeCrag(service.GetCrag(ctx, req))
 			errcmp.MustMatch(t, err, "")
 
-			want := expectedCragForInclude(*expected, perm.input)
+			want := expectedCragForInclude(*expected, req)
 
 			if !cmp.Equal(*crag, want, cmpOpts) {
 				t.Errorf("crag mismatch (-got +want):\n%s", cmp.Diff(*crag, want, cmpOpts))
@@ -99,6 +90,14 @@ func TestCrags_GetCrag(t *testing.T) {
 
 // expectedCragForInclude produces the expected crag for a given include request
 func expectedCragForInclude(crag models.Crag, req CragsReadRequest) models.Crag {
+	if !req.Include.IsIncluded("trail") {
+		crag.Trail = nil
+	}
+	if req.Include.IsIncluded("trail") && !req.Include.IsIncluded("trail.lines") {
+		if crag.Trail != nil {
+			crag.Trail.Lines = nil
+		}
+	}
 	if !req.Include.IsIncluded("areas") {
 		crag.Areas = nil
 	}
@@ -106,15 +105,26 @@ func expectedCragForInclude(crag models.Crag, req CragsReadRequest) models.Crag 
 		crag.Parking = nil
 	}
 	if req.Include.IsIncluded("areas") && !req.Include.IsIncluded("areas.boulders") {
-		crag.Areas = crag.Areas[:]
 		for i := range crag.Areas {
 			crag.Areas[i].Boulders = nil
 		}
 	}
+	if req.Include.IsIncluded("areas.boulders") && !req.Include.IsIncluded("areas.boulders.routes") {
+		for i := range crag.Areas {
+			crag.Areas[i].Boulders = crag.Areas[i].Boulders[:]
+			for j := range crag.Areas[i].Boulders {
+				crag.Areas[i].Boulders[j].Routes = nil
+			}
+		}
+	}
 	if req.Include.IsIncluded("areas") && !req.Include.IsIncluded("areas.polygon") {
-		crag.Areas = crag.Areas[:]
 		for i := range crag.Areas {
 			crag.Areas[i].Polygon = nil
+		}
+	}
+	if req.Include.IsIncluded("areas.polygon") && !req.Include.IsIncluded("areas.polygon.coordinates") {
+		for i := range crag.Areas {
+			crag.Areas[i].Polygon.Coordinates = nil
 		}
 	}
 	return crag

@@ -30,11 +30,11 @@ const TrailLineSchema = new EntitySchema<TrailLine>({
   embeddeds: {
     start: {
       schema: CoordinateSchema,
-      prefix: "start",
+      prefix: "start_",
     },
     end: {
       schema: CoordinateSchema,
-      prefix: "end",
+      prefix: "end_",
     },
   },
   relations: {

@@ -79,6 +79,7 @@ func LoadCrags(t *testing.T, ctx context.Context, d *sqlp.DB) {
 	t.Helper()
 
 	santee := LoadCragFromJSON(t, "testdata/santee.json")
+	santee.TrailID = santee.Trail.ID // Ensure TrailID is set for insertion
 	_, err := sqlp.Insert(ctx, d, "crag", *santee)
 	errcmp.MustMatch(t, err, "", "failed to insert crag")
 	for _, a := range santee.Areas {
@@ -104,12 +105,31 @@ func LoadCrags(t *testing.T, ctx context.Context, d *sqlp.DB) {
 			b.AreaID = a.ID
 			_, err := sqlp.Insert(ctx, d, "boulder", b)
 			errcmp.MustMatch(t, err, "", "failed to insert boulder")
+
+			for _, r := range b.Routes {
+				r.BoulderID = b.ID
+				if r.Grade != nil {
+					r.GradeRaw = r.Grade.Raw
+				}
+				_, err := sqlp.Insert(ctx, d, "route", r)
+				errcmp.MustMatch(t, err, "", "failed to insert route")
+			}
 		}
 	}
 	if santee.Parking != nil {
 		santee.Parking.CragID = santee.ID
 		_, err := sqlp.Insert(ctx, d, "parking", *santee.Parking)
 		errcmp.MustMatch(t, err, "", "failed to insert parking")
+	}
+	if santee.Trail != nil {
+		_, err := sqlp.Insert(ctx, d, "trail", *santee.Trail)
+		errcmp.MustMatch(t, err, "", "failed to insert trail")
+		for i, l := range santee.Trail.Lines {
+			l.TrailID = santee.Trail.ID
+			l.Order = i
+			_, err := sqlp.Insert(ctx, d, "trail_line", l)
+			errcmp.MustMatch(t, err, "", "failed to insert trail line")
+		}
 	}
 
 	empty := LoadCragFromJSON(t, "testdata/empty.json")

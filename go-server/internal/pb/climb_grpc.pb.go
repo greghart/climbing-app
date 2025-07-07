@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ClimbService_GetCrag_FullMethodName   = "/pb.ClimbService/GetCrag"
-	ClimbService_ListCrags_FullMethodName = "/pb.ClimbService/ListCrags"
+	ClimbService_GetCrag_FullMethodName    = "/pb.ClimbService/GetCrag"
+	ClimbService_ListCrags_FullMethodName  = "/pb.ClimbService/ListCrags"
+	ClimbService_UpdateCrag_FullMethodName = "/pb.ClimbService/UpdateCrag"
 )
 
 // ClimbServiceClient is the client API for ClimbService service.
@@ -29,6 +30,7 @@ const (
 type ClimbServiceClient interface {
 	GetCrag(ctx context.Context, in *GetCragRequest, opts ...grpc.CallOption) (*GetCragResponse, error)
 	ListCrags(ctx context.Context, in *ListCragsRequest, opts ...grpc.CallOption) (*ListCragsResponse, error)
+	UpdateCrag(ctx context.Context, in *UpdateCragRequest, opts ...grpc.CallOption) (*ListCragsResponse, error)
 }
 
 type climbServiceClient struct {
@@ -59,12 +61,23 @@ func (c *climbServiceClient) ListCrags(ctx context.Context, in *ListCragsRequest
 	return out, nil
 }
 
+func (c *climbServiceClient) UpdateCrag(ctx context.Context, in *UpdateCragRequest, opts ...grpc.CallOption) (*ListCragsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCragsResponse)
+	err := c.cc.Invoke(ctx, ClimbService_UpdateCrag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ClimbServiceServer is the server API for ClimbService service.
 // All implementations must embed UnimplementedClimbServiceServer
 // for forward compatibility.
 type ClimbServiceServer interface {
 	GetCrag(context.Context, *GetCragRequest) (*GetCragResponse, error)
 	ListCrags(context.Context, *ListCragsRequest) (*ListCragsResponse, error)
+	UpdateCrag(context.Context, *UpdateCragRequest) (*ListCragsResponse, error)
 	mustEmbedUnimplementedClimbServiceServer()
 }
 
@@ -80,6 +93,9 @@ func (UnimplementedClimbServiceServer) GetCrag(context.Context, *GetCragRequest)
 }
 func (UnimplementedClimbServiceServer) ListCrags(context.Context, *ListCragsRequest) (*ListCragsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCrags not implemented")
+}
+func (UnimplementedClimbServiceServer) UpdateCrag(context.Context, *UpdateCragRequest) (*ListCragsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCrag not implemented")
 }
 func (UnimplementedClimbServiceServer) mustEmbedUnimplementedClimbServiceServer() {}
 func (UnimplementedClimbServiceServer) testEmbeddedByValue()                      {}
@@ -138,6 +154,24 @@ func _ClimbService_ListCrags_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClimbService_UpdateCrag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCragRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClimbServiceServer).UpdateCrag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClimbService_UpdateCrag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClimbServiceServer).UpdateCrag(ctx, req.(*UpdateCragRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ClimbService_ServiceDesc is the grpc.ServiceDesc for ClimbService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +186,10 @@ var ClimbService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCrags",
 			Handler:    _ClimbService_ListCrags_Handler,
+		},
+		{
+			MethodName: "UpdateCrag",
+			Handler:    _ClimbService_UpdateCrag_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

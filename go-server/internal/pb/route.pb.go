@@ -79,6 +79,7 @@ type Route struct {
 	FirstAscent   string                 `protobuf:"bytes,5,opt,name=first_ascent,json=firstAscent,proto3" json:"first_ascent,omitempty"`
 	Grade         *Grade                 `protobuf:"bytes,6,opt,name=grade,proto3" json:"grade,omitempty"`
 	BoulderId     int64                  `protobuf:"varint,8,opt,name=boulder_id,json=boulderId,proto3" json:"boulder_id,omitempty"`
+	Coordinates   *Coordinate            `protobuf:"bytes,9,opt,name=coordinates,proto3" json:"coordinates,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -162,6 +163,13 @@ func (x *Route) GetBoulderId() int64 {
 	return 0
 }
 
+func (x *Route) GetCoordinates() *Coordinate {
+	if x != nil {
+		return x.Coordinates
+	}
+	return nil
+}
+
 // Size specifies the size of the route in whatever dimensions user puts in
 type Route_Size struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -227,7 +235,7 @@ var File_route_proto protoreflect.FileDescriptor
 
 const file_route_proto_rawDesc = "" +
 	"\n" +
-	"\vroute.proto\x12\x02pb\x1a\vgrade.proto\"\x8a\x03\n" +
+	"\vroute.proto\x12\x02pb\x1a\x10coordinate.proto\x1a\vgrade.proto\"\xbc\x03\n" +
 	"\x05Route\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\"\n" +
@@ -236,7 +244,8 @@ const file_route_proto_rawDesc = "" +
 	"\ffirst_ascent\x18\x05 \x01(\tR\vfirstAscent\x12\x1f\n" +
 	"\x05grade\x18\x06 \x01(\v2\t.pb.GradeR\x05grade\x12\x1d\n" +
 	"\n" +
-	"boulder_id\x18\b \x01(\x03R\tboulderId\x1a_\n" +
+	"boulder_id\x18\b \x01(\x03R\tboulderId\x120\n" +
+	"\vcoordinates\x18\t \x01(\v2\x0e.pb.CoordinateR\vcoordinates\x1a_\n" +
 	"\x04Size\x12)\n" +
 	"\x05units\x18\x01 \x01(\x0e2\x13.pb.Route.SizeUnitsR\x05units\x12\x16\n" +
 	"\x06height\x18\x02 \x01(\x05R\x06height\x12\x14\n" +
@@ -265,16 +274,18 @@ var file_route_proto_goTypes = []any{
 	(*Route)(nil),        // 1: pb.Route
 	(*Route_Size)(nil),   // 2: pb.Route.Size
 	(*Grade)(nil),        // 3: pb.Grade
+	(*Coordinate)(nil),   // 4: pb.Coordinate
 }
 var file_route_proto_depIdxs = []int32{
 	2, // 0: pb.Route.size:type_name -> pb.Route.Size
 	3, // 1: pb.Route.grade:type_name -> pb.Grade
-	0, // 2: pb.Route.Size.units:type_name -> pb.Route.SizeUnits
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	4, // 2: pb.Route.coordinates:type_name -> pb.Coordinate
+	0, // 3: pb.Route.Size.units:type_name -> pb.Route.SizeUnits
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_route_proto_init() }
@@ -282,6 +293,7 @@ func file_route_proto_init() {
 	if File_route_proto != nil {
 		return
 	}
+	file_coordinate_proto_init()
 	file_grade_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{

@@ -34,8 +34,8 @@ func (g Grade) IsZero() bool {
 type GradingSystem string
 
 const (
-	V   GradingSystem = "V"
-	YDS GradingSystem = "YDS"
+	GradingSystemV   GradingSystem = "V"
+	GradingSystemYDS GradingSystem = "YDS"
 )
 
 var vGradeValues = map[string]float64{
@@ -102,11 +102,11 @@ var ydsGradeValues = map[string]float64{
 }
 
 func parseV(raw string) (Grade, error) {
-	return splitter(raw, V, parseVScore)
+	return splitter(raw, GradingSystemV, parseVScore)
 }
 
 func parseYDS(raw string) (Grade, error) {
-	return splitter(raw, YDS, parseYDSScore)
+	return splitter(raw, GradingSystemYDS, parseYDSScore)
 }
 
 var splitters = []string{"/", "-"}

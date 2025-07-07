@@ -73,8 +73,13 @@ func (s *Server) Stop() {
 	}
 }
 
-func (s *Server) GetCrag(ctx context.Context, req *pb.GetCragRequest) (*pb.GetCragResponse, error) {
-	crag, err := s.env.Services.Crags.GetCrag(ctx, protoToCragReadRequest(req))
+func (s *Server) GetCrag(ctx context.Context, _req *pb.GetCragRequest) (*pb.GetCragResponse, error) {
+	req := (*GetCragRequest)(_req)
+	if err := req.Validate(); err != nil {
+		return nil, status.Errorf(codes.InvalidArgument, "invalid request: %v", err)
+	}
+
+	crag, err := s.env.Services.Crags.GetCrag(ctx, req.ToService())
 	if err != nil {
 		return nil, status.Errorf(codes.Unavailable, "failed to get crag %v: %v", req.Id, err)
 	}
@@ -87,8 +92,13 @@ func (s *Server) GetCrag(ctx context.Context, req *pb.GetCragRequest) (*pb.GetCr
 	}, nil
 }
 
-func (s *Server) ListCrags(ctx context.Context, req *pb.ListCragsRequest) (*pb.ListCragsResponse, error) {
-	crags, err := s.env.Services.Crags.ListCrags(ctx, protoToCragsReadRequest(req))
+func (s *Server) ListCrags(ctx context.Context, _req *pb.ListCragsRequest) (*pb.ListCragsResponse, error) {
+	req := (*ListCragsRequest)(_req)
+	if err := req.Validate(); err != nil {
+		return nil, status.Errorf(codes.InvalidArgument, "invalid request: %v", err)
+	}
+
+	crags, err := s.env.Services.Crags.ListCrags(ctx, req.ToService())
 	if err != nil {
 		return nil, status.Errorf(codes.Unavailable, "failed to get crags: %v", err)
 	}
@@ -101,6 +111,49 @@ func (s *Server) ListCrags(ctx context.Context, req *pb.ListCragsRequest) (*pb.L
 	return &pb.ListCragsResponse{
 		Crags: pbCrags,
 	}, nil
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+type ListCragsRequest pb.ListCragsRequest
+
+func (req *ListCragsRequest) Validate() error {
+	if req.Opts != nil {
+		if err := service.ValidateIncludes(service.CragsIncludeSchema, req.Opts.Includes); err != nil {
+			return fmt.Errorf("invalid include requested: %w", err)
+		}
+	}
+	return nil
+}
+
+func (req *ListCragsRequest) ToService() service.CragsReadRequest {
+	if req.Opts == nil {
+		return service.CragsReadRequest{}
+	}
+	return service.CragsReadRequest{
+		Include: service.CragsIncludeSchema.Include(req.Opts.Includes...),
+	}
+}
+
+type GetCragRequest pb.GetCragRequest
+
+func (req *GetCragRequest) Validate() error {
+	if req.Opts != nil {
+		if err := service.ValidateIncludes(service.CragsIncludeSchema, req.Opts.Includes); err != nil {
+			return fmt.Errorf("invalid include requested: %w", err)
+		}
+	}
+	return nil
+}
+
+func (req *GetCragRequest) ToService() service.CragsReadRequest {
+	out := service.CragsReadRequest{
+		ID: req.Id,
+	}
+	if req.Opts != nil {
+		out.Include = service.CragsIncludeSchema.Include(req.Opts.Includes...)
+	}
+	return out
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -132,23 +185,4 @@ func valid(authorization []string, apiKey string) bool {
 	}
 	token := strings.TrimPrefix(authorization[0], "Bearer ")
 	return token == apiKey
-}
-
-func protoToCragsReadRequest(req *pb.ListCragsRequest) service.CragsReadRequest {
-	if req.Opts == nil {
-		return service.CragsReadRequest{}
-	}
-	return service.CragsReadRequest{
-		Include: service.CragsIncludeSchema.Include(req.Opts.Includes...),
-	}
-}
-
-func protoToCragReadRequest(req *pb.GetCragRequest) service.CragsReadRequest {
-	out := service.CragsReadRequest{
-		ID: req.Id,
-	}
-	if req.Opts != nil {
-		out.Include = service.CragsIncludeSchema.Include(req.Opts.Includes...)
-	}
-	return out
 }

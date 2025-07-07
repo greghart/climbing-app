@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package pb;
 
+import "coordinate.proto";
 import "grade.proto";
 
 option go_package = "github.com/greghart/climbing-app/internal/pb";
@@ -26,4 +27,5 @@ message Route {
   string first_ascent = 5;
   Grade grade = 6;
   int64 boulder_id = 8;
+  Coordinate coordinates = 9;
 }

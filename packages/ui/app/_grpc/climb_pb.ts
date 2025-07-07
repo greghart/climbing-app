@@ -6,13 +6,16 @@ import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegen
 import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Crag } from "./crag_pb";
 import { file_crag } from "./crag_pb";
+import { file_google_protobuf_field_mask } from "@bufbuild/protobuf/wkt";
+import type { Line } from "./line_pb";
+import { file_line } from "./line_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file climb.proto.
  */
 export const file_climb: GenFile = /*@__PURE__*/
-  fileDesc("CgtjbGltYi5wcm90bxICcGIiIwoPUmVhZENyYWdPcHRpb25zEhAKCGluY2x1ZGVzGAEgAygJIj8KDkdldENyYWdSZXF1ZXN0EgoKAmlkGAEgASgDEiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQ3JhZ09wdGlvbnMiKQoPR2V0Q3JhZ1Jlc3BvbnNlEhYKBGNyYWcYASABKAsyCC5wYi5DcmFnIjUKEExpc3RDcmFnc1JlcXVlc3QSIQoEb3B0cxgCIAEoCzITLnBiLlJlYWRDcmFnT3B0aW9ucyIsChFMaXN0Q3JhZ3NSZXNwb25zZRIXCgVjcmFncxgBIAMoCzIILnBiLkNyYWcyfAoMQ2xpbWJTZXJ2aWNlEjIKB0dldENyYWcSEi5wYi5HZXRDcmFnUmVxdWVzdBoTLnBiLkdldENyYWdSZXNwb25zZRI4CglMaXN0Q3JhZ3MSFC5wYi5MaXN0Q3JhZ3NSZXF1ZXN0GhUucGIuTGlzdENyYWdzUmVzcG9uc2VCLlosZ2l0aHViLmNvbS9ncmVnaGFydC9jbGltYmluZy1hcHAvaW50ZXJuYWwvcGJiBnByb3RvMw", [file_crag]);
+  fileDesc("CgtjbGltYi5wcm90bxICcGIiIwoPUmVhZENyYWdPcHRpb25zEhAKCGluY2x1ZGVzGAEgAygJIj8KDkdldENyYWdSZXF1ZXN0EgoKAmlkGAEgASgDEiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQ3JhZ09wdGlvbnMiKQoPR2V0Q3JhZ1Jlc3BvbnNlEhYKBGNyYWcYASABKAsyCC5wYi5DcmFnIjUKEExpc3RDcmFnc1JlcXVlc3QSIQoEb3B0cxgCIAEoCzITLnBiLlJlYWRDcmFnT3B0aW9ucyIsChFMaXN0Q3JhZ3NSZXNwb25zZRIXCgVjcmFncxgBIAMoCzIILnBiLkNyYWcikAEKEVVwZGF0ZUNyYWdSZXF1ZXN0EgwKBG5hbWUYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkSMAoFdHJhaWwYAyABKAsyIS5wYi5VcGRhdGVDcmFnUmVxdWVzdC5VcGRhdGVUcmFpbBomCgtVcGRhdGVUcmFpbBIXCgVsaW5lcxgBIAMoCzIILnBiLkxpbmUyfAoMQ2xpbWJTZXJ2aWNlEjIKB0dldENyYWcSEi5wYi5HZXRDcmFnUmVxdWVzdBoTLnBiLkdldENyYWdSZXNwb25zZRI4CglMaXN0Q3JhZ3MSFC5wYi5MaXN0Q3JhZ3NSZXF1ZXN0GhUucGIuTGlzdENyYWdzUmVzcG9uc2VCLlosZ2l0aHViLmNvbS9ncmVnaGFydC9jbGltYmluZy1hcHAvaW50ZXJuYWwvcGJiBnByb3RvMw", [file_crag, file_google_protobuf_field_mask, file_line]);
 
 /**
  * @generated from message pb.ReadCragOptions
@@ -103,6 +106,50 @@ export type ListCragsResponse = Message<"pb.ListCragsResponse"> & {
  */
 export const ListCragsResponseSchema: GenMessage<ListCragsResponse> = /*@__PURE__*/
   messageDesc(file_climb, 4);
+
+/**
+ * @generated from message pb.UpdateCragRequest
+ */
+export type UpdateCragRequest = Message<"pb.UpdateCragRequest"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string description = 2;
+   */
+  description: string;
+
+  /**
+   * @generated from field: pb.UpdateCragRequest.UpdateTrail trail = 3;
+   */
+  trail?: UpdateCragRequest_UpdateTrail;
+};
+
+/**
+ * Describes the message pb.UpdateCragRequest.
+ * Use `create(UpdateCragRequestSchema)` to create a new message.
+ */
+export const UpdateCragRequestSchema: GenMessage<UpdateCragRequest> = /*@__PURE__*/
+  messageDesc(file_climb, 5);
+
+/**
+ * @generated from message pb.UpdateCragRequest.UpdateTrail
+ */
+export type UpdateCragRequest_UpdateTrail = Message<"pb.UpdateCragRequest.UpdateTrail"> & {
+  /**
+   * @generated from field: repeated pb.Line lines = 1;
+   */
+  lines: Line[];
+};
+
+/**
+ * Describes the message pb.UpdateCragRequest.UpdateTrail.
+ * Use `create(UpdateCragRequest_UpdateTrailSchema)` to create a new message.
+ */
+export const UpdateCragRequest_UpdateTrailSchema: GenMessage<UpdateCragRequest_UpdateTrail> = /*@__PURE__*/
+  messageDesc(file_climb, 5, 0);
 
 /**
  * @generated from service pb.ClimbService

@@ -1,5 +1,7 @@
 import { ProtoToCrag } from "@/app/_grpc/adapters";
 import client from "@/app/_grpc/client";
+import { ReadCragOptions } from "@/app/_grpc/climb_pb";
+import { ExtractMessage } from "@/app/_util/grpc";
 import getCragTrail from "@/app/api/_actions/getCragTrail";
 import resolveCrag from "@/app/api/resolveCrag";
 import { CragSchema, getDataSource } from "@/db";
@@ -9,7 +11,7 @@ import "server-only";
 const getCrag = cache(
   async (
     id: number | string,
-    opts: { includes?: string[] } = {
+    opts: ExtractMessage<ReadCragOptions> = {
       includes: [
         "areas.boulders.routes",
         "areas.polygon.coordinates",

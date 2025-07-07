@@ -14,6 +14,7 @@ type Crag struct {
 	Commentable *Commentable `json:"commentable,omitzero" sqlp:"commentable"`
 	Photoable   *Photoable   `json:"photoable,omitzero" sqlp:"photoable"`
 	Trail       *Trail       `json:"trail,omitzero" sqlp:"trail"`
+	TrailID     int64        `json:"-" sqlp:"trailId"`
 	Timestamps
 }
 

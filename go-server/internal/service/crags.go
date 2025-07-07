@@ -77,8 +77,8 @@ func (c *Crags) ListCrags(ctx context.Context, req CragsReadRequest) ([]models.C
 	areasByCragIDCh := addErrGroupFn(&errGroup, func() (map[int64][]models.Area, error) {
 		return c.areasByCragID(ctx, req)
 	})
-	trailsByCragIDCh := addErrGroupFn(&errGroup, func() (map[int64]models.Trail, error) {
-		return c.trailsByCragID(ctx, req)
+	trailsByIDCh := addErrGroupFn(&errGroup, func() (map[int64]models.Trail, error) {
+		return c.trailsByID(ctx, req)
 	})
 
 	if err := errGroup.Wait(); err != nil {
@@ -86,12 +86,12 @@ func (c *Crags) ListCrags(ctx context.Context, req CragsReadRequest) ([]models.C
 	}
 	crags := <-cragsCh
 	areasByCragID := <-areasByCragIDCh
-	trailsByCragID := <-trailsByCragIDCh
+	trailsByID := <-trailsByIDCh
 	for i := range crags {
 		if areas, ok := areasByCragID[crags[i].ID]; ok {
 			crags[i].Areas = areas
 		}
-		if trail, ok := trailsByCragID[crags[i].ID]; ok {
+		if trail, ok := trailsByID[crags[i].TrailID]; ok {
 			crags[i].Trail = &trail
 		}
 	}
@@ -126,7 +126,7 @@ func (r CragsReadRequest) ToDBAreas() db.AreasReadRequest {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-func (c *Crags) trailsByCragID(ctx context.Context, req CragsReadRequest) (map[int64]models.Trail, error) {
+func (c *Crags) trailsByID(ctx context.Context, req CragsReadRequest) (map[int64]models.Trail, error) {
 	if !req.Include.IsIncluded("trail") {
 		return nil, nil
 	}
@@ -138,11 +138,11 @@ func (c *Crags) trailsByCragID(ctx context.Context, req CragsReadRequest) (map[i
 		return nil, fmt.Errorf("failed to get trails: %w", err)
 	}
 
-	byCragID := make(map[int64]models.Trail, len(trails))
+	byID := make(map[int64]models.Trail, len(trails))
 	for _, trail := range trails {
-		byCragID[trail.CragID] = trail
+		byID[trail.ID] = trail
 	}
-	return byCragID, nil
+	return byID, nil
 }
 
 func (c *Crags) areasByCragID(ctx context.Context, req CragsReadRequest) (map[int64][]models.Area, error) {

@@ -77,7 +77,77 @@
           "coordinates": {
             "lat": 32.85038594495237,
             "lng": -117.0234277925539
-          }
+          },
+          "routes": [
+            {
+              "id": 1457,
+              "name": "Butt Plug Mantle",
+              "description": "Mantling a butt plug is a one step process",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85037760809142,
+                "lng": -117.023410831197
+              }
+            },
+            {
+              "id": 1899,
+              "name": "East Face L-\u003eR",
+              "description": "Traverse the east face from left to right",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.85038005230947,
+                "lng": -117.02340916021394
+              }
+            },
+            {
+              "id": 1900,
+              "name": "East Face R-\u003eL",
+              "description": "Traverse the east face from right to left",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.8503909471431,
+                "lng": -117.02341080112026
+              }
+            },
+            {
+              "id": 1459,
+              "name": "East Face of Butt Plug",
+              "grade": {
+                "raw": "V2",
+                "system": "V",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.85038652132756,
+                "lng": -117.02340744901657
+              }
+            },
+            {
+              "id": 1458,
+              "name": "The Butt Plug North Side",
+              "grade": {
+                "raw": "V0-",
+                "system": "V",
+                "value": 9
+              },
+              "coordinates": {
+                "lat": 32.85039540531562,
+                "lng": -117.0234248063049
+              }
+            }
+          ]
         },
         {
           "id": 1445,
@@ -85,7 +155,93 @@
           "coordinates": {
             "lat": 32.85059381131804,
             "lng": -117.0241365662861
-          }
+          },
+          "routes": [
+            {
+              "id": 1753,
+              "name": "The Ramp",
+              "description": "Starting in the lowest part of the obvious ramp, continue up left as it gets thinner, and then go either straight up or around the corner.",
+              "grade": {
+                "raw": "5.10d",
+                "system": "YDS",
+                "value": 25
+              },
+              "coordinates": {
+                "lat": 32.850559802455884,
+                "lng": -117.02414037334489
+              }
+            },
+            {
+              "id": 1752,
+              "name": "Traverse - left",
+              "description": "Starting left and below of the ramp on crimps, climb straight up into the ramp, and then back down it to start as for The Ramp",
+              "grade": {
+                "raw": "5.11d",
+                "system": "YDS",
+                "value": 41
+              },
+              "coordinates": {
+                "lat": 32.85056258353307,
+                "lng": -117.02415184960114
+              }
+            },
+            {
+              "id": 1754,
+              "name": "Traverse - right",
+              "description": "Start over to the right of the ramp on what used to be jugs, and now are slightly harder edges. Obviously this can go into any of the other problems",
+              "grade": {
+                "raw": "5.10d",
+                "system": "YDS",
+                "value": 25
+              },
+              "coordinates": {
+                "lat": 32.850557206108725,
+                "lng": -117.0241296593865
+              }
+            },
+            {
+              "id": 1755,
+              "name": "Twenty Point Problem",
+              "description": "Start as with the ramp, but go straight up instead to bad crimps and an obvious diagonal shelf.",
+              "grade": {
+                "raw": "5.12a",
+                "system": "YDS",
+                "value": 50
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            },
+            {
+              "id": 1757,
+              "name": "West Face - left",
+              "description": "Climb up left side of the west face through the obvious triangular edge and up",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.85058875319363,
+                "lng": -117.02416536376604
+              }
+            },
+            {
+              "id": 1756,
+              "name": "West Face - right",
+              "description": "Climb the right side of the west face, starting with a right hand around the arete, and climb up following flake.",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.850568054233705,
+                "lng": -117.02415792244568
+              }
+            }
+          ]
         },
         {
           "id": 1446,
@@ -94,7 +250,79 @@
           "coordinates": {
             "lat": 32.850355,
             "lng": -117.022885
-          }
+          },
+          "routes": [
+            {
+              "id": 1760,
+              "name": "Mean Streak",
+              "description": "Opposing side pulls to start.\r\nFlaky undercling near the top, so take care.",
+              "grade": {
+                "raw": "V11",
+                "system": "V",
+                "value": 120
+              },
+              "coordinates": {
+                "lat": 32.85037172459257,
+                "lng": -117.0229056156341
+              }
+            },
+            {
+              "id": 1762,
+              "name": "Suzie's Mantle",
+              "description": "Mantle on the southeast side, next to an adjoining boulder. Jump start to the obvious holds and press it out!",
+              "grade": {
+                "raw": "V1/2",
+                "system": "V",
+                "value": 25
+              },
+              "coordinates": {
+                "lat": 32.85033592264869,
+                "lng": -117.022853647859
+              }
+            },
+            {
+              "id": 1759,
+              "name": "Suzies face",
+              "description": "Easiest line up some obvious flakes, somewhere to the right of Mean Streak?",
+              "grade": {
+                "raw": "VB",
+                "system": "V",
+                "value": 0
+              },
+              "coordinates": {
+                "lat": 32.850357076183826,
+                "lng": -117.02293168263962
+              }
+            },
+            {
+              "id": 1758,
+              "name": "Suzy's Discharge",
+              "description": "Start low on the obvious crimps, and climb straight up and increasingly less obvious crimps.",
+              "grade": {
+                "raw": "V8",
+                "system": "V",
+                "value": 90
+              },
+              "coordinates": {
+                "lat": 32.85032475162991,
+                "lng": -117.02291997488102
+              }
+            },
+            {
+              "id": 1763,
+              "name": "Wall Flower",
+              "description": "Start to the right of Suzie's Discharge and climb up",
+              "grade": {
+                "raw": "V8",
+                "system": "V",
+                "value": 90
+              },
+              "coordinates": {
+                "lat": 32.85030969397586,
+                "lng": -117.02291127147357
+              }
+            }
+          ]
         },
         {
           "id": 1447,
@@ -102,7 +330,31 @@
           "coordinates": {
             "lat": 32.850465,
             "lng": -117.023495
-          }
+          },
+          "routes": [
+            {
+              "id": 1764,
+              "name": "Southeast Face",
+              "description": "Starting from the right, go up and left, using the obvious under clings.",
+              "grade": {
+                "raw": "5.10",
+                "system": "YDS",
+                "value": 11
+              },
+              "coordinates": {
+                "lat": 32.85045324681759,
+                "lng": -117.02347713294003
+              }
+            },
+            {
+              "id": 1765,
+              "name": "Traverse",
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            }
+          ]
         },
         {
           "id": 1448,
@@ -111,7 +363,93 @@
           "coordinates": {
             "lat": 32.850625,
             "lng": -117.022945
-          }
+          },
+          "routes": [
+            {
+              "id": 1770,
+              "name": "Aréte",
+              "description": "Up the eat arete",
+              "grade": {
+                "raw": "5.10a",
+                "system": "YDS",
+                "value": 11
+              },
+              "coordinates": {
+                "lat": 32.85062113564616,
+                "lng": -117.02292648575857
+              }
+            },
+            {
+              "id": 1766,
+              "name": "Crack Direct",
+              "description": "See the crack, go to the crack.",
+              "grade": {
+                "raw": "5.7",
+                "system": "YDS",
+                "value": 0
+              },
+              "coordinates": {
+                "lat": 32.85059552538955,
+                "lng": -117.02295941006287
+              }
+            },
+            {
+              "id": 1769,
+              "name": "Crack Traverse",
+              "description": "Start on the left most part of the crack, checking for lizards first, and follow right and up the crack direct.",
+              "grade": {
+                "raw": "5.8",
+                "system": "YDS",
+                "value": 9
+              },
+              "coordinates": {
+                "lat": 32.85059713883156,
+                "lng": -117.02298173661254
+              }
+            },
+            {
+              "id": 1767,
+              "name": "Face",
+              "description": "Climb the lightly patina'd face to the right of the crack. Crack is off for maximum fun points.",
+              "grade": {
+                "raw": "5.10a",
+                "system": "YDS",
+                "value": 11
+              },
+              "coordinates": {
+                "lat": 32.85060692653297,
+                "lng": -117.02293934980962
+              }
+            },
+            {
+              "id": 1768,
+              "name": "Round Rock Traverse",
+              "description": "Starting below the crack, or farther left in the crack for more moves, move right toward northeast face and climb up \"Thin Face\"",
+              "grade": {
+                "raw": "5.10a/10b",
+                "system": "YDS",
+                "value": 11.5
+              },
+              "coordinates": {
+                "lat": 32.850595908112005,
+                "lng": -117.02296470611435
+              }
+            },
+            {
+              "id": 1771,
+              "name": "Thin Face",
+              "description": "Northside face",
+              "grade": {
+                "raw": "5.11a",
+                "system": "YDS",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.85063837027504,
+                "lng": -117.02294335294779
+              }
+            }
+          ]
         },
         {
           "id": 1449,
@@ -119,7 +457,48 @@
           "coordinates": {
             "lat": 32.850195,
             "lng": -117.023335
-          }
+          },
+          "routes": [
+            {
+              "id": 1775,
+              "name": "Unknown A",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            },
+            {
+              "id": 1772,
+              "name": "Unknown B",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            },
+            {
+              "id": 1773,
+              "name": "Unknown Black Face/Arete",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            }
+          ]
         },
         {
           "id": 1451,
@@ -128,7 +507,147 @@
           "coordinates": {
             "lat": 32.850474999999996,
             "lng": -117.023115
-          }
+          },
+          "routes": [
+            {
+              "id": 1780,
+              "name": "5.9 Face",
+              "description": "Left side of the east facing wall, around the corner from Eppersons Lunge.",
+              "coordinates": {
+                "lat": 32.850422536949736,
+                "lng": -117.02307913129023
+              }
+            },
+            {
+              "id": 1778,
+              "name": "Big Nuthin",
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            },
+            {
+              "id": 1788,
+              "name": "Dog Pile Traverse",
+              "description": "A right to left traverse, starting at Shockley's Lunge, and finishing up The Hand Crack",
+              "grade": {
+                "raw": "V0+",
+                "system": "V",
+                "value": 11
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            },
+            {
+              "id": 1783,
+              "name": "Epperson's Lunge",
+              "description": "A harder lunge right of Shockley's, do the eponymous lunge to an alright hold and mantle.",
+              "grade": {
+                "raw": "5.12",
+                "system": "YDS",
+                "value": 50
+              },
+              "coordinates": {
+                "lat": 32.85039591419254,
+                "lng": -117.02314255438378
+              }
+            },
+            {
+              "id": 1779,
+              "name": "Kung Pao",
+              "description": "Actually a lead climb up the south facing overhanging face.",
+              "coordinates": {
+                "lat": 32.850454298289655,
+                "lng": -117.02306233447834
+              }
+            },
+            {
+              "id": 1787,
+              "name": "Mkay",
+              "description": "Very low angle slab on the boulder ramping up below and to the right of Kung Pao",
+              "grade": {
+                "raw": "VB",
+                "system": "V",
+                "value": 0
+              },
+              "coordinates": {
+                "lat": 32.850443607214096,
+                "lng": -117.02299077254116
+              }
+            },
+            {
+              "id": 1784,
+              "name": "Picket Mantel",
+              "description": "Follow a gall bladder dish up the rock on the east most section of the pile, in a narrow path between rock and bushes.",
+              "grade": {
+                "raw": "5.11",
+                "system": "YDS",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.850504087451796,
+                "lng": -117.02296476515065
+              }
+            },
+            {
+              "id": 1785,
+              "name": "Seam Slab",
+              "description": "Keep walking past Picket Mantle till you get to the seam, and then climb it.",
+              "grade": {
+                "raw": "5.5",
+                "system": "YDS",
+                "value": -2
+              },
+              "coordinates": {
+                "lat": 32.850562843559686,
+                "lng": -117.02300197338047
+              }
+            },
+            {
+              "id": 1781,
+              "name": "Shockley's Lunge",
+              "description": "Left of Epperson's Lunge, climb up past black splotches to finish.",
+              "grade": {
+                "raw": "5.11",
+                "system": "YDS",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.85039326816594,
+                "lng": -117.0231756649065
+              }
+            },
+            {
+              "id": 1782,
+              "name": "The 5.8 Face",
+              "description": "Moving to the right of 5.9 face, a bit easier but a bit higher as well. There is a bolt as needed.",
+              "grade": {
+                "raw": "5.8",
+                "system": "YDS",
+                "value": 9
+              },
+              "coordinates": {
+                "lat": 32.85043508944872,
+                "lng": -117.02309079047009
+              }
+            },
+            {
+              "id": 1786,
+              "name": "The Hand Crack",
+              "description": "Low angle hand crack",
+              "grade": {
+                "raw": "5.7",
+                "system": "YDS",
+                "value": 0
+              },
+              "coordinates": {
+                "lat": 32.85039326816594,
+                "lng": -117.02321589804174
+              }
+            }
+          ]
         },
         {
           "id": 1475,
@@ -137,7 +656,23 @@
           "coordinates": {
             "lat": 32.84947560846604,
             "lng": -117.02273008293392
-          }
+          },
+          "routes": [
+            {
+              "id": 1774,
+              "name": "The Outlander",
+              "description": "Climb up the weird scoop.\r\nDoesn't get much action so may be dirty.",
+              "grade": {
+                "raw": "V3",
+                "system": "V",
+                "value": 40
+              },
+              "coordinates": {
+                "lat": 32.8494884397815,
+                "lng": -117.02272938565368
+              }
+            }
+          ]
         }
       ]
     },
@@ -198,7 +733,32 @@
           "coordinates": {
             "lat": 32.850215,
             "lng": -117.020205
-          }
+          },
+          "routes": [
+            {
+              "id": 1904,
+              "name": "Loaf Right",
+              "description": "Go up the face to the right of the loaf seam, using obvious underclings and crimps.",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.85018664236843,
+                "lng": -117.02019004271435
+              }
+            },
+            {
+              "id": 1794,
+              "name": "The Bread Loaf",
+              "description": "Go up the obvious \"slice\" in the loaf",
+              "coordinates": {
+                "lat": 32.85019488444544,
+                "lng": -117.02020006462742
+              }
+            }
+          ]
         },
         {
           "id": 1454,
@@ -207,7 +767,65 @@
           "coordinates": {
             "lat": 32.849965,
             "lng": -117.021035
-          }
+          },
+          "routes": [
+            {
+              "id": 1907,
+              "name": "East Arete",
+              "description": "Climb the southeast arete",
+              "grade": {
+                "raw": "5.12",
+                "system": "YDS",
+                "value": 50
+              },
+              "coordinates": {
+                "lat": 32.84996721651171,
+                "lng": -117.02101236026823
+              }
+            },
+            {
+              "id": 1905,
+              "name": "Face left left",
+              "description": "Go up the left side of the left face of the boulder, topping out with a mantle.",
+              "grade": {
+                "raw": "5.10",
+                "system": "YDS",
+                "value": 11
+              },
+              "coordinates": {
+                "lat": 32.84994609236528,
+                "lng": -117.02105976000111
+              }
+            },
+            {
+              "id": 1906,
+              "name": "Face left right",
+              "description": "Go up the right side of the left face of the boulder, topping out with a mantle.",
+              "grade": {
+                "raw": "5.11",
+                "system": "YDS",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.84995268218133,
+                "lng": -117.02104497334349
+              }
+            },
+            {
+              "id": 1795,
+              "name": "Thin Crack",
+              "description": "Jam the obvious thin but nicely angled crack.",
+              "grade": {
+                "raw": "5.6",
+                "system": "YDS",
+                "value": -1
+              },
+              "coordinates": {
+                "lat": 32.84995866405393,
+                "lng": -117.02103155082892
+              }
+            }
+          ]
         },
         {
           "id": 1455,
@@ -216,7 +834,74 @@
           "coordinates": {
             "lat": 32.850155,
             "lng": -117.020355
-          }
+          },
+          "routes": [
+            {
+              "id": 1798,
+              "name": "10a Face",
+              "description": "Technical climbing up alright holds on the southwest face of the boulder.",
+              "grade": {
+                "raw": "5.10a",
+                "system": "YDS",
+                "value": 11
+              },
+              "coordinates": {
+                "lat": 32.850126828622265,
+                "lng": -117.02041380017178
+              }
+            },
+            {
+              "id": 1800,
+              "name": "10d Face",
+              "description": "Technical climbing up not so alright holds on the center right part of the southwest face.",
+              "grade": {
+                "raw": "5.10c/d",
+                "system": "YDS",
+                "value": 22.5
+              },
+              "coordinates": {
+                "lat": 32.850116933143276,
+                "lng": -117.02040157737578
+              }
+            },
+            {
+              "id": 1797,
+              "name": "Painted Traverse",
+              "description": "Traverse from the left of the crack as far as you'd like, squeezing inside the hewn rock, before finishing up the crack.",
+              "grade": {
+                "raw": "5.10",
+                "system": "YDS",
+                "value": 11
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            },
+            {
+              "id": 1801,
+              "name": "The Painted Crack",
+              "description": "Very classic hand jams up the obvious and eponymous painted crack -- a great and not too painful trainer.",
+              "grade": {
+                "raw": "5.8",
+                "system": "YDS",
+                "value": 9
+              },
+              "coordinates": {
+                "lat": 32.850129875561194,
+                "lng": -117.02033760609376
+              }
+            },
+            {
+              "id": 1799,
+              "name": "The Painted Face",
+              "description": "Face climb to the right of the crack, past the \"sunburst\" pattern",
+              "coordinates": {
+                "lat": 32.85013975757349,
+                "lng": -117.0203247850386
+              }
+            }
+          ]
         },
         {
           "id": 1456,
@@ -225,7 +910,23 @@
           "coordinates": {
             "lat": 32.85023687566521,
             "lng": -117.02077176421884
-          }
+          },
+          "routes": [
+            {
+              "id": 1804,
+              "name": "Offwidth Problem",
+              "description": "Climb the offwidth, stopping on the ledge half way to collect yourself before continuing up the easy but definite highball. ",
+              "grade": {
+                "raw": "5.10d",
+                "system": "YDS",
+                "value": 25
+              },
+              "coordinates": {
+                "lat": 32.85021514718825,
+                "lng": -117.0207424321173
+              }
+            }
+          ]
         },
         {
           "id": 1457,
@@ -234,7 +935,23 @@
           "coordinates": {
             "lat": 32.849865,
             "lng": -117.021075
-          }
+          },
+          "routes": [
+            {
+              "id": 1805,
+              "name": "No Hands Traverse",
+              "description": "The obvious left to right traverse on the south side of the boulder, scrambling up the face once it feels finished out.",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.84984445127366,
+                "lng": -117.021081154137
+              }
+            }
+          ]
         },
         {
           "id": 1458,
@@ -243,7 +960,37 @@
           "coordinates": {
             "lat": 32.85008505941492,
             "lng": -117.02055115252735
-          }
+          },
+          "routes": [
+            {
+              "id": 1908,
+              "name": "Lightbulb Southwest Sit",
+              "description": "On the southwest face, sit start the obvious ^ shaped seam that leads into an obvious | shaped seam.",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.850068565778344,
+                "lng": -117.02055672272185
+              }
+            },
+            {
+              "id": 1806,
+              "name": "The Lightbulb",
+              "description": "On the northwest side of the boulder (from uphill), scramble up, following a sloping crack in the upper section of the bulb.",
+              "grade": {
+                "raw": "VB",
+                "system": "V",
+                "value": 0
+              },
+              "coordinates": {
+                "lat": 32.85009512440328,
+                "lng": -117.0205650584006
+              }
+            }
+          ]
         },
         {
           "id": 1459,
@@ -252,7 +999,23 @@
           "coordinates": {
             "lat": 32.850085,
             "lng": -117.01999500000001
-          }
+          },
+          "routes": [
+            {
+              "id": 1807,
+              "name": "Southeast arete",
+              "description": "Start on obvious climbs on the southeast arete, moving up and left",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.85007614386543,
+                "lng": -117.019963696299
+              }
+            }
+          ]
         },
         {
           "id": 1460,
@@ -261,7 +1024,79 @@
           "coordinates": {
             "lat": 32.850428124338094,
             "lng": -117.0205444470048
-          }
+          },
+          "routes": [
+            {
+              "id": 1811,
+              "name": "Left Face",
+              "description": "The stand start version on the left face of the problem, using a variety of holds to go up.",
+              "grade": {
+                "raw": "5.7",
+                "system": "YDS",
+                "value": 0
+              },
+              "coordinates": {
+                "lat": 32.85039994344453,
+                "lng": -117.0205835722888
+              }
+            },
+            {
+              "id": 1809,
+              "name": "Right Face",
+              "description": "Just left of the vertical paint streak, use opposing sidepulls to pull straight up the slab",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85039667188868,
+                "lng": -117.02055207433
+              }
+            },
+            {
+              "id": 1812,
+              "name": "Sit Start Left",
+              "description": "From the obvious juggy ledge, move up left to a not so obvious credit card crimp.",
+              "grade": {
+                "raw": "V3",
+                "system": "V",
+                "value": 40
+              },
+              "coordinates": {
+                "lat": 32.850399974890365,
+                "lng": -117.02058387504376
+              }
+            },
+            {
+              "id": 1810,
+              "name": "Sit Start Right",
+              "description": "From the obvious juggy ledge, move up right using obvious crimps.",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.850399873156285,
+                "lng": -117.02058289556608
+              }
+            },
+            {
+              "id": 1808,
+              "name": "The Paint Stripe",
+              "description": "Climb up the slippery paint streak on the right side of the south face.",
+              "grade": {
+                "raw": "V0+",
+                "system": "V",
+                "value": 11
+              },
+              "coordinates": {
+                "lat": 32.8503952924244,
+                "lng": -117.02053879309288
+              }
+            }
+          ]
         },
         {
           "id": 1461,
@@ -270,7 +1105,93 @@
           "coordinates": {
             "lat": 32.849885,
             "lng": -117.02048500000001
-          }
+          },
+          "routes": [
+            {
+              "id": 1814,
+              "name": "Donkey Dick, Right Arete",
+              "description": "Staying on the more south facing face, climb up the right arete. ",
+              "grade": {
+                "raw": "5.10c",
+                "system": "YDS",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.849878991545864,
+                "lng": -117.02047430537948
+              }
+            },
+            {
+              "id": 1815,
+              "name": "East Face - Arete",
+              "description": "Same as the eponymous Donkey Dick Arete, but stay on the east facing side as long as you can or dare.",
+              "grade": {
+                "raw": "5.11a",
+                "system": "YDS",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.849884573800864,
+                "lng": -117.02047331589525
+              }
+            },
+            {
+              "id": 1816,
+              "name": "South Face - Center",
+              "description": "Straight up the obvious face, either braving the highball or using a bolt to TR.",
+              "grade": {
+                "raw": "5.11a",
+                "system": "YDS",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.84987305165125,
+                "lng": -117.02047887401385
+              }
+            },
+            {
+              "id": 1818,
+              "name": "Traverse",
+              "description": "Starting on the west face scoop, traverse clockwise all the way around before going straight up.",
+              "grade": {
+                "raw": "5.11a/b",
+                "system": "YDS",
+                "value": 30.5
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            },
+            {
+              "id": 1813,
+              "name": "West Face",
+              "description": "Also the easiest downclimb, you shimmy up (or down) the gently slabby west side of the boulder.",
+              "grade": {
+                "raw": "5.10a/b",
+                "system": "YDS",
+                "value": 11.5
+              },
+              "coordinates": {
+                "lat": 32.849876084231795,
+                "lng": -117.02050579274646
+              }
+            },
+            {
+              "id": 1817,
+              "name": "West Face - Arete",
+              "description": "The south west arete.",
+              "grade": {
+                "raw": "5.11a/b",
+                "system": "YDS",
+                "value": 30.5
+              },
+              "coordinates": {
+                "lat": 32.84986834375948,
+                "lng": -117.02049399661955
+              }
+            }
+          ]
         }
       ]
     },
@@ -322,7 +1243,177 @@
           "coordinates": {
             "lat": 32.850644510357746,
             "lng": -117.02113048053266
-          }
+          },
+          "routes": [
+            {
+              "id": 1826,
+              "name": "Amp Incline",
+              "description": "The left most climb on the amphitheater face",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.8506186569252,
+                "lng": -117.0211686993061
+              }
+            },
+            {
+              "id": 1830,
+              "name": "Amphitheatre Traverse",
+              "description": "Traverse the eponymous \"amphitheater\" face, in as many ways and directions as you feel like.",
+              "grade": {
+                "raw": "V3",
+                "system": "V",
+                "value": 40
+              },
+              "coordinates": {
+                "lat": 32.85061886541459,
+                "lng": -117.0211298598009
+              }
+            },
+            {
+              "id": 1821,
+              "name": "Beneath the Shelf",
+              "description": "use the big obvious shelf of the ampitheater",
+              "grade": {
+                "raw": "5.7",
+                "system": "YDS",
+                "value": 0
+              },
+              "coordinates": {
+                "lat": 32.85061884410223,
+                "lng": -117.02113383008175
+              }
+            },
+            {
+              "id": 1827,
+              "name": "Eastside Traverse (Left)",
+              "description": "Starting on right side of the east face, traverse left and then up.",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85064171513708,
+                "lng": -117.02107342024819
+              }
+            },
+            {
+              "id": 1829,
+              "name": "Eastside Traverse (right)",
+              "description": "Starting on the left side of the east face, traverse right and then up.",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85066167789686,
+                "lng": -117.02109252675926
+              }
+            },
+            {
+              "id": 1823,
+              "name": "Face",
+              "description": "The next slab right from Amp Incline, also avoid the shelf (just used for downclimbing) for full points.",
+              "grade": {
+                "raw": "5.9",
+                "system": "YDS",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85061873073729,
+                "lng": -117.02115494884528
+              }
+            },
+            {
+              "id": 1825,
+              "name": "Jumpstart",
+              "description": "Stand start with a very high foot (or possibly jump it in place) with hands on the arete.\r\nKeep moving up and left, avoiding slab exits.",
+              "grade": {
+                "raw": "V3",
+                "system": "V",
+                "value": 40
+              },
+              "coordinates": {
+                "lat": 32.850623455500596,
+                "lng": -117.02118545704309
+              }
+            },
+            {
+              "id": 1831,
+              "name": "Jumpstart Sit",
+              "description": "SDS to Jumpstart, somehow squeeze your way up to get in the standing position.",
+              "grade": {
+                "raw": "V7",
+                "system": "V",
+                "value": 80
+              },
+              "coordinates": {
+                "lat": 32.850621534075714,
+                "lng": -117.02118320617525
+              }
+            },
+            {
+              "id": 1819,
+              "name": "One Cut Above",
+              "description": "Starting just right of where Amphitheater's slab ends, grab the left arete and small crimps. Slab up and over.\r\nYou should be able to go straight up without using slab as well for similar grade and style.\r\n",
+              "grade": {
+                "raw": "V4",
+                "system": "V",
+                "value": 50
+              },
+              "coordinates": {
+                "lat": 32.85062204695313,
+                "lng": -117.02107210826249
+              }
+            },
+            {
+              "id": 1828,
+              "name": "Powell Face",
+              "description": "Either deadpoint to a crimp high off the ground, or utilize some non existent holds to reach it. Finesse your way up.",
+              "grade": {
+                "raw": "V4",
+                "system": "V",
+                "value": 50
+              },
+              "coordinates": {
+                "lat": 32.850667398648774,
+                "lng": -117.02113811364754
+              }
+            },
+            {
+              "id": 1820,
+              "name": "Thin Face",
+              "description": "Thin crimps to the right of the amphitheater shelf",
+              "grade": {
+                "raw": "5.10c",
+                "system": "YDS",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.85061893770292,
+                "lng": -117.02111639320168
+              }
+            },
+            {
+              "id": 1824,
+              "name": "Walkman",
+              "description": "Sidepull and polished foot smear to launch to crimps and then \"walk\" up",
+              "grade": {
+                "raw": "V0+",
+                "system": "V",
+                "value": 11
+              },
+              "coordinates": {
+                "lat": 32.850671258316765,
+                "lng": -117.02111396040904
+              }
+            }
+          ]
         },
         {
           "id": 1463,
@@ -331,7 +1422,23 @@
           "coordinates": {
             "lat": 32.850235,
             "lng": -117.021435
-          }
+          },
+          "routes": [
+            {
+              "id": 1832,
+              "name": "Triangle Boulder, Left Arete",
+              "description": "Climb the left arete, as tricky and technical as you'd expect.",
+              "grade": {
+                "raw": "V1/2",
+                "system": "V",
+                "value": 25
+              },
+              "coordinates": {
+                "lat": 32.850206737766065,
+                "lng": -117.0214429870248
+              }
+            }
+          ]
         },
         {
           "id": 1464,
@@ -340,7 +1447,63 @@
           "coordinates": {
             "lat": 32.851304999999996,
             "lng": -117.020905
-          }
+          },
+          "routes": [
+            {
+              "id": 1836,
+              "name": "Center Crack",
+              "grade": {
+                "raw": "5.6",
+                "system": "YDS",
+                "value": -1
+              },
+              "coordinates": {
+                "lat": 32.85128622146422,
+                "lng": -117.02090603062923
+              }
+            },
+            {
+              "id": 1834,
+              "name": "Face",
+              "description": "The face between left crack and center crack",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85129063712405,
+                "lng": -117.02091543343874
+              }
+            },
+            {
+              "id": 1835,
+              "name": "Left Crack",
+              "description": "The largest of the cracks, but this one has cracks in the cracks",
+              "grade": {
+                "raw": "5.6",
+                "system": "YDS",
+                "value": -1
+              },
+              "coordinates": {
+                "lat": 32.85129648594806,
+                "lng": -117.02092788806162
+              }
+            },
+            {
+              "id": 1837,
+              "name": "Right Crack",
+              "grade": {
+                "raw": "5.4",
+                "system": "YDS",
+                "value": -3
+              },
+              "coordinates": {
+                "lat": 32.851280552532494,
+                "lng": -117.02089395907318
+              }
+            }
+          ]
         },
         {
           "id": 1465,
@@ -348,7 +1511,35 @@
           "coordinates": {
             "lat": 32.850725,
             "lng": -117.020975
-          }
+          },
+          "routes": [
+            {
+              "id": 1838,
+              "name": "East Buttress",
+              "grade": {
+                "raw": "5.8",
+                "system": "YDS",
+                "value": 9
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            },
+            {
+              "id": 1839,
+              "name": "Unnamed (\"Puckerfest\")",
+              "grade": {
+                "raw": "V3",
+                "system": "V",
+                "value": 40
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            }
+          ]
         },
         {
           "id": 1466,
@@ -356,7 +1547,149 @@
           "coordinates": {
             "lat": 32.851255,
             "lng": -117.020715
-          }
+          },
+          "routes": [
+            {
+              "id": 1847,
+              "name": "Crack",
+              "description": "Obvious crack on left side of the west facing face.\r\nBeware living creatures nestled within the crack.",
+              "grade": {
+                "raw": "5.7",
+                "system": "YDS",
+                "value": 0
+              },
+              "coordinates": {
+                "lat": 32.8512693348545,
+                "lng": -117.02074773281657
+              }
+            },
+            {
+              "id": 1846,
+              "name": "Flake",
+              "description": "Climb the left facing flake straight up.",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85123242830863,
+                "lng": -117.02073204209034
+              }
+            },
+            {
+              "id": 1840,
+              "name": "Flake Extended",
+              "description": "A simple extension to Flake, start to the left of the left facing flake, as far as you'd like, and then traverse into the flake and up",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.85124546869463,
+                "lng": -117.02073781800092
+              }
+            },
+            {
+              "id": 1844,
+              "name": "Funky Like a Monkey (aka Lieback Rock Traverse)",
+              "description": "Starting on the lieback, traverse left across slab (staying below dyno jug), past the left facing flake, traversing over on crimps, all the way into the finger crack at the far left.\r\nYou can also choose to start even farther right around the lieback for more moves and fun.",
+              "grade": {
+                "raw": "V3",
+                "system": "V",
+                "value": 40
+              },
+              "coordinates": {
+                "lat": 32.85122388566009,
+                "lng": -117.02069196850063
+              }
+            },
+            {
+              "id": 1848,
+              "name": "Lieback Rock Dyno",
+              "description": "Start on polished holds to dyno up to the obvious shelf jug, or go more slowly if you'd like.",
+              "grade": {
+                "raw": "5.10a",
+                "system": "YDS",
+                "value": 11
+              },
+              "coordinates": {
+                "lat": 32.85122388566009,
+                "lng": -117.02071074396372
+              }
+            },
+            {
+              "id": 1845,
+              "name": "Lieback Rock Lieback",
+              "description": "Lieback the obvious right facing rail into some awkward underclings, then following the feature up and right.\r\n\r\nYou can even choose to lieback facing the wrong way if you'd like.",
+              "grade": {
+                "raw": "5.11a",
+                "system": "YDS",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.85122388566009,
+                "lng": -117.02068962156774
+              }
+            },
+            {
+              "id": 1841,
+              "name": "Mantle",
+              "description": "Jump up to the obvious triangular feature to the right of the crack, and just mantle it up. ",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85125413373033,
+                "lng": -117.02074165596026
+              }
+            },
+            {
+              "id": 1850,
+              "name": "Sloping Disappointment",
+              "description": "To the right of the flake, climb the technical face without using the flake or going into the dyno jug.",
+              "grade": {
+                "raw": "V2",
+                "system": "V",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.851267542858224,
+                "lng": -117.02074759519579
+              }
+            },
+            {
+              "id": 1849,
+              "name": "Snot a problem",
+              "description": "To the right of Lieback, climb desperate smears to an even more desperate top out.",
+              "grade": {
+                "raw": "V2-3",
+                "system": "V",
+                "value": 35
+              },
+              "coordinates": {
+                "lat": 32.851230218295896,
+                "lng": -117.02068017970811
+              }
+            },
+            {
+              "id": 1843,
+              "name": "Unknown Slab",
+              "description": "To the right of \"Snot a Problem\", and with more obvious holds, climb straight up",
+              "grade": {
+                "raw": "V0-",
+                "system": "V",
+                "value": 9
+              },
+              "coordinates": {
+                "lat": 32.851236460385955,
+                "lng": -117.02067288446949
+              }
+            }
+          ]
         },
         {
           "id": 1467,
@@ -365,7 +1698,102 @@
           "coordinates": {
             "lat": 32.850771539491134,
             "lng": -117.02107381886722
-          }
+          },
+          "routes": [
+            {
+              "id": 1857,
+              "name": "American Express",
+              "description": "On the west most end of the boulder, very tenuous \"credit card\" crimps give you just enough to get up this highball.",
+              "grade": {
+                "raw": "5.9",
+                "system": "YDS",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.850743094802574,
+                "lng": -117.02117074579199
+              }
+            },
+            {
+              "id": 1855,
+              "name": "Bullet Hole Face",
+              "description": "Left of the crack, past the bullet hole. Plenty of variations, including but not limited to ignoring the eponymous hole.",
+              "coordinates": {
+                "lat": 32.850811238582835,
+                "lng": -117.02106848302567
+              }
+            },
+            {
+              "id": 1854,
+              "name": "Bullet Hole Wall Crack",
+              "description": "Follow the slightly right angling finger crack in the middle of the boulder",
+              "grade": {
+                "raw": "5.7",
+                "system": "YDS",
+                "value": 0
+              },
+              "coordinates": {
+                "lat": 32.850783548495045,
+                "lng": -117.02111331820097
+              }
+            },
+            {
+              "id": 1856,
+              "name": "Bullet Hole Wall Mantle",
+              "description": "To the right of Bullet Hole Face, going up and through the diagonal seam. Mantle out the slope, ignoring the blocky jugs up and right.",
+              "grade": {
+                "raw": "5.10",
+                "system": "YDS",
+                "value": 11
+              },
+              "coordinates": {
+                "lat": 32.850802687776024,
+                "lng": -117.0210823283022
+              }
+            },
+            {
+              "id": 1852,
+              "name": "Face left of American Express",
+              "description": "Climb the obvious and imposing face to the left of American Express. It is high, and it is at least as tricky as AmEx.",
+              "grade": {
+                "raw": "5.10a",
+                "system": "YDS",
+                "value": 11
+              },
+              "coordinates": {
+                "lat": 32.850755687553274,
+                "lng": -117.02115433677676
+              }
+            },
+            {
+              "id": 1853,
+              "name": "Friction Seam",
+              "description": "Starting at the finger crack, but go up right following the seam and smearing your feet.",
+              "grade": {
+                "raw": "V2",
+                "system": "V",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.850777696862345,
+                "lng": -117.0211224069076
+              }
+            },
+            {
+              "id": 1851,
+              "name": "Seam",
+              "description": "Follow the left angling seam/crack, left of the finger crack.",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85078936170983,
+                "lng": -117.02110390557267
+              }
+            }
+          ]
         },
         {
           "id": 1468,
@@ -374,7 +1802,130 @@
           "coordinates": {
             "lat": 32.85101066922889,
             "lng": -117.02086460656407
-          }
+          },
+          "routes": [
+            {
+              "id": 1867,
+              "name": "Bear Hug",
+              "description": "Bear hug the bulge to the left of Masochist Crack.",
+              "coordinates": {
+                "lat": 32.85100579580553,
+                "lng": -117.02089598837269
+              }
+            },
+            {
+              "id": 1858,
+              "name": "Fingercrack",
+              "description": "Climb the obvious finger crack straight up, or completely avoid it if you want with some supplemental holds.",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85098023989494,
+                "lng": -117.02086538556608
+              }
+            },
+            {
+              "id": 1865,
+              "name": "Iron Cross",
+              "description": "Starting in Masochist crack, exit straight right to some good holds, feeling like you're in an iron cross before swinging right and topping out on the jugs of The Knobs",
+              "grade": {
+                "raw": "V2",
+                "system": "V",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.850995694138454,
+                "lng": -117.02088389178303
+              }
+            },
+            {
+              "id": 1860,
+              "name": "Masochist Crack",
+              "description": "Ignore the name and enjoy the painless and perfect hand crack",
+              "grade": {
+                "raw": "5.9",
+                "system": "YDS",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85100028336068,
+                "lng": -117.02088938730547
+              }
+            },
+            {
+              "id": 1866,
+              "name": "Off-Width Problem",
+              "description": "Push yourself between the Beehive boulder and the next and wriggle up.",
+              "grade": {
+                "raw": "5.7",
+                "system": "YDS",
+                "value": 0
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            },
+            {
+              "id": 1863,
+              "name": "The Knobs",
+              "description": "Climb straight up the juggy knobs",
+              "grade": {
+                "raw": "V0-",
+                "system": "V",
+                "value": 9
+              },
+              "coordinates": {
+                "lat": 32.85098808400809,
+                "lng": -117.02087477876994
+              }
+            },
+            {
+              "id": 1902,
+              "name": "The Terrible Face",
+              "description": "Climb the alluring center face of the large boulder right of most of the beehive problems. The top out is high but it's jugs, we swear!",
+              "grade": {
+                "raw": "5.11",
+                "system": "YDS",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.850936230562795,
+                "lng": -117.02081268507335
+              }
+            },
+            {
+              "id": 1861,
+              "name": "Unnamed (Slab)",
+              "description": "The gentle low angle slab right of the finger crack",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85097360475978,
+                "lng": -117.02085744009463
+              }
+            },
+            {
+              "id": 1901,
+              "name": "Unnamed Off-Width",
+              "description": "On the lowest part of the boulder, around the west side, work your way up the off width crack.",
+              "grade": {
+                "raw": "VB",
+                "system": "V",
+                "value": 0
+              },
+              "coordinates": {
+                "lat": 32.85102813372431,
+                "lng": -117.02090164001243
+              }
+            }
+          ]
         },
         {
           "id": 1469,
@@ -383,7 +1934,79 @@
           "coordinates": {
             "lat": 32.850635,
             "lng": -117.021375
-          }
+          },
+          "routes": [
+            {
+              "id": 1870,
+              "name": "Dead Animal Traverse",
+              "description": "Right to left traverse of the obvious crack, either following the crack the whole way, or mantle the last overhanging scoop for full Santee experience.",
+              "grade": {
+                "raw": "V2+",
+                "system": "V",
+                "value": 31
+              },
+              "coordinates": {
+                "lat": 32.850611343394135,
+                "lng": -117.02140209083376
+              }
+            },
+            {
+              "id": 1874,
+              "name": "Long Tall Texan",
+              "description": "To the left of Animal Traverse crack, find some small holds and go up the bulge. Avoid the crack topout for extra Santee.",
+              "grade": {
+                "raw": "V4",
+                "system": "V",
+                "value": 50
+              },
+              "coordinates": {
+                "lat": 32.85062594553444,
+                "lng": -117.02141558837657
+              }
+            },
+            {
+              "id": 1872,
+              "name": "North Face Traverse",
+              "description": "Traverse the technical slab on the north face.",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.8506560734351,
+                "lng": -117.02137865759698
+              }
+            },
+            {
+              "id": 1873,
+              "name": "Ron's Pharmacy",
+              "description": "A potentially unrepeated ascent up the completely blank NW face of Animal Boulder",
+              "grade": {
+                "raw": "V7",
+                "system": "V",
+                "value": 80
+              },
+              "coordinates": {
+                "lat": 32.850642735341715,
+                "lng": -117.02140816508502
+              }
+            },
+            {
+              "id": 1871,
+              "name": "West Face Traverse",
+              "description": "Traverse the west face of the boulder, ending up Long Tall Texan or the Animal Traverse mantle.",
+              "grade": {
+                "raw": "V4",
+                "system": "V",
+                "value": 50
+              },
+              "coordinates": {
+                "lat": 32.85062837602897,
+                "lng": -117.02141451377999
+              }
+            }
+          ]
         },
         {
           "id": 1476,
@@ -392,7 +2015,79 @@
           "coordinates": {
             "lat": 32.85086871243049,
             "lng": -117.02067517555238
-          }
+          },
+          "routes": [
+            {
+              "id": 1903,
+              "name": "NW Face Right",
+              "description": "Stand start to the right of the NW face, straight up the face to the left of the arete",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.850874275751586,
+                "lng": -117.02071607923986
+              }
+            },
+            {
+              "id": 1869,
+              "name": "SW Face Left",
+              "description": "On the left side of the trail facing SW face, starting on down diagonal edges, work your way up past the stain into flaky undercling.",
+              "grade": {
+                "raw": "5.8",
+                "system": "YDS",
+                "value": 9
+              },
+              "coordinates": {
+                "lat": 32.85086275471194,
+                "lng": -117.0207058241902
+              }
+            },
+            {
+              "id": 1909,
+              "name": "SW Face Left Corner",
+              "description": "Starting at obvious edges on the left side of the SW face, climb into and follow the right leaning undercling flake.",
+              "grade": {
+                "raw": "5.8",
+                "system": "YDS",
+                "value": 9
+              },
+              "coordinates": {
+                "lat": 32.85086654389551,
+                "lng": -117.02071234653015
+              }
+            },
+            {
+              "id": 1859,
+              "name": "Unknown Flake",
+              "description": "The right side of the SW trail facing face, make your way straight up the large hollow flakes ",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.850839250462435,
+                "lng": -117.02066536621219
+              }
+            },
+            {
+              "id": 1862,
+              "name": "Unnamed NW Face",
+              "description": "SDS on an obvious poor crimp and left hand sidepull (may need a butt pad), go straight up and slightly left up.",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.8508902257177,
+                "lng": -117.02071607923986
+              }
+            }
+          ]
         }
       ]
     },
@@ -429,7 +2124,93 @@
           "coordinates": {
             "lat": 32.851214999999996,
             "lng": -117.022495
-          }
+          },
+          "routes": [
+            {
+              "id": 1876,
+              "name": "East Side SDS",
+              "description": "Start with obvious underclings and smear feet, working your way up the middle of the face",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.851200555610546,
+                "lng": -117.02245760344623
+              }
+            },
+            {
+              "id": 1875,
+              "name": "North Side Crimps",
+              "description": "Ignoring the juggier holds to the left and right, stay on small crimps straight up the north face.",
+              "grade": {
+                "raw": "V1",
+                "system": "V",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.8512278361298,
+                "lng": -117.02249383388673
+              }
+            },
+            {
+              "id": 1879,
+              "name": "North Side SDS",
+              "description": "A sit start on the down facing triangle, reaching for the obvious chipped hole and up.",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85122693909682,
+                "lng": -117.02247888479427
+              }
+            },
+            {
+              "id": 1877,
+              "name": "South Side Undercling",
+              "description": "The obvious undercling, taken for a stand start.",
+              "grade": {
+                "raw": "V0-",
+                "system": "V",
+                "value": 9
+              },
+              "coordinates": {
+                "lat": 32.85119262247037,
+                "lng": -117.02248937151542
+              }
+            },
+            {
+              "id": 1898,
+              "name": "Southeast Side Stand",
+              "description": "Easy stand start on the southeast arete",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.851199018583166,
+                "lng": -117.02246266538248
+              }
+            },
+            {
+              "id": 1880,
+              "name": "The Carousel Traverse",
+              "description": "Traverse the boulder, feel like a pony.",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            }
+          ]
         },
         {
           "id": 1471,
@@ -438,7 +2219,35 @@
           "coordinates": {
             "lat": 32.851395,
             "lng": -117.023065
-          }
+          },
+          "routes": [
+            {
+              "id": 1882,
+              "name": "Far North",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            },
+            {
+              "id": 1881,
+              "name": "Longbow",
+              "grade": {
+                "raw": "V0-",
+                "system": "V",
+                "value": 9
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            }
+          ]
         },
         {
           "id": 1472,
@@ -447,7 +2256,23 @@
           "coordinates": {
             "lat": 32.851030948752985,
             "lng": -117.02174805915834
-          }
+          },
+          "routes": [
+            {
+              "id": 1883,
+              "name": "Synchronicity (Aid Crack)",
+              "description": "Follow the obvious seam up the north side of the boulder.",
+              "grade": {
+                "raw": "5.12",
+                "system": "YDS",
+                "value": 50
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            }
+          ]
         },
         {
           "id": 1473,
@@ -456,7 +2281,65 @@
           "coordinates": {
             "lat": 32.850995,
             "lng": -117.022595
-          }
+          },
+          "routes": [
+            {
+              "id": 1887,
+              "name": "NE face (left)",
+              "description": "Follow the arete to the left of the black spot, avoiding its' eponymous crimp, and slabbing your way up.",
+              "grade": {
+                "raw": "V2",
+                "system": "V",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.85100449440152,
+                "lng": -117.02256833950489
+              }
+            },
+            {
+              "id": 1884,
+              "name": "The Black Spot Problem",
+              "description": "A Santee slab classic. Look for a small but noticeable black spot, and work your way up to the seam \"jug\" straight up.",
+              "grade": {
+                "raw": "V2",
+                "system": "V",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.85100832615062,
+                "lng": -117.02257099825029
+              }
+            },
+            {
+              "id": 1885,
+              "name": "Unnamed",
+              "description": "Climb up the dimple of the southeast face",
+              "grade": {
+                "raw": "5.10a/b",
+                "system": "YDS",
+                "value": 11.5
+              },
+              "coordinates": {
+                "lat": 32.850987207946375,
+                "lng": -117.02256566716024
+              }
+            },
+            {
+              "id": 1886,
+              "name": "Unnamed",
+              "description": "On the south face of the boulder, climb up ",
+              "grade": {
+                "raw": "5.10c",
+                "system": "YDS",
+                "value": 20
+              },
+              "coordinates": {
+                "lat": 32.850976718040066,
+                "lng": -117.02260982288892
+              }
+            }
+          ]
         },
         {
           "id": 1474,
@@ -465,11 +2348,1737 @@
           "coordinates": {
             "lat": 32.851524999999995,
             "lng": -117.022045
-          }
+          },
+          "routes": [
+            {
+              "id": 1896,
+              "name": "East corner",
+              "description": "Use the obvious undercling to pull up and over.",
+              "grade": {
+                "raw": "V0+",
+                "system": "V",
+                "value": 11
+              },
+              "coordinates": {
+                "lat": 32.8515315989951,
+                "lng": -117.021988254404
+              }
+            },
+            {
+              "id": 1889,
+              "name": "Kathleen Turner Overdrive",
+              "description": "SDS on small edges, pull up left to good part of the arete and scoot upward.\r\nNot actually on Lonesome Boulder",
+              "grade": {
+                "raw": "V2-3",
+                "system": "V",
+                "value": 35
+              },
+              "coordinates": {
+                "lat": 0,
+                "lng": 0
+              }
+            },
+            {
+              "id": 1892,
+              "name": "Left Shelf Mantle",
+              "description": "Starting above the shelf jutting out of the ground on the leftmost side of the north face, use the right facing sidepull to pull up to lip and mantle.",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.851557250691584,
+                "lng": -117.02201928867795
+              }
+            },
+            {
+              "id": 1893,
+              "name": "SW Face",
+              "description": "Go up obvious edges, but beware a loose flake near the top",
+              "grade": {
+                "raw": "5.12b",
+                "system": "YDS",
+                "value": 60
+              },
+              "coordinates": {
+                "lat": 32.851493535363375,
+                "lng": -117.0220734776476
+              }
+            },
+            {
+              "id": 1895,
+              "name": "The Flake Left",
+              "description": "Climb the obvious and large flakes at the northwest corner of the boulder, following the left easier side.",
+              "coordinates": {
+                "lat": 32.8515228006949,
+                "lng": -117.02209496415884
+              }
+            },
+            {
+              "id": 1888,
+              "name": "The Flake Right",
+              "description": "Climb the obvious and large flakes at the northwest corner of the boulder, following the right harder side.",
+              "grade": {
+                "raw": "5.11",
+                "system": "YDS",
+                "value": 30
+              },
+              "coordinates": {
+                "lat": 32.851515895285885,
+                "lng": -117.0220991407391
+              }
+            },
+            {
+              "id": 1897,
+              "name": "Uphill face center",
+              "description": "Various obvious edges in middle of face alongside narrow northeast boulder face",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.851544317795536,
+                "lng": -117.02200072613927
+              }
+            },
+            {
+              "id": 1891,
+              "name": "Uphill face right",
+              "description": "On the right side of the northeast face, easy and obvious holds",
+              "grade": {
+                "raw": "VB",
+                "system": "V",
+                "value": 0
+              },
+              "coordinates": {
+                "lat": 32.851553788304315,
+                "lng": -117.02201021949222
+              }
+            },
+            {
+              "id": 1894,
+              "name": "shelf center",
+              "description": "To the right of the thin \"hueco\" in the middle left side of the north face, use the left facing flake to go straight up.",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85155386384908,
+                "lng": -117.02203111463747
+              }
+            },
+            {
+              "id": 1890,
+              "name": "shelf right",
+              "description": "On the right side of the north face at end of the rock ledge, climb straight up crimps and then mantle out.",
+              "grade": {
+                "raw": "V0",
+                "system": "V",
+                "value": 10
+              },
+              "coordinates": {
+                "lat": 32.85154787750609,
+                "lng": -117.02205201736608
+              }
+            }
+          ]
         }
       ]
     }
   ],
+  "trail": {
+    "id": 11,
+    "lines": [
+      {
+        "id": 132,
+        "start": {
+          "lat": 32.84855455926171,
+          "lng": -117.02013202822688
+        },
+        "end": {
+          "lat": 32.84862779288162,
+          "lng": -117.0201548270035
+        }
+      },
+      {
+        "id": 133,
+        "start": {
+          "lat": 32.84862779288162,
+          "lng": -117.0201548270035
+        },
+        "end": {
+          "lat": 32.84877763994631,
+          "lng": -117.02016823804858
+        }
+      },
+      {
+        "id": 134,
+        "start": {
+          "lat": 32.84877763994631,
+          "lng": -117.02016823804858
+        },
+        "end": {
+          "lat": 32.84905142002003,
+          "lng": -117.02026747978212
+        }
+      },
+      {
+        "id": 135,
+        "start": {
+          "lat": 32.84905142002003,
+          "lng": -117.02026747978212
+        },
+        "end": {
+          "lat": 32.84918098642713,
+          "lng": -117.02028223193169
+        }
+      },
+      {
+        "id": 136,
+        "start": {
+          "lat": 32.84918098642713,
+          "lng": -117.02028223193169
+        },
+        "end": {
+          "lat": 32.849195633052545,
+          "lng": -117.0203734270382
+        }
+      },
+      {
+        "id": 137,
+        "start": {
+          "lat": 32.849195633052545,
+          "lng": -117.0203734270382
+        },
+        "end": {
+          "lat": 32.84924520622836,
+          "lng": -117.020425730114
+        }
+      },
+      {
+        "id": 138,
+        "start": {
+          "lat": 32.84924520622836,
+          "lng": -117.020425730114
+        },
+        "end": {
+          "lat": 32.8492688661434,
+          "lng": -117.02048607981685
+        }
+      },
+      {
+        "id": 139,
+        "start": {
+          "lat": 32.8492688661434,
+          "lng": -117.02048607981685
+        },
+        "end": {
+          "lat": 32.849358999095344,
+          "lng": -117.02052497184755
+        }
+      },
+      {
+        "id": 140,
+        "start": {
+          "lat": 32.849358999095344,
+          "lng": -117.02052497184755
+        },
+        "end": {
+          "lat": 32.849449131955716,
+          "lng": -117.02051960742952
+        }
+      },
+      {
+        "id": 141,
+        "start": {
+          "lat": 32.849449131955716,
+          "lng": -117.02051960742952
+        },
+        "end": {
+          "lat": 32.84947504513614,
+          "lng": -117.02050217307094
+        }
+      },
+      {
+        "id": 142,
+        "start": {
+          "lat": 32.84947504513614,
+          "lng": -117.02050217307094
+        },
+        "end": {
+          "lat": 32.849527998133446,
+          "lng": -117.020512901907
+        }
+      },
+      {
+        "id": 143,
+        "start": {
+          "lat": 32.849527998133446,
+          "lng": -117.020512901907
+        },
+        "end": {
+          "lat": 32.84960348426647,
+          "lng": -117.02049144423488
+        }
+      },
+      {
+        "id": 144,
+        "start": {
+          "lat": 32.84960348426647,
+          "lng": -117.02049144423488
+        },
+        "end": {
+          "lat": 32.84968911025009,
+          "lng": -117.02049412644388
+        }
+      },
+      {
+        "id": 145,
+        "start": {
+          "lat": 32.84968911025009,
+          "lng": -117.02049412644388
+        },
+        "end": {
+          "lat": 32.84973530318063,
+          "lng": -117.02054106510164
+        }
+      },
+      {
+        "id": 146,
+        "start": {
+          "lat": 32.84973530318063,
+          "lng": -117.02054106510164
+        },
+        "end": {
+          "lat": 32.84979388930185,
+          "lng": -117.02050887859346
+        }
+      },
+      {
+        "id": 147,
+        "start": {
+          "lat": 32.8492688661434,
+          "lng": -117.02048607981685
+        },
+        "end": {
+          "lat": 32.84925872618059,
+          "lng": -117.020515584116
+        }
+      },
+      {
+        "id": 148,
+        "start": {
+          "lat": 32.84925872618059,
+          "lng": -117.020515584116
+        },
+        "end": {
+          "lat": 32.84926548615593,
+          "lng": -117.02070467985155
+        }
+      },
+      {
+        "id": 149,
+        "start": {
+          "lat": 32.84926548615593,
+          "lng": -117.02070467985155
+        },
+        "end": {
+          "lat": 32.84925759951797,
+          "lng": -117.02082940257075
+        }
+      },
+      {
+        "id": 150,
+        "start": {
+          "lat": 32.84925759951797,
+          "lng": -117.02082940257075
+        },
+        "end": {
+          "lat": 32.84925083954204,
+          "lng": -117.0208951166916
+        }
+      },
+      {
+        "id": 151,
+        "start": {
+          "lat": 32.84925083954204,
+          "lng": -117.0208951166916
+        },
+        "end": {
+          "lat": 32.84926210616833,
+          "lng": -117.02097021854402
+        }
+      },
+      {
+        "id": 152,
+        "start": {
+          "lat": 32.84926210616833,
+          "lng": -117.02097021854402
+        },
+        "end": {
+          "lat": 32.849303792673155,
+          "lng": -117.02103325045589
+        }
+      },
+      {
+        "id": 153,
+        "start": {
+          "lat": 32.849303792673155,
+          "lng": -117.02103325045589
+        },
+        "end": {
+          "lat": 32.849429978730534,
+          "lng": -117.0211982063103
+        }
+      },
+      {
+        "id": 154,
+        "start": {
+          "lat": 32.849429978730534,
+          "lng": -117.0211982063103
+        },
+        "end": {
+          "lat": 32.84962263745419,
+          "lng": -117.02139132535936
+        }
+      },
+      {
+        "id": 155,
+        "start": {
+          "lat": 32.84962263745419,
+          "lng": -117.02139132535936
+        },
+        "end": {
+          "lat": 32.84969699684968,
+          "lng": -117.02143021739009
+        }
+      },
+      {
+        "id": 156,
+        "start": {
+          "lat": 32.84969699684968,
+          "lng": -117.02143021739009
+        },
+        "end": {
+          "lat": 32.84983219559094,
+          "lng": -117.02152945912363
+        }
+      },
+      {
+        "id": 157,
+        "start": {
+          "lat": 32.84983219559094,
+          "lng": -117.02152945912363
+        },
+        "end": {
+          "lat": 32.84988064175644,
+          "lng": -117.0215442112732
+        }
+      },
+      {
+        "id": 158,
+        "start": {
+          "lat": 32.84988064175644,
+          "lng": -117.0215442112732
+        },
+        "end": {
+          "lat": 32.849987673888734,
+          "lng": -117.0215214124966
+        }
+      },
+      {
+        "id": 159,
+        "start": {
+          "lat": 32.849987673888734,
+          "lng": -117.0215214124966
+        },
+        "end": {
+          "lat": 32.8502039910673,
+          "lng": -117.0215790799904
+        }
+      },
+      {
+        "id": 160,
+        "start": {
+          "lat": 32.8502039910673,
+          "lng": -117.0215790799904
+        },
+        "end": {
+          "lat": 32.85026933677792,
+          "lng": -117.02158578551295
+        }
+      },
+      {
+        "id": 161,
+        "start": {
+          "lat": 32.85026933677792,
+          "lng": -117.02158578551295
+        },
+        "end": {
+          "lat": 32.85032566924847,
+          "lng": -117.02155896342278
+        }
+      },
+      {
+        "id": 162,
+        "start": {
+          "lat": 32.85032566924847,
+          "lng": -117.02155896342278
+        },
+        "end": {
+          "lat": 32.85049691973933,
+          "lng": -117.02144362843515
+        }
+      },
+      {
+        "id": 163,
+        "start": {
+          "lat": 32.85049691973933,
+          "lng": -117.02144362843515
+        },
+        "end": {
+          "lat": 32.85054423889564,
+          "lng": -117.02137791431429
+        }
+      },
+      {
+        "id": 164,
+        "start": {
+          "lat": 32.85054423889564,
+          "lng": -117.02137791431429
+        },
+        "end": {
+          "lat": 32.85057465833992,
+          "lng": -117.02131488240244
+        }
+      },
+      {
+        "id": 165,
+        "start": {
+          "lat": 32.85057465833992,
+          "lng": -117.02131488240244
+        },
+        "end": {
+          "lat": 32.850600571191656,
+          "lng": -117.02131354129793
+        }
+      },
+      {
+        "id": 166,
+        "start": {
+          "lat": 32.850600571191656,
+          "lng": -117.02131354129793
+        },
+        "end": {
+          "lat": 32.8506140909374,
+          "lng": -117.02134170449258
+        }
+      },
+      {
+        "id": 167,
+        "start": {
+          "lat": 32.850600571191656,
+          "lng": -117.02131354129793
+        },
+        "end": {
+          "lat": 32.85070985574398,
+          "lng": -117.0212545326996
+        }
+      },
+      {
+        "id": 168,
+        "start": {
+          "lat": 32.85070985574398,
+          "lng": -117.0212545326996
+        },
+        "end": {
+          "lat": 32.85073238862463,
+          "lng": -117.02131622350694
+        }
+      },
+      {
+        "id": 169,
+        "start": {
+          "lat": 32.85070985574398,
+          "lng": -117.0212545326996
+        },
+        "end": {
+          "lat": 32.85072337547305,
+          "lng": -117.02122100508693
+        }
+      },
+      {
+        "id": 170,
+        "start": {
+          "lat": 32.85072337547305,
+          "lng": -117.02122100508693
+        },
+        "end": {
+          "lat": 32.85083941972955,
+          "lng": -117.02122234619142
+        }
+      },
+      {
+        "id": 171,
+        "start": {
+          "lat": 32.85083941972955,
+          "lng": -117.02122234619142
+        },
+        "end": {
+          "lat": 32.850876598925254,
+          "lng": -117.02117138422014
+        }
+      },
+      {
+        "id": 172,
+        "start": {
+          "lat": 32.85080111387526,
+          "lng": -117.02122502840044
+        },
+        "end": {
+          "lat": 32.85082252008998,
+          "lng": -117.02133097565653
+        }
+      },
+      {
+        "id": 173,
+        "start": {
+          "lat": 32.85082252008998,
+          "lng": -117.02133097565653
+        },
+        "end": {
+          "lat": 32.850803367161255,
+          "lng": -117.02137389100076
+        }
+      },
+      {
+        "id": 174,
+        "start": {
+          "lat": 32.850448473910305,
+          "lng": -117.02147715604784
+        },
+        "end": {
+          "lat": 32.850665916610254,
+          "lng": -117.0215603045273
+        }
+      },
+      {
+        "id": 175,
+        "start": {
+          "lat": 32.850665916610254,
+          "lng": -117.0215603045273
+        },
+        "end": {
+          "lat": 32.850669296544396,
+          "lng": -117.02143021739009
+        }
+      },
+      {
+        "id": 176,
+        "start": {
+          "lat": 32.850665916610254,
+          "lng": -117.0215603045273
+        },
+        "end": {
+          "lat": 32.850712109032294,
+          "lng": -117.02164881742479
+        }
+      },
+      {
+        "id": 177,
+        "start": {
+          "lat": 32.850712109032294,
+          "lng": -117.02164881742479
+        },
+        "end": {
+          "lat": 32.850771821152,
+          "lng": -117.02167966282846
+        }
+      },
+      {
+        "id": 178,
+        "start": {
+          "lat": 32.850876598925254,
+          "lng": -117.02117138422014
+        },
+        "end": {
+          "lat": 32.850898005121785,
+          "lng": -117.02114858544351
+        }
+      },
+      {
+        "id": 179,
+        "start": {
+          "lat": 32.850898005121785,
+          "lng": -117.02114858544351
+        },
+        "end": {
+          "lat": 32.850965603603235,
+          "lng": -117.0211284688759
+        }
+      },
+      {
+        "id": 180,
+        "start": {
+          "lat": 32.850965603603235,
+          "lng": -117.0211284688759
+        },
+        "end": {
+          "lat": 32.85099038970019,
+          "lng": -117.02130147135735
+        }
+      },
+      {
+        "id": 181,
+        "start": {
+          "lat": 32.85099038970019,
+          "lng": -117.02130147135735
+        },
+        "end": {
+          "lat": 32.850966730244146,
+          "lng": -117.02153348243714
+        }
+      },
+      {
+        "id": 182,
+        "start": {
+          "lat": 32.850966730244146,
+          "lng": -117.02153348243714
+        },
+        "end": {
+          "lat": 32.850771821152,
+          "lng": -117.02167966282846
+        }
+      },
+      {
+        "id": 183,
+        "start": {
+          "lat": 32.850965603603235,
+          "lng": -117.0211284688759
+        },
+        "end": {
+          "lat": 32.85106812786846,
+          "lng": -117.02112176335336
+        }
+      },
+      {
+        "id": 184,
+        "start": {
+          "lat": 32.85106812786846,
+          "lng": -117.02112176335336
+        },
+        "end": {
+          "lat": 32.851163892185006,
+          "lng": -117.0210822007704
+        }
+      },
+      {
+        "id": 185,
+        "start": {
+          "lat": 32.851163892185006,
+          "lng": -117.0210822007704
+        },
+        "end": {
+          "lat": 32.85121064766674,
+          "lng": -117.02102721548559
+        }
+      },
+      {
+        "id": 186,
+        "start": {
+          "lat": 32.85121064766674,
+          "lng": -117.02102721548559
+        },
+        "end": {
+          "lat": 32.85127035945094,
+          "lng": -117.0209125510502
+        }
+      },
+      {
+        "id": 187,
+        "start": {
+          "lat": 32.85127035945094,
+          "lng": -117.0209125510502
+        },
+        "end": {
+          "lat": 32.851228673869976,
+          "lng": -117.02083677864552
+        }
+      },
+      {
+        "id": 188,
+        "start": {
+          "lat": 32.851228673869976,
+          "lng": -117.02083677864552
+        },
+        "end": {
+          "lat": 32.85122585727596,
+          "lng": -117.0207315019417
+        }
+      },
+      {
+        "id": 189,
+        "start": {
+          "lat": 32.850965603603235,
+          "lng": -117.0211284688759
+        },
+        "end": {
+          "lat": 32.85095940707791,
+          "lng": -117.02090182221414
+        }
+      },
+      {
+        "id": 190,
+        "start": {
+          "lat": 32.85095940707791,
+          "lng": -117.02090182221414
+        },
+        "end": {
+          "lat": 32.850805057125726,
+          "lng": -117.02064634180547
+        }
+      },
+      {
+        "id": 191,
+        "start": {
+          "lat": 32.850856319365896,
+          "lng": -117.02073619580746
+        },
+        "end": {
+          "lat": 32.850748724959516,
+          "lng": -117.02075430071834
+        }
+      },
+      {
+        "id": 192,
+        "start": {
+          "lat": 32.850748724959516,
+          "lng": -117.02075430071834
+        },
+        "end": {
+          "lat": 32.850710982388144,
+          "lng": -117.02075228906156
+        }
+      },
+      {
+        "id": 193,
+        "start": {
+          "lat": 32.850710982388144,
+          "lng": -117.02075228906156
+        },
+        "end": {
+          "lat": 32.85066873322206,
+          "lng": -117.02078782833101
+        }
+      },
+      {
+        "id": 194,
+        "start": {
+          "lat": 32.85066873322206,
+          "lng": -117.02078782833101
+        },
+        "end": {
+          "lat": 32.85063831381,
+          "lng": -117.02080056882383
+        }
+      },
+      {
+        "id": 195,
+        "start": {
+          "lat": 32.85063831381,
+          "lng": -117.02080056882383
+        },
+        "end": {
+          "lat": 32.85033411911598,
+          "lng": -117.02077508783819
+        }
+      },
+      {
+        "id": 196,
+        "start": {
+          "lat": 32.850771821152,
+          "lng": -117.02167966282846
+        },
+        "end": {
+          "lat": 32.850769567865186,
+          "lng": -117.02187144077303
+        }
+      },
+      {
+        "id": 197,
+        "start": {
+          "lat": 32.850769567865186,
+          "lng": -117.02187144077303
+        },
+        "end": {
+          "lat": 32.850807873733096,
+          "lng": -117.02200018680574
+        }
+      },
+      {
+        "id": 198,
+        "start": {
+          "lat": 32.850807873733096,
+          "lng": -117.02200018680574
+        },
+        "end": {
+          "lat": 32.85084617958447,
+          "lng": -117.02217855370523
+        }
+      },
+      {
+        "id": 199,
+        "start": {
+          "lat": 32.85084617958447,
+          "lng": -117.02217855370523
+        },
+        "end": {
+          "lat": 32.85083491315931,
+          "lng": -117.02222549236299
+        }
+      },
+      {
+        "id": 200,
+        "start": {
+          "lat": 32.85083491315931,
+          "lng": -117.02222549236299
+        },
+        "end": {
+          "lat": 32.85089124527081,
+          "lng": -117.02235021508218
+        }
+      },
+      {
+        "id": 201,
+        "start": {
+          "lat": 32.85089124527081,
+          "lng": -117.02235021508218
+        },
+        "end": {
+          "lat": 32.85072900869288,
+          "lng": -117.02250310099605
+        }
+      },
+      {
+        "id": 202,
+        "start": {
+          "lat": 32.85072900869288,
+          "lng": -117.02250310099605
+        },
+        "end": {
+          "lat": 32.85077632772542,
+          "lng": -117.0222979120064
+        }
+      },
+      {
+        "id": 203,
+        "start": {
+          "lat": 32.85077632772542,
+          "lng": -117.0222979120064
+        },
+        "end": {
+          "lat": 32.85083491315931,
+          "lng": -117.02222549236299
+        }
+      },
+      {
+        "id": 204,
+        "start": {
+          "lat": 32.85072900869288,
+          "lng": -117.02250310099605
+        },
+        "end": {
+          "lat": 32.85069070279093,
+          "lng": -117.02261441267017
+        }
+      },
+      {
+        "id": 205,
+        "start": {
+          "lat": 32.85069070279093,
+          "lng": -117.02261441267017
+        },
+        "end": {
+          "lat": 32.850458613737175,
+          "lng": -117.02290006793025
+        }
+      },
+      {
+        "id": 206,
+        "start": {
+          "lat": 32.850458613737175,
+          "lng": -117.02290006793025
+        },
+        "end": {
+          "lat": 32.8503504555242,
+          "lng": -117.02306502378465
+        }
+      },
+      {
+        "id": 207,
+        "start": {
+          "lat": 32.8503504555242,
+          "lng": -117.02306502378465
+        },
+        "end": {
+          "lat": 32.85025356367975,
+          "lng": -117.02314012563707
+        }
+      },
+      {
+        "id": 208,
+        "start": {
+          "lat": 32.85025356367975,
+          "lng": -117.02314012563707
+        },
+        "end": {
+          "lat": 32.85035946871364,
+          "lng": -117.02339627659799
+        }
+      },
+      {
+        "id": 209,
+        "start": {
+          "lat": 32.85025356367975,
+          "lng": -117.02314012563707
+        },
+        "end": {
+          "lat": 32.850187091306715,
+          "lng": -117.02325411952022
+        }
+      },
+      {
+        "id": 210,
+        "start": {
+          "lat": 32.85089124527081,
+          "lng": -117.02235021508218
+        },
+        "end": {
+          "lat": 32.850966730244146,
+          "lng": -117.0223689905453
+        }
+      },
+      {
+        "id": 211,
+        "start": {
+          "lat": 32.850966730244146,
+          "lng": -117.0223689905453
+        },
+        "end": {
+          "lat": 32.85104672171297,
+          "lng": -117.0224615267563
+        }
+      },
+      {
+        "id": 212,
+        "start": {
+          "lat": 32.85104672171297,
+          "lng": -117.0224615267563
+        },
+        "end": {
+          "lat": 32.85118867822659,
+          "lng": -117.0224803022194
+        }
+      },
+      {
+        "id": 251,
+        "start": {
+          "lat": 32.850437207434666,
+          "lng": -117.02293292499067
+        },
+        "end": {
+          "lat": 32.850394958138196,
+          "lng": -117.0229295722294
+        }
+      },
+      {
+        "id": 252,
+        "start": {
+          "lat": 32.850394958138196,
+          "lng": -117.0229295722294
+        },
+        "end": {
+          "lat": 32.850437207434666,
+          "lng": -117.02293292499067
+        }
+      },
+      {
+        "id": 253,
+        "start": {
+          "lat": 32.85089124527081,
+          "lng": -117.02235021508218
+        },
+        "end": {
+          "lat": 32.85086871243049,
+          "lng": -117.02265598690988
+        }
+      },
+      {
+        "id": 254,
+        "start": {
+          "lat": 32.85086871243049,
+          "lng": -117.02265598690988
+        },
+        "end": {
+          "lat": 32.85086871243049,
+          "lng": -117.02279412067415
+        }
+      },
+      {
+        "id": 255,
+        "start": {
+          "lat": 32.85086871243049,
+          "lng": -117.02279412067415
+        },
+        "end": {
+          "lat": 32.85081350694756,
+          "lng": -117.0228584936905
+        }
+      },
+      {
+        "id": 256,
+        "start": {
+          "lat": 32.85081350694756,
+          "lng": -117.0228584936905
+        },
+        "end": {
+          "lat": 32.850803367161255,
+          "lng": -117.02290945566179
+        }
+      },
+      {
+        "id": 257,
+        "start": {
+          "lat": 32.850803367161255,
+          "lng": -117.02290945566179
+        },
+        "end": {
+          "lat": 32.85070534916717,
+          "lng": -117.02294968879701
+        }
+      },
+      {
+        "id": 258,
+        "start": {
+          "lat": 32.85070534916717,
+          "lng": -117.02294968879701
+        },
+        "end": {
+          "lat": 32.85062761068105,
+          "lng": -117.02291750228882
+        }
+      },
+      {
+        "id": 259,
+        "start": {
+          "lat": 32.85087885220934,
+          "lng": -117.02258088505747
+        },
+        "end": {
+          "lat": 32.850966730244146,
+          "lng": -117.02258759058
+        }
+      },
+      {
+        "id": 260,
+        "start": {
+          "lat": 32.84979388930185,
+          "lng": -117.02050887859346
+        },
+        "end": {
+          "lat": 32.849827688969555,
+          "lng": -117.02052363074306
+        }
+      },
+      {
+        "id": 261,
+        "start": {
+          "lat": 32.849827688969555,
+          "lng": -117.02052363074306
+        },
+        "end": {
+          "lat": 32.84985303871189,
+          "lng": -117.02048138595106
+        }
+      },
+      {
+        "id": 262,
+        "start": {
+          "lat": 32.84985303871189,
+          "lng": -117.02048138595106
+        },
+        "end": {
+          "lat": 32.84987838844701,
+          "lng": -117.0204532227564
+        }
+      },
+      {
+        "id": 263,
+        "start": {
+          "lat": 32.84987838844701,
+          "lng": -117.0204532227564
+        },
+        "end": {
+          "lat": 32.849899794884344,
+          "lng": -117.02046529269697
+        }
+      },
+      {
+        "id": 264,
+        "start": {
+          "lat": 32.849899794884344,
+          "lng": -117.02046529269697
+        },
+        "end": {
+          "lat": 32.8499459877052,
+          "lng": -117.02049949086191
+        }
+      },
+      {
+        "id": 265,
+        "start": {
+          "lat": 32.8499459877052,
+          "lng": -117.02049949086191
+        },
+        "end": {
+          "lat": 32.84994767768598,
+          "lng": -117.02054777062418
+        }
+      },
+      {
+        "id": 266,
+        "start": {
+          "lat": 32.84994767768598,
+          "lng": -117.02054777062418
+        },
+        "end": {
+          "lat": 32.849984857255336,
+          "lng": -117.020563193326
+        }
+      },
+      {
+        "id": 267,
+        "start": {
+          "lat": 32.849984857255336,
+          "lng": -117.020563193326
+        },
+        "end": {
+          "lat": 32.84998598390872,
+          "lng": -117.02058800375941
+        }
+      },
+      {
+        "id": 268,
+        "start": {
+          "lat": 32.84998598390872,
+          "lng": -117.02058800375941
+        },
+        "end": {
+          "lat": 32.850097522521864,
+          "lng": -117.02061348474506
+        }
+      },
+      {
+        "id": 269,
+        "start": {
+          "lat": 32.850097522521864,
+          "lng": -117.02061348474506
+        },
+        "end": {
+          "lat": 32.8501161122771,
+          "lng": -117.0206677994776
+        }
+      },
+      {
+        "id": 270,
+        "start": {
+          "lat": 32.8501161122771,
+          "lng": -117.0206677994776
+        },
+        "end": {
+          "lat": 32.85006428628311,
+          "lng": -117.02070266819477
+        }
+      },
+      {
+        "id": 271,
+        "start": {
+          "lat": 32.850097522521864,
+          "lng": -117.02061348474506
+        },
+        "end": {
+          "lat": 32.85013075874818,
+          "lng": -117.02054173565388
+        }
+      },
+      {
+        "id": 272,
+        "start": {
+          "lat": 32.85013075874818,
+          "lng": -117.02054173565388
+        },
+        "end": {
+          "lat": 32.85019779448877,
+          "lng": -117.02052430129531
+        }
+      },
+      {
+        "id": 273,
+        "start": {
+          "lat": 32.85019779448877,
+          "lng": -117.02052430129531
+        },
+        "end": {
+          "lat": 32.85028848982194,
+          "lng": -117.02037677979948
+        }
+      },
+      {
+        "id": 274,
+        "start": {
+          "lat": 32.85028848982194,
+          "lng": -117.02037677979948
+        },
+        "end": {
+          "lat": 32.8501820213779,
+          "lng": -117.02035398102284
+        }
+      },
+      {
+        "id": 275,
+        "start": {
+          "lat": 32.85020906099484,
+          "lng": -117.02035934544087
+        },
+        "end": {
+          "lat": 32.85021413092208,
+          "lng": -117.02029899573805
+        }
+      },
+      {
+        "id": 276,
+        "start": {
+          "lat": 32.85021413092208,
+          "lng": -117.02029899573805
+        },
+        "end": {
+          "lat": 32.85015610840393,
+          "lng": -117.02025138652803
+        }
+      },
+      {
+        "id": 277,
+        "start": {
+          "lat": 32.85015610840393,
+          "lng": -117.02025138652803
+        },
+        "end": {
+          "lat": 32.850178078099745,
+          "lng": -117.02020310676576
+        }
+      },
+      {
+        "id": 278,
+        "start": {
+          "lat": 32.85015610840393,
+          "lng": -117.02025138652803
+        },
+        "end": {
+          "lat": 32.85008794597978,
+          "lng": -117.02006363189699
+        }
+      },
+      {
+        "id": 279,
+        "start": {
+          "lat": 32.85008794597978,
+          "lng": -117.02006363189699
+        },
+        "end": {
+          "lat": 32.85008259438229,
+          "lng": -117.02000428802255
+        }
+      },
+      {
+        "id": 280,
+        "start": {
+          "lat": 32.85019779448877,
+          "lng": -117.02052430129531
+        },
+        "end": {
+          "lat": 32.85024933874228,
+          "lng": -117.02064567125323
+        }
+      },
+      {
+        "id": 281,
+        "start": {
+          "lat": 32.85024933874228,
+          "lng": -117.02064567125323
+        },
+        "end": {
+          "lat": 32.85033411911598,
+          "lng": -117.02077508783819
+        }
+      },
+      {
+        "id": 282,
+        "start": {
+          "lat": 32.85035946871364,
+          "lng": -117.02339627659799
+        },
+        "end": {
+          "lat": 32.850377495089795,
+          "lng": -117.02345964378597
+        }
+      },
+      {
+        "id": 283,
+        "start": {
+          "lat": 32.850377495089795,
+          "lng": -117.02345964378597
+        },
+        "end": {
+          "lat": 32.8504050979712,
+          "lng": -117.02350255913021
+        }
+      },
+      {
+        "id": 284,
+        "start": {
+          "lat": 32.8504050979712,
+          "lng": -117.02350255913021
+        },
+        "end": {
+          "lat": 32.85044481230589,
+          "lng": -117.02349451250315
+        }
+      },
+      {
+        "id": 285,
+        "start": {
+          "lat": 32.8504050979712,
+          "lng": -117.02350255913021
+        },
+        "end": {
+          "lat": 32.85043495413935,
+          "lng": -117.02372719413519
+        }
+      },
+      {
+        "id": 286,
+        "start": {
+          "lat": 32.85043495413935,
+          "lng": -117.02372719413519
+        },
+        "end": {
+          "lat": 32.85050931285413,
+          "lng": -117.02387505090715
+        }
+      },
+      {
+        "id": 287,
+        "start": {
+          "lat": 32.85050931285413,
+          "lng": -117.02387505090715
+        },
+        "end": {
+          "lat": 32.850492413151706,
+          "lng": -117.02401251411915
+        }
+      },
+      {
+        "id": 288,
+        "start": {
+          "lat": 32.850492413151706,
+          "lng": -117.02401251411915
+        },
+        "end": {
+          "lat": 32.85052790252311,
+          "lng": -117.02412717855455
+        }
+      },
+      {
+        "id": 289,
+        "start": {
+          "lat": 32.850966730244146,
+          "lng": -117.02153348243714
+        },
+        "end": {
+          "lat": 32.85110192705081,
+          "lng": -117.02163004196169
+        }
+      },
+      {
+        "id": 290,
+        "start": {
+          "lat": 32.85110192705081,
+          "lng": -117.02163004196169
+        },
+        "end": {
+          "lat": 32.85111995327614,
+          "lng": -117.02184864199641
+        }
+      },
+      {
+        "id": 291,
+        "start": {
+          "lat": 32.85111995327614,
+          "lng": -117.02184864199641
+        },
+        "end": {
+          "lat": 32.85106024139072,
+          "lng": -117.02195458925249
+        }
+      },
+      {
+        "id": 292,
+        "start": {
+          "lat": 32.85106024139072,
+          "lng": -117.02195458925249
+        },
+        "end": {
+          "lat": 32.851059114750974,
+          "lng": -117.02205517209055
+        }
+      },
+      {
+        "id": 293,
+        "start": {
+          "lat": 32.851059114750974,
+          "lng": -117.02205517209055
+        },
+        "end": {
+          "lat": 32.85092053795465,
+          "lng": -117.02235960281374
+        }
+      },
+      {
+        "id": 294,
+        "start": {
+          "lat": 32.851114320081116,
+          "lng": -117.02174001253131
+        },
+        "end": {
+          "lat": 32.851265289584035,
+          "lng": -117.02176951683046
+        }
+      },
+      {
+        "id": 295,
+        "start": {
+          "lat": 32.851265289584035,
+          "lng": -117.02176951683046
+        },
+        "end": {
+          "lat": 32.85135570216708,
+          "lng": -117.02187177604915
+        }
+      },
+      {
+        "id": 296,
+        "start": {
+          "lat": 32.85135570216708,
+          "lng": -117.02187177604915
+        },
+        "end": {
+          "lat": 32.85151652930674,
+          "lng": -117.02196397698404
+        }
+      },
+      {
+        "id": 297,
+        "start": {
+          "lat": 32.85006428628311,
+          "lng": -117.02070266819477
+        },
+        "end": {
+          "lat": 32.85002985344135,
+          "lng": -117.0207915455103
+        }
+      },
+      {
+        "id": 298,
+        "start": {
+          "lat": 32.85002985344135,
+          "lng": -117.0207915455103
+        },
+        "end": {
+          "lat": 32.849949297724365,
+          "lng": -117.02091157436372
+        }
+      },
+      {
+        "id": 299,
+        "start": {
+          "lat": 32.849949297724365,
+          "lng": -117.02091157436372
+        },
+        "end": {
+          "lat": 32.8499628175701,
+          "lng": -117.0209947228432
+        }
+      },
+      {
+        "id": 300,
+        "start": {
+          "lat": 32.8499628175701,
+          "lng": -117.0209947228432
+        },
+        "end": {
+          "lat": 32.849852405436444,
+          "lng": -117.02096052467826
+        }
+      },
+      {
+        "id": 301,
+        "start": {
+          "lat": 32.849852405436444,
+          "lng": -117.02096052467826
+        },
+        "end": {
+          "lat": 32.849831562314165,
+          "lng": -117.02090285718442
+        }
+      },
+      {
+        "id": 302,
+        "start": {
+          "lat": 32.849831562314165,
+          "lng": -117.02090285718442
+        },
+        "end": {
+          "lat": 32.8498017059413,
+          "lng": -117.02100411057474
+        }
+      },
+      {
+        "id": 303,
+        "start": {
+          "lat": 32.8498017059413,
+          "lng": -117.02100411057474
+        },
+        "end": {
+          "lat": 32.84977015957415,
+          "lng": -117.02105171978474
+        }
+      },
+      {
+        "id": 304,
+        "start": {
+          "lat": 32.84977015957415,
+          "lng": -117.02105171978474
+        },
+        "end": {
+          "lat": 32.84975494971456,
+          "lng": -117.02119991183281
+        }
+      },
+      {
+        "id": 305,
+        "start": {
+          "lat": 32.84975494971456,
+          "lng": -117.02119991183281
+        },
+        "end": {
+          "lat": 32.84967552040541,
+          "lng": -117.02141918241979
+        }
+      },
+      {
+        "id": 306,
+        "start": {
+          "lat": 32.84926485284318,
+          "lng": -117.02072918415071
+        },
+        "end": {
+          "lat": 32.84938202567473,
+          "lng": -117.02077344059946
+        }
+      },
+      {
+        "id": 307,
+        "start": {
+          "lat": 32.84938202567473,
+          "lng": -117.02077344059946
+        },
+        "end": {
+          "lat": 32.84952398485954,
+          "lng": -117.02088072896005
+        }
+      },
+      {
+        "id": 308,
+        "start": {
+          "lat": 32.84952398485954,
+          "lng": -117.02088072896005
+        },
+        "end": {
+          "lat": 32.849683970335285,
+          "lng": -117.02095448970796
+        }
+      },
+      {
+        "id": 309,
+        "start": {
+          "lat": 32.849683970335285,
+          "lng": -117.02095448970796
+        },
+        "end": {
+          "lat": 32.8498017059413,
+          "lng": -117.02100411057474
+        }
+      },
+      {
+        "id": 310,
+        "start": {
+          "lat": 32.84991606142823,
+          "lng": -117.0204770565033
+        },
+        "end": {
+          "lat": 32.84999436386876,
+          "lng": -117.02046968042852
+        }
+      },
+      {
+        "id": 311,
+        "start": {
+          "lat": 32.84999436386876,
+          "lng": -117.02046968042852
+        },
+        "end": {
+          "lat": 32.850046753232824,
+          "lng": -117.02044621109964
+        }
+      },
+      {
+        "id": 312,
+        "start": {
+          "lat": 32.850046753232824,
+          "lng": -117.02044621109964
+        },
+        "end": {
+          "lat": 32.850107592455515,
+          "lng": -117.02040664851667
+        }
+      },
+      {
+        "id": 313,
+        "start": {
+          "lat": 32.850107592455515,
+          "lng": -117.02040664851667
+        },
+        "end": {
+          "lat": 32.85011942229953,
+          "lng": -117.02034562826158
+        }
+      }
+    ]
+  },
   "createdAt": "2025-06-10T21:00:40Z",
   "updatedAt": "2025-06-10T21:00:40Z"
 }

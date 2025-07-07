@@ -53,7 +53,7 @@ func NewAreas(db *sqlp.DB) *Areas {
 				{{- end}}
 				{{- if .Include "polygon.coordinates"}},
 				COALESCE(polygon_coordinate.id, 0) AS polygon_coordinate_id,
-				COALESCE(polygon_coordinate.lat,0) AS polygon_coordinate_Lat,
+				COALESCE(polygon_coordinate.lat, 0) AS polygon_coordinate_Lat,
 				COALESCE(polygon_coordinate.lng, 0) AS polygon_coordinate_Lng,
 				COALESCE(polygon_coordinate."order", 0) AS polygon_coordinate_order
 				{{- end}}

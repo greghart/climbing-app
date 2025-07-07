@@ -24,8 +24,7 @@ const (
 type Trail struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	CragId        int64                  `protobuf:"varint,2,opt,name=crag_id,json=cragId,proto3" json:"crag_id,omitempty"` // Omitted to avoid circular reference
-	Lines         []*Line                `protobuf:"bytes,3,rep,name=lines,proto3" json:"lines,omitempty"`
+	Lines         []*Line                `protobuf:"bytes,2,rep,name=lines,proto3" json:"lines,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -67,13 +66,6 @@ func (x *Trail) GetId() int64 {
 	return 0
 }
 
-func (x *Trail) GetCragId() int64 {
-	if x != nil {
-		return x.CragId
-	}
-	return 0
-}
-
 func (x *Trail) GetLines() []*Line {
 	if x != nil {
 		return x.Lines
@@ -86,11 +78,10 @@ var File_trail_proto protoreflect.FileDescriptor
 const file_trail_proto_rawDesc = "" +
 	"\n" +
 	"\vtrail.proto\x12\x02pb\x1a\n" +
-	"line.proto\"P\n" +
+	"line.proto\"7\n" +
 	"\x05Trail\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
-	"\acrag_id\x18\x02 \x01(\x03R\x06cragId\x12\x1e\n" +
-	"\x05lines\x18\x03 \x03(\v2\b.pb.LineR\x05linesB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1e\n" +
+	"\x05lines\x18\x02 \x03(\v2\b.pb.LineR\x05linesB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
 
 var (
 	file_trail_proto_rawDescOnce sync.Once
