@@ -15,7 +15,7 @@ func CragToProto(m *models.Crag) *pb.Crag {
 		Id:          m.ID,
 		Name:        m.Name,
 		Description: derefString(m.Description),
-		Bounds:      BoundsToProto(m.Bounds),
+		Bounds:      BoundsToProto(&m.Bounds),
 		Center:      CoordinateToProto(&m.Center),
 		DefaultZoom: int32(m.DefaultZoom),
 		MinZoom:     derefInt32(m.MinZoom),
@@ -34,11 +34,15 @@ func ProtoToCrag(p *pb.Crag) *models.Crag {
 	if p == nil {
 		return nil
 	}
+	bounds := ProtoToBounds(p.GetBounds())
+	if bounds == nil {
+		bounds = &models.Bounds{} // Ensure bounds is never nil
+	}
 	return &models.Crag{
 		ID:          p.GetId(),
 		Name:        p.GetName(),
 		Description: stringPtr(p.GetDescription()),
-		Bounds:      ProtoToBounds(p.GetBounds()),
+		Bounds:      *bounds,
 		Center:      ProtoToCoordinate(p.GetCenter()),
 		DefaultZoom: int(p.GetDefaultZoom()),
 		MinZoom:     intPtr(p.GetMinZoom()),

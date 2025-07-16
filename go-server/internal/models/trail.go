@@ -1,7 +1,7 @@
 package models
 
 type Trail struct {
-	ID    int64  `json:"id,omitzero" sqlp:"id"`
+	ID    int64  `json:"id,omitzero" sqlp:"id,readonly"`
 	Lines []Line `json:"lines,omitzero"`
 }
 

@@ -10,6 +10,7 @@ import (
 	"github.com/greghart/climbing-app/internal/env"
 	"github.com/greghart/climbing-app/internal/pb"
 	"github.com/greghart/climbing-app/internal/service"
+	"github.com/greghart/powerputtygo/servicep"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
@@ -179,13 +180,13 @@ func (req *UpdateCragRequest) Validate() error {
 }
 
 func (req *UpdateCragRequest) ToService() service.CragUpdateRequest {
-	fm := NewFieldMask(req.FieldMask)
 	return service.CragUpdateRequest{
 		ID:          req.Id,
-		Name:        MaskPtr(fm, "name", req.Name),
-		Description: MaskPtr(fm, "description", req.Description),
-		Trail:       MaskValue(fm, "trail", ProtoToTrail(req.Trail)),
-		Bounds:      MaskValue(fm, "bounds", ProtoToBounds(req.Bounds)),
+		FieldMask:   servicep.NewFieldMaskFromPB(req.FieldMask),
+		Name:        req.Name,
+		Description: servicep.ZeroToPtr(req.Description),
+		Trail:       ProtoToTrail(req.Trail),
+		Bounds:      ProtoToBounds(req.Bounds),
 		RequestedAt: req.RequestedAt.AsTime(),
 	}
 }

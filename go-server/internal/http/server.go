@@ -3,6 +3,7 @@ package http
 import (
 	"context"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"os"
 	"strconv"
@@ -10,6 +11,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/greghart/climbing-app/internal/env"
+	"github.com/greghart/climbing-app/internal/models"
 	"github.com/greghart/climbing-app/internal/service"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
@@ -48,6 +50,7 @@ func (s *Server) Start() error {
 		MaxHeaderBytes: 1 << 20,
 	}
 
+	slog.Info(fmt.Sprintf("HTTP listening on port %d", s.opts.Port))
 	return s.http.ListenAndServe()
 }
 
@@ -75,6 +78,7 @@ func (s *Server) Handler() http.Handler {
 			crags := v1.Group("/crags")
 			crags.GET("", s.listCrags)
 			crags.GET("/:id", s.getCrag)
+			crags.PATCH("/:id", s.updateCrag)
 		}
 	}
 
@@ -100,7 +104,7 @@ func (s *Server) listCrags(c *gin.Context) {
 		Include: service.CragsIncludeSchema.Include(req.Includes...),
 	})
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Failed to get crags: %v", err)})
+		s.error(c, fmt.Errorf("Failed to get crags: %v", err))
 		return
 	}
 
@@ -124,15 +128,29 @@ func (s *Server) getCrag(c *gin.Context) {
 		Include: service.CragsIncludeSchema.Include(req.Includes...),
 	})
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("failed to get crag %v: %v", id, err)})
+		s.error(c, fmt.Errorf("failed to get crag %v: %w", id, err))
 		return
 	}
 	if crag == nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": fmt.Sprintf("failed to find crag %v", id)})
+		s.error(c, fmt.Errorf("failed to find crag %v", id), http.StatusNotFound)
 		return
 	}
 
 	c.JSON(http.StatusOK, crag)
+}
+
+type cragsUpdateRequest struct {
+	ID        int          `uri:"id"`
+	FieldMask []string     `json:"fieldMask"`
+	Crag      *models.Crag `json:"crag"`
+}
+
+func (s *Server) updateCrag(c *gin.Context) {
+	var update cragsUpdateRequest
+	if err := c.ShouldBind(&update); err != nil {
+		s.error(c, fmt.Errorf("could not bind request: %w", err))
+	}
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////

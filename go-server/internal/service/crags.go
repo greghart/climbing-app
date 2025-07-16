@@ -92,7 +92,7 @@ func (c *Crags) ListCrags(ctx context.Context, req CragsReadRequest) ([]models.C
 		if areas, ok := areasByCragID[crags[i].ID]; ok {
 			crags[i].Areas = areas
 		}
-		if trail, ok := trailsByID[crags[i].TrailID]; ok {
+		if trail, ok := trailsByID[servicep.PtrToZero(crags[i].TrailID)]; ok {
 			crags[i].Trail = &trail
 		}
 	}
@@ -111,20 +111,46 @@ func (c *Crags) Update(ctx context.Context, req CragUpdateRequest) error {
 		if err != nil {
 			return fmt.Errorf("failed to find crag for update with ID %d: %w", req.ID, err)
 		}
-		// Update crag
-		if req.Name != nil {
-			crag.Name = *req.Name
+		if crag == nil {
+			return fmt.Errorf("cannot update: %d not found", req.ID)
 		}
-		if req.Description != nil {
+		if crag.UpdatedAt.After(req.RequestedAt) {
+			return fmt.Errorf("update is out of date: crag was last updated at '%s', requested at '%s'", crag.UpdatedAt, req.RequestedAt)
+		}
+		// Update crag
+		if req.Has("name") {
+			crag.Name = req.Name
+		}
+		if req.Has("description") {
 			crag.Description = req.Description
 		}
-		if req.Bounds != nil {
-			crag.Bounds = req.Bounds
+		if req.Has("bounds") {
+			if req.Bounds == nil {
+				return fmt.Errorf("bounds cannot be nil'ed out")
+			}
+			crag.Bounds = *req.Bounds
+		}
+		if req.Has("trail") {
+			if req.Trail == nil { // Remove trail
+				crag.TrailID = servicep.ZeroToPtr(int64(0))
+			} else if crag.Trail != nil { // Update existing trail
+				crag.Trail.Lines = req.Trail.Lines
+			} else { // Create new trail
+				// TODO: Setup a new service to manage inserting trails alongside their lines!
+				trail, err := c.repos.Trails.Insert(ctx, *req.Trail)
+				if err != nil {
+					return fmt.Errorf("failed to insert new trail: %w", err)
+				}
+				trailID, err := trail.LastInsertId()
+				if err != nil {
+					return fmt.Errorf("failed to get last insert ID for trail: %w", err)
+				}
+				crag.TrailID = servicep.ZeroToPtr(trailID)
+			}
 		}
 		if _, err := c.repos.Crags.Update(ctx, crag); err != nil {
 			return fmt.Errorf("failed to update crag: %w", err)
 		}
-		// TOOD: Update trail directly if needed
 		return nil
 	})
 }
@@ -132,8 +158,9 @@ func (c *Crags) Update(ctx context.Context, req CragUpdateRequest) error {
 ////////////////////////////////////////////////////////////////////////////////
 
 type CragUpdateRequest struct {
+	*servicep.FieldMask
 	ID          int64
-	Name        *string
+	Name        string
 	Description *string
 	Trail       *models.Trail
 	Bounds      *models.Bounds

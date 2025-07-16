@@ -15,6 +15,7 @@ import (
 	"github.com/greghart/climbing-app/internal/db"
 	"github.com/greghart/climbing-app/internal/models"
 	"github.com/greghart/powerputtygo/errcmp"
+	"github.com/greghart/powerputtygo/servicep"
 	"github.com/greghart/powerputtygo/sqlp"
 )
 
@@ -79,7 +80,7 @@ func LoadCrags(t *testing.T, ctx context.Context, d *sqlp.DB) {
 	t.Helper()
 
 	santee := LoadCragFromJSON(t, "testdata/santee.json")
-	santee.TrailID = santee.Trail.ID // Ensure TrailID is set for insertion
+	santee.TrailID = servicep.ZeroToPtr(santee.Trail.ID) // Ensure TrailID is set for insertion
 	_, err := sqlp.Insert(ctx, d, "crag", *santee)
 	errcmp.MustMatch(t, err, "", "failed to insert crag")
 	for _, a := range santee.Areas {
@@ -122,7 +123,7 @@ func LoadCrags(t *testing.T, ctx context.Context, d *sqlp.DB) {
 		errcmp.MustMatch(t, err, "", "failed to insert parking")
 	}
 	if santee.Trail != nil {
-		_, err := sqlp.Insert(ctx, d, "trail", *santee.Trail)
+		_, err := d.Exec(ctx, "INSERT INTO trail (id) VALUES (?)", santee.Trail.ID)
 		errcmp.MustMatch(t, err, "", "failed to insert trail")
 		for i, l := range santee.Trail.Lines {
 			l.TrailID = santee.Trail.ID
