@@ -42,7 +42,6 @@ func (db *DB) Start() error {
 		return fmt.Errorf("Failed to ping database: %v", err)
 	}
 
-	// TODO: Integrate logging solution, maybe try grafana!
 	slog.Info("Database connection established")
 	return nil
 }

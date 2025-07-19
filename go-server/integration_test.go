@@ -29,6 +29,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/protobuf/types/known/fieldmaskpb"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // Integration tests that test against actual running server against actual database.
@@ -158,7 +159,8 @@ func TestGrpcServer_crags(t *testing.T) {
 				FieldMask: &fieldmaskpb.FieldMask{
 					Paths: []string{"name"},
 				},
-				Name: original.Crag.Name,
+				Name:        original.Crag.Name,
+				RequestedAt: timestamppb.Now(),
 			})
 
 		}()
@@ -168,7 +170,8 @@ func TestGrpcServer_crags(t *testing.T) {
 			FieldMask: &fieldmaskpb.FieldMask{
 				Paths: []string{"name"},
 			},
-			Name: name,
+			Name:        name,
+			RequestedAt: timestamppb.Now(),
 		})
 
 		updated, err := client.GetCrag(ctx, &pb.GetCragRequest{

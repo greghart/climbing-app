@@ -4,6 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log/slog"
+	"os"
 	"path"
 	"testing"
 	"time"
@@ -19,17 +21,16 @@ import (
 	"github.com/greghart/powerputtygo/sqlp"
 )
 
-////////////////////////////////////////////////////////////////////////////////
-
 func TestRepos(t testing.TB) (*db.Repos, context.Context) {
 	t.Helper()
 
 	d, ctx := TestDB(t)
 
 	repos := &db.Repos{
-		Crags:  db.NewCrags(d),
-		Areas:  db.NewAreas(d),
-		Trails: db.NewTrails(d),
+		Crags:      db.NewCrags(d),
+		Areas:      db.NewAreas(d),
+		Trails:     db.NewTrails(d),
+		TrailLines: db.NewTrailLines(d),
 	}
 	if repos.Crags.DB != d {
 		t.Fatalf("repos.Crags.DB is not the same as d: %p != %p", repos.Crags.DB, d)
@@ -40,6 +41,11 @@ func TestRepos(t testing.TB) (*db.Repos, context.Context) {
 // TestDB returns a test database that has migrations applied.
 func TestDB(t testing.TB) (*sqlp.DB, context.Context) {
 	t.Helper()
+
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+		Level: slog.Level(config.Load().LogLevel),
+	}))
+	slog.SetDefault(logger)
 
 	db := db.NewDB(db.Options{
 		Driver: "sqlite3",

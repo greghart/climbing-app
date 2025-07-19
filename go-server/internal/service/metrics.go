@@ -22,9 +22,11 @@ var (
 
 // index of service methods
 var (
-	getCragObserver    = requestObserver("crags", "getCrag")
-	listCragsObserver  = requestObserver("crags", "listCrags")
-	updateCragObserver = requestObserver("crags", "updateCrag")
+	getCragObserver     = requestObserver("crags", "get")
+	listCragsObserver   = requestObserver("crags", "list")
+	updateCragObserver  = requestObserver("crags", "update")
+	updateTrailObserver = requestObserver("trails", "update")
+	insertTrailObserver = requestObserver("trails", "insert")
 )
 
 func init() {

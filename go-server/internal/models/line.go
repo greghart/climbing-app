@@ -1,7 +1,7 @@
 package models
 
 type Line struct {
-	ID      int64      `json:"id,omitzero" sqlp:"id"`
+	ID      int64      `json:"id,omitzero" sqlp:"id,readonly"`
 	Start   Coordinate `json:"start" sqlp:"start,promote"`
 	End     Coordinate `json:"end" sqlp:"end,promote"`
 	Order   int        `json:"-" sqlp:"order"`

@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 	"fmt"
-	"log/slog"
 	"slices"
 	"time"
 
@@ -29,29 +28,13 @@ var CragsIncludeSchema = servicep.NewIncludeSchema().Allow(
 ////////////////////////////////////////////////////////////////////////////////
 
 type Crags struct {
-	repos *db.Repos // shortcut to repos
+	*Services
 }
 
-func NewCrags(repos *db.Repos) *Crags {
+func NewCrags(services *Services) *Crags {
 	return &Crags{
-		repos: repos,
+		Services: services,
 	}
-}
-
-// TODO: Keep working on these APIs and move to powerputty
-func addErrGroupFn[T any](eg *errgroup.Group, fn func() (T, error)) <-chan T {
-	ch := make(chan T, 1)
-	eg.Go(func() error {
-		defer close(ch)
-		result, err := fn()
-		if err != nil {
-			slog.Error(fmt.Sprintf("error in errgroup function: %v", err))
-			return err
-		}
-		ch <- result
-		return nil
-	})
-	return ch
 }
 
 func (c *Crags) GetCrag(ctx context.Context, req CragsReadRequest) (*models.Crag, error) {
@@ -69,16 +52,16 @@ func (c *Crags) ListCrags(ctx context.Context, req CragsReadRequest) ([]models.C
 	defer listCragsObserver()()
 
 	var errGroup errgroup.Group
-	cragsCh := addErrGroupFn(&errGroup, func() ([]models.Crag, error) {
+	cragsCh := servicep.ErrGroupValuer(&errGroup, func() ([]models.Crag, error) {
 		return c.repos.Crags.GetCrags(ctx, db.CragsReadRequest{
 			ID:      req.ID,
 			Include: db.CragsIncludeSchema.FromRequest(req.Include),
 		})
 	})
-	areasByCragIDCh := addErrGroupFn(&errGroup, func() (map[int64][]models.Area, error) {
+	areasByCragIDCh := servicep.ErrGroupValuer(&errGroup, func() (map[int64][]models.Area, error) {
 		return c.areasByCragID(ctx, req)
 	})
-	trailsByIDCh := addErrGroupFn(&errGroup, func() (map[int64]models.Trail, error) {
+	trailsByIDCh := servicep.ErrGroupValuer(&errGroup, func() (map[int64]models.Trail, error) {
 		return c.trailsByID(ctx, req)
 	})
 
@@ -130,28 +113,31 @@ func (c *Crags) Update(ctx context.Context, req CragUpdateRequest) error {
 			}
 			crag.Bounds = *req.Bounds
 		}
+		var g errgroup.Group
 		if req.Has("trail") {
 			if req.Trail == nil { // Remove trail
 				crag.TrailID = servicep.ZeroToPtr(int64(0))
-			} else if crag.Trail != nil { // Update existing trail
-				crag.Trail.Lines = req.Trail.Lines
+			} else if crag.TrailID != nil { // Update existing trail
+				g.Go(func() error {
+					err := c.Trails.Update(ctx, *crag.TrailID, req.Trail.Lines)
+					if err != nil {
+						return fmt.Errorf("failed to update trail: %w", err)
+					}
+					return nil
+				})
 			} else { // Create new trail
-				// TODO: Setup a new service to manage inserting trails alongside their lines!
-				trail, err := c.repos.Trails.Insert(ctx, *req.Trail)
+				trail, err := c.Trails.Insert(ctx, req.Trail.Lines)
 				if err != nil {
 					return fmt.Errorf("failed to insert new trail: %w", err)
 				}
-				trailID, err := trail.LastInsertId()
-				if err != nil {
-					return fmt.Errorf("failed to get last insert ID for trail: %w", err)
-				}
-				crag.TrailID = servicep.ZeroToPtr(trailID)
+				crag.TrailID = servicep.ZeroToPtr(trail.ID)
 			}
 		}
-		if _, err := c.repos.Crags.Update(ctx, crag); err != nil {
-			return fmt.Errorf("failed to update crag: %w", err)
-		}
-		return nil
+		g.Go(func() error {
+			_, err := c.repos.Crags.Update(ctx, crag)
+			return err
+		})
+		return g.Wait()
 	})
 }
 

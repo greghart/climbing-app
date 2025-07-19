@@ -3,6 +3,7 @@
 Service layer lies on top of the database repos.
 
 It's responsible for stitching up requests that require multiple operations across entities,
-whether long running transactions or large queries. 
+whether long running transactions, larger queries, coordinated operations, etc.
 
-Services correspond 1:1 to our HTTP/gRPC layer. Every public method should respond to an endpoint.
+Since we're so high level, every service can directly access every other service, and we embrace the
+lack of isolation/potential for circular dependencies in favor of the ease of use.

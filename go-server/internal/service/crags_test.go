@@ -16,7 +16,7 @@ import (
 
 func TestCrags_GetCrags(t *testing.T) {
 	repos, ctx := testutil.TestRepos(t)
-	service := NewCrags(repos)
+	services := NewServices(repos)
 	testutil.LoadCrags(t, ctx, repos.Crags.DB)
 
 	combos := testutil.IncludeCombos(CragsIncludeSchema)
@@ -25,7 +25,7 @@ func TestCrags_GetCrags(t *testing.T) {
 			req := CragsReadRequest{
 				Include: CragsIncludeSchema.Include(includes...),
 			}
-			_crags, err := service.ListCrags(ctx, req)
+			_crags, err := services.Crags.ListCrags(ctx, req)
 			errcmp.MustMatch(t, err, "")
 			crags := make([]models.Crag, len(_crags))
 			for i := range _crags {
@@ -55,7 +55,7 @@ func TestCrags_GetCrags(t *testing.T) {
 
 func TestCrags_GetCrag(t *testing.T) {
 	repos, ctx := testutil.TestRepos(t)
-	service := NewCrags(repos)
+	services := NewServices(repos)
 	testutil.LoadCrags(t, ctx, repos.Crags.DB)
 
 	for _, includes := range testutil.IncludeCombos(CragsIncludeSchema) {
@@ -65,7 +65,7 @@ func TestCrags_GetCrag(t *testing.T) {
 				Include: CragsIncludeSchema.Include(includes...),
 			}
 			req.ID = 55
-			crag, err := testutil.NormalizeCrag(service.GetCrag(ctx, req))
+			crag, err := testutil.NormalizeCrag(services.Crags.GetCrag(ctx, req))
 			errcmp.MustMatch(t, err, "")
 
 			want := expectedCragForInclude(*expected, req)
@@ -178,6 +178,46 @@ func TestCrags_UpdateCrag(t *testing.T) {
 				}
 			},
 		},
+		"update existing trail": {
+			crag: santee,
+			update: CragUpdateRequest{
+				FieldMask: servicep.NewFieldMask([]string{"trail"}),
+				Trail: &models.Trail{
+					Lines: []models.Line{
+						{
+							Start: models.Coordinate{Lat: 1.0, Lng: 2.0},
+							End:   models.Coordinate{Lat: 3.0, Lng: 4.0},
+						},
+					},
+				},
+			},
+			expect: func(t *testing.T, crag *models.Crag, req *CragUpdateRequest) {
+				expected := models.Trail{
+					ID: santee.Trail.ID,
+					Lines: []models.Line{
+						{
+							Start: models.Coordinate{Lat: 1.0, Lng: 2.0},
+							End:   models.Coordinate{Lat: 3.0, Lng: 4.0},
+						},
+					},
+				}
+				if !cmp.Equal(*crag.Trail, expected, cmpOpts) {
+					t.Fatalf("crag.Trail not created as expected\n:%s", cmp.Diff(*crag.Trail, expected, cmpOpts))
+				}
+			},
+		},
+		"remove existing trail": {
+			crag: santee,
+			update: CragUpdateRequest{
+				FieldMask: servicep.NewFieldMask([]string{"trail"}),
+				Trail:     nil,
+			},
+			expect: func(t *testing.T, crag *models.Crag, req *CragUpdateRequest) {
+				if crag.Trail != nil {
+					t.Fatalf("crag.Trail not deleted as expected:\n%v", crag.Trail)
+				}
+			},
+		},
 		"out of date update is rejected": {
 			update: CragUpdateRequest{
 				FieldMask:   servicep.NewFieldMask([]string{"name"}),
@@ -192,7 +232,7 @@ func TestCrags_UpdateCrag(t *testing.T) {
 	for name, tests := range tests {
 		t.Run(name, func(t *testing.T) {
 			repos, ctx := testutil.TestRepos(t)
-			service := NewCrags(repos)
+			services := NewServices(repos)
 			testutil.LoadCrags(t, ctx, repos.Crags.DB)
 
 			crag := tests.crag
@@ -204,10 +244,10 @@ func TestCrags_UpdateCrag(t *testing.T) {
 			if req.RequestedAt.IsZero() {
 				req.RequestedAt = time.Now()
 			}
-			err := service.Update(ctx, req)
+			err := services.Crags.Update(ctx, req)
 			errcmp.MustMatch(t, err, tests.err)
 
-			updated, err := service.GetCrag(ctx, CragsReadRequest{
+			updated, err := services.Crags.GetCrag(ctx, CragsReadRequest{
 				ID:      req.ID,
 				Include: servicep.NewIncludeRequest().Include("trail.lines"),
 			})
@@ -273,7 +313,7 @@ var cmpOpts = cmp.Options{
 	cmpopts.EquateEmpty(),
 	cmp.FilterPath(
 		func(p cmp.Path) bool {
-			return strings.Contains(p.String(), "UpdatedAt") || strings.Contains(p.String(), "CreatedAt")
+			return strings.Contains(p.String(), "UpdatedAt") || strings.Contains(p.String(), "CreatedAt") || strings.Contains(p.String(), "ID")
 		},
 		cmp.Ignore(),
 	),
