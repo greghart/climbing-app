@@ -4,6 +4,8 @@
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Coordinate } from "./coordinate_pb";
+import { file_coordinate } from "./coordinate_pb";
 import type { Grade } from "./grade_pb";
 import { file_grade } from "./grade_pb";
 import type { Message } from "@bufbuild/protobuf";
@@ -12,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file route.proto.
  */
 export const file_route: GenFile = /*@__PURE__*/
-  fileDesc("Cgtyb3V0ZS5wcm90bxICcGIiuAIKBVJvdXRlEgoKAmlkGAEgASgDEgwKBG5hbWUYAiABKAkSHAoEc2l6ZRgDIAEoCzIOLnBiLlJvdXRlLlNpemUSEwoLZGVzY3JpcHRpb24YBCABKAkSFAoMZmlyc3RfYXNjZW50GAUgASgJEhgKBWdyYWRlGAYgASgLMgkucGIuR3JhZGUSEgoKYm91bGRlcl9pZBgIIAEoAxpJCgRTaXplEiIKBXVuaXRzGAEgASgOMhMucGIuUm91dGUuU2l6ZVVuaXRzEg4KBmhlaWdodBgCIAEoBRINCgV3aWR0aBgDIAEoBSJTCglTaXplVW5pdHMSGgoWU0laRV9VTklUU19VTlNQRUNJRklFRBAAEhUKEVNJWkVfVU5JVFNfTUVURVJTEAESEwoPU0laRV9VTklUU19GRUVUEAJCLlosZ2l0aHViLmNvbS9ncmVnaGFydC9jbGltYmluZy1hcHAvaW50ZXJuYWwvcGJiBnByb3RvMw", [file_grade]);
+  fileDesc("Cgtyb3V0ZS5wcm90bxICcGIi3QIKBVJvdXRlEgoKAmlkGAEgASgDEgwKBG5hbWUYAiABKAkSHAoEc2l6ZRgDIAEoCzIOLnBiLlJvdXRlLlNpemUSEwoLZGVzY3JpcHRpb24YBCABKAkSFAoMZmlyc3RfYXNjZW50GAUgASgJEhgKBWdyYWRlGAYgASgLMgkucGIuR3JhZGUSEgoKYm91bGRlcl9pZBgIIAEoAxIjCgtjb29yZGluYXRlcxgJIAEoCzIOLnBiLkNvb3JkaW5hdGUaSQoEU2l6ZRIiCgV1bml0cxgBIAEoDjITLnBiLlJvdXRlLlNpemVVbml0cxIOCgZoZWlnaHQYAiABKAUSDQoFd2lkdGgYAyABKAUiUwoJU2l6ZVVuaXRzEhoKFlNJWkVfVU5JVFNfVU5TUEVDSUZJRUQQABIVChFTSVpFX1VOSVRTX01FVEVSUxABEhMKD1NJWkVfVU5JVFNfRkVFVBACQi5aLGdpdGh1Yi5jb20vZ3JlZ2hhcnQvY2xpbWJpbmctYXBwL2ludGVybmFsL3BiYgZwcm90bzM", [file_coordinate, file_grade]);
 
 /**
  * @generated from message pb.Route
@@ -52,6 +54,11 @@ export type Route = Message<"pb.Route"> & {
    * @generated from field: int64 boulder_id = 8;
    */
   boulderId: bigint;
+
+  /**
+   * @generated from field: pb.Coordinate coordinates = 9;
+   */
+  coordinates?: Coordinate;
 };
 
 /**

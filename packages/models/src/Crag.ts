@@ -4,9 +4,11 @@ import { type ICommentable } from "./Commentable.js";
 import Coordinate, { type ICoordinate } from "./Coordinate.js";
 import Parking, { type IParking } from "./Parking.js";
 import { type IPhotoable } from "./Photoable.js";
+import type { ITimestamps } from "./Timestamps.js";
+import Timestamps from "./Timestamps.js";
 import Trail, { type ITrail } from "./Trail.js";
 
-export interface ICrag {
+export type ICrag = {
   id?: number; // IDs are tricky -- schema wise they always exist, but not till we save
   name: string;
   description?: string;
@@ -24,7 +26,7 @@ export interface ICrag {
   commentable?: ICommentable;
   photoable?: IPhotoable;
   trail?: ITrail;
-}
+} & ITimestamps;
 
 interface Crag extends Omit<ICrag, "center" | "parking"> {}
 class Crag {
@@ -44,6 +46,9 @@ class Crag {
     this.id = data.id;
     this.name = data.name;
     this.description = data.description;
+    this.defaultZoom = data.defaultZoom;
+    this.minZoom = data.minZoom;
+    this.maxZoom = data.maxZoom;
 
     this.bounds = Bounds.build(data.bounds);
     this.center = Coordinate.build(data.center);
@@ -54,10 +59,7 @@ class Crag {
     if (data.parking) {
       this.parking = new Parking(data.parking);
     }
-
-    this.defaultZoom = data.defaultZoom;
-    this.minZoom = data.minZoom;
-    this.maxZoom = data.maxZoom;
+    Timestamps.mix(this, data);
   }
 }
 

@@ -157,11 +157,13 @@ func (s *Server) updateCrag(c *gin.Context) {
 // Helpers
 
 func (s *Server) error(c *gin.Context, err error, _status ...int) {
-	// TODO: Integrate logging solution, exception reporting
 	// TODO: Implement error classifications -- don't surface unexpected errors to the user
 	status := http.StatusInternalServerError
 	if len(_status) == 1 {
 		status = _status[0]
+	}
+	if status == http.StatusInternalServerError {
+		slog.Error(fmt.Sprintf("%s '%s' server error(%d): %v", c.Request.Method, c.Request.RequestURI, status, err))
 	}
 	c.JSON(status, gin.H{"error": fmt.Sprintf("Failed to get crags: %v", err)})
 }

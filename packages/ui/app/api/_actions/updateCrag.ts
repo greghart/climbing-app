@@ -1,13 +1,39 @@
 "use server";
+import client from "@/app/_grpc/client";
+import getCrag from "@/app/api/_actions/getCrag";
 import cragSchema from "@/app/api/_schemas/crag";
 import formAction from "@/app/api/formAction";
 import { CragSchema, getDataSource } from "@/db";
 import CragRepository from "@/db/repos/CragRepository";
+import { timestampFromDate } from "@bufbuild/protobuf/wkt";
 import { ICrag, isBounds } from "models";
 import "server-only";
 import { z } from "zod";
 
-const updateCrag = formAction<ICrag, z.infer<typeof cragSchema>>(
+const updateCrag = formAction<
+  ICrag,
+  z.infer<typeof cragSchema>,
+  { id: number; fieldMask: string[] }
+>(cragSchema, async (res, data) => {
+  console.warn("UpdatedAt", res.data.updatedAt);
+  await client.updateCrag({
+    id: BigInt(res.meta.id),
+    requestedAt: timestampFromDate(res.data.updatedAt),
+    fieldMask: {
+      paths: res.meta.fieldMask,
+    },
+    name: data.name,
+    description: data.description,
+    bounds: data.bounds,
+    // TODO: Technically our models should be bigints, but large change in this codebase, so put it
+    // off for now.
+    trail: data.trail as any,
+  });
+  const crag = await getCrag(res.meta.id);
+  return res.respond(crag!, "Crag updated");
+});
+
+const updateCragLegacy = formAction<ICrag, z.infer<typeof cragSchema>>(
   cragSchema,
   async (res, data) => {
     const ds = await getDataSource();

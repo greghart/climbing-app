@@ -217,6 +217,7 @@ export function ProtoToCrag(proto: Crag): ICrag {
       photos: proto.photos?.map(ProtoToPhoto),
     },
     trail: proto.trail ? ProtoToTrail(proto.trail) : undefined,
+    ...ProtoToTimestamps(proto.timestamps),
   };
 }
 

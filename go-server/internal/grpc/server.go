@@ -3,6 +3,7 @@ package grpc
 import (
 	"context"
 	"fmt"
+	"log/slog"
 	"net"
 	"os"
 	"strings"
@@ -180,6 +181,7 @@ func (req *UpdateCragRequest) Validate() error {
 }
 
 func (req *UpdateCragRequest) ToService() service.CragUpdateRequest {
+	slog.Info("UpdateCragRequest.ToService", "req", req)
 	return service.CragUpdateRequest{
 		ID:          req.Id,
 		FieldMask:   servicep.NewFieldMaskFromPB(req.FieldMask),

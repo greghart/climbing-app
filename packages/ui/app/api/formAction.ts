@@ -55,9 +55,7 @@ export default function formAction<
       if (!validatedFields.success) {
         return res.withData(data).withZerr(validatedFields).toJSON();
       }
-      return (
-        await action(res.withData(data), validatedFields.data, prevState)
-      ).toJSON();
+      return (await action(res, validatedFields.data, prevState)).toJSON();
     } catch (err: any) {
       // TODO: This is a quick workaround -- next/navigation redirect throws an error
       // as a signal -- we should either re-throw it, or handle redirects in our layer to

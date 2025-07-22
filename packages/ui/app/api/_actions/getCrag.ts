@@ -28,6 +28,7 @@ const getCrag = cache(
       .then((res) => {
         if (res.crag) {
           const proto = ProtoToCrag(res.crag);
+          console.warn("getCrag", proto);
           return proto;
         }
         return null;

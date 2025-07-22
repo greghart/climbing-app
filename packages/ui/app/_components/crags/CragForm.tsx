@@ -18,7 +18,7 @@ export default function CragForm(props: Props) {
   const [state, formAction, meta] = useActionState(updateCrag, {
     ok: true,
     data: props.crag,
-    meta: {},
+    meta: { id: props.crag.id!, fieldMask: ["bounds", "name", "description"] },
   });
   return (
     <form action={formAction}>

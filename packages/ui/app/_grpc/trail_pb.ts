@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file trail.proto.
  */
 export const file_trail: GenFile = /*@__PURE__*/
-  fileDesc("Cgt0cmFpbC5wcm90bxICcGIiPQoFVHJhaWwSCgoCaWQYASABKAMSDwoHY3JhZ19pZBgCIAEoAxIXCgVsaW5lcxgDIAMoCzIILnBiLkxpbmVCLlosZ2l0aHViLmNvbS9ncmVnaGFydC9jbGltYmluZy1hcHAvaW50ZXJuYWwvcGJiBnByb3RvMw", [file_line]);
+  fileDesc("Cgt0cmFpbC5wcm90bxICcGIiLAoFVHJhaWwSCgoCaWQYASABKAMSFwoFbGluZXMYAiADKAsyCC5wYi5MaW5lQi5aLGdpdGh1Yi5jb20vZ3JlZ2hhcnQvY2xpbWJpbmctYXBwL2ludGVybmFsL3BiYgZwcm90bzM", [file_line]);
 
 /**
  * @generated from message pb.Trail
@@ -24,14 +24,7 @@ export type Trail = Message<"pb.Trail"> & {
   id: bigint;
 
   /**
-   * Omitted to avoid circular reference
-   *
-   * @generated from field: int64 crag_id = 2;
-   */
-  cragId: bigint;
-
-  /**
-   * @generated from field: repeated pb.Line lines = 3;
+   * @generated from field: repeated pb.Line lines = 2;
    */
   lines: Line[];
 };

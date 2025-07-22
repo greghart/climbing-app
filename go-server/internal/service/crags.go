@@ -91,6 +91,7 @@ func (c *Crags) Update(ctx context.Context, req CragUpdateRequest) error {
 
 	return c.repos.Crags.RunInTx(ctx, func(ctx context.Context) error {
 		crag, err := c.repos.Crags.Find(ctx, req.ID)
+		// Validate
 		if err != nil {
 			return fmt.Errorf("failed to find crag for update with ID %d: %w", req.ID, err)
 		}
@@ -100,19 +101,8 @@ func (c *Crags) Update(ctx context.Context, req CragUpdateRequest) error {
 		if crag.UpdatedAt.After(req.RequestedAt) {
 			return fmt.Errorf("update is out of date: crag was last updated at '%s', requested at '%s'", crag.UpdatedAt, req.RequestedAt)
 		}
-		// Update crag
-		if req.Has("name") {
-			crag.Name = req.Name
-		}
-		if req.Has("description") {
-			crag.Description = req.Description
-		}
-		if req.Has("bounds") {
-			if req.Bounds == nil {
-				return fmt.Errorf("bounds cannot be nil'ed out")
-			}
-			crag.Bounds = *req.Bounds
-		}
+
+		// Update trail
 		var g errgroup.Group
 		if req.Has("trail") {
 			if req.Trail == nil { // Remove trail
@@ -133,7 +123,25 @@ func (c *Crags) Update(ctx context.Context, req CragUpdateRequest) error {
 				crag.TrailID = servicep.ZeroToPtr(trail.ID)
 			}
 		}
+
+		// Update crag
 		g.Go(func() error {
+			if !req.HasAny("name", "description", "bounds") {
+				return nil
+			}
+			crag.UpdatedAt = time.Now()
+			if req.Has("name") {
+				crag.Name = req.Name
+			}
+			if req.Has("description") {
+				crag.Description = req.Description
+			}
+			if req.Has("bounds") {
+				if req.Bounds == nil {
+					return fmt.Errorf("bounds cannot be nil'ed out")
+				}
+				crag.Bounds = *req.Bounds
+			}
 			_, err := c.repos.Crags.Update(ctx, crag)
 			return err
 		})

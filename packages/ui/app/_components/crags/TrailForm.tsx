@@ -22,7 +22,7 @@ export default function TrailForm<Meta>(props: Props<Meta>) {
   const [state, formAction, meta] = useActionState(updateCrag, {
     ok: true,
     data: props.crag,
-    meta: {},
+    meta: { id: props.crag.id!, fieldMask: ["trail"] },
   });
   return (
     <form action={formAction}>
