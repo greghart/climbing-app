@@ -223,7 +223,7 @@ func TestCrags_UpdateCrag(t *testing.T) {
 				FieldMask:   servicep.NewFieldMask([]string{"name"}),
 				ID:          santee.ID,
 				Name:        "Updated name",
-				RequestedAt: time.Now().Add(-time.Hour), // Simulate an out-of-date update
+				RequestedAt: time.Now().Add(-365 * 15 * 24 * time.Hour), // Simulate an out-of-date update
 			},
 			err: "update is out of date",
 		},
