@@ -10,6 +10,7 @@ type Area struct {
 	Boulders    []Boulder    `json:"boulders,omitzero"`
 	Commentable *Commentable `json:"commentable,omitzero" sqlp:"commentable"`
 	Photoable   *Photoable   `json:"photoable,omitzero" sqlp:"photoable"`
+	Timestamps
 }
 
 func (a Area) IsZero() bool {

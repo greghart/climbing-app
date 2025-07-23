@@ -2,36 +2,62 @@ syntax = "proto3";
 
 package pb;
 
+import "area.proto";
 import "bounds.proto";
 import "crag.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
+import "polygon.proto";
 import "trail.proto";
 
 
 option go_package = "github.com/greghart/climbing-app/internal/pb";
 
+// GetArea
+message ReadAreaOptions {
+  repeated string includes = 1;
+}
+message GetAreaRequest {
+  int64 id = 1;
+  ReadAreaOptions opts = 2;
+}
+message GetAreaResponse {
+  Area area = 1;
+}
+
+// UpdateArea
+message UpdateAreaRequest {
+  int64 id = 1;
+  google.protobuf.FieldMask field_mask = 2;
+  string name = 3;
+  string description = 4;
+  Polygon polygon = 5;
+  google.protobuf.Timestamp requested_at = 6;
+}
+message UpdateAreaResponse {
+}
+
+// GetCrag
 message ReadCragOptions {
   repeated string includes = 1;
 }
-
+message GetCragResponse {
+  Crag crag = 1;
+}
 message GetCragRequest {
   int64 id = 1;
   ReadCragOptions opts = 2;
 }
 
-message GetCragResponse {
-  Crag crag = 1;
-}
-
+// ListCrags
 message ListCragsRequest {
   ReadCragOptions opts = 2;
 }
-
 message ListCragsResponse {
   repeated Crag crags = 1;
 }
 
+// UpdateCrag
 message UpdateCragRequest {
   int64 id = 1;
   google.protobuf.FieldMask field_mask = 2;
@@ -41,11 +67,15 @@ message UpdateCragRequest {
   Bounds bounds = 6;
   google.protobuf.Timestamp requested_at = 7;
 }
-
 message UpdateCragResponse {
 }
 
 service ClimbService {
+  // Areas
+  rpc GetArea(GetAreaRequest) returns (GetAreaResponse);
+  rpc UpdateArea(UpdateAreaRequest) returns (UpdateAreaResponse);
+
+  // Crags
   rpc GetCrag(GetCragRequest) returns (GetCragResponse);
   rpc ListCrags(ListCragsRequest) returns (ListCragsResponse);
   rpc UpdateCrag(UpdateCragRequest) returns (UpdateCragResponse);

@@ -103,11 +103,11 @@ func (c *Crags) Update(ctx context.Context, req CragUpdateRequest) error {
 		}
 
 		// Update trail
-		// Side effect of setting crag.TrailID for update
+		// If crag.TrailID won't change, we can run concurrently
 		var g errgroup.Group
 		if req.Has("trail") {
 			if req.Trail == nil { // Remove trail
-				crag.TrailID = servicep.ZeroToPtr(int64(0))
+				crag.TrailID = nil
 				// TODO: Delete the existing trail?
 			} else if crag.TrailID != nil { // Update existing trail
 				g.Go(func() error {
