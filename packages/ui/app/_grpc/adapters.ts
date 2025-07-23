@@ -167,6 +167,7 @@ export function ProtoToArea(proto: Area): IArea {
       descriptor: "",
       photos: proto.photos?.map(ProtoToPhoto),
     },
+    ...ProtoToTimestamps(proto.timestamps),
   };
 }
 
@@ -190,6 +191,7 @@ export function ProtoToBoulder(proto: Boulder): IBoulder {
       descriptor: "",
       photos: proto.photos?.map(ProtoToPhoto),
     },
+    ...ProtoToTimestamps(proto.timestamps),
   };
 }
 

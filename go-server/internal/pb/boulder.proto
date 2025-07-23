@@ -7,6 +7,7 @@ import "coordinate.proto";
 import "photo.proto";
 import "polygon.proto";
 import "route.proto";
+import "timestamps.proto";
 
 option go_package = "github.com/greghart/climbing-app/internal/pb";
 
@@ -20,4 +21,5 @@ message Boulder {
   Polygon polygon = 7;
   repeated Comment comments = 8;
   repeated Photo photos = 9;
+  Timestamps timestamps = 10;
 }

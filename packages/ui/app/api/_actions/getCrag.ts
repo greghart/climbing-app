@@ -10,7 +10,7 @@ import "server-only";
 
 const getCrag = cache(
   async (
-    id: number | string,
+    id: bigint | number | string,
     opts: ExtractMessage<ReadCragOptions> = {
       includes: [
         "areas.boulders.routes",
@@ -28,7 +28,6 @@ const getCrag = cache(
       .then((res) => {
         if (res.crag) {
           const proto = ProtoToCrag(res.crag);
-          console.warn("getCrag", proto);
           return proto;
         }
         return null;

@@ -1,15 +1,35 @@
 "use server";
+import client from "@/app/_grpc/client";
+import getArea from "@/app/api/_actions/getArea";
 import areaSchema from "@/app/api/_schemas/area";
 import formAction from "@/app/api/formAction";
 import { AreaSchema, getDataSource } from "@/db";
+import { timestampFromDate } from "@bufbuild/protobuf/wkt";
 import { IArea } from "models";
 import { redirect } from "next/navigation";
 import "server-only";
 import { z } from "zod";
 
-type Model = Pick<IArea, "name" | "description" | "polygon">;
-type Meta = { id: number };
-const createArea = formAction<Model, z.infer<typeof areaSchema>, Meta>(
+type Meta = { id: number; fieldMask: string[] };
+const updateArea = formAction<IArea, z.infer<typeof areaSchema>, Meta>(
+  areaSchema,
+  async (res, data) => {
+    await client.updateArea({
+      id: BigInt(res.meta.id),
+      requestedAt: timestampFromDate(res.data.updatedAt),
+      fieldMask: {
+        paths: res.meta.fieldMask,
+      },
+      name: data.name,
+      description: data.description,
+      polygon: data.polygon as any, // TODO: Fix id types
+    });
+    const area = await getArea(res.meta.id);
+    return res.respond(area!, "Area updated");
+  }
+);
+
+const createAreaLegacy = formAction<IArea, z.infer<typeof areaSchema>, Meta>(
   areaSchema,
   async (res, data) => {
     const ds = await getDataSource();
@@ -53,4 +73,4 @@ const createArea = formAction<Model, z.infer<typeof areaSchema>, Meta>(
   }
 );
 
-export default createArea;
+export default updateArea;

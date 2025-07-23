@@ -12,6 +12,7 @@ type Route struct {
 	Grade       *Grade     `json:"grade,omitzero" sqlp:"-"`
 	BoulderID   int64      `json:"boulder_id,omitzero" sqlp:"boulderId"`
 	Coordinates Coordinate `json:"coordinates" sqlp:"coordinates,promote"`
+	Timestamps
 }
 
 func (r Route) GetGrade() *Grade {

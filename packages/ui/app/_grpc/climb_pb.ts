@@ -4,12 +4,16 @@
 
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Area } from "./area_pb";
+import { file_area } from "./area_pb";
 import type { Bounds } from "./bounds_pb";
 import { file_bounds } from "./bounds_pb";
 import type { Crag } from "./crag_pb";
 import { file_crag } from "./crag_pb";
 import type { FieldMask, Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_field_mask, file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
+import type { Polygon } from "./polygon_pb";
+import { file_polygon } from "./polygon_pb";
 import type { Trail } from "./trail_pb";
 import { file_trail } from "./trail_pb";
 import type { Message } from "@bufbuild/protobuf";
@@ -18,9 +22,126 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file climb.proto.
  */
 export const file_climb: GenFile = /*@__PURE__*/
-  fileDesc("CgtjbGltYi5wcm90bxICcGIiIwoPUmVhZENyYWdPcHRpb25zEhAKCGluY2x1ZGVzGAEgAygJIj8KDkdldENyYWdSZXF1ZXN0EgoKAmlkGAEgASgDEiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQ3JhZ09wdGlvbnMiKQoPR2V0Q3JhZ1Jlc3BvbnNlEhYKBGNyYWcYASABKAsyCC5wYi5DcmFnIjUKEExpc3RDcmFnc1JlcXVlc3QSIQoEb3B0cxgCIAEoCzITLnBiLlJlYWRDcmFnT3B0aW9ucyIsChFMaXN0Q3JhZ3NSZXNwb25zZRIXCgVjcmFncxgBIAMoCzIILnBiLkNyYWci2gEKEVVwZGF0ZUNyYWdSZXF1ZXN0EgoKAmlkGAEgASgDEi4KCmZpZWxkX21hc2sYAiABKAsyGi5nb29nbGUucHJvdG9idWYuRmllbGRNYXNrEgwKBG5hbWUYAyABKAkSEwoLZGVzY3JpcHRpb24YBCABKAkSGAoFdHJhaWwYBSABKAsyCS5wYi5UcmFpbBIaCgZib3VuZHMYBiABKAsyCi5wYi5Cb3VuZHMSMAoMcmVxdWVzdGVkX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIUChJVcGRhdGVDcmFnUmVzcG9uc2UyuQEKDENsaW1iU2VydmljZRIyCgdHZXRDcmFnEhIucGIuR2V0Q3JhZ1JlcXVlc3QaEy5wYi5HZXRDcmFnUmVzcG9uc2USOAoJTGlzdENyYWdzEhQucGIuTGlzdENyYWdzUmVxdWVzdBoVLnBiLkxpc3RDcmFnc1Jlc3BvbnNlEjsKClVwZGF0ZUNyYWcSFS5wYi5VcGRhdGVDcmFnUmVxdWVzdBoWLnBiLlVwZGF0ZUNyYWdSZXNwb25zZUIuWixnaXRodWIuY29tL2dyZWdoYXJ0L2NsaW1iaW5nLWFwcC9pbnRlcm5hbC9wYmIGcHJvdG8z", [file_bounds, file_crag, file_google_protobuf_field_mask, file_google_protobuf_timestamp, file_trail]);
+  fileDesc("CgtjbGltYi5wcm90bxICcGIiIwoPUmVhZEFyZWFPcHRpb25zEhAKCGluY2x1ZGVzGAEgAygJIj8KDkdldEFyZWFSZXF1ZXN0EgoKAmlkGAEgASgDEiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQXJlYU9wdGlvbnMiKQoPR2V0QXJlYVJlc3BvbnNlEhYKBGFyZWEYASABKAsyCC5wYi5BcmVhIsIBChFVcGRhdGVBcmVhUmVxdWVzdBIKCgJpZBgBIAEoAxIuCgpmaWVsZF9tYXNrGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLkZpZWxkTWFzaxIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEhwKB3BvbHlnb24YBSABKAsyCy5wYi5Qb2x5Z29uEjAKDHJlcXVlc3RlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFAoSVXBkYXRlQXJlYVJlc3BvbnNlIiMKD1JlYWRDcmFnT3B0aW9ucxIQCghpbmNsdWRlcxgBIAMoCSIpCg9HZXRDcmFnUmVzcG9uc2USFgoEY3JhZxgBIAEoCzIILnBiLkNyYWciPwoOR2V0Q3JhZ1JlcXVlc3QSCgoCaWQYASABKAMSIQoEb3B0cxgCIAEoCzITLnBiLlJlYWRDcmFnT3B0aW9ucyI1ChBMaXN0Q3JhZ3NSZXF1ZXN0EiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQ3JhZ09wdGlvbnMiLAoRTGlzdENyYWdzUmVzcG9uc2USFwoFY3JhZ3MYASADKAsyCC5wYi5DcmFnItoBChFVcGRhdGVDcmFnUmVxdWVzdBIKCgJpZBgBIAEoAxIuCgpmaWVsZF9tYXNrGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLkZpZWxkTWFzaxIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEhgKBXRyYWlsGAUgASgLMgkucGIuVHJhaWwSGgoGYm91bmRzGAYgASgLMgoucGIuQm91bmRzEjAKDHJlcXVlc3RlZF9hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFAoSVXBkYXRlQ3JhZ1Jlc3BvbnNlMqoCCgxDbGltYlNlcnZpY2USMgoHR2V0QXJlYRISLnBiLkdldEFyZWFSZXF1ZXN0GhMucGIuR2V0QXJlYVJlc3BvbnNlEjsKClVwZGF0ZUFyZWESFS5wYi5VcGRhdGVBcmVhUmVxdWVzdBoWLnBiLlVwZGF0ZUFyZWFSZXNwb25zZRIyCgdHZXRDcmFnEhIucGIuR2V0Q3JhZ1JlcXVlc3QaEy5wYi5HZXRDcmFnUmVzcG9uc2USOAoJTGlzdENyYWdzEhQucGIuTGlzdENyYWdzUmVxdWVzdBoVLnBiLkxpc3RDcmFnc1Jlc3BvbnNlEjsKClVwZGF0ZUNyYWcSFS5wYi5VcGRhdGVDcmFnUmVxdWVzdBoWLnBiLlVwZGF0ZUNyYWdSZXNwb25zZUIuWixnaXRodWIuY29tL2dyZWdoYXJ0L2NsaW1iaW5nLWFwcC9pbnRlcm5hbC9wYmIGcHJvdG8z", [file_area, file_bounds, file_crag, file_google_protobuf_field_mask, file_google_protobuf_timestamp, file_polygon, file_trail]);
 
 /**
+ * GetArea
+ *
+ * @generated from message pb.ReadAreaOptions
+ */
+export type ReadAreaOptions = Message<"pb.ReadAreaOptions"> & {
+  /**
+   * @generated from field: repeated string includes = 1;
+   */
+  includes: string[];
+};
+
+/**
+ * Describes the message pb.ReadAreaOptions.
+ * Use `create(ReadAreaOptionsSchema)` to create a new message.
+ */
+export const ReadAreaOptionsSchema: GenMessage<ReadAreaOptions> = /*@__PURE__*/
+  messageDesc(file_climb, 0);
+
+/**
+ * @generated from message pb.GetAreaRequest
+ */
+export type GetAreaRequest = Message<"pb.GetAreaRequest"> & {
+  /**
+   * @generated from field: int64 id = 1;
+   */
+  id: bigint;
+
+  /**
+   * @generated from field: pb.ReadAreaOptions opts = 2;
+   */
+  opts?: ReadAreaOptions;
+};
+
+/**
+ * Describes the message pb.GetAreaRequest.
+ * Use `create(GetAreaRequestSchema)` to create a new message.
+ */
+export const GetAreaRequestSchema: GenMessage<GetAreaRequest> = /*@__PURE__*/
+  messageDesc(file_climb, 1);
+
+/**
+ * @generated from message pb.GetAreaResponse
+ */
+export type GetAreaResponse = Message<"pb.GetAreaResponse"> & {
+  /**
+   * @generated from field: pb.Area area = 1;
+   */
+  area?: Area;
+};
+
+/**
+ * Describes the message pb.GetAreaResponse.
+ * Use `create(GetAreaResponseSchema)` to create a new message.
+ */
+export const GetAreaResponseSchema: GenMessage<GetAreaResponse> = /*@__PURE__*/
+  messageDesc(file_climb, 2);
+
+/**
+ * UpdateArea
+ *
+ * @generated from message pb.UpdateAreaRequest
+ */
+export type UpdateAreaRequest = Message<"pb.UpdateAreaRequest"> & {
+  /**
+   * @generated from field: int64 id = 1;
+   */
+  id: bigint;
+
+  /**
+   * @generated from field: google.protobuf.FieldMask field_mask = 2;
+   */
+  fieldMask?: FieldMask;
+
+  /**
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string description = 4;
+   */
+  description: string;
+
+  /**
+   * @generated from field: pb.Polygon polygon = 5;
+   */
+  polygon?: Polygon;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp requested_at = 6;
+   */
+  requestedAt?: Timestamp;
+};
+
+/**
+ * Describes the message pb.UpdateAreaRequest.
+ * Use `create(UpdateAreaRequestSchema)` to create a new message.
+ */
+export const UpdateAreaRequestSchema: GenMessage<UpdateAreaRequest> = /*@__PURE__*/
+  messageDesc(file_climb, 3);
+
+/**
+ * @generated from message pb.UpdateAreaResponse
+ */
+export type UpdateAreaResponse = Message<"pb.UpdateAreaResponse"> & {
+};
+
+/**
+ * Describes the message pb.UpdateAreaResponse.
+ * Use `create(UpdateAreaResponseSchema)` to create a new message.
+ */
+export const UpdateAreaResponseSchema: GenMessage<UpdateAreaResponse> = /*@__PURE__*/
+  messageDesc(file_climb, 4);
+
+/**
+ * GetCrag
+ *
  * @generated from message pb.ReadCragOptions
  */
 export type ReadCragOptions = Message<"pb.ReadCragOptions"> & {
@@ -35,7 +156,24 @@ export type ReadCragOptions = Message<"pb.ReadCragOptions"> & {
  * Use `create(ReadCragOptionsSchema)` to create a new message.
  */
 export const ReadCragOptionsSchema: GenMessage<ReadCragOptions> = /*@__PURE__*/
-  messageDesc(file_climb, 0);
+  messageDesc(file_climb, 5);
+
+/**
+ * @generated from message pb.GetCragResponse
+ */
+export type GetCragResponse = Message<"pb.GetCragResponse"> & {
+  /**
+   * @generated from field: pb.Crag crag = 1;
+   */
+  crag?: Crag;
+};
+
+/**
+ * Describes the message pb.GetCragResponse.
+ * Use `create(GetCragResponseSchema)` to create a new message.
+ */
+export const GetCragResponseSchema: GenMessage<GetCragResponse> = /*@__PURE__*/
+  messageDesc(file_climb, 6);
 
 /**
  * @generated from message pb.GetCragRequest
@@ -57,26 +195,11 @@ export type GetCragRequest = Message<"pb.GetCragRequest"> & {
  * Use `create(GetCragRequestSchema)` to create a new message.
  */
 export const GetCragRequestSchema: GenMessage<GetCragRequest> = /*@__PURE__*/
-  messageDesc(file_climb, 1);
+  messageDesc(file_climb, 7);
 
 /**
- * @generated from message pb.GetCragResponse
- */
-export type GetCragResponse = Message<"pb.GetCragResponse"> & {
-  /**
-   * @generated from field: pb.Crag crag = 1;
-   */
-  crag?: Crag;
-};
-
-/**
- * Describes the message pb.GetCragResponse.
- * Use `create(GetCragResponseSchema)` to create a new message.
- */
-export const GetCragResponseSchema: GenMessage<GetCragResponse> = /*@__PURE__*/
-  messageDesc(file_climb, 2);
-
-/**
+ * ListCrags
+ *
  * @generated from message pb.ListCragsRequest
  */
 export type ListCragsRequest = Message<"pb.ListCragsRequest"> & {
@@ -91,7 +214,7 @@ export type ListCragsRequest = Message<"pb.ListCragsRequest"> & {
  * Use `create(ListCragsRequestSchema)` to create a new message.
  */
 export const ListCragsRequestSchema: GenMessage<ListCragsRequest> = /*@__PURE__*/
-  messageDesc(file_climb, 3);
+  messageDesc(file_climb, 8);
 
 /**
  * @generated from message pb.ListCragsResponse
@@ -108,9 +231,11 @@ export type ListCragsResponse = Message<"pb.ListCragsResponse"> & {
  * Use `create(ListCragsResponseSchema)` to create a new message.
  */
 export const ListCragsResponseSchema: GenMessage<ListCragsResponse> = /*@__PURE__*/
-  messageDesc(file_climb, 4);
+  messageDesc(file_climb, 9);
 
 /**
+ * UpdateCrag
+ *
  * @generated from message pb.UpdateCragRequest
  */
 export type UpdateCragRequest = Message<"pb.UpdateCragRequest"> & {
@@ -155,7 +280,7 @@ export type UpdateCragRequest = Message<"pb.UpdateCragRequest"> & {
  * Use `create(UpdateCragRequestSchema)` to create a new message.
  */
 export const UpdateCragRequestSchema: GenMessage<UpdateCragRequest> = /*@__PURE__*/
-  messageDesc(file_climb, 5);
+  messageDesc(file_climb, 10);
 
 /**
  * @generated from message pb.UpdateCragResponse
@@ -168,13 +293,33 @@ export type UpdateCragResponse = Message<"pb.UpdateCragResponse"> & {
  * Use `create(UpdateCragResponseSchema)` to create a new message.
  */
 export const UpdateCragResponseSchema: GenMessage<UpdateCragResponse> = /*@__PURE__*/
-  messageDesc(file_climb, 6);
+  messageDesc(file_climb, 11);
 
 /**
  * @generated from service pb.ClimbService
  */
 export const ClimbService: GenService<{
   /**
+   * Areas
+   *
+   * @generated from rpc pb.ClimbService.GetArea
+   */
+  getArea: {
+    methodKind: "unary";
+    input: typeof GetAreaRequestSchema;
+    output: typeof GetAreaResponseSchema;
+  },
+  /**
+   * @generated from rpc pb.ClimbService.UpdateArea
+   */
+  updateArea: {
+    methodKind: "unary";
+    input: typeof UpdateAreaRequestSchema;
+    output: typeof UpdateAreaResponseSchema;
+  },
+  /**
+   * Crags
+   *
    * @generated from rpc pb.ClimbService.GetCrag
    */
   getCrag: {

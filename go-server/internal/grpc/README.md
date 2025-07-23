@@ -2,11 +2,14 @@
 
 Protobuf/gRPC declarations are in the `pb` package.
 
+Server implementation is spread across domain specific implementations (eg. `./crags.go` for crag
+related service methods).
+
 ## API Design Decisions
 
-* Use `google.protobuf.FieldMask` for writes, but use the more intentional `repeated string includes`
-  for reads. `FieldMask` specifically targets fields, while latter represents associations (and 
-  we don't support only selecting certain fields in fact).
+* Use `google.protobuf.FieldMask` (and `servicep.FieldMask`) for writes, but use the more 
+  intentional `repeated string includes` for reads. `FieldMask` specifically targets fields, while 
+  latter represents associations (and we don't support only selecting certain fields in fact).
 * Re-use our domain messages for updates and writes  -- application layer will handle whether 
   certain fields aren't valid for updating/writing (such as db ids).
 * Every update should include a requested at timestamp -- if the entity has since been updated,

@@ -23,6 +23,269 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// GetArea
+type ReadAreaOptions struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Includes      []string               `protobuf:"bytes,1,rep,name=includes,proto3" json:"includes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReadAreaOptions) Reset() {
+	*x = ReadAreaOptions{}
+	mi := &file_climb_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReadAreaOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReadAreaOptions) ProtoMessage() {}
+
+func (x *ReadAreaOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_climb_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReadAreaOptions.ProtoReflect.Descriptor instead.
+func (*ReadAreaOptions) Descriptor() ([]byte, []int) {
+	return file_climb_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ReadAreaOptions) GetIncludes() []string {
+	if x != nil {
+		return x.Includes
+	}
+	return nil
+}
+
+type GetAreaRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Opts          *ReadAreaOptions       `protobuf:"bytes,2,opt,name=opts,proto3" json:"opts,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAreaRequest) Reset() {
+	*x = GetAreaRequest{}
+	mi := &file_climb_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAreaRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAreaRequest) ProtoMessage() {}
+
+func (x *GetAreaRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_climb_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAreaRequest.ProtoReflect.Descriptor instead.
+func (*GetAreaRequest) Descriptor() ([]byte, []int) {
+	return file_climb_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetAreaRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *GetAreaRequest) GetOpts() *ReadAreaOptions {
+	if x != nil {
+		return x.Opts
+	}
+	return nil
+}
+
+type GetAreaResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Area          *Area                  `protobuf:"bytes,1,opt,name=area,proto3" json:"area,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAreaResponse) Reset() {
+	*x = GetAreaResponse{}
+	mi := &file_climb_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAreaResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAreaResponse) ProtoMessage() {}
+
+func (x *GetAreaResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_climb_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAreaResponse.ProtoReflect.Descriptor instead.
+func (*GetAreaResponse) Descriptor() ([]byte, []int) {
+	return file_climb_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetAreaResponse) GetArea() *Area {
+	if x != nil {
+		return x.Area
+	}
+	return nil
+}
+
+// UpdateArea
+type UpdateAreaRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	Polygon       *Polygon               `protobuf:"bytes,5,opt,name=polygon,proto3" json:"polygon,omitempty"`
+	RequestedAt   *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=requested_at,json=requestedAt,proto3" json:"requested_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAreaRequest) Reset() {
+	*x = UpdateAreaRequest{}
+	mi := &file_climb_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAreaRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAreaRequest) ProtoMessage() {}
+
+func (x *UpdateAreaRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_climb_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAreaRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAreaRequest) Descriptor() ([]byte, []int) {
+	return file_climb_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *UpdateAreaRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateAreaRequest) GetFieldMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.FieldMask
+	}
+	return nil
+}
+
+func (x *UpdateAreaRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateAreaRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *UpdateAreaRequest) GetPolygon() *Polygon {
+	if x != nil {
+		return x.Polygon
+	}
+	return nil
+}
+
+func (x *UpdateAreaRequest) GetRequestedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RequestedAt
+	}
+	return nil
+}
+
+type UpdateAreaResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAreaResponse) Reset() {
+	*x = UpdateAreaResponse{}
+	mi := &file_climb_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAreaResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAreaResponse) ProtoMessage() {}
+
+func (x *UpdateAreaResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_climb_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAreaResponse.ProtoReflect.Descriptor instead.
+func (*UpdateAreaResponse) Descriptor() ([]byte, []int) {
+	return file_climb_proto_rawDescGZIP(), []int{4}
+}
+
+// GetCrag
 type ReadCragOptions struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Includes      []string               `protobuf:"bytes,1,rep,name=includes,proto3" json:"includes,omitempty"`
@@ -32,7 +295,7 @@ type ReadCragOptions struct {
 
 func (x *ReadCragOptions) Reset() {
 	*x = ReadCragOptions{}
-	mi := &file_climb_proto_msgTypes[0]
+	mi := &file_climb_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44,7 +307,7 @@ func (x *ReadCragOptions) String() string {
 func (*ReadCragOptions) ProtoMessage() {}
 
 func (x *ReadCragOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_climb_proto_msgTypes[0]
+	mi := &file_climb_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,12 +320,56 @@ func (x *ReadCragOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadCragOptions.ProtoReflect.Descriptor instead.
 func (*ReadCragOptions) Descriptor() ([]byte, []int) {
-	return file_climb_proto_rawDescGZIP(), []int{0}
+	return file_climb_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ReadCragOptions) GetIncludes() []string {
 	if x != nil {
 		return x.Includes
+	}
+	return nil
+}
+
+type GetCragResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Crag          *Crag                  `protobuf:"bytes,1,opt,name=crag,proto3" json:"crag,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetCragResponse) Reset() {
+	*x = GetCragResponse{}
+	mi := &file_climb_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCragResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCragResponse) ProtoMessage() {}
+
+func (x *GetCragResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_climb_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCragResponse.ProtoReflect.Descriptor instead.
+func (*GetCragResponse) Descriptor() ([]byte, []int) {
+	return file_climb_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetCragResponse) GetCrag() *Crag {
+	if x != nil {
+		return x.Crag
 	}
 	return nil
 }
@@ -77,7 +384,7 @@ type GetCragRequest struct {
 
 func (x *GetCragRequest) Reset() {
 	*x = GetCragRequest{}
-	mi := &file_climb_proto_msgTypes[1]
+	mi := &file_climb_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -89,7 +396,7 @@ func (x *GetCragRequest) String() string {
 func (*GetCragRequest) ProtoMessage() {}
 
 func (x *GetCragRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_climb_proto_msgTypes[1]
+	mi := &file_climb_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -102,7 +409,7 @@ func (x *GetCragRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCragRequest.ProtoReflect.Descriptor instead.
 func (*GetCragRequest) Descriptor() ([]byte, []int) {
-	return file_climb_proto_rawDescGZIP(), []int{1}
+	return file_climb_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetCragRequest) GetId() int64 {
@@ -119,50 +426,7 @@ func (x *GetCragRequest) GetOpts() *ReadCragOptions {
 	return nil
 }
 
-type GetCragResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Crag          *Crag                  `protobuf:"bytes,1,opt,name=crag,proto3" json:"crag,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetCragResponse) Reset() {
-	*x = GetCragResponse{}
-	mi := &file_climb_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetCragResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetCragResponse) ProtoMessage() {}
-
-func (x *GetCragResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_climb_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetCragResponse.ProtoReflect.Descriptor instead.
-func (*GetCragResponse) Descriptor() ([]byte, []int) {
-	return file_climb_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *GetCragResponse) GetCrag() *Crag {
-	if x != nil {
-		return x.Crag
-	}
-	return nil
-}
-
+// ListCrags
 type ListCragsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Opts          *ReadCragOptions       `protobuf:"bytes,2,opt,name=opts,proto3" json:"opts,omitempty"`
@@ -172,7 +436,7 @@ type ListCragsRequest struct {
 
 func (x *ListCragsRequest) Reset() {
 	*x = ListCragsRequest{}
-	mi := &file_climb_proto_msgTypes[3]
+	mi := &file_climb_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -184,7 +448,7 @@ func (x *ListCragsRequest) String() string {
 func (*ListCragsRequest) ProtoMessage() {}
 
 func (x *ListCragsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_climb_proto_msgTypes[3]
+	mi := &file_climb_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -197,7 +461,7 @@ func (x *ListCragsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCragsRequest.ProtoReflect.Descriptor instead.
 func (*ListCragsRequest) Descriptor() ([]byte, []int) {
-	return file_climb_proto_rawDescGZIP(), []int{3}
+	return file_climb_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ListCragsRequest) GetOpts() *ReadCragOptions {
@@ -216,7 +480,7 @@ type ListCragsResponse struct {
 
 func (x *ListCragsResponse) Reset() {
 	*x = ListCragsResponse{}
-	mi := &file_climb_proto_msgTypes[4]
+	mi := &file_climb_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -228,7 +492,7 @@ func (x *ListCragsResponse) String() string {
 func (*ListCragsResponse) ProtoMessage() {}
 
 func (x *ListCragsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_climb_proto_msgTypes[4]
+	mi := &file_climb_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -241,7 +505,7 @@ func (x *ListCragsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCragsResponse.ProtoReflect.Descriptor instead.
 func (*ListCragsResponse) Descriptor() ([]byte, []int) {
-	return file_climb_proto_rawDescGZIP(), []int{4}
+	return file_climb_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ListCragsResponse) GetCrags() []*Crag {
@@ -251,6 +515,7 @@ func (x *ListCragsResponse) GetCrags() []*Crag {
 	return nil
 }
 
+// UpdateCrag
 type UpdateCragRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -266,7 +531,7 @@ type UpdateCragRequest struct {
 
 func (x *UpdateCragRequest) Reset() {
 	*x = UpdateCragRequest{}
-	mi := &file_climb_proto_msgTypes[5]
+	mi := &file_climb_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -278,7 +543,7 @@ func (x *UpdateCragRequest) String() string {
 func (*UpdateCragRequest) ProtoMessage() {}
 
 func (x *UpdateCragRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_climb_proto_msgTypes[5]
+	mi := &file_climb_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -291,7 +556,7 @@ func (x *UpdateCragRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCragRequest.ProtoReflect.Descriptor instead.
 func (*UpdateCragRequest) Descriptor() ([]byte, []int) {
-	return file_climb_proto_rawDescGZIP(), []int{5}
+	return file_climb_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *UpdateCragRequest) GetId() int64 {
@@ -351,7 +616,7 @@ type UpdateCragResponse struct {
 
 func (x *UpdateCragResponse) Reset() {
 	*x = UpdateCragResponse{}
-	mi := &file_climb_proto_msgTypes[6]
+	mi := &file_climb_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -363,7 +628,7 @@ func (x *UpdateCragResponse) String() string {
 func (*UpdateCragResponse) ProtoMessage() {}
 
 func (x *UpdateCragResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_climb_proto_msgTypes[6]
+	mi := &file_climb_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -376,22 +641,39 @@ func (x *UpdateCragResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCragResponse.ProtoReflect.Descriptor instead.
 func (*UpdateCragResponse) Descriptor() ([]byte, []int) {
-	return file_climb_proto_rawDescGZIP(), []int{6}
+	return file_climb_proto_rawDescGZIP(), []int{11}
 }
 
 var File_climb_proto protoreflect.FileDescriptor
 
 const file_climb_proto_rawDesc = "" +
 	"\n" +
-	"\vclimb.proto\x12\x02pb\x1a\fbounds.proto\x1a\n" +
-	"crag.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\vtrail.proto\"-\n" +
-	"\x0fReadCragOptions\x12\x1a\n" +
+	"\vclimb.proto\x12\x02pb\x1a\n" +
+	"area.proto\x1a\fbounds.proto\x1a\n" +
+	"crag.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\rpolygon.proto\x1a\vtrail.proto\"-\n" +
+	"\x0fReadAreaOptions\x12\x1a\n" +
 	"\bincludes\x18\x01 \x03(\tR\bincludes\"I\n" +
+	"\x0eGetAreaRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12'\n" +
+	"\x04opts\x18\x02 \x01(\v2\x13.pb.ReadAreaOptionsR\x04opts\"/\n" +
+	"\x0fGetAreaResponse\x12\x1c\n" +
+	"\x04area\x18\x01 \x01(\v2\b.pb.AreaR\x04area\"\xfa\x01\n" +
+	"\x11UpdateAreaRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x129\n" +
+	"\n" +
+	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12%\n" +
+	"\apolygon\x18\x05 \x01(\v2\v.pb.PolygonR\apolygon\x12=\n" +
+	"\frequested_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\vrequestedAt\"\x14\n" +
+	"\x12UpdateAreaResponse\"-\n" +
+	"\x0fReadCragOptions\x12\x1a\n" +
+	"\bincludes\x18\x01 \x03(\tR\bincludes\"/\n" +
+	"\x0fGetCragResponse\x12\x1c\n" +
+	"\x04crag\x18\x01 \x01(\v2\b.pb.CragR\x04crag\"I\n" +
 	"\x0eGetCragRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12'\n" +
-	"\x04opts\x18\x02 \x01(\v2\x13.pb.ReadCragOptionsR\x04opts\"/\n" +
-	"\x0fGetCragResponse\x12\x1c\n" +
-	"\x04crag\x18\x01 \x01(\v2\b.pb.CragR\x04crag\";\n" +
+	"\x04opts\x18\x02 \x01(\v2\x13.pb.ReadCragOptionsR\x04opts\";\n" +
 	"\x10ListCragsRequest\x12'\n" +
 	"\x04opts\x18\x02 \x01(\v2\x13.pb.ReadCragOptionsR\x04opts\"3\n" +
 	"\x11ListCragsResponse\x12\x1e\n" +
@@ -406,8 +688,11 @@ const file_climb_proto_rawDesc = "" +
 	"\x06bounds\x18\x06 \x01(\v2\n" +
 	".pb.BoundsR\x06bounds\x12=\n" +
 	"\frequested_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\vrequestedAt\"\x14\n" +
-	"\x12UpdateCragResponse2\xb9\x01\n" +
+	"\x12UpdateCragResponse2\xaa\x02\n" +
 	"\fClimbService\x122\n" +
+	"\aGetArea\x12\x12.pb.GetAreaRequest\x1a\x13.pb.GetAreaResponse\x12;\n" +
+	"\n" +
+	"UpdateArea\x12\x15.pb.UpdateAreaRequest\x1a\x16.pb.UpdateAreaResponse\x122\n" +
 	"\aGetCrag\x12\x12.pb.GetCragRequest\x1a\x13.pb.GetCragResponse\x128\n" +
 	"\tListCrags\x12\x14.pb.ListCragsRequest\x1a\x15.pb.ListCragsResponse\x12;\n" +
 	"\n" +
@@ -425,41 +710,57 @@ func file_climb_proto_rawDescGZIP() []byte {
 	return file_climb_proto_rawDescData
 }
 
-var file_climb_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_climb_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_climb_proto_goTypes = []any{
-	(*ReadCragOptions)(nil),       // 0: pb.ReadCragOptions
-	(*GetCragRequest)(nil),        // 1: pb.GetCragRequest
-	(*GetCragResponse)(nil),       // 2: pb.GetCragResponse
-	(*ListCragsRequest)(nil),      // 3: pb.ListCragsRequest
-	(*ListCragsResponse)(nil),     // 4: pb.ListCragsResponse
-	(*UpdateCragRequest)(nil),     // 5: pb.UpdateCragRequest
-	(*UpdateCragResponse)(nil),    // 6: pb.UpdateCragResponse
-	(*Crag)(nil),                  // 7: pb.Crag
-	(*fieldmaskpb.FieldMask)(nil), // 8: google.protobuf.FieldMask
-	(*Trail)(nil),                 // 9: pb.Trail
-	(*Bounds)(nil),                // 10: pb.Bounds
-	(*timestamppb.Timestamp)(nil), // 11: google.protobuf.Timestamp
+	(*ReadAreaOptions)(nil),       // 0: pb.ReadAreaOptions
+	(*GetAreaRequest)(nil),        // 1: pb.GetAreaRequest
+	(*GetAreaResponse)(nil),       // 2: pb.GetAreaResponse
+	(*UpdateAreaRequest)(nil),     // 3: pb.UpdateAreaRequest
+	(*UpdateAreaResponse)(nil),    // 4: pb.UpdateAreaResponse
+	(*ReadCragOptions)(nil),       // 5: pb.ReadCragOptions
+	(*GetCragResponse)(nil),       // 6: pb.GetCragResponse
+	(*GetCragRequest)(nil),        // 7: pb.GetCragRequest
+	(*ListCragsRequest)(nil),      // 8: pb.ListCragsRequest
+	(*ListCragsResponse)(nil),     // 9: pb.ListCragsResponse
+	(*UpdateCragRequest)(nil),     // 10: pb.UpdateCragRequest
+	(*UpdateCragResponse)(nil),    // 11: pb.UpdateCragResponse
+	(*Area)(nil),                  // 12: pb.Area
+	(*fieldmaskpb.FieldMask)(nil), // 13: google.protobuf.FieldMask
+	(*Polygon)(nil),               // 14: pb.Polygon
+	(*timestamppb.Timestamp)(nil), // 15: google.protobuf.Timestamp
+	(*Crag)(nil),                  // 16: pb.Crag
+	(*Trail)(nil),                 // 17: pb.Trail
+	(*Bounds)(nil),                // 18: pb.Bounds
 }
 var file_climb_proto_depIdxs = []int32{
-	0,  // 0: pb.GetCragRequest.opts:type_name -> pb.ReadCragOptions
-	7,  // 1: pb.GetCragResponse.crag:type_name -> pb.Crag
-	0,  // 2: pb.ListCragsRequest.opts:type_name -> pb.ReadCragOptions
-	7,  // 3: pb.ListCragsResponse.crags:type_name -> pb.Crag
-	8,  // 4: pb.UpdateCragRequest.field_mask:type_name -> google.protobuf.FieldMask
-	9,  // 5: pb.UpdateCragRequest.trail:type_name -> pb.Trail
-	10, // 6: pb.UpdateCragRequest.bounds:type_name -> pb.Bounds
-	11, // 7: pb.UpdateCragRequest.requested_at:type_name -> google.protobuf.Timestamp
-	1,  // 8: pb.ClimbService.GetCrag:input_type -> pb.GetCragRequest
-	3,  // 9: pb.ClimbService.ListCrags:input_type -> pb.ListCragsRequest
-	5,  // 10: pb.ClimbService.UpdateCrag:input_type -> pb.UpdateCragRequest
-	2,  // 11: pb.ClimbService.GetCrag:output_type -> pb.GetCragResponse
-	4,  // 12: pb.ClimbService.ListCrags:output_type -> pb.ListCragsResponse
-	6,  // 13: pb.ClimbService.UpdateCrag:output_type -> pb.UpdateCragResponse
-	11, // [11:14] is the sub-list for method output_type
-	8,  // [8:11] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	0,  // 0: pb.GetAreaRequest.opts:type_name -> pb.ReadAreaOptions
+	12, // 1: pb.GetAreaResponse.area:type_name -> pb.Area
+	13, // 2: pb.UpdateAreaRequest.field_mask:type_name -> google.protobuf.FieldMask
+	14, // 3: pb.UpdateAreaRequest.polygon:type_name -> pb.Polygon
+	15, // 4: pb.UpdateAreaRequest.requested_at:type_name -> google.protobuf.Timestamp
+	16, // 5: pb.GetCragResponse.crag:type_name -> pb.Crag
+	5,  // 6: pb.GetCragRequest.opts:type_name -> pb.ReadCragOptions
+	5,  // 7: pb.ListCragsRequest.opts:type_name -> pb.ReadCragOptions
+	16, // 8: pb.ListCragsResponse.crags:type_name -> pb.Crag
+	13, // 9: pb.UpdateCragRequest.field_mask:type_name -> google.protobuf.FieldMask
+	17, // 10: pb.UpdateCragRequest.trail:type_name -> pb.Trail
+	18, // 11: pb.UpdateCragRequest.bounds:type_name -> pb.Bounds
+	15, // 12: pb.UpdateCragRequest.requested_at:type_name -> google.protobuf.Timestamp
+	1,  // 13: pb.ClimbService.GetArea:input_type -> pb.GetAreaRequest
+	3,  // 14: pb.ClimbService.UpdateArea:input_type -> pb.UpdateAreaRequest
+	7,  // 15: pb.ClimbService.GetCrag:input_type -> pb.GetCragRequest
+	8,  // 16: pb.ClimbService.ListCrags:input_type -> pb.ListCragsRequest
+	10, // 17: pb.ClimbService.UpdateCrag:input_type -> pb.UpdateCragRequest
+	2,  // 18: pb.ClimbService.GetArea:output_type -> pb.GetAreaResponse
+	4,  // 19: pb.ClimbService.UpdateArea:output_type -> pb.UpdateAreaResponse
+	6,  // 20: pb.ClimbService.GetCrag:output_type -> pb.GetCragResponse
+	9,  // 21: pb.ClimbService.ListCrags:output_type -> pb.ListCragsResponse
+	11, // 22: pb.ClimbService.UpdateCrag:output_type -> pb.UpdateCragResponse
+	18, // [18:23] is the sub-list for method output_type
+	13, // [13:18] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_climb_proto_init() }
@@ -467,8 +768,10 @@ func file_climb_proto_init() {
 	if File_climb_proto != nil {
 		return
 	}
+	file_area_proto_init()
 	file_bounds_proto_init()
 	file_crag_proto_init()
+	file_polygon_proto_init()
 	file_trail_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -476,7 +779,7 @@ func file_climb_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_climb_proto_rawDesc), len(file_climb_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

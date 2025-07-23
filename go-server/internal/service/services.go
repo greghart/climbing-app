@@ -9,6 +9,7 @@ type Services struct {
 	Trails   *Trails
 	Areas    *Areas
 	Polygons *Polygons
+	Comments *Comments
 }
 
 func NewServices(repos *db.Repos) *Services {
@@ -19,5 +20,6 @@ func NewServices(repos *db.Repos) *Services {
 	s.Trails = NewTrails(s)
 	s.Areas = NewAreas(s)
 	s.Polygons = NewPolygons(s)
+	s.Comments = NewComments(s)
 	return s
 }

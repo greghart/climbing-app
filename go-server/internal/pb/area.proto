@@ -6,6 +6,7 @@ import "boulder.proto";
 import "comment.proto";
 import "photo.proto";
 import "polygon.proto";
+import "timestamps.proto";
 
 option go_package = "github.com/greghart/climbing-app/internal/pb";
 
@@ -18,4 +19,5 @@ message Area {
   repeated Boulder boulders = 6;
   repeated Comment comments = 7;
   repeated Photo photos = 8;
+  Timestamps timestamps = 9;
 }

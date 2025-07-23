@@ -8,13 +8,15 @@ import type { Coordinate } from "./coordinate_pb";
 import { file_coordinate } from "./coordinate_pb";
 import type { Grade } from "./grade_pb";
 import { file_grade } from "./grade_pb";
+import type { Timestamps } from "./timestamps_pb";
+import { file_timestamps } from "./timestamps_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file route.proto.
  */
 export const file_route: GenFile = /*@__PURE__*/
-  fileDesc("Cgtyb3V0ZS5wcm90bxICcGIi3QIKBVJvdXRlEgoKAmlkGAEgASgDEgwKBG5hbWUYAiABKAkSHAoEc2l6ZRgDIAEoCzIOLnBiLlJvdXRlLlNpemUSEwoLZGVzY3JpcHRpb24YBCABKAkSFAoMZmlyc3RfYXNjZW50GAUgASgJEhgKBWdyYWRlGAYgASgLMgkucGIuR3JhZGUSEgoKYm91bGRlcl9pZBgIIAEoAxIjCgtjb29yZGluYXRlcxgJIAEoCzIOLnBiLkNvb3JkaW5hdGUaSQoEU2l6ZRIiCgV1bml0cxgBIAEoDjITLnBiLlJvdXRlLlNpemVVbml0cxIOCgZoZWlnaHQYAiABKAUSDQoFd2lkdGgYAyABKAUiUwoJU2l6ZVVuaXRzEhoKFlNJWkVfVU5JVFNfVU5TUEVDSUZJRUQQABIVChFTSVpFX1VOSVRTX01FVEVSUxABEhMKD1NJWkVfVU5JVFNfRkVFVBACQi5aLGdpdGh1Yi5jb20vZ3JlZ2hhcnQvY2xpbWJpbmctYXBwL2ludGVybmFsL3BiYgZwcm90bzM", [file_coordinate, file_grade]);
+  fileDesc("Cgtyb3V0ZS5wcm90bxICcGIigQMKBVJvdXRlEgoKAmlkGAEgASgDEgwKBG5hbWUYAiABKAkSHAoEc2l6ZRgDIAEoCzIOLnBiLlJvdXRlLlNpemUSEwoLZGVzY3JpcHRpb24YBCABKAkSFAoMZmlyc3RfYXNjZW50GAUgASgJEhgKBWdyYWRlGAYgASgLMgkucGIuR3JhZGUSEgoKYm91bGRlcl9pZBgIIAEoAxIjCgtjb29yZGluYXRlcxgJIAEoCzIOLnBiLkNvb3JkaW5hdGUSIgoKdGltZXN0YW1wcxgKIAEoCzIOLnBiLlRpbWVzdGFtcHMaSQoEU2l6ZRIiCgV1bml0cxgBIAEoDjITLnBiLlJvdXRlLlNpemVVbml0cxIOCgZoZWlnaHQYAiABKAUSDQoFd2lkdGgYAyABKAUiUwoJU2l6ZVVuaXRzEhoKFlNJWkVfVU5JVFNfVU5TUEVDSUZJRUQQABIVChFTSVpFX1VOSVRTX01FVEVSUxABEhMKD1NJWkVfVU5JVFNfRkVFVBACQi5aLGdpdGh1Yi5jb20vZ3JlZ2hhcnQvY2xpbWJpbmctYXBwL2ludGVybmFsL3BiYgZwcm90bzM", [file_coordinate, file_grade, file_timestamps]);
 
 /**
  * @generated from message pb.Route
@@ -59,6 +61,11 @@ export type Route = Message<"pb.Route"> & {
    * @generated from field: pb.Coordinate coordinates = 9;
    */
   coordinates?: Coordinate;
+
+  /**
+   * @generated from field: pb.Timestamps timestamps = 10;
+   */
+  timestamps?: Timestamps;
 };
 
 /**

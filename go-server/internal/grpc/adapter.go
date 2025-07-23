@@ -141,6 +141,7 @@ func AreaToProto(m *models.Area) *pb.Area {
 		Boulders:    BouldersToProto(m.Boulders),
 		Comments:    CommentableToProto(m.Commentable),
 		Photos:      PhotoableToProto(m.Photoable),
+		Timestamps:  TimestampsToProto(m.Timestamps),
 	}
 }
 
@@ -157,6 +158,7 @@ func ProtoToArea(p *pb.Area) *models.Area {
 		Boulders:    ProtoToBoulders(p.GetBoulders()),
 		Commentable: ProtoToCommentable(p.GetComments()),
 		Photoable:   ProtoToPhotoable(p.GetPhotos()),
+		Timestamps:  ProtoToTimestamps(p.GetTimestamps()),
 	}
 }
 
@@ -241,6 +243,7 @@ func BoulderToProto(m *models.Boulder) *pb.Boulder {
 		Polygon:     PolygonToProto(m.Polygon),
 		Comments:    CommentableToProto(m.Commentable),
 		Photos:      PhotoableToProto(m.Photoable),
+		Timestamps:  TimestampsToProto(m.Timestamps),
 	}
 }
 
@@ -259,6 +262,7 @@ func ProtoToBoulder(p *pb.Boulder) *models.Boulder {
 		Polygon:     ProtoToPolygon(p.GetPolygon()),
 		Commentable: ProtoToCommentable(p.GetComments()),
 		Photoable:   ProtoToPhotoable(p.GetPhotos()),
+		Timestamps:  ProtoToTimestamps(p.GetTimestamps()),
 	}
 }
 
@@ -295,6 +299,7 @@ func RouteToProto(m *models.Route) *pb.Route {
 		BoulderId:   m.BoulderID,
 		Grade:       GradeToProto(m.GetGrade()),
 		Coordinates: CoordinateToProto(&m.Coordinates),
+		Timestamps:  TimestampsToProto(m.Timestamps),
 	}
 }
 
@@ -311,6 +316,7 @@ func ProtoToRoute(p *pb.Route) *models.Route {
 		Grade:       ProtoToGrade(p.GetGrade()),
 		BoulderID:   p.GetBoulderId(),
 		Coordinates: ProtoToCoordinate(p.GetCoordinates()),
+		Timestamps:  ProtoToTimestamps(p.GetTimestamps()),
 	}
 }
 

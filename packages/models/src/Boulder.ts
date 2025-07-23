@@ -4,8 +4,10 @@ import Coordinate, { type ICoordinateLiteral } from "./Coordinate.js";
 import type { IPhotoable } from "./Photoable.js";
 import Polygon, { type IPolygon } from "./Polygon.js";
 import Route, { type IRoute } from "./Route.js";
+import type { ITimestamps } from "./Timestamps.js";
+import Timestamps from "./Timestamps.js";
 
-export interface IBoulder {
+export type IBoulder = {
   id?: number;
   name: string;
   description?: string;
@@ -17,7 +19,7 @@ export interface IBoulder {
   polygon?: IPolygon;
   commentable?: ICommentable;
   photoable?: IPhotoable;
-}
+} & ITimestamps;
 
 interface Boulder extends Omit<IBoulder, "center"> {}
 class Boulder {
@@ -45,6 +47,7 @@ class Boulder {
       this.polygon = new Polygon(data.polygon);
     }
     this.routes = (data.routes || []).map((route) => new Route(route));
+    Timestamps.mix(this, data);
   }
 
   _clockwiseRoutes?: Route[];

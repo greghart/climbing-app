@@ -4,6 +4,7 @@ package pb;
 
 import "coordinate.proto";
 import "grade.proto";
+import "timestamps.proto";
 
 option go_package = "github.com/greghart/climbing-app/internal/pb";
 
@@ -28,4 +29,5 @@ message Route {
   Grade grade = 6;
   int64 boulder_id = 8;
   Coordinate coordinates = 9;
+  Timestamps timestamps = 10;
 }

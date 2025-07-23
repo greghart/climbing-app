@@ -15,7 +15,6 @@ const updateCrag = formAction<
   z.infer<typeof cragSchema>,
   { id: number; fieldMask: string[] }
 >(cragSchema, async (res, data) => {
-  console.warn("UpdatedAt", res.data.updatedAt);
   await client.updateCrag({
     id: BigInt(res.meta.id),
     requestedAt: timestampFromDate(res.data.updatedAt),

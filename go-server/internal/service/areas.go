@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"slices"
 	"time"
 
 	"github.com/greghart/climbing-app/internal/db"
@@ -11,6 +12,11 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
+var AreasIncludeSchema = servicep.NewIncludeSchema().Allow(
+	slices.Collect(db.AreasIncludeSchema.All())...,
+)
+
+// //////////////////////////////////////////////////////////////////////////////
 // Areas service mirrors Crags style, but delegates all includes to the repo.
 type Areas struct {
 	*Services
@@ -23,19 +29,9 @@ func NewAreas(services *Services) *Areas {
 }
 
 // GetArea retrieves an area by ID, delegating all includes to the repo.
-func (a *Areas) GetArea(ctx context.Context, id int64, req db.AreasReadRequest) (*models.Area, error) {
+func (a *Areas) GetArea(ctx context.Context, req AreasReadRequest) (*models.Area, error) {
 	defer getAreaObserver()()
-	return a.repos.Areas.GetArea(ctx, id, req)
-}
-
-// AreaUpdateRequest mirrors CragUpdateRequest but for area fields.
-type AreaUpdateRequest struct {
-	*servicep.FieldMask
-	ID          int64
-	Name        string
-	Description *string
-	Polygon     *models.Polygon
-	RequestedAt time.Time
+	return a.repos.Areas.GetArea(ctx, db.AreasReadRequest(req))
 }
 
 // Update updates an area, handling name, description, and polygon.
@@ -45,7 +41,7 @@ func (a *Areas) Update(ctx context.Context, req AreaUpdateRequest) error {
 		return fmt.Errorf("requested_at must be set")
 	}
 	return a.repos.Areas.RunInTx(ctx, func(ctx context.Context) error {
-		area, err := a.repos.Areas.GetArea(ctx, req.ID, db.AreasReadRequest{})
+		area, err := a.repos.Areas.GetArea(ctx, db.AreasReadRequest{IDs: []int64{req.ID}})
 		// validate
 		if err != nil {
 			return fmt.Errorf("failed to find area for update with ID %d: %w", req.ID, err)
@@ -66,7 +62,7 @@ func (a *Areas) Update(ctx context.Context, req AreaUpdateRequest) error {
 				// TODO: Delete the existing polygon?
 			} else if area.PolygonID != nil { // Update existing
 				g.Go(func() error {
-					return a.Polygons.Update(ctx, area.Polygon.ID, req.Polygon.Coordinates)
+					return a.Polygons.Update(ctx, *area.PolygonID, req.Polygon.Coordinates)
 				})
 			} else { // Insert new
 				poly, err := a.Polygons.Insert(ctx, req.Polygon.Coordinates)
@@ -92,4 +88,17 @@ func (a *Areas) Update(ctx context.Context, req AreaUpdateRequest) error {
 
 		return g.Wait()
 	})
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+type AreasReadRequest db.AreasReadRequest
+
+type AreaUpdateRequest struct {
+	*servicep.FieldMask
+	ID          int64
+	Name        string
+	Description *string
+	Polygon     *models.Polygon
+	RequestedAt time.Time
 }

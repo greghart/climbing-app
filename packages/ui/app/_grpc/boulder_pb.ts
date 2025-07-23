@@ -14,13 +14,15 @@ import type { Polygon } from "./polygon_pb";
 import { file_polygon } from "./polygon_pb";
 import type { Route } from "./route_pb";
 import { file_route } from "./route_pb";
+import type { Timestamps } from "./timestamps_pb";
+import { file_timestamps } from "./timestamps_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file boulder.proto.
  */
 export const file_boulder: GenFile = /*@__PURE__*/
-  fileDesc("Cg1ib3VsZGVyLnByb3RvEgJwYiLhAQoHQm91bGRlchIKCgJpZBgBIAEoAxIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEiMKC2Nvb3JkaW5hdGVzGAQgASgLMg4ucGIuQ29vcmRpbmF0ZRIPCgdhcmVhX2lkGAUgASgDEhkKBnJvdXRlcxgGIAMoCzIJLnBiLlJvdXRlEhwKB3BvbHlnb24YByABKAsyCy5wYi5Qb2x5Z29uEh0KCGNvbW1lbnRzGAggAygLMgsucGIuQ29tbWVudBIZCgZwaG90b3MYCSADKAsyCS5wYi5QaG90b0IuWixnaXRodWIuY29tL2dyZWdoYXJ0L2NsaW1iaW5nLWFwcC9pbnRlcm5hbC9wYmIGcHJvdG8z", [file_comment, file_coordinate, file_photo, file_polygon, file_route]);
+  fileDesc("Cg1ib3VsZGVyLnByb3RvEgJwYiKFAgoHQm91bGRlchIKCgJpZBgBIAEoAxIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEiMKC2Nvb3JkaW5hdGVzGAQgASgLMg4ucGIuQ29vcmRpbmF0ZRIPCgdhcmVhX2lkGAUgASgDEhkKBnJvdXRlcxgGIAMoCzIJLnBiLlJvdXRlEhwKB3BvbHlnb24YByABKAsyCy5wYi5Qb2x5Z29uEh0KCGNvbW1lbnRzGAggAygLMgsucGIuQ29tbWVudBIZCgZwaG90b3MYCSADKAsyCS5wYi5QaG90bxIiCgp0aW1lc3RhbXBzGAogASgLMg4ucGIuVGltZXN0YW1wc0IuWixnaXRodWIuY29tL2dyZWdoYXJ0L2NsaW1iaW5nLWFwcC9pbnRlcm5hbC9wYmIGcHJvdG8z", [file_comment, file_coordinate, file_photo, file_polygon, file_route, file_timestamps]);
 
 /**
  * @generated from message pb.Boulder
@@ -70,6 +72,11 @@ export type Boulder = Message<"pb.Boulder"> & {
    * @generated from field: repeated pb.Photo photos = 9;
    */
   photos: Photo[];
+
+  /**
+   * @generated from field: pb.Timestamps timestamps = 10;
+   */
+  timestamps?: Timestamps;
 };
 
 /**

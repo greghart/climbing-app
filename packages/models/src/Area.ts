@@ -3,8 +3,10 @@ import type { ICommentable } from "./Commentable.js";
 import Crag, { type ICrag } from "./Crag.js";
 import type { IPhotoable } from "./Photoable.js";
 import Polygon, { type IPolygon } from "./Polygon.js";
+import type { ITimestamps } from "./Timestamps.js";
+import Timestamps from "./Timestamps.js";
 
-export interface IArea {
+export type IArea = {
   id?: number;
   name: string;
   description?: string;
@@ -15,7 +17,7 @@ export interface IArea {
   boulders?: IBoulder[];
   commentable?: ICommentable;
   photoable?: IPhotoable;
-}
+} & ITimestamps;
 
 interface Area extends Omit<IArea, "center"> {}
 class Area {
@@ -42,6 +44,7 @@ class Area {
     if (data.boulders) {
       this.boulders = data.boulders.map((boulder) => new Boulder(boulder));
     }
+    Timestamps.mix(this, data);
   }
 }
 

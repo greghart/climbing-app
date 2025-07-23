@@ -20,7 +20,7 @@ export default async function Page(props: {
       area={area}
       crag={crag!}
       action={updateArea}
-      meta={{ id: area.id! }}
+      meta={{ id: area.id!, fieldMask: ["name", "description", "polygon"] }}
     />
   );
 }

@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	ClimbService_GetArea_FullMethodName    = "/pb.ClimbService/GetArea"
+	ClimbService_UpdateArea_FullMethodName = "/pb.ClimbService/UpdateArea"
 	ClimbService_GetCrag_FullMethodName    = "/pb.ClimbService/GetCrag"
 	ClimbService_ListCrags_FullMethodName  = "/pb.ClimbService/ListCrags"
 	ClimbService_UpdateCrag_FullMethodName = "/pb.ClimbService/UpdateCrag"
@@ -28,6 +30,10 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ClimbServiceClient interface {
+	// Areas
+	GetArea(ctx context.Context, in *GetAreaRequest, opts ...grpc.CallOption) (*GetAreaResponse, error)
+	UpdateArea(ctx context.Context, in *UpdateAreaRequest, opts ...grpc.CallOption) (*UpdateAreaResponse, error)
+	// Crags
 	GetCrag(ctx context.Context, in *GetCragRequest, opts ...grpc.CallOption) (*GetCragResponse, error)
 	ListCrags(ctx context.Context, in *ListCragsRequest, opts ...grpc.CallOption) (*ListCragsResponse, error)
 	UpdateCrag(ctx context.Context, in *UpdateCragRequest, opts ...grpc.CallOption) (*UpdateCragResponse, error)
@@ -39,6 +45,26 @@ type climbServiceClient struct {
 
 func NewClimbServiceClient(cc grpc.ClientConnInterface) ClimbServiceClient {
 	return &climbServiceClient{cc}
+}
+
+func (c *climbServiceClient) GetArea(ctx context.Context, in *GetAreaRequest, opts ...grpc.CallOption) (*GetAreaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAreaResponse)
+	err := c.cc.Invoke(ctx, ClimbService_GetArea_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *climbServiceClient) UpdateArea(ctx context.Context, in *UpdateAreaRequest, opts ...grpc.CallOption) (*UpdateAreaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAreaResponse)
+	err := c.cc.Invoke(ctx, ClimbService_UpdateArea_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *climbServiceClient) GetCrag(ctx context.Context, in *GetCragRequest, opts ...grpc.CallOption) (*GetCragResponse, error) {
@@ -75,6 +101,10 @@ func (c *climbServiceClient) UpdateCrag(ctx context.Context, in *UpdateCragReque
 // All implementations must embed UnimplementedClimbServiceServer
 // for forward compatibility.
 type ClimbServiceServer interface {
+	// Areas
+	GetArea(context.Context, *GetAreaRequest) (*GetAreaResponse, error)
+	UpdateArea(context.Context, *UpdateAreaRequest) (*UpdateAreaResponse, error)
+	// Crags
 	GetCrag(context.Context, *GetCragRequest) (*GetCragResponse, error)
 	ListCrags(context.Context, *ListCragsRequest) (*ListCragsResponse, error)
 	UpdateCrag(context.Context, *UpdateCragRequest) (*UpdateCragResponse, error)
@@ -88,6 +118,12 @@ type ClimbServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedClimbServiceServer struct{}
 
+func (UnimplementedClimbServiceServer) GetArea(context.Context, *GetAreaRequest) (*GetAreaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetArea not implemented")
+}
+func (UnimplementedClimbServiceServer) UpdateArea(context.Context, *UpdateAreaRequest) (*UpdateAreaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateArea not implemented")
+}
 func (UnimplementedClimbServiceServer) GetCrag(context.Context, *GetCragRequest) (*GetCragResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCrag not implemented")
 }
@@ -116,6 +152,42 @@ func RegisterClimbServiceServer(s grpc.ServiceRegistrar, srv ClimbServiceServer)
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ClimbService_ServiceDesc, srv)
+}
+
+func _ClimbService_GetArea_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAreaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClimbServiceServer).GetArea(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClimbService_GetArea_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClimbServiceServer).GetArea(ctx, req.(*GetAreaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClimbService_UpdateArea_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAreaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClimbServiceServer).UpdateArea(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClimbService_UpdateArea_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClimbServiceServer).UpdateArea(ctx, req.(*UpdateAreaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ClimbService_GetCrag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -179,6 +251,14 @@ var ClimbService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.ClimbService",
 	HandlerType: (*ClimbServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetArea",
+			Handler:    _ClimbService_GetArea_Handler,
+		},
+		{
+			MethodName: "UpdateArea",
+			Handler:    _ClimbService_UpdateArea_Handler,
+		},
 		{
 			MethodName: "GetCrag",
 			Handler:    _ClimbService_GetCrag_Handler,

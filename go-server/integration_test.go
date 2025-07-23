@@ -87,7 +87,7 @@ func TestHttpServer_crags(t *testing.T) {
 		errcmp.MustMatch(t, json.NewDecoder(res.Body).Decode(&actual), "")
 		expected := testutil.LoadCragFromJSON(t, santeeFixturePath)
 		if !cmp.Equal(&actual, expected, cmpOpts) {
-			t.Errorf("crag response mismatch (-got +want):\n%v", cmp.Diff(actual, expected, cmpOpts))
+			t.Errorf("crag response mismatch (-got +want):\n%v", cmp.Diff(&actual, expected, cmpOpts))
 		}
 	})
 }

@@ -19,6 +19,7 @@ var AreasIncludeSchema = servicep.NewIncludeSchema().Allow(
 )
 
 type AreasReadRequest struct {
+	IDs     []int64
 	CragIDs []int64
 	Include *servicep.IncludeRequest
 }
@@ -29,6 +30,9 @@ func (r *AreasReadRequest) ForTemplate(t queryp.Templater) queryp.Templater {
 	}
 	if len(r.CragIDs) > 0 {
 		t = t.Param("cragIds", r.CragIDs)
+	}
+	if len(r.IDs) > 0 {
+		t = t.Param("ids", r.IDs)
 	}
 	return t
 }
@@ -43,7 +47,10 @@ type Areas struct {
 
 func NewAreas(db *sqlp.DB) *Areas {
 	return &Areas{
-		Repository: sqlp.NewRepository[models.Area](db, "area"),
+		Repository: sqlp.NewRepository[models.Area](db, "area").
+			WithIdentifier(func(e *models.Area) any {
+				return e.ID
+			}),
 		queryTemplate: queryp.Must(queryp.NewTemplate(`
 			SELECT 
 				area.*
@@ -104,8 +111,8 @@ func NewAreas(db *sqlp.DB) *Areas {
 			{{- if .HasParams}}
 			WHERE
 				1=1
-				{{- if .Param "id"}}
-				AND area.id = :id
+				{{- if .Param "ids"}}
+				AND area.id IN (:ids)
 				{{- end -}}
 				{{- if .Param "cragIds"}}
 				AND area.cragId IN (:cragIds)
@@ -179,8 +186,8 @@ func (a *Areas) BatchAreasByCrag(req AreasReadRequest) *clientp.Batch[int64, []m
 }
 
 // GetArea retrieves a single area by its ID using the new query template and mapper
-func (a *Areas) GetArea(ctx context.Context, id int64, req AreasReadRequest) (*models.Area, error) {
-	q, args, err := req.ForTemplate(a.queryTemplate).Param("id", id).Execute()
+func (a *Areas) GetArea(ctx context.Context, req AreasReadRequest) (*models.Area, error) {
+	q, args, err := req.ForTemplate(a.queryTemplate).Execute()
 	if err != nil {
 		return nil, err
 	}

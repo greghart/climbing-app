@@ -32,6 +32,7 @@ type Boulder struct {
 	Polygon       *Polygon               `protobuf:"bytes,7,opt,name=polygon,proto3" json:"polygon,omitempty"`
 	Comments      []*Comment             `protobuf:"bytes,8,rep,name=comments,proto3" json:"comments,omitempty"`
 	Photos        []*Photo               `protobuf:"bytes,9,rep,name=photos,proto3" json:"photos,omitempty"`
+	Timestamps    *Timestamps            `protobuf:"bytes,10,opt,name=timestamps,proto3" json:"timestamps,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -129,11 +130,18 @@ func (x *Boulder) GetPhotos() []*Photo {
 	return nil
 }
 
+func (x *Boulder) GetTimestamps() *Timestamps {
+	if x != nil {
+		return x.Timestamps
+	}
+	return nil
+}
+
 var File_boulder_proto protoreflect.FileDescriptor
 
 const file_boulder_proto_rawDesc = "" +
 	"\n" +
-	"\rboulder.proto\x12\x02pb\x1a\rcomment.proto\x1a\x10coordinate.proto\x1a\vphoto.proto\x1a\rpolygon.proto\x1a\vroute.proto\"\xb0\x02\n" +
+	"\rboulder.proto\x12\x02pb\x1a\rcomment.proto\x1a\x10coordinate.proto\x1a\vphoto.proto\x1a\rpolygon.proto\x1a\vroute.proto\x1a\x10timestamps.proto\"\xe0\x02\n" +
 	"\aBoulder\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -143,7 +151,11 @@ const file_boulder_proto_rawDesc = "" +
 	"\x06routes\x18\x06 \x03(\v2\t.pb.RouteR\x06routes\x12%\n" +
 	"\apolygon\x18\a \x01(\v2\v.pb.PolygonR\apolygon\x12'\n" +
 	"\bcomments\x18\b \x03(\v2\v.pb.CommentR\bcomments\x12!\n" +
-	"\x06photos\x18\t \x03(\v2\t.pb.PhotoR\x06photosB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
+	"\x06photos\x18\t \x03(\v2\t.pb.PhotoR\x06photos\x12.\n" +
+	"\n" +
+	"timestamps\x18\n" +
+	" \x01(\v2\x0e.pb.TimestampsR\n" +
+	"timestampsB.Z,github.com/greghart/climbing-app/internal/pbb\x06proto3"
 
 var (
 	file_boulder_proto_rawDescOnce sync.Once
@@ -165,6 +177,7 @@ var file_boulder_proto_goTypes = []any{
 	(*Polygon)(nil),    // 3: pb.Polygon
 	(*Comment)(nil),    // 4: pb.Comment
 	(*Photo)(nil),      // 5: pb.Photo
+	(*Timestamps)(nil), // 6: pb.Timestamps
 }
 var file_boulder_proto_depIdxs = []int32{
 	1, // 0: pb.Boulder.coordinates:type_name -> pb.Coordinate
@@ -172,11 +185,12 @@ var file_boulder_proto_depIdxs = []int32{
 	3, // 2: pb.Boulder.polygon:type_name -> pb.Polygon
 	4, // 3: pb.Boulder.comments:type_name -> pb.Comment
 	5, // 4: pb.Boulder.photos:type_name -> pb.Photo
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	6, // 5: pb.Boulder.timestamps:type_name -> pb.Timestamps
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_boulder_proto_init() }
@@ -189,6 +203,7 @@ func file_boulder_proto_init() {
 	file_photo_proto_init()
 	file_polygon_proto_init()
 	file_route_proto_init()
+	file_timestamps_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

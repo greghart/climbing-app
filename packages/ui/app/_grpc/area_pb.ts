@@ -12,13 +12,15 @@ import type { Photo } from "./photo_pb";
 import { file_photo } from "./photo_pb";
 import type { Polygon } from "./polygon_pb";
 import { file_polygon } from "./polygon_pb";
+import type { Timestamps } from "./timestamps_pb";
+import { file_timestamps } from "./timestamps_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file area.proto.
  */
 export const file_area: GenFile = /*@__PURE__*/
-  fileDesc("CgphcmVhLnByb3RvEgJwYiK9AQoEQXJlYRIKCgJpZBgBIAEoAxIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEg8KB2NyYWdfaWQYBCABKAMSHAoHcG9seWdvbhgFIAEoCzILLnBiLlBvbHlnb24SHQoIYm91bGRlcnMYBiADKAsyCy5wYi5Cb3VsZGVyEh0KCGNvbW1lbnRzGAcgAygLMgsucGIuQ29tbWVudBIZCgZwaG90b3MYCCADKAsyCS5wYi5QaG90b0IuWixnaXRodWIuY29tL2dyZWdoYXJ0L2NsaW1iaW5nLWFwcC9pbnRlcm5hbC9wYmIGcHJvdG8z", [file_boulder, file_comment, file_photo, file_polygon]);
+  fileDesc("CgphcmVhLnByb3RvEgJwYiLhAQoEQXJlYRIKCgJpZBgBIAEoAxIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEg8KB2NyYWdfaWQYBCABKAMSHAoHcG9seWdvbhgFIAEoCzILLnBiLlBvbHlnb24SHQoIYm91bGRlcnMYBiADKAsyCy5wYi5Cb3VsZGVyEh0KCGNvbW1lbnRzGAcgAygLMgsucGIuQ29tbWVudBIZCgZwaG90b3MYCCADKAsyCS5wYi5QaG90bxIiCgp0aW1lc3RhbXBzGAkgASgLMg4ucGIuVGltZXN0YW1wc0IuWixnaXRodWIuY29tL2dyZWdoYXJ0L2NsaW1iaW5nLWFwcC9pbnRlcm5hbC9wYmIGcHJvdG8z", [file_boulder, file_comment, file_photo, file_polygon, file_timestamps]);
 
 /**
  * @generated from message pb.Area
@@ -63,6 +65,11 @@ export type Area = Message<"pb.Area"> & {
    * @generated from field: repeated pb.Photo photos = 8;
    */
   photos: Photo[];
+
+  /**
+   * @generated from field: pb.Timestamps timestamps = 9;
+   */
+  timestamps?: Timestamps;
 };
 
 /**
