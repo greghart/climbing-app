@@ -1,15 +1,16 @@
 package models
 
 type Boulder struct {
-	ID          int64        `json:"id,omitzero" sqlp:"id"`
-	Name        string       `json:"name" sqlp:"name"`
-	Description *string      `json:"description,omitzero" sqlp:"description"`
-	Coordinates Coordinate   `json:"coordinates" sqlp:"coordinates,promote"`
-	AreaID      int64        `json:"area_id,omitzero" sqlp:"areaId"`
-	Routes      []Route      `json:"routes,omitzero"`
-	Polygon     *Polygon     `json:"polygon,omitzero" sqlp:"polygon"`
-	Commentable *Commentable `json:"commentable,omitzero" sqlp:"commentable"`
-	Photoable   *Photoable   `json:"photoable,omitzero" sqlp:"photoable"`
+	ID            int64        `json:"id,omitzero" sqlp:"id"`
+	Name          string       `json:"name" sqlp:"name"`
+	Description   *string      `json:"description,omitzero" sqlp:"description"`
+	Coordinates   Coordinate   `json:"coordinates" sqlp:"coordinates,promote"`
+	AreaID        int64        `json:"area_id,omitzero" sqlp:"areaId"`
+	Routes        []Route      `json:"routes,omitzero"`
+	Polygon       *Polygon     `json:"polygon,omitzero" sqlp:"polygon"`
+	Commentable   *Commentable `json:"commentable,omitzero" sqlp:"commentable"`
+	CommentableID *int64       `json:"-" sqlp:"commentableId"`
+	Photoable     *Photoable   `json:"photoable,omitzero" sqlp:"photoable"`
 	Timestamps
 }
 

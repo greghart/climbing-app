@@ -1,15 +1,16 @@
 package models
 
 type Area struct {
-	ID          int64        `json:"id,omitzero" sqlp:"id"`
-	Name        string       `json:"name" sqlp:"name"`
-	Description *string      `json:"description,omitzero" sqlp:"description"`
-	CragID      int64        `json:"-" sqlp:"cragId"`
-	Polygon     *Polygon     `json:"polygon,omitzero" sqlp:"polygon"`
-	PolygonID   *int64       `json:"-" sqlp:"polygonId"`
-	Boulders    []Boulder    `json:"boulders,omitzero"`
-	Commentable *Commentable `json:"commentable,omitzero" sqlp:"commentable"`
-	Photoable   *Photoable   `json:"photoable,omitzero" sqlp:"photoable"`
+	ID            int64        `json:"id,omitzero" sqlp:"id"`
+	Name          string       `json:"name" sqlp:"name"`
+	Description   *string      `json:"description,omitzero" sqlp:"description"`
+	CragID        int64        `json:"-" sqlp:"cragId"`
+	Polygon       *Polygon     `json:"polygon,omitzero" sqlp:"polygon"`
+	PolygonID     *int64       `json:"-" sqlp:"polygonId"`
+	Boulders      []Boulder    `json:"boulders,omitzero"`
+	Commentable   *Commentable `json:"commentable,omitzero" sqlp:"commentable"`
+	CommentableID *int64       `json:"-" sqlp:"commentableId"`
+	Photoable     *Photoable   `json:"photoable,omitzero" sqlp:"photoable"`
 	Timestamps
 }
 

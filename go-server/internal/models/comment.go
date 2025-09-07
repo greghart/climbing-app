@@ -4,7 +4,7 @@ type Comment struct {
 	ID            int64        `json:"id,omitzero" sqlp:"id,readonly"`
 	Text          string       `json:"text" sqlp:"text"`
 	Commentable   *Commentable `json:"commentable" sqlp:"commentable"`
-	CommentableID *int64       `json:"-" sqlp:"commentableId"`
+	CommentableID int64        `json:"-" sqlp:"commentableId"`
 	Timestamps
 }
 

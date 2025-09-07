@@ -9,9 +9,11 @@ type Route struct {
 	FirstAscent *string `json:"firstAscent,omitzero" sqlp:"firstAscent"`
 	GradeRaw    string  `json:"-" sqlp:"gradeRaw"` // don't leak raw grade, always parse
 	// Grade is not persisted in database, and is a "virtual" field based on parsing raw.
-	Grade       *Grade     `json:"grade,omitzero" sqlp:"-"`
-	BoulderID   int64      `json:"boulder_id,omitzero" sqlp:"boulderId"`
-	Coordinates Coordinate `json:"coordinates" sqlp:"coordinates,promote"`
+	Grade         *Grade       `json:"grade,omitzero" sqlp:"-"`
+	BoulderID     int64        `json:"boulder_id,omitzero" sqlp:"boulderId"`
+	Coordinates   Coordinate   `json:"coordinates" sqlp:"coordinates,promote"`
+	Commentable   *Commentable `json:"commentable,omitzero" sqlp:"commentable"`
+	CommentableID *int64       `json:"-" sqlp:"commentableId"`
 	Timestamps
 }
 

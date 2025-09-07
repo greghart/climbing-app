@@ -31,6 +31,8 @@ var (
 	updateAreaObserver    = requestObserver("areas", "update")
 	insertPolygonObserver = requestObserver("polygons", "insert")
 	updatePolygonObserver = requestObserver("polygons", "update")
+	getCommentsObserver   = requestObserver("comments", "get")
+	createCommentObserver = requestObserver("comments", "create")
 )
 
 func init() {
