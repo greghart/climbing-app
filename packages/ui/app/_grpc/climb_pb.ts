@@ -2,12 +2,14 @@
 // @generated from file climb.proto (package pb, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
+import { enumDesc, fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Area } from "./area_pb";
 import { file_area } from "./area_pb";
 import type { Bounds } from "./bounds_pb";
 import { file_bounds } from "./bounds_pb";
+import type { Comment } from "./comment_pb";
+import { file_comment } from "./comment_pb";
 import type { Crag } from "./crag_pb";
 import { file_crag } from "./crag_pb";
 import type { FieldMask, Timestamp } from "@bufbuild/protobuf/wkt";
@@ -22,7 +24,50 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file climb.proto.
  */
 export const file_climb: GenFile = /*@__PURE__*/
-  fileDesc("CgtjbGltYi5wcm90bxICcGIiIwoPUmVhZEFyZWFPcHRpb25zEhAKCGluY2x1ZGVzGAEgAygJIj8KDkdldEFyZWFSZXF1ZXN0EgoKAmlkGAEgASgDEiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQXJlYU9wdGlvbnMiKQoPR2V0QXJlYVJlc3BvbnNlEhYKBGFyZWEYASABKAsyCC5wYi5BcmVhIsIBChFVcGRhdGVBcmVhUmVxdWVzdBIKCgJpZBgBIAEoAxIuCgpmaWVsZF9tYXNrGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLkZpZWxkTWFzaxIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEhwKB3BvbHlnb24YBSABKAsyCy5wYi5Qb2x5Z29uEjAKDHJlcXVlc3RlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFAoSVXBkYXRlQXJlYVJlc3BvbnNlIiMKD1JlYWRDcmFnT3B0aW9ucxIQCghpbmNsdWRlcxgBIAMoCSIpCg9HZXRDcmFnUmVzcG9uc2USFgoEY3JhZxgBIAEoCzIILnBiLkNyYWciPwoOR2V0Q3JhZ1JlcXVlc3QSCgoCaWQYASABKAMSIQoEb3B0cxgCIAEoCzITLnBiLlJlYWRDcmFnT3B0aW9ucyI1ChBMaXN0Q3JhZ3NSZXF1ZXN0EiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQ3JhZ09wdGlvbnMiLAoRTGlzdENyYWdzUmVzcG9uc2USFwoFY3JhZ3MYASADKAsyCC5wYi5DcmFnItoBChFVcGRhdGVDcmFnUmVxdWVzdBIKCgJpZBgBIAEoAxIuCgpmaWVsZF9tYXNrGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLkZpZWxkTWFzaxIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEhgKBXRyYWlsGAUgASgLMgkucGIuVHJhaWwSGgoGYm91bmRzGAYgASgLMgoucGIuQm91bmRzEjAKDHJlcXVlc3RlZF9hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFAoSVXBkYXRlQ3JhZ1Jlc3BvbnNlMqoCCgxDbGltYlNlcnZpY2USMgoHR2V0QXJlYRISLnBiLkdldEFyZWFSZXF1ZXN0GhMucGIuR2V0QXJlYVJlc3BvbnNlEjsKClVwZGF0ZUFyZWESFS5wYi5VcGRhdGVBcmVhUmVxdWVzdBoWLnBiLlVwZGF0ZUFyZWFSZXNwb25zZRIyCgdHZXRDcmFnEhIucGIuR2V0Q3JhZ1JlcXVlc3QaEy5wYi5HZXRDcmFnUmVzcG9uc2USOAoJTGlzdENyYWdzEhQucGIuTGlzdENyYWdzUmVxdWVzdBoVLnBiLkxpc3RDcmFnc1Jlc3BvbnNlEjsKClVwZGF0ZUNyYWcSFS5wYi5VcGRhdGVDcmFnUmVxdWVzdBoWLnBiLlVwZGF0ZUNyYWdSZXNwb25zZUIuWixnaXRodWIuY29tL2dyZWdoYXJ0L2NsaW1iaW5nLWFwcC9pbnRlcm5hbC9wYmIGcHJvdG8z", [file_area, file_bounds, file_crag, file_google_protobuf_field_mask, file_google_protobuf_timestamp, file_polygon, file_trail]);
+  fileDesc("CgtjbGltYi5wcm90bxICcGIifwoSR2V0Q29tbWVudHNSZXF1ZXN0EjMKC2VudGl0eV90eXBlGAEgASgOMhkucGIuQ29tbWVudGFibGVFbnRpdHlUeXBlSACIAQESFgoJZW50aXR5X2lkGAIgASgDSAGIAQFCDgoMX2VudGl0eV90eXBlQgwKCl9lbnRpdHlfaWQiNAoTR2V0Q29tbWVudHNSZXNwb25zZRIdCghjb21tZW50cxgBIAMoCzILLnBiLkNvbW1lbnQiIwoPUmVhZEFyZWFPcHRpb25zEhAKCGluY2x1ZGVzGAEgAygJIj8KDkdldEFyZWFSZXF1ZXN0EgoKAmlkGAEgASgDEiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQXJlYU9wdGlvbnMiKQoPR2V0QXJlYVJlc3BvbnNlEhYKBGFyZWEYASABKAsyCC5wYi5BcmVhIsIBChFVcGRhdGVBcmVhUmVxdWVzdBIKCgJpZBgBIAEoAxIuCgpmaWVsZF9tYXNrGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLkZpZWxkTWFzaxIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEhwKB3BvbHlnb24YBSABKAsyCy5wYi5Qb2x5Z29uEjAKDHJlcXVlc3RlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFAoSVXBkYXRlQXJlYVJlc3BvbnNlIiMKD1JlYWRDcmFnT3B0aW9ucxIQCghpbmNsdWRlcxgBIAMoCSIpCg9HZXRDcmFnUmVzcG9uc2USFgoEY3JhZxgBIAEoCzIILnBiLkNyYWciPwoOR2V0Q3JhZ1JlcXVlc3QSCgoCaWQYASABKAMSIQoEb3B0cxgCIAEoCzITLnBiLlJlYWRDcmFnT3B0aW9ucyI1ChBMaXN0Q3JhZ3NSZXF1ZXN0EiEKBG9wdHMYAiABKAsyEy5wYi5SZWFkQ3JhZ09wdGlvbnMiLAoRTGlzdENyYWdzUmVzcG9uc2USFwoFY3JhZ3MYASADKAsyCC5wYi5DcmFnItoBChFVcGRhdGVDcmFnUmVxdWVzdBIKCgJpZBgBIAEoAxIuCgpmaWVsZF9tYXNrGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLkZpZWxkTWFzaxIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEhgKBXRyYWlsGAUgASgLMgkucGIuVHJhaWwSGgoGYm91bmRzGAYgASgLMgoucGIuQm91bmRzEjAKDHJlcXVlc3RlZF9hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFAoSVXBkYXRlQ3JhZ1Jlc3BvbnNlKswBChVDb21tZW50YWJsZUVudGl0eVR5cGUSJwojQ09NTUVOVEFCTEVfRU5USVRZX1RZUEVfVU5TUEVDSUZJRUQQABIgChxDT01NRU5UQUJMRV9FTlRJVFlfVFlQRV9DUkFHEAESIAocQ09NTUVOVEFCTEVfRU5USVRZX1RZUEVfQVJFQRACEiMKH0NPTU1FTlRBQkxFX0VOVElUWV9UWVBFX0JPVUxERVIQAxIhCh1DT01NRU5UQUJMRV9FTlRJVFlfVFlQRV9ST1VURRAEMuoCCgxDbGltYlNlcnZpY2USMgoHR2V0QXJlYRISLnBiLkdldEFyZWFSZXF1ZXN0GhMucGIuR2V0QXJlYVJlc3BvbnNlEjsKClVwZGF0ZUFyZWESFS5wYi5VcGRhdGVBcmVhUmVxdWVzdBoWLnBiLlVwZGF0ZUFyZWFSZXNwb25zZRIyCgdHZXRDcmFnEhIucGIuR2V0Q3JhZ1JlcXVlc3QaEy5wYi5HZXRDcmFnUmVzcG9uc2USOAoJTGlzdENyYWdzEhQucGIuTGlzdENyYWdzUmVxdWVzdBoVLnBiLkxpc3RDcmFnc1Jlc3BvbnNlEjsKClVwZGF0ZUNyYWcSFS5wYi5VcGRhdGVDcmFnUmVxdWVzdBoWLnBiLlVwZGF0ZUNyYWdSZXNwb25zZRI+CgtHZXRDb21tZW50cxIWLnBiLkdldENvbW1lbnRzUmVxdWVzdBoXLnBiLkdldENvbW1lbnRzUmVzcG9uc2VCLlosZ2l0aHViLmNvbS9ncmVnaGFydC9jbGltYmluZy1hcHAvaW50ZXJuYWwvcGJiBnByb3RvMw", [file_area, file_bounds, file_comment, file_crag, file_google_protobuf_field_mask, file_google_protobuf_timestamp, file_polygon, file_trail]);
+
+/**
+ * Request for GetComments
+ *
+ * @generated from message pb.GetCommentsRequest
+ */
+export type GetCommentsRequest = Message<"pb.GetCommentsRequest"> & {
+  /**
+   * @generated from field: optional pb.CommentableEntityType entity_type = 1;
+   */
+  entityType?: CommentableEntityType;
+
+  /**
+   * @generated from field: optional int64 entity_id = 2;
+   */
+  entityId?: bigint;
+};
+
+/**
+ * Describes the message pb.GetCommentsRequest.
+ * Use `create(GetCommentsRequestSchema)` to create a new message.
+ */
+export const GetCommentsRequestSchema: GenMessage<GetCommentsRequest> = /*@__PURE__*/
+  messageDesc(file_climb, 0);
+
+/**
+ * Response for GetComments
+ *
+ * @generated from message pb.GetCommentsResponse
+ */
+export type GetCommentsResponse = Message<"pb.GetCommentsResponse"> & {
+  /**
+   * @generated from field: repeated pb.Comment comments = 1;
+   */
+  comments: Comment[];
+};
+
+/**
+ * Describes the message pb.GetCommentsResponse.
+ * Use `create(GetCommentsResponseSchema)` to create a new message.
+ */
+export const GetCommentsResponseSchema: GenMessage<GetCommentsResponse> = /*@__PURE__*/
+  messageDesc(file_climb, 1);
 
 /**
  * GetArea
@@ -41,7 +86,7 @@ export type ReadAreaOptions = Message<"pb.ReadAreaOptions"> & {
  * Use `create(ReadAreaOptionsSchema)` to create a new message.
  */
 export const ReadAreaOptionsSchema: GenMessage<ReadAreaOptions> = /*@__PURE__*/
-  messageDesc(file_climb, 0);
+  messageDesc(file_climb, 2);
 
 /**
  * @generated from message pb.GetAreaRequest
@@ -63,7 +108,7 @@ export type GetAreaRequest = Message<"pb.GetAreaRequest"> & {
  * Use `create(GetAreaRequestSchema)` to create a new message.
  */
 export const GetAreaRequestSchema: GenMessage<GetAreaRequest> = /*@__PURE__*/
-  messageDesc(file_climb, 1);
+  messageDesc(file_climb, 3);
 
 /**
  * @generated from message pb.GetAreaResponse
@@ -80,7 +125,7 @@ export type GetAreaResponse = Message<"pb.GetAreaResponse"> & {
  * Use `create(GetAreaResponseSchema)` to create a new message.
  */
 export const GetAreaResponseSchema: GenMessage<GetAreaResponse> = /*@__PURE__*/
-  messageDesc(file_climb, 2);
+  messageDesc(file_climb, 4);
 
 /**
  * UpdateArea
@@ -124,7 +169,7 @@ export type UpdateAreaRequest = Message<"pb.UpdateAreaRequest"> & {
  * Use `create(UpdateAreaRequestSchema)` to create a new message.
  */
 export const UpdateAreaRequestSchema: GenMessage<UpdateAreaRequest> = /*@__PURE__*/
-  messageDesc(file_climb, 3);
+  messageDesc(file_climb, 5);
 
 /**
  * @generated from message pb.UpdateAreaResponse
@@ -137,7 +182,7 @@ export type UpdateAreaResponse = Message<"pb.UpdateAreaResponse"> & {
  * Use `create(UpdateAreaResponseSchema)` to create a new message.
  */
 export const UpdateAreaResponseSchema: GenMessage<UpdateAreaResponse> = /*@__PURE__*/
-  messageDesc(file_climb, 4);
+  messageDesc(file_climb, 6);
 
 /**
  * GetCrag
@@ -156,7 +201,7 @@ export type ReadCragOptions = Message<"pb.ReadCragOptions"> & {
  * Use `create(ReadCragOptionsSchema)` to create a new message.
  */
 export const ReadCragOptionsSchema: GenMessage<ReadCragOptions> = /*@__PURE__*/
-  messageDesc(file_climb, 5);
+  messageDesc(file_climb, 7);
 
 /**
  * @generated from message pb.GetCragResponse
@@ -173,7 +218,7 @@ export type GetCragResponse = Message<"pb.GetCragResponse"> & {
  * Use `create(GetCragResponseSchema)` to create a new message.
  */
 export const GetCragResponseSchema: GenMessage<GetCragResponse> = /*@__PURE__*/
-  messageDesc(file_climb, 6);
+  messageDesc(file_climb, 8);
 
 /**
  * @generated from message pb.GetCragRequest
@@ -195,7 +240,7 @@ export type GetCragRequest = Message<"pb.GetCragRequest"> & {
  * Use `create(GetCragRequestSchema)` to create a new message.
  */
 export const GetCragRequestSchema: GenMessage<GetCragRequest> = /*@__PURE__*/
-  messageDesc(file_climb, 7);
+  messageDesc(file_climb, 9);
 
 /**
  * ListCrags
@@ -214,7 +259,7 @@ export type ListCragsRequest = Message<"pb.ListCragsRequest"> & {
  * Use `create(ListCragsRequestSchema)` to create a new message.
  */
 export const ListCragsRequestSchema: GenMessage<ListCragsRequest> = /*@__PURE__*/
-  messageDesc(file_climb, 8);
+  messageDesc(file_climb, 10);
 
 /**
  * @generated from message pb.ListCragsResponse
@@ -231,7 +276,7 @@ export type ListCragsResponse = Message<"pb.ListCragsResponse"> & {
  * Use `create(ListCragsResponseSchema)` to create a new message.
  */
 export const ListCragsResponseSchema: GenMessage<ListCragsResponse> = /*@__PURE__*/
-  messageDesc(file_climb, 9);
+  messageDesc(file_climb, 11);
 
 /**
  * UpdateCrag
@@ -280,7 +325,7 @@ export type UpdateCragRequest = Message<"pb.UpdateCragRequest"> & {
  * Use `create(UpdateCragRequestSchema)` to create a new message.
  */
 export const UpdateCragRequestSchema: GenMessage<UpdateCragRequest> = /*@__PURE__*/
-  messageDesc(file_climb, 10);
+  messageDesc(file_climb, 12);
 
 /**
  * @generated from message pb.UpdateCragResponse
@@ -293,7 +338,45 @@ export type UpdateCragResponse = Message<"pb.UpdateCragResponse"> & {
  * Use `create(UpdateCragResponseSchema)` to create a new message.
  */
 export const UpdateCragResponseSchema: GenMessage<UpdateCragResponse> = /*@__PURE__*/
-  messageDesc(file_climb, 11);
+  messageDesc(file_climb, 13);
+
+/**
+ * Enum for entities that can have comments
+ *
+ * @generated from enum pb.CommentableEntityType
+ */
+export enum CommentableEntityType {
+  /**
+   * @generated from enum value: COMMENTABLE_ENTITY_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: COMMENTABLE_ENTITY_TYPE_CRAG = 1;
+   */
+  CRAG = 1,
+
+  /**
+   * @generated from enum value: COMMENTABLE_ENTITY_TYPE_AREA = 2;
+   */
+  AREA = 2,
+
+  /**
+   * @generated from enum value: COMMENTABLE_ENTITY_TYPE_BOULDER = 3;
+   */
+  BOULDER = 3,
+
+  /**
+   * @generated from enum value: COMMENTABLE_ENTITY_TYPE_ROUTE = 4;
+   */
+  ROUTE = 4,
+}
+
+/**
+ * Describes the enum pb.CommentableEntityType.
+ */
+export const CommentableEntityTypeSchema: GenEnum<CommentableEntityType> = /*@__PURE__*/
+  enumDesc(file_climb, 0);
 
 /**
  * @generated from service pb.ClimbService
@@ -342,6 +425,16 @@ export const ClimbService: GenService<{
     methodKind: "unary";
     input: typeof UpdateCragRequestSchema;
     output: typeof UpdateCragResponseSchema;
+  },
+  /**
+   * Comments
+   *
+   * @generated from rpc pb.ClimbService.GetComments
+   */
+  getComments: {
+    methodKind: "unary";
+    input: typeof GetCommentsRequestSchema;
+    output: typeof GetCommentsResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_climb, 0);

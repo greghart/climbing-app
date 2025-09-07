@@ -1,32 +1,27 @@
-import { CommentableSchema, getDataSource } from "@/db";
-import CommentRepository, {
-  CommentableEntity,
-} from "@/db/repos/CommentRepository";
+import { ProtoToCommentable } from "@/app/_grpc/adapters";
+import client from "@/app/_grpc/client";
+import { CommentableEntityType } from "@/app/_grpc/climb_pb";
 import { cache } from "react";
 import "server-only";
-import { EntitySchema } from "typeorm";
 
 /**
  * getComments returns comments for given entity.
  * Curried for ease of use.
- * TODO: Seems like this isn't type safe due to EntitySchema
  */
-function getComments(schema: EntitySchema<CommentableEntity>) {
+function getComments(entityType: CommentableEntityType) {
   return cache(async (id: number) => {
-    const ds = await getDataSource();
-    const entity = await ds.getRepository(schema).findOne({
-      where: { id },
-    });
-    if (!entity) return;
-
-    const commentable = await ds.manager
-      .withRepository(CommentRepository)
-      .findOrGetCommentable(entity, schema);
-
-    return ds.getRepository(CommentableSchema).findOne({
-      where: { id: commentable.id },
-      relations: ["comments"], // TODO: add and get user relation
-    });
+    return client
+      .getComments({
+        entityId: BigInt(id),
+        entityType,
+      })
+      .then((res) => {
+        return ProtoToCommentable(res.comments);
+      })
+      .catch((err) => {
+        console.error(`Error fetching comments for ${entityType}: ${err}`);
+        throw err;
+      });
   });
 }
 

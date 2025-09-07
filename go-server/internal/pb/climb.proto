@@ -4,14 +4,34 @@ package pb;
 
 import "area.proto";
 import "bounds.proto";
+import "comment.proto";
 import "crag.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "polygon.proto";
 import "trail.proto";
 
-
 option go_package = "github.com/greghart/climbing-app/internal/pb";
+
+// Enum for entities that can have comments
+enum CommentableEntityType {
+  COMMENTABLE_ENTITY_TYPE_UNSPECIFIED = 0;
+  COMMENTABLE_ENTITY_TYPE_CRAG = 1;
+  COMMENTABLE_ENTITY_TYPE_AREA = 2;
+  COMMENTABLE_ENTITY_TYPE_BOULDER = 3;
+  COMMENTABLE_ENTITY_TYPE_ROUTE = 4;
+}
+
+// Request for GetComments
+message GetCommentsRequest {
+  optional CommentableEntityType entity_type = 1;
+  optional int64 entity_id = 2;
+}
+
+// Response for GetComments
+message GetCommentsResponse {
+  repeated Comment comments = 1;
+}
 
 // GetArea
 message ReadAreaOptions {
@@ -79,4 +99,7 @@ service ClimbService {
   rpc GetCrag(GetCragRequest) returns (GetCragResponse);
   rpc ListCrags(ListCragsRequest) returns (ListCragsResponse);
   rpc UpdateCrag(UpdateCragRequest) returns (UpdateCragResponse);
+
+  // Comments
+  rpc GetComments(GetCommentsRequest) returns (GetCommentsResponse);
 }
