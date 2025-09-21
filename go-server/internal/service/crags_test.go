@@ -8,6 +8,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
+	"github.com/greghart/climbing-app/internal/db"
 	"github.com/greghart/climbing-app/internal/models"
 	"github.com/greghart/climbing-app/internal/testutil"
 	"github.com/greghart/powerputtygo/errcmp"
@@ -81,11 +82,17 @@ func TestCrags_UpdateCrag(t *testing.T) {
 	santee := testutil.LoadCragFromJSON(t, "testdata/santee.json")
 	empty := testutil.LoadCragFromJSON(t, "testdata/empty.json")
 
+	// testContext for expectations against
+	type testContext struct {
+		crag  *models.Crag       // updated crag
+		req   *CragUpdateRequest // the request that was made
+		repos *db.Repos
+	}
 	tests := map[string]struct {
 		crag   *models.Crag
 		update CragUpdateRequest
 		err    string
-		expect func(*testing.T, *models.Crag, *CragUpdateRequest)
+		expect func(*testing.T, testContext)
 	}{
 		"update basic attrs": {
 			update: CragUpdateRequest{
@@ -93,12 +100,12 @@ func TestCrags_UpdateCrag(t *testing.T) {
 				Name:        "Updated name",
 				Description: servicep.ZeroToPtr("Updated description"),
 			},
-			expect: func(t *testing.T, crag *models.Crag, req *CragUpdateRequest) {
-				if crag.Name != req.Name {
-					t.Errorf("crag.Name = %s, wanted '%s'", crag.Name, req.Name)
+			expect: func(t *testing.T, tc testContext) {
+				if tc.crag.Name != tc.req.Name {
+					t.Errorf("crag.Name = %s, wanted '%s'", tc.crag.Name, tc.req.Name)
 				}
-				if !cmp.Equal(crag.Description, req.Description) {
-					t.Errorf("crag.Description = %s, wanted '%s'", *crag.Description, *req.Description)
+				if !cmp.Equal(tc.crag.Description, tc.req.Description) {
+					t.Errorf("crag.Description = %s, wanted '%s'", *tc.crag.Description, *tc.req.Description)
 				}
 			},
 		},
@@ -108,12 +115,12 @@ func TestCrags_UpdateCrag(t *testing.T) {
 				Name:        "Updated name",
 				Description: servicep.ZeroToPtr("Updated description"),
 			},
-			expect: func(t *testing.T, crag *models.Crag, req *CragUpdateRequest) {
-				if crag.Name != santee.Name {
-					t.Errorf("crag.Name = '%s', wanted '%s'", crag.Name, santee.Name)
+			expect: func(t *testing.T, tc testContext) {
+				if tc.crag.Name != santee.Name {
+					t.Errorf("crag.Name = '%s', wanted '%s'", tc.crag.Name, santee.Name)
 				}
-				if !cmp.Equal(crag.Description, santee.Description) {
-					t.Errorf("crag.Description = %s, wanted '%s'", *crag.Description, *santee.Description)
+				if !cmp.Equal(tc.crag.Description, santee.Description) {
+					t.Errorf("crag.Description = %s, wanted '%s'", *tc.crag.Description, *santee.Description)
 				}
 			},
 		},
@@ -122,9 +129,9 @@ func TestCrags_UpdateCrag(t *testing.T) {
 				FieldMask:   servicep.NewFieldMask([]string{"description"}),
 				Description: servicep.ZeroToPtr(""), // this mirrors how user data comes in
 			},
-			expect: func(t *testing.T, crag *models.Crag, req *CragUpdateRequest) {
-				if crag.Description != nil {
-					t.Errorf("crag.Description = %s, wanted nil", *crag.Description)
+			expect: func(t *testing.T, tc testContext) {
+				if tc.crag.Description != nil {
+					t.Errorf("crag.Description = %s, wanted nil", *tc.crag.Description)
 				}
 			},
 		},
@@ -149,9 +156,9 @@ func TestCrags_UpdateCrag(t *testing.T) {
 					},
 				},
 			},
-			expect: func(t *testing.T, crag *models.Crag, req *CragUpdateRequest) {
-				if !cmp.Equal(crag.Bounds, *req.Bounds) {
-					t.Errorf("crag.Bounds = %v, wanted %v", crag.Bounds, *req.Bounds)
+			expect: func(t *testing.T, tc testContext) {
+				if !cmp.Equal(tc.crag.Bounds, *tc.req.Bounds) {
+					t.Errorf("crag.Bounds = %v, wanted %v", tc.crag.Bounds, *tc.req.Bounds)
 				}
 			},
 		},
@@ -168,13 +175,13 @@ func TestCrags_UpdateCrag(t *testing.T) {
 					},
 				},
 			},
-			expect: func(t *testing.T, crag *models.Crag, req *CragUpdateRequest) {
-				if crag.Trail == nil {
+			expect: func(t *testing.T, tc testContext) {
+				if tc.crag.Trail == nil {
 					t.Fatalf("crag.Trail is nil, expected a new trail to be created")
 				}
-				req.Trail.ID = crag.Trail.ID
-				if !cmp.Equal(*crag.Trail, *req.Trail, cmpOpts) {
-					t.Fatalf("crag.Trail not created as expected\n:%s", cmp.Diff(*crag.Trail, *req.Trail, cmpOpts))
+				tc.req.Trail.ID = tc.crag.Trail.ID
+				if !cmp.Equal(*tc.crag.Trail, *tc.req.Trail, cmpOpts) {
+					t.Fatalf("crag.Trail not created as expected\n:%s", cmp.Diff(*tc.crag.Trail, *tc.req.Trail, cmpOpts))
 				}
 			},
 		},
@@ -191,7 +198,7 @@ func TestCrags_UpdateCrag(t *testing.T) {
 					},
 				},
 			},
-			expect: func(t *testing.T, crag *models.Crag, req *CragUpdateRequest) {
+			expect: func(t *testing.T, tc testContext) {
 				expected := models.Trail{
 					ID: santee.Trail.ID,
 					Lines: []models.Line{
@@ -201,8 +208,8 @@ func TestCrags_UpdateCrag(t *testing.T) {
 						},
 					},
 				}
-				if !cmp.Equal(*crag.Trail, expected, cmpOpts) {
-					t.Fatalf("crag.Trail not created as expected\n:%s", cmp.Diff(*crag.Trail, expected, cmpOpts))
+				if !cmp.Equal(*tc.crag.Trail, expected, cmpOpts) {
+					t.Fatalf("crag.Trail not created as expected\n:%s", cmp.Diff(*tc.crag.Trail, expected, cmpOpts))
 				}
 			},
 		},
@@ -212,9 +219,12 @@ func TestCrags_UpdateCrag(t *testing.T) {
 				FieldMask: servicep.NewFieldMask([]string{"trail"}),
 				Trail:     nil,
 			},
-			expect: func(t *testing.T, crag *models.Crag, req *CragUpdateRequest) {
-				if crag.Trail != nil {
-					t.Fatalf("crag.Trail not deleted as expected:\n%v", crag.Trail)
+			expect: func(t *testing.T, tc testContext) {
+				if tc.crag.Trail != nil {
+					t.Errorf("crag.Trail not deleted as expected:\n%v", tc.crag.Trail)
+				}
+				if trail, _ := tc.repos.Trails.Find(t.Context(), santee.Trail.ID); trail != nil {
+					t.Error("trail not deleted from db")
 				}
 			},
 		},
@@ -257,7 +267,11 @@ func TestCrags_UpdateCrag(t *testing.T) {
 			}
 
 			if tests.expect != nil {
-				tests.expect(t, updated, &req)
+				tests.expect(t, testContext{
+					crag:  updated,
+					req:   &req,
+					repos: repos,
+				})
 			}
 		})
 	}

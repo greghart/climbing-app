@@ -58,8 +58,12 @@ func (a *Areas) Update(ctx context.Context, req AreaUpdateRequest) error {
 		var g errgroup.Group
 		if req.Has("polygon") {
 			if req.Polygon == nil { // Remove
-				area.PolygonID = nil
-				// TODO: Delete the existing polygon?
+				if area.PolygonID != nil {
+					g.Go(func() error {
+						_, err := a.repos.Polygons.Delete(ctx, *area.PolygonID)
+						return err
+					})
+				}
 			} else if area.PolygonID != nil { // Update existing
 				g.Go(func() error {
 					return a.Polygons.Update(ctx, *area.PolygonID, req.Polygon.Coordinates)
