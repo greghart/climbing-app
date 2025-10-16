@@ -24,13 +24,25 @@ enum CommentableEntityType {
 
 // Request for GetComments
 message GetCommentsRequest {
-  optional CommentableEntityType entity_type = 1;
-  optional int64 entity_id = 2;
+  CommentableEntityType entity_type = 1;
+  int64 entity_id = 2;
 }
 
 // Response for GetComments
 message GetCommentsResponse {
   repeated Comment comments = 1;
+}
+
+// Request for CreateComment
+message CreateCommentRequest {
+  CommentableEntityType entity_type = 1;
+  int64 entity_id = 2;
+  string text = 3;
+}
+
+// Response for CreateComment
+message CreateCommentResponse {
+  Comment comment = 1;
 }
 
 // GetArea
@@ -91,6 +103,8 @@ message UpdateCragResponse {
 }
 
 service ClimbService {
+  // Comments
+  rpc CreateComment(CreateCommentRequest) returns (CreateCommentResponse);
   // Areas
   rpc GetArea(GetAreaRequest) returns (GetAreaResponse);
   rpc UpdateArea(UpdateAreaRequest) returns (UpdateAreaResponse);

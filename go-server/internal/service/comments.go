@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/greghart/climbing-app/internal/models"
-	"github.com/greghart/powerputtygo/servicep"
 )
 
 // Comments is the service level comments handler
@@ -120,7 +119,6 @@ type GetCommentsOptions struct {
 
 // CreateCommentOptions is the request for CreateComment.
 type CreateCommentOptions struct {
-	*servicep.FieldMask
 	EntityType CommentableEntityType
 	EntityID   int64
 	Text       string

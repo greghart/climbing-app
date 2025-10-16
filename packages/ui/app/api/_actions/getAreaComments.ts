@@ -1,7 +1,7 @@
+import { CommentableEntityType } from "@/app/_grpc/climb_pb";
 import getComments from "@/app/api/_actions/getComments";
-import { AreaSchema } from "@/db";
 import "server-only";
 
-const getAreaComments = getComments(AreaSchema);
+const getAreaComments = getComments(CommentableEntityType.AREA);
 
 export default getAreaComments;

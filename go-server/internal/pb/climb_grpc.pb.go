@@ -19,18 +19,21 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ClimbService_GetArea_FullMethodName     = "/pb.ClimbService/GetArea"
-	ClimbService_UpdateArea_FullMethodName  = "/pb.ClimbService/UpdateArea"
-	ClimbService_GetCrag_FullMethodName     = "/pb.ClimbService/GetCrag"
-	ClimbService_ListCrags_FullMethodName   = "/pb.ClimbService/ListCrags"
-	ClimbService_UpdateCrag_FullMethodName  = "/pb.ClimbService/UpdateCrag"
-	ClimbService_GetComments_FullMethodName = "/pb.ClimbService/GetComments"
+	ClimbService_CreateComment_FullMethodName = "/pb.ClimbService/CreateComment"
+	ClimbService_GetArea_FullMethodName       = "/pb.ClimbService/GetArea"
+	ClimbService_UpdateArea_FullMethodName    = "/pb.ClimbService/UpdateArea"
+	ClimbService_GetCrag_FullMethodName       = "/pb.ClimbService/GetCrag"
+	ClimbService_ListCrags_FullMethodName     = "/pb.ClimbService/ListCrags"
+	ClimbService_UpdateCrag_FullMethodName    = "/pb.ClimbService/UpdateCrag"
+	ClimbService_GetComments_FullMethodName   = "/pb.ClimbService/GetComments"
 )
 
 // ClimbServiceClient is the client API for ClimbService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ClimbServiceClient interface {
+	// Comments
+	CreateComment(ctx context.Context, in *CreateCommentRequest, opts ...grpc.CallOption) (*CreateCommentResponse, error)
 	// Areas
 	GetArea(ctx context.Context, in *GetAreaRequest, opts ...grpc.CallOption) (*GetAreaResponse, error)
 	UpdateArea(ctx context.Context, in *UpdateAreaRequest, opts ...grpc.CallOption) (*UpdateAreaResponse, error)
@@ -48,6 +51,16 @@ type climbServiceClient struct {
 
 func NewClimbServiceClient(cc grpc.ClientConnInterface) ClimbServiceClient {
 	return &climbServiceClient{cc}
+}
+
+func (c *climbServiceClient) CreateComment(ctx context.Context, in *CreateCommentRequest, opts ...grpc.CallOption) (*CreateCommentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateCommentResponse)
+	err := c.cc.Invoke(ctx, ClimbService_CreateComment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *climbServiceClient) GetArea(ctx context.Context, in *GetAreaRequest, opts ...grpc.CallOption) (*GetAreaResponse, error) {
@@ -114,6 +127,8 @@ func (c *climbServiceClient) GetComments(ctx context.Context, in *GetCommentsReq
 // All implementations must embed UnimplementedClimbServiceServer
 // for forward compatibility.
 type ClimbServiceServer interface {
+	// Comments
+	CreateComment(context.Context, *CreateCommentRequest) (*CreateCommentResponse, error)
 	// Areas
 	GetArea(context.Context, *GetAreaRequest) (*GetAreaResponse, error)
 	UpdateArea(context.Context, *UpdateAreaRequest) (*UpdateAreaResponse, error)
@@ -133,6 +148,9 @@ type ClimbServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedClimbServiceServer struct{}
 
+func (UnimplementedClimbServiceServer) CreateComment(context.Context, *CreateCommentRequest) (*CreateCommentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateComment not implemented")
+}
 func (UnimplementedClimbServiceServer) GetArea(context.Context, *GetAreaRequest) (*GetAreaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetArea not implemented")
 }
@@ -170,6 +188,24 @@ func RegisterClimbServiceServer(s grpc.ServiceRegistrar, srv ClimbServiceServer)
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ClimbService_ServiceDesc, srv)
+}
+
+func _ClimbService_CreateComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCommentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClimbServiceServer).CreateComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClimbService_CreateComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClimbServiceServer).CreateComment(ctx, req.(*CreateCommentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ClimbService_GetArea_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -287,6 +323,10 @@ var ClimbService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.ClimbService",
 	HandlerType: (*ClimbServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateComment",
+			Handler:    _ClimbService_CreateComment_Handler,
+		},
 		{
 			MethodName: "GetArea",
 			Handler:    _ClimbService_GetArea_Handler,

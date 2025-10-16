@@ -15,12 +15,12 @@ function getComments(entityType: CommentableEntityType) {
         entityId: BigInt(id),
         entityType,
       })
-      .then((res) => {
-        return ProtoToCommentable(res.comments);
-      })
       .catch((err) => {
         console.error(`Error fetching comments for ${entityType}: ${err}`);
         throw err;
+      })
+      .then((res) => {
+        return ProtoToCommentable(res.comments);
       });
   });
 }
